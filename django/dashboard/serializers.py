@@ -40,6 +40,11 @@ def set_field_serializer(value, field_type):
         case 'BooleanField': return False if not value else True
     return value
 
-def set_relation_serialize(value, relation):
-    ...
+def set_relation_serialize(value, relation, field):
+    match(relation):
+        case 'one_to_one':
+            item = field.related_model.objects.filter(pk=value).first()
+            return item
+    return None
+    ## TODO
     

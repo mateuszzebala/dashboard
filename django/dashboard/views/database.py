@@ -102,9 +102,10 @@ def put_item_view(request, model_name):
                 get_type_of_field(model, field_name)
             )
         ) for field_name in names_of_fields)
+    
     for relation in names_of_relations:
         if relation_can_be_set(get_field(model, relation)):
-            data_fields.update({relation: set_relation_serialize(request.POST.get(f'relation_{relation}'))})
+            data_fields.update({relation: set_relation_serialize(request.POST.get(f'relation_{relation}'), get_relation_type_of_field(get_field(model, relation)), get_field(model, relation))})
 
     item = model(**data_fields)
     item.save()
