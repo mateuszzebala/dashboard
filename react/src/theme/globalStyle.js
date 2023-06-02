@@ -10,10 +10,20 @@ export const GlobalStyle = createGlobalStyle`
     font-family: var(--font-family);
     margin: 0;
     padding: 0;
-    background: #eeeeee;
     color: var(--dark);
   }
   button, input, textarea, select, option, span{
     font-family: var(--font-family);
+  }
+  ::-webkit-scrollbar {
+    width: ${({ theme }) => theme.scrollbar.width};
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.scrollbar.track};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.scrollbar.thumb};
   }
 `

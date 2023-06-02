@@ -1,9 +1,7 @@
 import React from 'react'
 import { CiMenuBurger } from 'react-icons/ci'
 import styled from 'styled-components'
-import { BiUserCircle } from 'react-icons/bi'
-import { AiOutlineMessage } from 'react-icons/ai'
-import { FiSettings, FiSearch } from 'react-icons/fi'
+import { TopBarIcons } from '../molecules/TopBarIcons'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -12,6 +10,7 @@ const StyledWrapper = styled.nav`
     width: 100%;
     align-items: center;
     justify-content: space-between;
+    background-color: ${({ theme }) => theme.topbar.background};
 `
 
 const StyledMenuButton = styled.button`
@@ -33,21 +32,6 @@ const StyledTitle = styled.span`
     font-size: 25px;
     font-weight: 500;
 `
-
-const StyledLinkIcon = styled.span`
-    display: grid;
-    cursor: pointer;
-    font-size: 20px;
-    place-items: center;
-`
-const StyledLinkIcons = styled.span`
-    display: flex;
-    padding: 0 10px;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    color: black;
-`
 const StyledLeftSide = styled.div`
     display: flex;
     gap: 10px;
@@ -68,20 +52,7 @@ export const TopBar = ({ title = '', setOpen }) => {
                 </StyledMenuButton>
                 <StyledTitle>{title.toUpperCase()}</StyledTitle>
             </StyledLeftSide>
-            <StyledLinkIcons>
-                <StyledLinkIcon>
-                    <FiSearch />
-                </StyledLinkIcon>
-                <StyledLinkIcon>
-                    <FiSettings />
-                </StyledLinkIcon>
-                <StyledLinkIcon>
-                    <BiUserCircle />
-                </StyledLinkIcon>
-                <StyledLinkIcon>
-                    <AiOutlineMessage />
-                </StyledLinkIcon>
-            </StyledLinkIcons>
+            <TopBarIcons />
         </StyledWrapper>
     )
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import { GlobalStyle } from './theme/globalStyle'
 import { Router } from './router/Router'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
+import { theme } from './theme/theme'
 
 const StyledWrapper = styled.div`
     min-height: 100vh;
@@ -9,9 +10,11 @@ const StyledWrapper = styled.div`
 
 export const App = () => {
     return (
-        <StyledWrapper>
-            <GlobalStyle />
-            <Router />
-        </StyledWrapper>
+        <ThemeProvider theme={theme}>
+            <StyledWrapper>
+                <GlobalStyle />
+                <Router />
+            </StyledWrapper>
+        </ThemeProvider>
     )
 }
