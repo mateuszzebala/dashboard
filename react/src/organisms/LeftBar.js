@@ -21,11 +21,12 @@ const StyledWrapper = styled.nav`
     background-color: ${({ theme }) => theme.leftbar.background};
     color: ${({ theme }) => theme.leftbar.font};
     height: 100vh;
+    z-index: 1;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 20px 0;
-    width: 200px;
+    width: 230px;
     overflow-x: hidden;
     transition: max-width 0.3s ease;
     max-width: ${({ open }) => (open ? '200px' : '0')};
@@ -40,6 +41,7 @@ const StyleDashboard = styled.span`
     font-size: 20px;
     padding: 10px;
     text-align: center;
+    color: ${({ theme }) => theme.leftbar.font};
 `
 
 export const LeftBar = ({ open }) => {

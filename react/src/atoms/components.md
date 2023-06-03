@@ -6,7 +6,7 @@
 | | 4. Switch
 | | 5. Radio
 |*| 6. Select (normal, multiple)
-|*| 7. Modal
+| | 7. Modal
 | | 8. Loading
 |*| 9. Link
 |*| 10. Table (column, row)

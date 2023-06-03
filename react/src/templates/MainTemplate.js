@@ -15,10 +15,14 @@ const StyledRightSide = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100vh;
 `
 
 const StyledContent = styled.div`
     padding: 10px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.content.background};
+    color: ${({ theme }) => theme.content.font};
 `
 
 export const MainTemplate = ({ title = '', children }) => {

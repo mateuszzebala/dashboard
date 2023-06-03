@@ -8,9 +8,11 @@ const StyledWrapper = styled.nav`
     padding: 20px 10px;
     box-shadow: 0 0 10px -6px black;
     width: 100%;
+    z-index: 1;
     align-items: center;
     justify-content: space-between;
     background-color: ${({ theme }) => theme.topbar.background};
+    color: ${({ theme }) => theme.topbar.font};
 `
 
 const StyledMenuButton = styled.button`
@@ -19,6 +21,7 @@ const StyledMenuButton = styled.button`
     place-items: center;
     background-color: transparent;
     border: 0;
+    color: ${({ theme }) => theme.topbar.font};
     cursor: pointer;
     svg {
         stroke-width: 1.4px;

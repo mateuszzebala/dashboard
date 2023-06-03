@@ -8,7 +8,7 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    color: white;
+    color: ${({ theme }) => theme.leftbar.font};
     font-size: 20px;
     padding: 5px;
     background-color: #ffffff11;
@@ -17,7 +17,7 @@ const StyledWrapper = styled.div`
     width: 90%;
 
     a {
-        color: white;
+        color: ${({ theme }) => theme.leftbar.font};
         text-decoration: none;
         font-size: 15px;
     }

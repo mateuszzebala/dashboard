@@ -9,6 +9,7 @@ const StyledIcon = styled.span`
     cursor: pointer;
     font-size: 20px;
     place-items: center;
+    color: ${({ theme }) => theme.topbar.font};
 `
 const StyledWrapper = styled.span`
     display: flex;
