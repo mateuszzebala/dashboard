@@ -5,12 +5,12 @@
 | | 3. Checkbox
 | | 4. Switch
 | | 5. Radio
-|*| 6. Select (normal, multiple)
+| | 6. Select (normal, multiple)
 | | 7. Modal
 | | 8. Loading
-|*| 9. Link
+| | 9. Link
 |*| 10. Table (column, row)
-|*| 11. Tooltip
+| | 11. Tooltip
 |*| 12. Range
 |*| 13. Video
 |*| 14. Audio

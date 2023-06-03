@@ -37,8 +37,8 @@ export const theme = {
         font: primary,
     },
     scrollbar: {
-        thumb: light,
-        track: primary,
+        thumb: primary,
+        track: light,
         width: '5px',
     },
     loading: primary,
@@ -56,5 +56,14 @@ export const theme = {
     select: {
         font: primary,
         background: light,
+    },
+    tooltip: {
+        font: light,
+        background: primary,
+    },
+    table: {
+        border: primary,
+        background: light,
+        font: primary,
     },
 }

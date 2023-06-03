@@ -25,16 +25,14 @@ const StyledWrapper = styled.nav`
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px 0;
+    padding: 20px 0 0;
     width: 230px;
     overflow-x: hidden;
-    transition: max-width 0.3s ease;
+    transition: max-width 0.3s ease, min-width 0.3s ease;
     max-width: ${({ open }) => (open ? '200px' : '0')};
+    min-width: ${({ open }) => (open ? '200px' : '0')};
     box-shadow: 0 0 10px -5px black;
     gap: 10px;
-    ::-webkit-scrollbar {
-        width: 0;
-    }
 `
 
 const StyleDashboard = styled.span`
@@ -42,6 +40,18 @@ const StyleDashboard = styled.span`
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.leftbar.font};
+`
+const StyledMenuItems = styled.div`
+    overflow-y: scroll;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+    height: 100%;
+    ::-webkit-scrollbar {
+        width: 0;
+    }
 `
 
 export const LeftBar = ({ open }) => {
@@ -54,45 +64,47 @@ export const LeftBar = ({ open }) => {
                 <br />
                 BOARD
             </StyleDashboard>
-            <LeftBarItem icon={<BiHomeAlt2 />} to={'/'}>
-                HOME
-            </LeftBarItem>
-            <LeftBarItem icon={<BsDatabase />} to={'/'}>
-                DATABASE
-            </LeftBarItem>
-            <LeftBarItem icon={<AiOutlineMessage />} to={'/'}>
-                MESSAGES
-            </LeftBarItem>
-            <LeftBarItem icon={<FiUsers />} to={'/'}>
-                USERS
-            </LeftBarItem>
-            <LeftBarItem icon={<BsFolder />} to={'/'}>
-                FILES
-            </LeftBarItem>
-            <LeftBarItem icon={<BsTerminal />} to={'/'}>
-                TERMINAL
-            </LeftBarItem>
-            <LeftBarItem icon={<BsPlay />} to={'/'}>
-                PYTHON
-            </LeftBarItem>
-            <LeftBarItem icon={<BsCalendarWeek />} to={'/'}>
-                CALENDAR
-            </LeftBarItem>
-            <LeftBarItem icon={<HiOutlineMail />} to={'/'}>
-                EMAIL
-            </LeftBarItem>
-            <LeftBarItem icon={<FaRegStickyNote />} to={'/'}>
-                NOTES
-            </LeftBarItem>
-            <LeftBarItem icon={<FaRegEye />} to={'/'}>
-                REQUESTS
-            </LeftBarItem>
-            <LeftBarItem icon={<BiDollarCircle />} to={'/'}>
-                FINANCE
-            </LeftBarItem>
-            <LeftBarItem icon={<BsGlobeEuropeAfrica />} to={'/'}>
-                MAP
-            </LeftBarItem>
+            <StyledMenuItems>
+                <LeftBarItem icon={<BiHomeAlt2 />} to={'/'}>
+                    HOME
+                </LeftBarItem>
+                <LeftBarItem icon={<BsDatabase />} to={'/'}>
+                    DATABASE
+                </LeftBarItem>
+                <LeftBarItem icon={<AiOutlineMessage />} to={'/'}>
+                    MESSAGES
+                </LeftBarItem>
+                <LeftBarItem icon={<FiUsers />} to={'/'}>
+                    USERS
+                </LeftBarItem>
+                <LeftBarItem icon={<BsFolder />} to={'/'}>
+                    FILES
+                </LeftBarItem>
+                <LeftBarItem icon={<BsTerminal />} to={'/'}>
+                    TERMINAL
+                </LeftBarItem>
+                <LeftBarItem icon={<BsPlay />} to={'/'}>
+                    PYTHON
+                </LeftBarItem>
+                <LeftBarItem icon={<BsCalendarWeek />} to={'/'}>
+                    CALENDAR
+                </LeftBarItem>
+                <LeftBarItem icon={<HiOutlineMail />} to={'/'}>
+                    EMAIL
+                </LeftBarItem>
+                <LeftBarItem icon={<FaRegStickyNote />} to={'/'}>
+                    NOTES
+                </LeftBarItem>
+                <LeftBarItem icon={<FaRegEye />} to={'/'}>
+                    REQUESTS
+                </LeftBarItem>
+                <LeftBarItem icon={<BiDollarCircle />} to={'/'}>
+                    FINANCE
+                </LeftBarItem>
+                <LeftBarItem icon={<BsGlobeEuropeAfrica />} to={'/'}>
+                    MAP
+                </LeftBarItem>
+            </StyledMenuItems>
         </StyledWrapper>
     )
 }

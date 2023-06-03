@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   ::-webkit-scrollbar {
     width: ${({ theme }) => theme.scrollbar.width};
+    height: ${({ theme }) => theme.scrollbar.width};
   }
 
   ::-webkit-scrollbar-track {

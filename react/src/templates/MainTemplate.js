@@ -9,6 +9,8 @@ const StyledWrapper = styled.div`
     justify-content: flex-start;
     flex-direction: row;
     min-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
 `
 
 const StyledRightSide = styled.div`
@@ -23,6 +25,7 @@ const StyledContent = styled.div`
     height: 100%;
     background-color: ${({ theme }) => theme.content.background};
     color: ${({ theme }) => theme.content.font};
+    overflow: auto;
 `
 
 export const MainTemplate = ({ title = '', children }) => {

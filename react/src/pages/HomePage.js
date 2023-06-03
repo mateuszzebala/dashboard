@@ -1,26 +1,13 @@
 import React from 'react'
 import { MainTemplate } from '../templates/MainTemplate'
-import { MultipleSelect } from '../atoms/MultipleSelect'
+import { Paginator } from '../atoms/Paginator'
 
 export const HomePage = () => {
-    const [value, setValue] = React.useState([])
+    const [page, setPage] = React.useState(1)
 
     return (
         <MainTemplate title={'HOME'}>
-            <MultipleSelect
-                value={value}
-                setValue={setValue}
-                data={{
-                    a: 2,
-                    b: 5,
-                    c: 6,
-                    d: 6,
-                    e: 6,
-                    f: 6,
-                }}
-            />
-            <br />
-            {value}
+            <Paginator value={page} setValue={setPage} pages={10} />
         </MainTemplate>
     )
 }

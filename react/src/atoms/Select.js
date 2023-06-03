@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { Checkbox } from './Checkbox'
-import { HiXMark } from 'react-icons/hi2'
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
 import { toBoolStr } from '../utils/utils'
 import { Tooltip } from './Tooltip'
@@ -28,40 +26,6 @@ const StyledValue = styled.div`
     height: 40px;
 `
 
-const StyledValues = styled.div`
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    overflow-x: scroll;
-    padding: 0 10px;
-    border-left: 2px solid black;
-    &::-webkit-scrollbar {
-        height: 0;
-    }
-`
-const StyledValueElem = styled.button`
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: ${({ theme }) => theme.select.font};
-    color: ${({ theme }) => theme.select.background};
-    border: 0;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 16px;
-    white-space: nowrap;
-    max-width: 200px;
-    gap: 5px;
-    cursor: pointer;
-    & > *:first-child {
-        display: inline-block;
-        max-width: 150px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-`
-
 const StyledDropdownIcon = styled.button`
     font-size: 30px;
     padding: 0;
@@ -75,13 +39,7 @@ const StyledDropdownIcon = styled.button`
         dropdown ? 'rotate(180deg)' : 'rotate(0deg)'};
 `
 
-const ValueComponent = ({
-    value = [],
-    data,
-    setValue,
-    dropdown,
-    setDropdown,
-}) => {
+const ValueComponent = ({ value = [], data, dropdown, setDropdown }) => {
     return (
         <StyledValue>
             <StyledDropdownIcon
@@ -92,43 +50,20 @@ const ValueComponent = ({
             >
                 <IoIosArrowDropdownCircle />
             </StyledDropdownIcon>
-
-            <StyledValues>
-                {value.map((val) => (
-                    <StyledValueElem
-                        key={val}
-                        onClick={() => {
-                            setValue((prev) => prev.filter((v) => v != val))
-                        }}
-                    >
-                        <Tooltip text={data[val]}>
-                            <span>{data[val]}</span>
-                        </Tooltip>{' '}
-                        <HiXMark />
-                    </StyledValueElem>
-                ))}
-                {value.length < 1 && <span>SELECT</span>}
-            </StyledValues>
+            <StyledValue>
+                {!value ? <span>SELECT</span> : data[value]}
+            </StyledValue>
         </StyledValue>
     )
 }
 
-const OptionComponent = ({ data, value, onClick, currectValue }) => {
-    const [checked, setChecked] = React.useState(false)
-
-    useEffect(() => {
-        setChecked(currectValue.some((val) => val == value))
-        console.log(currectValue)
-    }, [currectValue])
-
+const OptionComponent = ({ data, value, onClick }) => {
     const handleOptionClick = () => {
         onClick(value)
-        setChecked((prev) => !prev)
     }
 
     return (
         <StyledOption onClick={handleOptionClick}>
-            <Checkbox size={0.8} value={checked} setValue={setChecked} />
             <Tooltip text={data[value]}>
                 <span>{data[value]}</span>
             </Tooltip>
@@ -160,14 +95,13 @@ const StyledWrapper = styled.div`
     position: relative;
 `
 
-export const MultipleSelect = ({ data, value = [], setValue }) => {
+export const Select = ({ data, value = null, setValue }) => {
     const [dropdown, setDropdown] = React.useState(false)
     return (
         <StyledWrapper>
             <ValueComponent
                 value={value}
                 data={data}
-                setValue={setValue}
                 dropdown={toBoolStr(dropdown)}
                 setDropdown={setDropdown}
             />
@@ -176,14 +110,9 @@ export const MultipleSelect = ({ data, value = [], setValue }) => {
                     <OptionComponent
                         key={name}
                         data={data}
-                        currectValue={value}
                         value={name}
                         onClick={(val) => {
-                            if (value.includes(val)) {
-                                setValue(value.filter((v) => v !== val))
-                            } else {
-                                setValue((prev) => [...prev, val])
-                            }
+                            setValue(val)
                         }}
                     />
                 ))}
