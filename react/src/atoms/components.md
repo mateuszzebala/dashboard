@@ -9,7 +9,7 @@
 | | 7. Modal
 | | 8. Loading
 | | 9. Link
-|*| 10. Table (column, row)
+| | 10. Table (column, row)
 | | 11. Tooltip
 |*| 12. Range
 |*| 13. Video

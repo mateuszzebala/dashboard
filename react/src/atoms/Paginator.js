@@ -1,10 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { range, toBoolStr } from '../utils/utils'
+import {
+    FaRegArrowAltCircleRight,
+    FaRegArrowAltCircleLeft,
+} from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
-    display: flex;
+    display: inline-flex;
     gap: 7px;
+    height: 50px;
     align-items: center;
     justify-content: center;
 `
@@ -18,9 +23,10 @@ const StyledPageButton = styled.button`
     place-items: center;
     padding: 5px;
     font-size: 18px;
-    width: ${({ selected }) => (selected ? '40px' : '33px')};
-    height: ${({ selected }) => (selected ? '40px' : '33px')};
+    width: ${({ selected }) => (selected ? '45px' : '40px')};
+    height: ${({ selected }) => (selected ? '45px' : '40px')};
     cursor: pointer;
+    font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
     outline: 0px solid ${({ theme }) => theme.button.background}88;
     transition: 0.1s outline-width, width 0.1s, height 0.1s;
     &:focus,
@@ -29,17 +35,64 @@ const StyledPageButton = styled.button`
     }
 `
 
-export const Paginator = ({ value, pages = 10 }) => {
+export const Paginator = ({ value, setValue, pages }) => {
     return (
         <StyledWrapper>
-            {range(1, pages).map((page) => (
-                <StyledPageButton
-                    selected={toBoolStr(value == page)}
-                    key={page}
-                >
-                    {page + 1}
-                </StyledPageButton>
-            ))}
+            <StyledPageButton
+                onClick={() => {
+                    setValue((prev) => (prev > 0 ? prev - 1 : prev))
+                }}
+            >
+                <FaRegArrowAltCircleLeft />
+            </StyledPageButton>
+            {value > 2 && (
+                <>
+                    <StyledPageButton
+                        selected={toBoolStr(value == 0)}
+                        onClick={() => {
+                            setValue(0)
+                        }}
+                    >
+                        1
+                    </StyledPageButton>
+                    {value > 3 && '...'}
+                </>
+            )}
+            {range(1, pages).map((page) => {
+                if (Math.abs(value - page) >= 3) return ''
+                return (
+                    <StyledPageButton
+                        selected={toBoolStr(value == page)}
+                        key={page}
+                        onClick={() => {
+                            setValue(page)
+                        }}
+                    >
+                        {page + 1}
+                    </StyledPageButton>
+                )
+            })}
+
+            {value < pages - 3 && (
+                <>
+                    {value < pages - 4 && '...'}
+                    <StyledPageButton
+                        selected={toBoolStr(value == pages - 1)}
+                        onClick={() => {
+                            setValue(pages - 1)
+                        }}
+                    >
+                        {pages}
+                    </StyledPageButton>
+                </>
+            )}
+            <StyledPageButton
+                onClick={() => {
+                    setValue((prev) => (prev < pages - 1 ? prev - 1 : prev))
+                }}
+            >
+                <FaRegArrowAltCircleRight />
+            </StyledPageButton>
         </StyledWrapper>
     )
 }
