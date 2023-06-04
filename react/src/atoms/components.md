@@ -11,7 +11,7 @@
 | | 9. Link
 | | 10. Table (column, row)
 | | 11. Tooltip
-|*| 12. Range
+| | 12. Range
 |*| 13. Video
 |*| 14. Audio
 |*| 15. Image

@@ -1,11 +1,11 @@
 import React from 'react'
 import { MainTemplate } from '../templates/MainTemplate'
-import { Range } from '../atoms/Range'
+import { Button } from '../atoms/Button'
 
 export const HomePage = () => {
     return (
         <MainTemplate title={'HOME'}>
-            <Range />
+            <Button>OK</Button>
         </MainTemplate>
     )
 }

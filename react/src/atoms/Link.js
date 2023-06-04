@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
+import { toBoolStr } from '../utils/utils'
 
 const StyledWrapper = styled.span`
     a {
@@ -22,15 +23,15 @@ const StyledWrapper = styled.span`
             background-color: ${({ theme }) => theme.link.font};
         }
         &:hover::after {
-            width: 100%;
+            width: ${({ animation }) => (animation ? '100%' : '0')};
             left: 0;
         }
     }
 `
 
-export const Link = ({ children, ...props }) => {
+export const Link = ({ children, animation = true, ...props }) => {
     return (
-        <StyledWrapper>
+        <StyledWrapper animation={toBoolStr(animation)}>
             <RouterLink {...props}>{children}</RouterLink>
         </StyledWrapper>
     )

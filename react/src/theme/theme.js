@@ -66,4 +66,13 @@ export const theme = {
         background: light,
         font: primary,
     },
+    range: {
+        left: primary,
+        right: 'grey',
+        dot: primary,
+    },
+    contextMenu: {
+        font: primary,
+        background: light,
+    },
 }
