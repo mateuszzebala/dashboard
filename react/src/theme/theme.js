@@ -7,9 +7,10 @@ const darkColors = {
 }
 
 export const theme = {
+    primary: primary,
     error: '#FF6B6B',
     warning: '#f5d11d',
-    success: '#9EFF00',
+    success: '#38b000',
     leftbar: darkColors,
     topbar: {
         background: light,
@@ -28,7 +29,7 @@ export const theme = {
     checkbox: primary,
     switch: {
         on: primary,
-        off: 'grey',
+        off: '#969696',
         dot: light,
     },
     radio: primary,
@@ -68,7 +69,7 @@ export const theme = {
     },
     range: {
         left: primary,
-        right: 'grey',
+        right: '#969696',
         dot: primary,
     },
     contextMenu: {

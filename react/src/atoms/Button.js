@@ -16,9 +16,11 @@ const StyledWrapper = styled.button`
         icon ? '0' : size * 10 + 'px ' + size * 20 + 'px'};
     border-radius: ${({ circle, size }) => (circle ? '50%' : size * 5 + 'px')};
     outline: 0px solid ${({ theme }) => theme.button.background}88;
-    transition: outline-width 0.2s;
-    display: grid;
-    place-items: center;
+    transition: outline-width 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     cursor: pointer;
     &:focus,
     &:hover {

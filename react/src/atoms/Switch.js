@@ -6,12 +6,18 @@ const StyledWrapper = styled.button`
     background-color: ${({ theme, value }) =>
         value ? theme.switch.on : theme.switch.off};
     border: 0;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, outline 0.1s;
     border-radius: ${({ size }) => size * 28 + 'px'};
     height: ${({ size }) => size * 28 + 'px'};
     width: ${({ size }) => size * 48 + 'px'};
     padding: ${({ size }) => size * 4 + 'px'};
     cursor: pointer;
+    outline: 0px solid
+        ${({ theme, value }) => (value ? theme.switch.on : theme.switch.off)}88;
+    &:focus,
+    &:hover {
+        outline-width: ${({ size }) => size * 2 + 'px'};
+    }
 `
 const StyledDot = styled.div`
     width: ${({ size }) => size * 20 + 'px'};

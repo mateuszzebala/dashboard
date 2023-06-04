@@ -1,21 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
-import { BiHomeAlt2, BiDollarCircle } from 'react-icons/bi'
-import { AiOutlineMessage } from 'react-icons/ai'
-import {
-    BsTerminal,
-    BsDatabase,
-    BsFolder,
-    BsPlay,
-    BsCalendarWeek,
-    BsGlobeEuropeAfrica,
-} from 'react-icons/bs'
-import { FiUsers } from 'react-icons/fi'
-import { toBoolStr } from '../utils/utils'
-import { FaReact, FaRegStickyNote, FaRegEye } from 'react-icons/fa'
-import { HiOutlineMail } from 'react-icons/hi'
 import { SiDjango } from 'react-icons/si'
+import { APPS } from '../apps'
+import { FaReact } from 'react-icons/fa'
+import { toBoolStr } from '../utils/utils'
 
 const StyledWrapper = styled.nav`
     background-color: ${({ theme }) => theme.leftbar.background};
@@ -65,45 +54,18 @@ export const LeftBar = ({ open }) => {
                 BOARD
             </StyleDashboard>
             <StyledMenuItems>
-                <LeftBarItem icon={<BiHomeAlt2 />} to={'/'}>
-                    HOME
-                </LeftBarItem>
-                <LeftBarItem icon={<BsDatabase />} to={'/'}>
-                    DATABASE
-                </LeftBarItem>
-                <LeftBarItem icon={<AiOutlineMessage />} to={'/'}>
-                    MESSAGES
-                </LeftBarItem>
-                <LeftBarItem icon={<FiUsers />} to={'/'}>
-                    USERS
-                </LeftBarItem>
-                <LeftBarItem icon={<BsFolder />} to={'/'}>
-                    FILES
-                </LeftBarItem>
-                <LeftBarItem icon={<BsTerminal />} to={'/'}>
-                    TERMINAL
-                </LeftBarItem>
-                <LeftBarItem icon={<BsPlay />} to={'/'}>
-                    PYTHON
-                </LeftBarItem>
-                <LeftBarItem icon={<BsCalendarWeek />} to={'/'}>
-                    CALENDAR
-                </LeftBarItem>
-                <LeftBarItem icon={<HiOutlineMail />} to={'/'}>
-                    EMAIL
-                </LeftBarItem>
-                <LeftBarItem icon={<FaRegStickyNote />} to={'/'}>
-                    NOTES
-                </LeftBarItem>
-                <LeftBarItem icon={<FaRegEye />} to={'/'}>
-                    REQUESTS
-                </LeftBarItem>
-                <LeftBarItem icon={<BiDollarCircle />} to={'/'}>
-                    FINANCE
-                </LeftBarItem>
-                <LeftBarItem icon={<BsGlobeEuropeAfrica />} to={'/'}>
-                    MAP
-                </LeftBarItem>
+                {APPS.map((app) => {
+                    const Icon = app.icon
+                    return (
+                        <LeftBarItem
+                            key={app.name}
+                            icon={<Icon />}
+                            to={app.link}
+                        >
+                            {app.name.toUpperCase()}
+                        </LeftBarItem>
+                    )
+                })}
             </StyledMenuItems>
         </StyledWrapper>
     )
