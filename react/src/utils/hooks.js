@@ -16,3 +16,26 @@ export const useOnClickOutside = (ref, handler) => {
         }
     }, [ref, handler])
 }
+
+export const useMediaQuery = (query) => {
+    const getMatches = (query) => {
+        return window.matchMedia(query).matches
+    }
+
+    const [matches, setMatches] = React.useState(getMatches(query))
+
+    function handleChange() {
+        setMatches(getMatches(query))
+    }
+
+    React.useEffect(() => {
+        const matchMedia = window.matchMedia(query)
+        handleChange()
+        matchMedia.addEventListener('change', handleChange)
+        return () => {
+            matchMedia.removeEventListener('change', handleChange)
+        }
+    }, [query])
+
+    return matches
+}

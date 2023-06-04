@@ -3,12 +3,16 @@ import styled from 'styled-components'
 import { datetimeToString } from '../../../utils/utils'
 
 const StyledLogItem = styled.div`
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     gap: 5px;
     padding: 5px 5px 5px 10px;
     border-left: 3px solid ${({ theme }) => theme.primary};
     cursor: pointer;
+    transition: transform 0.3s;
+    &:hover {
+        transform: translateX(10px);
+    }
 `
 const StyledRow = styled.div`
     display: flex;

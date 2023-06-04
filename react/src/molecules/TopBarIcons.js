@@ -3,6 +3,9 @@ import { BiUserCircle } from 'react-icons/bi'
 import { AiOutlineMessage } from 'react-icons/ai'
 import { FiSettings, FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { LINKS } from '../router/links'
+import { toBoolStr } from '../utils/utils'
 
 const StyledIcon = styled.span`
     display: grid;
@@ -10,6 +13,10 @@ const StyledIcon = styled.span`
     font-size: 20px;
     place-items: center;
     color: ${({ theme }) => theme.topbar.font};
+    transition: color 0.1s;
+    &:hover {
+        color: ${({ theme }) => theme.secondary};
+    }
 `
 const StyledWrapper = styled.span`
     display: flex;
@@ -19,22 +26,49 @@ const StyledWrapper = styled.span`
     gap: 5px;
     color: black;
 `
+const StyledSearchInput = styled.input`
+    border: 0;
+    border-bottom: 2px solid ${({ theme }) => theme.input.border};
+    text-align: center;
+    padding: 3px 0;
+    transition: max-width 0.2s;
+    max-width: ${({ show }) => (show ? '200px' : 0)};
+    font-size: 18px;
+    &:focus {
+        outline: none;
+    }
+`
 
 export const TopBarIcons = () => {
+    const [showInput, setShowInput] = React.useState(false)
     return (
         <StyledWrapper>
-            <StyledIcon>
+            <StyledSearchInput
+                placeholder="SEARCH ..."
+                show={toBoolStr(showInput)}
+            />
+            <StyledIcon
+                onClick={() => {
+                    setShowInput((prev) => !prev)
+                }}
+            >
                 <FiSearch />
             </StyledIcon>
-            <StyledIcon>
-                <FiSettings />
-            </StyledIcon>
-            <StyledIcon>
-                <BiUserCircle />
-            </StyledIcon>
-            <StyledIcon>
-                <AiOutlineMessage />
-            </StyledIcon>
+            <Link to={LINKS.SETTINGS}>
+                <StyledIcon>
+                    <FiSettings />
+                </StyledIcon>
+            </Link>
+            <Link to={LINKS.ACCOUNT}>
+                <StyledIcon>
+                    <BiUserCircle />
+                </StyledIcon>
+            </Link>
+            <Link to={LINKS.MESSAGES}>
+                <StyledIcon>
+                    <AiOutlineMessage />
+                </StyledIcon>
+            </Link>
         </StyledWrapper>
     )
 }

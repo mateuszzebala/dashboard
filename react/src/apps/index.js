@@ -11,76 +11,77 @@ import {
 import { FiUsers } from 'react-icons/fi'
 import { FaRegStickyNote, FaRegEye } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
+import { LINKS } from '../router/links'
 
 export const APPS = [
     {
         name: 'Home',
         icon: BiHomeAlt2,
-        link: '/',
+        link: LINKS.HOME,
     },
     {
         name: 'Database',
         icon: BsDatabase,
-        link: '/database/',
+        link: LINKS.DATABASE,
     },
     {
         name: 'Messages',
         icon: AiOutlineMessage,
-        link: '/messages/',
+        link: LINKS.MESSAGES,
     },
     {
         name: 'Users',
         icon: FiUsers,
-        link: '/users/',
+        link: LINKS.USERS,
     },
     {
         name: 'Files',
         icon: BsFolder,
-        link: '/files/',
+        link: LINKS.FILES,
     },
     {
         name: 'Terminal',
         icon: BsTerminal,
-        link: '/terminal/',
+        link: LINKS.TERMINAL,
     },
     {
         name: 'Python',
         icon: BsPlay,
-        link: '/python/',
+        link: LINKS.PYTHON,
     },
     {
         name: 'Calendar',
         icon: BsCalendarWeek,
-        link: '/calendar/',
+        link: LINKS.CALENDAR,
     },
     {
         name: 'Email',
         icon: HiOutlineMail,
-        link: '/email/',
+        link: LINKS.EMAIL,
     },
     {
         name: 'Notes',
         icon: FaRegStickyNote,
-        link: '/notes/',
+        link: LINKS.NOTES,
     },
     {
         name: 'Requests',
         icon: FaRegEye,
-        link: '/requests/',
+        link: LINKS.REQUESTS,
     },
     {
         name: 'Finance',
         icon: BiDollarCircle,
-        link: '/finance/',
+        link: LINKS.FINANCE,
     },
     {
         name: 'Statistics',
         icon: AiOutlineBarChart,
-        link: '/statistics/',
+        link: LINKS.STATISTICS,
     },
     {
         name: 'Map',
         icon: BsGlobeEuropeAfrica,
-        link: '/map/',
+        link: LINKS.MAP,
     },
 ]

@@ -6,6 +6,7 @@ const StyledWrapper = styled.div`
     box-shadow: 0 0 8px -5px black;
     padding: 10px;
     height: 100%;
+    width: 100%;
     border-radius: 10px;
 `
 
@@ -18,7 +19,8 @@ const StyledList = styled.div`
     min-height: 100%;
     overflow: scroll;
     &::-webkit-scrollbar {
-        width: 00;
+        width: 0;
+        height: 0;
     }
 `
 

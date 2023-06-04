@@ -3,7 +3,8 @@ import React from 'react'
 
 const StyledTable = styled.table`
     border-collapse: collapse;
-    width: 100%;
+    display: table;
+    max-width: 100%;
 `
 
 const StyledField = styled.td`

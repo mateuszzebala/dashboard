@@ -13,15 +13,20 @@ const StyledBox = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.1s;
     cursor: pointer;
     a {
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
+        transition: color 0.1s;
     }
     &:hover {
         transform: scale(1.1);
         box-shadow: 0 0 5px -4px black;
+        background-color: ${({ theme }) => theme.primary};
+        a {
+            color: ${({ theme }) => theme.light};
+        }
     }
 `
 const StyledName = styled.div``

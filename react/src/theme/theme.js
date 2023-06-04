@@ -8,6 +8,8 @@ const darkColors = {
 
 export const theme = {
     primary: primary,
+    light: light,
+    secondary: '#4f8de3',
     error: '#FF6B6B',
     warning: '#f5d11d',
     success: '#38b000',

@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { LeftBar } from '../organisms/LeftBar'
 import { TopBar } from '../organisms/TopBar'
+import { useCookies } from 'react-cookie'
+import { toBoolStr } from '../utils/utils'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -23,19 +25,32 @@ const StyledRightSide = styled.div`
 const StyledContent = styled.div`
     padding: 10px;
     height: 100%;
+    width: ${({ leftbarOpen }) =>
+        leftbarOpen ? 'calc(100vw - 200px)' : '100vw'};
     background-color: ${({ theme }) => theme.content.background};
     color: ${({ theme }) => theme.content.font};
     overflow: auto;
 `
 
 export const MainTemplate = ({ title = '', children }) => {
-    const [leftbarOpen, setLeftbarOpen] = React.useState(true)
+    const [cookies, setCookies, removeCookies] = useCookies(['leftbarOpen'])
+    const [leftbarOpen, setLeftbarOpen] = React.useState(cookies.leftbarOpen)
+
+    React.useEffect(() => {
+        if (cookies.leftbarOpen === leftbarOpen) return
+        removeCookies(['leftbaropen'])
+        setCookies(['leftbarOpen'], toBoolStr(leftbarOpen))
+        console.log(cookies.leftbarOpen)
+    }, [cookies, leftbarOpen])
+
     return (
         <StyledWrapper>
             <LeftBar open={leftbarOpen} />
             <StyledRightSide>
                 <TopBar title={title} setOpen={setLeftbarOpen} />
-                <StyledContent>{children}</StyledContent>
+                <StyledContent leftbarOpen={toBoolStr(leftbarOpen)}>
+                    {children}
+                </StyledContent>
             </StyledRightSide>
         </StyledWrapper>
     )

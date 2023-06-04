@@ -18,19 +18,6 @@ const StyledWrapper = styled.div`
         return theme.message.background
     }};
     box-shadow: 0 0 8px -3px black;
-
-    @keyframes fade-in-from-bottom {
-        from {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    animation: fade-in-from-bottom 0.5s;
 `
 const StyledText = styled.span`
     font-size: 17px;

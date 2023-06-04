@@ -11,14 +11,33 @@ const StyledWrapper = styled.div`
     gap: 10px;
     right: 0;
     padding: 10px;
+    z-index: 10;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
 `
 
 export const MessageGroup = () => {
     const { messages, removeMessage } = useMessage()
-
+    const timeoutRef = React.useRef([])
     const handleCloseMessage = (id) => {
         removeMessage(id)
     }
+
+    React.useEffect(() => {
+        timeoutRef.current = timeoutRef.current.filter((timeout) => {
+            clearTimeout(timeout)
+            return false
+        })
+        Object.keys(messages).forEach((message) => {
+            timeoutRef.current.push(
+                setTimeout(() => {
+                    handleCloseMessage(message)
+                }, 3000)
+            )
+        })
+    }, [messages])
 
     return (
         <StyledWrapper>

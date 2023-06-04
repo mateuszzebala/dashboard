@@ -19,6 +19,7 @@ const StyledTooltip = styled.div`
     max-width: 300px;
     overflow: hidden;
     white-space: pre-wrap;
+    word-break: break-all;
     @keyframes fadein {
         from {
             opacity: 0;

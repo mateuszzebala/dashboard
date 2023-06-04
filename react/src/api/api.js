@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const API_URL = 'http://localhost:8000/dashboard/api/'
 
-export const makeAPIurl = (path, args = null) => {
+export const API = (path, args = null) => {
     let url = API_URL
     url += path.join('/')
     url += '/'
@@ -21,12 +21,11 @@ export const makeAPIurl = (path, args = null) => {
     return url
 }
 
-export const sendData = (
-    url,
-    formData = null,
-    headers = {},
-    method = 'POST'
-) => {
+export const FETCH = (url, data = {}, headers = {}, method = 'POST') => {
+    const formData = new FormData()
+    Object.keys(data).forEach((field) => {
+        formData.append(field, data[field])
+    })
     return axios({
         url,
         data: formData,

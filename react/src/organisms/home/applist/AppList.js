@@ -4,14 +4,16 @@ import { AppItem } from './AppItem.js'
 import { APPS } from '../../../apps/index.js'
 
 const StyledWrapper = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 45%);
     gap: 20px;
-    min-width: 240px;
-    max-width: 240px;
+    min-width: 250px;
     max-height: 100%;
     flex-wrap: wrap;
-    padding: 0 10px;
+    padding: 10px;
     overflow: scroll;
+    box-shadow: 0 0 8px -5px black;
+    border-radius: 10px;
     justify-content: center;
     &::-webkit-scrollbar {
         width: 0;
