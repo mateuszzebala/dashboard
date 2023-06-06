@@ -20,9 +20,6 @@ export const links = {
     python: {
         index: () => '/python/',
     },
-    calendar: {
-        index: () => '/calendar/',
-    },
     email: {
         index: () => '/email/',
     },
@@ -46,5 +43,8 @@ export const links = {
     },
     account: {
         index: () => '/account/',
+    },
+    sessions: {
+        index: () => '/sessions/',
     },
 }

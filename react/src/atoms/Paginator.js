@@ -1,10 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { range, toBoolStr } from '../utils/utils'
-import {
-    FaRegArrowAltCircleRight,
-    FaRegArrowAltCircleLeft,
-} from 'react-icons/fa'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     display: inline-flex;
@@ -43,7 +40,7 @@ export const Paginator = ({ value, setValue, pages }) => {
                     setValue((prev) => (prev > 0 ? prev - 1 : prev))
                 }}
             >
-                <FaRegArrowAltCircleLeft />
+                <FaArrowLeft />
             </StyledPageButton>
             {value > 2 && (
                 <>
@@ -91,7 +88,7 @@ export const Paginator = ({ value, setValue, pages }) => {
                     setValue((prev) => (prev < pages - 1 ? prev - 1 : prev))
                 }}
             >
-                <FaRegArrowAltCircleRight />
+                <FaArrowRight />
             </StyledPageButton>
         </StyledWrapper>
     )

@@ -5,6 +5,7 @@ from django.urls import path
 from dashboard.serializers import get_field_serializer, set_field_serializer, set_relation_serialize
 from html import unescape
 from django.contrib import admin
+from math import ceil
 
 
 def get_models_view(reqeust):
@@ -44,17 +45,19 @@ def select_items_view(request, model_name):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
 
-    length = request.POST.get('length') or -1
-    page = request.POST.get('page') or 0
-    order_by = request.POST.get('order_by') or 'pk'
-    asc = request.POST.get('asc') or True
+    length = int(request.GET.get('length')) or -1
+    page = int(request.GET.get('page')) or 0
+    order_by = request.GET.get('order_by') or 'pk'
+    asc = request.GET.get('asc') == 'true'
 
     items = list(model.objects.all().order_by(order_by))
+    pages = ceil(len(items) / length) if length != -1 else 1
     if length != -1: items = items[page*length:page*length+length]
-    if not asc: items = items.reverse()
+    if not asc: items.reverse()
 
     return JsonResponse({
         'model': model.__name__,
+        'pages': pages,
         'items': [item_to_json(item) for item in items]
     })
 
@@ -65,11 +68,10 @@ def manage_item_view(request, model_name, pk):
     if item is None: return error_message('Item does not exists', 400)
 
     match (request.POST.get('method')):
-        case 'GET': return get_item_view(request, item)
         case 'DELETE': return delete_item_view(request, item)
         case 'PATCH': return patch_item_view(request, item)
 
-    return error_message('Bad request method', 400)
+    return get_item_view(request, item)
 
 
 def get_item_view(request, item):

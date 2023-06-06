@@ -23,7 +23,7 @@ const StyledWrapper = styled.div`
 export const AppList = () => {
     return (
         <StyledWrapper>
-            {APPS.map((app) => {
+            {Object.values(APPS).map((app) => {
                 const Icon = app.icon
                 return (
                     <AppItem

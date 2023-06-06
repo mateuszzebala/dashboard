@@ -11,10 +11,11 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.leftbar.font};
     font-size: 20px;
     padding: 5px;
-    background-color: #ffffff11;
+    background-color: #ffffff09;
     border-radius: 5px;
     padding: 10px;
     width: 90%;
+    cursor: pointer;
 
     a {
         color: ${({ theme }) => theme.leftbar.font};

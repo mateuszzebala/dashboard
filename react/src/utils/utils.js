@@ -31,6 +31,19 @@ export const timeToString = (datetime) => {
     return `${hour}:${minute}:${second}`
 }
 
+export const durationToString = (duration) => {
+    let { days, seconds } = duration
+    seconds += days * 24 * 3600
+    days = Math.floor(seconds / (3600 * 24))
+    seconds -= days * 3600 * 24
+    let hours = Math.floor(seconds / 3600)
+    seconds -= hours * 3600
+    let minutes = Math.floor(seconds / 60)
+    seconds -= minutes * 60
+
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`
+}
+
 export const fieldToString = (value, type) => {
     if (type === 'DateTimeField') {
         value = datetimeToString(value)
@@ -40,6 +53,8 @@ export const fieldToString = (value, type) => {
         value = timeToString(value)
     } else if (type === 'BooleanField') {
         value = value ? 'True' : 'False'
+    } else if (type === 'DurationField') {
+        value = durationToString(value)
     } else {
         value = value.toString()
     }

@@ -68,7 +68,7 @@ export const LeftBar = ({ open }) => {
                 </StyleDashboard>
             </Link>
             <StyledMenuItems>
-                {APPS.map((app) => {
+                {Object.values(APPS).map((app) => {
                     const Icon = app.icon
                     return (
                         <LeftBarItem
