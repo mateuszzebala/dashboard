@@ -2,9 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
 import { SiDjango } from 'react-icons/si'
-import { APPS } from '../apps'
+import { APPS } from '../apps/apps'
 import { FaReact } from 'react-icons/fa'
 import { toBoolStr } from '../utils/utils'
+import { Link } from 'react-router-dom'
+import { links } from '../router/links'
 
 const StyledWrapper = styled.nav`
     background-color: ${({ theme }) => theme.leftbar.background};
@@ -17,11 +19,20 @@ const StyledWrapper = styled.nav`
     padding: 20px 0 0;
     width: 230px;
     overflow-x: hidden;
+    z-index: 2;
     transition: max-width 0.3s ease, min-width 0.3s ease;
     max-width: ${({ open }) => (open ? '200px' : '0')};
     min-width: ${({ open }) => (open ? '200px' : '0')};
     box-shadow: 0 0 10px -5px black;
     gap: 10px;
+    a {
+        text-decoration: none;
+        text-align: center;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 `
 
 const StyleDashboard = styled.span`
@@ -47,13 +58,15 @@ const StyledMenuItems = styled.div`
 export const LeftBar = ({ open }) => {
     return (
         <StyledWrapper open={toBoolStr(open)}>
-            <StyleDashboard>
-                <SiDjango /> <FaReact />
-                <br />
-                DASH
-                <br />
-                BOARD
-            </StyleDashboard>
+            <Link to={links.home()}>
+                <StyleDashboard>
+                    <SiDjango /> <FaReact />
+                    <br />
+                    DASH
+                    <br />
+                    BOARD
+                </StyleDashboard>
+            </Link>
             <StyledMenuItems>
                 {APPS.map((app) => {
                     const Icon = app.icon

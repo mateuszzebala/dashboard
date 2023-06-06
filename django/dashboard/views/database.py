@@ -4,6 +4,7 @@ from dashboard.utils import error_message, get_all_models, get_model, get_type_o
 from django.urls import path
 from dashboard.serializers import get_field_serializer, set_field_serializer, set_relation_serialize
 from html import unescape
+from django.contrib import admin
 
 
 def get_models_view(reqeust):
@@ -34,6 +35,7 @@ def get_model_info_view(reqeust, model_name):
                 'field_name': None,
                 'choices': get_field_options(field),
             },
+            'registered': field.name in admin.site._registry.get(model).list_display
         }) for field in model._meta.get_fields()),
 
 })

@@ -25,6 +25,7 @@ const StyledRightSide = styled.div`
 const StyledContent = styled.div`
     padding: 10px;
     height: 100%;
+    transition: width 0.3s;
     width: ${({ leftbarOpen }) =>
         leftbarOpen ? 'calc(100vw - 200px)' : '100vw'};
     background-color: ${({ theme }) => theme.content.background};

@@ -4,7 +4,7 @@ import { AiOutlineMessage } from 'react-icons/ai'
 import { FiSettings, FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { LINKS } from '../router/links'
+import { links } from '../router/links'
 import { toBoolStr } from '../utils/utils'
 
 const StyledIcon = styled.span`
@@ -54,17 +54,17 @@ export const TopBarIcons = () => {
             >
                 <FiSearch />
             </StyledIcon>
-            <Link to={LINKS.SETTINGS}>
+            <Link to={links.settings.index()}>
                 <StyledIcon>
                     <FiSettings />
                 </StyledIcon>
             </Link>
-            <Link to={LINKS.ACCOUNT}>
+            <Link to={links.account.index()}>
                 <StyledIcon>
                     <BiUserCircle />
                 </StyledIcon>
             </Link>
-            <Link to={LINKS.MESSAGES}>
+            <Link to={links.messages.index()}>
                 <StyledIcon>
                     <AiOutlineMessage />
                 </StyledIcon>

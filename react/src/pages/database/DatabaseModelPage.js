@@ -1,12 +1,14 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { FETCH } from '../../api/api'
 import { endpoints } from '../../api/endpoints'
 import { Table, Field, HeaderRow, Row } from '../../atoms/Table'
 import styled from 'styled-components'
-import { Loading } from '../../atoms/Loading'
 import { Tooltip } from '../../atoms/Tooltip'
+import { fieldToString } from '../../utils/utils'
+import { Loading } from '../../atoms/Loading'
+import { links } from '../../router/links'
 
 const StyledWrapper = styled.div`
     max-width: 100%;
@@ -18,6 +20,25 @@ const StyledWrapper = styled.div`
     &::-webkit-scrollbar {
         height: 0;
     }
+    table {
+        width: 100%;
+    }
+`
+const StyledField = styled.td`
+    border: 2px solid ${({ theme }) => theme.table.border};
+    text-align: center;
+    padding: 5px 10px;
+    width: auto;
+    display: table-cell;
+    white-space: nowrap;
+    max-width: 100px;
+    transition: background-color 0.2s;
+    tr:has(&):hover td {
+        background-color: #00000011;
+    }
+    overflow: hidden;
+    cursor: pointer;
+    text-overflow: ellipsis;
 `
 
 export const DatabaseModelPage = () => {
@@ -28,10 +49,22 @@ export const DatabaseModelPage = () => {
     const [asc] = React.useState(true)
     const [modelData, setModelData] = React.useState(false)
     const [data, setData] = React.useState([])
+    const [fields, setFields] = React.useState([])
+    const navigate = useNavigate()
+
+    const handleRowClick = (item) => {
+        navigate(links.database.item(modelName, item.pk))
+    }
 
     React.useEffect(() => {
-        FETCH(endpoints.database.model(modelName)).then((data) => {
-            setModelData(data.data)
+        FETCH(endpoints.database.model(modelName)).then((res) => {
+            const resModelData = res.data
+            setModelData(resModelData)
+            setFields(
+                Object.keys(res.data.fields)
+                    .filter((field) => !resModelData.fields[field].relation.is)
+                    .filter((field) => !resModelData.fields[field].registered)
+            )
         })
         FETCH(
             endpoints.database.items(modelName, {
@@ -40,8 +73,8 @@ export const DatabaseModelPage = () => {
                 order_by: orderBy,
                 asc,
             })
-        ).then((data) => {
-            setData(data.data)
+        ).then((res) => {
+            setData(res.data)
         })
     }, [])
 
@@ -51,32 +84,42 @@ export const DatabaseModelPage = () => {
         <MainTemplate title={'DATABASE'}>
             <StyledWrapper>
                 <Table>
-                    <HeaderRow>
-                        {Object.keys(modelData.fields)
-                            .filter(
-                                (field) => !modelData.fields[field].relation.is
-                            )
-                            .map((field) => {
-                                return <Field key={field}>{field}</Field>
-                            })}
-                    </HeaderRow>
-                    {data ? (
-                        data.items.map((item) => (
-                            <Row key={item.pk}>
-                                {Object.keys(item.fields).map((field) => (
-                                    <Field key={item.fields[field]}>
-                                        <Tooltip
-                                            text={item.fields[field].toString()}
-                                        >
-                                            {item.fields[field].toString()}
-                                        </Tooltip>
-                                    </Field>
-                                ))}
-                            </Row>
-                        ))
-                    ) : (
-                        <Loading size={3} />
-                    )}
+                    <thead>
+                        <HeaderRow>
+                            {fields &&
+                                fields.map((field) => {
+                                    return <Field key={field}>{field}</Field>
+                                })}
+                        </HeaderRow>
+                    </thead>
+                    <tbody>
+                        {!data || !modelData ? (
+                            <Loading size={3} />
+                        ) : (
+                            data.items.map((item) => (
+                                <Row
+                                    onClick={() => {
+                                        handleRowClick(item)
+                                    }}
+                                    key={item.pk}
+                                >
+                                    {fields.map((field) => {
+                                        const content = fieldToString(
+                                            item.fields[field],
+                                            modelData.fields[field].type
+                                        )
+                                        return (
+                                            <StyledField key={field}>
+                                                <Tooltip text={content}>
+                                                    {content}
+                                                </Tooltip>
+                                            </StyledField>
+                                        )
+                                    })}
+                                </Row>
+                            ))
+                        )}
+                    </tbody>
                 </Table>
             </StyledWrapper>
         </MainTemplate>

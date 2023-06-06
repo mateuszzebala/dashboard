@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { AppItem } from './AppItem.js'
-import { APPS } from '../../../apps/index.js'
+import { APPS } from '../../../apps/apps'
 
 const StyledWrapper = styled.div`
     display: grid;

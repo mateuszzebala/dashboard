@@ -8,4 +8,7 @@ export const endpoints = {
         item: (model, pk) => API(['database', model, 'items', pk]),
         create: (model) => API(['database', model, 'create']),
     },
+    auth: {
+        signin: () => API(['signin']),
+    },
 }

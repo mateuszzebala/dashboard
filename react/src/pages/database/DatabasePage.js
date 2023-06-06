@@ -5,6 +5,7 @@ import { Typography } from '../../atoms/Typography'
 import { endpoints } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { Link } from 'react-router-dom'
+import { links } from '../../router/links'
 
 const StyledModels = styled.div`
     display: flex;
@@ -23,9 +24,11 @@ const StyledModel = styled.div`
     cursor: pointer;
     border-left: 2px solid ${({ theme }) => theme.primary};
 
-    transition: transform 0.1s;
+    transition: transform 0.1s, background-color 0.1s, color 0.1s;
     &:hover {
         transform: scale(1.1);
+        background-color: ${({ theme }) => theme.primary};
+        color: ${({ theme }) => theme.light};
     }
 `
 
@@ -61,7 +64,7 @@ export const DatabasePage = () => {
                     <Typography variant="h1">{app.toUpperCase()}</Typography>
                     <StyledModels>
                         {models[app].map((model) => (
-                            <Link to={'/'} key={model}>
+                            <Link to={links.database.model(model)} key={model}>
                                 <StyledModel>{model}</StyledModel>
                             </Link>
                         ))}

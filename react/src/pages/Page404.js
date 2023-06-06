@@ -3,7 +3,7 @@ import { MainTemplate } from '../templates/MainTemplate'
 import { Typography } from '../atoms/Typography'
 import styled from 'styled-components'
 import { Link } from '../atoms/Link'
-import { LINKS } from '../router/links'
+import { links } from '../router/links'
 
 const StyledWrapper = styled.div`
     height: 100%;
@@ -23,7 +23,7 @@ export const Page404 = () => {
         <MainTemplate title={'PAGE NOT FOUND'}>
             <StyledWrapper>
                 <Typography variant={'h1'}>404</Typography>
-                <Link animation={false} to={LINKS.HOME}>
+                <Link animation={false} to={links.home()}>
                     BACK TO HOME
                 </Link>
             </StyledWrapper>

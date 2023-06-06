@@ -1,11 +1,6 @@
 const primary = '#181915'
 const light = '#ffffff'
 
-const darkColors = {
-    background: primary,
-    font: light,
-}
-
 export const theme = {
     primary: primary,
     light: light,
@@ -13,7 +8,10 @@ export const theme = {
     error: '#FF6B6B',
     warning: '#f5d11d',
     success: '#38b000',
-    leftbar: darkColors,
+    leftbar: {
+        background: primary,
+        font: light,
+    },
     topbar: {
         background: light,
         font: primary,
@@ -22,7 +20,10 @@ export const theme = {
         background: light,
         font: primary,
     },
-    button: darkColors,
+    button: {
+        background: primary,
+        font: light,
+    },
     input: {
         border: primary,
         font: primary,

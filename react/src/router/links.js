@@ -1,19 +1,50 @@
-export const LINKS = {
-    HOME: '/',
-    DATABASE: '/database/',
-    MESSAGES: '/messages/',
-    USERS: '/users/',
-    FILES: '/files/',
-    TERMINAL: '/terminal/',
-    PYTHON: '/python/',
-    CALENDAR: '/calendar/',
-    EMAIL: '/email/',
-    NOTES: '/notes/',
-    REQUESTS: '/requests/',
-    FINANCE: '/finance/',
-    STATISTICS: '/statistics/',
-    MAP: '/map/',
-
-    SETTINGS: '/settings/',
-    ACCOUNT: '/account/',
+export const links = {
+    home: () => '/',
+    database: {
+        index: () => '/database/',
+        model: (modelName) => `/database/${modelName}`,
+        item: (modelName, pk) => `/database/${modelName}/${pk}`,
+    },
+    messages: {
+        index: () => '/messages/',
+    },
+    users: {
+        index: () => '/users/',
+    },
+    files: {
+        index: () => '/files/',
+    },
+    terminal: {
+        index: () => '/terminal/',
+    },
+    python: {
+        index: () => '/python/',
+    },
+    calendar: {
+        index: () => '/calendar/',
+    },
+    email: {
+        index: () => '/email/',
+    },
+    notes: {
+        index: () => '/notes/',
+    },
+    requests: {
+        index: () => '/requests/',
+    },
+    finance: {
+        index: () => '/finance/',
+    },
+    statistics: {
+        index: () => '/statistics/',
+    },
+    map: {
+        index: () => '/map/',
+    },
+    settings: {
+        index: () => '/settings/',
+    },
+    account: {
+        index: () => '/account/',
+    },
 }

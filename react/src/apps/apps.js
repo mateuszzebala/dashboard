@@ -11,77 +11,77 @@ import {
 import { FiUsers } from 'react-icons/fi'
 import { FaRegStickyNote, FaRegEye } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
-import { LINKS } from '../router/links'
+import { links } from '../router/links'
 
 export const APPS = [
     {
         name: 'Home',
         icon: BiHomeAlt2,
-        link: LINKS.HOME,
+        link: links.home(),
     },
     {
         name: 'Database',
         icon: BsDatabase,
-        link: LINKS.DATABASE,
+        link: links.database.index(),
     },
     {
         name: 'Messages',
         icon: AiOutlineMessage,
-        link: LINKS.MESSAGES,
+        link: links.messages.index(),
     },
     {
         name: 'Users',
         icon: FiUsers,
-        link: LINKS.USERS,
+        link: links.users.index(),
     },
     {
         name: 'Files',
         icon: BsFolder,
-        link: LINKS.FILES,
+        link: links.files.index(),
     },
     {
         name: 'Terminal',
         icon: BsTerminal,
-        link: LINKS.TERMINAL,
+        link: links.terminal.index(),
     },
     {
         name: 'Python',
         icon: BsPlay,
-        link: LINKS.PYTHON,
+        link: links.python.index(),
     },
     {
         name: 'Calendar',
         icon: BsCalendarWeek,
-        link: LINKS.CALENDAR,
+        link: links.calendar.index(),
     },
     {
         name: 'Email',
         icon: HiOutlineMail,
-        link: LINKS.EMAIL,
+        link: links.email.index(),
     },
     {
         name: 'Notes',
         icon: FaRegStickyNote,
-        link: LINKS.NOTES,
+        link: links.notes.index(),
     },
     {
         name: 'Requests',
         icon: FaRegEye,
-        link: LINKS.REQUESTS,
+        link: links.requests.index(),
     },
     {
         name: 'Finance',
         icon: BiDollarCircle,
-        link: LINKS.FINANCE,
+        link: links.finance.index(),
     },
     {
         name: 'Statistics',
         icon: AiOutlineBarChart,
-        link: LINKS.STATISTICS,
+        link: links.statistics.index(),
     },
     {
         name: 'Map',
         icon: BsGlobeEuropeAfrica,
-        link: LINKS.MAP,
+        link: links.map.index(),
     },
 ]
