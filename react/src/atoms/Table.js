@@ -23,6 +23,7 @@ const StyledHeaderRow = styled.tr`
     td {
         color: ${({ theme }) => theme.table.background};
         background: ${({ theme }) => theme.table.font};
+        text-align: center;
     }
 `
 

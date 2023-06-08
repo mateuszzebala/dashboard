@@ -11,4 +11,5 @@ export const endpoints = {
     auth: {
         signin: () => API(['signin']),
     },
+    other: {},
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
+import { APPS } from '../../apps/apps'
 
 export const TerminalPage = () => {
-    return <MainTemplate title={'TERMINAL'}></MainTemplate>
+    return <MainTemplate app={APPS.terminal}></MainTemplate>
 }

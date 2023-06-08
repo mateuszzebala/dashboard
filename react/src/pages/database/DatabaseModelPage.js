@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { useNavigate, useParams } from 'react-router'
 import { FETCH } from '../../api/api'
 import { endpoints } from '../../api/endpoints'
-import { Table, Field, HeaderRow, Row } from '../../atoms/Table'
 import styled from 'styled-components'
-import { Tooltip } from '../../atoms/Tooltip'
-import { fieldToString } from '../../utils/utils'
-import { Loading } from '../../atoms/Loading'
 import { links } from '../../router/links'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FaCheck, FaMinus, FaPlus, FaSearch } from 'react-icons/fa'
 import { Button } from '../../atoms/Button'
 import { Typography } from '../../atoms/Typography'
 import { Paginator } from '../../atoms/Paginator'
+import { Switch } from '../../atoms/Switch'
+import { Input } from '../../atoms/Input'
+import { Select } from '../../atoms/Select'
+import { Modal } from '../../atoms/Modal'
+import { APPS } from '../../apps/apps'
+import { ModelTable } from '../../organisms/database/ModelTable'
+import { PutItemForm } from '../../organisms/database/PutItemForm'
 
 const StyledWrapper = styled.div`
     max-width: 100%;
@@ -29,22 +32,6 @@ const StyledWrapper = styled.div`
     table {
         width: 100%;
     }
-`
-const StyledField = styled.td`
-    border: 2px solid ${({ theme }) => theme.table.border};
-    text-align: center;
-    padding: 5px 10px;
-    width: auto;
-    display: table-cell;
-    white-space: nowrap;
-    max-width: 100px;
-    transition: background-color 0.2s;
-    tr:has(&):hover td {
-        background-color: #00000011;
-    }
-    overflow: hidden;
-    cursor: pointer;
-    text-overflow: ellipsis;
 `
 
 const StyledMenu = styled.div`
@@ -65,10 +52,12 @@ const StyledFooter = styled.div`
 
 export const DatabaseModelPage = () => {
     const { modelName } = useParams()
+    const [showNewItemModal, setShowNewItemModal] = useState(false)
     const [page, setPage] = React.useState(0)
     const [pages, setPages] = React.useState(2)
+    const [searchQuery, setSearchQuery] = React.useState('')
     const [length, setLength] = React.useState(30)
-    const [orderBy] = React.useState('pk')
+    const [orderBy, setOrderBy] = React.useState('pk')
     const [asc, setAsc] = React.useState(true)
     const [modelData, setModelData] = React.useState(false)
     const [data, setData] = React.useState([])
@@ -89,36 +78,46 @@ export const DatabaseModelPage = () => {
                     .filter((field) => resModelData.fields[field].registered)
             )
         })
+    }, [])
+
+    React.useEffect(() => {
         FETCH(
             endpoints.database.items(modelName, {
                 page,
                 length,
                 order_by: orderBy.toString(),
                 asc: asc.toString(),
+                query: searchQuery,
             })
         ).then((res) => {
             setData(res.data)
             setPages(res.data.pages)
         })
-    }, [page, length, orderBy, asc])
+    }, [page, length, orderBy, asc, searchQuery])
 
     return !modelData ? (
         ''
     ) : (
-        <MainTemplate title={'DATABASE'}>
+        <MainTemplate app={APPS.database}>
             <StyledWrapper>
                 <StyledMenu>
                     <Button icon={<FaCheck />}>ALL</Button>
+                    <Input
+                        label={'QUERY'}
+                        value={searchQuery}
+                        setValue={setSearchQuery}
+                    />
                     <Button icon={<FaSearch />}>SEARCH</Button>
-
-                    <Button>order_by</Button>
-                    <Button
-                        onClick={() => {
-                            setAsc((prev) => !prev)
-                        }}
-                    >
-                        {asc ? 'asc' : 'desc'}
-                    </Button>
+                    <Select
+                        data={fields.reduce((flds, key) => {
+                            flds[key] = key
+                            return flds
+                        }, {})}
+                        value={orderBy}
+                        setValue={setOrderBy}
+                    />
+                    <Typography variant={'h2'}>ASC:</Typography>
+                    <Switch size={1.5} value={asc} setValue={setAsc} />
                     <Button
                         onClick={() => {
                             setLength((prev) => (prev > 1 ? prev - 1 : prev))
@@ -135,45 +134,27 @@ export const DatabaseModelPage = () => {
                         icon={<FaPlus />}
                     />
                 </StyledMenu>
-                <Table>
-                    <thead>
-                        <HeaderRow>
-                            {fields &&
-                                fields.map((field) => {
-                                    return <Field key={field}>{field}</Field>
-                                })}
-                        </HeaderRow>
-                    </thead>
-                    <tbody>
-                        {!data || !modelData ? (
-                            <Loading size={3} />
-                        ) : (
-                            data.items.map((item) => (
-                                <Row
-                                    onClick={() => {
-                                        handleRowClick(item)
-                                    }}
-                                    key={item.pk}
-                                >
-                                    {fields.map((field) => {
-                                        const content = fieldToString(
-                                            item.fields[field],
-                                            modelData.fields[field].type
-                                        )
-                                        return (
-                                            <StyledField key={field}>
-                                                <Tooltip text={content}>
-                                                    {content}
-                                                </Tooltip>
-                                            </StyledField>
-                                        )
-                                    })}
-                                </Row>
-                            ))
-                        )}
-                    </tbody>
-                </Table>
-                <FloatingActionButton icon={<FaPlus />} circle size={1.5} />
+                <ModelTable
+                    fields={fields}
+                    data={data}
+                    modelData={modelData}
+                    handleRowClick={handleRowClick}
+                />
+                <Modal
+                    title={'CREATE NEW ITEM'}
+                    open={showNewItemModal}
+                    setOpen={setShowNewItemModal}
+                >
+                    <PutItemForm modelName={modelName} />
+                </Modal>
+                <FloatingActionButton
+                    onClick={() => {
+                        setShowNewItemModal(true)
+                    }}
+                    icon={<FaPlus />}
+                    circle
+                    size={1.5}
+                />
                 <StyledFooter>
                     <Paginator value={page} pages={pages} setValue={setPage} />
                 </StyledFooter>

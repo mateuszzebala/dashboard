@@ -4,7 +4,6 @@ import {
     BsTerminal,
     BsDatabase,
     BsFolder,
-    BsPlay,
     BsGlobeEuropeAfrica,
     BsKey,
 } from 'react-icons/bs'
@@ -12,6 +11,7 @@ import { FiUsers } from 'react-icons/fi'
 import { FaRegStickyNote, FaRegEye } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
 import { links } from '../router/links'
+import { TbBrandPython } from 'react-icons/tb'
 
 export const APPS = {
     home: {
@@ -46,7 +46,7 @@ export const APPS = {
     },
     python: {
         name: 'Python',
-        icon: BsPlay,
+        icon: TbBrandPython,
         link: links.python.index(),
     },
     email: {

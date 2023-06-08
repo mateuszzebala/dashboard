@@ -1,6 +1,7 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
+import { APPS } from '../../apps/apps'
 
 export const UsersPage = () => {
-    return <MainTemplate title={'USERS'}></MainTemplate>
+    return <MainTemplate app={APPS.users}></MainTemplate>
 }

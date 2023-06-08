@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
     padding: 10px;
     background-color: ${({ theme }) => theme.modal.background};
     color: ${({ theme }) => theme.modal.font};
-    box-shadow: 0 0 20px -10px black;
+    box-shadow: 0 0 10px -5px black, 2px 2px 10px 0px #00000033;
     border-radius: 10px;
 `
 

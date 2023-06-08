@@ -33,7 +33,7 @@ const StyledContent = styled.div`
     overflow: auto;
 `
 
-export const MainTemplate = ({ title = '', children }) => {
+export const MainTemplate = ({ app, children }) => {
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarOpen'])
     const [leftbarOpen, setLeftbarOpen] = React.useState(cookies.leftbarOpen)
 
@@ -41,14 +41,13 @@ export const MainTemplate = ({ title = '', children }) => {
         if (cookies.leftbarOpen === leftbarOpen) return
         removeCookies(['leftbaropen'])
         setCookies(['leftbarOpen'], toBoolStr(leftbarOpen))
-        console.log(cookies.leftbarOpen)
     }, [cookies, leftbarOpen])
 
     return (
         <StyledWrapper>
             <LeftBar open={leftbarOpen} />
             <StyledRightSide>
-                <TopBar title={title} setOpen={setLeftbarOpen} />
+                <TopBar app={app} setOpen={setLeftbarOpen} />
                 <StyledContent leftbarOpen={toBoolStr(leftbarOpen)}>
                     {children}
                 </StyledContent>

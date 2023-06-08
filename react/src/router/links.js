@@ -47,4 +47,7 @@ export const links = {
     sessions: {
         index: () => '/sessions/',
     },
+    search: {
+        index: (query = '') => `/search/${query}`,
+    },
 }

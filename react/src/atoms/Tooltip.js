@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.span`
     display: inline-block;
     align-items: center;
     justify-content: center;
@@ -19,6 +19,8 @@ const StyledTooltip = styled.div`
     max-width: 300px;
     overflow: hidden;
     white-space: pre-wrap;
+    font-size: 18px;
+    padding: 8px 12px;
     word-break: break-all;
     @keyframes fadein {
         from {

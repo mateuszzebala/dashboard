@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { IoIosArrowDropdownCircle } from 'react-icons/io'
 import { toBoolStr } from '../utils/utils'
 import { Tooltip } from './Tooltip'
+import { useOnClickOutside } from '../utils/hooks'
 
 const StyledOption = styled.button`
     display: flex;
@@ -78,7 +79,8 @@ const StyledDropdown = styled.div`
     overflow: scroll;
     position: absolute;
     top: 100%;
-    width: 100%;
+    width: calc(100% + 6px);
+    left: -3px;
     border: 3px solid ${({ theme }) => theme.select.border};
     border-width: 0 3px 3px;
     &::-webkit-scrollbar {
@@ -97,8 +99,12 @@ const StyledWrapper = styled.div`
 
 export const Select = ({ data, value = null, setValue }) => {
     const [dropdown, setDropdown] = React.useState(false)
+    const mainRef = React.useRef()
+    useOnClickOutside(mainRef, () => {
+        setDropdown(false)
+    })
     return (
-        <StyledWrapper>
+        <StyledWrapper ref={mainRef}>
             <ValueComponent
                 value={value}
                 data={data}

@@ -49,8 +49,15 @@ def select_items_view(request, model_name):
     page = int(request.GET.get('page')) or 0
     order_by = request.GET.get('order_by') or 'pk'
     asc = request.GET.get('asc') == 'true'
+    query = request.GET.get('query') or ''
+    items = []
+    try:
+        query = dict(equation.strip().split('=') for equation in query.split(','))
+        items = model.objects.filter(**query)
+    except:
+        items = model.objects.all()
 
-    items = list(model.objects.all().order_by(order_by))
+    items = list(items.order_by(order_by))
     pages = ceil(len(items) / length) if length != -1 else 1
     if length != -1: items = items[page*length:page*length+length]
     if not asc: items.reverse()

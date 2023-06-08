@@ -6,6 +6,7 @@ import { endpoints } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { Link } from 'react-router-dom'
 import { links } from '../../router/links'
+import { APPS } from '../../apps/apps'
 
 const StyledModels = styled.div`
     display: flex;
@@ -58,7 +59,7 @@ export const DatabasePage = () => {
     }, [])
 
     return (
-        <MainTemplate title={'DATABASE'}>
+        <MainTemplate app={APPS.database}>
             {Object.keys(models).map((app) => (
                 <StyledApp key={app}>
                     <Typography variant="h1">{app.toUpperCase()}</Typography>

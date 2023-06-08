@@ -12,7 +12,6 @@ import { SignInPage } from '../pages/SignInPage'
 import { FinancePage } from '../pages/finance/FinancePage'
 import { TerminalPage } from '../pages/terminal/TerminalPage'
 import { PythonPage } from '../pages/python/PythonPage'
-import { CalendarPage } from '../pages/calendar/CalendarPage'
 import { NotesPage } from '../pages/notes/NotesPage'
 import { EmailPage } from '../pages/email/EmailPage'
 import { StatisticsPage } from '../pages/statistics/StatisticsPage'
@@ -21,6 +20,7 @@ import { RequestsPage } from '../pages/requests/RequestsPage'
 import { AccountPage } from '../pages/account/AccountPage'
 import { SettingsPage } from '../pages/settings/Settings'
 import { SearchPage } from '../pages/search/SearchPage'
+import { SessionsPage } from '../pages/sessions/SessionsPage'
 
 const pages = {
     '/': HomePage,
@@ -43,8 +43,6 @@ const pages = {
 
     '/python/': PythonPage,
 
-    '/calendar/': CalendarPage,
-
     '/email/': EmailPage,
 
     '/notes/': NotesPage,
@@ -58,6 +56,8 @@ const pages = {
     '/account/': AccountPage,
 
     '/settings/': SettingsPage,
+
+    '/sessions/': SessionsPage,
 
     '/search/': SearchPage,
 

@@ -4,6 +4,7 @@ import { Typography } from '../atoms/Typography'
 import styled from 'styled-components'
 import { Link } from '../atoms/Link'
 import { links } from '../router/links'
+import { TbError404 } from 'react-icons/tb'
 
 const StyledWrapper = styled.div`
     height: 100%;
@@ -20,7 +21,12 @@ const StyledWrapper = styled.div`
 
 export const Page404 = () => {
     return (
-        <MainTemplate title={'PAGE NOT FOUND'}>
+        <MainTemplate
+            app={{
+                name: 'PAGE NOT FOUND',
+                icon: TbError404,
+            }}
+        >
             <StyledWrapper>
                 <Typography variant={'h1'}>404</Typography>
                 <Link animation={false} to={links.home()}>

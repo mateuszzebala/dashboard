@@ -2,6 +2,8 @@ import React from 'react'
 import { CiMenuBurger } from 'react-icons/ci'
 import styled from 'styled-components'
 import { TopBarIcons } from '../molecules/TopBarIcons'
+import { links } from '../router/links'
+import { Link } from '../atoms/Link'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -33,7 +35,14 @@ const StyledMenuButton = styled.button`
 
 const StyledTitle = styled.span`
     font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 10px;
     font-weight: 500;
+    color: ${({ theme }) => theme.topbar.font};
+    text-decoration: none;
 `
 const StyledLeftSide = styled.div`
     display: flex;
@@ -42,7 +51,7 @@ const StyledLeftSide = styled.div`
     justify-content: center;
 `
 
-export const TopBar = ({ title = '', setOpen }) => {
+export const TopBar = ({ app, setOpen }) => {
     function handleBurgerClick() {
         setOpen((prev) => !prev)
     }
@@ -53,7 +62,11 @@ export const TopBar = ({ title = '', setOpen }) => {
                 <StyledMenuButton onClick={handleBurgerClick}>
                     <CiMenuBurger />
                 </StyledMenuButton>
-                <StyledTitle>{title.toUpperCase()}</StyledTitle>
+                <Link animation={false} to={app.link || links.home}>
+                    <StyledTitle>
+                        {<app.icon />} {app.name.toUpperCase()}
+                    </StyledTitle>
+                </Link>
             </StyledLeftSide>
             <TopBarIcons />
         </StyledWrapper>

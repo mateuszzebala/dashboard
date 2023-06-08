@@ -118,7 +118,6 @@ const OptionComponent = ({ data, value, onClick, currectValue }) => {
 
     useEffect(() => {
         setChecked(currectValue.some((val) => val == value))
-        console.log(currectValue)
     }, [currectValue])
 
     const handleOptionClick = () => {
