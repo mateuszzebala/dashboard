@@ -4,6 +4,7 @@ export const links = {
         index: () => '/database/',
         model: (modelName) => `/database/${modelName}`,
         item: (modelName, pk) => `/database/${modelName}/${pk}`,
+        putItem: (modelName) => `/database/${modelName}/create`,
     },
     messages: {
         index: () => '/messages/',

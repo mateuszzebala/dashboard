@@ -21,6 +21,7 @@ import { AccountPage } from '../pages/account/AccountPage'
 import { SettingsPage } from '../pages/settings/Settings'
 import { SearchPage } from '../pages/search/SearchPage'
 import { SessionsPage } from '../pages/sessions/SessionsPage'
+import { DatabasePutItem } from '../pages/database/DatabasePutItem'
 
 const pages = {
     '/': HomePage,
@@ -30,6 +31,7 @@ const pages = {
     '/database/': DatabasePage,
     '/database/:modelName': DatabaseModelPage,
     '/database/:modelName/:pk': DatabaseItemPage,
+    '/database/:modelName/create': DatabasePutItem,
 
     '/files/': FilesPage,
 

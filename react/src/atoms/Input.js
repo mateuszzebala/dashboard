@@ -16,11 +16,10 @@ const StyledWrapper = styled.div`
 
 const StyledLabel = styled.label`
     position: absolute;
-    top: -10px;
-    left: 10px;
+    top: -3px;
+    left: 5px;
     padding: 0 10px;
-    border-top: ${({ label }) => (label ? '3px' : 0)} solid
-        ${({ theme }) => theme.input.border};
+    font-size: 10px;
     background-color: ${({ theme }) => theme.input.background};
     color: ${({ theme }) => theme.input.font};
 `
@@ -73,21 +72,21 @@ export const Input = ({
             <StyledLabel label={toBoolStr(label)}>{label || ''}</StyledLabel>
             {textarea ? (
                 <StyledTextarea
-                    {...props}
                     type={type}
                     value={value}
                     onChange={(e) => {
                         setValue(e.target.value)
                     }}
+                    {...props}
                 />
             ) : (
                 <StyledInput
-                    {...props}
                     type={type}
                     value={value}
                     onChange={(e) => {
                         setValue(e.target.value)
                     }}
+                    {...props}
                 />
             )}
         </StyledWrapper>

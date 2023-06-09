@@ -19,6 +19,7 @@ const StyledTooltip = styled.div`
     max-width: 300px;
     overflow: hidden;
     white-space: pre-wrap;
+    z-index: 10;
     font-size: 18px;
     padding: 8px 12px;
     word-break: break-all;

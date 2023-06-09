@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Switch } from '../../../atoms/Switch'
 import { Typography } from '../../../atoms/Typography'
 import { Theme } from '../../../atoms/Theme'
+import { FETCH } from '../../../api/api'
+import { endpoints } from '../../../api/endpoints'
 
 const StyledWrapper = styled.div`
     padding: 20px 50px;
@@ -34,12 +36,22 @@ const StyledToggle = styled.div`
 `
 
 export const ServerManage = () => {
-    const [disablepPage, setDisablePage] = React.useState(true)
-    const [enableLogs, setEnableLogs] = React.useState(true)
-    const [enableDebug, setEnableDebug] = React.useState(true)
-    const [enableNewUsers, setEnableNewUsers] = React.useState(true)
-    const [DDOSBlock, setDDOSBlock] = React.useState(true)
-    const [saveRequests, setSaveRequests] = React.useState(true)
+    const [configuration, setConfiguration] = React.useState({})
+
+    React.useEffect(() => {
+        if (configuration.enable_server !== undefined) {
+            FETCH(endpoints.home.configuration(), {
+                method: 'PATCH',
+                ...configuration,
+            })
+        }
+    }, [configuration])
+
+    React.useEffect(() => {
+        FETCH(endpoints.home.configuration()).then((data) => {
+            setConfiguration(data.data)
+        })
+    }, [])
 
     return (
         <StyledWrapper>
@@ -51,41 +63,66 @@ export const ServerManage = () => {
                     }}
                 >
                     <Switch
-                        value={disablepPage}
-                        setValue={setDisablePage}
+                        value={configuration.enable_server}
+                        setValue={(val) => {
+                            setConfiguration((prev) => ({
+                                ...prev,
+                                enable_server: val(configuration.enable_server),
+                            }))
+                        }}
                         size={2}
                     />
                 </Theme>
             </StyledToggle>
             <StyledToggle>
-                <Typography variant={'h4'}>LOGS</Typography>
-                <Switch value={enableLogs} setValue={setEnableLogs} size={2} />
-            </StyledToggle>
-            <StyledToggle>
                 <Typography variant={'h4'}>DEBUG</Typography>
                 <Switch
-                    value={enableDebug}
-                    setValue={setEnableDebug}
+                    value={configuration.debug}
+                    setValue={(val) => {
+                        setConfiguration((prev) => ({
+                            ...prev,
+                            debug: val(configuration.debug),
+                        }))
+                    }}
                     size={2}
                 />
             </StyledToggle>
             <StyledToggle>
                 <Typography variant={'h4'}>NEW USERS</Typography>
                 <Switch
-                    value={enableNewUsers}
-                    setValue={setEnableNewUsers}
+                    value={configuration.new_users}
+                    setValue={(val) => {
+                        setConfiguration((prev) => ({
+                            ...prev,
+                            new_users: val(configuration.new_users),
+                        }))
+                    }}
                     size={2}
                 />
             </StyledToggle>
             <StyledToggle>
                 <Typography variant={'h4'}>DDoS BLOCK</Typography>
-                <Switch value={DDOSBlock} setValue={setDDOSBlock} size={2} />
+                <Switch
+                    value={configuration.ddos_block}
+                    setValue={(val) => {
+                        setConfiguration((prev) => ({
+                            ...prev,
+                            ddos_block: val(configuration.ddos_block),
+                        }))
+                    }}
+                    size={2}
+                />
             </StyledToggle>
             <StyledToggle>
                 <Typography variant={'h4'}>SAVE REQUESTS</Typography>
                 <Switch
-                    value={saveRequests}
-                    setValue={setSaveRequests}
+                    value={configuration.save_requests}
+                    setValue={(val) => {
+                        setConfiguration((prev) => ({
+                            ...prev,
+                            save_requests: val(configuration.save_requests),
+                        }))
+                    }}
                     size={2}
                 />
             </StyledToggle>

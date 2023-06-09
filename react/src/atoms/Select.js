@@ -8,14 +8,20 @@ import { useOnClickOutside } from '../utils/hooks'
 const StyledOption = styled.button`
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     background-color: ${({ theme }) => theme.select.background};
     color: ${({ theme }) => theme.select.font};
     border: 0;
-    font-size: 15px;
+    font-size: 18px;
     white-space: nowrap;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 10px 10px;
+    text-align: center;
+    transition: background-color 0.2s;
+    &:hover {
+        background-color: ${({ theme }) => theme.select.font}22;
+    }
 `
 
 const StyledValue = styled.div`
@@ -40,7 +46,13 @@ const StyledDropdownIcon = styled.button`
         dropdown ? 'rotate(180deg)' : 'rotate(0deg)'};
 `
 
-const ValueComponent = ({ value = [], data, dropdown, setDropdown }) => {
+const ValueComponent = ({
+    value = [],
+    data,
+    dropdown,
+    setDropdown,
+    emptyName,
+}) => {
     return (
         <StyledValue>
             <StyledDropdownIcon
@@ -52,7 +64,7 @@ const ValueComponent = ({ value = [], data, dropdown, setDropdown }) => {
                 <IoIosArrowDropdownCircle />
             </StyledDropdownIcon>
             <StyledValue>
-                {!value ? <span>SELECT</span> : data[value]}
+                {!value ? <span>{emptyName}</span> : data[value]}
             </StyledValue>
         </StyledValue>
     )
@@ -77,11 +89,13 @@ const StyledDropdown = styled.div`
     transition: max-height 0.3s;
     max-height: ${({ dropdown }) => (dropdown ? '300px' : 0)};
     overflow: scroll;
+    z-index: 3;
     position: absolute;
     top: 100%;
     width: calc(100% + 6px);
     left: -3px;
     border: 3px solid ${({ theme }) => theme.select.border};
+    background-color: ${({ theme }) => theme.select.background};
     border-width: 0 3px 3px;
     &::-webkit-scrollbar {
         width: 0;
@@ -97,7 +111,12 @@ const StyledWrapper = styled.div`
     position: relative;
 `
 
-export const Select = ({ data, value = null, setValue }) => {
+export const Select = ({
+    data,
+    value = null,
+    setValue,
+    emptyName = 'SELECT',
+}) => {
     const [dropdown, setDropdown] = React.useState(false)
     const mainRef = React.useRef()
     useOnClickOutside(mainRef, () => {
@@ -110,6 +129,7 @@ export const Select = ({ data, value = null, setValue }) => {
                 data={data}
                 dropdown={toBoolStr(dropdown)}
                 setDropdown={setDropdown}
+                emptyName={emptyName}
             />
             <StyledDropdown dropdown={toBoolStr(dropdown)}>
                 {Object.keys(data).map((name) => (

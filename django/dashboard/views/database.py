@@ -7,7 +7,6 @@ from html import unescape
 from django.contrib import admin
 from math import ceil
 
-
 def get_models_view(reqeust):
     return JsonResponse({
         'models': dict((model.__name__, model._meta.app_label) for model in get_all_models())
@@ -21,6 +20,7 @@ def get_model_info_view(reqeust, model_name):
     return JsonResponse({
         'model': model.__name__,
         'app': model._meta.app_label,
+        'actions': [*[action.short_description for action in admin.site._registry.get(model).actions], 'delete'],
         'fields': dict((str(field.name), {
             'type': field.get_internal_type(),
             'relation': {
@@ -33,7 +33,6 @@ def get_model_info_view(reqeust, model_name):
                 'max_length': None if field.get_internal_type() != 'CharField' else field.max_length,
                 'editable': field.editable,
                 'auto_created': field.auto_created,
-                'field_name': None,
                 'choices': get_field_options(field),
             },
             'registered': field.name in admin.site._registry.get(model).list_display
@@ -42,6 +41,7 @@ def get_model_info_view(reqeust, model_name):
 })
 
 def select_items_view(request, model_name):
+
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
 
@@ -131,11 +131,16 @@ def item_to_json(item):
         'relations': dict((field.name, get_relation_items(item, field.name)) for field in filter(lambda field: field.is_relation, item.__class__._meta.get_fields()) )
     }
 
+def make_action_view(request, model_name):
+    print(request.POST.get('action'))
+    print(list(map(lambda key: key, request.POST.get('primary_keys').split(','))))
+    return JsonResponse({})
 
 urlpatterns = [
     path('', get_models_view), # GET MODELS
     path('<model_name>/', get_model_info_view), # GET MODEL INFO
     path('<model_name>/create/', put_item_view), # GET MODEL INFO
     path('<model_name>/items/', select_items_view), # GET ITEMS VIEW
+    path('<model_name>/items/action/', make_action_view), # MAKE ACTION VIEW
     path('<model_name>/items/<pk>/', manage_item_view), # MANAGE ITEM  # POST: {'method':string}
 ]

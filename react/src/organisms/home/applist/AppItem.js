@@ -13,7 +13,7 @@ const StyledBox = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.1s;
+    transition: transform 0.4s, box-shadow 0.4s, background-color 0.4s;
     cursor: pointer;
     a {
         color: ${({ theme }) => theme.primary};

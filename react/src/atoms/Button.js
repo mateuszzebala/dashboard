@@ -31,6 +31,8 @@ const StyledWrapper = styled.button`
 const StyledLoading = styled.span`
     display: grid;
     position: absolute;
+    width: 100%;
+    height: 100%;
     top: 50%;
     left: 50%;
     place-items: center;

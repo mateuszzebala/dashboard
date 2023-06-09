@@ -1,19 +1,1309 @@
 Watching for file changes with StatReloader
-/home/mz/Code/Projects/dashboard/django_dashboard/main/settings.py changed, reloading.
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
 Watching for file changes with StatReloader
-/home/mz/Code/Projects/dashboard/django_dashboard/main/settings.py changed, reloading.
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, ensure_ascii=False, indent=4)
+TypeError: dump() missing 1 required positional argument: 'fp'
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
 Watching for file changes with StatReloader
-/home/mz/Code/Projects/dashboard/django_dashboard/main/settings.py changed, reloading.
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
 Watching for file changes with StatReloader
-Not Found: /dashboard/api/
-Not Found: /dashboard/api/
-Not Found: /dashboard/api/
-Not Found: /dashboard/api/
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, config, ensure_ascii=False, indent=4)
+  File "/usr/lib/python3.11/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+io.UnsupportedOperation: not writable
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, config, ensure_ascii=False, indent=4)
+  File "/usr/lib/python3.11/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+io.UnsupportedOperation: not writable
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, config, ensure_ascii=False, indent=4)
+  File "/usr/lib/python3.11/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+io.UnsupportedOperation: not writable
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, config, ensure_ascii=False, indent=4)
+  File "/usr/lib/python3.11/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+io.UnsupportedOperation: not writable
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, config, ensure_ascii=False, indent=4)
+  File "/usr/lib/python3.11/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+io.UnsupportedOperation: not writable
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 32, in set_configuration
+    json.dump(CONFIG.CONFIGURATION, config, ensure_ascii=False, indent=4)
+  File "/usr/lib/python3.11/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+io.UnsupportedOperation: not writable
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
 Watching for file changes with StatReloader
-Not Found: /dashboard/api/
-Not Found: /dashboard/api/
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 16, in manage_configuration_view
+    set_configuration('new_users', new_users)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 15, in manage_configuration_view
+    set_configuration('debug', debug)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
 Watching for file changes with StatReloader
-Not Found: /dashboard/api/
-Not Found: /dashboard/api/
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
 Watching for file changes with StatReloader
-/home/mz/Code/Projects/dashboard/django_dashboard/main/settings.py changed, reloading.
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 16, in manage_configuration_view
+    set_configuration('new_users', new_users)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py", line 28, in __call__
+    if not CONFIG.ENABLE_SERVER() and not request.user.is_superuser:
+                                          ^^^^^^^^^^^^
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py", line 28, in __call__
+    if not CONFIG.ENABLE_SERVER() and not request.user.is_superuser:
+                                          ^^^^^^^^^^^^
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py", line 28, in __call__
+    if not CONFIG.ENABLE_SERVER() and not request.user.is_superuser:
+                                          ^^^^^^^^^^^^
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py", line 28, in __call__
+    if not CONFIG.ENABLE_SERVER() and not request.user.is_superuser:
+                                          ^^^^^^^^^^^^
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Not Found: /
+Not Found: /
+Not Found: /
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 15, in manage_configuration_view
+    set_configuration('debug', debug)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 17, in manage_configuration_view
+    set_configuration('ddos_block', ddos_block)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 33, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 14, in manage_configuration_view
+    set_configuration('enable_logs', enable_logs)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 14, in manage_configuration_view
+    set_configuration('enable_logs', enable_logs)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 34, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py", line 28, in __call__
+    if not CONFIG.ENABLE_SERVER() and not request.user.is_superuser:
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 7, in ENABLE_SERVER
+    return CONFIG.CONFIGURATION['enable_server']
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'enable_server'
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 38, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config)
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 38, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config).get('config')
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 36, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config).get('config')
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 36, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config).get('config')
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 13, in manage_configuration_view
+    set_configuration('enable_server', enable_server)
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 36, in set_configuration
+    load_configuration()
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py", line 27, in load_configuration
+    CONFIG.CONFIGURATION = json.load(config).get('config')
+                           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/dashboard/configuration/config.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 19, in manage_configuration_view
+    settings['DEBUG'] = debug
+    ~~~~~~~~^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Settings' object does not support item assignment
+Not Found: /
+Not Found: /
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 19, in manage_configuration_view
+    settings['DEBUG'] = debug
+    ~~~~~~~~^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Settings' object does not support item assignment
+Internal Server Error: /dashboard/api/home/configuration/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py", line 19, in manage_configuration_view
+    settings['DEBUG'] = debug
+    ~~~~~~~~^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/functional.py", line 268, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'Settings' object does not support item assignment
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /

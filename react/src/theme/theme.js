@@ -65,6 +65,10 @@ export const theme = {
         font: light,
         background: primary,
     },
+    counter: {
+        font: light,
+        background: primary,
+    },
     table: {
         border: primary,
         background: light,
