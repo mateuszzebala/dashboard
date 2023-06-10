@@ -1,8 +1,9 @@
 from termcolor import colored
 from datetime import datetime
-from dashboard.configuration.config import CONFIG
+from dashboard.configuration.config import SERVER_CONFIG
 from django.http import JsonResponse
 from django.urls import resolve
+from django.shortcuts import render
 
 
 colors_by_method = {
@@ -27,16 +28,16 @@ class DashboardMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if not CONFIG.ENABLE_SERVER():
+        if not SERVER_CONFIG.ENABLE_SERVER():
             try:
                 resolver_match = resolve(request.path_info)
                 view_func = resolver_match.func
                 app_name = view_func.__module__.split('.')[0]
                 print(app_name)
                 if app_name != 'dashboard':
-                    return JsonResponse({'error': 'Server is disabled'})
+                    return render(request, 'server_disabled.html', status=401)
             except:
-                return JsonResponse({'error': 'Server is disabled'})
+                return render(request, 'server_disabled.html', status=401)
            
 
 

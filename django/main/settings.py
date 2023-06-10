@@ -1,12 +1,13 @@
 from pathlib import Path
-from dashboard.configuration.config import CONFIG
+from dashboard.configuration.config import SERVER_CONFIG
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 SECRET_KEY = 'django-insecure-(hdjli*-jg0cp5v*)r59*i)7lyix&7*-d$=u8oaifiao+ky64l'
 
-DEBUG = CONFIG.DEBUG()
+DEBUG = SERVER_CONFIG.DEBUG()
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = SERVER_CONFIG.GET_ALLOWED_HOSTS()
 
 CORS_ALLOW_ALL_ORIGINS = True
 

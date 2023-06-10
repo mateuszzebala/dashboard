@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { LogsList } from '../organisms/home/logslist/LogsList'
 import { ServerManage } from '../organisms/home/servermanage/ServerManage'
 import { APPS } from '../apps/apps'
+import { AllowedHosts } from '../organisms/home/allowed_hosts/AllowedHosts'
 
 const StyledWrapper = styled.main`
     scroll-behavior: smooth;
@@ -34,6 +35,9 @@ export const HomePage = () => {
                     <AppList />
                     <ServerManage />
                     <LogsList />
+                </StyledRow>
+                <StyledRow>
+                    <AllowedHosts />
                 </StyledRow>
             </StyledWrapper>
         </MainTemplate>
