@@ -3523,3 +3523,444 @@ Traceback (most recent call last):
 django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
 Bad Request: /
 Unauthorized: /
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /favicon.ico
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Not Found: /
+Not Found: /
+Not Found: /
+Unauthorized: /
+Unauthorized: /
+Not Found: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '192.168.100.35:8000'. You may need to add '192.168.100.35' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.100.35:8000'. You may need to add '192.168.100.35' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '192.168.100.35:8000'. You may need to add '192.168.100.35' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.100.35:8000'. You may need to add '192.168.100.35' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+Not Found: /
+Not Found: /favicon.ico
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /dashboard/api/home/hosts/
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /dashboard/api/home/hosts/
+Bad Request: /dashboard/api/home/hosts/
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 49, in select_items_view
+    page = int(request.GET.get('page')) or 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 49, in select_items_view
+    page = int(request.GET.get('page')) or 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 49, in select_items_view
+    page = int(request.GET.get('page')) or 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /
+Unauthorized: /
+Unauthorized: /
+Unauthorized: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/urls/api_urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /dashboard/api/me/
+Not Found: /favicon.ico
+Internal Server Error: /dashboard/api/auth/me/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 23, in me
+    'siginin': request.user.is_authenticated(),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/middleware.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/configuration/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/home/hosts/
+Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /dashboard/api/auth/me/
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Watching for file changes with StatReloader
+Forbidden (CSRF token missing.): /dashboard/api/home/configuration/
+Forbidden (CSRF token missing.): /dashboard/api/home/hosts/
+Forbidden (CSRF token missing.): /dashboard/api/auth/me/
+Forbidden (CSRF token missing.): /dashboard/api/home/configuration/
+Forbidden (CSRF token missing.): /dashboard/api/home/hosts/
+Forbidden (CSRF token missing.): /dashboard/api/auth/me/
+Forbidden (CSRF token missing.): /dashboard/api/home/configuration/
+Forbidden (CSRF token missing.): /dashboard/api/home/hosts/
+Forbidden (CSRF token missing.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/configuration/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/home/hosts/
+Forbidden (CSRF token from POST has incorrect length.): /dashboard/api/auth/me/
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/auth/logout/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view django.contrib.auth.logout didn't return an HttpResponse object. It returned None instead.
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico

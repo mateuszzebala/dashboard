@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import React from 'react'
 import { HomePage } from '../pages/HomePage'
 import { Page404 } from '../pages/Page404'
@@ -22,6 +22,9 @@ import { SettingsPage } from '../pages/settings/SettingsPage'
 import { SearchPage } from '../pages/search/SearchPage'
 import { SessionsPage } from '../pages/sessions/SessionsPage'
 import { DatabasePutItem } from '../pages/database/DatabasePutItem'
+import { FETCH } from '../api/api'
+import { endpoints } from '../api/endpoints'
+import { links } from './links'
 
 const pages = {
     '/': HomePage,
@@ -67,14 +70,21 @@ const pages = {
 }
 
 export const Router = () => {
+    const navigate = useNavigate()
+    React.useEffect(() => {
+        FETCH(endpoints.auth.me()).then((data) => {
+            if (!data.data.signin) {
+                navigate(links.auth.signin())
+            }
+        })
+    }, [])
+
     return (
-        <BrowserRouter>
-            <Routes>
-                {Object.keys(pages).map((path) => {
-                    const Elem = pages[path]
-                    return <Route key={path} path={path} element={<Elem />} />
-                })}
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            {Object.keys(pages).map((path) => {
+                const Elem = pages[path]
+                return <Route key={path} path={path} element={<Elem />} />
+            })}
+        </Routes>
     )
 }

@@ -51,4 +51,7 @@ export const links = {
     search: {
         index: (query = '') => `/search/${query}`,
     },
+    auth: {
+        signin: () => '/signin/',
+    },
 }

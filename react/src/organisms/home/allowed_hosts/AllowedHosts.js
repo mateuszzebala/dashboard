@@ -6,6 +6,7 @@ import { Host } from './Host'
 import { Button } from '../../../atoms/Button'
 import { Input } from '../../../atoms/Input'
 import { Typography } from '../../../atoms/Typography'
+import { FaPlus } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     padding: 20px;
@@ -25,6 +26,7 @@ const StyledHosts = styled.div`
 const StyledMenu = styled.div`
     display: flex;
     gap: 10px;
+    align-items: center;
 `
 
 export const AllowedHosts = () => {
@@ -67,13 +69,14 @@ export const AllowedHosts = () => {
                         e.key === 'Enter' && handleAddHost()
                     }}
                 />
-                <Button onClick={handleAddHost}>OK</Button>
+                <Button onClick={handleAddHost} icon={<FaPlus />} />
             </StyledMenu>
             <StyledHosts>
                 {hosts.length > 0 ? (
                     hosts.map((host) => (
                         <Host
-                            onClick={() => {
+                            onContextMenu={(e) => {
+                                e.preventDefault()
                                 setHosts((prev) =>
                                     prev.filter((val) => val !== host)
                                 )

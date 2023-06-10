@@ -2,8 +2,9 @@ from django.urls import path
 from django.http import JsonResponse
 from dashboard.configuration.config import SERVER_CONFIG, save_configuration
 from django.conf import settings
+from .auth import is_superuser
 
-
+@is_superuser
 def manage_server_configuration_view(request):
     if request.POST.get('method') == 'PATCH':
         enable_server = request.POST.get('enable_server') == "true"
@@ -20,6 +21,7 @@ def manage_server_configuration_view(request):
         save_configuration()
     return JsonResponse(dict((name, bool(value)) for name, value in SERVER_CONFIG.CONFIGURATION.items()))
 
+@is_superuser
 def manage_allowed_hosts(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.ALLOWED_HOSTS = request.POST.get('hosts').split(',')

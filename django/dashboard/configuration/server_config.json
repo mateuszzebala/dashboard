@@ -1,13 +1,12 @@
 {
    "config": {
-      "enable_server": false,
+      "enable_server": true,
       "debug": true,
       "new_users": true,
       "ddos_block": true,
       "save_requests": true
    },
    "allowed_hosts": [
-      "localhost",
-      "127.0.0.1"
+      "localhost"
    ]
 }

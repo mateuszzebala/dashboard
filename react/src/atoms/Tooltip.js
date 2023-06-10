@@ -46,6 +46,7 @@ export const Tooltip = ({ children, text = '' }) => {
         setShow(false)
     }
     const handleMouseMove = (e) => {
+        console.log(e)
         setPosition({
             x: e.clientX,
             y: e.clientY,

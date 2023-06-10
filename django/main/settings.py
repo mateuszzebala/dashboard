@@ -9,7 +9,15 @@ DEBUG = SERVER_CONFIG.DEBUG()
 
 ALLOWED_HOSTS = SERVER_CONFIG.GET_ALLOWED_HOSTS()
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000'
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 INSTALLED_APPS = [
     'corsheaders',
@@ -27,7 +35,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'dashboard.middleware.DashboardMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

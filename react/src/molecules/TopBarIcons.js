@@ -3,9 +3,12 @@ import { BiUserCircle } from 'react-icons/bi'
 import { AiOutlineMessage } from 'react-icons/ai'
 import { FiSettings, FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { links } from '../router/links'
 import { toBoolStr } from '../utils/utils'
+import { IoMdLogOut } from 'react-icons/io'
+import { FETCH } from '../api/api'
+import { endpoints } from '../api/endpoints'
 
 const StyledIcon = styled.span`
     display: grid;
@@ -41,6 +44,8 @@ const StyledSearchInput = styled.input`
 
 export const TopBarIcons = () => {
     const [showInput, setShowInput] = React.useState(false)
+    const navigate = useNavigate()
+
     return (
         <StyledWrapper>
             <StyledSearchInput
@@ -69,6 +74,17 @@ export const TopBarIcons = () => {
                     <AiOutlineMessage />
                 </StyledIcon>
             </Link>
+            <StyledIcon
+                onClick={() => {
+                    FETCH(endpoints.auth.logout()).then((data) => {
+                        if (data.data.logout) {
+                            navigate(links.auth.signin())
+                        }
+                    })
+                }}
+            >
+                <IoMdLogOut />
+            </StyledIcon>
         </StyledWrapper>
     )
 }

@@ -14,7 +14,10 @@ export const endpoints = {
         action: (model) => API(['database', model, 'items', 'action']),
     },
     auth: {
-        signin: () => API(['signin']),
+        signin: () => API(['auth', 'signin']),
+        csrf: () => API(['auth', 'csrf']),
+        logout: () => API(['auth', 'logout']),
+        me: () => API(['auth', 'me']),
     },
     other: {},
 }

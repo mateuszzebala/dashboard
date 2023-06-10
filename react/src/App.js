@@ -1,6 +1,7 @@
 import React from 'react'
 import { GlobalStyle } from './theme/globalStyle'
 import { Router } from './router/Router'
+import { BrowserRouter } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { theme } from './theme/theme'
 import { MessageGroup } from './molecules/MessageGroup'
@@ -19,7 +20,9 @@ export const App = () => {
                 <StyledWrapper>
                     <GlobalStyle />
                     <MessageGroup />
-                    <Router />
+                    <BrowserRouter>
+                        <Router />
+                    </BrowserRouter>
                 </StyledWrapper>
             </MessageContext.Provider>
         </ThemeProvider>

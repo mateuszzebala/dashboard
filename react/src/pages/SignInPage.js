@@ -5,10 +5,14 @@ import { Button } from '../atoms/Button'
 import { Typography } from '../atoms/Typography'
 import { FETCH } from '../api/api'
 import { endpoints } from '../api/endpoints'
+import { useNavigate } from 'react-router'
+import { links } from '../router/links'
 
 const StyledWrapper = styled.div`
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: ${({ theme }) => theme.ligth};
     min-height: 100vh;
 `
@@ -16,7 +20,7 @@ const StyledWrapper = styled.div`
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 8px -3px black;
@@ -24,26 +28,40 @@ const StyledForm = styled.form`
 
 const StyledError = styled.p`
     color: ${({ theme }) => theme.error};
+    text-align: center;
 `
 
 export const SignInPage = () => {
+    const navigate = useNavigate()
     const [sending, setSending] = React.useState(false)
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const [error, setError] = React.useState('')
+    const [error, setError] = React.useState(false)
+
+    React.useEffect(() => {
+        FETCH(endpoints.auth.me()).then((data) => {
+            data.data.signin && navigate(links.home())
+        })
+    }, [])
 
     const handleSubmitForm = (e) => {
         e.preventDefault()
         setSending(true)
-        FETCH(endpoints.auth.signin, {
+
+        FETCH(endpoints.auth.signin(), {
             username,
             password,
         })
-            .then(() => {
+            .then((data) => {
+                if (data.data.done) {
+                    navigate(links.home())
+                } else {
+                    setError(true)
+                }
                 setSending(false)
             })
-            .catch((err) => {
-                setError(err)
+            .catch(() => {
+                setError(true)
                 setSending(false)
             })
     }
@@ -63,10 +81,10 @@ export const SignInPage = () => {
                     type="password"
                     label={'PASSWORD'}
                 />
-                {error && <StyledError>{error.toString()}</StyledError>}
 
                 <Button loading={sending}>SIGN IN</Button>
             </StyledForm>
+            {error && <StyledError>Dad data</StyledError>}
         </StyledWrapper>
     )
 }

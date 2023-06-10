@@ -6,13 +6,15 @@ from dashboard.serializers import get_field_serializer, set_field_serializer, se
 from html import unescape
 from django.contrib import admin
 from math import ceil
+from .auth import is_superuser
 
+@is_superuser
 def get_models_view(reqeust):
     return JsonResponse({
         'models': dict((model.__name__, model._meta.app_label) for model in get_all_models())
     })
 
-
+@is_superuser
 def get_model_info_view(reqeust, model_name):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
@@ -39,14 +41,14 @@ def get_model_info_view(reqeust, model_name):
         }) for field in model._meta.get_fields()),
 
 })
-
+@is_superuser
 def select_items_view(request, model_name):
 
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
 
     length = int(request.GET.get('length')) or -1
-    page = int(request.GET.get('page')) or 0
+    page = int((request.GET.get('page') or 0))
     order_by = request.GET.get('order_by') or 'pk'
     asc = request.GET.get('asc') == 'true'
     query = request.GET.get('query') or ''
@@ -67,7 +69,7 @@ def select_items_view(request, model_name):
         'pages': pages,
         'items': [item_to_json(item) for item in items]
     })
-
+@is_superuser
 def manage_item_view(request, model_name, pk):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
@@ -80,14 +82,16 @@ def manage_item_view(request, model_name, pk):
 
     return get_item_view(request, item)
 
-
+@is_superuser
 def get_item_view(request, item):
     return JsonResponse(item_to_json(item))
 
+@is_superuser
 def delete_item_view(request, item):
     item.delete()
     return JsonResponse({'done': True})
 
+@is_superuser
 def patch_item_view(request, item):
     field = request.POST.get('field')
     value_post = unescape(request.POST.get('value') or '')
@@ -100,6 +104,7 @@ def patch_item_view(request, item):
     item.save()
     return JsonResponse({'done': True})
 
+@is_superuser
 def put_item_view(request, model_name):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
@@ -122,7 +127,7 @@ def put_item_view(request, model_name):
     item.save()
     return JsonResponse({'pk':item.pk})
 
-
+@is_superuser
 def item_to_json(item):
     return {
         'pk': item.pk,
@@ -131,6 +136,7 @@ def item_to_json(item):
         'relations': dict((field.name, get_relation_items(item, field.name)) for field in filter(lambda field: field.is_relation, item.__class__._meta.get_fields()) )
     }
 
+@is_superuser
 def make_action_view(request, model_name):
     print(request.POST.get('action'))
     print(list(map(lambda key: key, request.POST.get('primary_keys').split(','))))

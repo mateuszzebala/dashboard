@@ -3,7 +3,8 @@ from django.urls import path, include
 
 views = [
     'database',
-    'home'
+    'home',
+    'auth'
 ]
 
 
