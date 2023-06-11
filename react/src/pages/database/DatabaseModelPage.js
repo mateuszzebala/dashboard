@@ -8,9 +8,7 @@ import { links } from '../../router/links'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FaCheck, FaPlus } from 'react-icons/fa'
 import { Button } from '../../atoms/Button'
-import { Typography } from '../../atoms/Typography'
 import { Paginator } from '../../atoms/Paginator'
-import { Switch } from '../../atoms/Switch'
 import { Input } from '../../atoms/Input'
 import { Select } from '../../atoms/Select'
 import { APPS } from '../../apps/apps'
@@ -84,7 +82,7 @@ export const DatabaseModelPage = () => {
         })
     }, [])
 
-    React.useEffect(() => {
+    const fetchItems = () => {
         FETCH(
             endpoints.database.items(modelName, {
                 page,
@@ -97,7 +95,9 @@ export const DatabaseModelPage = () => {
             setData(res.data)
             setPages(res.data.pages)
         })
-    }, [page, length, orderBy, asc, searchQuery])
+    }
+
+    React.useEffect(fetchItems, [page, length, orderBy, asc, searchQuery])
 
     const handleAction = () => {
         setLoadingActionButton(true)
@@ -106,6 +106,8 @@ export const DatabaseModelPage = () => {
             primary_keys: selectedItems,
         }).then(() => {
             setLoadingActionButton(false)
+            fetchItems()
+            setSelectedItems([])
         })
     }
 
@@ -145,17 +147,6 @@ export const DatabaseModelPage = () => {
                         value={searchQuery}
                         setValue={setSearchQuery}
                     />
-                    <Select
-                        emptyName="ORDER BY"
-                        data={fields.reduce((flds, key) => {
-                            flds[key] = key
-                            return flds
-                        }, {})}
-                        value={orderBy}
-                        setValue={setOrderBy}
-                    />
-                    <Typography variant={'h2'}>ASC:</Typography>
-                    <Switch size={1.5} value={asc} setValue={setAsc} />
                     <Counter
                         value={length}
                         setValue={setLength}
@@ -170,6 +161,9 @@ export const DatabaseModelPage = () => {
                     selectedItems={selectedItems}
                     setSelectedItems={setSelectedItems}
                     data={data}
+                    orderBy={orderBy}
+                    setOrderBy={setOrderBy}
+                    setAsc={setAsc}
                     modelData={modelData}
                     handleRowClick={handleRowClick}
                 />

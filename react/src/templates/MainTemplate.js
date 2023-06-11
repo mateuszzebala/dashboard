@@ -40,7 +40,10 @@ export const MainTemplate = ({ app, children }) => {
     React.useEffect(() => {
         if (cookies.leftbarOpen === leftbarOpen) return
         removeCookies(['leftbaropen'])
-        setCookies(['leftbarOpen'], toBoolStr(leftbarOpen))
+        const today = new Date()
+        setCookies(['leftbarOpen'], toBoolStr(leftbarOpen), {
+            expires: new Date(today.getFullYear() + 10, 1, 1),
+        })
     }, [cookies, leftbarOpen])
 
     return (

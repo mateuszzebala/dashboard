@@ -25,7 +25,7 @@ const StyledModel = styled.div`
     cursor: pointer;
     border-left: 2px solid ${({ theme }) => theme.primary};
 
-    transition: transform 0.1s, background-color 0.1s, color 0.1s;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover {
         transform: scale(1.1);
         background-color: ${({ theme }) => theme.primary};

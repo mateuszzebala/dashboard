@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 100;
     background-color: ${({ theme }) => theme.curtain.background};
 `
 

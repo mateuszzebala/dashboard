@@ -6,6 +6,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import { theme } from './theme/theme'
 import { MessageGroup } from './molecules/MessageGroup'
 import { MessageContext } from './utils/messages'
+import { RootTemplate } from './templates/RootTemplate'
 
 const StyledWrapper = styled.div`
     min-height: 100vh;
@@ -16,15 +17,17 @@ export const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <MessageContext.Provider value={[messages, setMessages]}>
-                <StyledWrapper>
-                    <GlobalStyle />
-                    <MessageGroup />
-                    <BrowserRouter>
-                        <Router />
-                    </BrowserRouter>
-                </StyledWrapper>
-            </MessageContext.Provider>
+            <RootTemplate>
+                <MessageContext.Provider value={[messages, setMessages]}>
+                    <StyledWrapper>
+                        <GlobalStyle />
+                        <MessageGroup />
+                        <BrowserRouter>
+                            <Router />
+                        </BrowserRouter>
+                    </StyledWrapper>
+                </MessageContext.Provider>
+            </RootTemplate>
         </ThemeProvider>
     )
 }

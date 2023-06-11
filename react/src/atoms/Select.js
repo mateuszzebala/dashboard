@@ -89,7 +89,7 @@ const StyledDropdown = styled.div`
     transition: max-height 0.3s;
     max-height: ${({ dropdown }) => (dropdown ? '300px' : 0)};
     overflow: scroll;
-    z-index: 3;
+    z-index: 0;
     position: absolute;
     top: 100%;
     width: calc(100% + 6px);
@@ -101,6 +101,7 @@ const StyledDropdown = styled.div`
         width: 0;
         height: 0;
     }
+    z-index: ${({ hide }) => (hide ? 0 : 3)};
 `
 const StyledWrapper = styled.div`
     display: inline-flex;
@@ -117,7 +118,22 @@ export const Select = ({
     setValue,
     emptyName = 'SELECT',
 }) => {
-    const [dropdown, setDropdown] = React.useState(false)
+    const [dropdown, setDropdown] = React.useState(null)
+    const [hide, setHide] = React.useState(true)
+    const timeoutRef = React.useRef()
+
+    React.useEffect(() => {
+        if (dropdown === null) return
+        if (dropdown) {
+            setHide(false)
+            clearTimeout(timeoutRef.current)
+        } else {
+            timeoutRef.current = setTimeout(() => {
+                setHide(true)
+            }, 3000)
+        }
+    }, [dropdown])
+
     const mainRef = React.useRef()
     useOnClickOutside(mainRef, () => {
         setDropdown(false)
@@ -131,7 +147,10 @@ export const Select = ({
                 setDropdown={setDropdown}
                 emptyName={emptyName}
             />
-            <StyledDropdown dropdown={toBoolStr(dropdown)}>
+            <StyledDropdown
+                dropdown={toBoolStr(dropdown)}
+                hide={toBoolStr(hide)}
+            >
                 {Object.keys(data).map((name) => (
                     <OptionComponent
                         key={name}

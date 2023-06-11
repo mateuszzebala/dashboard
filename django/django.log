@@ -3964,3 +3964,665 @@ Watching for file changes with StatReloader
 /home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
 Watching for file changes with StatReloader
 Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /dashboard
+Internal Server Error: /dashboard/api/database/TestModel/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in select_items_view
+    'items': [item_to_json(item) for item in items]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in <listcomp>
+    'items': [item_to_json(item) for item in items]
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 34, in inner
+    if request.user.is_superuser:
+       ^^^^^^^^^^^^
+AttributeError: 'TestModel' object has no attribute 'user'
+Internal Server Error: /dashboard/api/database/TestModel/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in select_items_view
+    'items': [item_to_json(item) for item in items]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in <listcomp>
+    'items': [item_to_json(item) for item in items]
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 34, in inner
+    if request.user.is_superuser:
+       ^^^^^^^^^^^^
+AttributeError: 'TestModel' object has no attribute 'user'
+Internal Server Error: /dashboard/api/database/TestModel/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in select_items_view
+    'items': [item_to_json(item) for item in items]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in <listcomp>
+    'items': [item_to_json(item) for item in items]
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 34, in inner
+    if request.user.is_superuser:
+       ^^^^^^^^^^^^
+AttributeError: 'TestModel' object has no attribute 'user'
+Internal Server Error: /dashboard/api/database/TestModel/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in select_items_view
+    'items': [item_to_json(item) for item in items]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 70, in <listcomp>
+    'items': [item_to_json(item) for item in items]
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 34, in inner
+    if request.user.is_superuser:
+       ^^^^^^^^^^^^
+AttributeError: 'TestModel' object has no attribute 'user'
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /dashboard/
+Not Found: /dashboard/api/
+Not Found: /favicon.ico
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 63, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 65, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 73, in select_items_view
+    'pages': pages,
+             ^^^^^
+UnboundLocalError: cannot access local variable 'pages' where it is not associated with a value
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 67, in select_items_view
+    items = list(items.order_by(order_by))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 398, in __iter__
+    self._fetch_all()
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1547, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 762, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/where.py", line 145, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 544, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/lookups.py", line 568, in as_sql
+    raise ValueError(
+ValueError: The QuerySet value for an isnull lookup must be True or False.
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/urls/api_urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/database/User/items/action/
+Traceback (most recent call last):
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/auth.py", line 35, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py", line 147, in make_action_view
+    item = model.objects.get(pk=pk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/Projects/dashboard/django/venv/lib/python3.11/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+/home/mz/Code/Projects/dashboard/django/dashboard/views/database.py changed, reloading.
+Watching for file changes with StatReloader

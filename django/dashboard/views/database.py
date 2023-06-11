@@ -41,9 +41,9 @@ def get_model_info_view(reqeust, model_name):
         }) for field in model._meta.get_fields()),
 
 })
+
 @is_superuser
 def select_items_view(request, model_name):
-
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
 
@@ -52,8 +52,9 @@ def select_items_view(request, model_name):
     order_by = request.GET.get('order_by') or 'pk'
     asc = request.GET.get('asc') == 'true'
     query = request.GET.get('query') or ''
-    items = []
+    pages = 0
     try:
+        items = []
         query = dict(equation.strip().split('=') for equation in query.split(','))
         items = model.objects.filter(**query)
     except:
@@ -64,11 +65,13 @@ def select_items_view(request, model_name):
     if length != -1: items = items[page*length:page*length+length]
     if not asc: items.reverse()
 
+
     return JsonResponse({
         'model': model.__name__,
         'pages': pages,
         'items': [item_to_json(item) for item in items]
     })
+
 @is_superuser
 def manage_item_view(request, model_name, pk):
     model = get_model(model_name)
@@ -82,16 +85,13 @@ def manage_item_view(request, model_name, pk):
 
     return get_item_view(request, item)
 
-@is_superuser
 def get_item_view(request, item):
     return JsonResponse(item_to_json(item))
 
-@is_superuser
 def delete_item_view(request, item):
     item.delete()
     return JsonResponse({'done': True})
 
-@is_superuser
 def patch_item_view(request, item):
     field = request.POST.get('field')
     value_post = unescape(request.POST.get('value') or '')
@@ -127,7 +127,6 @@ def put_item_view(request, model_name):
     item.save()
     return JsonResponse({'pk':item.pk})
 
-@is_superuser
 def item_to_json(item):
     return {
         'pk': item.pk,
@@ -138,8 +137,17 @@ def item_to_json(item):
 
 @is_superuser
 def make_action_view(request, model_name):
-    print(request.POST.get('action'))
-    print(list(map(lambda key: key, request.POST.get('primary_keys').split(','))))
+    model = get_model(model_name)
+    if model is None: return error_message('Model does not exists', 400)
+    action = request.POST.get('action')
+    primary_keys = list(map(lambda key: key, request.POST.get('primary_keys').split(',')))
+
+    if action == 'delete':
+        for pk in primary_keys:
+            item = model.objects.filter(pk=pk).first()
+            if item is not None:
+                item.delete()
+
     return JsonResponse({})
 
 urlpatterns = [

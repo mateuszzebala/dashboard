@@ -4,6 +4,7 @@ import { Loading } from '../../atoms/Loading'
 import { Tooltip } from '../../atoms/Tooltip'
 import { fieldToString, toBoolStr } from '../../utils/utils'
 import styled from 'styled-components'
+import { HiSelector } from 'react-icons/hi'
 
 const StyledField = styled.td`
     border: 2px solid ${({ theme }) => theme.table.border};
@@ -19,12 +20,18 @@ const StyledField = styled.td`
     white-space: nowrap;
     max-width: 100px;
     transition: background-color 0.2s, color 0.2s;
-    tr:has(&):hover td {
-        background-color: #00000011;
-    }
+
     overflow: hidden;
     cursor: pointer;
     text-overflow: ellipsis;
+`
+
+const StyledHeaderField = styled.div`
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 `
 
 const StyledLoadingWrapper = styled.div`
@@ -40,6 +47,9 @@ export const ModelTable = ({
     data,
     modelData,
     handleRowClick,
+    orderBy,
+    setOrderBy,
+    setAsc,
     selectedItems,
     setSelectedItems,
 }) => {
@@ -50,7 +60,19 @@ export const ModelTable = ({
                     <HeaderRow>
                         {fields &&
                             fields.map((field) => {
-                                return <Field key={field}>{field}</Field>
+                                return (
+                                    <Field key={field}>
+                                        <StyledHeaderField
+                                            onClick={() => {
+                                                if (orderBy === field)
+                                                    setAsc((prev) => !prev)
+                                                setOrderBy(field)
+                                            }}
+                                        >
+                                            {field} <HiSelector />
+                                        </StyledHeaderField>
+                                    </Field>
+                                )
                             })}
                     </HeaderRow>
                 </thead>
