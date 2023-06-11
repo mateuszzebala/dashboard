@@ -26,32 +26,32 @@ const StyledContent = styled.div`
     padding: 10px;
     height: 100%;
     transition: width 0.3s;
-    width: ${({ leftbarOpen }) =>
-        leftbarOpen ? 'calc(100vw - 200px)' : '100vw'};
+    width: ${({ leftbarClose }) =>
+        !leftbarClose ? '100vw' : 'calc(100vw - 200px)'};
     background-color: ${({ theme }) => theme.content.background};
     color: ${({ theme }) => theme.content.font};
     overflow: auto;
 `
 
 export const MainTemplate = ({ app, children }) => {
-    const [cookies, setCookies, removeCookies] = useCookies(['leftbarOpen'])
-    const [leftbarOpen, setLeftbarOpen] = React.useState(cookies.leftbarOpen)
+    const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
+    const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
 
     React.useEffect(() => {
-        if (cookies.leftbarOpen === leftbarOpen) return
-        removeCookies(['leftbaropen'])
+        if (cookies.leftbarClose === leftbarClose) return
+        removeCookies(['leftbarClose'])
         const today = new Date()
-        setCookies(['leftbarOpen'], toBoolStr(leftbarOpen), {
+        setCookies(['leftbarClose'], toBoolStr(leftbarClose), {
             expires: new Date(today.getFullYear() + 10, 1, 1),
         })
-    }, [cookies, leftbarOpen])
+    }, [cookies, leftbarClose])
 
     return (
         <StyledWrapper>
-            <LeftBar open={leftbarOpen} />
+            <LeftBar close={leftbarClose} />
             <StyledRightSide>
-                <TopBar app={app} setOpen={setLeftbarOpen} />
-                <StyledContent leftbarOpen={toBoolStr(leftbarOpen)}>
+                <TopBar app={app} setClose={setLeftbarClose} />
+                <StyledContent leftbarClose={toBoolStr(leftbarClose)}>
                     {children}
                 </StyledContent>
             </StyledRightSide>

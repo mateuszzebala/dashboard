@@ -21,8 +21,8 @@ const StyledWrapper = styled.nav`
     overflow-x: hidden;
     z-index: 2;
     transition: max-width 0.3s ease, min-width 0.3s ease;
-    max-width: ${({ open }) => (open ? '200px' : '0')};
-    min-width: ${({ open }) => (open ? '200px' : '0')};
+    max-width: ${({ close }) => (close ? '200px' : '0')};
+    min-width: ${({ close }) => (close ? '200px' : '0')};
     box-shadow: 0 0 10px -5px black;
     gap: 10px;
     a {
@@ -55,9 +55,9 @@ const StyledMenuItems = styled.div`
     }
 `
 
-export const LeftBar = ({ open }) => {
+export const LeftBar = ({ close }) => {
     return (
-        <StyledWrapper open={toBoolStr(open)}>
+        <StyledWrapper close={toBoolStr(close)}>
             <Link to={links.home()}>
                 <StyleDashboard>
                     <SiDjango /> <FaReact />

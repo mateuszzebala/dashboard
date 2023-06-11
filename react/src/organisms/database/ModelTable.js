@@ -18,9 +18,8 @@ const StyledField = styled.td`
         selected ? theme.table.background : theme.table.font} !important;
 
     white-space: nowrap;
-    max-width: 100px;
+    max-width: 150px;
     transition: background-color 0.2s, color 0.2s;
-
     overflow: hidden;
     cursor: pointer;
     text-overflow: ellipsis;
@@ -30,6 +29,7 @@ const StyledHeaderField = styled.div`
     font-weight: normal;
     display: flex;
     align-items: center;
+
     justify-content: space-between;
     cursor: pointer;
 `

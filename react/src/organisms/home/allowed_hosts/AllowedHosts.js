@@ -39,7 +39,7 @@ export const AllowedHosts = () => {
     }, [])
 
     React.useEffect(() => {
-        if (hosts.length !== 0) {
+        if (hosts && hosts.length !== 0) {
             FETCH(endpoints.home.hosts(), {
                 method: 'PATCH',
                 hosts: hosts,

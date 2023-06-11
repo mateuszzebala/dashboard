@@ -39,7 +39,6 @@ class DashboardMiddleware:
                     return render(request, 'server_disabled.html', status=401)
             except:
                 return render(request, 'server_disabled.html', status=401)
-           
 
 
         response = self.get_response(request)
@@ -47,10 +46,6 @@ class DashboardMiddleware:
         url = request.get_full_path()
         args = {}
 
-        if len(url.split('?')) > 1:
-            for equation in url.split('?')[1].split('&'):
-                key, val = equation.split('=')
-                args[key] = val
 
         log = Log(
             ip_v4=get_client_ip(request),

@@ -51,9 +51,9 @@ const StyledLeftSide = styled.div`
     justify-content: center;
 `
 
-export const TopBar = ({ app, setOpen }) => {
+export const TopBar = ({ app, setClose }) => {
     function handleBurgerClick() {
-        setOpen((prev) => !prev)
+        setClose((prev) => !prev)
     }
 
     return (

@@ -120,7 +120,7 @@ export const DatabaseModelPage = () => {
                     <Button
                         icon={<FaCheck />}
                         onClick={() => {
-                            if (selectedItems.length === 0)
+                            if (selectedItems && selectedItems.length === 0)
                                 setSelectedItems(
                                     data.items.map((item) => item.pk)
                                 )
