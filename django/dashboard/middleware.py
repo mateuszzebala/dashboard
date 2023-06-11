@@ -39,24 +39,25 @@ class DashboardMiddleware:
                     return render(request, 'server_disabled.html', status=401)
             except:
                 return render(request, 'server_disabled.html', status=401)
-
-
+        
         response = self.get_response(request)
-        method = (request.POST.get('method') or request.method).upper()
-        url = request.get_full_path()
-        args = {}
+        if SERVER_CONFIG.SAVE_REQUESTS():
+     
+            method = (request.POST.get('method') or request.method).upper()
+            url = request.get_full_path()
+            args = {}
 
 
-        log = Log(
-            ip_v4=get_client_ip(request),
-            method=method,
-            path=url.split('?')[0],
-            status_code = response.status_code,
-            device=request.META.get('HTTP_USER_AGENT'),
-            user=request.user if request.user.is_authenticated else None,
-            session=None,
-            args=args,
-        )
-        log.save()
+            log = Log(
+                ip_v4=get_client_ip(request),
+                method=method,
+                path=url.split('?')[0],
+                status_code = response.status_code,
+                device=request.META.get('HTTP_USER_AGENT'),
+                user=request.user if request.user.is_authenticated else None,
+                session=None,
+                args=args,
+            )
+            log.save()
         log_request(request, response)
         return response

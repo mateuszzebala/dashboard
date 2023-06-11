@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { MdKeyboardArrowRight } from 'react-icons/md'
+import { toBoolStr } from '../utils/utils'
 
-const StyledWrapper = styled.div`
+const StyledTop = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,13 +24,54 @@ const StyledWrapper = styled.div`
         font-size: 15px;
     }
 `
+const StyledWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
+const StyledDropdown = styled.div`
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: ${({ dropdown }) => dropdown ? '300px' : '0'};
+    padding: ${({ dropdown }) => dropdown ? '15px' : '0'};
+    transition: max-height 0.2s, padding 0.2s;
+    gap: 6px;
+    font-size: 18px;
+    a{
+        color: ${({ theme }) => theme.leftbar.font};
+    }
+`
+
+const StyledDropdownIcon = styled.div`
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+    justify-content: center;
+    transform: rotate(${({ dropdown }) => dropdown ? -90 : 90}deg);
+`
 
 export const LeftBarItem = ({ children, icon, to }) => {
+    const [dropdown, setDropdown] = React.useState(false)
     return (
         <StyledWrapper>
-            {icon}
-            <Link to={to}>{children}</Link>
-            <MdKeyboardArrowRight />
+            <StyledTop onClick={() => {
+                setDropdown(prev => !prev)
+            }}>
+                {icon}
+                <Link to={to}>{children}</Link>
+                <StyledDropdownIcon dropdown={toBoolStr(dropdown)}><MdKeyboardArrowRight /></StyledDropdownIcon>
+            </StyledTop>
+            <StyledDropdown dropdown={toBoolStr(dropdown)}>
+                <Link to={'/'}>Item 1</Link>
+                <Link to={'/'}>Item 2</Link>
+                <Link to={'/'}>Item 3</Link>
+                <Link to={'/'}>Item 4</Link>
+                <Link to={'/'}>Item 5</Link>
+                <Link to={'/'}>Item 6</Link>
+            </StyledDropdown>
         </StyledWrapper>
     )
 }

@@ -76,7 +76,6 @@ export const ModelTable = ({
                             })}
                     </HeaderRow>
                 </thead>
-
                 <tbody>
                     {!data ||
                         !modelData ||

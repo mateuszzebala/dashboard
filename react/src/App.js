@@ -17,17 +17,19 @@ export const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <RootTemplate>
-                <MessageContext.Provider value={[messages, setMessages]}>
-                    <StyledWrapper>
-                        <GlobalStyle />
-                        <MessageGroup />
-                        <BrowserRouter>
+
+            <MessageContext.Provider value={[messages, setMessages]}>
+                <StyledWrapper>
+                    <GlobalStyle />
+                    <MessageGroup />
+                    <BrowserRouter>
+                        <RootTemplate>
                             <Router />
-                        </BrowserRouter>
-                    </StyledWrapper>
-                </MessageContext.Provider>
-            </RootTemplate>
+                        </RootTemplate>
+                    </BrowserRouter>
+                </StyledWrapper>
+            </MessageContext.Provider>
+
         </ThemeProvider>
     )
 }

@@ -19,15 +19,16 @@ const StyledContextMenu = styled.div`
 const StyledContextMenuItem = styled.button`
     background-color: transparent;
     border: 0;
-    font-size: 25px;
+    font-size: 20px;
     display: inline-flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
     transition: background-color 0.2s;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px 30px;
+
     span {
         font-size: 20px;
     }
@@ -36,9 +37,20 @@ const StyledContextMenuItem = styled.button`
     }
 `
 
+const StyledIcon = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+`
+
+const StyledText = styled.span`
+    font-size: 18px;
+`
+
 // data {}[] = {icon: Icon, text: string, todo: Function}
 
-export const ContextMenu = ({ data, children }) => {
+export const ContextMenu = ({ data = [], children }) => {
     const [show, setShow] = React.useState(false)
     const [position, setPosition] = React.useState({ x: 0, y: 0 })
     const thisRef = React.useRef()
@@ -59,11 +71,11 @@ export const ContextMenu = ({ data, children }) => {
                 <StyledContextMenu x={position.x} y={position.y} ref={thisRef}>
                     {data.map((item) => (
                         <StyledContextMenuItem
-                            onClick={item.todo ? item.todo : () => {}}
+                            onClick={item.todo ? item.todo : () => { }}
                             key={item.text}
                         >
-                            {item.icon ? item.icon : <span></span>}
-                            <span>{item.text}</span>
+                            <StyledIcon>{item.icon ? item.icon : <span></span>}</StyledIcon>
+                            <StyledText>{item.text}</StyledText>
                         </StyledContextMenuItem>
                     ))}
                 </StyledContextMenu>

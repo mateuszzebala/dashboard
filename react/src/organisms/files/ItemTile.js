@@ -1,6 +1,8 @@
 import React from 'react'
 import { BsFileEarmarkBinary, BsFolder } from 'react-icons/bs'
 import styled from 'styled-components'
+import { ContextMenu } from '../../atoms/ContextMenu'
+import { FaPen, FaTrash } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
@@ -30,11 +32,24 @@ const StyledIcon = styled.div`
 
 export const ItemTile = ({ filename, isFile }) => {
     return (
-        <StyledWrapper>
-            <StyledIcon>
-                {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
-            </StyledIcon>
-            {filename}
-        </StyledWrapper>
+        <ContextMenu data={[
+            {
+                icon: <FaTrash />,
+                text: 'DELETE',
+                todo: () => { }
+            },
+            {
+                icon: <FaPen />,
+                text: 'RENAME',
+                todo: () => { alert(`You want to rename ${filename} but there is not this option avinabled yet`) }
+            },
+        ]}>
+            <StyledWrapper>
+                <StyledIcon>
+                    {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
+                </StyledIcon>
+                {filename}
+            </StyledWrapper>
+        </ContextMenu>
     )
 }

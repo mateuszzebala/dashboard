@@ -74,11 +74,16 @@ export const DatabaseModelPage = () => {
         FETCH(endpoints.database.model(modelName)).then((res) => {
             const resModelData = res.data
             setModelData(resModelData)
-            setFields(
-                Object.keys(res.data.fields)
-                    .filter((field) => !resModelData.fields[field].relation.is)
-                    .filter((field) => resModelData.fields[field].registered)
-            )
+            const registeredFields = Object.keys(res.data.fields)
+                .filter((field) => !resModelData.fields[field].relation.is)
+                .filter((field) => resModelData.fields[field].registered)
+
+            if (registeredFields.length === 0) {
+                setFields(Object.keys(res.data.fields).filter((field) => !resModelData.fields[field].relation.is))
+            }
+            else {
+                setFields(registeredFields)
+            }
         })
     }, [])
 
