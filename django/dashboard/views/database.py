@@ -147,6 +147,14 @@ def make_action_view(request, model_name):
             item = model.objects.filter(pk=pk).first()
             if item is not None:
                 item.delete()
+    else:
+        actions = admin.site._registry.get(model).actions
+        actions = list(filter(lambda fnc: fnc.short_description == action, actions))
+        if len(actions) > 0:
+            action = actions[0]
+            print(action)
+        for pk in primary_keys:
+            action(admin.site._registry.get(model), request, model.objects.filter(pk=pk))
 
     return JsonResponse({})
 

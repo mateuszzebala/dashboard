@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    flex-wrap: wrap;
 `
 
 export const PutItemForm = ({ modelName }) => {

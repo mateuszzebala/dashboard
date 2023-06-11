@@ -4,6 +4,7 @@ export const endpoints = {
     home: {
         configuration: () => API(['home', 'configuration']),
         hosts: () => API(['home', 'hosts']),
+        logs: () => API(['home', 'logs']),
     },
     database: {
         models: () => API(['database']),

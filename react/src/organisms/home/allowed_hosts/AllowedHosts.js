@@ -72,7 +72,7 @@ export const AllowedHosts = () => {
                 <Button onClick={handleAddHost} icon={<FaPlus />} />
             </StyledMenu>
             <StyledHosts>
-                {hosts.length > 0 ? (
+                {hosts && hosts.length > 0 ? (
                     hosts.map((host) => (
                         <Host
                             onContextMenu={(e) => {

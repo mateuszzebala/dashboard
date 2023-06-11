@@ -36,28 +36,26 @@ const StyledStatusCode = styled.span`
 `
 
 export const LogItem = ({
-    ip,
+    ip_v4,
     datetime,
     method,
     path,
-    statusCode,
+    status_code,
     device,
-    protocol,
 }) => {
     return (
         <StyledLogItem>
             <StyledRow>
-                <span>{ip}</span>
+                <span>{ip_v4}</span>
                 <span>{datetimeToString(datetime)}</span>
             </StyledRow>
             <StyledRow>
                 <StyledBold>{method}</StyledBold>
                 <span>{path}</span>
-                <StyledStatusCode statusCode={statusCode}>
-                    {statusCode}
+                <StyledStatusCode statusCode={status_code}>
+                    {status_code}
                 </StyledStatusCode>
                 <span>{device}</span>
-                <span>{protocol}</span>
             </StyledRow>
         </StyledLogItem>
     )

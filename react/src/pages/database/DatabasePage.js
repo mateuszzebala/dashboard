@@ -1,7 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import styled from 'styled-components'
-import { Typography } from '../../atoms/Typography'
 import { endpoints } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { Link } from 'react-router-dom'
@@ -28,9 +27,11 @@ const StyledModel = styled.div`
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover {
         transform: scale(1.1);
-        background-color: ${({ theme }) => theme.primary};
-        color: ${({ theme }) => theme.light};
     }
+`
+
+const StyledAppName = styled.span`
+    font-size: 20px;
 `
 
 const StyledApp = styled.div`
@@ -62,7 +63,7 @@ export const DatabasePage = () => {
         <MainTemplate app={APPS.database}>
             {Object.keys(models).map((app) => (
                 <StyledApp key={app}>
-                    <Typography variant="h1">{app.toUpperCase()}</Typography>
+                    <StyledAppName>{app.toUpperCase()}</StyledAppName>
                     <StyledModels>
                         {models[app].map((model) => (
                             <Link to={links.database.model(model)} key={model}>

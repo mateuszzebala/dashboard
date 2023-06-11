@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { LogItem } from './LogItem'
+import { FETCH } from '../../../api/api'
+import { endpoints } from '../../../api/endpoints'
 
 const StyledWrapper = styled.div`
     box-shadow: 0 0 8px -5px black;
@@ -24,33 +26,16 @@ const StyledList = styled.div`
     }
 `
 
-const tempLog = {
-    ip: '54.128.79.20',
-    datetime: { year: 2023, month: 5, day: 4, hour: 3, minute: 2, second: 2 },
-    method: 'GET',
-    path: '/account/',
-    statusCode: 200,
-    device: 'CHROME/5.0',
-    protocol: 'HTTP/1.1',
-}
-
 export const LogsList = () => {
-    const [logs, setLogs] = React.useState([
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-        tempLog,
-    ])
+    const [logs, setLogs] = React.useState([])
 
     const handleReload = () => {
-        setLogs([])
+        FETCH(endpoints.home.logs()).then((data) => {
+            setLogs(data.data.logs)
+        })
     }
+
+    React.useEffect(handleReload, [])
 
     return (
         <StyledWrapper>
