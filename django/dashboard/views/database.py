@@ -141,21 +141,22 @@ def make_action_view(request, model_name):
     if model is None: return error_message('Model does not exists', 400)
     action = request.POST.get('action')
     primary_keys = list(map(lambda key: key, request.POST.get('primary_keys').split(',')))
-
-    if action == 'delete':
-        for pk in primary_keys:
-            item = model.objects.filter(pk=pk).first()
-            if item is not None:
-                item.delete()
-    else:
-        actions = admin.site._registry.get(model).actions
-        actions = list(filter(lambda fnc: fnc.short_description == action, actions))
-        if len(actions) > 0:
-            action = actions[0]
-            print(action)
-        for pk in primary_keys:
-            action(admin.site._registry.get(model), request, model.objects.filter(pk=pk))
-
+    try:
+        if action == 'delete':
+            for pk in primary_keys:
+                item = model.objects.filter(pk=pk).first()
+                if item is not None:
+                     item.delete()
+        else:
+            actions = admin.site._registry.get(model).actions
+            actions = list(filter(lambda fnc: fnc.short_description == action, actions))
+            if len(actions) > 0:
+                action = actions[0]
+                print(action)
+            for pk in primary_keys:
+                action(admin.site._registry.get(model), request, model.objects.filter(pk=pk))
+    except:
+        ...
     return JsonResponse({})
 
 urlpatterns = [

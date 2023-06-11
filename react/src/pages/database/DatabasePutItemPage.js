@@ -9,13 +9,13 @@ import styled from 'styled-components'
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
     padding: 20px;
     justify-content: center;
 `
 
-export const DatabasePutItem = () => {
+export const DatabasePutItemPage = () => {
     const { modelName } = useParams()
     return (
         <MainTemplate app={APPS.database}>

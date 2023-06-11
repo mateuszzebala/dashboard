@@ -21,10 +21,10 @@ import { AccountPage } from '../pages/account/AccountPage'
 import { SettingsPage } from '../pages/settings/SettingsPage'
 import { SearchPage } from '../pages/search/SearchPage'
 import { SessionsPage } from '../pages/sessions/SessionsPage'
-import { DatabasePutItem } from '../pages/database/DatabasePutItem'
 import { FETCH } from '../api/api'
 import { endpoints } from '../api/endpoints'
 import { links } from './links'
+import { DatabasePutItemPage } from '../pages/database/DatabasePutItemPage'
 
 const pages = {
     '/': HomePage,
@@ -34,7 +34,7 @@ const pages = {
     '/database/': DatabasePage,
     '/database/:modelName': DatabaseModelPage,
     '/database/:modelName/:pk': DatabaseItemPage,
-    '/database/:modelName/create': DatabasePutItem,
+    '/database/:modelName/create': DatabasePutItemPage,
 
     '/files/': FilesPage,
 

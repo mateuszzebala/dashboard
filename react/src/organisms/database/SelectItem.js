@@ -6,7 +6,6 @@ import { FETCH } from '../../api/api'
 import { endpoints } from '../../api/endpoints'
 import { FaSearch } from 'react-icons/fa'
 
-const StyledWrapper = styled.div``
 const StyledInput = styled.div`
     display: inline-flex;
     padding: 10px 15px;
@@ -18,6 +17,27 @@ const StyledInput = styled.div`
     align-items: center;
     cursor: pointer;
     justify-content: flex-start;
+`
+
+const StyledValue = styled.div`
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+`
+
+const StyledIcon = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const StyledWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+    flex-direction: column;
 `
 
 const StyledItems = styled.div`
@@ -62,43 +82,47 @@ export const SelectItem = ({ modelName, value, setValue }) => {
         })
     }, [inputValue])
     return (
-        <StyledWrapper>
+        <>
             <StyledInput
                 onClick={() => {
                     setOpenModal(true)
                 }}
             >
-                <FaSearch />{' '}
-                <span>
+                <StyledIcon>
+                    <FaSearch />
+                </StyledIcon>
+                <StyledValue>
                     {value
                         ? `${modelName} - ${value.str}`
                         : `Select ${modelName}`}
-                </span>
+                </StyledValue>
             </StyledInput>
             <Modal
                 open={openModal}
                 setOpen={setOpenModal}
                 title={`Select - ${modelName}`}
             >
-                <Input
-                    label={'SEARCH'}
-                    value={inputValue}
-                    setValue={setInputValue}
-                />
-                <StyledItems>
-                    {items.map((item) => (
-                        <StyledItem
-                            onClick={() => {
-                                setValue(item)
-                                setOpenModal(false)
-                            }}
-                            key={item.pk}
-                        >
-                            {item.pk} - {item.str}
-                        </StyledItem>
-                    ))}
-                </StyledItems>
+                <StyledWrapper>
+                    <Input
+                        label={'SEARCH'}
+                        value={inputValue}
+                        setValue={setInputValue}
+                    />
+                    <StyledItems>
+                        {items.map((item) => (
+                            <StyledItem
+                                onClick={() => {
+                                    setValue(item)
+                                    setOpenModal(false)
+                                }}
+                                key={item.pk}
+                            >
+                                {item.pk} - {item.str}
+                            </StyledItem>
+                        ))}
+                    </StyledItems>
+                </StyledWrapper>
             </Modal>
-        </StyledWrapper>
+        </>
     )
 }

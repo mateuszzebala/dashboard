@@ -16,7 +16,6 @@ const StyledWrapper = styled.div`
     height: 100px;
     width: 100px;
     font-size: 15px;
-
     cursor: pointer;
     transition: background-color 0.3s;
     user-select: none;

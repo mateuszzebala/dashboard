@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IoIosArrowDropdownCircle } from 'react-icons/io'
+import { BsArrowDownShort } from 'react-icons/bs'
 import { toBoolStr } from '../utils/utils'
 import { Tooltip } from './Tooltip'
 import { useOnClickOutside } from '../utils/hooks'
@@ -54,14 +54,13 @@ const ValueComponent = ({
     emptyName,
 }) => {
     return (
-        <StyledValue>
-            <StyledDropdownIcon
-                dropdown={toBoolStr(dropdown)}
-                onClick={() => {
-                    setDropdown((prev) => !prev)
-                }}
-            >
-                <IoIosArrowDropdownCircle />
+        <StyledValue
+            onClick={() => {
+                setDropdown((prev) => !prev)
+            }}
+        >
+            <StyledDropdownIcon dropdown={toBoolStr(dropdown)}>
+                <BsArrowDownShort />
             </StyledDropdownIcon>
             <StyledValue>
                 {!value ? <span>{emptyName}</span> : data[value]}

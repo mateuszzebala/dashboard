@@ -23,10 +23,6 @@ const StyledBox = styled.div`
     &:hover {
         transform: scale(1.1);
         box-shadow: 0 0 5px -4px black;
-        background-color: ${({ theme }) => theme.primary};
-        a {
-            color: ${({ theme }) => theme.light};
-        }
     }
 `
 const StyledName = styled.div``

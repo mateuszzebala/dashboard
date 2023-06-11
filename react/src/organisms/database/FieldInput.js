@@ -4,7 +4,6 @@ import { Input } from '../../atoms/Input'
 import { Switch } from '../../atoms/Switch'
 import { Typography } from '../../atoms/Typography'
 import { Select } from '../../atoms/Select'
-import { Tooltip } from '../../atoms/Tooltip'
 
 const StyledWrapper = styled.div``
 const StyledRow = styled.div`
@@ -151,12 +150,10 @@ const INPUTS = {
 export const FieldInput = ({ field }) => {
     const [value, setValue] = React.useState()
     return (
-        <Tooltip text={JSON.stringify(field, false, 4)}>
-            <StyledWrapper>
-                {INPUTS[field.type]
-                    ? INPUTS[field.type]({ field, value, setValue })
-                    : field.name}
-            </StyledWrapper>
-        </Tooltip>
+        <StyledWrapper>
+            {INPUTS[field.type]
+                ? INPUTS[field.type]({ field, value, setValue })
+                : field.name}
+        </StyledWrapper>
     )
 }

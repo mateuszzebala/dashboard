@@ -33,16 +33,15 @@ const StyledLoading = styled.span`
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 50%;
-    left: 50%;
+
     place-items: center;
     padding: 0;
     @keyframes rotate {
         from {
-            transform: translate(-50%, -50%) rotate(0deg);
+            transform: rotate(0deg);
         }
         to {
-            transform: translate(-50%, -50%) rotate(360deg);
+            transform: rotate(360deg);
         }
     }
     animation: rotate 1s linear infinite;

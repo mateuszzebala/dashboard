@@ -40,7 +40,7 @@ export const PutItemForm = ({ modelName }) => {
             {fields.map((field) => (
                 <FieldInput key={field.name} field={field} />
             ))}
-            <Button>CREATE</Button>
+            <Button>SAVE</Button>
         </StyledWrapper>
     )
 }
