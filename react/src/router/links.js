@@ -17,6 +17,7 @@ export const links = {
     },
     terminal: {
         index: () => '/terminal/',
+        indexPath: (path) => `/terminal/?path=${path}`,
     },
     python: {
         index: () => '/python/',

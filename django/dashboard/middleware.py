@@ -34,7 +34,6 @@ class DashboardMiddleware:
                 resolver_match = resolve(request.path_info)
                 view_func = resolver_match.func
                 app_name = view_func.__module__.split('.')[0]
-                print(app_name)
                 if app_name != 'dashboard':
                     return render(request, 'server_disabled.html', status=401)
             except:

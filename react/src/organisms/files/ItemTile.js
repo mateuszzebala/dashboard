@@ -32,18 +32,51 @@ const StyledIcon = styled.div`
 
 export const ItemTile = ({ filename, isFile }) => {
     return (
-        <ContextMenu data={[
-            {
-                icon: <FaTrash />,
-                text: 'DELETE',
-                todo: () => { }
-            },
-            {
-                icon: <FaPen />,
-                text: 'RENAME',
-                todo: () => { alert(`You want to rename ${filename} but there is not this option avinabled yet`) }
-            },
-        ]}>
+        <ContextMenu
+            data={[
+                {
+                    icon: <FaTrash />,
+                    text: 'DELETE',
+                    todo: () => {},
+                },
+                {
+                    icon: <FaPen />,
+                    text: 'RENAME',
+                    todo: () => {
+                        alert(
+                            `You want to rename ${filename} but there is not this option avinabled yet`
+                        )
+                    },
+                },
+                {
+                    icon: <FaPen />,
+                    text: 'RENAME',
+                    todo: () => {
+                        alert(
+                            `You want to rename ${filename} but there is not this option avinabled yet`
+                        )
+                    },
+                },
+                {
+                    icon: <FaPen />,
+                    text: 'RENAME',
+                    todo: () => {
+                        alert(
+                            `You want to rename ${filename} but there is not this option avinabled yet`
+                        )
+                    },
+                },
+                {
+                    icon: <FaPen />,
+                    text: 'RENAME',
+                    todo: () => {
+                        alert(
+                            `You want to rename ${filename} but there is not this option avinabled yet`
+                        )
+                    },
+                },
+            ]}
+        >
             <StyledWrapper>
                 <StyledIcon>
                     {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}

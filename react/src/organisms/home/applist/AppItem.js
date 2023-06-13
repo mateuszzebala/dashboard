@@ -9,10 +9,7 @@ const StyledBox = styled.div`
     border-radius: 10px;
     box-shadow: 0 0 6px -4px black;
     color: ${({ theme }) => theme.primary} !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
     transition: transform 0.4s, box-shadow 0.4s, background-color 0.4s;
     cursor: pointer;
     a {
@@ -26,6 +23,14 @@ const StyledBox = styled.div`
     }
 `
 const StyledName = styled.div``
+const StyledLink = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+`
 const StyledIcon = styled.div`
     font-size: 30px;
 `
@@ -34,10 +39,10 @@ export const AppItem = ({ icon, name = '', link }) => {
     return (
         <StyledBox>
             <Link to={link}>
-                <StyledIcon>{icon || <IoAppsSharp />}</StyledIcon>
-            </Link>
-            <Link to={link}>
-                <StyledName>{name}</StyledName>
+                <StyledLink>
+                    <StyledIcon>{icon || <IoAppsSharp />}</StyledIcon>
+                    <StyledName>{name}</StyledName>
+                </StyledLink>
             </Link>
         </StyledBox>
     )

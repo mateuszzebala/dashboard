@@ -44,7 +44,7 @@ export const MainTemplate = ({ app, children }) => {
         setCookies(['leftbarClose'], toBoolStr(leftbarClose), {
             expires: new Date(today.getFullYear() + 10, 1, 1),
         })
-    }, [cookies, leftbarClose])
+    }, [leftbarClose])
 
     return (
         <StyledWrapper>

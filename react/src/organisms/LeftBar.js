@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
 import { SiDjango } from 'react-icons/si'
-import { APPS } from '../apps/apps'
+import { APPS, initLinks } from '../apps/apps'
 import { FaReact } from 'react-icons/fa'
 import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
@@ -36,7 +36,7 @@ const StyledWrapper = styled.nav`
 `
 
 const StyleDashboard = styled.span`
-    font-size: 20px;
+    font-size: 25px;
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.leftbar.font};
@@ -68,18 +68,16 @@ export const LeftBar = ({ close }) => {
                 </StyleDashboard>
             </Link>
             <StyledMenuItems>
-                {Object.values(APPS).map((app) => {
-                    const Icon = app.icon
-                    return (
-                        <LeftBarItem
-                            key={app.name}
-                            icon={<Icon />}
-                            to={app.link}
-                        >
-                            {app.name.toUpperCase()}
-                        </LeftBarItem>
-                    )
-                })}
+                {initLinks() &&
+                    Object.values(APPS).map((app) => {
+                        return (
+                            <LeftBarItem
+                                key={app.name}
+                                app={app}
+                                sublinks={app.sublinks && app.sublinks()}
+                            />
+                        )
+                    })}
             </StyledMenuItems>
         </StyledWrapper>
     )

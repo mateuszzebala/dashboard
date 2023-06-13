@@ -43,6 +43,12 @@ export const Message = ({
     success = false,
     warning = false,
 }) => {
+    React.useEffect(() => {
+        setTimeout(() => {
+            onClose(id)
+        }, 3000)
+    }, [])
+
     return (
         <StyledWrapper
             error={toBoolStr(error)}

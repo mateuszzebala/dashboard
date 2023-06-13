@@ -4,7 +4,8 @@ import { Switch } from '../../../atoms/Switch'
 import { Typography } from '../../../atoms/Typography'
 import { Theme } from '../../../atoms/Theme'
 import { FETCH } from '../../../api/api'
-import { endpoints } from '../../../api/endpoints'
+import { ENDPOINTS } from '../../../api/endpoints'
+import { useMessage } from '../../../utils/messages'
 
 const StyledWrapper = styled.div`
     padding: 20px 50px;
@@ -37,10 +38,11 @@ const StyledToggle = styled.div`
 
 export const ServerManage = () => {
     const [configuration, setConfiguration] = React.useState({})
+    const { newMessage } = useMessage()
 
     React.useEffect(() => {
         if (configuration.enable_server !== undefined) {
-            FETCH(endpoints.home.configuration(), {
+            FETCH(ENDPOINTS.home.configuration(), {
                 method: 'PATCH',
                 ...configuration,
             })
@@ -48,7 +50,7 @@ export const ServerManage = () => {
     }, [configuration])
 
     React.useEffect(() => {
-        FETCH(endpoints.home.configuration()).then((data) => {
+        FETCH(ENDPOINTS.home.configuration()).then((data) => {
             setConfiguration(data.data)
         })
     }, [])
@@ -69,6 +71,13 @@ export const ServerManage = () => {
                                 ...prev,
                                 enable_server: val(configuration.enable_server),
                             }))
+                            newMessage({
+                                text: val(configuration.enable_server)
+                                    ? 'The page is now on'
+                                    : 'The page is now down',
+                                success: val(configuration.enable_server),
+                                error: !val(configuration.enable_server),
+                            })
                         }}
                         size={2}
                     />

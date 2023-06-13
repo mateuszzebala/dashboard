@@ -1,3 +1,5 @@
+import { terminalCodesToHtml } from 'terminal-codes-to-html'
+
 export const toBoolStr = (variable) => {
     return variable ? '1' : ''
 }
@@ -45,6 +47,9 @@ export const durationToString = (duration) => {
 }
 
 export const fieldToString = (value, type) => {
+    if (value === null) return 'None'
+    if (value === undefined) return 'None'
+
     if (type === 'DateTimeField') {
         value = datetimeToString(value)
     } else if (type === 'DateField') {
@@ -60,4 +65,10 @@ export const fieldToString = (value, type) => {
     }
 
     return value
+}
+
+export const convertTerminalTextToHTML = (text) => {
+    // text = text ? text.replace('\\n', '<br>').replace('\\r', '<br>') : ''
+    text = terminalCodesToHtml(text || '')
+    return text.trim()
 }

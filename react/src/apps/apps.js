@@ -1,18 +1,20 @@
-import { BiHomeAlt2, BiDollarCircle } from 'react-icons/bi'
+import { BiHomeAlt2 } from 'react-icons/bi'
 import { AiOutlineBarChart, AiOutlineMessage } from 'react-icons/ai'
-import {
-    BsTerminal,
-    BsDatabase,
-    BsFolder,
-    BsGlobeEuropeAfrica,
-    BsKey,
-} from 'react-icons/bs'
+import { BsTerminal, BsDatabase, BsFolder, BsKey } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
-import { FaRegStickyNote, FaRegEye } from 'react-icons/fa'
-import { HiOutlineMail } from 'react-icons/hi'
+import { FaRegEye } from 'react-icons/fa'
 import { links } from '../router/links'
 import { TbBrandPython } from 'react-icons/tb'
+import { FETCH } from '../api/api'
+import { ENDPOINTS } from '../api/endpoints'
 
+const SUBLINKS = {}
+
+export const initLinks = async () => {
+    const { home, project } = (await FETCH(ENDPOINTS.terminal.init())).data
+    SUBLINKS.TERMINAL = { home: home || '/', project: project || '/' }
+}
+await initLinks()
 export const APPS = {
     home: {
         name: 'Home',
@@ -24,64 +26,101 @@ export const APPS = {
         icon: BsDatabase,
         link: links.database.index(),
     },
-    messages: {
-        name: 'Messages',
-        icon: AiOutlineMessage,
-        link: links.messages.index(),
-    },
     users: {
         name: 'Users',
         icon: FiUsers,
         link: links.users.index(),
+        sublinks: () => {
+            return {
+                ADMINS: '/',
+            }
+        },
     },
     files: {
         name: 'Files',
         icon: BsFolder,
         link: links.files.index(),
+        sublinks: () => {
+            return {
+                LIKED: '/',
+                LAST: '/',
+            }
+        },
     },
     terminal: {
         name: 'Terminal',
         icon: BsTerminal,
         link: links.terminal.index(),
+        sublinks: () => {
+            return {
+                HOME: links.terminal.indexPath(SUBLINKS.TERMINAL.home),
+                PROJECT: links.terminal.indexPath(SUBLINKS.TERMINAL.project),
+            }
+        },
     },
     python: {
         name: 'Python',
         icon: TbBrandPython,
         link: links.python.index(),
     },
-    email: {
-        name: 'Email',
-        icon: HiOutlineMail,
-        link: links.email.index(),
+    messages: {
+        name: 'Messages',
+        icon: AiOutlineMessage,
+        link: links.messages.index(),
+        sublinks: () => {
+            return {
+                ALL: '/',
+                READ: '/',
+                UNREAD: '/',
+            }
+        },
     },
-    notes: {
-        name: 'Notes',
-        icon: FaRegStickyNote,
-        link: links.notes.index(),
-    },
+    // email: {
+    //     name: 'Email',
+    //     icon: HiOutlineMail,
+    //     link: links.email.index(),
+    // },
+    // notes: {
+    //     name: 'Notes',
+    //     icon: FaRegStickyNote,
+    //     link: links.notes.index(),
+    // },
     requests: {
         name: 'Requests',
         icon: FaRegEye,
         link: links.requests.index(),
     },
-    finance: {
-        name: 'Finance',
-        icon: BiDollarCircle,
-        link: links.finance.index(),
-    },
+    // finance: {
+    //     name: 'Finance',
+    //     icon: BiDollarCircle,
+    //     link: links.finance.index(),
+    // },
     sessions: {
         name: 'Sessions',
         icon: BsKey,
         link: links.sessions.index(),
+        sublinks: () => {
+            return {
+                History: '/',
+                'Session Data': '/',
+            }
+        },
     },
     statistics: {
         name: 'Statistics',
         icon: AiOutlineBarChart,
         link: links.statistics.index(),
+        sublinks: () => {
+            return {
+                'Page Activity': '/',
+                'World Map': '/',
+                'Server Efficiency ': '/',
+            }
+        },
     },
-    map: {
-        name: 'Map',
-        icon: BsGlobeEuropeAfrica,
-        link: links.map.index(),
-    },
+    // map: {
+    //     name: 'Map',
+    //     icon: BsGlobeEuropeAfrica,
+    //     link: links.map.index(),
+    // },
 }

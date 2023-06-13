@@ -62,7 +62,7 @@ export const TopBar = ({ app, setClose }) => {
                 <StyledMenuButton onClick={handleBurgerClick}>
                     <CiMenuBurger />
                 </StyledMenuButton>
-                <Link animation={false} to={app.link || links.home}>
+                <Link animation={false} to={app.link || links.home()}>
                     <StyledTitle>
                         {<app.icon />} {app.name.toUpperCase()}
                     </StyledTitle>

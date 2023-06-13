@@ -5,13 +5,13 @@ import { Button } from './Button'
 const StyledWrapper = styled.span`
     display: inline-block;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: ${({ bottom }) => bottom + 'px'};
+    right: ${({ right }) => right + 'px'};
 `
 
-export const FloatingActionButton = ({ ...props }) => {
+export const FloatingActionButton = ({ bottom = 20, right = 20, ...props }) => {
     return (
-        <StyledWrapper>
+        <StyledWrapper bottom={bottom} right={right}>
             <Button {...props} />
         </StyledWrapper>
     )

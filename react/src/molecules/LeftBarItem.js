@@ -11,10 +11,10 @@ const StyledTop = styled.div`
     gap: 10px;
     color: ${({ theme }) => theme.leftbar.font};
     font-size: 20px;
-    padding: 5px;
-    background-color: #ffffff09;
+    text-transform: uppercase;
+    background-color: #ffffff11;
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px 10px;
     width: 90%;
     cursor: pointer;
 
@@ -35,12 +35,14 @@ const StyledDropdown = styled.div`
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    max-height: ${({ dropdown }) => dropdown ? '300px' : '0'};
-    padding: ${({ dropdown }) => dropdown ? '15px' : '0'};
+    max-height: ${({ sublinksLength, dropdown }) =>
+        sublinksLength === 0 ? 0 : dropdown ? '300px' : '0'};
+    padding: ${({ sublinksLength, dropdown }) =>
+        sublinksLength === 0 ? 0 : dropdown ? '15px 0' : '0'};
     transition: max-height 0.2s, padding 0.2s;
-    gap: 6px;
-    font-size: 18px;
-    a{
+    gap: 10px;
+    font-size: 15px;
+    a {
         color: ${({ theme }) => theme.leftbar.font};
     }
 `
@@ -50,27 +52,39 @@ const StyledDropdownIcon = styled.div`
     align-items: center;
     transition: transform 0.2s;
     justify-content: center;
-    transform: rotate(${({ dropdown }) => dropdown ? -90 : 90}deg);
+    transform: ${({ dropdown, sublinksLength }) => {
+        if (sublinksLength === 0) return 'none'
+        return dropdown ? 'rotate(-90deg)' : 'rotate(90deg)'
+    }};
 `
 
-export const LeftBarItem = ({ children, icon, to }) => {
+export const LeftBarItem = ({ app, sublinks = {} }) => {
     const [dropdown, setDropdown] = React.useState(false)
     return (
         <StyledWrapper>
-            <StyledTop onClick={() => {
-                setDropdown(prev => !prev)
-            }}>
-                {icon}
-                <Link to={to}>{children}</Link>
-                <StyledDropdownIcon dropdown={toBoolStr(dropdown)}><MdKeyboardArrowRight /></StyledDropdownIcon>
+            <StyledTop
+                onClick={() => {
+                    setDropdown((prev) => !prev)
+                }}
+            >
+                <app.icon />
+                <Link to={app.link}>{app.name}</Link>
+                <StyledDropdownIcon
+                    sublinksLength={Object.keys(sublinks).length}
+                    dropdown={toBoolStr(dropdown)}
+                >
+                    <MdKeyboardArrowRight />
+                </StyledDropdownIcon>
             </StyledTop>
-            <StyledDropdown dropdown={toBoolStr(dropdown)}>
-                <Link to={'/'}>Item 1</Link>
-                <Link to={'/'}>Item 2</Link>
-                <Link to={'/'}>Item 3</Link>
-                <Link to={'/'}>Item 4</Link>
-                <Link to={'/'}>Item 5</Link>
-                <Link to={'/'}>Item 6</Link>
+            <StyledDropdown
+                dropdown={toBoolStr(dropdown)}
+                sublinksLength={Object.keys(sublinks).length}
+            >
+                {Object.keys(sublinks).map((link) => (
+                    <Link key={link} to={sublinks[link]}>
+                        {link}
+                    </Link>
+                ))}
             </StyledDropdown>
         </StyledWrapper>
     )

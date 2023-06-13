@@ -2,22 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import { FieldInput } from './FieldInput'
 import { FETCH } from '../../api/api'
-import { endpoints } from '../../api/endpoints'
+import { ENDPOINTS } from '../../api/endpoints'
 import { Button } from '../../atoms/Button'
 
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+    gap: 10px;
 `
 
 export const PutItemForm = ({ modelName }) => {
     const [fields, setFields] = React.useState([])
 
     React.useEffect(() => {
-        FETCH(endpoints.database.model(modelName)).then((data) => {
+        FETCH(ENDPOINTS.database.model(modelName)).then((data) => {
             const allFields = data.data.fields
             const newFields = []
             Object.keys(allFields).forEach((fieldName) => {

@@ -1,6 +1,6 @@
 import { API } from './api'
 
-export const endpoints = {
+export const ENDPOINTS = {
     home: {
         configuration: () => API(['home', 'configuration']),
         hosts: () => API(['home', 'hosts']),
@@ -19,6 +19,10 @@ export const endpoints = {
         csrf: () => API(['auth', 'csrf']),
         logout: () => API(['auth', 'logout']),
         me: () => API(['auth', 'me']),
+    },
+    terminal: {
+        command: () => API(['terminal', 'command']),
+        init: () => API(['terminal', 'init']),
     },
     other: {},
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Modal } from '../../atoms/Modal'
 import { Input } from '../../atoms/Input'
 import { FETCH } from '../../api/api'
-import { endpoints } from '../../api/endpoints'
+import { ENDPOINTS } from '../../api/endpoints'
 import { FaSearch } from 'react-icons/fa'
 
 const StyledInput = styled.div`
@@ -73,7 +73,7 @@ export const SelectItem = ({ modelName, value, setValue }) => {
     const [openModal, setOpenModal] = React.useState(false)
     React.useEffect(() => {
         FETCH(
-            endpoints.database.items(modelName, {
+            ENDPOINTS.database.items(modelName, {
                 query: inputValue,
                 length: 20,
             })

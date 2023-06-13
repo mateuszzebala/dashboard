@@ -2,7 +2,7 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { useNavigate, useParams } from 'react-router'
 import { FETCH } from '../../api/api'
-import { endpoints } from '../../api/endpoints'
+import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import { links } from '../../router/links'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
@@ -36,8 +36,6 @@ const StyledMenu = styled.div`
     padding: 0 10px;
     gap: 10px;
     align-items: center;
-
-    flex-wrap: wrap;
 `
 
 const StyledFooter = styled.div`
@@ -71,7 +69,7 @@ export const DatabaseModelPage = () => {
     }
 
     React.useEffect(() => {
-        FETCH(endpoints.database.model(modelName)).then((res) => {
+        FETCH(ENDPOINTS.database.model(modelName)).then((res) => {
             const resModelData = res.data
             setModelData(resModelData)
             const registeredFields = Object.keys(res.data.fields)
@@ -79,9 +77,12 @@ export const DatabaseModelPage = () => {
                 .filter((field) => resModelData.fields[field].registered)
 
             if (registeredFields.length === 0) {
-                setFields(Object.keys(res.data.fields).filter((field) => !resModelData.fields[field].relation.is))
-            }
-            else {
+                setFields(
+                    Object.keys(res.data.fields).filter(
+                        (field) => !resModelData.fields[field].relation.is
+                    )
+                )
+            } else {
                 setFields(registeredFields)
             }
         })
@@ -89,7 +90,7 @@ export const DatabaseModelPage = () => {
 
     const fetchItems = () => {
         FETCH(
-            endpoints.database.items(modelName, {
+            ENDPOINTS.database.items(modelName, {
                 page,
                 length,
                 order_by: orderBy ? orderBy : 'pk',
@@ -106,7 +107,7 @@ export const DatabaseModelPage = () => {
 
     const handleAction = () => {
         setLoadingActionButton(true)
-        FETCH(endpoints.database.action(modelName), {
+        FETCH(ENDPOINTS.database.action(modelName), {
             action,
             primary_keys: selectedItems,
         }).then(() => {

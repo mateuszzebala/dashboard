@@ -2,7 +2,9 @@ from django.urls import path
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def signin(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
@@ -13,6 +15,7 @@ def signin(request):
         'done': request.user.is_authenticated
     })
 
+@csrf_exempt
 def csrf(request):
     return JsonResponse({'token': get_token(request)})
 
@@ -22,8 +25,8 @@ def logout_view(request):
         'logout': not request.user.is_authenticated,
     })
 
+@csrf_exempt
 def me(request):
-    print(request.user)
     return JsonResponse({
         'signin': request.user.is_authenticated,
     })

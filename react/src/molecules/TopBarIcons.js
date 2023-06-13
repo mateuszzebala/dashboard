@@ -8,7 +8,7 @@ import { links } from '../router/links'
 import { toBoolStr } from '../utils/utils'
 import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
-import { endpoints } from '../api/endpoints'
+import { ENDPOINTS } from '../api/endpoints'
 
 const StyledIcon = styled.span`
     display: grid;
@@ -76,7 +76,7 @@ export const TopBarIcons = () => {
             </Link>
             <StyledIcon
                 onClick={() => {
-                    FETCH(endpoints.auth.logout()).then((data) => {
+                    FETCH(ENDPOINTS.auth.logout()).then((data) => {
                         if (data.data.logout) {
                             navigate(links.auth.signin())
                         }

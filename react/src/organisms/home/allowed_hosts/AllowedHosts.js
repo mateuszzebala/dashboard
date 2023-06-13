@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FETCH } from '../../../api/api'
-import { endpoints } from '../../../api/endpoints'
+import { ENDPOINTS } from '../../../api/endpoints'
 import { Host } from './Host'
 import { Button } from '../../../atoms/Button'
 import { Input } from '../../../atoms/Input'
@@ -30,17 +30,17 @@ const StyledMenu = styled.div`
 `
 
 export const AllowedHosts = () => {
-    const [hosts, setHosts] = React.useState([])
+    const [hosts, setHosts] = React.useState(['localhost'])
     const [inputValue, setInputValue] = React.useState('')
     React.useEffect(() => {
-        FETCH(endpoints.home.hosts()).then((data) => {
+        FETCH(ENDPOINTS.home.hosts()).then((data) => {
             setHosts(data.data.hosts)
         })
     }, [])
 
     React.useEffect(() => {
         if (hosts && hosts.length !== 0) {
-            FETCH(endpoints.home.hosts(), {
+            FETCH(ENDPOINTS.home.hosts(), {
                 method: 'PATCH',
                 hosts: hosts,
             })
@@ -77,9 +77,10 @@ export const AllowedHosts = () => {
                         <Host
                             onContextMenu={(e) => {
                                 e.preventDefault()
-                                setHosts((prev) =>
-                                    prev.filter((val) => val !== host)
-                                )
+                                host !== 'localhost' &&
+                                    setHosts((prev) =>
+                                        prev.filter((val) => val !== host)
+                                    )
                             }}
                             key={host}
                             name={host}

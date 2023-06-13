@@ -45,6 +45,12 @@ const StyledButton = styled.button`
     }
 `
 
+const StyledRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+
 export const Counter = ({
     value,
     setValue,
@@ -63,7 +69,7 @@ export const Counter = ({
             >
                 <FaMinus />
             </StyledButton>
-            <span>
+            <StyledRow>
                 <StyledInput
                     value={value}
                     scaleSize={size}
@@ -73,7 +79,7 @@ export const Counter = ({
                     }}
                 />{' '}
                 {unit}
-            </span>
+            </StyledRow>
 
             <StyledButton
                 size={size}

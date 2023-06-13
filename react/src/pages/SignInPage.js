@@ -4,7 +4,7 @@ import { Input } from '../atoms/Input'
 import { Button } from '../atoms/Button'
 import { Typography } from '../atoms/Typography'
 import { FETCH } from '../api/api'
-import { endpoints } from '../api/endpoints'
+import { ENDPOINTS } from '../api/endpoints'
 import { useNavigate } from 'react-router'
 import { links } from '../router/links'
 
@@ -39,7 +39,7 @@ export const SignInPage = () => {
     const [error, setError] = React.useState(false)
 
     React.useEffect(() => {
-        FETCH(endpoints.auth.me()).then((data) => {
+        FETCH(ENDPOINTS.auth.me()).then((data) => {
             data.data.signin && navigate(links.home())
         })
     }, [])
@@ -48,7 +48,7 @@ export const SignInPage = () => {
         e.preventDefault()
         setSending(true)
 
-        FETCH(endpoints.auth.signin(), {
+        FETCH(ENDPOINTS.auth.signin(), {
             username,
             password,
         })

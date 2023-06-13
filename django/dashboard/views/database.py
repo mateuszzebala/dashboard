@@ -152,7 +152,6 @@ def make_action_view(request, model_name):
             actions = list(filter(lambda fnc: fnc.short_description == action, actions))
             if len(actions) > 0:
                 action = actions[0]
-                print(action)
             for pk in primary_keys:
                 action(admin.site._registry.get(model), request, model.objects.filter(pk=pk))
     except:

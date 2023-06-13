@@ -20,24 +20,10 @@ const StyledWrapper = styled.div`
 
 export const MessageGroup = () => {
     const { messages, removeMessage } = useMessage()
-    const timeoutRef = React.useRef([])
+    
     const handleCloseMessage = (id) => {
         removeMessage(id)
     }
-
-    React.useEffect(() => {
-        timeoutRef.current = timeoutRef.current.filter((timeout) => {
-            clearTimeout(timeout)
-            return false
-        })
-        Object.keys(messages).forEach((message) => {
-            timeoutRef.current.push(
-                setTimeout(() => {
-                    handleCloseMessage(message)
-                }, 3000)
-            )
-        })
-    }, [messages])
 
     return (
         <StyledWrapper>

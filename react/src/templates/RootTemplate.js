@@ -3,7 +3,7 @@ import { Curtain } from '../atoms/Curtain'
 import { toBoolStr } from '../utils/utils'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router'
-import { endpoints } from '../api/endpoints'
+import { ENDPOINTS } from '../api/endpoints'
 import { FETCH } from '../api/api'
 import { links } from '../router/links'
 
@@ -15,7 +15,7 @@ export const RootTemplate = ({ children }) => {
     const [show, setShow] = React.useState(true)
     const navigate = useNavigate()
     React.useEffect(() => {
-        FETCH(endpoints.auth.me()).then((data) => {
+        FETCH(ENDPOINTS.auth.me()).then(async (data) => {
             if (!data.data.signin) {
                 navigate(links.auth.signin())
             }
@@ -28,7 +28,7 @@ export const RootTemplate = ({ children }) => {
             <StyledCurtain show={toBoolStr(show)}>
                 <Curtain loading time={2} />
             </StyledCurtain>
-            {children}
+            {!show && children}
         </>
     )
 }

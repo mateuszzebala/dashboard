@@ -4,7 +4,8 @@ from django.urls import path, include
 views = [
     'database',
     'home',
-    'auth'
+    'auth',
+    'terminal'
 ]
 
 

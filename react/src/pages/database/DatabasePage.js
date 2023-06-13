@@ -1,7 +1,7 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import styled from 'styled-components'
-import { endpoints } from '../../api/endpoints'
+import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { Link } from 'react-router-dom'
 import { links } from '../../router/links'
@@ -48,7 +48,7 @@ export const DatabasePage = () => {
     const [models, setModels] = React.useState([])
 
     React.useEffect(() => {
-        FETCH(endpoints.database.models()).then((data) => {
+        FETCH(ENDPOINTS.database.models()).then((data) => {
             const newModels = {}
             Object.keys(data.data.models).forEach((modelName) => {
                 if (!newModels[data.data.models[modelName]])

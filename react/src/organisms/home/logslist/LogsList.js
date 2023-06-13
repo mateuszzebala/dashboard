@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { LogItem } from './LogItem'
 import { FETCH } from '../../../api/api'
-import { endpoints } from '../../../api/endpoints'
+import { ENDPOINTS } from '../../../api/endpoints'
 
 const StyledWrapper = styled.div`
     box-shadow: 0 0 8px -5px black;
@@ -30,7 +30,7 @@ export const LogsList = () => {
     const [logs, setLogs] = React.useState([])
 
     const handleReload = () => {
-        FETCH(endpoints.home.logs()).then((data) => {
+        FETCH(ENDPOINTS.home.logs()).then((data) => {
             setLogs(data.data.logs)
         })
     }

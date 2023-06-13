@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { endpoints } from './endpoints'
+import { ENDPOINTS } from './endpoints'
 
 export const API_URL = 'http://localhost:8000/dashboard/api/'
 
@@ -23,7 +23,7 @@ export const API = (path, args = null) => {
 }
 
 async function CSRF() {
-    const response = await fetch(endpoints.auth.csrf(), {
+    const response = await fetch(ENDPOINTS.auth.csrf(), {
         credentials: 'include',
     })
     const data = await response.json()
@@ -32,7 +32,7 @@ async function CSRF() {
 }
 
 export const SIGNIN = async () => {
-    return (await FETCH(endpoints.auth.me())).data.signin
+    return (await FETCH(ENDPOINTS.auth.me())).data.signin
 }
 
 export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
