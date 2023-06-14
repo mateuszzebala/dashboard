@@ -1,4 +1,4 @@
-# dashboard for server in django and react
+# Dashboard for server in django and react
 
 ## How to run django app?
 
