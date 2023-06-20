@@ -24,5 +24,8 @@ export const ENDPOINTS = {
         command: () => API(['terminal', 'command']),
         init: () => API(['terminal', 'init']),
     },
+    files: {
+        content: () => API(['files', 'content'])
+    },
     other: {},
 }

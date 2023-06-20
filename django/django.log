@@ -1065,3 +1065,412 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 /home/mz/Code/dashboard/django/dashboard/admin.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/urls/api_urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/urls/api_urls.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 9, in get_content_of_folder
+    path = request.POST.get('path').split(os.sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'split'
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 9, in get_content_of_folder
+    path = request.POST.get('path').split(os.sep)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'split'
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/dashboard/views/files.py", line 13, in get_content_of_folder
+    return JsonResponse({
+           ^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/http/response.py", line 731, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mz/Code/dashboard/django/venv/lib/python3.11/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type DirEntry is not JSON serializable
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/dashboard/views/files.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/Code/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /
+Forbidden (Origin checking failed - http://localhost does not match any trusted origins.): /dashboard/api/terminal/init/
+Forbidden (Origin checking failed - http://localhost does not match any trusted origins.): /dashboard/api/terminal/init/
+/home/mz/Code/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Unauthorized: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /

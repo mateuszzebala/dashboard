@@ -5,3 +5,4 @@ venv
 .idea
 **/media/**
 **/__init__.py
+**/build/

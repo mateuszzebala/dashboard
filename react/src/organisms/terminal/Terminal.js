@@ -168,7 +168,7 @@ export const Terminal = () => {
         })
     }
 
-    const handleArrowDown = (c, index) => {
+    const handleArrowButtonDown = (c, index) => {
         setHistoryCounter((prev) => prev + c)
         setPrompts((prev) => {
             const newPrompts = [...prev]
@@ -212,9 +212,9 @@ export const Terminal = () => {
                                         handleEnterDown(prompts[index], e)
                                     e.key === 'Tab' && handleTabDown(index, e)
                                     e.key === 'ArrowDown' &&
-                                        handleArrowDown(1, index, e)
+                                        handleArrowButtonDown(1, index, e)
                                     e.key === 'ArrowUp' &&
-                                        handleArrowDown(-1, index, e)
+                                        handleArrowButtonDown(-1, index, e)
                                 }}
                                 onChange={(e) => {
                                     handleInputChange(index, e)

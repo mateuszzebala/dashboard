@@ -22,8 +22,8 @@ const StyledForm = styled.form`
     flex-direction: column;
     gap: 20px;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px -6px black;
+    border-radius: 10px;
+    box-shadow: 0 0 8px -6px black;
 `
 
 const StyledError = styled.p`

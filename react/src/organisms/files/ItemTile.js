@@ -2,6 +2,7 @@ import React from 'react'
 import { BsFileEarmarkBinary, BsFolder } from 'react-icons/bs'
 import styled from 'styled-components'
 import { ContextMenu } from '../../atoms/ContextMenu'
+import { Tooltip } from '../../atoms/Tooltip'
 import { FaPen, FaTrash } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
@@ -11,7 +12,7 @@ const StyledWrapper = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    padding: 20px;
+    padding: 10px;
     background-color: ${({ theme }) => theme.light};
     box-shadow: 0 0 5px -4px black;
     border-radius: 10px;
@@ -25,12 +26,19 @@ const StyledWrapper = styled.div`
         background-color: ${({ theme }) => theme.primary}05;
     }
 `
-
+const StyledFilename = styled.div`
+    white-space: nowrap;
+    width: 90%;
+    overflow: hidden;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    text-align: center;
+`
 const StyledIcon = styled.div`
     font-size: 30px;
 `
 
-export const ItemTile = ({ filename, isFile }) => {
+export const ItemTile = ({ filename, isFile, setLocation }) => {
     return (
         <ContextMenu
             data={[
@@ -77,12 +85,14 @@ export const ItemTile = ({ filename, isFile }) => {
                 },
             ]}
         >
-            <StyledWrapper>
-                <StyledIcon>
-                    {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
-                </StyledIcon>
-                {filename}
-            </StyledWrapper>
+            <Tooltip text={filename}>
+                <StyledWrapper onClick={()=>{setLocation(filename)}}>
+                    <StyledIcon>
+                        {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
+                    </StyledIcon>
+                    <StyledFilename>{filename}</StyledFilename>
+                </StyledWrapper>
+            </Tooltip>
         </ContextMenu>
     )
 }

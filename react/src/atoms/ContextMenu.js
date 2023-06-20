@@ -48,8 +48,6 @@ const StyledText = styled.span`
     font-size: 18px;
 `
 
-// data {}[] = {icon: Icon, text: string, todo: Function}
-
 export const ContextMenu = ({ data = [], children }) => {
     const [show, setShow] = React.useState(false)
     const [position, setPosition] = React.useState({ x: 0, y: 0 })

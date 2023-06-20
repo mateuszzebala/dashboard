@@ -5,7 +5,8 @@ views = [
     'database',
     'home',
     'auth',
-    'terminal'
+    'terminal',
+    'files',
 ]
 
 
