@@ -10,11 +10,11 @@ DEBUG = SERVER_CONFIG.DEBUG()
 ALLOWED_HOSTS = SERVER_CONFIG.GET_ALLOWED_HOSTS()
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost'
+    'http://localhost:3000'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost'
+    'http://localhost:3000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True

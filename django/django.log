@@ -1474,3 +1474,6 @@ Not Found: /
 Not Found: /
 Not Found: /
 Not Found: /
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
