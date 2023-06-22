@@ -1,12 +1,19 @@
 {
    "config": {
       "enable_server": true,
-      "debug": true,
+      "debug": false,
       "new_users": true,
-      "ddos_block": false,
-      "save_requests": false
+      "ddos_block": true,
+      "save_requests": false,
+      "credientals": true
    },
    "allowed_hosts": [
       "localhost"
+   ],
+   "cors_allowed_origins": [
+      "http://localhost:3000"
+   ],
+   "csrf_trusted_origins": [
+      "http://localhost:3000"
    ]
 }

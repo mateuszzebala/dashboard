@@ -14,7 +14,6 @@ const StyledWrapper = styled.div`
     overflow: scroll;
     box-shadow: 0 0 8px -5px black;
     border-radius: 10px;
-    justify-content: center;
     &::-webkit-scrollbar {
         width: 0;
     }

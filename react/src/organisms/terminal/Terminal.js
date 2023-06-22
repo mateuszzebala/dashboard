@@ -64,7 +64,11 @@ export const Terminal = () => {
         })
     }
 
-    const handleStopProcess = () => {}
+    const handleStopProcess = () => {
+        FETCH(ENDPOINTS.terminal.kill()).then(() => {
+            setWaiting(false)
+        })
+    }
 
     React.useEffect(focusLastInput, [prompts])
 
@@ -173,7 +177,6 @@ export const Terminal = () => {
         setPrompts((prev) => {
             const newPrompts = [...prev]
             newPrompts[index].value = commandHistory[historyCounter + c]
-            console.log(commandHistory)
             return newPrompts
         })
     }

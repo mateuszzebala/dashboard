@@ -8,7 +8,7 @@ import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
 import { links } from '../router/links'
 
-const StyledWrapper = styled.nav`
+const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.leftbar.background};
     color: ${({ theme }) => theme.leftbar.font};
     height: 100vh;
@@ -42,7 +42,7 @@ const StyleDashboard = styled.span`
     color: ${({ theme }) => theme.leftbar.font};
 `
 const StyledMenuItems = styled.div`
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 100%;
     display: flex;
     align-items: center;
@@ -50,14 +50,15 @@ const StyledMenuItems = styled.div`
     padding-bottom: 10px;
     flex-direction: column;
     height: 100%;
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 0;
+        height: 0;
     }
 `
 
 export const LeftBar = ({ close }) => {
     return (
-        <StyledWrapper close={toBoolStr(close)}>
+        <StyledBar close={toBoolStr(close)}>
             <Link to={links.home()}>
                 <StyleDashboard>
                     <SiDjango /> <FaReact />
@@ -79,6 +80,6 @@ export const LeftBar = ({ close }) => {
                         )
                     })}
             </StyledMenuItems>
-        </StyledWrapper>
+        </StyledBar>
     )
 }

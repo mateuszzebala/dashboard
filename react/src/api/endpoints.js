@@ -3,7 +3,11 @@ import { API } from './api'
 export const ENDPOINTS = {
     home: {
         configuration: () => API(['home', 'configuration']),
-        hosts: () => API(['home', 'hosts']),
+        allowed_hosts: () => API(['home', 'hosts', 'allowed_hosts']),
+        cors_allowed_origins: () =>
+            API(['home', 'hosts', 'cors_allowed_origins']),
+        csrf_trusted_origins: () =>
+            API(['home', 'hosts', 'csrf_trusted_origins']),
         logs: () => API(['home', 'logs']),
     },
     database: {
@@ -23,9 +27,10 @@ export const ENDPOINTS = {
     terminal: {
         command: () => API(['terminal', 'command']),
         init: () => API(['terminal', 'init']),
+        kill: () => API(['terminal', 'kill']),
     },
     files: {
-        content: () => API(['files', 'content'])
+        content: () => API(['files', 'content']),
     },
     other: {},
 }

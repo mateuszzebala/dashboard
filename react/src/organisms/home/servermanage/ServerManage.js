@@ -135,6 +135,19 @@ export const ServerManage = () => {
                     size={2}
                 />
             </StyledToggle>
+            <StyledToggle>
+                <Typography variant={'h4'}>CREDENTIALS</Typography>
+                <Switch
+                    value={configuration.credientals}
+                    setValue={(val) => {
+                        setConfiguration((prev) => ({
+                            ...prev,
+                            credientals: val(configuration.credientals),
+                        }))
+                    }}
+                    size={2}
+                />
+            </StyledToggle>
         </StyledWrapper>
     )
 }

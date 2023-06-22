@@ -17,7 +17,6 @@ export const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-
             <MessageContext.Provider value={[messages, setMessages]}>
                 <StyledWrapper>
                     <GlobalStyle />
@@ -29,7 +28,6 @@ export const App = () => {
                     </BrowserRouter>
                 </StyledWrapper>
             </MessageContext.Provider>
-
         </ThemeProvider>
     )
 }

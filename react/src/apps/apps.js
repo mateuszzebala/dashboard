@@ -11,8 +11,13 @@ import { ENDPOINTS } from '../api/endpoints'
 const SUBLINKS = {}
 
 export const initLinks = async () => {
-    const { home, project } = (await FETCH(ENDPOINTS.terminal.init())).data
-    SUBLINKS.TERMINAL = { home: home || '/', project: project || '/' }
+    const { home, project, root } = (await FETCH(ENDPOINTS.terminal.init()))
+        .data
+    SUBLINKS.TERMINAL = {
+        home: home || '/',
+        project: project || '/',
+        root: root || '/',
+    }
 }
 await initLinks()
 export const APPS = {
@@ -33,6 +38,7 @@ export const APPS = {
         sublinks: () => {
             return {
                 ADMINS: '/',
+                CREATE: '/',
             }
         },
     },
@@ -53,6 +59,7 @@ export const APPS = {
         link: links.terminal.index(),
         sublinks: () => {
             return {
+                ROOT: links.terminal.indexPath(SUBLINKS.TERMINAL.root),
                 HOME: links.terminal.indexPath(SUBLINKS.TERMINAL.home),
                 PROJECT: links.terminal.indexPath(SUBLINKS.TERMINAL.project),
             }

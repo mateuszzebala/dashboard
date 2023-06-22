@@ -27,11 +27,11 @@ const StyledBold = styled.span`
 
 const StyledStatusCode = styled.span`
     font-weight: bold;
-    color: ${({ statusCode, theme }) => {
-        if (statusCode.toString().startsWith('2')) return theme.success
-        if (statusCode.toString().startsWith('3')) return theme.warning
-        if (statusCode.toString().startsWith('4')) return theme.warning
-        if (statusCode.toString().startsWith('5')) return theme.error
+    color: ${({ statuscode, theme }) => {
+        if (statuscode.toString().startsWith('2')) return theme.success
+        if (statuscode.toString().startsWith('3')) return theme.warning
+        if (statuscode.toString().startsWith('4')) return theme.warning
+        if (statuscode.toString().startsWith('5')) return theme.error
     }};
 `
 
@@ -52,7 +52,7 @@ export const LogItem = ({
             <StyledRow>
                 <StyledBold>{method}</StyledBold>
                 <span>{path}</span>
-                <StyledStatusCode statusCode={status_code}>
+                <StyledStatusCode statuscode={status_code}>
                     {status_code}
                 </StyledStatusCode>
                 <span>{device}</span>

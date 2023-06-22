@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FETCH } from '../../../api/api'
-import { ENDPOINTS } from '../../../api/endpoints'
 import { Host } from './Host'
 import { Button } from '../../../atoms/Button'
 import { Input } from '../../../atoms/Input'
@@ -29,18 +28,19 @@ const StyledMenu = styled.div`
     align-items: center;
 `
 
-export const AllowedHosts = () => {
-    const [hosts, setHosts] = React.useState(['localhost'])
+export const HostSelect = ({ name, endpoint }) => {
+    const [hosts, setHosts] = React.useState([])
     const [inputValue, setInputValue] = React.useState('')
+
     React.useEffect(() => {
-        FETCH(ENDPOINTS.home.hosts()).then((data) => {
+        FETCH(endpoint).then((data) => {
             setHosts(data.data.hosts)
         })
     }, [])
 
     React.useEffect(() => {
         if (hosts && hosts.length !== 0) {
-            FETCH(ENDPOINTS.home.hosts(), {
+            FETCH(endpoint, {
                 method: 'PATCH',
                 hosts: hosts,
             })
@@ -59,7 +59,7 @@ export const AllowedHosts = () => {
 
     return (
         <StyledWrapper>
-            <Typography variant={'h3'}>ALLOWED HOSTS</Typography>
+            <Typography variant={'h3'}>{name.toUpperCase()}</Typography>
             <StyledMenu>
                 <Input
                     label="ADD HOSTNAME"

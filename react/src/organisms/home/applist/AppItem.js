@@ -7,6 +7,7 @@ const StyledBox = styled.div`
     min-width: 100px;
     min-height: 100px;
     border-radius: 10px;
+    aspect-ratio: 1/1;
     box-shadow: 0 0 6px -4px black;
     color: ${({ theme }) => theme.primary} !important;
 

@@ -12,13 +12,16 @@ def manage_server_configuration_view(request):
         debug = request.POST.get('debug') == "true"
         new_users = request.POST.get('new_users') == "true"
         ddos_block = request.POST.get('ddos_block') == "true"
+        credientals = request.POST.get('credientals') == "true"
         save_requests = request.POST.get('save_requests') == "true"
         SERVER_CONFIG.CONFIGURATION['enable_server'] = enable_server
         SERVER_CONFIG.CONFIGURATION['debug'] = debug
         SERVER_CONFIG.CONFIGURATION['new_users'] = new_users
         SERVER_CONFIG.CONFIGURATION['ddos_block'] = ddos_block
+        SERVER_CONFIG.CONFIGURATION['credientals'] = credientals
         SERVER_CONFIG.CONFIGURATION['save_requests'] = save_requests
         settings.DEBUG = debug
+        settings.CORS_ALLOW_CREDENTIALS = credientals
         save_configuration()
     return JsonResponse(dict((name, bool(value)) for name, value in SERVER_CONFIG.CONFIGURATION.items()))
 
@@ -29,6 +32,22 @@ def manage_allowed_hosts(request):
         settings.ALLOWED_HOSTS = SERVER_CONFIG.ALLOWED_HOSTS
         save_configuration()
     return JsonResponse({'hosts':SERVER_CONFIG.GET_ALLOWED_HOSTS()})
+
+@is_superuser
+def manage_cors_allowed_origins(request):
+    if request.POST.get('method') == 'PATCH':
+        SERVER_CONFIG.CORS_ALLOWED_ORIGINS = request.POST.get('hosts').split(',')
+        settings.CORS_ALLOWED_ORIGINS = SERVER_CONFIG.CORS_ALLOWED_ORIGINS
+        save_configuration()
+    return JsonResponse({'hosts':SERVER_CONFIG.CORS_ALLOWED_ORIGINS})
+
+@is_superuser
+def manage_csrf_trusted_origins(request):
+    if request.POST.get('method') == 'PATCH':
+        SERVER_CONFIG.CSRF_TRUSTED_ORIGINS = request.POST.get('hosts').split(',')
+        settings.CSRF_TRUSTED_ORIGINS = SERVER_CONFIG.CSRF_TRUSTED_ORIGINS
+        save_configuration()
+    return JsonResponse({'hosts':SERVER_CONFIG.CSRF_TRUSTED_ORIGINS})
 
 def get_last_logs(request):
     last_logs = list(Log.objects.all().order_by('datetime').reverse())[0:50]
@@ -55,6 +74,8 @@ def get_last_logs(request):
 
 urlpatterns = [
     path('configuration/', manage_server_configuration_view), # MANAGE SERVER CONFIGURATION 
-    path('hosts/', manage_allowed_hosts), # MANAGE HOSTS CONFIGURATION 
+    path('hosts/allowed_hosts/', manage_allowed_hosts), # MANAGE HOSTS CONFIGURATION 
+    path('hosts/cors_allowed_origins/', manage_cors_allowed_origins), # MANAGE CORS ALLOWED ORIGINS
+    path('hosts/csrf_trusted_origins/', manage_csrf_trusted_origins), # MANAGE CSRF TRUSTED ORIGINS
     path('logs/', get_last_logs), # GET LAST LOGS 
 ]

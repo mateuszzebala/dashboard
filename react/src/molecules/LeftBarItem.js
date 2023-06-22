@@ -35,10 +35,10 @@ const StyledDropdown = styled.div`
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    max-height: ${({ sublinksLength, dropdown }) =>
-        sublinksLength === 0 ? 0 : dropdown ? '300px' : '0'};
-    padding: ${({ sublinksLength, dropdown }) =>
-        sublinksLength === 0 ? 0 : dropdown ? '15px 0' : '0'};
+    max-height: ${({ sublinkslength, dropdown }) =>
+        sublinkslength === 0 ? 0 : dropdown ? '300px' : '0'};
+    padding: ${({ sublinkslength, dropdown }) =>
+        sublinkslength === 0 ? 0 : dropdown ? '15px 0' : '0'};
     transition: max-height 0.2s, padding 0.2s;
     gap: 10px;
     font-size: 15px;
@@ -52,8 +52,8 @@ const StyledDropdownIcon = styled.div`
     align-items: center;
     transition: transform 0.2s;
     justify-content: center;
-    transform: ${({ dropdown, sublinksLength }) => {
-        if (sublinksLength === 0) return 'none'
+    transform: ${({ dropdown, sublinkslength }) => {
+        if (sublinkslength === 0) return 'rotate(0deg)'
         return dropdown ? 'rotate(-90deg)' : 'rotate(90deg)'
     }};
 `
@@ -70,7 +70,7 @@ export const LeftBarItem = ({ app, sublinks = {} }) => {
                 <app.icon />
                 <Link to={app.link}>{app.name}</Link>
                 <StyledDropdownIcon
-                    sublinksLength={Object.keys(sublinks).length}
+                    sublinkslength={Object.keys(sublinks).length}
                     dropdown={toBoolStr(dropdown)}
                 >
                     <MdKeyboardArrowRight />
@@ -78,7 +78,7 @@ export const LeftBarItem = ({ app, sublinks = {} }) => {
             </StyledTop>
             <StyledDropdown
                 dropdown={toBoolStr(dropdown)}
-                sublinksLength={Object.keys(sublinks).length}
+                sublinkslength={Object.keys(sublinks).length}
             >
                 {Object.keys(sublinks).map((link) => (
                     <Link key={link} to={sublinks[link]}>

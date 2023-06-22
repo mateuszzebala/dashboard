@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import { LogsList } from '../organisms/home/logslist/LogsList'
 import { ServerManage } from '../organisms/home/servermanage/ServerManage'
 import { APPS } from '../apps/apps'
-import { AllowedHosts } from '../organisms/home/allowed_hosts/AllowedHosts'
+import { HostSelect } from '../organisms/home/hosts/HostSelect'
+import { ENDPOINTS } from '../api/endpoints'
 
-const StyledWrapper = styled.main`
+const StyledWrapp = styled.main`
     scroll-behavior: smooth;
     display: grid;
     grid-template-columns: repeat(1, 100%);
@@ -30,16 +31,27 @@ const StyledRow = styled.div`
 export const HomePage = () => {
     return (
         <MainTemplate app={APPS.home}>
-            <StyledWrapper>
+            <StyledWrapp page={APPS.home.name}>
                 <StyledRow>
                     <AppList />
                     <ServerManage />
                     <LogsList />
                 </StyledRow>
                 <StyledRow>
-                    <AllowedHosts />
+                    <HostSelect
+                        endpoint={ENDPOINTS.home.allowed_hosts()}
+                        name={'ALLOWED HOSTS'}
+                    />
+                    <HostSelect
+                        endpoint={ENDPOINTS.home.cors_allowed_origins()}
+                        name={'CORS ALLOWED ORIGINS'}
+                    />
+                    <HostSelect
+                        endpoint={ENDPOINTS.home.csrf_trusted_origins()}
+                        name={'CSRF TRUSTED ORIGINS'}
+                    />
                 </StyledRow>
-            </StyledWrapper>
+            </StyledWrapp>
         </MainTemplate>
     )
 }

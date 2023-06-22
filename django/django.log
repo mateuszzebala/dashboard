@@ -1477,3 +1477,728 @@ Not Found: /
 Watching for file changes with StatReloader
 /home/mz/dashboard/django/main/settings.py changed, reloading.
 Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /
+Unauthorized: /
+Unauthorized: /
+Unauthorized: /
+Unauthorized: /
+Unauthorized: /
+Unauthorized: /
+Unauthorized: /admin/
+Unauthorized: /dashboard/
+Unauthorized: /dashboard/database/
+Unauthorized: /dashboard/database/User
+Unauthorized: /dashboard/database/User/
+Not Found: /dashboard/database/User/
+Unauthorized: /
+Not Found: /
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Unauthorized: /
+Unauthorized: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /dashboard
+Not Found: /dashboard/api
+Not Found: /dashboard/api/
+Not Found: /das
+Not Found: /dashboard/database/User/items
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Internal Server Error: /dashboard/api/database/User/items/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/database.py", line 50, in select_items_view
+    length = int(request.GET.get('length')) or -1
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/terminal/command/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/terminal.py", line 17, in command
+    if request.SESSION.get('processes') is None:
+       ^^^^^^^^^^^^^^^
+AttributeError: 'WSGIRequest' object has no attribute 'SESSION'
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /dashboard/api/terminal/kill/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/auth.py", line 38, in inner
+    return fnc(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/terminal.py", line 13, in kill_process
+    print(request.session.id)
+          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute 'id'
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/terminal.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/dashboard/views/home.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

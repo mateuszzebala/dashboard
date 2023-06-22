@@ -5,7 +5,7 @@ import { TopBar } from '../organisms/TopBar'
 import { useCookies } from 'react-cookie'
 import { toBoolStr } from '../utils/utils'
 
-const StyledWrapper = styled.div`
+const StyledContainer = styled.main`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -22,12 +22,12 @@ const StyledRightSide = styled.div`
     height: 100vh;
 `
 
-const StyledContent = styled.div`
+const StyledContent = styled.article`
     padding: 10px;
     height: 100%;
     transition: width 0.3s;
-    width: ${({ leftbarClose }) =>
-        !leftbarClose ? '100vw' : 'calc(100vw - 200px)'};
+    width: ${({ leftbarclose }) =>
+        !leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
     background-color: ${({ theme }) => theme.content.background};
     color: ${({ theme }) => theme.content.font};
     overflow: auto;
@@ -47,14 +47,14 @@ export const MainTemplate = ({ app, children }) => {
     }, [leftbarClose])
 
     return (
-        <StyledWrapper>
+        <StyledContainer>
             <LeftBar close={leftbarClose} />
             <StyledRightSide>
                 <TopBar app={app} setClose={setLeftbarClose} />
-                <StyledContent leftbarClose={toBoolStr(leftbarClose)}>
+                <StyledContent leftbarclose={toBoolStr(leftbarClose)}>
                     {children}
                 </StyledContent>
             </StyledRightSide>
-        </StyledWrapper>
+        </StyledContainer>
     )
 }
