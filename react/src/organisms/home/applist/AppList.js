@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { AppItem } from './AppItem.js'
 import { APPS } from '../../../apps/apps'
 
-const StyledWrapper = styled.div`
+const StyledGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 45%);
     gap: 20px;
@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
 
 export const AppList = () => {
     return (
-        <StyledWrapper>
+        <StyledGrid>
             {Object.values(APPS).map((app) => {
                 const Icon = app.icon
                 return (
@@ -33,6 +33,6 @@ export const AppList = () => {
                     />
                 )
             })}
-        </StyledWrapper>
+        </StyledGrid>
     )
 }

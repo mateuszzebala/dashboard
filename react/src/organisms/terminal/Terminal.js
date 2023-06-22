@@ -192,7 +192,7 @@ export const Terminal = () => {
             <FloatingActionButton size={1.2} right={80} icon={<BiBookmark />} />
             {waiting && (
                 <FloatingActionButton
-                    size={1.2}
+                    size={1.1}
                     right={140}
                     icon={<FaStop />}
                     onClick={handleStopProcess}

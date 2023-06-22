@@ -39,3 +39,21 @@ export const useMediaQuery = (query) => {
 
     return matches
 }
+
+export const ConfirmContext = React.createContext([])
+
+export const useConfirm = () => {
+    const [confirm, setConfirm] = React.useContext(ConfirmContext)
+
+    const ask = (question, todo) => {
+        setConfirm({
+            question,
+            todo,
+            onCancel: ()=>{
+                setConfirm(null)
+            }
+        })
+    }
+
+    return {confirm, ask}
+}

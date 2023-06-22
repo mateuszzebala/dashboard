@@ -15,7 +15,7 @@ const StyledWrapper = styled.button`
     padding: ${({ icon, size }) =>
         icon ? '0' : size * 10 + 'px ' + size * 20 + 'px'};
     border-radius: ${({ circle, size }) => (circle ? '50%' : size * 5 + 'px')};
-    outline: 0px solid ${({ theme }) => theme.button.background}88;
+    outline: 0 solid ${({ theme }) => theme.button.background}88;
     transition: outline-width 0.1s;
     display: flex;
     align-items: center;

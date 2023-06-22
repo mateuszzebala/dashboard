@@ -8,7 +8,7 @@ import { APPS } from '../apps/apps'
 import { HostSelect } from '../organisms/home/hosts/HostSelect'
 import { ENDPOINTS } from '../api/endpoints'
 
-const StyledWrapp = styled.main`
+const StyledPage = styled.main`
     scroll-behavior: smooth;
     display: grid;
     grid-template-columns: repeat(1, 100%);
@@ -19,10 +19,9 @@ const StyledWrapp = styled.main`
 
 const StyledRow = styled.div`
     display: flex;
-    align-items: flex-start;
     scroll-snap-align: start;
     align-items: stretch;
-    justify-content: stretch;
+    justify-content: space-between;
     padding: 20px;
     gap: 20px;
     height: 100%;
@@ -31,7 +30,7 @@ const StyledRow = styled.div`
 export const HomePage = () => {
     return (
         <MainTemplate app={APPS.home}>
-            <StyledWrapp page={APPS.home.name}>
+            <StyledPage page={APPS.home.name}>
                 <StyledRow>
                     <AppList />
                     <ServerManage />
@@ -51,7 +50,7 @@ export const HomePage = () => {
                         name={'CSRF TRUSTED ORIGINS'}
                     />
                 </StyledRow>
-            </StyledWrapp>
+            </StyledPage>
         </MainTemplate>
     )
 }

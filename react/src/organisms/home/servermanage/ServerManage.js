@@ -7,7 +7,7 @@ import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { useMessage } from '../../../utils/messages'
 
-const StyledWrapper = styled.div`
+const StyledWrapper2 = styled.div`
     padding: 20px 50px;
     box-shadow: 0 0 5px -3px black;
     border-radius: 10px;
@@ -56,7 +56,7 @@ export const ServerManage = () => {
     }, [])
 
     return (
-        <StyledWrapper>
+        <StyledWrapper2>
             <StyledToggle>
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
@@ -135,19 +135,19 @@ export const ServerManage = () => {
                     size={2}
                 />
             </StyledToggle>
-            <StyledToggle>
-                <Typography variant={'h4'}>CREDENTIALS</Typography>
-                <Switch
-                    value={configuration.credientals}
-                    setValue={(val) => {
-                        setConfiguration((prev) => ({
-                            ...prev,
-                            credientals: val(configuration.credientals),
-                        }))
-                    }}
-                    size={2}
-                />
-            </StyledToggle>
-        </StyledWrapper>
+            {/*<StyledToggle>*/}
+            {/*    <Typography variant={'h4'}>CREDENTIALS</Typography>*/}
+            {/*    <Switch*/}
+            {/*        value={configuration.credientals}*/}
+            {/*        setValue={(val) => {*/}
+            {/*            setConfiguration((prev) => ({*/}
+            {/*                ...prev,*/}
+            {/*                credientals: val(configuration.credientals),*/}
+            {/*            }))*/}
+            {/*        }}*/}
+            {/*        size={2}*/}
+            {/*    />*/}
+            {/*</StyledToggle>*/}
+        </StyledWrapper2>
     )
 }
