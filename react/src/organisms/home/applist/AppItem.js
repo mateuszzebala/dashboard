@@ -19,8 +19,8 @@ const StyledBox = styled.div`
         transition: color 0.1s;
     }
     &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 5px -4px black;
+        transform: scale(1.1) rotate(4deg);
+        box-shadow: 0 0 6px -5px black;
     }
 `
 const StyledName = styled.div``

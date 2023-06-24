@@ -35,7 +35,11 @@ export const LogsList = () => {
         })
     }
 
-    React.useEffect(handleReload, [])
+    React.useEffect(() => {
+        handleReload()
+        const interval = setInterval(handleReload, 1000)
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <StyledWrapper>

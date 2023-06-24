@@ -41,22 +41,26 @@ class DashboardMiddleware:
         
         response = self.get_response(request)
         if SERVER_CONFIG.SAVE_REQUESTS():
-     
-            method = (request.POST.get('method') or request.method).upper()
-            url = request.get_full_path()
-            args = {}
 
+            resolver_match = resolve(request.path_info)
+            view_func = resolver_match.func
+            app_name = view_func.__module__.split('.')[0]
+            if app_name != 'dashboard':
+                method = (request.POST.get('method') or request.method).upper()
+                url = request.get_full_path()
+                args = {}
 
-            log = Log(
-                ip_v4=get_client_ip(request),
-                method=method,
-                path=url.split('?')[0],
-                status_code = response.status_code,
-                device=request.META.get('HTTP_USER_AGENT'),
-                user=request.user if request.user.is_authenticated else None,
-                session=None,
-                args=args,
-            )
-            log.save()
+                log = Log(
+                    ip_v4=get_client_ip(request),
+                    method=method,
+                    path=url.split('?')[0],
+                    status_code=response.status_code,
+                    device=request.META.get('HTTP_USER_AGENT'),
+                    user=request.user if request.user.is_authenticated else None,
+                    session=None,
+                    args=args,
+                )
+                log.save()
+
         log_request(request, response)
         return response
