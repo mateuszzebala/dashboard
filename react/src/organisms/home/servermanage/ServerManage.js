@@ -6,6 +6,8 @@ import { Theme } from '../../../atoms/Theme'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { useMessage } from '../../../utils/messages'
+import { useConfirm } from '../../../utils/hooks'
+import { theme } from '../../../theme/theme'
 
 const StyledWrapper2 = styled.div`
     padding: 20px 50px;
@@ -39,6 +41,7 @@ const StyledToggle = styled.div`
 export const ServerManage = () => {
     const [configuration, setConfiguration] = React.useState({})
     const { newMessage } = useMessage()
+    const {ask} = useConfirm()
 
     React.useEffect(() => {
         if (configuration.enable_server !== undefined) {
@@ -61,22 +64,24 @@ export const ServerManage = () => {
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
                     value={{
-                        switch: { on: '#4dff3d', off: '#ff473d', dot: 'white' },
+                        switch: { on: theme.success, off: theme.error, dot: theme.light },
                     }}
                 >
                     <Switch
                         value={configuration.enable_server}
                         setValue={(val) => {
-                            setConfiguration((prev) => ({
-                                ...prev,
-                                enable_server: val(configuration.enable_server),
-                            }))
-                            newMessage({
-                                text: val(configuration.enable_server)
-                                    ? 'The page is now on'
-                                    : 'The page is now down',
-                                success: val(configuration.enable_server),
-                                error: !val(configuration.enable_server),
+                            ask(val(configuration.enable_server) ? 'Enable page?' : 'Disable page?', ()=>{
+                                setConfiguration((prev) => ({
+                                    ...prev,
+                                    enable_server: val(configuration.enable_server),
+                                }))
+                                newMessage({
+                                    text: val(configuration.enable_server)
+                                        ? 'The page is now on'
+                                        : 'The page is now down',
+                                    success: val(configuration.enable_server),
+                                    error: !val(configuration.enable_server),
+                                })
                             })
                         }}
                         size={2}

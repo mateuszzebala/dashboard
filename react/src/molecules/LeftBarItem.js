@@ -12,7 +12,7 @@ const StyledTop = styled.div`
     color: ${({ theme }) => theme.leftbar.font};
     font-size: 20px;
     text-transform: uppercase;
-    background-color: #ffffff11;
+    background-color: ${({theme})=>theme.light}11;
     border-radius: 5px;
     padding: 15px 10px;
     width: 90%;

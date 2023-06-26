@@ -172,13 +172,18 @@ export const Terminal = () => {
         })
     }
 
-    const handleArrowButtonDown = (c, index) => {
-        setHistoryCounter((prev) => prev + c)
-        setPrompts((prev) => {
-            const newPrompts = [...prev]
-            newPrompts[index].value = commandHistory[historyCounter + c]
-            return newPrompts
+    const handleArrowButtonDown = (c, index, e) => {
+        setHistoryCounter((prev) => {
+            console.log(commandHistory)
+            if(prev + c < 0 && (prev + c) * -1 <= commandHistory.length){
+                e.target.value = commandHistory[commandHistory.length + prev + c].value
+                return prev + c
+            }
+            e.target.value = commandHistory[commandHistory.length + prev].value
+            return prev
+            
         })
+        console.log(historyCounter)
     }
 
     return (

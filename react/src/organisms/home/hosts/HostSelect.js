@@ -62,7 +62,7 @@ export const HostSelect = ({ name, endpoint }) => {
             <Typography variant={'h3'}>{name.toUpperCase()}</Typography>
             <StyledMenu>
                 <Input
-                    label="ADD HOSTNAME"
+                    label="ADD"
                     value={inputValue}
                     setValue={setInputValue}
                     onKeyUp={(e) => {

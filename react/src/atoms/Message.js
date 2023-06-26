@@ -43,11 +43,10 @@ export const Message = ({
     success = false,
     warning = false,
 }) => {
-    React.useEffect(() => {
-        setTimeout(() => {
-            onClose(id)
-        }, 3000)
-    }, [])
+
+    React.useEffect(()=>{
+        setTimeout(()=>{onClose(id)}, 10000)
+    })
 
     return (
         <StyledWrapper

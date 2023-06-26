@@ -8,7 +8,6 @@ import { Link } from '../atoms/Link'
 const StyledWrapper = styled.nav`
     display: flex;
     padding: 20px 10px;
-    box-shadow: 0 0 10px -6px black;
     width: 100%;
     z-index: 1;
     align-items: center;
@@ -38,12 +37,17 @@ const StyledTitle = styled.span`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     padding: 0 10px;
     font-weight: 500;
     color: ${({ theme }) => theme.topbar.font};
     text-decoration: none;
 `
+
+const StyledSubTitle = styled.div`
+  font-size: 18px;
+`
+
 const StyledLeftSide = styled.div`
     display: flex;
     gap: 10px;
@@ -51,7 +55,7 @@ const StyledLeftSide = styled.div`
     justify-content: center;
 `
 
-export const TopBar = ({ app, setClose }) => {
+export const TopBar = ({ app, setClose, title }) => {
     function handleBurgerClick() {
         setClose((prev) => !prev)
     }
@@ -65,6 +69,7 @@ export const TopBar = ({ app, setClose }) => {
                 <Link animation={false} to={app.link || links.home()}>
                     <StyledTitle>
                         {<app.icon />} {app.name.toUpperCase()}
+                        <StyledSubTitle>{title}</StyledSubTitle>
                     </StyledTitle>
                 </Link>
             </StyledLeftSide>

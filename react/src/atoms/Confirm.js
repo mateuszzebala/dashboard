@@ -12,7 +12,7 @@ const StyledButtons = styled.div`
 const StyledWrapper = styled.div`
     position: fixed;
     top: ${({open})=>open?'10px':'-100%'};
-    transition: top 0.8s;
+    transition: top 0.2s;
     left: 50%;
     gap: 10px;
     display: flex;
@@ -42,7 +42,7 @@ const StyledWrapper = styled.div`
         to{ top: -100%; }
     }
 
-    animation: ${ ({ open }) => open ? 'fade-in' : 'fade-out' } 0.8s ease forwards;
+    animation: ${ ({ open }) => open ? 'fade-in' : 'fade-out' } 0.2s ease forwards;
 `
 
 const StyledCaption = styled.div`
@@ -69,7 +69,7 @@ export const Confirm = ({question='CONFIRM', todo=()=>{}, onCancel=()=>{}}) => {
             setTimeout(()=>{
                 setShow(false)
                 onCancel()
-            }, 1000)
+            }, 200)
         }
     }, [open])
 

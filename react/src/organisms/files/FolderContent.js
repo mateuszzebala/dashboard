@@ -20,6 +20,12 @@ export const FolderContent = ({path, setPath}) => {
     }
 
     React.useEffect(()=>{
+        setPath(prev => {
+            return prev.split('/').filter(name => name !== '..').join('/')
+        })
+    }, [path])
+
+    React.useEffect(()=>{
         FETCH(ENDPOINTS.files.content(), {
             path,
         }).then(data => {
@@ -31,6 +37,10 @@ export const FolderContent = ({path, setPath}) => {
 
     return (
         <StyledWrapper>
+            <ItemTile setLocation={()=>{
+                setPath(path + '/' + '..')
+                
+            }} filename={'UP'} isFile={false}/>
             {folders.map(folder => <ItemTile setLocation={setLocation} key={folder} filename={folder} isFile={false} />)}
             {files.map(file => <ItemTile setLocation={setLocation} key={file} filename={file} isFile={true} />)}
         </StyledWrapper>

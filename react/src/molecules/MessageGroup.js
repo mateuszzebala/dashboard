@@ -18,6 +18,7 @@ const StyledWrapper = styled.div`
     }
 `
 
+
 export const MessageGroup = () => {
     const { messages, removeMessage } = useMessage()
     
@@ -27,17 +28,15 @@ export const MessageGroup = () => {
 
     return (
         <StyledWrapper>
-            {Object.keys(messages).map((messageKey) => (
-                <Message
-                    key={messageKey}
-                    id={messageKey}
-                    text={messages[messageKey].text}
-                    error={messages[messageKey].error}
-                    warning={messages[messageKey].warning}
-                    success={messages[messageKey].success}
-                    onClose={handleCloseMessage}
-                />
-            ))}
+            {Object.values(messages).map((message) => {
+                return (
+                    <Message
+                        key={message.id}
+                        onClose={handleCloseMessage}
+                        {...message}
+                    />
+                )
+            })}
         </StyledWrapper>
     )
 }

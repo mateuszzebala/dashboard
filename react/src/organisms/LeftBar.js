@@ -12,7 +12,6 @@ const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.leftbar.background};
     color: ${({ theme }) => theme.leftbar.font};
     height: 100vh;
-    z-index: 1;
     display: flex;
     align-items: center;
     flex-direction: column;

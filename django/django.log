@@ -2219,3 +2219,72 @@ Not Found: /
 Not Found: /
 /home/mz/dashboard/django/dashboard/middleware.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Unauthorized: /
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/files.py", line 12, in get_content_of_folder
+    content = os.scandir(path)
+              ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mz/UP'
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/files.py", line 12, in get_content_of_folder
+    content = os.scandir(path)
+              ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mz/UP'
+Internal Server Error: /dashboard/api/files/content/
+Traceback (most recent call last):
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mz/dashboard/django/dashboard/views/files.py", line 12, in get_content_of_folder
+    content = os.scandir(path)
+              ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/mz/home/mz'
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/home/mz/dashboard/django/main/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /admin
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Watching for file changes with StatReloader

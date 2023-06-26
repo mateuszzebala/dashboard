@@ -4,6 +4,7 @@ import { LeftBar } from '../organisms/LeftBar'
 import { TopBar } from '../organisms/TopBar'
 import { useCookies } from 'react-cookie'
 import { toBoolStr } from '../utils/utils'
+import { SubMenu } from '../organisms/SubMenu'
 
 const StyledContainer = styled.main`
     display: flex;
@@ -20,6 +21,7 @@ const StyledRightSide = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100vh;
+
 `
 
 const StyledContent = styled.article`
@@ -33,7 +35,14 @@ const StyledContent = styled.article`
     overflow: auto;
 `
 
-export const MainTemplate = ({ app, children }) => {
+const StyledTopMenu = styled.div`
+  box-shadow: 0 0 10px -6px black;
+  z-index: 2;
+  
+`
+
+
+export const MainTemplate = ({ app, children, title='', submenuChildren}) => {
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
 
@@ -50,7 +59,10 @@ export const MainTemplate = ({ app, children }) => {
         <StyledContainer>
             <LeftBar close={leftbarClose} />
             <StyledRightSide>
-                <TopBar app={app} setClose={setLeftbarClose} />
+                <StyledTopMenu>
+                    <TopBar title={title} app={app} setClose={setLeftbarClose} />
+                    <SubMenu>{submenuChildren}</SubMenu>
+                </StyledTopMenu>
                 <StyledContent leftbarclose={toBoolStr(leftbarClose)}>
                     {children}
                 </StyledContent>

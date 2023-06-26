@@ -8,9 +8,11 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { fieldToString } from '../../utils/utils'
 import { Tooltip } from '../../atoms/Tooltip'
-import { Typography } from '../../atoms/Typography'
 import { Theme } from '../../atoms/Theme'
 import { theme } from '../../theme/theme'
+import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
+
+
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -26,10 +28,6 @@ const StyledValue = styled.span`
   text-overflow: ellipsis;
 `
 
-const StyledRow = styled.div`
-  display: flex;
-  gap: 10px;
-`
 
 const StyledButtons = styled.div`
   display: flex;
@@ -52,41 +50,51 @@ export const DatabaseItemPage = () => {
     }, [])
 
     return (
-        <MainTemplate app={APPS.database}>
+        <MainTemplate app={APPS.database} title={`${modelName} - ${pk}`} submenuChildren={
+            <StyledButtons>
+                <Button size={0.8}>EDIT</Button>
+                <Theme value={{
+                    button: {
+                        background: theme.error,
+                        font: theme.light,
+                    },
+                }}>
+                    <Button size={0.8}>DELETE</Button>
+                </Theme>
+            </StyledButtons>
+        }>
             <StyledWrapper>
-                <Typography variant={'h1'}>
-                    {modelName} / {pk}
-                </Typography>
-                <StyledButtons>
-                    <Button size={0.8}>EDIT</Button>
-                    <Theme value={{
-                        button: {
-                            background: theme.error,
-                            font: theme.light,
-                        },
-                    }}>
-                        <Button size={0.8}>DELETE</Button>
-                    </Theme>
-                </StyledButtons>
-
-                {modelData &&
-                    itemData &&
-                    Object.keys(modelData.fields).map((fieldName) => (
-                        <StyledRow key={fieldName}>
-                            {fieldName}{': '}
-                            <Tooltip text={fieldToString(
-                                itemData.fields[fieldName],
-                                modelData.fields[fieldName].type
-                            )}>
-                                <StyledValue>
-                                    {fieldToString(
+                <Table>
+                    <HeaderRow>
+                        <Field>
+                            FIELD
+                        </Field>
+                        <Field>
+                            VALUE
+                        </Field>
+                    </HeaderRow>
+                    {modelData &&
+                        itemData &&
+                        Object.keys(modelData.fields).map((fieldName) => (
+                            <Row key={fieldName}>
+                                <Field>{fieldName}</Field>
+                                <Field>
+                                    <Tooltip text={fieldToString(
                                         itemData.fields[fieldName],
-                                        modelData.fields[fieldName].type,
-                                    )}
-                                </StyledValue>
-                            </Tooltip>
-                        </StyledRow>
-                    ))}
+                                        modelData.fields[fieldName].type
+                                    )}>
+                                        <StyledValue>
+                                            {fieldToString(
+                                                itemData.fields[fieldName],
+                                                modelData.fields[fieldName].type,
+                                            )}
+                                        </StyledValue>
+                                    </Tooltip>
+                                </Field>
+                            </Row>
+                        ))}
+                </Table>
+
 
             </StyledWrapper>
         </MainTemplate>

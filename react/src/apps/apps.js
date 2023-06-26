@@ -106,12 +106,6 @@ export const APPS = {
         name: 'Sessions',
         icon: BsKey,
         link: links.sessions.index(),
-        sublinks: () => {
-            return {
-                History: '/',
-                'Session Data': '/',
-            }
-        },
     },
     statistics: {
         name: 'Statistics',
@@ -119,9 +113,9 @@ export const APPS = {
         link: links.statistics.index(),
         sublinks: () => {
             return {
-                'Page Activity': '/',
-                'World Map': '/',
-                'Server Efficiency ': '/',
+                'PAGE ACTIVITY': '/',
+                'WORLD MAP': '/',
+                'SERVER EFFICIENCY ': '/',
             }
         },
     },
