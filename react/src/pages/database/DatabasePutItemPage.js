@@ -3,7 +3,7 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { useParams } from 'react-router'
 import { PutItemForm } from '../../organisms/database/PutItemForm'
 import { APPS } from '../../apps/apps'
-import { Typography } from '../../atoms/Typography'
+
 import styled from 'styled-components'
 
 const StyledWrapper = styled.div`
@@ -18,11 +18,8 @@ const StyledWrapper = styled.div`
 export const DatabasePutItemPage = () => {
     const { modelName } = useParams()
     return (
-        <MainTemplate app={APPS.database}>
+        <MainTemplate app={APPS.database} title={`New ${modelName}`}>
             <StyledWrapper>
-                <Typography variant={'h2'}>
-                    NEW {modelName.toUpperCase()}
-                </Typography>
                 <PutItemForm modelName={modelName} />
             </StyledWrapper>
         </MainTemplate>

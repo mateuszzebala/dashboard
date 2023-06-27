@@ -49,11 +49,30 @@ export const useConfirm = () => {
         setConfirm({
             question,
             todo,
-            onCancel: ()=>{
+            onCancel: () => {
                 setConfirm(null)
-            }
+            },
         })
     }
 
-    return {confirm, ask}
+    return { confirm, ask }
+}
+
+export const PromptContext = React.createContext([])
+
+export const usePrompt = () => {
+    const [prompt, setPrompt] = React.useContext(PromptContext)
+
+    const ask = (question, todo, type) => {
+        setPrompt({
+            question,
+            todo,
+            type,
+            onCancel: () => {
+                setPrompt(null)
+            },
+        })
+    }
+
+    return { prompt, ask }
 }

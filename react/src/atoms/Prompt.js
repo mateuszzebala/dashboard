@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from './Button'
 import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
+import { Input } from './Input'
 
 const StyledButtons = styled.div`
     display: flex;
@@ -13,12 +14,12 @@ const StyledWrapper = styled.div`
     top: ${({ open }) => (open ? '10px' : '-100%')};
     transition: top 0.2s;
     left: 50%;
-    gap: 20px;
+    gap: 10px;
     display: flex;
     flex-direction: column;
     transform: translate(-50%, 0);
     z-index: 10;
-    padding: 20px;
+    padding: 10px;
     background-color: ${({ theme }) => theme.modal.background};
     color: ${({ theme }) => theme.modal.font};
 
@@ -64,13 +65,15 @@ const StyledTitle = styled.span`
     text-align: center;
     font-size: 25px;
 `
-export const Confirm = ({
-    question = 'CONFIRM',
+export const Prompt = ({
+    question = 'PROMPT',
     todo = () => {},
+    type = 'text',
     onCancel = () => {},
 }) => {
     const [open, setOpen] = React.useState(true)
     const [show, setShow] = React.useState(true)
+    const [inputValue, setInputValue] = React.useState('')
 
     React.useEffect(() => {
         if (!open) {
@@ -87,6 +90,7 @@ export const Confirm = ({
             <StyledCaption>
                 <StyledTitle>{question}</StyledTitle>
             </StyledCaption>
+            <Input type={type} value={inputValue} setValue={setInputValue} />
             <StyledButtons>
                 <Button
                     size={1}
@@ -100,7 +104,7 @@ export const Confirm = ({
                     size={1}
                     onClick={() => {
                         setOpen(false)
-                        todo()
+                        todo(inputValue)
                     }}
                 >
                     OK

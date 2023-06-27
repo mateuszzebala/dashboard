@@ -46,13 +46,7 @@ const StyledDropdownIcon = styled.button`
         dropdown ? 'rotate(180deg)' : 'rotate(0deg)'};
 `
 
-const ValueComponent = ({
-    value = [],
-    data,
-    dropdown,
-    setDropdown,
-    emptyName,
-}) => {
+const ValueComponent = ({ value = [], dropdown, setDropdown, emptyName }) => {
     return (
         <StyledValue
             onClick={() => {
@@ -63,7 +57,7 @@ const ValueComponent = ({
                 <BsArrowDownShort />
             </StyledDropdownIcon>
             <StyledValue>
-                {!value ? <span>{emptyName}</span> : data[value]}
+                {!value ? <span>{emptyName}</span> : value}
             </StyledValue>
         </StyledValue>
     )
@@ -141,7 +135,6 @@ export const Select = ({
         <StyledWrapper ref={mainRef}>
             <ValueComponent
                 value={value}
-                data={data}
                 dropdown={toBoolStr(dropdown)}
                 setDropdown={setDropdown}
                 emptyName={emptyName}
@@ -156,7 +149,8 @@ export const Select = ({
                         data={data}
                         value={name}
                         onClick={(val) => {
-                            setValue(val)
+                            setValue(data[val])
+                            setDropdown(false)
                         }}
                     />
                 ))}

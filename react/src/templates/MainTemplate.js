@@ -21,7 +21,6 @@ const StyledRightSide = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100vh;
-
 `
 
 const StyledContent = styled.article`
@@ -36,13 +35,19 @@ const StyledContent = styled.article`
 `
 
 const StyledTopMenu = styled.div`
-  box-shadow: 0 0 10px -6px black;
-  z-index: 2;
-  
+    box-shadow: 0 0 10px -6px black;
+    z-index: 2;
+    width: ${({ leftbarclose }) =>
+        !leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
+    transition: width 0.3s;
 `
 
-
-export const MainTemplate = ({ app, children, title='', submenuChildren}) => {
+export const MainTemplate = ({
+    app,
+    children,
+    title = '',
+    submenuChildren,
+}) => {
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
 
@@ -59,8 +64,12 @@ export const MainTemplate = ({ app, children, title='', submenuChildren}) => {
         <StyledContainer>
             <LeftBar close={leftbarClose} />
             <StyledRightSide>
-                <StyledTopMenu>
-                    <TopBar title={title} app={app} setClose={setLeftbarClose} />
+                <StyledTopMenu leftbarclose={toBoolStr(leftbarClose)}>
+                    <TopBar
+                        title={title}
+                        app={app}
+                        setClose={setLeftbarClose}
+                    />
                     <SubMenu>{submenuChildren}</SubMenu>
                 </StyledTopMenu>
                 <StyledContent leftbarclose={toBoolStr(leftbarClose)}>

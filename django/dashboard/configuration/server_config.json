@@ -1,10 +1,10 @@
 {
    "config": {
       "enable_server": true,
-      "debug": true,
-      "new_users": true,
+      "debug": false,
+      "new_users": false,
       "ddos_block": true,
-      "save_requests": true,
+      "save_requests": false,
       "credientals": true
    },
    "allowed_hosts": [

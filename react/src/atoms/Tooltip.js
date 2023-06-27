@@ -59,7 +59,7 @@ export const Tooltip = ({ children, text = '' }) => {
             onMouseMove={handleMouseMove}
         >
             {children}
-            {show && (
+            {show && text && (
                 <StyledTooltip x={position.x} y={position.y}>
                     {text}
                 </StyledTooltip>

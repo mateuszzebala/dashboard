@@ -120,50 +120,53 @@ export const DatabaseModelPage = () => {
     return !modelData ? (
         ''
     ) : (
-        <MainTemplate app={APPS.database} submenuChildren={
-            <StyledMenu>
-                <Button
-                    icon={<FaCheck />}
-                    onClick={() => {
-                        if (selectedItems && selectedItems.length === 0)
-                            setSelectedItems(
-                                data.items.map((item) => item.pk)
-                            )
-                        else setSelectedItems([])
-                    }}
-                />
-                <Select
-                    emptyName="ACTION"
-                    data={modelData.actions.reduce((flds, key) => {
-                        flds[key] = key.toUpperCase()
-                        return flds
-                    }, {})}
-                    value={action}
-                    setValue={setAction}
-                />
-                <Button
-                    onClick={handleAction}
-                    loading={loadingActionButton}
-                >
-                    MAKE
-                </Button>
-                <Input
-                    label={'QUERY'}
-                    value={searchQuery}
-                    setValue={setSearchQuery}
-                />
-                <Counter
-                    value={length}
-                    setValue={setLength}
-                    min={1}
-                    max={1000}
-                    unit="rows"
-                    size={1.3}
-                />
-            </StyledMenu>
-        }>
+        <MainTemplate
+            app={APPS.database}
+            title={modelName}
+            submenuChildren={
+                <StyledMenu>
+                    <Button
+                        icon={<FaCheck />}
+                        onClick={() => {
+                            if (selectedItems && selectedItems.length === 0)
+                                setSelectedItems(
+                                    data.items.map((item) => item.pk)
+                                )
+                            else setSelectedItems([])
+                        }}
+                    />
+                    <Select
+                        emptyName="ACTION"
+                        data={modelData.actions.reduce((flds, key) => {
+                            flds[key] = key.toUpperCase()
+                            return flds
+                        }, {})}
+                        value={action}
+                        setValue={setAction}
+                    />
+                    <Button
+                        onClick={handleAction}
+                        loading={loadingActionButton}
+                    >
+                        MAKE
+                    </Button>
+                    <Input
+                        label={'QUERY'}
+                        value={searchQuery}
+                        setValue={setSearchQuery}
+                    />
+                    <Counter
+                        value={length}
+                        setValue={setLength}
+                        min={1}
+                        max={1000}
+                        unit="rows"
+                        size={1.3}
+                    />
+                </StyledMenu>
+            }
+        >
             <StyledWrapper>
-
                 <ModelTable
                     fields={fields}
                     selectedItems={selectedItems}

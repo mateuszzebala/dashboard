@@ -12,26 +12,24 @@ import { Theme } from '../../atoms/Theme'
 import { theme } from '../../theme/theme'
 import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
 
-
-
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
     flex-wrap: wrap;
+    width: 100%;
 `
 
 const StyledValue = styled.span`
-  overflow: hidden;
-  max-width: 100%;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
 `
 
-
 const StyledButtons = styled.div`
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 `
 
 export const DatabaseItemPage = () => {
@@ -50,28 +48,30 @@ export const DatabaseItemPage = () => {
     }, [])
 
     return (
-        <MainTemplate app={APPS.database} title={`${modelName} - ${pk}`} submenuChildren={
-            <StyledButtons>
-                <Button size={0.8}>EDIT</Button>
-                <Theme value={{
-                    button: {
-                        background: theme.error,
-                        font: theme.light,
-                    },
-                }}>
-                    <Button size={0.8}>DELETE</Button>
-                </Theme>
-            </StyledButtons>
-        }>
+        <MainTemplate
+            app={APPS.database}
+            title={`${modelName} - ${pk}`}
+            submenuChildren={
+                <StyledButtons>
+                    <Button size={0.8}>EDIT</Button>
+                    <Theme
+                        value={{
+                            button: {
+                                background: theme.error,
+                                font: theme.light,
+                            },
+                        }}
+                    >
+                        <Button size={0.8}>DELETE</Button>
+                    </Theme>
+                </StyledButtons>
+            }
+        >
             <StyledWrapper>
                 <Table>
                     <HeaderRow>
-                        <Field>
-                            FIELD
-                        </Field>
-                        <Field>
-                            VALUE
-                        </Field>
+                        <Field>FIELD</Field>
+                        <Field>VALUE</Field>
                     </HeaderRow>
                     {modelData &&
                         itemData &&
@@ -79,14 +79,16 @@ export const DatabaseItemPage = () => {
                             <Row key={fieldName}>
                                 <Field>{fieldName}</Field>
                                 <Field>
-                                    <Tooltip text={fieldToString(
-                                        itemData.fields[fieldName],
-                                        modelData.fields[fieldName].type
-                                    )}>
+                                    <Tooltip
+                                        text={fieldToString(
+                                            itemData.fields[fieldName],
+                                            modelData.fields[fieldName].type
+                                        )}
+                                    >
                                         <StyledValue>
                                             {fieldToString(
                                                 itemData.fields[fieldName],
-                                                modelData.fields[fieldName].type,
+                                                modelData.fields[fieldName].type
                                             )}
                                         </StyledValue>
                                     </Tooltip>
@@ -94,8 +96,6 @@ export const DatabaseItemPage = () => {
                             </Row>
                         ))}
                 </Table>
-
-
             </StyledWrapper>
         </MainTemplate>
     )

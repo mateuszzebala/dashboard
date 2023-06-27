@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
 import { VscLoading } from 'react-icons/vsc'
 import { Link } from 'react-router-dom'
+import { Tooltip } from './Tooltip'
 
 const StyledWrapper = styled.button`
     position: relative;
@@ -58,6 +59,7 @@ export const Button = ({
     loading = false,
     icon,
     onClick,
+    tooltip,
     to,
     circle,
     ...props
@@ -65,24 +67,26 @@ export const Button = ({
     const handleOnClick = (e) => !loading && onClick && onClick(e)
 
     const content = (
-        <StyledWrapper
-            onClick={handleOnClick}
-            icon={toBoolStr(icon)}
-            circle={toBoolStr(circle)}
-            size={size}
-            {...props}
-        >
-            {icon || (
-                <StyledChildren loading={toBoolStr(loading)}>
-                    {children}
-                </StyledChildren>
-            )}
-            {loading && (
-                <StyledLoading>
-                    <VscLoading />
-                </StyledLoading>
-            )}
-        </StyledWrapper>
+        <Tooltip text={tooltip}>
+            <StyledWrapper
+                onClick={handleOnClick}
+                icon={toBoolStr(icon)}
+                circle={toBoolStr(circle)}
+                size={size}
+                {...props}
+            >
+                {icon || (
+                    <StyledChildren loading={toBoolStr(loading)}>
+                        {children}
+                    </StyledChildren>
+                )}
+                {loading && (
+                    <StyledLoading>
+                        <VscLoading />
+                    </StyledLoading>
+                )}
+            </StyledWrapper>
+        </Tooltip>
     )
 
     return to ? <Link to={to}>{content}</Link> : <>{content}</>

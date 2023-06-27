@@ -145,14 +145,32 @@ const INPUTS = {
             />
         </StyledField>
     ),
+    JSONField: (props) => (
+        <StyledField>
+            <Typography variant={'h3'}>
+                {props.field.name} - <StyledType>{props.field.type}</StyledType>
+            </Typography>
+            <Input
+                textarea
+                type="text"
+                value={props.value}
+                setValue={props.setValue}
+            />
+        </StyledField>
+    ),
 }
 
-export const FieldInput = ({ field }) => {
+export const FieldInput = ({ field, onChange }) => {
     const [value, setValue] = React.useState()
+
+    React.useEffect(() => {
+        onChange(value)
+    }, [value])
+
     return (
         <StyledWrapper>
             {INPUTS[field.type]
-                ? INPUTS[field.type]({ field, value, setValue })
+                ? INPUTS[field.type]({ field, value, setValue, onChange })
                 : field.name}
         </StyledWrapper>
     )

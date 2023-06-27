@@ -5,6 +5,7 @@ const StyledTable = styled.table`
     border-collapse: collapse;
     display: table;
     max-width: 100%;
+    width: 100%;
 `
 
 const StyledField = styled.td`
