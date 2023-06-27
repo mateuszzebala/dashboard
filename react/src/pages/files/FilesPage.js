@@ -9,6 +9,8 @@ import styled from 'styled-components'
 import { FaCheck, FaSearch } from 'react-icons/fa'
 import { FiTrash } from 'react-icons/fi'
 import { BiCopy, BiCut, BiPaste, BiRename } from 'react-icons/bi'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
 
 const StyledMenu = styled.div`
     display: flex;
@@ -25,7 +27,16 @@ const StyledMenuSide = styled.div`
 `
 
 export const FilesPage = () => {
-    const [path, setPath] = React.useState('/home/mz')
+    const [path, setPath] = React.useState()
+    const [initData, setInitData] = React.useState({})
+
+    React.useEffect(() => {
+        FETCH(ENDPOINTS.files.init()).then((data) => {
+            setInitData(data.data)
+            setPath(data.data.home)
+        })
+    }, [])
+
     const [searchValue, setSearchValue] = React.useState('')
     return (
         <MainTemplate
@@ -57,7 +68,9 @@ export const FilesPage = () => {
                 </StyledMenu>
             }
         >
-            <FolderContent path={path} setPath={setPath} />
+            {initData && path && (
+                <FolderContent path={path} setPath={setPath} />
+            )}
         </MainTemplate>
     )
 }

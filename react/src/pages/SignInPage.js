@@ -7,8 +7,9 @@ import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { useNavigate } from 'react-router'
 import { links } from '../router/links'
-import { FaReact } from 'react-icons/fa'
+import { FaLock, FaReact } from 'react-icons/fa'
 import { SiDjango } from 'react-icons/si'
+import { toBoolStr } from '../utils/utils'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -29,6 +30,7 @@ const StyledBackgroundDecoration1 = styled.div`
     position: absolute;
     top: 0;
     padding: 0;
+
     clip-path: polygon(0 75%, 0% 100%, 100% 100%);
     @keyframes move-up {
         from {
@@ -47,6 +49,7 @@ const StyledBackgroundDecoration2 = styled.div`
     background-color: ${({ theme }) => theme.primary};
     position: absolute;
     top: 0;
+
     padding: 0;
     clip-path: polygon(100% 0, 0 0, 100% 25%);
     @keyframes move-down {
@@ -60,12 +63,31 @@ const StyledBackgroundDecoration2 = styled.div`
     animation: move-down 0.7s forwards;
 `
 
+const StyledLock = styled.div`
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: ${({ theme }) => theme.light};
+    font-size: 30px;
+`
+
+const StyledDeveloperName = styled.a`
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    color: ${({ theme }) => theme.light};
+    font-size: 20px;
+    text-decoration: none;
+`
+
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     padding: 40px;
-    border-radius: 10px;
+    align-items: center;
+    border-radius: 30px;
+
     box-shadow: 0 0 8px -6px black;
     @keyframes fade-in {
         from {
@@ -78,9 +100,12 @@ const StyledForm = styled.form`
     animation: fade-in 0.7s forwards;
 `
 
-const StyledError = styled.p`
-    color: ${({ theme }) => theme.error};
+const StyledError = styled.span`
+    color: ${({ error, theme }) => (error ? theme.error : 'transparent')};
+    transition: color 0.3s;
+    opacity: ${({ error }) => (error ? 1 : 0)};
     text-align: center;
+    font-weight: bold;
 `
 
 const StyledIcon = styled.div`
@@ -133,6 +158,7 @@ export const SignInPage = () => {
             <StyledForm onSubmit={handleSubmitForm}>
                 <Typography variant={'h6'}>ADMIN DASHBOARD</Typography>
                 <Typography variant={'h1'}>SIGN IN</Typography>
+
                 <Input
                     value={username}
                     setValue={setUsername}
@@ -144,13 +170,24 @@ export const SignInPage = () => {
                     type="password"
                     label={'PASSWORD'}
                 />
-
+                <StyledError error={toBoolStr(error)}>
+                    BAD USERNAME OR PASSWORD
+                </StyledError>
                 <Button loading={sending}>SIGN IN</Button>
             </StyledForm>
             <StyledIcon>
                 <FaReact />
             </StyledIcon>
-            {error && <StyledError>Dad data</StyledError>}
+
+            <StyledLock>
+                <FaLock />
+            </StyledLock>
+            <StyledDeveloperName
+                target="_blank"
+                href="https://mateuszzebala.pl"
+            >
+                MATEUSZ ZEBALA
+            </StyledDeveloperName>
         </StyledWrapper>
     )
 }

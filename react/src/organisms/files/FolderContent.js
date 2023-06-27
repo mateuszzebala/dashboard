@@ -4,31 +4,29 @@ import styled from 'styled-components'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 
-
 const StyledWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, 100px);
     gap: 10px;
 `
 
-export const FolderContent = ({path, setPath}) => {
+export const FolderContent = ({ path, setPath }) => {
     const [files, setFiles] = React.useState([])
     const [folders, setFolders] = React.useState([])
 
-    const setLocation = (next) => {
-        setPath(path + '/' + next)
-    }
-
-    React.useEffect(()=>{
-        setPath(prev => {
-            return prev.split('/').filter(name => name !== '..').join('/')
+    React.useEffect(() => {
+        setPath((prev) => {
+            return prev
+                .split('/')
+                .filter((name) => name !== '..')
+                .join('/')
         })
     }, [path])
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         FETCH(ENDPOINTS.files.content(), {
             path,
-        }).then(data => {
+        }).then((data) => {
             console.log(data.data)
             setFiles(data.data.files)
             setFolders(data.data.folders)
@@ -37,12 +35,29 @@ export const FolderContent = ({path, setPath}) => {
 
     return (
         <StyledWrapper>
-            <ItemTile setLocation={()=>{
-                setPath(path + '/' + '..')
-                
-            }} filename={'UP'} isFile={false}/>
-            {folders.map(folder => <ItemTile setLocation={setLocation} key={folder} filename={folder} isFile={false} />)}
-            {files.map(file => <ItemTile setLocation={setLocation} key={file} filename={file} isFile={true} />)}
+            <ItemTile
+                setLocation={() => {
+                    setPath(path + '/' + '..')
+                }}
+                filename={'UP'}
+                isFile={false}
+            />
+            {folders.map((folder) => (
+                <ItemTile
+                    setLocation={() => setPath(folder.path)}
+                    key={folder.name}
+                    filename={folder.name}
+                    isFile={false}
+                />
+            ))}
+            {files.map((file) => (
+                <ItemTile
+                    setLocation={() => setPath(file.path)}
+                    key={file.name}
+                    filename={file.name}
+                    isFile={true}
+                />
+            ))}
         </StyledWrapper>
     )
 }

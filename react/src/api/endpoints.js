@@ -31,6 +31,7 @@ export const ENDPOINTS = {
     },
     files: {
         content: () => API(['files', 'content']),
+        init: () => API(['files', 'init']),
     },
     other: {},
 }

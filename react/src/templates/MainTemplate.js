@@ -13,6 +13,7 @@ const StyledContainer = styled.main`
     flex-direction: row;
     min-height: 100vh;
     max-width: 100vw;
+    position: relative;
     overflow: hidden;
 `
 

@@ -6,16 +6,24 @@ from django.conf import settings
 import os
 
 def get_content_of_folder(request):
+
     path = request.POST.get('path')
-    
+    list_path = path.split(os.sep)
+
     files, folders = [], []
     content = os.scandir(path)
     
     for item in content:
         if os.path.isfile(item):
-            files.append(item.name)
+            files.append({
+                'name': item.name,
+                'path': os.sep.join([*list_path, item.name])
+            })
         else:
-            folders.append(item.name)
+            folders.append({
+                'name': item.name,
+                'path': os.sep.join([*list_path, item.name])
+            })
     
     return JsonResponse({
         'files': files,
@@ -32,5 +40,6 @@ def init_files(request):
 
 urlpatterns = [
     path('content/', get_content_of_folder), # GET CONTENT OF FOLER
+    path('init/', init_files), # INIT FILES
     
 ]
