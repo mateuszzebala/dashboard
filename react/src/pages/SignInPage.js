@@ -76,7 +76,7 @@ const StyledDeveloperName = styled.a`
     bottom: 30px;
     left: 30px;
     color: ${({ theme }) => theme.light};
-    font-size: 20px;
+    font-size: 15px;
     text-decoration: none;
 `
 
@@ -87,7 +87,7 @@ const StyledForm = styled.form`
     padding: 40px;
     align-items: center;
     border-radius: 30px;
-
+    color: ${({ theme }) => theme.primary};
     box-shadow: 0 0 8px -6px black;
     @keyframes fade-in {
         from {
@@ -110,6 +110,7 @@ const StyledError = styled.span`
 
 const StyledIcon = styled.div`
     font-size: 70px;
+    color: ${({ theme }) => theme.primary};
 `
 
 export const SignInPage = () => {
@@ -186,7 +187,7 @@ export const SignInPage = () => {
                 target="_blank"
                 href="https://mateuszzebala.pl"
             >
-                MATEUSZ ZEBALA
+                MATEUSZZEBALA
             </StyledDeveloperName>
         </StyledWrapper>
     )

@@ -8,19 +8,20 @@ const StyledBox = styled.div`
     min-height: 100px;
     border-radius: 10px;
     aspect-ratio: 1/1;
-    box-shadow: 0 0 6px -4px black;
-    color: ${({ theme }) => theme.primary} !important;
-
-    transition: transform 0.4s, box-shadow 0.4s, background-color 0.4s;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    background-color: ${({ theme }) => theme.light};
     a {
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
         transition: color 0.1s;
     }
     &:hover {
-        transform: scale(1.1) rotate(4deg);
-        box-shadow: 0 0 6px -5px black;
+        a {
+            color: ${({ theme }) => theme.light};
+        }
+        background-color: ${({ theme }) => theme.primary};
+        box-shadow: 0 0 10px -5px ${({ theme }) => theme.primary};
     }
 `
 const StyledName = styled.div``

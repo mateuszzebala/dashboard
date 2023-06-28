@@ -1,9 +1,9 @@
 import React from 'react'
 import { BsFileEarmarkBinary, BsFolder } from 'react-icons/bs'
 import styled from 'styled-components'
-import { ContextMenu } from '../../atoms/ContextMenu'
 import { Tooltip } from '../../atoms/Tooltip'
-import { FaPen, FaTrash } from 'react-icons/fa'
+import { toBoolStr } from '../../utils/utils'
+import { FaLock } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
@@ -13,18 +13,19 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 10px;
-    background-color: ${({ theme }) => theme.light};
+    background-color: ${({ theme, selected }) =>
+        selected ? theme.primary : theme.light};
+    color: ${({ theme, selected }) => (selected ? theme.light : theme.primary)};
     box-shadow: 0 0 5px -4px black;
-    border-radius: 10px;
+    border-radius: 5px;
     height: 100px;
+    transition: 0.1s background-color, 0.1s color;
     width: 100px;
     font-size: 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
+
     user-select: none;
-    &:hover {
-        background-color: ${({ theme }) => theme.primary}05;
-    }
+    position: relative;
 `
 const StyledFilename = styled.div`
     white-space: nowrap;
@@ -35,64 +36,51 @@ const StyledFilename = styled.div`
     text-align: center;
 `
 const StyledIcon = styled.div`
-    font-size: 30px;
+    font-size: 40px;
 `
 
-export const ItemTile = ({ filename, isFile, setLocation }) => {
+const StyledLockIcon = styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+`
+
+export const ItemTile = ({
+    filename,
+    isFile,
+    setLocation,
+    selected,
+    access,
+    reloadPos,
+    setPos,
+    ...props
+}) => {
+    const wrapperRef = React.useRef()
+    React.useEffect(() => {
+        const bcr = wrapperRef.current.getBoundingClientRect()
+        setPos(bcr)
+    }, [reloadPos])
+
     return (
-        <ContextMenu
-            data={[
-                {
-                    icon: <FaTrash />,
-                    text: 'DELETE',
-                    todo: () => {},
-                },
-                {
-                    icon: <FaPen />,
-                    text: 'RENAME',
-                    todo: () => {
-                        alert(
-                            `You want to rename ${filename} but there is not this option avinabled yet`
-                        )
-                    },
-                },
-                {
-                    icon: <FaPen />,
-                    text: 'RENAME',
-                    todo: () => {
-                        alert(
-                            `You want to rename ${filename} but there is not this option avinabled yet`
-                        )
-                    },
-                },
-                {
-                    icon: <FaPen />,
-                    text: 'RENAME',
-                    todo: () => {
-                        alert(
-                            `You want to rename ${filename} but there is not this option avinabled yet`
-                        )
-                    },
-                },
-                {
-                    icon: <FaPen />,
-                    text: 'RENAME',
-                    todo: () => {
-                        alert(
-                            `You want to rename ${filename} but there is not this option avinabled yet`
-                        )
-                    },
-                },
-            ]}
-        >
-            <Tooltip text={filename}>
-                <StyledWrapper onClick={()=>{setLocation(filename)}}>
-                    <StyledIcon>
-                        {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
-                    </StyledIcon>
-                    <StyledFilename>{filename}</StyledFilename>
-                </StyledWrapper>
-            </Tooltip>
-        </ContextMenu>
+        <Tooltip text={filename}>
+            <StyledWrapper
+                ref={wrapperRef}
+                selected={toBoolStr(selected)}
+                {...props}
+                onClick={() => {
+                    setLocation(filename)
+                }}
+            >
+                <StyledIcon>
+                    {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
+                </StyledIcon>
+                <StyledFilename>{filename}</StyledFilename>
+                {!access && (
+                    <StyledLockIcon>
+                        <FaLock />
+                    </StyledLockIcon>
+                )}
+            </StyledWrapper>
+        </Tooltip>
     )
 }

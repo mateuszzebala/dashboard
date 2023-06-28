@@ -6,14 +6,15 @@ import { Theme } from '../../../atoms/Theme'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { useMessage } from '../../../utils/messages'
-import { useConfirm } from '../../../utils/hooks'
+
 import { theme } from '../../../theme/theme'
 
-const StyledWrapper2 = styled.div`
+const StyledWrapper = styled.div`
     padding: 20px 50px;
     box-shadow: 0 0 5px -3px black;
     border-radius: 10px;
     width: 30%;
+    min-width: 200px;
     gap: 20px;
     display: grid;
     grid-template-columns: repeat(1, 90%);
@@ -41,7 +42,6 @@ const StyledToggle = styled.div`
 export const ServerManage = () => {
     const [configuration, setConfiguration] = React.useState({})
     const { newMessage } = useMessage()
-    const { ask } = useConfirm()
 
     React.useEffect(() => {
         if (configuration.enable_server !== undefined) {
@@ -59,7 +59,7 @@ export const ServerManage = () => {
     }, [])
 
     return (
-        <StyledWrapper2>
+        <StyledWrapper>
             <StyledToggle>
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
@@ -74,30 +74,17 @@ export const ServerManage = () => {
                     <Switch
                         value={configuration.enable_server}
                         setValue={(val) => {
-                            ask(
-                                val(configuration.enable_server)
-                                    ? 'Enable page?'
-                                    : 'Disable page?',
-                                () => {
-                                    setConfiguration((prev) => ({
-                                        ...prev,
-                                        enable_server: val(
-                                            configuration.enable_server
-                                        ),
-                                    }))
-                                    newMessage({
-                                        text: val(configuration.enable_server)
-                                            ? 'The page is now on'
-                                            : 'The page is now down',
-                                        success: val(
-                                            configuration.enable_server
-                                        ),
-                                        error: !val(
-                                            configuration.enable_server
-                                        ),
-                                    })
-                                }
-                            )
+                            setConfiguration((prev) => ({
+                                ...prev,
+                                enable_server: val(configuration.enable_server),
+                            }))
+                            newMessage({
+                                text: val(configuration.enable_server)
+                                    ? 'The page is now on'
+                                    : 'The page is now down',
+                                success: val(configuration.enable_server),
+                                error: !val(configuration.enable_server),
+                            })
                         }}
                         size={2}
                     />
@@ -168,6 +155,6 @@ export const ServerManage = () => {
             {/*        size={2}*/}
             {/*    />*/}
             {/*</StyledToggle>*/}
-        </StyledWrapper2>
+        </StyledWrapper>
     )
 }

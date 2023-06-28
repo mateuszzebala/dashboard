@@ -38,6 +38,7 @@ const StyledDropdownIcon = styled.button`
     padding: 0;
     display: grid;
     place-items: center;
+    color: ${({ theme }) => theme.primary};
     border: 0;
     background-color: transparent;
     cursor: pointer;

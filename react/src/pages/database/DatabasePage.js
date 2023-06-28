@@ -3,7 +3,7 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import styled from 'styled-components'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { links } from '../../router/links'
 import { APPS } from '../../apps/apps'
 
@@ -46,7 +46,7 @@ const StyledApp = styled.div`
 
 export const DatabasePage = () => {
     const [models, setModels] = React.useState([])
-
+    const navigate = useNavigate()
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.models()).then((data) => {
             const newModels = {}
@@ -66,9 +66,14 @@ export const DatabasePage = () => {
                     <StyledAppName>{app.toUpperCase()}</StyledAppName>
                     <StyledModels>
                         {models[app].map((model) => (
-                            <Link to={links.database.model(model)} key={model}>
-                                <StyledModel>{model}</StyledModel>
-                            </Link>
+                            <StyledModel
+                                key={model}
+                                onClick={() =>
+                                    navigate(links.database.model(model))
+                                }
+                            >
+                                {model}
+                            </StyledModel>
                         ))}
                     </StyledModels>
                 </StyledApp>

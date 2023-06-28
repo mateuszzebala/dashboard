@@ -1,7 +1,11 @@
 import axios from 'axios'
 import { ENDPOINTS } from './endpoints'
 
-export const API_URL = 'http://localhost:8000/dashboard/api/'
+const manifest_location = '/manifest.json'
+
+export const API_URL = await fetch(manifest_location)
+    .then((data) => data.json())
+    .then((data) => data.api_url)
 
 export const API = (path, args = null) => {
     let url = API_URL

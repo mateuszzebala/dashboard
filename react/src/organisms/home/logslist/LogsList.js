@@ -9,6 +9,7 @@ const StyledWrapper = styled.div`
     padding: 10px;
     height: 100%;
     width: 100%;
+    min-width: 400px;
     border-radius: 10px;
 `
 

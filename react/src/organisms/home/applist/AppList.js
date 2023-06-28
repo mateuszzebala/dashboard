@@ -9,6 +9,8 @@ const StyledGrid = styled.div`
     gap: 20px;
     min-width: 250px;
     max-height: 100%;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     padding: 10px;
     overflow: scroll;

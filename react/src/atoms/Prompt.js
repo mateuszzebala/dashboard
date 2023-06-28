@@ -6,7 +6,7 @@ import { Input } from './Input'
 
 const StyledButtons = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 20px;
 `
 const StyledWrapper = styled.div`
@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     transform: translate(-50%, 0);
     z-index: 10;
-    padding: 10px;
+    padding: 20px;
     background-color: ${({ theme }) => theme.modal.background};
     color: ${({ theme }) => theme.modal.font};
 
@@ -46,7 +46,7 @@ const StyledWrapper = styled.div`
         }
     }
 
-    animation: ${({ open }) => (open ? 'fade-in' : 'fade-out')} 0.2s ease
+    animation: ${({ open }) => (open ? 'fade-in' : 'fade-out')} 0.4s ease
         forwards;
 `
 
@@ -63,6 +63,10 @@ const StyledTitle = styled.span`
     font-weight: bold;
     max-width: 300px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     font-size: 25px;
 `
 export const Prompt = ({
@@ -80,7 +84,7 @@ export const Prompt = ({
             setTimeout(() => {
                 setShow(false)
                 onCancel()
-            }, 200)
+            }, 400)
         }
     }, [open])
 

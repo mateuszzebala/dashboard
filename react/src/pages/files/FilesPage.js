@@ -5,12 +5,15 @@ import { FolderContent } from '../../organisms/files/FolderContent'
 import { Button } from '../../atoms/Button'
 import { BsFilePlus, BsFolderPlus } from 'react-icons/bs'
 import { Input } from '../../atoms/Input'
+import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import styled from 'styled-components'
-import { FaCheck, FaSearch } from 'react-icons/fa'
+import { FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
 import { FiTrash } from 'react-icons/fi'
 import { BiCopy, BiCut, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
+import { useSearchParams } from 'react-router-dom'
+import { usePrompt } from '../../utils/hooks'
 
 const StyledMenu = styled.div`
     display: flex;
@@ -27,13 +30,40 @@ const StyledMenuSide = styled.div`
 `
 
 export const FilesPage = () => {
-    const [path, setPath] = React.useState()
+    const { ask } = usePrompt()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [path, setPath] = React.useState('')
     const [initData, setInitData] = React.useState({})
+    const [selectedItems, setSelectedItems] = React.useState([])
+    const [files, setFiles] = React.useState([])
+    const [folders, setFolders] = React.useState([])
+
+    const handleSetPath = () => {
+        setSearchParams({
+            path,
+        })
+    }
+
+    React.useEffect(() => {
+        path && handleSetPath()
+    }, [path])
+
+    React.useEffect(() => {
+        if (searchParams.get('path')) {
+            setPath(searchParams.get('path'))
+        } else {
+            setPath(initData.home)
+        }
+    }, [searchParams])
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.files.init()).then((data) => {
             setInitData(data.data)
-            setPath(data.data.home)
+            if (searchParams.get('path')) {
+                setPath(searchParams.get('path'))
+            } else {
+                setPath(data.data.home)
+            }
         })
     }, [])
 
@@ -45,17 +75,63 @@ export const FilesPage = () => {
             submenuChildren={
                 <StyledMenu>
                     <StyledMenuSide>
-                        <Button tooltip={'SELECT ALL'} icon={<FaCheck />} />
-                        <Button tooltip={'NEW FILE'} icon={<BsFilePlus />} />
+                        <Button
+                            tooltip={'FOLDER UP'}
+                            icon={<FaArrowLeft />}
+                            onClick={() => {}}
+                        />
+                        <Button
+                            tooltip={'SELECT ALL'}
+                            icon={<FaCheck />}
+                            onClick={() => {
+                                setSelectedItems((prev) =>
+                                    prev.length > 0
+                                        ? []
+                                        : [...folders, ...files]
+                                )
+                            }}
+                        />
+                        <Button
+                            tooltip={'NEW FILE'}
+                            icon={<BsFilePlus />}
+                            onClick={() => {
+                                ask(
+                                    <>
+                                        <BsFilePlus />
+                                        FILE NAME
+                                    </>,
+                                    () => {},
+                                    'text'
+                                )
+                            }}
+                        />
                         <Button
                             tooltip={'NEW FOLDER'}
                             icon={<BsFolderPlus />}
+                            onClick={() => {
+                                ask(
+                                    <>
+                                        <BsFolderPlus />
+                                        FOLDER NAME
+                                    </>,
+                                    () => {},
+                                    'text'
+                                )
+                            }}
                         />
                         <Button tooltip={'DELETE'} icon={<FiTrash />} />
                         <Button tooltip={'REMOVE'} icon={<BiRename />} />
-                        <Button tooltip={'COPY'} icon={<BiCopy />} />
-                        <Button tooltip={'CUT'} icon={<BiCut />} />
                         <Button tooltip={'PASTE'} icon={<BiPaste />} />
+                        {selectedItems.length ? (
+                            <Button tooltip={'COPY'} icon={<BiCopy />} />
+                        ) : (
+                            ''
+                        )}
+                        {selectedItems.length ? (
+                            <Button tooltip={'CUT'} icon={<BiCut />} />
+                        ) : (
+                            ''
+                        )}
                     </StyledMenuSide>
                     <StyledMenuSide>
                         <Input
@@ -69,8 +145,55 @@ export const FilesPage = () => {
             }
         >
             {initData && path && (
-                <FolderContent path={path} setPath={setPath} />
+                <FolderContent
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                    path={path}
+                    setPath={setPath}
+                    files={files}
+                    setFiles={setFiles}
+                    folders={folders}
+                    setFolders={setFolders}
+                />
             )}
+            <FloatingActionButton
+                icon={<BsFilePlus />}
+                size={1.3}
+                circle
+                right={80}
+                onClick={() => {
+                    ask(
+                        <>
+                            <BsFilePlus />
+                            FILE NAME
+                        </>,
+                        () => {},
+                        'text'
+                    )
+                }}
+            />
+            <FloatingActionButton
+                size={1.3}
+                circle
+                icon={<BsFolderPlus />}
+                onClick={() => {
+                    ask(
+                        <>
+                            <BsFolderPlus />
+                            FOLDER NAME
+                        </>,
+                        () => {},
+                        'text'
+                    )
+                }}
+            />
+            <FloatingActionButton
+                right={140}
+                size={1.3}
+                circle
+                icon={<FaArrowLeft />}
+                onClick={() => {}}
+            />
         </MainTemplate>
     )
 }

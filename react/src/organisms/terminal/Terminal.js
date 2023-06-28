@@ -46,10 +46,10 @@ const StyledErrors = styled.pre`
     font-family: var(--font-family) !important;
 `
 
-export const Terminal = () => {
+export const Terminal = ({ path, setPath }) => {
     const [waiting, setWaiting] = React.useState(false)
     const [searchParams] = useSearchParams()
-    const [path, setPath] = React.useState('')
+
     const [folderContent, setFolderContent] = React.useState('')
     const lastInputRef = React.useRef()
     const terminalRef = React.useRef()
@@ -65,8 +65,8 @@ export const Terminal = () => {
     }
 
     const handleStopProcess = () => {
-        FETCH(ENDPOINTS.terminal.kill()).then(() => {
-            setWaiting(false)
+        FETCH(ENDPOINTS.terminal.kill()).then((data) => {
+            data.data.done && setWaiting(false)
         })
     }
 
@@ -174,14 +174,13 @@ export const Terminal = () => {
 
     const handleArrowButtonDown = (c, index, e) => {
         setHistoryCounter((prev) => {
-            console.log(commandHistory)
-            if(prev + c < 0 && (prev + c) * -1 <= commandHistory.length){
-                e.target.value = commandHistory[commandHistory.length + prev + c].value
+            if (prev + c < 0 && (prev + c) * -1 <= commandHistory.length) {
+                e.target.value =
+                    commandHistory[commandHistory.length + prev + c].value
                 return prev + c
             }
             e.target.value = commandHistory[commandHistory.length + prev].value
             return prev
-            
         })
         console.log(historyCounter)
     }
@@ -197,7 +196,7 @@ export const Terminal = () => {
             <FloatingActionButton size={1.2} right={80} icon={<BiBookmark />} />
             {waiting && (
                 <FloatingActionButton
-                    size={1.1}
+                    size={1.2}
                     right={140}
                     icon={<FaStop />}
                     onClick={handleStopProcess}

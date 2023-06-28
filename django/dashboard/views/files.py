@@ -10,24 +10,35 @@ def get_content_of_folder(request):
     path = request.POST.get('path')
     list_path = path.split(os.sep)
 
+    permission_error = False
+
     files, folders = [], []
-    content = os.scandir(path)
+    try:
+        content = os.scandir(path)
+    except PermissionError:
+        permission_error = True
+        content = []
     
     for item in content:
+
         if os.path.isfile(item):
             files.append({
                 'name': item.name,
-                'path': os.sep.join([*list_path, item.name])
+                'path': os.sep.join([*list_path, item.name]),
+                'access': os.access(os.sep.join([*list_path, item.name]), os.W_OK)
             })
         else:
             folders.append({
                 'name': item.name,
-                'path': os.sep.join([*list_path, item.name])
+                'path': os.sep.join([*list_path, item.name]),
+                'access': os.access(os.sep.join([*list_path, item.name]), os.W_OK)
             })
     
     return JsonResponse({
         'files': files,
-        'folders': folders
+        'folders': folders,
+        'permission_error': permission_error ,
+        'sep': os.sep
     })
 
 def init_files(request):

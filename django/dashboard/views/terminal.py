@@ -15,8 +15,13 @@ processes = {}
 def kill_process(request):
     if processes.get(request.user.id) is not None:
         for process in processes[request.user.id]:
-            process.kill()
-    return JsonResponse({})
+            try:
+                print(process)
+                process.terminate()
+                process.kill()
+            except:
+                return JsonResponse({'done':False})
+    return JsonResponse({'done':True})
 
 @is_superuser
 def command(request):
@@ -43,6 +48,7 @@ def command(request):
         'path': os.sep.join(path),
         'folder_content': os.listdir(os.sep.join(path))
     })
+
 
 @is_superuser
 def init_terminal(request):

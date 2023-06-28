@@ -17,13 +17,28 @@ const StyledPage = styled.main`
     scroll-snap-type: y mandatory;
 `
 
-const StyledRow = styled.div`
+const StyledWidgets = styled.div`
     display: flex;
     scroll-snap-align: start;
     align-items: stretch;
     justify-content: space-between;
     padding: 20px;
     gap: 20px;
+    overflow-y: scroll;
+    height: 100%;
+    &::-webkit-scrollbar {
+        height: 0;
+    }
+`
+
+const StyledHosts = styled.div`
+    display: flex;
+    scroll-snap-align: start;
+    align-items: stretch;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
     height: 100%;
 `
 
@@ -31,12 +46,12 @@ export const HomePage = () => {
     return (
         <MainTemplate app={APPS.home}>
             <StyledPage page={APPS.home.name}>
-                <StyledRow>
+                <StyledWidgets>
                     <AppList />
                     <ServerManage />
                     <LogsList />
-                </StyledRow>
-                <StyledRow>
+                </StyledWidgets>
+                <StyledHosts>
                     <HostSelect
                         endpoint={ENDPOINTS.home.allowed_hosts()}
                         name={'ALLOWED HOSTS'}
@@ -49,7 +64,7 @@ export const HomePage = () => {
                         endpoint={ENDPOINTS.home.csrf_trusted_origins()}
                         name={'CSRF TRUSTED ORIGINS'}
                     />
-                </StyledRow>
+                </StyledHosts>
             </StyledPage>
         </MainTemplate>
     )
