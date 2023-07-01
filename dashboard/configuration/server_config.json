@@ -1,0 +1,26 @@
+{
+   "config": {
+      "enable_server": true,
+      "debug": true,
+      "new_users": true,
+      "ddos_block": true,
+      "save_requests": false,
+      "credientals": true
+   },
+   "allowed_hosts": [
+      "localhost",
+      "192.168.100.35"
+   ],
+   "cors_allowed_origins": [
+      "http://localhost:3000",
+      "http://192.168.100.35:3000",
+      "http://localhost:8000",
+      "http://192.168.100.35:8000"
+   ],
+   "csrf_trusted_origins": [
+      "http://localhost:3000",
+      "http://192.168.100.35:3000",
+      "http://localhost:8000",
+      "http://192.168.100.35:8000"
+   ]
+}
