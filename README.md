@@ -8,12 +8,19 @@
 
 `python manage.py runserver 0.0.0.0:8000`
 
-## How to run react app?
+## How to run dev react app?
 
-`cd react`
+`cd dashboard/app`
 
 `yarn install`
 
 `yarn start`
 
+## How to build react app?
+
+`cd dashboard/app`
+
+`yarn install`
+
+`yarn run build`
 
