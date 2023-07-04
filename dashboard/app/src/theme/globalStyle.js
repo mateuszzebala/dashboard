@@ -11,6 +11,9 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     color:#181915;
   }
+  a{
+    text-decoration: none;
+  }
   button, input, textarea, select, option, span{
     font-family: var(--font-family);
   }

@@ -10,10 +10,12 @@ import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 
 const StyledIcon = styled.span`
-    display: grid;
+    display: flex;
     cursor: pointer;
     font-size: 20px;
-    place-items: center;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none !important;
     color: ${({ theme }) => theme.topbar.font};
     transition: color 0.1s;
     &:hover {
@@ -29,26 +31,24 @@ const StyledWrapper = styled.span`
     color: ${({ theme }) => theme.primary};
 `
 
-export const TopBarIcons = ({ app }) => {
+export const TopBarIcons = ({ app, username }) => {
     const navigate = useNavigate()
 
     return (
         <StyledWrapper>
-            <Link to={links.info.app(app.name)}>
+            <Link to={links.account.index()}>
                 <StyledIcon>
-                    <AiOutlineInfoCircle />
+                    {username}
+                    <BiUserCircle />
                 </StyledIcon>
             </Link>
+
             <Link to={links.settings.index()}>
                 <StyledIcon>
                     <FiSettings />
                 </StyledIcon>
             </Link>
-            <Link to={links.account.index()}>
-                <StyledIcon>
-                    <BiUserCircle />
-                </StyledIcon>
-            </Link>
+
             <Link to={links.messages.index()}>
                 <StyledIcon>
                     <AiOutlineMessage />
@@ -65,6 +65,11 @@ export const TopBarIcons = ({ app }) => {
             >
                 <IoMdLogOut />
             </StyledIcon>
+            <Link to={links.info.app(app.name)}>
+                <StyledIcon>
+                    <AiOutlineInfoCircle />
+                </StyledIcon>
+            </Link>
         </StyledWrapper>
     )
 }

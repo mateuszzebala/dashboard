@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
     gap: 5px;
     grid-template-columns: repeat(auto-fit, 100px);
     grid-template-rows: repeat(auto-fit, 100px);
+    height: ${({ content }) => (content ? '100%' : '0')};
 `
 
 const StyledSelectRect = styled.div`
@@ -21,15 +22,6 @@ const StyledSelectRect = styled.div`
     left: ${({ left }) => left}px;
     background-color: ${({ theme }) => theme.primary}88;
     border-radius: 3px;
-`
-
-const StyledError = styled.div`
-    color: ${({ theme }) => theme.error};
-    font-weight: bold;
-    width: 100%;
-    font-size: 30px;
-    text-align: center;
-    padding: 20px;
 `
 
 const StyledLoading = styled.div`
@@ -48,17 +40,11 @@ export const FolderContent = ({
     setFiles,
     folders,
     setFolders,
-    data,
+    reload,
+    setReload,
     setData,
 }) => {
     const [loading, setLoading] = React.useState(true)
-    const { ref: contentRef } = useResizeObserver({
-        onResize: () => {
-            setReloadPos((prev) => prev + 1)
-        },
-    })
-
-    const [reloadPos, setReloadPos] = React.useState(0)
     const [pos, setPos] = React.useState({})
     const [selectRect, setSelectRect] = React.useState({
         show: false,
@@ -66,6 +52,12 @@ export const FolderContent = ({
         y1: 0,
         x2: 0,
         y2: 0,
+    })
+
+    const { ref: contentRef } = useResizeObserver({
+        onResize: () => {
+            setReload((prev) => prev + 1)
+        },
     })
 
     const handleMouseDown = (e) => {
@@ -90,7 +82,7 @@ export const FolderContent = ({
     }
 
     const handleMouseMove = (e) => {
-        if (selectRect.show && e.shiftKey) {
+        if (selectRect.show) {
             setSelectRect((prev) => ({
                 ...prev,
                 x2: e.clientX,
@@ -135,19 +127,18 @@ export const FolderContent = ({
             setFolders(data.data.folders)
             setLoading(false)
         })
-    }, [path])
+        setSelectedItems([])
+    }, [path, reload])
 
     return (
         <>
-            {data.permission_error && (
-                <StyledError>Permission Error</StyledError>
-            )}
             {loading && (
                 <StyledLoading>
                     <Loading size={2} />
                 </StyledLoading>
             )}
             <StyledWrapper
+                content={[...folders, ...files].length > 0}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 ref={contentRef}
@@ -162,7 +153,7 @@ export const FolderContent = ({
                 {folders.map((folder) => (
                     <ItemTile
                         access={folder.access}
-                        reloadPos={reloadPos}
+                        reload={reload}
                         setPos={(val) => {
                             setPos((prev) => ({ ...prev, [folder.name]: val }))
                         }}
@@ -177,7 +168,7 @@ export const FolderContent = ({
                 {files.map((file) => (
                     <ItemTile
                         access={file.access}
-                        reloadPos={reloadPos}
+                        reload={reload}
                         setPos={(val) => {
                             setPos((prev) => ({ ...prev, [file.name]: val }))
                         }}
@@ -186,7 +177,9 @@ export const FolderContent = ({
                         setLocation={() => setPath(file.path)}
                         key={file.name}
                         filename={file.name}
+                        path={file.path}
                         isFile={true}
+                        filetype={file.type}
                     />
                 ))}
                 {selectRect.show && (

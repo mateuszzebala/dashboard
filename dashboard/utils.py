@@ -53,3 +53,24 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+def get_type_of_file(filename):
+    ext = filename.split('.')[-1]
+    if ext in ['mp3', 'flac', 'wav', 'wma', 'aac', 'm4a']:
+        return 'audio'
+    if ext in ['png', 'jpg', 'jpeg', 'apng', 'avif', 'gif', 'webp']:
+        return 'image'
+    if ext in ['mp4', 'mov', 'wmv']:
+        return 'video'
+    if ext in ['py', 'cpp', 'cs', 'php', 'js', 'html', 'go', 'java', 'css', 'c', 'kt', 'swift', 'ts', 'rb', 'dart', 'json', 'sh']:
+        return 'code'
+    if ext in ['exe']:
+        return 'program'
+    if ext in ['docx', 'doc']:
+        return 'docs'
+    if ext in ['xlsx']:
+        return 'sheets'
+    if ext in ['sql', 'sqlite', 'sqlite3', 'db', 'csv']:
+        return 'database'
+    else:
+        return 'file'

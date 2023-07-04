@@ -158,6 +158,10 @@ export const DatabaseModelPage = () => {
                                 <Button
                                     tooltip={'SHOW ITEM'}
                                     icon={<BsArrowUpRightSquare />}
+                                    to={links.database.item(
+                                        modelName,
+                                        selectedItems[0]
+                                    )}
                                 />
                             </>
                         )}

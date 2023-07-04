@@ -4,6 +4,8 @@ import { TopBarIcons } from '../molecules/TopBarIcons'
 import { links } from '../router/links'
 import { Link } from '../atoms/Link'
 import { AiOutlineMenu } from 'react-icons/ai'
+import { FETCH } from '../api/api'
+import { ENDPOINTS } from '../api/endpoints'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -56,6 +58,14 @@ const StyledLeftSide = styled.div`
 `
 
 export const TopBar = ({ app, setClose, title }) => {
+    const [username, setUsername] = React.useState('')
+
+    React.useEffect(() => {
+        FETCH(ENDPOINTS.auth.me()).then((data) => {
+            setUsername(data.data.username)
+        })
+    }, [])
+
     function handleBurgerClick() {
         setClose((prev) => !prev)
     }
@@ -73,7 +83,7 @@ export const TopBar = ({ app, setClose, title }) => {
                     </StyledTitle>
                 </Link>
             </StyledLeftSide>
-            <TopBarIcons app={app} />
+            <TopBarIcons app={app} username={username} />
         </StyledWrapper>
     )
 }

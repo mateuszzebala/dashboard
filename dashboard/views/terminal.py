@@ -8,7 +8,6 @@ import signal
 import os
 from django.conf import settings
 
-
 processes = {}
 
 @is_superuser
@@ -35,7 +34,7 @@ def command(request):
     processes[request.user.id].remove(process)
     
     request.session.save()
-    if re.search('cd [a-zA-Z]*', cmd) and len(errors) == 0:
+    if cmd.startswith('cd ') and len(errors) == 0:
         folder = cmd.split(' ')[1]
         if folder == '..':
             path = path[:-1]

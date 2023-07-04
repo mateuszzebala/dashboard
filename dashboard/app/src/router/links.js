@@ -15,6 +15,8 @@ export const links = {
     files: {
         index: () => '/dashboard/files/',
         indexPath: (path) => `/dashboard/files/?path=${path}`,
+        editor: (path, type = 'text') =>
+            `/dashboard/files/editor/${type}/?path=${path}`,
     },
     terminal: {
         index: () => '/dashboard/terminal/',

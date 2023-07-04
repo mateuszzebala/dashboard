@@ -49,6 +49,7 @@ def manage_csrf_trusted_origins(request):
         save_configuration()
     return JsonResponse({'hosts':SERVER_CONFIG.CSRF_TRUSTED_ORIGINS})
 
+@is_superuser
 def get_last_logs(request):
     last_logs = list(Log.objects.all().order_by('datetime').reverse())[0:50]
     return JsonResponse({

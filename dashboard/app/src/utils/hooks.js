@@ -41,43 +41,6 @@ export const useMediaQuery = (query) => {
     return matches
 }
 
-export const ConfirmContext = React.createContext([])
-
-export const useConfirm = () => {
-    const [confirm, setConfirm] = React.useContext(ConfirmContext)
-
-    const ask = (question, todo) => {
-        setConfirm({
-            question,
-            todo,
-            onCancel: () => {
-                setConfirm(null)
-            },
-        })
-    }
-
-    return { confirm, ask }
-}
-
-export const PromptContext = React.createContext([])
-
-export const usePrompt = () => {
-    const [prompt, setPrompt] = React.useContext(PromptContext)
-
-    const ask = (question, todo, type) => {
-        setPrompt({
-            question,
-            todo,
-            type,
-            onCancel: () => {
-                setPrompt(null)
-            },
-        })
-    }
-
-    return { prompt, ask }
-}
-
 export const ThemeContext = React.createContext([])
 
 export const useTheme = () => {
@@ -94,4 +57,16 @@ export const useTheme = () => {
     }
 
     return [theme, updateTheme]
+}
+
+export const ModalFormContext = React.createContext([])
+
+export const useModalForm = () => {
+    const [modalForm, setModalForm] = React.useContext(ModalFormContext)
+
+    const ask = (form) => {
+        setModalForm(form)
+    }
+
+    return { modalForm, ask }
 }

@@ -16,7 +16,6 @@
         "react-router": "^6.11.2",
         "react-router-dom": "^6.11.2",
         "react-scripts": "5.0.1",
-        "react-terminal": "^1.3.1",
         "styled-components": "^5.3.11",
         "terminal-codes-to-html": "^0.0.1",
         "use-resize-observer": "^9.1.0",

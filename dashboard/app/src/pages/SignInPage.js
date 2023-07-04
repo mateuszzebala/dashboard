@@ -121,8 +121,8 @@ export const SignInPage = () => {
     const [error, setError] = React.useState(false)
 
     React.useEffect(() => {
-        FETCH(ENDPOINTS.auth.me()).then((data) => {
-            data.data.signin && navigate(links.home())
+        FETCH(ENDPOINTS.auth.csrf()).then((data) => {
+            data.data.username && navigate(links.home())
         })
     }, [])
 

@@ -13,6 +13,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { links } from '../../router/links'
 import { toBoolStr } from '../../utils/utils'
 import { TbReload } from 'react-icons/tb'
+import { Input } from '../../atoms/Input'
 
 const StyledContent = styled.div`
     display: inline-flex;
@@ -83,12 +84,18 @@ const StyledInput = styled.div`
     padding: 10px;
 `
 
-export const SelectFile = ({ value, setValue }) => {
+export const SelectFile = ({
+    value,
+    setValue,
+    save = false,
+    inputValue = '',
+}) => {
     const [open, setOpen] = React.useState(false)
     const [path, setPath] = React.useState('')
     const [folders, setFolders] = React.useState([])
     const [files, setFiles] = React.useState([])
     const [filename, setFilename] = React.useState('')
+    const [name, setName] = React.useState(inputValue)
     const [data, setData] = React.useState([])
     const [reload, setReload] = React.useState(0)
 
@@ -138,6 +145,16 @@ export const SelectFile = ({ value, setValue }) => {
                                 setReload((prev) => prev + 1)
                             }}
                         />
+                        {save && (
+                            <>
+                                <Input
+                                    value={name}
+                                    setValue={setName}
+                                    label={'FILENAME'}
+                                />
+                                <Button>SAVE</Button>
+                            </>
+                        )}
                     </StyledMenu>
                     <StyledContent>
                         {folders.map((folder) => (

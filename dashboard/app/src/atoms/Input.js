@@ -64,6 +64,7 @@ export const Input = ({
     textarea,
     type = 'text',
     icon,
+
     ...props
 }) => {
     return (

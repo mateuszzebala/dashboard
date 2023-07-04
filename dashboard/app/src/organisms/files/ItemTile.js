@@ -1,5 +1,15 @@
 import React from 'react'
-import { BsFileEarmarkBinary, BsFolder } from 'react-icons/bs'
+import {
+    BsFileBinary,
+    BsFileCode,
+    BsFileEarmarkImage,
+    BsFileExcel,
+    BsFileMusic,
+    BsFilePlay,
+    BsFileText,
+    BsFileWord,
+    BsFolder,
+} from 'react-icons/bs'
 import styled from 'styled-components'
 import { Tooltip } from '../../atoms/Tooltip'
 import { toBoolStr } from '../../utils/utils'
@@ -44,21 +54,36 @@ const StyledLockIcon = styled.div`
     left: 10px;
 `
 
+const getIconByFileType = (type) => {
+    if (type === 'audio') return <BsFileMusic />
+    if (type === 'video') return <BsFilePlay />
+    if (type === 'image') return <BsFileEarmarkImage />
+    if (type === 'code') return <BsFileCode />
+    if (type === 'program') return <BsFileBinary />
+    if (type === 'docs') return <BsFileWord />
+    if (type === 'sheets') return <BsFileExcel />
+    if (type === 'database') return <BsFileBinary />
+
+    return <BsFileText />
+}
+
 export const ItemTile = ({
     filename,
     isFile,
     setLocation,
     selected,
+    reload,
     access,
-    reloadPos,
     setPos,
+    filetype,
+
     ...props
 }) => {
     const wrapperRef = React.useRef()
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
         setPos(bcr)
-    }, [reloadPos])
+    }, [reload])
 
     return (
         <Tooltip text={filename}>
@@ -67,11 +92,11 @@ export const ItemTile = ({
                 selected={toBoolStr(selected)}
                 {...props}
                 onClick={() => {
-                    setLocation(filename)
+                    !isFile && setLocation(filename)
                 }}
             >
                 <StyledIcon>
-                    {isFile ? <BsFileEarmarkBinary /> : <BsFolder />}
+                    {isFile ? getIconByFileType(filetype) : <BsFolder />}
                 </StyledIcon>
                 <StyledFilename>{filename}</StyledFilename>
                 {!access && (

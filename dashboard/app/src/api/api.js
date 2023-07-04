@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ENDPOINTS } from './endpoints'
+import { links } from '../router/links'
 
 const manifest_location = '/dashboard/manifest.json'
 
@@ -31,8 +32,7 @@ async function CSRF() {
         credentials: 'include',
     })
     const data = await response.json()
-
-    return data.token
+    return data
 }
 
 export const SIGNIN = async () => {
@@ -41,11 +41,18 @@ export const SIGNIN = async () => {
 
 export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
     const formData = new FormData()
-    const token = await CSRF()
+    const tokenData = await CSRF()
+
     Object.keys(data).forEach((field) => {
         formData.append(field, data[field])
     })
-    formData.append('csrfmiddlewaretoken', token)
+
+    formData.append('csrfmiddlewaretoken', tokenData.token)
+
+    if (tokenData.username === null) {
+        if (window.location.pathname !== links.auth.signin())
+            window.location.href = links.auth.signin()
+    }
 
     return axios({
         url,
@@ -53,7 +60,7 @@ export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
         method,
         headers: {
             'Content-Type': 'multipart/formdata',
-            'X-Csrftoken': token,
+            'X-Csrftoken': tokenData.token,
             ...headers,
         },
         withCredentials: true,
