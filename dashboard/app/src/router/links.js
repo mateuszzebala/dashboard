@@ -57,6 +57,7 @@ export const links = {
     },
     auth: {
         signin: () => '/dashboard/signin/',
+        signinNext: (next) => `/dashboard/signin/?next=${next}`,
     },
     info: {
         app: (appName) => `/dashboard/info/${appName}/`,

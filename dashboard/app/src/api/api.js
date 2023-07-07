@@ -51,7 +51,9 @@ export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
 
     if (tokenData.username === null) {
         if (window.location.pathname !== links.auth.signin())
-            window.location.href = links.auth.signin()
+            window.location.href = links.auth.signinNext(
+                window.location.pathname
+            )
     }
 
     return axios({

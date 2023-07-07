@@ -17,6 +17,12 @@ const StyledRow = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
+
+    text-transform: uppercase;
+    h2,
+    h3 {
+        font-weight: 500;
+    }
 `
 
 const StyledSection = styled.div`

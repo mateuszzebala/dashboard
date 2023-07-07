@@ -6,6 +6,7 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: center;
     height: ${({ size }) => size * 20 + 'px'};
+    width: 100%;
 `
 
 const StyledDraggableDot = styled.button`
@@ -43,7 +44,13 @@ const StyledRange = styled.div`
     background-color: ${({ theme }) => theme.range.left};
 `
 
-export const Range = ({ setValue, min, max, size = 1 }) => {
+export const Range = ({
+    value = 0,
+    setValue = () => {},
+    min = 0,
+    max = 100,
+    size = 1,
+}) => {
     const [x, setX] = React.useState(0)
     const lineRef = React.useRef()
     const mouseUpListener = React.useRef(null)
@@ -75,6 +82,13 @@ export const Range = ({ setValue, min, max, size = 1 }) => {
         setX(((((val - min) / range) * width) / bcr.width) * 100)
         setValue(val)
     }
+
+    React.useEffect(() => {
+        const bcr = lineRef.current.getBoundingClientRect()
+        const width = bcr.width - 18 * size
+        const range = max - min
+        setX(((((value - min) / range) * width) / bcr.width) * 100)
+    }, [value])
 
     return (
         <StyledWrapper size={size}>

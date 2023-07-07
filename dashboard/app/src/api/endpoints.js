@@ -38,6 +38,9 @@ export const ENDPOINTS = {
         remove: () => API(['files', 'remove']),
         touch: () => API(['files', 'touch']),
         saveFile: (path) => API(['files', 'file', 'save'], { path }),
+        save: {
+            image: (path) => API(['files', 'file', 'save', 'image'], { path }),
+        },
     },
     other: {},
 }

@@ -15,9 +15,11 @@ export const RootTemplate = ({ children }) => {
     const [show, setShow] = React.useState(true)
     const navigate = useNavigate()
     React.useEffect(() => {
-        FETCH(ENDPOINTS.auth.me()).then(async (data) => {
-            if (!data.data.signin) {
-                navigate(links.auth.signin())
+        FETCH(ENDPOINTS.auth.me()).then((data) => {
+            if (window.location.pathname !== links.auth.signin()) {
+                if (!data.data.signin) {
+                    navigate(links.auth.signinNext(window.location.pathname))
+                }
             }
             setShow(false)
         })

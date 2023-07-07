@@ -1,7 +1,7 @@
 {
    "config": {
       "enable_server": true,
-      "debug": true,
+      "debug": false,
       "new_users": true,
       "ddos_block": true,
       "save_requests": false,

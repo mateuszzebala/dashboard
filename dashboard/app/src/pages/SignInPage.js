@@ -10,6 +10,7 @@ import { links } from '../router/links'
 import { FaLock, FaReact } from 'react-icons/fa'
 import { SiDjango } from 'react-icons/si'
 import { toBoolStr } from '../utils/utils'
+import { useSearchParams } from 'react-router-dom'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -115,6 +116,7 @@ const StyledIcon = styled.div`
 
 export const SignInPage = () => {
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
     const [sending, setSending] = React.useState(false)
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
@@ -136,7 +138,9 @@ export const SignInPage = () => {
         })
             .then((data) => {
                 if (data.data.done) {
-                    navigate(links.home())
+                    if (searchParams.get('next'))
+                        navigate(searchParams.get('next'))
+                    else navigate(links.home())
                 } else {
                     setError(true)
                 }
