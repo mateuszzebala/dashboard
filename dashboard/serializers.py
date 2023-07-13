@@ -40,10 +40,9 @@ def set_field_serializer(value, field_type):
     return value
 
 def set_relation_serialize(value, relation, field):
-    match(relation):
-        case 'one_to_one':
-            item = field.related_model.objects.filter(pk=value).first()
-            return item
+    if relation == 'one_to_one':
+        item = field.related_model.objects.filter(pk=value).first()
+        return item
     return None
     ## TODO
     
