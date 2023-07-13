@@ -1,6 +1,6 @@
 {
    "config": {
-      "enable_server": false,
+      "enable_server": true,
       "debug": true,
       "new_users": true,
       "ddos_block": true,
@@ -9,14 +9,17 @@
    },
    "allowed_hosts": [
       "localhost",
-      "192.168.100.35"
+      "192.168.100.35",
+      "rskihfqlcq.cfolks.pl"
    ],
    "cors_allowed_origins": [
       "http://localhost:3000",
-      "http://localhost:8000"
+      "http://localhost:8000",
+      "https://rskihfqlcq.cfolks.pl"
    ],
    "csrf_trusted_origins": [
       "http://localhost:3000",
-      "http://localhost:8000"
+      "http://localhost:8000",
+      "https://rskihfqlcq.cfolks.pl"
    ]
 }

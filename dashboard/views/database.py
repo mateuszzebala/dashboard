@@ -79,9 +79,8 @@ def manage_item_view(request, model_name, pk):
     item = model.objects.filter(pk=pk).first()
     if item is None: return error_message('Item does not exists', 400)
 
-    match (request.POST.get('method')):
-        case 'DELETE': return delete_item_view(request, item)
-        case 'PATCH': return patch_item_view(request, item)
+    if request.POST.get('method') == 'DELETE': return delete_item_view(request, item)
+    if request.POST.get('method') == 'PATCH': return patch_item_view(request, item)
 
     return get_item_view(request, item)
 
