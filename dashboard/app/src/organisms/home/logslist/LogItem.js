@@ -7,7 +7,6 @@ const StyledLogItem = styled.div`
     flex-direction: column;
     gap: 5px;
     padding: 5px 5px 5px 10px;
-    border-left: 3px solid ${({ theme }) => theme.primary};
     cursor: pointer;
     transition: transform 0.3s;
     &:hover {

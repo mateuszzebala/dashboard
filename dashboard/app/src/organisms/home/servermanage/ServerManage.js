@@ -5,9 +5,10 @@ import { Typography } from '../../../atoms/Typography'
 import { Theme } from '../../../atoms/Theme'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
-import { useMessage } from '../../../utils/messages'
 
 import { theme } from '../../../theme/theme'
+import { FiPower } from 'react-icons/fi'
+import { Button } from '../../../atoms/Button'
 
 const StyledWrapper = styled.div`
     padding: 20px 50px;
@@ -41,7 +42,6 @@ const StyledToggle = styled.div`
 
 export const ServerManage = () => {
     const [configuration, setConfiguration] = React.useState({})
-    const { newMessage } = useMessage()
 
     React.useEffect(() => {
         if (configuration.enable_server !== undefined) {
@@ -61,6 +61,30 @@ export const ServerManage = () => {
     return (
         <StyledWrapper>
             <StyledToggle>
+                <Typography variant={'h4'}>PAGE</Typography>
+                <Theme
+                    value={{
+                        button: {
+                            background: configuration.enable_server
+                                ? theme.success
+                                : theme.error,
+                            font: theme.secondary,
+                        },
+                    }}
+                >
+                    <Button
+                        onClick={() => {
+                            setConfiguration((prev) => ({
+                                ...prev,
+                                enable_server: !prev.enable_server,
+                            }))
+                        }}
+                        icon={<FiPower />}
+                        size={2}
+                    />
+                </Theme>
+            </StyledToggle>
+            {/* <StyledToggle>
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
                     value={{
@@ -89,7 +113,7 @@ export const ServerManage = () => {
                         size={2}
                     />
                 </Theme>
-            </StyledToggle>
+            </StyledToggle> */}
             <StyledToggle>
                 <Typography variant={'h4'}>DEBUG</Typography>
                 <Switch

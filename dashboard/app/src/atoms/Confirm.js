@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button } from './Button'
 import styled from 'styled-components'
-import { HiXMark, HiCheck } from 'react-icons/hi2'
+
+import { BsCheck, BsX } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -19,16 +20,16 @@ export const Confirm = ({ setOpen, todo = () => {} }) => {
                 onClick={() => {
                     setOpen(false)
                 }}
-                icon={<HiXMark />}
-                size={2}
+                icon={<BsX />}
+                size={1.3}
             />
             <Button
                 onClick={() => {
                     setOpen(false)
                     todo()
                 }}
-                icon={<HiCheck />}
-                size={2}
+                icon={<BsCheck />}
+                size={1.3}
             />
         </StyledWrapper>
     )

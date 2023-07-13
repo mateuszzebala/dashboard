@@ -23,13 +23,13 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 10px;
-    background-color: ${({ theme, selected }) =>
-        selected ? theme.primary : theme.secondary};
-    color: ${({ theme, selected }) =>
-        selected ? theme.secondary : theme.primary};
-    box-shadow: 0 0 5px -4px ${({ theme }) => theme.primary};
-    border-radius: 1px;
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
+    box-shadow: 0 0 5px -4px ${({ theme, selected }) => (selected ? theme.accent : theme.primary)};
+    border-radius: 3px;
     height: 100px;
+    border: 3px solid
+        ${({ theme, selected }) => (selected ? theme.primary : theme.secondary)};
     width: 100px;
     font-size: 15px;
     cursor: pointer;
@@ -41,11 +41,12 @@ const StyledFilename = styled.div`
     width: 90%;
     overflow: hidden;
     font-size: 15px;
+    padding: 5px 0;
     text-overflow: ellipsis;
     text-align: center;
 `
 const StyledIcon = styled.div`
-    font-size: 40px;
+    font-size: 35px;
 `
 
 const StyledLockIcon = styled.div`

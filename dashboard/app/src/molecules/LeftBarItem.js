@@ -23,6 +23,10 @@ const StyledTop = styled.div`
         text-decoration: none;
         font-size: 15px;
     }
+
+    &:hover a {
+        text-decoration: underline;
+    }
 `
 const StyledWrapper = styled.div`
     width: 100%;

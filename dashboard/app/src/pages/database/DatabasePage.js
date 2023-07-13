@@ -60,7 +60,7 @@ export const DatabasePage = () => {
     }, [])
 
     return (
-        <MainTemplate app={APPS.database} title={'Models'}>
+        <MainTemplate app={APPS.database} title={'MODELS'}>
             {Object.keys(models).map((app) => (
                 <StyledApp key={app}>
                     <StyledAppName>{app.toUpperCase()}</StyledAppName>

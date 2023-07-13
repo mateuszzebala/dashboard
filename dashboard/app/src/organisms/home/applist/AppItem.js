@@ -15,7 +15,6 @@ const StyledBox = styled.div`
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
     }
-    box-shadow: 0 0 8px -5px ${({ theme }) => theme.primary};
 `
 const StyledName = styled.div``
 const StyledLink = styled.div`

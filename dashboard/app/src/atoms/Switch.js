@@ -7,7 +7,7 @@ const StyledWrapper = styled.button`
         value ? theme.switch.on : theme.switch.off};
     border: 0;
     transition: background-color 0.3s, outline 0.1s;
-    border-radius: ${({ size }) => size * 28 + 'px'};
+    border-radius: ${({ size }) => size * 7 + 'px'};
     height: ${({ size }) => size * 28 + 'px'};
     width: ${({ size }) => size * 48 + 'px'};
     padding: ${({ size }) => size * 4 + 'px'};
@@ -23,7 +23,7 @@ const StyledDot = styled.div`
     width: ${({ size }) => size * 20 + 'px'};
     height: ${({ size }) => size * 20 + 'px'};
     background-color: ${({ theme }) => theme.switch.dot};
-    border-radius: 50%;
+    border-radius: ${({ size }) => size * 5 + 'px'};
     transition: transform 0.3s;
     transform: translateX(
         ${({ value, size }) => (value ? size * 20 + 'px' : 0)}

@@ -6,6 +6,9 @@ import { Button } from '../../../atoms/Button'
 import { Input } from '../../../atoms/Input'
 import { Typography } from '../../../atoms/Typography'
 import { FaPlus } from 'react-icons/fa'
+import { useModalForm } from '../../../utils/hooks'
+import { Confirm } from '../../../atoms/Confirm'
+import { FiTrash } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     padding: 20px;
@@ -29,6 +32,7 @@ const StyledMenu = styled.div`
 `
 
 export const HostSelect = ({ name, endpoint }) => {
+    const { ask } = useModalForm()
     const [hosts, setHosts] = React.useState([])
     const [inputValue, setInputValue] = React.useState('')
 
@@ -77,10 +81,19 @@ export const HostSelect = ({ name, endpoint }) => {
                         <Host
                             onContextMenu={(e) => {
                                 e.preventDefault()
-                                host !== 'localhost' &&
-                                    setHosts((prev) =>
-                                        prev.filter((val) => val !== host)
-                                    )
+                                ask({
+                                    content: Confirm,
+                                    title: 'DELETE',
+                                    icon: <FiTrash />,
+                                    todo: () => {
+                                        host !== 'localhost' &&
+                                            setHosts((prev) =>
+                                                prev.filter(
+                                                    (val) => val !== host
+                                                )
+                                            )
+                                    },
+                                })
                             }}
                             key={host}
                             name={host}

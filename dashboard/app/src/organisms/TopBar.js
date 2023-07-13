@@ -6,6 +6,7 @@ import { Link } from '../atoms/Link'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
+import { DashboardsMenu } from '../atoms/DashboardsMenu'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -16,6 +17,10 @@ const StyledWrapper = styled.nav`
     justify-content: space-between;
     background-color: ${({ theme }) => theme.topbar.background};
     color: ${({ theme }) => theme.topbar.font};
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+        height: 0;
+    }
 `
 
 const StyledMenuButton = styled.button`
@@ -27,8 +32,8 @@ const StyledMenuButton = styled.button`
     background-color: transparent;
     border: 0;
     color: ${({ theme }) => theme.topbar.font};
-    border-radius: 10px;
-    outline: 0 solid ${({ theme }) => theme.tertiary};
+    border-radius: 8px;
+    outline: 0 solid ${({ theme }) => theme.tertiary}aa;
     cursor: pointer;
     svg {
         stroke-width: 1.4px;
@@ -89,6 +94,7 @@ export const TopBar = ({ app, setClose, title }) => {
                 </Link>
             </StyledLeftSide>
             <TopBarIcons app={app} username={username} />
+            <DashboardsMenu />
         </StyledWrapper>
     )
 }
