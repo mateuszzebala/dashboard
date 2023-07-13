@@ -4,21 +4,21 @@ from django.core.files import File
 from django.core.files.images import ImageFile
 
 def get_field_serializer(value, field_type):
-    match (field_type):
-        case 'DateTimeField': return value and {
+    if field_type == 'DateTimeField':
+        return value and {
             'year': value.year, 'month': value.month, 'day': value.day, 'hour': value.hour, 'minute': value.minute, 'second': value.second
         }
-        case 'DateField': return value and {
+    if field_type == 'DateField': return value and {
             'year': value.year, 'month': value.month, 'day': value.day,
         }
-        case 'TimeField': return value and {
+    if field_type == 'TimeField': return value and {
             'hour': value.hour, 'minute': value.minute, 'second': value.second
         }
-        case 'DurationField': return value and {
+    if field_type == 'DurationField': return value and {
             'days': value.days, 'seconds': value.seconds
         }
-        case 'FileField': return value and value.path
-        case 'ImageField': return value and value.path
+    if field_type == 'FileField': return value and value.path
+    if field_type ==  'ImageField': return value and value.path
     return value
 
 def set_field_serializer(value, field_type):
