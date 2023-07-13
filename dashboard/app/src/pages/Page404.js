@@ -15,7 +15,7 @@ const StyledWrapper = styled.div`
     justify-content: center;
     align-items: center;
     h1 {
-        text-shadow: 5px 5px 0px ${({ theme }) => theme.primary};
+        text-shadow: 5px 5px 0 ${({ theme }) => theme.tertiary};
     }
 `
 

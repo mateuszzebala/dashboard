@@ -103,6 +103,7 @@ const FolderMenu = ({
                 <StyledMenuSide>
                     {data.parent !== path && (
                         <Button
+                            size={1.2}
                             tooltip={'FOLDER UP'}
                             icon={<FaArrowLeft />}
                             onClick={() => {
@@ -111,6 +112,7 @@ const FolderMenu = ({
                         />
                     )}
                     <Button
+                        size={1.2}
                         tooltip={'SELECT ALL'}
                         icon={<FaCheck />}
                         onClick={() => {
@@ -120,6 +122,7 @@ const FolderMenu = ({
                         }}
                     />
                     <Button
+                        size={1.2}
                         tooltip={'RELOAD'}
                         icon={<TbReload />}
                         onClick={() => {
@@ -127,28 +130,40 @@ const FolderMenu = ({
                         }}
                     />
                     <Button
+                        size={1.2}
                         tooltip={'OPEN IN TERMINAL'}
                         icon={<APPS.terminal.icon />}
                         to={links.terminal.indexPath(path)}
                     />
                     <Button
+                        size={1.2}
                         tooltip={'NEW FILE'}
                         icon={<BsFilePlus />}
                         onClick={handleNewFile}
                     />
                     <Button
+                        size={1.2}
                         tooltip={'NEW FOLDER'}
                         icon={<BsFolderPlus />}
                         onClick={handleNewFolder}
                     />
 
-                    <Button tooltip={'PASTE'} icon={<BiPaste />} />
+                    <Button size={1.2} tooltip={'PASTE'} icon={<BiPaste />} />
 
                     {selectedItems.length > 0 ? (
                         <>
-                            <Button tooltip={'COPY'} icon={<BiCopy />} />
-                            <Button tooltip={'CUT'} icon={<BiCut />} />
                             <Button
+                                size={1.2}
+                                tooltip={'COPY'}
+                                icon={<BiCopy />}
+                            />
+                            <Button
+                                size={1.2}
+                                tooltip={'CUT'}
+                                icon={<BiCut />}
+                            />
+                            <Button
+                                size={1.2}
                                 tooltip={'DELETE'}
                                 icon={<FiTrash />}
                                 onClick={() => {
@@ -178,6 +193,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 tooltip={'MAKE ZIP'}
+                                size={1.2}
                                 icon={<BsFileZip />}
                                 onClick={() => {
                                     ask({
@@ -196,6 +212,7 @@ const FolderMenu = ({
                     )}
                     {selectedItems.length === 1 && (
                         <Button
+                            size={1.2}
                             tooltip={'RENAME'}
                             icon={<BiRename />}
                             onClick={() => {
@@ -214,6 +231,7 @@ const FolderMenu = ({
                     {isSelectedOneFile() && (
                         <>
                             <Button
+                                size={1.2}
                                 tooltip={'DOWNLOAD'}
                                 icon={<HiDownload />}
                                 to={ENDPOINTS.files.file(selectedItems[0].path)}
@@ -221,6 +239,7 @@ const FolderMenu = ({
                                 download
                             />
                             <Button
+                                size={1.2}
                                 tooltip={'EDIT'}
                                 icon={<BiEditAlt />}
                                 onClick={() => {

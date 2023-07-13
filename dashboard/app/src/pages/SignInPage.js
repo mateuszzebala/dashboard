@@ -111,7 +111,7 @@ const StyledError = styled.span`
 
 const StyledIcon = styled.div`
     font-size: 70px;
-    color: ${({ theme }) => theme.primary};
+    color: ${({ color }) => color};
 `
 
 export const SignInPage = () => {
@@ -156,7 +156,7 @@ export const SignInPage = () => {
         <StyledWrapper>
             <StyledBackgroundDecoration1 />
             <StyledBackgroundDecoration2 />
-            <StyledIcon>
+            <StyledIcon color="#2BA977">
                 <SiDjango />
             </StyledIcon>
 
@@ -180,7 +180,7 @@ export const SignInPage = () => {
                 </StyledError>
                 <Button loading={sending}>SIGN IN</Button>
             </StyledForm>
-            <StyledIcon>
+            <StyledIcon color="#00D8FF">
                 <FaReact />
             </StyledIcon>
 

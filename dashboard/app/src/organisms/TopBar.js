@@ -19,18 +19,23 @@ const StyledWrapper = styled.nav`
 `
 
 const StyledMenuButton = styled.button`
-    font-size: 30px;
+    font-size: 35px;
     display: grid;
+    height: 50px;
+    width: 50px;
     place-items: center;
     background-color: transparent;
     border: 0;
     color: ${({ theme }) => theme.topbar.font};
+    border-radius: 10px;
+    outline: 0 solid ${({ theme }) => theme.tertiary};
     cursor: pointer;
     svg {
         stroke-width: 1.4px;
     }
-    &:focus {
-        outline: none;
+    transition: outline-width 0.1s;
+    &:hover {
+        outline-width: 3px;
     }
 `
 

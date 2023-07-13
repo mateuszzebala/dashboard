@@ -17,7 +17,7 @@ import { FaLock } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
-    display: inline-flex;
+    display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -28,7 +28,7 @@ const StyledWrapper = styled.div`
     color: ${({ theme, selected }) =>
         selected ? theme.secondary : theme.primary};
     box-shadow: 0 0 5px -4px ${({ theme }) => theme.primary};
-    border-radius: 5px;
+    border-radius: 1px;
     height: 100px;
     width: 100px;
     font-size: 15px;
@@ -76,7 +76,7 @@ export const ItemTile = ({
     access,
     setPos,
     filetype,
-
+    hidden,
     ...props
 }) => {
     const wrapperRef = React.useRef()
@@ -88,6 +88,7 @@ export const ItemTile = ({
     return (
         <Tooltip text={filename}>
             <StyledWrapper
+                hidden={toBoolStr(hidden)}
                 ref={wrapperRef}
                 selected={toBoolStr(selected)}
                 {...props}
