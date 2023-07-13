@@ -22,22 +22,21 @@ def get_field_serializer(value, field_type):
     return value
 
 def set_field_serializer(value, field_type):
-    match (field_type):
-        case 'DateTimeField': 
+    if field_type == 'DateTimeField': 
             value = json.loads(value)
             return value and datetime.datetime(value['year'], value['month'], value['day'], value['hour'], value['minute'], value['second'])
-        case 'DateField': 
+    if field_type == 'DateField': 
             value = json.loads(value)
             return value and datetime.date(value['year'], value['month'], value['day'])
-        case 'TimeField': 
+    if field_type == 'TimeField': 
             value = json.loads(value)
             return value and datetime.time(value['hour'], value['minute'], value['second'])
-        case 'DurationField': 
+    if field_type == 'DurationField': 
             value = json.loads(value)
             return value and datetime.timedelta(value['days'], value['seconds'])
-        case 'FileField': return value
-        case 'ImageField': return value
-        case 'BooleanField': return False if not value else True
+    if field_type == 'FileField': return value
+    if field_type == 'ImageField': return value
+    if field_type == 'BooleanField': return False if not value else True
     return value
 
 def set_relation_serialize(value, relation, field):
