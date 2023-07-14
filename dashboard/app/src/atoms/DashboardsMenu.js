@@ -19,7 +19,7 @@ const StyledLine = styled.a`
     cursor: pointer;
     transition: min-width 0.3s, width 0.3s, color 0.3s;
     display: flex;
-    padding: 15px 4px;
+    padding: 12px 4px;
     border-radius: 2px 0 0 2px;
     align-items: center;
     justify-content: center;

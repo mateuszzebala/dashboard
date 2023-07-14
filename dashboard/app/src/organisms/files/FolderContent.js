@@ -25,6 +25,8 @@ const StyledSelectRect = styled.div`
     left: ${({ left }) => left}px;
     background-color: ${({ theme }) => theme.primary}55;
     border-radius: 3px;
+    border: 3px solid ${({ theme }) => theme.primary};
+    box-sizing: border-box;
 `
 
 const StyledLoading = styled.div`
@@ -44,7 +46,7 @@ export const FolderContent = ({
     folders,
     setFolders,
     reload,
-
+    contextMenu,
     setData,
 }) => {
     const [loading, setLoading] = React.useState(true)
@@ -52,6 +54,7 @@ export const FolderContent = ({
     const [reloadPos, setReloadPos] = React.useState(0)
 
     const [selectRect, setSelectRect] = React.useState({
+        mouseDown: false,
         show: false,
         x1: 0,
         y1: 0,
@@ -72,7 +75,8 @@ export const FolderContent = ({
                 y1: e.clientY,
                 x2: e.clientX,
                 y2: e.clientY,
-                show: true,
+                mouseDown: true,
+                show: false,
             })
     }
 
@@ -83,14 +87,16 @@ export const FolderContent = ({
             y1: 0,
             x2: 0,
             y2: 0,
+            mouseDown: false,
             show: false,
         })
     }
 
     const handleMouseMove = (e) => {
-        if (selectRect.show) {
+        if (selectRect.mouseDown) {
             setSelectRect((prev) => ({
                 ...prev,
+                show: prev.mouseDown,
                 x2: e.clientX,
                 y2: e.clientY,
             }))
@@ -109,18 +115,10 @@ export const FolderContent = ({
                     bcr.y < top + height
                 )
             })
-            setSelectedItems(newSelectedItems)
-        }
-    }
 
-    const handleItemSelect = (e, item) => {
-        e.preventDefault()
-        if (selectedItems.includes(item)) {
-            const newSelectedItems = selectedItems.filter((i) => i != item)
-            setSelectedItems(newSelectedItems)
-        } else {
-            const newSelectedItems = [...selectedItems, item]
-            setSelectedItems(newSelectedItems)
+            setSelectedItems((prev) =>
+                e.shiftKey ? [...prev, ...newSelectedItems] : newSelectedItems
+            )
         }
     }
 
@@ -154,7 +152,6 @@ export const FolderContent = ({
             <StyledWrapper
                 onScroll={() => {
                     setReloadPos((prev) => prev + 1)
-                    console.log('s')
                 }}
                 content={toBoolStr([...folders, ...files].length > 0)}
                 onMouseDown={handleMouseDown}
@@ -165,19 +162,22 @@ export const FolderContent = ({
                     setSelectRect((prev) => ({
                         ...prev,
                         show: false,
+                        mouseDown: false,
                     }))
                 }}
             >
                 {folders.map((folder) => (
                     <ItemTile
+                        item={folder}
                         access={folder.access}
                         reload={reloadPos}
                         setPos={(val) => {
                             setPos((prev) => ({ ...prev, [folder.name]: val }))
                         }}
+                        setSelectedItems={setSelectedItems}
                         selected={selectedItems.includes(folder)}
-                        onContextMenu={(e) => handleItemSelect(e, folder)}
                         setLocation={() => setPath(folder.path)}
+                        contextMenu={contextMenu}
                         key={folder.name}
                         filename={folder.name}
                         isFile={false}
@@ -185,23 +185,32 @@ export const FolderContent = ({
                 ))}
                 {files.map((file) => (
                     <ItemTile
+                        item={file}
                         access={file.access}
                         reload={reloadPos}
                         setPos={(val) => {
                             setPos((prev) => ({ ...prev, [file.name]: val }))
                         }}
+                        setSelectedItems={setSelectedItems}
                         selected={selectedItems.includes(file)}
-                        onContextMenu={(e) => handleItemSelect(e, file)}
                         setLocation={() => setPath(file.path)}
                         key={file.name}
                         filename={file.name}
                         path={file.path}
+                        contextMenu={contextMenu}
                         isFile={true}
                         filetype={file.type}
                     />
                 ))}
                 {selectRect.show && (
                     <StyledSelectRect
+                        onMouseUp={() => {
+                            setSelectRect((prev) => ({
+                                ...prev,
+                                show: false,
+                                mouseDown: false,
+                            }))
+                        }}
                         top={
                             selectRect.y1 < selectRect.y2
                                 ? selectRect.y1

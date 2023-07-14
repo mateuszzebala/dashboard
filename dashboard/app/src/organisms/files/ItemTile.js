@@ -15,6 +15,12 @@ import styled from 'styled-components'
 import { Tooltip } from '../../atoms/Tooltip'
 import { toBoolStr } from '../../utils/utils'
 import { FaLock } from 'react-icons/fa'
+import { ContextMenu } from '../../atoms/ContextMenu'
+import { useModalForm } from '../../utils/hooks'
+import { useNavigate } from 'react-router'
+import { links } from '../../router/links'
+import { BiEditAlt } from 'react-icons/bi'
+import { EditorChooser } from '../../molecules/EditorChooser'
 
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
@@ -36,6 +42,10 @@ const StyledWrapper = styled.div`
     cursor: pointer;
     user-select: none;
     position: relative;
+    transition: transform 0.3s;
+    &:hover {
+        transform: scale(0.9);
+    }
 `
 const StyledFilename = styled.div`
     white-space: nowrap;
@@ -77,40 +87,68 @@ export const ItemTile = ({
     selected,
     reload,
     access,
+    item,
+    contextMenu,
+    setSelectedItems,
     setPos,
     filetype,
     hidden,
     ...props
 }) => {
     const wrapperRef = React.useRef()
-
+    const { ask } = useModalForm()
+    const navigate = useNavigate()
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
         setPos(bcr)
-        console.log(reload)
     }, [reload])
 
     return (
-        <Tooltip text={filename}>
-            <StyledWrapper
-                hidden={toBoolStr(hidden)}
-                ref={wrapperRef}
-                selected={toBoolStr(selected)}
-                {...props}
-                onClick={() => {
-                    !isFile && setLocation(filename)
-                }}
-            >
-                <StyledIcon>
-                    {isFile ? getIconByFileType(filetype) : <BsFolder />}
-                </StyledIcon>
-                <StyledFilename>{filename}</StyledFilename>
-                {!access && (
-                    <StyledLockIcon>
-                        <FaLock />
-                    </StyledLockIcon>
-                )}
-            </StyledWrapper>
-        </Tooltip>
+        <ContextMenu data={contextMenu}>
+            <Tooltip text={filename}>
+                <StyledWrapper
+                    hidden={toBoolStr(hidden)}
+                    ref={wrapperRef}
+                    selected={toBoolStr(selected)}
+                    {...props}
+                    onClick={(e) => {
+                        !isFile && !e.shiftKey && setLocation(filename)
+                        isFile &&
+                            setSelectedItems((prev) =>
+                                selected
+                                    ? [...prev.filter((i) => i !== item)]
+                                    : [...prev, item]
+                            )
+                        e.shiftKey &&
+                            setSelectedItems((prev) =>
+                                selected
+                                    ? [...prev.filter((i) => i !== item)]
+                                    : [...prev, item]
+                            )
+                        e.detail > 1 &&
+                            ask({
+                                content: EditorChooser,
+                                icon: <BiEditAlt />,
+                                title: 'Choose Other Editor',
+                                todo: (editorType) => {
+                                    navigate(
+                                        links.editor.edit(item.path, editorType)
+                                    )
+                                },
+                            })
+                    }}
+                >
+                    <StyledIcon>
+                        {isFile ? getIconByFileType(filetype) : <BsFolder />}
+                    </StyledIcon>
+                    <StyledFilename>{filename}</StyledFilename>
+                    {!access && (
+                        <StyledLockIcon>
+                            <FaLock />
+                        </StyledLockIcon>
+                    )}
+                </StyledWrapper>
+            </Tooltip>
+        </ContextMenu>
     )
 }

@@ -15,6 +15,8 @@ const StyledContextMenu = styled.div`
     padding: 10px;
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 2px 10px 10px 10px;
+    border: 3px solid ${({ theme }) => theme.primary};
+    z-index: 20;
 `
 const StyledContextMenuItem = styled.button`
     background-color: transparent;
@@ -25,7 +27,7 @@ const StyledContextMenuItem = styled.button`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
     border-radius: 5px;
     padding: 10px 30px;
 
@@ -33,7 +35,7 @@ const StyledContextMenuItem = styled.button`
         font-size: 20px;
     }
     &:hover {
-        background-color: #00000011;
+        background-color: ${({ theme }) => theme.tertiary}44;
     }
 `
 
@@ -41,11 +43,11 @@ const StyledIcon = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 18px;
 `
 
 const StyledText = styled.span`
-    font-size: 18px;
+    font-size: 17px;
 `
 
 export const ContextMenu = ({ data = [], children }) => {
@@ -76,6 +78,7 @@ export const ContextMenu = ({ data = [], children }) => {
                                 {item.icon ? item.icon : <span></span>}
                             </StyledIcon>
                             <StyledText>{item.text}</StyledText>
+                            <span></span>
                         </StyledContextMenuItem>
                     ))}
                 </StyledContextMenu>

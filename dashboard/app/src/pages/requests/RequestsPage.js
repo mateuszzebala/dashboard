@@ -1,47 +1,42 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
-import { useModalForm } from '../../utils/hooks'
 import { Button } from '../../atoms/Button'
-import { Input } from '../../atoms/Input'
-import styled from 'styled-components'
-
-const StyledWrapper = styled.div`
-    display: flex;
-    gap: 20px;
-`
-
-const AgePrompt = ({ setValue, setOpen }) => {
-    return (
-        <StyledWrapper>
-            <Input setValue={setValue} label="YOUR AGE" type="number" />
-            <Button
-                onClick={() => {
-                    setOpen(false)
-                }}
-            >
-                OK
-            </Button>
-        </StyledWrapper>
-    )
-}
+import { ContextMenu } from '../../atoms/ContextMenu'
+import { AiOutlineDelete } from 'react-icons/ai'
+import { BiRename } from 'react-icons/bi'
+import { BsFileZip } from 'react-icons/bs'
 
 export const RequestsPage = () => {
-    const { ask } = useModalForm()
-    const [age, setAge] = React.useState(null)
     return (
         <MainTemplate app={APPS.requests}>
-            <Button
-                onClick={() => {
-                    ask({
-                        content: AgePrompt,
-                        title: 'HOW OLD ARE YOU?',
-                        setValue: setAge,
-                    })
-                }}
+            <ContextMenu
+                data={[
+                    {
+                        text: 'DELETE',
+                        icon: <AiOutlineDelete />,
+                        todo: () => {
+                            alert()
+                        },
+                    },
+                    {
+                        text: 'RENAME',
+                        icon: <BiRename />,
+                        todo: () => {
+                            alert()
+                        },
+                    },
+                    {
+                        text: 'ZIP',
+                        icon: <BsFileZip />,
+                        todo: () => {
+                            alert()
+                        },
+                    },
+                ]}
             >
-                {age !== null ? `YOUR AGE: ${age}` : 'SET YOUR AGE'}
-            </Button>
+                <Button>TEST</Button>
+            </ContextMenu>
         </MainTemplate>
     )
 }

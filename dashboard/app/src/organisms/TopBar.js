@@ -6,7 +6,6 @@ import { Link } from '../atoms/Link'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
-import { DashboardsMenu } from '../atoms/DashboardsMenu'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -94,7 +93,6 @@ export const TopBar = ({ app, setClose, title }) => {
                 </Link>
             </StyledLeftSide>
             <TopBarIcons app={app} username={username} />
-            <DashboardsMenu />
         </StyledWrapper>
     )
 }

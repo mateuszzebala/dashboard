@@ -11,9 +11,13 @@ const StyledBox = styled.div`
     transition: box-shadow 0.2s;
     cursor: pointer;
     background-color: ${({ theme }) => theme.secondary};
+    transition: transform 0.3s;
     a {
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
+    }
+    &:hover{
+        transform: scale(0.9);
     }
 `
 const StyledName = styled.div``

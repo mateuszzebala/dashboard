@@ -23,7 +23,8 @@ import { SearchPage } from '../pages/search/SearchPage'
 import { InfoPage } from '../pages/info/InfoPage'
 import { SessionsPage } from '../pages/sessions/SessionsPage'
 import { DatabasePutItemPage } from '../pages/database/DatabasePutItemPage'
-import { FileEditorPage } from '../pages/files/FileEditorPage'
+import { FileEditorPage } from '../pages/editor/FileEditorPage'
+import { EditorPage } from '../pages/editor/EditorPage'
 
 const pages = {
     '/dashboard/': HomePage,
@@ -36,7 +37,9 @@ const pages = {
     '/dashboard/database/:modelName/create/': DatabasePutItemPage,
 
     '/dashboard/files/': FilesPage,
-    '/dashboard/files/editor/:type/': FileEditorPage,
+
+    '/dashboard/editor/': EditorPage,
+    '/dashboard/editor/:type/': FileEditorPage,
 
     '/dashboard/messages/': MessagesPage,
 

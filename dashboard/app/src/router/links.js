@@ -12,11 +12,17 @@ export const links = {
     users: {
         index: () => '/dashboard/users/',
     },
+    editor: {
+        index: () => '/dashboard/editor/',
+        edit: (path, type = 'text') =>
+            `/dashboard/editor/${type}/?path=${path}`,
+    },
     files: {
         index: () => '/dashboard/files/',
         indexPath: (path) => `/dashboard/files/?path=${path}`,
-        editor: (path, type = 'text') =>
-            `/dashboard/files/editor/${type}/?path=${path}`,
+
+        liked: () => '/dashboard/files/liked/',
+        last: () => '/dashboard/files/last/',
     },
     terminal: {
         index: () => '/dashboard/terminal/',

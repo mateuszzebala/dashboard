@@ -38,9 +38,24 @@ const StyledWrapper = styled.div`
     gap: 20px;
 `
 
+const SwitchSetting = ({ value, setValue, prop, text }) => {
+    return (
+        <StyledRow>
+            <Switch
+                size={1.5}
+                value={value[prop]}
+                setValue={(val) => {
+                    setValue((prev) => ({ ...prev, [prop]: val(value[prop]) }))
+                }}
+            />
+            <Typography variant={'h3'}>{text}</Typography>
+        </StyledRow>
+    )
+}
+
 export const SettingsPage = () => {
     const [theme, setTheme] = useTheme()
-    const [temp, setTemp] = React.useState(false)
+    const [value, setValue] = React.useState({})
     const [primaryColor, setPrimaryColor] = React.useState(theme.primary)
     const [secondaryColor, setSecondaryColor] = React.useState(theme.secondary)
     const [successColor, setSuccessColor] = React.useState(theme.success)
@@ -62,6 +77,7 @@ export const SettingsPage = () => {
                 icon: FiSettings,
                 link: links.settings.index(),
             }}
+            submenuChildren={<Button>SAVE</Button>}
         >
             <StyledWrapper>
                 <StyledSection>
@@ -229,52 +245,104 @@ export const SettingsPage = () => {
                     </StyledRow>
                 </StyledSection>
                 <StyledSection>
-                    <span>HOME</span>
+                    <span>MAIN</span>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'dashboards_menu'}
+                        text={'Show Dashboards Menu'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'topbar_username'}
+                        text={'Show Username In TopBar'}
+                    />
 
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>App List Widget</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>
-                            Server Config Widget
-                        </Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>Logs Widget</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>Reload Logs</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>Hosts Widgets</Typography>
-                    </StyledRow>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'topbar_app_icon'}
+                        text={'Show TopBar app icon'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'leftbar_technology_icons'}
+                        text={'Show Leftbar technology icons'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'leftbar_app_icons'}
+                        text={'Show Leftbar app icons'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'leftbar_arrow_icons'}
+                        text={'Show Leftbar arrow icons'}
+                    />
+                </StyledSection>
+                <StyledSection>
+                    <span>HOME</span>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'app_list_widget'}
+                        text={'App List Widget'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'server_config_widget'}
+                        text={'Server Config Widget'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'logs_widget'}
+                        text={'Logs Widget'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'reload_logs'}
+                        text={'Reload Logs'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'hosts_widgets'}
+                        text={'Hosts Widgets'}
+                    />
                 </StyledSection>
                 <StyledSection>
                     <span>DATABASE</span>
-
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>
-                            Show on right click
-                        </Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>JSON Export</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>XLSX Export</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>CSV Export</Typography>
-                    </StyledRow>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'item_show_right_click'}
+                        text={'Show on right click'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'json_export'}
+                        text={'JSON Export'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'xlsx_export'}
+                        text={'XLSX Export'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'csv_export'}
+                        text={'CSV Export'}
+                    />
                     <StyledRow>
                         <Counter value={10} min={1} size={1.3} unit="rows" />
                         <Typography variant={'h3'}>
@@ -284,42 +352,54 @@ export const SettingsPage = () => {
                 </StyledSection>
                 <StyledSection>
                     <span>TERMINAL</span>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>Auto Clear</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>Bookmarks</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>WINDOWS/UNIX</Typography>
-                    </StyledRow>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'auto_clear'}
+                        text={'Auto Clear'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'bookmarks_terminal'}
+                        text={'Bookmarks'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'windows_unix_terminal'}
+                        text={'Windows/Unix'}
+                    />
                 </StyledSection>
                 <StyledSection>
                     <span>FILES</span>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>WINDOWS/UNIX</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>GRID/LIST</Typography>
-                    </StyledRow>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'windows_unix_files'}
+                        text={'WINDOWS/UNIX'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'grid_list_files'}
+                        text={'GRID/LIST'}
+                    />
                 </StyledSection>
                 <StyledSection>
                     <span>REQUESTS</span>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>SAVE REQUESTS</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Switch size={1.5} value={temp} setValue={setTemp} />
-                        <Typography variant={'h3'}>
-                            SAVE ADMIN REQUESTS
-                        </Typography>
-                    </StyledRow>
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'save_requests'}
+                        text={'SAVE REQUESTS'}
+                    />
+                    <SwitchSetting
+                        value={value}
+                        setValue={setValue}
+                        prop={'save_admin'}
+                        text={'SAVE ADMIN'}
+                    />
                 </StyledSection>
             </StyledWrapper>
         </MainTemplate>

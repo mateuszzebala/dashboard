@@ -24,14 +24,6 @@ const StyledWrapper = styled.div`
 `
 
 export const InfoByApp = {
-    index: (
-        <StyledWrapper>
-            <h3>
-                On each app in right you have info icon. If you will click it
-                then you see info about this app and how to use it
-            </h3>
-        </StyledWrapper>
-    ),
     [APPS.home.name]: (
         <StyledWrapper>
             <h3>CONFIG</h3>
@@ -71,6 +63,13 @@ export const InfoByApp = {
         <StyledWrapper>
             <h1>Database</h1>
             <p>Info about database app</p>
+            <p>I will complete this page after end of app</p>
+        </StyledWrapper>
+    ),
+    [APPS.files.name]: (
+        <StyledWrapper>
+            <h3>FILES</h3>
+            <p>Info about files app</p>
             <p>I will complete this page after end of app</p>
         </StyledWrapper>
     ),

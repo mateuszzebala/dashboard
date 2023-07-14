@@ -8,7 +8,7 @@ import { Input } from '../../atoms/Input'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { HiDownload } from 'react-icons/hi'
 import styled from 'styled-components'
-import { FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
+import { Fa500Px, FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
 import { FiTrash } from 'react-icons/fi'
 import { BiCopy, BiCut, BiEditAlt, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
@@ -249,7 +249,7 @@ const FolderMenu = ({
                                         title: 'Choose Other Editor',
                                         todo: (editorType) => {
                                             navigate(
-                                                links.files.editor(
+                                                links.editor.edit(
                                                     selectedItems[0].path,
                                                     editorType
                                                 )
@@ -371,6 +371,15 @@ export const FilesPage = () => {
                         setData={setData}
                         reload={reload}
                         setReload={setReload}
+                        contextMenu={[
+                            {
+                                text: 'DELETE',
+                                icon: <Fa500Px />,
+                                todo: () => {
+                                    alert()
+                                },
+                            },
+                        ]}
                     />
                 </>
             )}

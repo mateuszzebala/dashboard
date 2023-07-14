@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
 import { SiDjango } from 'react-icons/si'
-import { APPS, initLinks } from '../apps/apps'
+import { APPS } from '../apps/apps'
 import { FaReact } from 'react-icons/fa'
 import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
@@ -23,7 +23,7 @@ const StyledBar = styled.nav`
     transition: max-width 0.3s ease, min-width 0.3s ease;
     max-width: ${({ close }) => (close ? '200px' : '0')};
     min-width: ${({ close }) => (close ? '200px' : '0')};
-    box-shadow: 0 0 10px -5px ${({ theme }) => theme.primary};
+    box-shadow: 0 0 10px -5px ${({ theme }) => theme.primary}88;
     gap: 10px;
     a {
         text-decoration: none;
@@ -69,16 +69,15 @@ export const LeftBar = ({ close }) => {
                 </StyleDashboard>
             </Link>
             <StyledMenuItems>
-                {initLinks() &&
-                    Object.values(APPS).map((app) => {
-                        return (
-                            <LeftBarItem
-                                key={app.name}
-                                app={app}
-                                sublinks={app.sublinks && app.sublinks()}
-                            />
-                        )
-                    })}
+                {Object.values(APPS).map((app) => {
+                    return (
+                        <LeftBarItem
+                            key={app.name}
+                            app={app}
+                            sublinks={app.sublinks && app.sublinks()}
+                        />
+                    )
+                })}
             </StyledMenuItems>
         </StyledBar>
     )

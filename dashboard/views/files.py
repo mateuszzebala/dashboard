@@ -52,6 +52,7 @@ def get_content_of_folder(request):
 def init_files(request):
     path = request.POST.get('path') if request.POST.get('path') != 'null' else Path.home() 
     return JsonResponse({
+        'root': str(os.path.abspath(os.sep)),
         'path': str(path),
         'home': str(Path.home()),
         'project': str(settings.BASE_DIR),
@@ -129,6 +130,8 @@ def save_image(request):
     path = request.GET.get('path')
     print(request.POST.get('imageData'))
     return JsonResponse({})
+
+
 
 urlpatterns = [
     path('content/', get_content_of_folder), # GET CONTENT OF FOLER

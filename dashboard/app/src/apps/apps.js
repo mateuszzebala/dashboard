@@ -1,4 +1,4 @@
-import { BiHomeAlt2 } from 'react-icons/bi'
+import { BiEditAlt, BiHomeAlt2 } from 'react-icons/bi'
 import { AiOutlineBarChart, AiOutlineMessage } from 'react-icons/ai'
 import { BsTerminal, BsDatabase, BsFolder, BsKey } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
@@ -11,13 +11,8 @@ import { ENDPOINTS } from '../api/endpoints'
 const SUBLINKS = {}
 
 export const initLinks = async () => {
-    const { home, project, root } = (await FETCH(ENDPOINTS.terminal.init()))
-        .data
-    SUBLINKS.TERMINAL = {
-        home: home || '/',
-        project: project || '/',
-        root: root || '/',
-    }
+    SUBLINKS.TERMINAL = (await FETCH(ENDPOINTS.terminal.init())).data
+    SUBLINKS.FILES = (await FETCH(ENDPOINTS.files.init())).data
 }
 await initLinks()
 export const APPS = {
@@ -48,10 +43,16 @@ export const APPS = {
         link: links.files.index(),
         sublinks: () => {
             return {
-                LIKED: '/',
-                LAST: '/',
+                ROOT: links.files.indexPath(SUBLINKS.FILES.root),
+                HOME: links.files.indexPath(SUBLINKS.FILES.home),
+                PROJECT: links.files.indexPath(SUBLINKS.FILES.project),
             }
         },
+    },
+    editor: {
+        name: 'Editor',
+        icon: BiEditAlt,
+        link: links.editor.index(),
     },
     terminal: {
         name: 'Terminal',

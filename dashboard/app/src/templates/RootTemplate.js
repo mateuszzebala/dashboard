@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router'
 import { ENDPOINTS } from '../api/endpoints'
 import { FETCH } from '../api/api'
 import { links } from '../router/links'
+import { DashboardsMenu } from '../atoms/DashboardsMenu'
 
 const StyledCurtain = styled.div`
     display: ${({ show }) => (show ? 'flex' : 'none')};
@@ -27,6 +28,7 @@ export const RootTemplate = ({ children }) => {
 
     return (
         <>
+            <DashboardsMenu />
             <StyledCurtain show={toBoolStr(show)}>
                 <Curtain loading time={2} />
             </StyledCurtain>
