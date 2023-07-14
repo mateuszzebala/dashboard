@@ -9,8 +9,8 @@ import styled from 'styled-components'
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    font-size: 130%;
+    gap: 5px;
+
     color: ${({ theme }) => theme.primary};
     h1 {
         margin: 0;
@@ -18,22 +18,23 @@ const StyledWrapper = styled.div`
     }
     p {
         margin: 0;
+
         color: ${({ theme }) => theme.primary};
     }
 `
 
-const InfoByApp = {
+export const InfoByApp = {
     index: (
         <StyledWrapper>
-            <h1>
+            <h3>
                 On each app in right you have info icon. If you will click it
                 then you see info about this app and how to use it
-            </h1>
+            </h3>
         </StyledWrapper>
     ),
     [APPS.home.name]: (
         <StyledWrapper>
-            <h1>CONFIG</h1>
+            <h3>CONFIG</h3>
             <p>
                 Switch the most important config toggles on your server.
                 <br />
@@ -52,13 +53,13 @@ const InfoByApp = {
                 SAVE REQUESTS: If this is true then all of requests from other
                 apps are saved as logs
             </p>
-            <h1>LOG LIST</h1>
+            <h3>LOG LIST</h3>
             <p>
                 It widget showing last logs on server from others apps. If you
                 want you can disabled saveing it by toggling SAVE REQUESTS
                 Switch. Also you can disable auto reload each second in settings
             </p>
-            <h1>HOSTS MANAGE</h1>
+            <h3>HOSTS MANAGE</h3>
             <p>
                 Three hosts groups used by django for security. If you want to
                 add some host you should write it to input and click plus

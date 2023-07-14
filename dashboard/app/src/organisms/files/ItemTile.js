@@ -8,6 +8,7 @@ import {
     BsFilePlay,
     BsFileText,
     BsFileWord,
+    BsFileZip,
     BsFolder,
 } from 'react-icons/bs'
 import styled from 'styled-components'
@@ -64,6 +65,7 @@ const getIconByFileType = (type) => {
     if (type === 'docs') return <BsFileWord />
     if (type === 'sheets') return <BsFileExcel />
     if (type === 'database') return <BsFileBinary />
+    if (type === 'archive') return <BsFileZip />
 
     return <BsFileText />
 }
@@ -81,9 +83,11 @@ export const ItemTile = ({
     ...props
 }) => {
     const wrapperRef = React.useRef()
+
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
         setPos(bcr)
+        console.log(reload)
     }, [reload])
 
     return (

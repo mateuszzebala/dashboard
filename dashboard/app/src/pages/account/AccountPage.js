@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { MdOutlineAccountCircle } from 'react-icons/md'
+import { MdOutlineAccountCircle, MdOutlineEmail } from 'react-icons/md'
 import { links } from '../../router/links'
 import { Input } from '../../atoms/Input'
 import { Typography } from '../../atoms/Typography'
@@ -9,13 +9,17 @@ import styled from 'styled-components'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { Switch } from '../../atoms/Switch'
+import { FiLock } from 'react-icons/fi'
+import { AiOutlineUser } from 'react-icons/ai'
+import { LiaIdCard } from 'react-icons/lia'
 
 const StyledForm = styled.div`
     display: inline-flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    justify-content: flex-start;
+    width: 100%;
+    justify-content: center;
     height: 100%;
 `
 
@@ -24,8 +28,8 @@ const StyledRow = styled.div`
     width: 100%;
     gap: 20px;
     align-items: center;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
 `
 
 export const AccountPage = () => {
@@ -49,6 +53,7 @@ export const AccountPage = () => {
             <StyledForm>
                 <Typography variant={'h1'}>EDIT USER</Typography>
                 <Input
+                    icon={<AiOutlineUser />}
                     value={userData.username}
                     setValue={(value) => {
                         setUserData((prev) => ({
@@ -60,6 +65,7 @@ export const AccountPage = () => {
                 />
                 <Input
                     label={'E-MAIL'}
+                    icon={<MdOutlineEmail />}
                     value={userData.email}
                     setValue={(value) => {
                         setUserData((prev) => ({
@@ -70,6 +76,7 @@ export const AccountPage = () => {
                 />
                 <Input
                     label={'FIRST NAME'}
+                    icon={<LiaIdCard />}
                     value={userData.first_name}
                     setValue={(value) => {
                         setUserData((prev) => ({
@@ -80,6 +87,7 @@ export const AccountPage = () => {
                 />
                 <Input
                     label={'LAST NAME'}
+                    icon={<LiaIdCard />}
                     value={userData.last_name}
                     setValue={(value) => {
                         setUserData((prev) => ({
@@ -89,6 +97,7 @@ export const AccountPage = () => {
                     }}
                 />
                 <Input
+                    icon={<FiLock />}
                     type="password"
                     label={'NEW PASSWORD'}
                     value={userData.new_password}
@@ -99,8 +108,19 @@ export const AccountPage = () => {
                         }))
                     }}
                 />
+                <Input
+                    icon={<FiLock />}
+                    type="password"
+                    label={'NEW PASSWORD AGAIN'}
+                    value={userData.new_password_v2}
+                    setValue={(value) => {
+                        setUserData((prev) => ({
+                            ...prev,
+                            new_password_v2: value,
+                        }))
+                    }}
+                />
                 <StyledRow>
-                    <Typography variant={'h3'}>IS SUPERUSER</Typography>
                     <Switch
                         size={1.3}
                         value={userData.is_superuser}
@@ -111,9 +131,9 @@ export const AccountPage = () => {
                             }))
                         }}
                     />
+                    <Typography variant={'h4'}>IS SUPERUSER</Typography>
                 </StyledRow>
                 <StyledRow>
-                    <Typography variant={'h3'}>IS STAFF</Typography>
                     <Switch
                         size={1.3}
                         value={userData.is_staff}
@@ -124,9 +144,9 @@ export const AccountPage = () => {
                             }))
                         }}
                     />
+                    <Typography variant={'h4'}>IS STAFF</Typography>
                 </StyledRow>
                 <StyledRow>
-                    <Typography variant={'h3'}>IS ACTIVE</Typography>
                     <Switch
                         size={1.3}
                         value={userData.is_active}
@@ -137,6 +157,7 @@ export const AccountPage = () => {
                             }))
                         }}
                     />
+                    <Typography variant={'h4'}>IS ACTIVE</Typography>
                 </StyledRow>
                 <Button>SAVE DATA</Button>
             </StyledForm>

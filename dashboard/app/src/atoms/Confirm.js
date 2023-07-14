@@ -2,8 +2,6 @@ import React from 'react'
 import { Button } from './Button'
 import styled from 'styled-components'
 
-import { BsCheck, BsX } from 'react-icons/bs'
-
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -20,17 +18,19 @@ export const Confirm = ({ setOpen, todo = () => {} }) => {
                 onClick={() => {
                     setOpen(false)
                 }}
-                icon={<BsX />}
-                size={1.3}
-            />
+                size={1.5}
+            >
+                NO
+            </Button>
             <Button
                 onClick={() => {
                     setOpen(false)
                     todo()
                 }}
-                icon={<BsCheck />}
-                size={1.3}
-            />
+                size={1.5}
+            >
+                YES
+            </Button>
         </StyledWrapper>
     )
 }

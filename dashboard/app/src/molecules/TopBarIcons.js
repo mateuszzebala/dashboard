@@ -8,6 +8,7 @@ import { links } from '../router/links'
 import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
+import { InfoByApp } from '../pages/info/InfoPage'
 
 const StyledIcon = styled.span`
     display: flex;
@@ -42,6 +43,13 @@ export const TopBarIcons = ({ app, username }) => {
                     <BiUserCircle />
                 </StyledIcon>
             </Link>
+            {InfoByApp[app.name] && (
+                <Link to={links.info.app(app.name)}>
+                    <StyledIcon>
+                        <AiOutlineInfoCircle />
+                    </StyledIcon>
+                </Link>
+            )}
 
             <Link to={links.settings.index()}>
                 <StyledIcon>
@@ -65,11 +73,6 @@ export const TopBarIcons = ({ app, username }) => {
             >
                 <IoMdLogOut />
             </StyledIcon>
-            <Link to={links.info.app(app.name)}>
-                <StyledIcon>
-                    <AiOutlineInfoCircle />
-                </StyledIcon>
-            </Link>
         </StyledWrapper>
     )
 }

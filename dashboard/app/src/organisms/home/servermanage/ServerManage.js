@@ -5,7 +5,6 @@ import { Typography } from '../../../atoms/Typography'
 import { Theme } from '../../../atoms/Theme'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
-
 import { theme } from '../../../theme/theme'
 import { FiPower } from 'react-icons/fi'
 import { Button } from '../../../atoms/Button'

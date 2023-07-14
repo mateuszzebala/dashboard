@@ -60,7 +60,6 @@ export const Button = ({
     loading = false,
     icon,
     onClick,
-    download,
     tooltip,
     to,
     circle,
@@ -92,7 +91,7 @@ export const Button = ({
     )
 
     return to ? (
-        <Link to={to} download={download} {...props}>
+        <Link to={to} {...props}>
             {content}
         </Link>
     ) : (

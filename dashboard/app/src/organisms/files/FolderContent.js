@@ -5,13 +5,16 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import useResizeObserver from 'use-resize-observer'
 import { Loading } from '../../atoms/Loading'
+import { toBoolStr } from '../../utils/utils'
 
 const StyledWrapper = styled.div`
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(auto-fit, 100px);
     grid-template-rows: repeat(auto-fit, 100px);
-    height: ${({ content }) => (content ? '100%' : '0')};
+    overflow: scroll;
+    min-height: ${({ content }) => (content ? '100%' : '0')};
+    max-height: 100%;
 `
 
 const StyledSelectRect = styled.div`
@@ -20,7 +23,7 @@ const StyledSelectRect = styled.div`
     position: absolute;
     top: ${({ top }) => top}px;
     left: ${({ left }) => left}px;
-    background-color: ${({ theme }) => theme.primary}88;
+    background-color: ${({ theme }) => theme.primary}55;
     border-radius: 3px;
 `
 
@@ -41,11 +44,13 @@ export const FolderContent = ({
     folders,
     setFolders,
     reload,
-    setReload,
+
     setData,
 }) => {
     const [loading, setLoading] = React.useState(true)
     const [pos, setPos] = React.useState({})
+    const [reloadPos, setReloadPos] = React.useState(0)
+
     const [selectRect, setSelectRect] = React.useState({
         show: false,
         x1: 0,
@@ -56,18 +61,19 @@ export const FolderContent = ({
 
     const { ref: contentRef } = useResizeObserver({
         onResize: () => {
-            setReload((prev) => prev + 1)
+            setReloadPos((prev) => prev + 1)
         },
     })
 
     const handleMouseDown = (e) => {
-        setSelectRect({
-            x1: e.clientX,
-            y1: e.clientY,
-            x2: e.clientX,
-            y2: e.clientY,
-            show: true,
-        })
+        e.button === 0 &&
+            setSelectRect({
+                x1: e.clientX,
+                y1: e.clientY,
+                x2: e.clientX,
+                y2: e.clientY,
+                show: true,
+            })
     }
 
     const handleMouseUp = (e) => {
@@ -119,6 +125,7 @@ export const FolderContent = ({
     }
 
     React.useEffect(() => {
+        setLoading(true)
         FETCH(ENDPOINTS.files.content(), {
             path,
         }).then((data) => {
@@ -127,8 +134,15 @@ export const FolderContent = ({
             setFolders(data.data.folders)
             setLoading(false)
         })
-        setSelectedItems([])
     }, [path, reload])
+
+    React.useEffect(() => {
+        setSelectedItems([])
+    }, [path])
+
+    React.useEffect(() => {
+        setReloadPos((prev) => prev + 1)
+    }, [folders, files])
 
     return (
         <>
@@ -138,7 +152,11 @@ export const FolderContent = ({
                 </StyledLoading>
             )}
             <StyledWrapper
-                content={[...folders, ...files].length > 0}
+                onScroll={() => {
+                    setReloadPos((prev) => prev + 1)
+                    console.log('s')
+                }}
+                content={toBoolStr([...folders, ...files].length > 0)}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 ref={contentRef}
@@ -153,7 +171,7 @@ export const FolderContent = ({
                 {folders.map((folder) => (
                     <ItemTile
                         access={folder.access}
-                        reload={reload}
+                        reload={reloadPos}
                         setPos={(val) => {
                             setPos((prev) => ({ ...prev, [folder.name]: val }))
                         }}
@@ -168,7 +186,7 @@ export const FolderContent = ({
                 {files.map((file) => (
                     <ItemTile
                         access={file.access}
-                        reload={reload}
+                        reload={reloadPos}
                         setPos={(val) => {
                             setPos((prev) => ({ ...prev, [file.name]: val }))
                         }}

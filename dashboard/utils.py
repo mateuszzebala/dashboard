@@ -58,19 +58,21 @@ def get_type_of_file(filename):
     ext = filename.split('.')[-1]
     if ext in ['mp3', 'flac', 'wav', 'wma', 'aac', 'm4a']:
         return 'audio'
-    if ext in ['png', 'jpg', 'jpeg', 'apng', 'avif', 'gif', 'webp']:
+    if ext in ['png', 'jpg', 'jpeg', 'apng', 'avif', 'gif', 'webp', 'tiff', 'jfif', 'bmp']:
         return 'image'
-    if ext in ['mp4', 'mov', 'wmv']:
+    if ext in ['mp4', 'mov', 'avi', 'mkv', 'wmv', 'flv', 'm4v']:
         return 'video'
-    if ext in ['py', 'cpp', 'cs', 'php', 'js', 'html', 'go', 'java', 'css', 'c', 'kt', 'swift', 'ts', 'rb', 'dart', 'json', 'sh']:
+    if ext in ['py', 'cpp', 'cs', 'php', 'svg', 'js', 'html', 'go', 'java', 'css', 'c', 'kt', 'swift', 'ts', 'rb', 'dart', 'json', 'sh']:
         return 'code'
-    if ext in ['exe']:
+    if ext in ['exe', 'msi']:
         return 'program'
-    if ext in ['docx', 'doc']:
+    if ext in ['doc', 'docx', 'pdf', 'rtf', 'odt']:
         return 'docs'
-    if ext in ['xlsx']:
+    if ext in ['xlsx', 'xls', 'ods']:
         return 'sheets'
     if ext in ['sql', 'sqlite', 'sqlite3', 'db', 'csv']:
         return 'database'
+    if ext in ['zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'xz', 'tar.gz', 'tar.bz2', 'tar.xz']:
+        return 'archive'
     else:
         return 'file'

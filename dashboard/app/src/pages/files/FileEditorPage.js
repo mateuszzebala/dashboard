@@ -4,7 +4,6 @@ import { APPS } from '../../apps/apps'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Button } from '../../atoms/Button'
 import { LuSave } from 'react-icons/lu'
-import { BsArrowUpRightSquare } from 'react-icons/bs'
 import { HiDownload } from 'react-icons/hi'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
@@ -56,15 +55,18 @@ export const FileEditorPage = () => {
                             setSave((prev) => prev + 1)
                         }}
                         tooltip={'SAVE CONTENT'}
+                        size={1.3}
                         icon={<LuSave />}
                     />
                     <Button
                         to={links.files.indexPath(data.parent)}
                         tooltip={'OPEN FOLDER'}
-                        icon={<BsArrowUpRightSquare />}
+                        size={1.3}
+                        icon={<APPS.files.icon />}
                     />
                     <Button
                         tooltip={'DOWNLOAD'}
+                        size={1.3}
                         target={'_blank'}
                         download
                         to={ENDPOINTS.files.file(searchParams.get('path'))}
@@ -72,6 +74,7 @@ export const FileEditorPage = () => {
                     />
                     <Button
                         icon={<BiEditAlt />}
+                        size={1.3}
                         tooltip={'CHOOSE EDITOR'}
                         onClick={handleAskEditor}
                     ></Button>

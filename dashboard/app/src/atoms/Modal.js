@@ -63,7 +63,11 @@ const StyledExitButton = styled.button`
     font-size: 30px;
     display: inline-flex;
     flex-direction: column;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
     justify-content: center;
+    transition: background-color 0.2s;
     align-items: center;
     cursor: pointer;
     &:hover {
