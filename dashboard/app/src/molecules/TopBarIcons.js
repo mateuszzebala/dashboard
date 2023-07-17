@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiUserCircle } from 'react-icons/bi'
+import { BiSolidGrid, BiUserCircle } from 'react-icons/bi'
 import { AiOutlineInfoCircle, AiOutlineMessage } from 'react-icons/ai'
 import { FiSettings } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -9,6 +9,8 @@ import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
+import { useModalForm } from '../utils/hooks'
+import { DashboardsMenu } from '../atoms/DashboardsMenu'
 
 const StyledIcon = styled.span`
     display: flex;
@@ -18,9 +20,11 @@ const StyledIcon = styled.span`
     gap: 5px;
     text-decoration: none !important;
     color: ${({ theme }) => theme.topbar.font};
-    transition: color 0.1s;
+    transition: color 0.2s, background-color 0.2s;
+    padding: 5px;
+    border-radius: 20px;
     &:hover {
-        color: ${({ theme }) => theme.accent};
+        background-color: ${({ theme }) => theme.tertiary}44;
     }
 `
 const StyledWrapper = styled.span`
@@ -28,13 +32,12 @@ const StyledWrapper = styled.span`
     padding: 0 10px;
     align-items: center;
     justify-content: center;
-    gap: 5px;
     color: ${({ theme }) => theme.primary};
 `
 
 export const TopBarIcons = ({ app, username }) => {
     const navigate = useNavigate()
-
+    const { ask } = useModalForm()
     return (
         <StyledWrapper>
             <Link to={links.account.index()}>
@@ -62,6 +65,17 @@ export const TopBarIcons = ({ app, username }) => {
                     <AiOutlineMessage />
                 </StyledIcon>
             </Link>
+            <StyledIcon
+                onClick={() => {
+                    ask({
+                        content: DashboardsMenu,
+                        title: 'CHOOSE APP',
+                        icon: <BiSolidGrid />,
+                    })
+                }}
+            >
+                <BiSolidGrid />
+            </StyledIcon>
             <StyledIcon
                 onClick={() => {
                     FETCH(ENDPOINTS.auth.logout()).then((data) => {

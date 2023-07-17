@@ -8,7 +8,7 @@ import { Input } from '../../atoms/Input'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { HiDownload } from 'react-icons/hi'
 import styled from 'styled-components'
-import { Fa500Px, FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
+import { FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
 import { FiTrash } from 'react-icons/fi'
 import { BiCopy, BiCut, BiEditAlt, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
@@ -103,7 +103,7 @@ const FolderMenu = ({
                 <StyledMenuSide>
                     {data.parent !== path && (
                         <Button
-                            size={1.2}
+                            size={1.3}
                             tooltip={'FOLDER UP'}
                             icon={<FaArrowLeft />}
                             onClick={() => {
@@ -112,7 +112,7 @@ const FolderMenu = ({
                         />
                     )}
                     <Button
-                        size={1.2}
+                        size={1.3}
                         tooltip={'SELECT ALL'}
                         icon={<FaCheck />}
                         onClick={() => {
@@ -122,7 +122,7 @@ const FolderMenu = ({
                         }}
                     />
                     <Button
-                        size={1.2}
+                        size={1.3}
                         tooltip={'RELOAD'}
                         icon={<TbReload />}
                         onClick={() => {
@@ -130,40 +130,40 @@ const FolderMenu = ({
                         }}
                     />
                     <Button
-                        size={1.2}
+                        size={1.3}
                         tooltip={'OPEN IN TERMINAL'}
                         icon={<APPS.terminal.icon />}
                         to={links.terminal.indexPath(path)}
                     />
                     <Button
-                        size={1.2}
+                        size={1.3}
                         tooltip={'NEW FILE'}
                         icon={<BsFilePlus />}
                         onClick={handleNewFile}
                     />
                     <Button
-                        size={1.2}
+                        size={1.3}
                         tooltip={'NEW FOLDER'}
                         icon={<BsFolderPlus />}
                         onClick={handleNewFolder}
                     />
 
-                    <Button size={1.2} tooltip={'PASTE'} icon={<BiPaste />} />
+                    <Button size={1.3} tooltip={'PASTE'} icon={<BiPaste />} />
 
                     {selectedItems.length > 0 ? (
                         <>
                             <Button
-                                size={1.2}
+                                size={1.3}
                                 tooltip={'COPY'}
                                 icon={<BiCopy />}
                             />
                             <Button
-                                size={1.2}
+                                size={1.3}
                                 tooltip={'CUT'}
                                 icon={<BiCut />}
                             />
                             <Button
-                                size={1.2}
+                                size={1.3}
                                 tooltip={'DELETE'}
                                 icon={<FiTrash />}
                                 onClick={() => {
@@ -193,7 +193,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 tooltip={'MAKE ZIP'}
-                                size={1.2}
+                                size={1.3}
                                 icon={<BsFileZip />}
                                 onClick={() => {
                                     ask({
@@ -212,7 +212,7 @@ const FolderMenu = ({
                     )}
                     {selectedItems.length === 1 && (
                         <Button
-                            size={1.2}
+                            size={1.3}
                             tooltip={'RENAME'}
                             icon={<BiRename />}
                             onClick={() => {
@@ -231,7 +231,7 @@ const FolderMenu = ({
                     {isSelectedOneFile() && (
                         <>
                             <Button
-                                size={1.2}
+                                size={1.3}
                                 tooltip={'DOWNLOAD'}
                                 icon={<HiDownload />}
                                 to={ENDPOINTS.files.file(selectedItems[0].path)}
@@ -239,14 +239,14 @@ const FolderMenu = ({
                                 download
                             />
                             <Button
-                                size={1.2}
+                                size={1.3}
                                 tooltip={'EDIT'}
                                 icon={<BiEditAlt />}
                                 onClick={() => {
                                     ask({
                                         content: EditorChooser,
                                         icon: <BiEditAlt />,
-                                        title: 'Choose Other Editor',
+                                        title: 'CHOOSE EDITOR TYPE',
                                         todo: (editorType) => {
                                             navigate(
                                                 links.editor.edit(
@@ -305,6 +305,24 @@ export const FilesPage = () => {
     const [data, setData] = React.useState({})
     const [searchValue, setSearchValue] = React.useState('')
     const [reload, setReload] = React.useState(0)
+
+    React.useEffect(() => {
+        data.files &&
+            setFiles(
+                data.files.filter((file) =>
+                    file.name.toLowerCase().includes(searchValue.toLowerCase())
+                )
+            )
+        data.folders &&
+            setFolders(
+                data.folders.filter((folder) =>
+                    folder.name
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase())
+                )
+            )
+        setSelectedItems([])
+    }, [searchValue])
 
     React.useEffect(() => {
         path &&
@@ -371,15 +389,6 @@ export const FilesPage = () => {
                         setData={setData}
                         reload={reload}
                         setReload={setReload}
-                        contextMenu={[
-                            {
-                                text: 'DELETE',
-                                icon: <Fa500Px />,
-                                todo: () => {
-                                    alert()
-                                },
-                            },
-                        ]}
                     />
                 </>
             )}

@@ -1,58 +1,142 @@
 import React from 'react'
 import styled from 'styled-components'
-import { theme } from '../theme/theme'
+import { Button } from './Button'
+import { Theme } from './Theme'
 
-const StyledWrapper = styled.div`
+import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { FaBlog } from 'react-icons/fa'
+import { theme } from '../theme/theme'
+import { SiDjango } from 'react-icons/si'
+import { BiSitemap, BiSolidDashboard } from 'react-icons/bi'
+import { links } from '../router/links'
+
+const StyledButtons = styled.div`
     display: flex;
-    align-items: flex-end;
-    padding: 2px 0;
-    overflow: hidden;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    right: 0;
-    gap: 2px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 30px;
 `
 
-const StyledLine = styled.a`
-    background-color: ${({ color }) => color};
-    cursor: pointer;
-    transition: min-width 0.3s, width 0.3s, color 0.3s;
+const StyledColumn = styled.div`
     display: flex;
-    padding: 12px 4px;
-    border-radius: 2px 0 0 2px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: transparent;
-    width: 0;
-
-    z-index: 10;
-    &:hover {
-        max-width: 120px;
-        width: 120px;
-        color: ${({ theme }) => theme.secondary};
-    }
+    gap: 10px;
+    text-align: center;
 `
 
-export const DashboardsMenu = () => {
+export const DashboardsMenu = ({ setOpen }) => {
     return (
-        <StyledWrapper>
-            <StyledLine target="_blank" href={'/'} color={theme.warning}>
-                PAGE
-            </StyledLine>
-            <StyledLine target="_blank" href={'/admin/'} color={theme.accent}>
-                ADMIN
-            </StyledLine>
-            <StyledLine
-                target="_blank"
-                href={'/dashboard/'}
-                color={theme.error}
-            >
-                DASHBOARD
-            </StyledLine>
-            <StyledLine target="_blank" href={'/'} color={theme.success}>
-                OTHER
-            </StyledLine>
-        </StyledWrapper>
+        <StyledButtons>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        button: {
+                            background: theme.accent,
+                            font: theme.secondary,
+                        },
+                    }}
+                >
+                    <Button
+                        onClick={() => {
+                            setOpen(false)
+                        }}
+                        target={'_blank'}
+                        to={links.other.page()}
+                        size={2}
+                        icon={<BiSitemap />}
+                    />
+                </Theme>
+                <span>PAGE</span>
+            </StyledColumn>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        button: {
+                            background: theme.primary,
+                            font: theme.secondary,
+                        },
+                    }}
+                >
+                    <Button
+                        onClick={() => {
+                            setOpen(false)
+                        }}
+                        to={links.home()}
+                        size={2}
+                        icon={<BiSolidDashboard />}
+                    />
+                </Theme>
+                <span>
+                    DASH
+                    <br />
+                    BOARD
+                </span>
+            </StyledColumn>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        button: {
+                            background: theme.success,
+                            font: theme.secondary,
+                        },
+                    }}
+                >
+                    <Button
+                        target={'_blank'}
+                        to={links.other.admin()}
+                        size={2}
+                        icon={<SiDjango />}
+                    />
+                </Theme>
+                <span>ADMIN</span>
+            </StyledColumn>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        button: {
+                            background: theme.warning,
+                            font: theme.secondary,
+                        },
+                    }}
+                >
+                    <Button
+                        onClick={() => {
+                            setOpen(false)
+                        }}
+                        target={'_blank'}
+                        to={links.other.shoper()}
+                        size={2}
+                        icon={<AiOutlineShoppingCart />}
+                    />
+                </Theme>
+                <span>SHOPER</span>
+            </StyledColumn>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        button: {
+                            background: theme.error,
+                            font: theme.secondary,
+                        },
+                    }}
+                >
+                    <Button
+                        onClick={() => {
+                            setOpen(false)
+                        }}
+                        target={'_blank'}
+                        to={links.other.bloger()}
+                        size={2}
+                        icon={<FaBlog />}
+                    />
+                </Theme>
+                <span>BLOGER</span>
+            </StyledColumn>
+        </StyledButtons>
     )
 }

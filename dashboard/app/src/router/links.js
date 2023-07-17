@@ -1,3 +1,5 @@
+import { MANIFEST } from '../api/api'
+
 export const links = {
     home: () => '/dashboard/',
     database: {
@@ -68,5 +70,12 @@ export const links = {
     info: {
         app: (appName) => `/dashboard/info/${appName}/`,
         index: () => '/dashboard/info/',
+    },
+
+    other: {
+        admin: () => `${MANIFEST.page_url}/admin/`,
+        page: () => MANIFEST.page_url,
+        shoper: () => `${MANIFEST.page_url}/shoper/`,
+        bloger: () => `${MANIFEST.page_url}/bloger/`,
     },
 }

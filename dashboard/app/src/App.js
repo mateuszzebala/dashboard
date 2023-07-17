@@ -22,20 +22,25 @@ export const App = () => {
     return (
         <ThemeContext.Provider value={[customTheme, setCustomTheme]}>
             <ThemeProvider theme={customTheme}>
-                <ModalFormContext.Provider value={[modalForm, setModalForm]}>
-                    <MessageContext.Provider value={[messages, setMessages]}>
-                        <StyledWrapper>
-                            <GlobalStyle />
-                            <MessageGroup />
-                            <ModalForm />
-                            <BrowserRouter>
+                <BrowserRouter>
+                    <ModalFormContext.Provider
+                        value={[modalForm, setModalForm]}
+                    >
+                        <MessageContext.Provider
+                            value={[messages, setMessages]}
+                        >
+                            <StyledWrapper>
+                                <GlobalStyle />
+                                <MessageGroup />
+                                <ModalForm />
+
                                 <RootTemplate>
                                     <Router />
                                 </RootTemplate>
-                            </BrowserRouter>
-                        </StyledWrapper>
-                    </MessageContext.Provider>
-                </ModalFormContext.Provider>
+                            </StyledWrapper>
+                        </MessageContext.Provider>
+                    </ModalFormContext.Provider>
+                </BrowserRouter>
             </ThemeProvider>
         </ThemeContext.Provider>
     )

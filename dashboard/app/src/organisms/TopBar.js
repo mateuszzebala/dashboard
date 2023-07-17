@@ -57,6 +57,11 @@ const StyledTitle = styled.span`
 
 const StyledSubTitle = styled.div`
     font-size: 18px;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 `
 
 const StyledLeftSide = styled.div`
@@ -66,7 +71,7 @@ const StyledLeftSide = styled.div`
     justify-content: center;
 `
 
-export const TopBar = ({ app, setClose, title }) => {
+export const TopBar = ({ app, setClose, title, topbarLink }) => {
     const [username, setUsername] = React.useState('')
 
     React.useEffect(() => {
@@ -85,7 +90,10 @@ export const TopBar = ({ app, setClose, title }) => {
                 <StyledMenuButton onClick={handleBurgerClick}>
                     <AiOutlineMenu />
                 </StyledMenuButton>
-                <Link animation={false} to={app.link || links.home()}>
+                <Link
+                    animation={false}
+                    to={topbarLink ? topbarLink : app.link || links.home()}
+                >
                     <StyledTitle>
                         {<app.icon />} {app.name.toUpperCase()}
                         <StyledSubTitle>{title}</StyledSubTitle>

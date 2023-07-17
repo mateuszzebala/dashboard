@@ -50,6 +50,10 @@ const StyledLoading = styled.span`
 `
 
 const StyledChildren = styled.span`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     color: ${({ theme, loading }) =>
         loading ? 'transparent' : theme.button.font};
 `

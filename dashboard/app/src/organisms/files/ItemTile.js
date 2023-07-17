@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import { Tooltip } from '../../atoms/Tooltip'
 import { toBoolStr } from '../../utils/utils'
 import { FaLock } from 'react-icons/fa'
-import { ContextMenu } from '../../atoms/ContextMenu'
+
 import { useModalForm } from '../../utils/hooks'
 import { useNavigate } from 'react-router'
 import { links } from '../../router/links'
@@ -88,7 +88,7 @@ export const ItemTile = ({
     reload,
     access,
     item,
-    contextMenu,
+
     setSelectedItems,
     setPos,
     filetype,
@@ -104,51 +104,48 @@ export const ItemTile = ({
     }, [reload])
 
     return (
-        <ContextMenu data={contextMenu}>
-            <Tooltip text={filename}>
-                <StyledWrapper
-                    hidden={toBoolStr(hidden)}
-                    ref={wrapperRef}
-                    selected={toBoolStr(selected)}
-                    {...props}
-                    onClick={(e) => {
-                        !isFile && !e.shiftKey && setLocation(filename)
-                        isFile &&
-                            setSelectedItems((prev) =>
-                                selected
-                                    ? [...prev.filter((i) => i !== item)]
-                                    : [...prev, item]
-                            )
-                        e.shiftKey &&
-                            setSelectedItems((prev) =>
-                                selected
-                                    ? [...prev.filter((i) => i !== item)]
-                                    : [...prev, item]
-                            )
-                        e.detail > 1 &&
-                            ask({
-                                content: EditorChooser,
-                                icon: <BiEditAlt />,
-                                title: 'Choose Other Editor',
-                                todo: (editorType) => {
-                                    navigate(
-                                        links.editor.edit(item.path, editorType)
-                                    )
-                                },
-                            })
-                    }}
-                >
-                    <StyledIcon>
-                        {isFile ? getIconByFileType(filetype) : <BsFolder />}
-                    </StyledIcon>
-                    <StyledFilename>{filename}</StyledFilename>
-                    {!access && (
-                        <StyledLockIcon>
-                            <FaLock />
-                        </StyledLockIcon>
-                    )}
-                </StyledWrapper>
-            </Tooltip>
-        </ContextMenu>
+        <Tooltip text={filename}>
+            <StyledWrapper
+                hidden={toBoolStr(hidden)}
+                ref={wrapperRef}
+                selected={toBoolStr(selected)}
+                {...props}
+                onClick={(e) => {
+                    !isFile &&
+                        !e.shiftKey &&
+                        e.detail === 1 &&
+                        setLocation(filename)
+                    if (e.detail === 1 && (isFile || e.shiftKey)) {
+                        setSelectedItems((prev) =>
+                            selected
+                                ? [...prev.filter((i) => i !== item)]
+                                : [...prev, item]
+                        )
+                    }
+
+                    e.detail > 1 &&
+                        ask({
+                            content: EditorChooser,
+                            icon: <BiEditAlt />,
+                            title: 'CHOOSE EDITOR TYPE',
+                            todo: (editorType) => {
+                                navigate(
+                                    links.editor.edit(item.path, editorType)
+                                )
+                            },
+                        })
+                }}
+            >
+                <StyledIcon>
+                    {isFile ? getIconByFileType(filetype) : <BsFolder />}
+                </StyledIcon>
+                <StyledFilename>{filename}</StyledFilename>
+                {!access && (
+                    <StyledLockIcon>
+                        <FaLock />
+                    </StyledLockIcon>
+                )}
+            </StyledWrapper>
+        </Tooltip>
     )
 }

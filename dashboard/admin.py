@@ -7,6 +7,7 @@ from django.contrib.sessions.models import Session
 class LogAdmin(admin.ModelAdmin):
     list_display = ['method', 'datetime', 'path']
 
+
 @admin.register(Permission)
 class PermissionAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'codename']

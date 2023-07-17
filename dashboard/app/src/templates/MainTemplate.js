@@ -48,6 +48,7 @@ export const MainTemplate = ({
     children,
     title = '',
     submenuChildren,
+    topbarLink,
 }) => {
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
@@ -70,6 +71,7 @@ export const MainTemplate = ({
                         title={title}
                         app={app}
                         setClose={setLeftbarClose}
+                        topbarLink={topbarLink}
                     />
                     <SubMenu>{submenuChildren}</SubMenu>
                 </StyledTopMenu>

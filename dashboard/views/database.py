@@ -105,6 +105,8 @@ def patch_item_view(request, item):
 
 @is_superuser
 def put_item_view(request, model_name):
+
+
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
     names_of_fields = list(map(lambda field: field.name, list(filter(lambda field: not field.is_relation, model._meta.get_fields()))))
@@ -113,7 +115,7 @@ def put_item_view(request, model_name):
         (
             field_name,
             set_field_serializer(
-                request.POST.get(f'field_{field_name}') or request.FILES.get(f'field_{field_name}'), 
+                request.FILES.get(f'{field_name}') or request.POST.get(f'{field_name}'), 
                 get_type_of_field(model, field_name)
             )
         ) for field_name in names_of_fields)

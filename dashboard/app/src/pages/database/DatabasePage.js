@@ -6,6 +6,21 @@ import { FETCH } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
 import { links } from '../../router/links'
 import { APPS } from '../../apps/apps'
+import {
+    BsFillEyeFill,
+    BsFillKeyFill,
+    BsPersonFillGear,
+    BsTable,
+} from 'react-icons/bs'
+import { FaUser, FaUsers } from 'react-icons/fa'
+
+const IconByModel = {
+    user: <FaUser />,
+    group: <FaUsers />,
+    session: <BsFillKeyFill />,
+    log: <BsFillEyeFill />,
+    permission: <BsPersonFillGear />,
+}
 
 const StyledModels = styled.div`
     display: flex;
@@ -22,11 +37,14 @@ const StyledModel = styled.div`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-    border-left: 2px solid ${({ theme }) => theme.primary};
-
+    border-left: 3px solid ${({ theme }) => theme.primary};
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover {
-        transform: scale(1.1);
+        transform: translateX(10px);
     }
 `
 
@@ -72,6 +90,11 @@ export const DatabasePage = () => {
                                     navigate(links.database.model(model))
                                 }
                             >
+                                {IconByModel[model.toLowerCase()] ? (
+                                    IconByModel[model.toLowerCase()]
+                                ) : (
+                                    <BsTable />
+                                )}
                                 {model}
                             </StyledModel>
                         ))}

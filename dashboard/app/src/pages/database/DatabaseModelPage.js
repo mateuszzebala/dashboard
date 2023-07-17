@@ -106,18 +106,23 @@ export const DatabaseModelPage = () => {
             setData(res.data)
             setPages(res.data.pages)
         })
+        setSelectedItems([])
     }
 
     React.useEffect(fetchItems, [page, length, orderBy, asc, searchQuery])
+    React.useEffect(() => {
+        setPage(0)
+    }, [length, orderBy, asc, searchQuery])
 
     return (
         <MainTemplate
             app={APPS.database}
-            title={modelName}
+            title={modelName.toUpperCase()}
             submenuChildren={
                 <StyledMenu>
                     <StyledMenuSide>
                         <Button
+                            size={1.3}
                             icon={<FaCheck />}
                             onClick={() => {
                                 if (selectedItems && selectedItems.length === 0)
@@ -127,22 +132,31 @@ export const DatabaseModelPage = () => {
                                 else setSelectedItems([])
                             }}
                         />
+                        <Button
+                            to={links.database.putItem(modelName)}
+                            icon={<FaPlus />}
+                            size={1.3}
+                        />
 
                         {selectedItems.length >= 1 && (
                             <>
                                 <Button
+                                    size={1.3}
                                     tooltip={'DELETE SELECTED'}
                                     icon={<FiTrash />}
                                 />
                                 <Button
+                                    size={1.3}
                                     tooltip={'EXPORT JSON'}
                                     icon={<BsFiletypeJson />}
                                 />
                                 <Button
+                                    size={1.3}
                                     tooltip={'EXPORT XLSX'}
                                     icon={<BsFiletypeXlsx />}
                                 />
                                 <Button
+                                    size={1.3}
                                     tooltip={'EXPORT CSV'}
                                     icon={<BsFiletypeCsv />}
                                 />
@@ -152,10 +166,12 @@ export const DatabaseModelPage = () => {
                         {selectedItems.length === 1 && (
                             <>
                                 <Button
+                                    size={1.3}
                                     tooltip={'EDIT ITEM'}
                                     icon={<FiEdit />}
                                 />
                                 <Button
+                                    size={1.3}
                                     tooltip={'SHOW ITEM'}
                                     icon={<BsArrowUpRightSquare />}
                                     to={links.database.item(
@@ -170,7 +186,7 @@ export const DatabaseModelPage = () => {
                         <Counter
                             value={length}
                             setValue={setLength}
-                            min={1}
+                            min={0}
                             max={1000}
                             unit="rows"
                             size={1.2}

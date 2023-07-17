@@ -7,6 +7,7 @@ import { links } from '../router/links'
 import { TbBrandPython } from 'react-icons/tb'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
+import { HiOutlineMail } from 'react-icons/hi'
 
 const SUBLINKS = {}
 
@@ -83,26 +84,17 @@ export const APPS = {
             }
         },
     },
-    // email: {
-    //     name: 'Email',
-    //     icon: HiOutlineMail,
-    //     link: links.email.index(),
-    // },
-    // notes: {
-    //     name: 'Notes',
-    //     icon: FaRegStickyNote,
-    //     link: links.notes.index(),
-    // },
+    email: {
+        name: 'Email',
+        icon: HiOutlineMail,
+        link: links.email.index(),
+    },
+
     requests: {
         name: 'Requests',
         icon: FaRegEye,
         link: links.requests.index(),
     },
-    // finance: {
-    //     name: 'Finance',
-    //     icon: BiDollarCircle,
-    //     link: links.finance.index(),
-    // },
     sessions: {
         name: 'Sessions',
         icon: BsKey,
@@ -120,9 +112,4 @@ export const APPS = {
             }
         },
     },
-    // map: {
-    //     name: 'Map',
-    //     icon: BsGlobeEuropeAfrica,
-    //     link: links.map.index(),
-    // },
 }

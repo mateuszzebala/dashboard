@@ -6,6 +6,7 @@ const StyledTable = styled.table`
     display: table;
     max-width: 100%;
     width: 100%;
+    font-size: 20px;
 `
 
 const StyledField = styled.td`

@@ -48,7 +48,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
                         todo(value)
                     }}
                 >
-                    CONFIRM
+                    NEXT
                 </Button>
             </StyledButtons>
         </StyledWrapper>

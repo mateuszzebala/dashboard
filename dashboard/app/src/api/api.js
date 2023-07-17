@@ -4,9 +4,11 @@ import { links } from '../router/links'
 
 const manifest_location = '/dashboard/manifest.json'
 
-export const API_URL = await fetch(manifest_location)
-    .then((data) => data.json())
-    .then((data) => data.api_url)
+export const MANIFEST = await fetch(manifest_location).then(async (data) => {
+    return await data.json()
+})
+
+export const API_URL = MANIFEST.api_url
 
 export const API = (path, args = null) => {
     let url = API_URL

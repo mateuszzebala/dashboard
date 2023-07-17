@@ -46,7 +46,7 @@ export const FolderContent = ({
     folders,
     setFolders,
     reload,
-    contextMenu,
+
     setData,
 }) => {
     const [loading, setLoading] = React.useState(true)
@@ -177,7 +177,6 @@ export const FolderContent = ({
                         setSelectedItems={setSelectedItems}
                         selected={selectedItems.includes(folder)}
                         setLocation={() => setPath(folder.path)}
-                        contextMenu={contextMenu}
                         key={folder.name}
                         filename={folder.name}
                         isFile={false}
@@ -197,7 +196,6 @@ export const FolderContent = ({
                         key={file.name}
                         filename={file.name}
                         path={file.path}
-                        contextMenu={contextMenu}
                         isFile={true}
                         filetype={file.type}
                     />

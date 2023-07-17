@@ -53,7 +53,7 @@ export const DatabaseItemPage = () => {
             title={`${modelName} - ${pk}`}
             submenuChildren={
                 <StyledButtons>
-                    <Button size={0.8}>EDIT</Button>
+                    <Button size={1}>EDIT</Button>
                     <Theme
                         value={{
                             button: {
@@ -62,7 +62,7 @@ export const DatabaseItemPage = () => {
                             },
                         }}
                     >
-                        <Button size={0.8}>DELETE</Button>
+                        <Button size={1}>DELETE</Button>
                     </Theme>
                 </StyledButtons>
             }
