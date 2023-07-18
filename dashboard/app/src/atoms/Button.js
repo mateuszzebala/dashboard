@@ -7,8 +7,10 @@ import { Tooltip } from './Tooltip'
 
 const StyledWrapper = styled.button`
     position: relative;
-    background-color: ${({ theme }) => theme.button.background};
-    color: ${({ theme }) => theme.button.font};
+    background-color: ${({ theme, second }) =>
+        second ? theme.button.background + '22' : theme.button.background};
+    color: ${({ theme, second }) =>
+        second ? theme.button.background : theme.button.font};
     border: 0;
     font-size: ${({ size }) => 20 * size + 'px'};
     width: ${({ icon, size }) => (icon ? 40 * size + 'px' : 'auto')};
@@ -16,8 +18,9 @@ const StyledWrapper = styled.button`
     padding: ${({ icon, size }) =>
         icon ? '0' : size * 10 + 'px ' + size * 20 + 'px'};
     border-radius: ${({ circle, size }) => (circle ? '50%' : size * 5 + 'px')};
-    outline: 0 solid ${({ theme }) => theme.button.background}88;
-
+    outline: 0 solid black;
+    outline-color: ${({ theme, second }) =>
+        theme.button.background + (second ? '22' : '88')};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,8 +57,9 @@ const StyledChildren = styled.span`
     align-items: center;
     justify-content: center;
     gap: 5px;
-    color: ${({ theme, loading }) =>
-        loading ? 'transparent' : theme.button.font};
+    opacity: ${({ loading }) => (loading ? 0 : 1)};
+    color: ${({ theme, second }) =>
+        second ? theme.button.background : theme.button.font};
 `
 
 export const Button = ({
@@ -67,6 +71,7 @@ export const Button = ({
     tooltip,
     to,
     circle,
+    second,
     ...props
 }) => {
     const handleOnClick = (e) => !loading && onClick && onClick(e)
@@ -78,10 +83,14 @@ export const Button = ({
                 icon={toBoolStr(icon)}
                 circle={toBoolStr(circle)}
                 size={size}
+                second={toBoolStr(second)}
                 {...props}
             >
                 {icon || (
-                    <StyledChildren loading={toBoolStr(loading)}>
+                    <StyledChildren
+                        second={second}
+                        loading={toBoolStr(loading)}
+                    >
                         {children}
                     </StyledChildren>
                 )}

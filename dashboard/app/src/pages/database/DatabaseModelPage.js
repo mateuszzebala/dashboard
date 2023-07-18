@@ -13,6 +13,7 @@ import { Input } from '../../atoms/Input'
 import { APPS } from '../../apps/apps'
 import { ModelTable } from '../../organisms/database/ModelTable'
 import { Counter } from '../../atoms/Counter'
+import { Confirm } from '../../atoms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import {
     BsArrowUpRightSquare,
@@ -20,6 +21,7 @@ import {
     BsFiletypeJson,
     BsFiletypeXlsx,
 } from 'react-icons/bs'
+import { useModalForm } from '../../utils/hooks'
 
 const StyledWrapper = styled.div`
     max-width: 100%;
@@ -62,6 +64,7 @@ const StyledFooter = styled.div`
 
 export const DatabaseModelPage = () => {
     const { modelName } = useParams()
+    const { ask } = useModalForm()
     const [page, setPage] = React.useState(0)
     const [pages, setPages] = React.useState(2)
     const [searchQuery, setSearchQuery] = React.useState('')
@@ -122,6 +125,7 @@ export const DatabaseModelPage = () => {
                 <StyledMenu>
                     <StyledMenuSide>
                         <Button
+                            second
                             size={1.3}
                             icon={<FaCheck />}
                             onClick={() => {
@@ -133,6 +137,7 @@ export const DatabaseModelPage = () => {
                             }}
                         />
                         <Button
+                            second
                             to={links.database.putItem(modelName)}
                             icon={<FaPlus />}
                             size={1.3}
@@ -141,21 +146,51 @@ export const DatabaseModelPage = () => {
                         {selectedItems.length >= 1 && (
                             <>
                                 <Button
+                                    second
                                     size={1.3}
                                     tooltip={'DELETE SELECTED'}
                                     icon={<FiTrash />}
+                                    onClick={() => {
+                                        ask({
+                                            content: Confirm,
+                                            title: `Delete ${
+                                                selectedItems.length
+                                            } item${
+                                                selectedItems.length ? 's' : ''
+                                            }?`,
+                                            icon: <FiTrash />,
+                                            todo: () => {
+                                                selectedItems.forEach(
+                                                    (item) => {
+                                                        FETCH(
+                                                            ENDPOINTS.database.item(
+                                                                modelName,
+                                                                item
+                                                            ),
+                                                            { method: 'DELETE' }
+                                                        ).then(() => {
+                                                            fetchItems()
+                                                        })
+                                                    }
+                                                )
+                                            },
+                                        })
+                                    }}
                                 />
                                 <Button
+                                    second
                                     size={1.3}
                                     tooltip={'EXPORT JSON'}
                                     icon={<BsFiletypeJson />}
                                 />
                                 <Button
+                                    second
                                     size={1.3}
                                     tooltip={'EXPORT XLSX'}
                                     icon={<BsFiletypeXlsx />}
                                 />
                                 <Button
+                                    second
                                     size={1.3}
                                     tooltip={'EXPORT CSV'}
                                     icon={<BsFiletypeCsv />}
@@ -166,11 +201,17 @@ export const DatabaseModelPage = () => {
                         {selectedItems.length === 1 && (
                             <>
                                 <Button
+                                    second
                                     size={1.3}
                                     tooltip={'EDIT ITEM'}
                                     icon={<FiEdit />}
+                                    to={links.database.patchItem(
+                                        modelName,
+                                        selectedItems[0]
+                                    )}
                                 />
                                 <Button
+                                    second
                                     size={1.3}
                                     tooltip={'SHOW ITEM'}
                                     icon={<BsArrowUpRightSquare />}

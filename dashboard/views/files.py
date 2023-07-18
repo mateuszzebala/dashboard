@@ -126,6 +126,15 @@ def save_file(request):
     return JsonResponse({})
 
 @is_superuser
+def upload_file(request):
+    path = request.GET.get('path')
+    file = request.FILES.get('file')
+    with open(os.path.join(path, file.name), "wb") as f:
+        f.write(file.read())
+    return JsonResponse({})
+
+
+@is_superuser
 def save_image(request):
     path = request.GET.get('path')
     print(request.POST.get('imageData'))
@@ -142,6 +151,7 @@ urlpatterns = [
     path('touch/', touch), # TOUCH
     path('file/json/', file_json), # GET INTO ABOUT FILE IN JSON
     path('file/save/', save_file), # SAVE FILE
+    path('file/upload/', upload_file), # UPLOAD FILE
     path('file/save/image/', save_image), # SAVE IMAGE
     
 ]

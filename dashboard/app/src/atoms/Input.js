@@ -67,6 +67,7 @@ export const Input = ({
 
     ...props
 }) => {
+    const [tempValue, setTempValue] = React.useState(value)
     return (
         <StyledWrapper>
             {icon && <StyledIcon>{icon}</StyledIcon>}
@@ -74,8 +75,9 @@ export const Input = ({
             {textarea ? (
                 <StyledTextarea
                     type={type}
-                    value={value}
+                    value={tempValue}
                     onChange={(e) => {
+                        setTempValue(e.target.value)
                         setValue(e.target.value)
                     }}
                     {...props}
@@ -83,9 +85,12 @@ export const Input = ({
             ) : (
                 <StyledInput
                     type={type}
-                    value={value}
+                    value={tempValue}
                     onChange={(e) => {
-                        setValue(e.target.value)
+                        setTempValue(e.target.value)
+                        type === 'file' &&
+                            setValue(e.target.files ? e.target.files[0] : '')
+                        type !== 'file' && setValue(e.target.value)
                     }}
                     {...props}
                 />

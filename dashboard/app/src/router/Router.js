@@ -25,6 +25,7 @@ import { SessionsPage } from '../pages/sessions/SessionsPage'
 import { DatabasePutItemPage } from '../pages/database/DatabasePutItemPage'
 import { FileEditorPage } from '../pages/editor/FileEditorPage'
 import { EditorPage } from '../pages/editor/EditorPage'
+import { DatabasePatchItemPage } from '../pages/database/DatabasePatchItemPage'
 
 const pages = {
     '/dashboard/': HomePage,
@@ -35,6 +36,7 @@ const pages = {
     '/dashboard/database/:modelName/': DatabaseModelPage,
     '/dashboard/database/:modelName/:pk/': DatabaseItemPage,
     '/dashboard/database/:modelName/create/': DatabasePutItemPage,
+    '/dashboard/database/:modelName/edit/:pk': DatabasePatchItemPage,
 
     '/dashboard/files/': FilesPage,
 

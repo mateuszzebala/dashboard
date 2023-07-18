@@ -55,7 +55,7 @@ export const DatabasePutItemPage = () => {
             title={`NEW ${modelName.toUpperCase()}`}
             submenuChildren={
                 <>
-                    <Button onClick={handleSave} size={0.9}>
+                    <Button second onClick={handleSave} size={0.9}>
                         SAVE
                     </Button>
                 </>

@@ -3,14 +3,16 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
 import { Button } from '../../atoms/Button'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { fieldToString } from '../../utils/utils'
 import { Tooltip } from '../../atoms/Tooltip'
-import { Theme } from '../../atoms/Theme'
-import { theme } from '../../theme/theme'
 import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
+import { links } from '../../router/links'
+import { useModalForm } from '../../utils/hooks'
+import { Confirm } from '../../atoms/Confirm'
+import { FaTrash } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -34,7 +36,8 @@ const StyledButtons = styled.div`
 
 export const DatabaseItemPage = () => {
     const { modelName, pk } = useParams()
-
+    const { ask } = useModalForm()
+    const navigate = useNavigate()
     const [itemData, setItemData] = React.useState()
     const [modelData, setModelData] = React.useState()
 
@@ -53,17 +56,37 @@ export const DatabaseItemPage = () => {
             title={`${modelName} - ${pk}`}
             submenuChildren={
                 <StyledButtons>
-                    <Button size={1}>EDIT</Button>
-                    <Theme
-                        value={{
-                            button: {
-                                background: theme.error,
-                                font: theme.secondary,
-                            },
+                    <Button
+                        size={1}
+                        second
+                        to={links.database.patchItem(modelName, pk)}
+                    >
+                        EDIT
+                    </Button>
+
+                    <Button
+                        second
+                        size={1}
+                        onClick={() => {
+                            ask({
+                                content: Confirm,
+                                icon: <FaTrash />,
+                                title: 'DELETE ITEM?',
+                                todo: () => {
+                                    FETCH(
+                                        ENDPOINTS.database.item(modelName, pk),
+                                        { method: 'DELETE' }
+                                    ).then(() => {
+                                        navigate(
+                                            links.database.model(modelName)
+                                        )
+                                    })
+                                },
+                            })
                         }}
                     >
-                        <Button size={1}>DELETE</Button>
-                    </Theme>
+                        DELETE
+                    </Button>
                 </StyledButtons>
             }
         >

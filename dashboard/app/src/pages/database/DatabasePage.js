@@ -24,7 +24,7 @@ const IconByModel = {
 
 const StyledModels = styled.div`
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
     a {
         color: ${({ theme }) => theme.primary};
@@ -32,12 +32,12 @@ const StyledModels = styled.div`
     }
 `
 const StyledModel = styled.div`
-    padding: 20px 40px;
+    padding: 25px 40px;
     background-color: ${({ theme }) => theme.secondary};
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-    border-left: 3px solid ${({ theme }) => theme.primary};
+    border-left: 4px solid ${({ theme }) => theme.primary};
     width: 100%;
     display: flex;
     gap: 10px;
@@ -56,7 +56,7 @@ const StyledApp = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px;
+    padding: 10px;
     h1 {
         font-size: 20px;
     }

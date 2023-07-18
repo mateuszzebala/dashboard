@@ -41,6 +41,7 @@ export const ENDPOINTS = {
         save: {
             image: (path) => API(['files', 'file', 'save', 'image'], { path }),
         },
+        upload: (path) => API(['files', 'file', 'upload'], { path }),
     },
     other: {},
 }

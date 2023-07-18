@@ -51,6 +51,7 @@ export const FileEditorPage = () => {
             submenuChildren={
                 <>
                     <Button
+                        second
                         onClick={() => {
                             setSave((prev) => prev + 1)
                         }}
@@ -59,12 +60,14 @@ export const FileEditorPage = () => {
                         icon={<LuSave />}
                     />
                     <Button
+                        second
                         to={links.files.indexPath(data.parent)}
                         tooltip={'OPEN FOLDER'}
                         size={1.3}
                         icon={<APPS.files.icon />}
                     />
                     <Button
+                        second
                         tooltip={'DOWNLOAD'}
                         size={1.3}
                         target={'_blank'}
@@ -73,6 +76,7 @@ export const FileEditorPage = () => {
                         icon={<HiDownload />}
                     />
                     <Button
+                        second
                         icon={<BiEditAlt />}
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}

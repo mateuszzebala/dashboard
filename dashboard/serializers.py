@@ -28,7 +28,7 @@ def set_field_serializer(value, field_type):
     if field_type == 'DateField': 
             value = json.loads(value)
             return value and datetime.date(value['year'], value['month'], value['day'])
-    if field_type == 'TimeField': 
+    if field_type == 'TimeField':
             value = json.loads(value)
             return value and datetime.time(value['hours'], value['minutes'], value['seconds'])
     if field_type == 'DurationField': 

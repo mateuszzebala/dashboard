@@ -3,7 +3,12 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import { FolderContent } from '../../organisms/files/FolderContent'
 import { Button } from '../../atoms/Button'
-import { BsFilePlus, BsFolderPlus, BsFileZip } from 'react-icons/bs'
+import {
+    BsFilePlus,
+    BsFolderPlus,
+    BsFileZip,
+    BsFileArrowUp,
+} from 'react-icons/bs'
 import { Input } from '../../atoms/Input'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { HiDownload } from 'react-icons/hi'
@@ -103,6 +108,7 @@ const FolderMenu = ({
                 <StyledMenuSide>
                     {data.parent !== path && (
                         <Button
+                            second
                             size={1.3}
                             tooltip={'FOLDER UP'}
                             icon={<FaArrowLeft />}
@@ -112,6 +118,7 @@ const FolderMenu = ({
                         />
                     )}
                     <Button
+                        second
                         size={1.3}
                         tooltip={'SELECT ALL'}
                         icon={<FaCheck />}
@@ -122,6 +129,7 @@ const FolderMenu = ({
                         }}
                     />
                     <Button
+                        second
                         size={1.3}
                         tooltip={'RELOAD'}
                         icon={<TbReload />}
@@ -130,39 +138,71 @@ const FolderMenu = ({
                         }}
                     />
                     <Button
+                        second
                         size={1.3}
                         tooltip={'OPEN IN TERMINAL'}
                         icon={<APPS.terminal.icon />}
                         to={links.terminal.indexPath(path)}
                     />
                     <Button
+                        second
                         size={1.3}
                         tooltip={'NEW FILE'}
                         icon={<BsFilePlus />}
                         onClick={handleNewFile}
                     />
                     <Button
+                        second
                         size={1.3}
                         tooltip={'NEW FOLDER'}
                         icon={<BsFolderPlus />}
                         onClick={handleNewFolder}
                     />
+                    <Button
+                        second
+                        size={1.3}
+                        tooltip={'UPLOAD FILE'}
+                        icon={<BsFileArrowUp />}
+                        onClick={() => {
+                            ask({
+                                content: Prompt,
+                                title: 'UPLOAD FILE',
+                                icon: <BsFileArrowUp />,
+                                type: 'file',
+                                todo: (val) => {
+                                    FETCH(ENDPOINTS.files.upload(path), {
+                                        file: val,
+                                    }).then(() => {
+                                        setReload((prev) => prev + 1)
+                                    })
+                                },
+                            })
+                        }}
+                    />
 
-                    <Button size={1.3} tooltip={'PASTE'} icon={<BiPaste />} />
+                    <Button
+                        second
+                        size={1.3}
+                        tooltip={'PASTE'}
+                        icon={<BiPaste />}
+                    />
 
                     {selectedItems.length > 0 ? (
                         <>
                             <Button
+                                second
                                 size={1.3}
                                 tooltip={'COPY'}
                                 icon={<BiCopy />}
                             />
                             <Button
+                                second
                                 size={1.3}
                                 tooltip={'CUT'}
                                 icon={<BiCut />}
                             />
                             <Button
+                                second
                                 size={1.3}
                                 tooltip={'DELETE'}
                                 icon={<FiTrash />}
@@ -192,6 +232,7 @@ const FolderMenu = ({
                                 }}
                             />
                             <Button
+                                second
                                 tooltip={'MAKE ZIP'}
                                 size={1.3}
                                 icon={<BsFileZip />}
@@ -212,6 +253,7 @@ const FolderMenu = ({
                     )}
                     {selectedItems.length === 1 && (
                         <Button
+                            second
                             size={1.3}
                             tooltip={'RENAME'}
                             icon={<BiRename />}
@@ -231,6 +273,7 @@ const FolderMenu = ({
                     {isSelectedOneFile() && (
                         <>
                             <Button
+                                second
                                 size={1.3}
                                 tooltip={'DOWNLOAD'}
                                 icon={<HiDownload />}
@@ -239,6 +282,7 @@ const FolderMenu = ({
                                 download
                             />
                             <Button
+                                second
                                 size={1.3}
                                 tooltip={'EDIT'}
                                 icon={<BiEditAlt />}
@@ -271,6 +315,7 @@ const FolderMenu = ({
                 </StyledMenuSide>
             </StyledMenu>
             <FloatingActionButton
+                second
                 icon={<BsFilePlus />}
                 size={1.3}
                 right={80}
@@ -278,11 +323,13 @@ const FolderMenu = ({
             />
             <FloatingActionButton
                 size={1.3}
+                second
                 icon={<BsFolderPlus />}
                 onClick={handleNewFolder}
             />
             {data.parent !== path && (
                 <FloatingActionButton
+                    second
                     right={140}
                     size={1.3}
                     icon={<FaArrowLeft />}
