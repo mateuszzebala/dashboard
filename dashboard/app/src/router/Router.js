@@ -11,7 +11,7 @@ import { UsersPage } from '../pages/users/UsersPage'
 import { SignInPage } from '../pages/SignInPage'
 import { FinancePage } from '../pages/finance/FinancePage'
 import { TerminalPage } from '../pages/terminal/TerminalPage'
-import { PythonPage } from '../pages/python/PythonPage'
+
 import { NotesPage } from '../pages/notes/NotesPage'
 import { EmailPage } from '../pages/email/EmailPage'
 import { StatisticsPage } from '../pages/statistics/StatisticsPage'
@@ -50,8 +50,6 @@ const pages = {
     '/dashboard/finance/': FinancePage,
 
     '/dashboard/terminal/': TerminalPage,
-
-    '/dashboard/python/': PythonPage,
 
     '/dashboard/email/': EmailPage,
 

@@ -106,16 +106,6 @@ def touch(request):
     file.close()
     return JsonResponse({})
 
-@is_superuser
-def file_json(request):
-
-    path = request.GET.get('path')
-    return JsonResponse({
-        'path': path,
-        'filename': path.split(os.sep)[-1],
-        'parent': os.path.abspath(os.path.join(path, os.pardir)),
-    })
-   
     
 @is_superuser
 def save_file(request):
@@ -134,11 +124,6 @@ def upload_file(request):
     return JsonResponse({})
 
 
-@is_superuser
-def save_image(request):
-    path = request.GET.get('path')
-    print(request.POST.get('imageData'))
-    return JsonResponse({})
 
 
 
@@ -149,9 +134,5 @@ urlpatterns = [
     path('mkdir/', mkdir), # MAKE DIR
     path('remove/', remove), # REMOVE
     path('touch/', touch), # TOUCH
-    path('file/json/', file_json), # GET INTO ABOUT FILE IN JSON
-    path('file/save/', save_file), # SAVE FILE
-    path('file/upload/', upload_file), # UPLOAD FILE
-    path('file/save/image/', save_image), # SAVE IMAGE
-    
+    path('upload/', upload_file), # UPLOAD FILE
 ]

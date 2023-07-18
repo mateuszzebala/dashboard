@@ -39,12 +39,13 @@ const StyledModel = styled.div`
     cursor: pointer;
     border-left: 4px solid ${({ theme }) => theme.primary};
     width: 100%;
+    max-width: 300px;
     display: flex;
     gap: 10px;
     align-items: center;
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover {
-        transform: translateX(10px);
+        transform: scale(0.98);
     }
 `
 

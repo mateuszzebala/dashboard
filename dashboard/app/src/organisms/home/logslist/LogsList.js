@@ -35,13 +35,7 @@ export const LogsList = () => {
             setLogs(data.data.logs)
         })
     }
-
-    React.useEffect(() => {
-        handleReload()
-        const interval = setInterval(handleReload, 1000)
-        return () => clearInterval(interval)
-    }, [])
-
+    React.useEffect(handleReload, [])
     return (
         <StyledWrapper>
             <StyledList onClick={handleReload}>

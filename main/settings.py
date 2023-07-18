@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # LOGGING = {
 #     'version': 1,
-#     'disable_existing_loggers': False,
+#     'disable_existing_loggers': True,
 #     'handlers': {
 #         'file': {
 #             'level': 'INFO',

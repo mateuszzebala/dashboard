@@ -92,7 +92,7 @@ export const theme = {
 }
 
 // const primary = '#ffffff'
-// const secondary = '#444444'
+// const secondary = '#181915'
 // const tertiary = '#8f8f8f'
 // const accent = '#4f8de3'
 // const error = '#FF6B6B'

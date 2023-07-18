@@ -28,3 +28,9 @@ class Log(models.Model):
     def __str__(self):
         return f"{self.method} - {self.path}"
 
+class Configuration(models.Model):
+    name = models.CharField(max_length=32)
+    value = models.JSONField()
+
+    def __str__(self):
+        return self.name

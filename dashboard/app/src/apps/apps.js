@@ -4,10 +4,8 @@ import { BsTerminal, BsDatabase, BsFolder, BsKey } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
 import { FaRegEye } from 'react-icons/fa'
 import { links } from '../router/links'
-import { TbBrandPython } from 'react-icons/tb'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
-import { HiOutlineMail } from 'react-icons/hi'
 
 const SUBLINKS = {}
 
@@ -67,11 +65,7 @@ export const APPS = {
             }
         },
     },
-    python: {
-        name: 'Python',
-        icon: TbBrandPython,
-        link: links.python.index(),
-    },
+
     messages: {
         name: 'Messages',
         icon: AiOutlineMessage,
@@ -84,11 +78,11 @@ export const APPS = {
             }
         },
     },
-    email: {
-        name: 'Email',
-        icon: HiOutlineMail,
-        link: links.email.index(),
-    },
+    // email: {
+    //     name: 'Email',
+    //     icon: HiOutlineMail,
+    //     link: links.email.index(),
+    // },
 
     requests: {
         name: 'Requests',

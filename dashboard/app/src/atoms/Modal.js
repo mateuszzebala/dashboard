@@ -63,6 +63,7 @@ const StyledExitButton = styled.button`
     font-size: 30px;
     display: inline-flex;
     flex-direction: column;
+    color: ${({ theme }) => theme.primary};
     border-radius: 50%;
     width: 35px;
     height: 35px;

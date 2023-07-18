@@ -33,15 +33,20 @@ export const ENDPOINTS = {
         content: () => API(['files', 'content']),
         init: () => API(['files', 'init']),
         file: (path) => API(['files', 'file'], { path }),
-        fileJson: (path) => API(['files', 'file', 'json'], { path }),
+
         mkdir: () => API(['files', 'mkdir']),
         remove: () => API(['files', 'remove']),
         touch: () => API(['files', 'touch']),
-        saveFile: (path) => API(['files', 'file', 'save'], { path }),
-        save: {
-            image: (path) => API(['files', 'file', 'save', 'image'], { path }),
-        },
+
         upload: (path) => API(['files', 'file', 'upload'], { path }),
+    },
+    editor: {
+        json: (path) => API(['editor', 'json'], { path }),
+        save: {
+            run: (path) => API(['editor', 'save', 'run'], { path }),
+            text: (path) => API(['editor', 'save', 'text'], { path }),
+            image: (path) => API(['editor', 'save', 'image'], { path }),
+        },
     },
     other: {},
 }

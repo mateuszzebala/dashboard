@@ -32,7 +32,7 @@ const StyledBar = styled.nav`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
+    }ki9
 `
 
 const StyleDashboard = styled.span`
