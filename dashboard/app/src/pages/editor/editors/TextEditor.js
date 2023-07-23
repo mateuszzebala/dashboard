@@ -3,12 +3,9 @@ import styled from 'styled-components'
 import { range } from '../../../utils/utils'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Loading } from '../../../atoms/Loading'
-import { Input } from '../../../atoms/Input'
 import { Button } from '../../../atoms/Button'
-import { FaPlay } from 'react-icons/fa'
-import { BsTerminal } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import { HiDownload } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
@@ -17,6 +14,11 @@ import { LuSave } from 'react-icons/lu'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { BiEditAlt } from 'react-icons/bi'
 import { convertTerminalTextToHTML } from '../../../utils/utils'
+import { useModalForm } from '../../../utils/hooks'
+import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
+import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
+import { BsFillPlayFill, BsPlay } from 'react-icons/bs'
+import { AiOutlineHeart } from 'react-icons/ai'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -80,14 +82,14 @@ const StyledIde = styled.div`
 `
 
 const StyledTerminal = styled.pre`
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
     font-family: var(--font-family);
-    background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
-    padding: 5px;
     font-size: 20px;
+    overflow: scroll;
+    max-width: 80vw;
+    max-height: 70vh;
+    min-height: 70vh;
+    min-width: 80vw;
 `
 
 const Lines = ({ max }) => {
@@ -102,16 +104,35 @@ const Lines = ({ max }) => {
     )
 }
 
+const Terminal = ({ terminalContent }) => (
+    <StyledTerminal
+        dangerouslySetInnerHTML={{
+            __html: convertTerminalTextToHTML(terminalContent),
+        }}
+    />
+)
+
 export const TextEditor = () => {
     const [searchParams] = useSearchParams()
     const { type } = useParams()
+    const { ask } = useModalForm()
+    const navigate = useNavigate()
     const [data, setData] = React.useState({})
     const [value, setValue] = React.useState(false)
     const [command, setCommand] = React.useState('')
     const [loading, setLoading] = React.useState(true)
     const [runLoading, setRunLoading] = React.useState(false)
-    const [showTerminal, setShowTerminal] = React.useState(false)
-    const [terminalContent, setTerminalContent] = React.useState('$')
+    const [saveLoading, setSaveLoading] = React.useState(false)
+
+    const handleSave = () => {
+        value !== false && setSaveLoading(true)
+        value !== false &&
+            FETCH(ENDPOINTS.editor.save.text(searchParams.get('path')), {
+                content: value,
+            }).then(() => {
+                setSaveLoading(false)
+            })
+    }
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.files.file(searchParams.get('path')))
@@ -133,7 +154,7 @@ export const TextEditor = () => {
     return (
         <MainTemplate
             app={APPS.editor}
-            title={type.toUpperCase() + ' ' + searchParams.get('path')}
+            title={type.toUpperCase() + ' - ' + searchParams.get('path')}
             submenuChildren={
                 <>
                     <Button
@@ -141,17 +162,8 @@ export const TextEditor = () => {
                         tooltip={'SAVE FILE'}
                         size={1.3}
                         icon={<LuSave />}
-                        onClick={() => {
-                            value !== false &&
-                                FETCH(
-                                    ENDPOINTS.editor.save.text(
-                                        searchParams.get('path')
-                                    ),
-                                    {
-                                        content: value,
-                                    }
-                                )
-                        }}
+                        loading={saveLoading}
+                        onClick={handleSave}
                     />
                     <Button
                         second
@@ -162,7 +174,7 @@ export const TextEditor = () => {
                     />
                     <Button
                         second
-                        tooltip={'DOWNLOAD VIDEO'}
+                        tooltip={'DOWNLOAD FILE'}
                         size={1.3}
                         target={'_blank'}
                         download="true"
@@ -174,24 +186,56 @@ export const TextEditor = () => {
                         icon={<BiEditAlt />}
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
-                    ></Button>
+                        onClick={() => {
+                            ask({
+                                content: EditorChooser,
+                                icon: <BiEditAlt />,
+                                title: 'CHOOSE EDITOR TYPE',
+                                todo: (editorType) => {
+                                    navigate(
+                                        links.editor.edit(
+                                            searchParams.get('path'),
+                                            editorType
+                                        )
+                                    )
+                                },
+                            })
+                        }}
+                    />
+                    <Button
+                        second
+                        onClick={() => {
+                            FETCH(
+                                ENDPOINTS.editor.like(searchParams.get('path'))
+                            )
+                        }}
+                        tooltip={'LIKE'}
+                        size={1.3}
+                        icon={<AiOutlineHeart />}
+                    />
                     |
                     <Button
                         second
-                        size={1.3}
-                        icon={<BsTerminal />}
+                        size={1.1}
                         onClick={() => {
-                            setShowTerminal((prev) => !prev)
+                            ask({
+                                content: ChooseRunner,
+                                title: 'RUNNER',
+                                icon: <BsFillPlayFill />,
+                                filename: data.filename,
+                                todo: (val) => {
+                                    setCommand(val)
+                                },
+                            })
                         }}
-                    />
-                    <Input
-                        label={'COMMAND'}
-                        value={command}
-                        setValue={setCommand}
-                    />
+                    >
+                        {command ? command : 'RUNNER'}
+                    </Button>
                     {command.length >= 1 && (
                         <Button
                             second
+                            size={1.3}
+                            icon={<BsPlay />}
                             loading={runLoading}
                             onClick={() => {
                                 if (value !== false) {
@@ -202,17 +246,19 @@ export const TextEditor = () => {
                                         ),
                                         { command, content: value }
                                     ).then((data) => {
-                                        setTerminalContent(
-                                            data.data.output + data.data.errors
-                                        )
                                         setRunLoading(false)
-                                        setShowTerminal(true)
+                                        ask({
+                                            content: Terminal,
+                                            title: 'TERMINAL',
+                                            icon: <APPS.terminal.icon />,
+                                            terminalContent:
+                                                data.data.output +
+                                                data.data.errors,
+                                        })
                                     })
                                 }
                             }}
-                        >
-                            <FaPlay /> RUN
-                        </Button>
+                        />
                     )}
                 </>
             }
@@ -225,46 +271,39 @@ export const TextEditor = () => {
 
             {!loading && (
                 <StyledIde>
-                    {!showTerminal && (
-                        <StyledWrapper>
-                            <Lines
-                                max={value.split('\n').length}
-                                height={value.split('\n').length}
-                            />
-                            <StyledTextArea
-                                onKeyDown={(e) => {
-                                    if (e.key == 'Tab') {
-                                        e.preventDefault()
-                                        var start = e.target.selectionStart
-                                        var end = e.target.selectionEnd
-                                        e.target.value =
-                                            e.target.value.substring(0, start) +
-                                            '\t' +
-                                            e.target.value.substring(end)
-                                        e.target.selectionStart =
-                                            e.target.selectionEnd = start + 1
-                                        setValue(e.target.value)
-                                    }
-                                }}
-                                preformate
-                                spellCheck={false}
-                                height={value.split('\n').length}
-                                onChange={(e) => {
-                                    setValue(e.target.value)
-                                }}
-                                value={value}
-                            />
-                        </StyledWrapper>
-                    )}
-                    {showTerminal && (
-                        <StyledTerminal
-                            dangerouslySetInnerHTML={{
-                                __html: convertTerminalTextToHTML(
-                                    terminalContent
-                                ),
-                            }}
+                    <StyledWrapper>
+                        <Lines
+                            max={value.split('\n').length}
+                            height={value.split('\n').length}
                         />
-                    )}
+                        <StyledTextArea
+                            onKeyDown={(e) => {
+                                if (e.key == 'Tab') {
+                                    e.preventDefault()
+                                    var start = e.target.selectionStart
+                                    var end = e.target.selectionEnd
+                                    e.target.value =
+                                        e.target.value.substring(0, start) +
+                                        '\t' +
+                                        e.target.value.substring(end)
+                                    e.target.selectionStart =
+                                        e.target.selectionEnd = start + 1
+                                    setValue(e.target.value)
+                                }
+                                if (e.key === 's' && e.ctrlKey) {
+                                    e.preventDefault()
+                                    handleSave()
+                                }
+                            }}
+                            preformate
+                            spellCheck={false}
+                            height={value.split('\n').length}
+                            onChange={(e) => {
+                                setValue(e.target.value)
+                            }}
+                            value={value}
+                        />
+                    </StyledWrapper>
                 </StyledIde>
             )}
         </MainTemplate>

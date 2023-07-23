@@ -10,7 +10,7 @@ import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
 import { useModalForm } from '../utils/hooks'
-import { DashboardsMenu } from '../atoms/DashboardsMenu'
+import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
 
 const StyledIcon = styled.span`
     display: flex;

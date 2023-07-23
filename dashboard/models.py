@@ -34,3 +34,9 @@ class Configuration(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TestModel(models.Model):
+    is_some = models.BooleanField(null=True)
+    other = models.FileField(upload_to='To_REMOVE_Media/images')
+    

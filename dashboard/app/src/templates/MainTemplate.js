@@ -29,7 +29,7 @@ const StyledContent = styled.article`
     height: 100%;
     transition: width 0.3s;
     width: ${({ leftbarclose }) =>
-        !leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
+        leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
     background-color: ${({ theme }) => theme.content.background};
     color: ${({ theme }) => theme.content.font};
     overflow: auto;
@@ -39,7 +39,7 @@ const StyledTopMenu = styled.div`
     box-shadow: 0 0 10px -6px ${({ theme }) => theme.primary};
     z-index: 2;
     width: ${({ leftbarclose }) =>
-        !leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
+        leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
     transition: width 0.3s;
 `
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
+import { SwitchWithNull } from '../../../atoms/SwitchWithNull'
 import { Switch } from '../../../atoms/Switch'
 
 const StyledRow = styled.div`
@@ -21,7 +22,18 @@ export const BooleanFieldInput = ({ field, onChange }) => {
     return (
         <StyledRow>
             <Typography variant={'h3'}>{field.name}</Typography>
-            <Switch size={1.4} value={value} setValue={setValue} />
+            {field.params.null ? (
+                <>
+                    <SwitchWithNull
+                        size={1.4}
+                        value={value}
+                        setValue={setValue}
+                    />
+                    {value === null ? 'null' : value.toString()}
+                </>
+            ) : (
+                <Switch size={1.4} value={value} setValue={setValue} />
+            )}
         </StyledRow>
     )
 }

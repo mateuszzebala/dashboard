@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Log, Configuration
+from .models import Log, Configuration, TestModel
 from django.contrib.auth.models import Permission
 from django.contrib.sessions.models import Session
 
@@ -7,6 +7,9 @@ from django.contrib.sessions.models import Session
 class LogAdmin(admin.ModelAdmin):
     list_display = ['method', 'datetime', 'path']
 
+@admin.register(TestModel)
+class TestModelAdmin(admin.ModelAdmin):
+    list_display = ['is_some', 'other']
 
 @admin.register(Permission)
 class PermissionAdmin(admin.ModelAdmin):

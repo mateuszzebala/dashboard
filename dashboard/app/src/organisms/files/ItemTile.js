@@ -20,7 +20,7 @@ import { useModalForm } from '../../utils/hooks'
 import { useNavigate } from 'react-router'
 import { links } from '../../router/links'
 import { BiEditAlt } from 'react-icons/bi'
-import { EditorChooser } from '../../molecules/EditorChooser'
+import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
@@ -66,7 +66,7 @@ const StyledLockIcon = styled.div`
     left: 10px;
 `
 
-const getIconByFileType = (type) => {
+export const getIconByFileType = (type) => {
     if (type === 'audio') return <BsFileMusic />
     if (type === 'video') return <BsFilePlay />
     if (type === 'image') return <BsFileEarmarkImage />

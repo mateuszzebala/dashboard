@@ -1,13 +1,14 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { APPS } from '../../apps/apps'
 import { FieldInput } from '../../organisms/database/FieldInput'
 import styled from 'styled-components'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
-import { Button } from '../../atoms/Button'
+import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { links } from '../../router/links'
+import { FaRegSave } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -19,14 +20,23 @@ const StyledWrapper = styled.div`
 `
 export const DatabasePutItemPage = () => {
     const { modelName } = useParams()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [fields, setFields] = React.useState([])
     const [values, setValues] = React.useState({})
 
     const handleSave = () => {
-        FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
-            navigate(links.database.item(modelName, data.data.pk))
-        })
+        const nullable = Object.assign(
+            {},
+            ...fields.map(({ name, params }) => ({ [name]: params.null }))
+        )
+        console.log(nullable)
+        const err = Object.keys(values).some(
+            (field) => values[field] === null && !nullable[field]
+        )
+        console.log(err)
+        // FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
+        //     navigate(links.database.item(modelName, data.data.pk))
+        // })
     }
 
     React.useEffect(() => {
@@ -53,13 +63,6 @@ export const DatabasePutItemPage = () => {
             app={APPS.database}
             topbarLink={links.database.model(modelName)}
             title={`NEW ${modelName.toUpperCase()}`}
-            submenuChildren={
-                <>
-                    <Button second onClick={handleSave} size={0.9}>
-                        SAVE
-                    </Button>
-                </>
-            }
         >
             <StyledWrapper>
                 {fields.map((field) => (
@@ -76,6 +79,9 @@ export const DatabasePutItemPage = () => {
                     />
                 ))}
             </StyledWrapper>
+            <FloatingActionButton onClick={handleSave} size={1}>
+                <FaRegSave /> SAVE
+            </FloatingActionButton>
         </MainTemplate>
     )
 }

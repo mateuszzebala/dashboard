@@ -42,6 +42,8 @@ export const ENDPOINTS = {
     },
     editor: {
         json: (path) => API(['editor', 'json'], { path }),
+        last_and_liked: () => API(['editor', 'last&liked']),
+        like: (path) => API(['editor', 'like'], { path }),
         save: {
             run: (path) => API(['editor', 'save', 'run'], { path }),
             text: (path) => API(['editor', 'save', 'text'], { path }),

@@ -60,10 +60,12 @@ export const fieldToString = (value, type) => {
         value = value ? 'True' : 'False'
     } else if (type === 'DurationField') {
         value = durationToString(value)
+    }
+    if (type === 'JSONField') {
+        value = JSON.stringify(value)
     } else {
         value = value.toString()
     }
-
     return value
 }
 

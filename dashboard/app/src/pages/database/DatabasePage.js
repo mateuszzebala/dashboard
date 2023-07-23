@@ -13,6 +13,7 @@ import {
     BsTable,
 } from 'react-icons/bs'
 import { FaUser, FaUsers } from 'react-icons/fa'
+import { BiWrench } from 'react-icons/bi'
 
 const IconByModel = {
     user: <FaUser />,
@@ -20,11 +21,12 @@ const IconByModel = {
     session: <BsFillKeyFill />,
     log: <BsFillEyeFill />,
     permission: <BsPersonFillGear />,
+    configuration: <BiWrench />,
 }
 
 const StyledModels = styled.div`
     display: flex;
-    gap: 10px;
+    gap: 20px;
     flex-wrap: wrap;
     a {
         color: ${({ theme }) => theme.primary};
@@ -37,7 +39,7 @@ const StyledModel = styled.div`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-    border-left: 4px solid ${({ theme }) => theme.primary};
+    border-left: 3px solid ${({ theme }) => theme.primary};
     width: 100%;
     max-width: 300px;
     display: flex;
@@ -45,7 +47,7 @@ const StyledModel = styled.div`
     align-items: center;
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover {
-        transform: scale(0.98);
+        transform: scale(0.95);
     }
 `
 

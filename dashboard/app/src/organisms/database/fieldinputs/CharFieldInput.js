@@ -19,7 +19,8 @@ export const CharFieldInput = ({ field, onChange }) => {
     const [value, setValue] = React.useState('')
 
     React.useEffect(() => {
-        onChange(value)
+        value && onChange(value)
+        !value && onChange(null)
     }, [value])
 
     if (field.params.choices) {

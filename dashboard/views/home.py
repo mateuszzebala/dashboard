@@ -26,7 +26,7 @@ def manage_server_configuration_view(request):
     return JsonResponse(dict((name, bool(value)) for name, value in SERVER_CONFIG.CONFIGURATION.items()))
 
 @is_superuser
-def manage_allowed_hosts(request):
+def manage_allowed_hosts_view(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.ALLOWED_HOSTS = request.POST.get('hosts').split(',')
         settings.ALLOWED_HOSTS = SERVER_CONFIG.ALLOWED_HOSTS
@@ -34,7 +34,7 @@ def manage_allowed_hosts(request):
     return JsonResponse({'hosts':SERVER_CONFIG.GET_ALLOWED_HOSTS()})
 
 @is_superuser
-def manage_cors_allowed_origins(request):
+def manage_cors_allowed_origins_view(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.CORS_ALLOWED_ORIGINS = request.POST.get('hosts').split(',')
         settings.CORS_ALLOWED_ORIGINS = SERVER_CONFIG.CORS_ALLOWED_ORIGINS
@@ -42,7 +42,7 @@ def manage_cors_allowed_origins(request):
     return JsonResponse({'hosts':SERVER_CONFIG.CORS_ALLOWED_ORIGINS})
 
 @is_superuser
-def manage_csrf_trusted_origins(request):
+def manage_csrf_trusted_origins_view(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.CSRF_TRUSTED_ORIGINS = request.POST.get('hosts').split(',')
         settings.CSRF_TRUSTED_ORIGINS = SERVER_CONFIG.CSRF_TRUSTED_ORIGINS
@@ -50,7 +50,7 @@ def manage_csrf_trusted_origins(request):
     return JsonResponse({'hosts':SERVER_CONFIG.CSRF_TRUSTED_ORIGINS})
 
 @is_superuser
-def get_last_logs(request):
+def get_last_logs_view(request):
     last_logs = list(Log.objects.all().order_by('datetime').reverse())[0:50]
     return JsonResponse({
         'logs': [
@@ -75,8 +75,8 @@ def get_last_logs(request):
 
 urlpatterns = [
     path('configuration/', manage_server_configuration_view), # MANAGE SERVER CONFIGURATION 
-    path('hosts/allowed_hosts/', manage_allowed_hosts), # MANAGE HOSTS CONFIGURATION 
-    path('hosts/cors_allowed_origins/', manage_cors_allowed_origins), # MANAGE CORS ALLOWED ORIGINS
-    path('hosts/csrf_trusted_origins/', manage_csrf_trusted_origins), # MANAGE CSRF TRUSTED ORIGINS
-    path('logs/', get_last_logs), # GET LAST LOGS 
+    path('hosts/allowed_hosts/', manage_allowed_hosts_view), # MANAGE HOSTS CONFIGURATION 
+    path('hosts/cors_allowed_origins/', manage_cors_allowed_origins_view), # MANAGE CORS ALLOWED ORIGINS
+    path('hosts/csrf_trusted_origins/', manage_csrf_trusted_origins_view), # MANAGE CSRF TRUSTED ORIGINS
+    path('logs/', get_last_logs_view), # GET LAST LOGS 
 ]

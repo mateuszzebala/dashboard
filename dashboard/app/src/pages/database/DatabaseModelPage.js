@@ -13,7 +13,7 @@ import { Input } from '../../atoms/Input'
 import { APPS } from '../../apps/apps'
 import { ModelTable } from '../../organisms/database/ModelTable'
 import { Counter } from '../../atoms/Counter'
-import { Confirm } from '../../atoms/Confirm'
+import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import {
     BsArrowUpRightSquare,

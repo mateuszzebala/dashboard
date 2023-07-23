@@ -80,19 +80,21 @@ def manage_item_view(request, model_name, pk):
     if item is None: return error_message('Item does not exists', 400)
 
     if request.POST.get('method') == 'DELETE': 
-        print(pk)
         return delete_item_view(request, item)
     if request.POST.get('method') == 'PATCH': return patch_item_view(request, item)
 
     return get_item_view(request, item)
 
+@is_superuser
 def get_item_view(request, item):
     return JsonResponse(item_to_json(item))
 
+@is_superuser
 def delete_item_view(request, item):
     item.delete()
     return JsonResponse({'done': True})
 
+@is_superuser
 def patch_item_view(request, item):
     field = request.POST.get('field')
     value_post = unescape(request.POST.get('value') or '')
@@ -104,6 +106,7 @@ def patch_item_view(request, item):
     setattr(item, field.name, set_field_serializer(value, field.get_internal_type()))
     item.save()
     return JsonResponse({'done': True})
+
 
 @is_superuser
 def put_item_view(request, model_name):

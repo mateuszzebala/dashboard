@@ -21,12 +21,12 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useModalForm } from '../../utils/hooks'
 import { TbReload } from 'react-icons/tb'
-import { Prompt } from '../../atoms/Prompt'
-import { Confirm } from '../../atoms/Confirm'
-import { ChooseDevice } from '../../molecules/ChooseDevice'
+import { Prompt } from '../../atoms/modalforms/Prompt'
+import { Confirm } from '../../atoms/modalforms/Confirm'
+import { ChooseDevice } from '../../atoms/modalforms/ChooseDevice'
 import { links } from '../../router/links'
 import { useMessage } from '../../utils/messages'
-import { EditorChooser } from '../../molecules/EditorChooser'
+import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 
 const StyledMenu = styled.div`
     display: flex;

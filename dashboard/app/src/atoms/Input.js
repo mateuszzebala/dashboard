@@ -68,6 +68,11 @@ export const Input = ({
     ...props
 }) => {
     const [tempValue, setTempValue] = React.useState(value)
+
+    React.useEffect(() => {
+        value !== tempValue && setTempValue(value)
+    }, [value])
+
     return (
         <StyledWrapper>
             {icon && <StyledIcon>{icon}</StyledIcon>}

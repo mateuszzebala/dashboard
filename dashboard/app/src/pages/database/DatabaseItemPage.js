@@ -11,7 +11,7 @@ import { Tooltip } from '../../atoms/Tooltip'
 import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
 import { links } from '../../router/links'
 import { useModalForm } from '../../utils/hooks'
-import { Confirm } from '../../atoms/Confirm'
+import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FaTrash } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`

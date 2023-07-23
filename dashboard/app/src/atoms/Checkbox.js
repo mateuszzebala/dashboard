@@ -14,10 +14,15 @@ const StyledWrapper = styled.button`
         ${({ theme }) => theme.checkbox};
     border-radius: ${({ size }) => size * 5 + 'px'};
     color: white;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, outline-width 0.1s;
+    outline: 0px solid ${({ theme }) => theme.checkbox}88;
     cursor: pointer;
+
     svg {
         stroke-width: ${({ size }) => size * 0.5 + 'px'};
+    }
+    &:hover {
+        outline-width: ${({ size }) => size * 2 + 'px'};
     }
 `
 

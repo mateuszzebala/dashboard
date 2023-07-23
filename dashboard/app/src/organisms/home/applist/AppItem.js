@@ -16,7 +16,7 @@ const StyledBox = styled.div`
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
     }
-    &:hover{
+    &:hover {
         transform: scale(0.9);
     }
 `

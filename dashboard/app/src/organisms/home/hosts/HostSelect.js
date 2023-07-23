@@ -7,7 +7,7 @@ import { Input } from '../../../atoms/Input'
 import { Typography } from '../../../atoms/Typography'
 import { FaPlus } from 'react-icons/fa'
 import { useModalForm } from '../../../utils/hooks'
-import { Confirm } from '../../../atoms/Confirm'
+import { Confirm } from '../../../atoms/modalforms/Confirm'
 import { FiTrash } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`

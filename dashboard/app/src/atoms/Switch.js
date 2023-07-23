@@ -23,7 +23,7 @@ const StyledDot = styled.div`
     width: ${({ size }) => size * 20 + 'px'};
     height: ${({ size }) => size * 20 + 'px'};
     background-color: ${({ theme }) => theme.switch.dot};
-    border-radius: ${({ size }) => size * 5 + 'px'};
+    border-radius: ${({ size }) => size * 4 + 'px'};
     transition: transform 0.3s;
     transform: translateX(
         ${({ value, size }) => (value ? size * 20 + 'px' : 0)}

@@ -1,37 +1,41 @@
 import React from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
 import { ENDPOINTS } from '../../../api/endpoints'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '../../../atoms/Button'
-import { HiDownload } from 'react-icons/hi'
+import { useParams } from 'react-router-dom'
+import { HiDownload, HiOutlineColorSwatch } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
 import { links } from '../../../router/links'
 import { LuSave } from 'react-icons/lu'
-import { FETCH } from '../../../api/api'
 import { MainTemplate } from '../../../templates/MainTemplate'
-import { BiEditAlt } from 'react-icons/bi'
+import { BiCrop, BiEditAlt, BiSolidDropletHalf } from 'react-icons/bi'
+import { useModalForm } from '../../../utils/hooks'
+import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
+import { BsFillBrightnessHighFill } from 'react-icons/bs'
+import { IoMdContrast } from 'react-icons/io'
+import { TbTemperature } from 'react-icons/tb'
+import { FiScissors } from 'react-icons/fi'
 
 export const VideoEditor = () => {
     const [searchParams] = useSearchParams()
     const { type } = useParams()
-    const [data, setData] = React.useState({})
-
-    React.useEffect(() => {
-        FETCH(ENDPOINTS.editor.json(searchParams.get('path'))).then((data) => {
-            setData(data.data)
-        })
-    }, [searchParams])
+    const { ask } = useModalForm()
+    const navigate = useNavigate()
+    const [data] = React.useState({})
+    const [saveLoading] = React.useState(false)
 
     return (
         <MainTemplate
             app={APPS.editor}
-            title={type.toUpperCase() + ' ' + searchParams.get('path')}
+            title={type.toUpperCase() + ' - ' + searchParams.get('path')}
             submenuChildren={
                 <>
                     <Button
                         second
-                        tooltip={'SAVE VIDEO'}
+                        tooltip={'SAVE IMAGE'}
                         size={1.3}
                         icon={<LuSave />}
+                        loading={saveLoading}
                     />
                     <Button
                         second
@@ -42,7 +46,7 @@ export const VideoEditor = () => {
                     />
                     <Button
                         second
-                        tooltip={'DOWNLOAD VIDEO'}
+                        tooltip={'DOWNLOAD IMAGE'}
                         size={1.3}
                         target={'_blank'}
                         download="true"
@@ -54,9 +58,73 @@ export const VideoEditor = () => {
                         icon={<BiEditAlt />}
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
-                    ></Button>
+                        onClick={() => {
+                            ask({
+                                content: EditorChooser,
+                                icon: <BiEditAlt />,
+                                title: 'CHOOSE EDITOR TYPE',
+                                todo: (editorType) => {
+                                    navigate(
+                                        links.editor.edit(
+                                            searchParams.get('path'),
+                                            editorType
+                                        )
+                                    )
+                                },
+                            })
+                        }}
+                    />
+                    |
+                    <Button
+                        second
+                        tooltip={'BRIGHTNESS'}
+                        size={1.3}
+                        icon={<BsFillBrightnessHighFill />}
+                    />
+                    <Button
+                        second
+                        tooltip={'CONTRAST'}
+                        size={1.3}
+                        icon={<IoMdContrast />}
+                    />
+                    <Button
+                        second
+                        tooltip={'COLORS'}
+                        size={1.3}
+                        icon={<HiOutlineColorSwatch />}
+                    />
+                    <Button
+                        second
+                        tooltip={'CROP'}
+                        size={1.3}
+                        icon={<BiCrop />}
+                    />
+                    <Button
+                        second
+                        tooltip={'SATURATION'}
+                        size={1.3}
+                        icon={<BiSolidDropletHalf />}
+                    />
+                    <Button
+                        second
+                        tooltip={'TEMPERATURE'}
+                        size={1.3}
+                        icon={<TbTemperature />}
+                    />
+                    <Button
+                        second
+                        tooltip={'CUT'}
+                        size={1.3}
+                        icon={<FiScissors />}
+                    />
                 </>
             }
-        ></MainTemplate>
+        >
+            <video
+                width={450}
+                height={300}
+                src={ENDPOINTS.files.file(searchParams.get('path'))}
+            />
+        </MainTemplate>
     )
 }

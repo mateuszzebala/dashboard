@@ -21,8 +21,8 @@ const StyledBar = styled.nav`
     overflow-x: hidden;
     z-index: 2;
     transition: max-width 0.3s ease, min-width 0.3s ease;
-    max-width: ${({ close }) => (close ? '200px' : '0')};
-    min-width: ${({ close }) => (close ? '200px' : '0')};
+    max-width: ${({ close }) => (close ? '0' : '200px')};
+    min-width: ${({ close }) => (close ? '0' : '200px')};
     box-shadow: 0 0 10px -5px ${({ theme }) => theme.primary}88;
     gap: 10px;
     a {
@@ -32,7 +32,7 @@ const StyledBar = styled.nav`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }ki9
+    }
 `
 
 const StyleDashboard = styled.span`

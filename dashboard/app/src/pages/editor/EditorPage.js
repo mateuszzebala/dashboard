@@ -2,9 +2,15 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
-
-import { BsFileImage } from 'react-icons/bs'
 import { AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
+import { useModalForm } from '../../utils/hooks'
+import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
+import { BiEditAlt } from 'react-icons/bi'
+import { links } from '../../router/links'
+import { useNavigate } from 'react-router'
+import { getIconByFileType } from '../../organisms/files/ItemTile'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -39,7 +45,7 @@ const StyledFile = styled.div`
     display: flex;
     cursor: pointer;
     border-radius: 0 5px 5px 0;
-    border-left: 4px solid ${({ theme }) => theme.primary};
+    border-left: 3px solid ${({ theme }) => theme.primary};
     transition: transform 0.3s;
     &:hover {
         transform: scale(0.95);
@@ -59,6 +65,18 @@ const StyledColumn = styled.div`
 `
 
 export const EditorPage = () => {
+    const [last, setLast] = React.useState([])
+    const [liked, setLiked] = React.useState([])
+    const { ask } = useModalForm()
+    const navigate = useNavigate()
+
+    React.useEffect(() => {
+        FETCH(ENDPOINTS.editor.last_and_liked()).then((data) => {
+            setLast(data.data.last)
+            setLiked(data.data.liked)
+        })
+    }, [])
+
     return (
         <MainTemplate app={APPS.editor}>
             <StyledWrapper>
@@ -68,15 +86,28 @@ export const EditorPage = () => {
                         LIKED
                     </StyledTitle>
                     <StyledFiles>
-                        <StyledFile>
-                            <BsFileImage /> main.py
-                        </StyledFile>
-                        <StyledFile>
-                            <BsFileImage /> main.py
-                        </StyledFile>
-                        <StyledFile>
-                            <BsFileImage /> main.py
-                        </StyledFile>
+                        {liked.map((file) => (
+                            <StyledFile
+                                onClick={() => {
+                                    ask({
+                                        content: EditorChooser,
+                                        icon: <BiEditAlt />,
+                                        title: 'CHOOSE EDITOR TYPE',
+                                        todo: (editorType) => {
+                                            navigate(
+                                                links.editor.edit(
+                                                    file.path,
+                                                    editorType
+                                                )
+                                            )
+                                        },
+                                    })
+                                }}
+                                key={file.path}
+                            >
+                                {getIconByFileType(file.type)} {file.basename}
+                            </StyledFile>
+                        ))}
                     </StyledFiles>
                 </StyledColumn>
                 <StyledColumn>
@@ -85,9 +116,28 @@ export const EditorPage = () => {
                         LAST
                     </StyledTitle>
                     <StyledFiles>
-                        <StyledFile>
-                            <BsFileImage /> screenshot.png
-                        </StyledFile>
+                        {last.map((file) => (
+                            <StyledFile
+                                onClick={() => {
+                                    ask({
+                                        content: EditorChooser,
+                                        icon: <BiEditAlt />,
+                                        title: 'CHOOSE EDITOR TYPE',
+                                        todo: (editorType) => {
+                                            navigate(
+                                                links.editor.edit(
+                                                    file.path,
+                                                    editorType
+                                                )
+                                            )
+                                        },
+                                    })
+                                }}
+                                key={file.path}
+                            >
+                                {getIconByFileType(file.type)} {file.basename}
+                            </StyledFile>
+                        ))}
                     </StyledFiles>
                 </StyledColumn>
             </StyledWrapper>
