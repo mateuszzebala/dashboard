@@ -5,7 +5,7 @@ import { Button } from '../../../atoms/Button'
 import { useParams } from 'react-router-dom'
 import { HiDownload, HiOutlineColorSwatch } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
-import { links } from '../../../router/links'
+import { LINKS } from '../../../router/links'
 import { LuSave } from 'react-icons/lu'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { BiCrop, BiEditAlt, BiSolidDropletHalf } from 'react-icons/bi'
@@ -38,7 +38,7 @@ export const ImageEditor = () => {
                     />
                     <Button
                         second
-                        to={links.files.indexPath(data.parent)}
+                        to={LINKS.files.indexPath(data.parent)}
                         tooltip={'OPEN FOLDER'}
                         size={1.3}
                         icon={<APPS.files.icon />}
@@ -64,7 +64,7 @@ export const ImageEditor = () => {
                                 title: 'CHOOSE EDITOR TYPE',
                                 todo: (editorType) => {
                                     navigate(
-                                        links.editor.edit(
+                                        LINKS.editor.edit(
                                             searchParams.get('path'),
                                             editorType
                                         )

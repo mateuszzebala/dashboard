@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { useParams } from 'react-router'
 import { APPS } from '../../apps/apps'
@@ -82,7 +82,7 @@ export const InfoPage = () => {
         <MainTemplate
             app={{
                 name: 'Info',
-                link: links.info.index(),
+                link: LINKS.info.index(),
                 icon: AiOutlineInfoCircle,
             }}
             title={appName || ''}

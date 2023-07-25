@@ -18,7 +18,7 @@ import { FaLock } from 'react-icons/fa'
 
 import { useModalForm } from '../../utils/hooks'
 import { useNavigate } from 'react-router'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { BiEditAlt } from 'react-icons/bi'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 
@@ -130,7 +130,7 @@ export const ItemTile = ({
                             title: 'CHOOSE EDITOR TYPE',
                             todo: (editorType) => {
                                 navigate(
-                                    links.editor.edit(item.path, editorType)
+                                    LINKS.editor.edit(item.path, editorType)
                                 )
                             },
                         })

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ENDPOINTS } from './endpoints'
-import { links } from '../router/links'
+import { LINKS } from '../router/links'
 
 const manifest_location = '/dashboard/manifest.json'
 
@@ -52,8 +52,8 @@ export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
     formData.append('csrfmiddlewaretoken', tokenData.token)
 
     if (tokenData.username === null) {
-        if (window.location.pathname !== links.auth.signin())
-            window.location.href = links.auth.signinNext(
+        if (window.location.pathname !== LINKS.auth.signin())
+            window.location.href = LINKS.auth.signinNext(
                 window.location.pathname
             )
     }

@@ -10,7 +10,7 @@ import {
     BsFolder,
 } from 'react-icons/bs'
 import { FaArrowLeft } from 'react-icons/fa'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { toBoolStr } from '../../utils/utils'
 import { TbReload } from 'react-icons/tb'
 import { Input } from '../../atoms/Input'
@@ -136,7 +136,7 @@ export const SelectFile = ({
                         />
                         <Button
                             target={'_blank'}
-                            to={links.files.indexPath(path)}
+                            to={LINKS.files.indexPath(path)}
                             icon={<BsArrowUpRightSquare />}
                         />
                         <Button

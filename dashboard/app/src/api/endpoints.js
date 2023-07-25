@@ -50,5 +50,8 @@ export const ENDPOINTS = {
             image: (path) => API(['editor', 'save', 'image'], { path }),
         },
     },
-    other: {},
+    other: {
+        get_config: (name) => API(['other', 'config', 'get'], { name }),
+        set_config: (name) => API(['other', 'config', 'set'], { name }),
+    },
 }

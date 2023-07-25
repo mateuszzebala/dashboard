@@ -9,7 +9,7 @@ import { Button } from '../../../atoms/Button'
 import { useParams } from 'react-router-dom'
 import { HiDownload } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
-import { links } from '../../../router/links'
+import { LINKS } from '../../../router/links'
 import { LuSave } from 'react-icons/lu'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { BiEditAlt } from 'react-icons/bi'
@@ -17,8 +17,9 @@ import { convertTerminalTextToHTML } from '../../../utils/utils'
 import { useModalForm } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
-import { BsFillPlayFill, BsPlay } from 'react-icons/bs'
+import { BsFillPlayFill } from 'react-icons/bs'
 import { AiOutlineHeart } from 'react-icons/ai'
+import { FaPlay } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -167,7 +168,7 @@ export const TextEditor = () => {
                     />
                     <Button
                         second
-                        to={links.files.indexPath(data.parent)}
+                        to={LINKS.files.indexPath(data.parent)}
                         tooltip={'OPEN FOLDER'}
                         size={1.3}
                         icon={<APPS.files.icon />}
@@ -193,7 +194,7 @@ export const TextEditor = () => {
                                 title: 'CHOOSE EDITOR TYPE',
                                 todo: (editorType) => {
                                     navigate(
-                                        links.editor.edit(
+                                        LINKS.editor.edit(
                                             searchParams.get('path'),
                                             editorType
                                         )
@@ -220,7 +221,7 @@ export const TextEditor = () => {
                         onClick={() => {
                             ask({
                                 content: ChooseRunner,
-                                title: 'RUNNER',
+                                title: 'RUN',
                                 icon: <BsFillPlayFill />,
                                 filename: data.filename,
                                 todo: (val) => {
@@ -229,13 +230,13 @@ export const TextEditor = () => {
                             })
                         }}
                     >
-                        {command ? command : 'RUNNER'}
+                        {command ? command.toUpperCase() : 'RUN'}
                     </Button>
                     {command.length >= 1 && (
                         <Button
                             second
                             size={1.3}
-                            icon={<BsPlay />}
+                            icon={<FaPlay />}
                             loading={runLoading}
                             onClick={() => {
                                 if (value !== false) {

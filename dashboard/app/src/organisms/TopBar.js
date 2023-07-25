@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TopBarIcons } from '../molecules/TopBarIcons'
-import { links } from '../router/links'
+import { LINKS } from '../router/links'
 import { Link } from '../atoms/Link'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { FETCH } from '../api/api'
@@ -92,7 +92,7 @@ export const TopBar = ({ app, setClose, title, topbarLink }) => {
                 </StyledMenuButton>
                 <Link
                     animation={false}
-                    to={topbarLink ? topbarLink : app.link || links.home()}
+                    to={topbarLink ? topbarLink : app.link || LINKS.home()}
                 >
                     <StyledTitle>
                         {<app.icon />} {app.name.toUpperCase()}

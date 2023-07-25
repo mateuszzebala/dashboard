@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Log, Configuration, TestModel
+from .models import Log, Configuration, TestModel, Account
 from django.contrib.auth.models import Permission
 from django.contrib.sessions.models import Session
 
@@ -20,5 +20,12 @@ class SessionAdmin(admin.ModelAdmin):
     list_display = ['session_key', 'expire_date']
 
 @admin.register(Configuration)
-class DashboardConfigurationAdmin(admin.ModelAdmin):
+class ConfigurationAdmin(admin.ModelAdmin):
     list_display = ['name', 'value']
+
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ['id', 'state', 'country', 'website']
+
+    
+

@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FaCheck, FaPlus } from 'react-icons/fa'
 import { Button } from '../../atoms/Button'
@@ -138,7 +138,7 @@ export const DatabaseModelPage = () => {
                         />
                         <Button
                             second
-                            to={links.database.putItem(modelName)}
+                            to={LINKS.database.putItem(modelName)}
                             icon={<FaPlus />}
                             size={1.3}
                         />
@@ -205,7 +205,7 @@ export const DatabaseModelPage = () => {
                                     size={1.3}
                                     tooltip={'EDIT ITEM'}
                                     icon={<FiEdit />}
-                                    to={links.database.patchItem(
+                                    to={LINKS.database.patchItem(
                                         modelName,
                                         selectedItems[0]
                                     )}
@@ -215,7 +215,7 @@ export const DatabaseModelPage = () => {
                                     size={1.3}
                                     tooltip={'SHOW ITEM'}
                                     icon={<BsArrowUpRightSquare />}
-                                    to={links.database.item(
+                                    to={LINKS.database.item(
                                         modelName,
                                         selectedItems[0]
                                     )}
@@ -257,7 +257,7 @@ export const DatabaseModelPage = () => {
                     />
 
                     <FloatingActionButton
-                        to={links.database.putItem(modelName)}
+                        to={LINKS.database.putItem(modelName)}
                         icon={<FaPlus />}
                         circle
                         size={1.5}

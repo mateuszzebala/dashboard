@@ -4,7 +4,7 @@ import { AiOutlineInfoCircle, AiOutlineMessage } from 'react-icons/ai'
 import { FiSettings } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
-import { links } from '../router/links'
+import { LINKS } from '../router/links'
 import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
@@ -40,27 +40,27 @@ export const TopBarIcons = ({ app, username }) => {
     const { ask } = useModalForm()
     return (
         <StyledWrapper>
-            <Link to={links.account.index()}>
+            <Link to={LINKS.account.index()}>
                 <StyledIcon>
                     {username}
                     <BiUserCircle />
                 </StyledIcon>
             </Link>
             {InfoByApp[app.name] && (
-                <Link to={links.info.app(app.name)}>
+                <Link to={LINKS.info.app(app.name)}>
                     <StyledIcon>
                         <AiOutlineInfoCircle />
                     </StyledIcon>
                 </Link>
             )}
 
-            <Link to={links.settings.index()}>
+            <Link to={LINKS.settings.index()}>
                 <StyledIcon>
                     <FiSettings />
                 </StyledIcon>
             </Link>
 
-            <Link to={links.messages.index()}>
+            <Link to={LINKS.messages.index()}>
                 <StyledIcon>
                     <AiOutlineMessage />
                 </StyledIcon>
@@ -80,7 +80,7 @@ export const TopBarIcons = ({ app, username }) => {
                 onClick={() => {
                     FETCH(ENDPOINTS.auth.logout()).then((data) => {
                         if (data.data.logout) {
-                            navigate(links.auth.signin())
+                            navigate(LINKS.auth.signin())
                         }
                     })
                 }}

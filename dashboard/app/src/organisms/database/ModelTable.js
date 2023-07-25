@@ -5,6 +5,8 @@ import { Tooltip } from '../../atoms/Tooltip'
 import { fieldToString, toBoolStr } from '../../utils/utils'
 import styled from 'styled-components'
 import { HiSelector } from 'react-icons/hi'
+import { LINKS } from '../../router/links'
+import { useNavigate, useParams } from 'react-router'
 
 const StyledField = styled.td`
     border: 2px solid ${({ theme }) => theme.table.border};
@@ -53,6 +55,9 @@ export const ModelTable = ({
     selectedItems,
     setSelectedItems,
 }) => {
+    const navigate = useNavigate()
+    const { modelName } = useParams()
+
     return (
         <>
             <Table>
@@ -99,7 +104,13 @@ export const ModelTable = ({
                                                 key={field}
                                                 onClick={(e) => {
                                                     e.preventDefault()
-
+                                                    e.detail > 1 &&
+                                                        navigate(
+                                                            LINKS.database.item(
+                                                                modelName,
+                                                                item.pk
+                                                            )
+                                                        )
                                                     setSelectedItems((prev) => {
                                                         if (
                                                             selectedItems.includes(

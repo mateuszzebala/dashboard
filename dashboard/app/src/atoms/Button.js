@@ -86,14 +86,12 @@ export const Button = ({
                 second={toBoolStr(second)}
                 {...props}
             >
-                {icon || (
-                    <StyledChildren
-                        second={second}
-                        loading={toBoolStr(loading)}
-                    >
-                        {children}
-                    </StyledChildren>
-                )}
+                <StyledChildren
+                    second={second}
+                    loading={toBoolStr(loading)}
+                >
+                    {icon || children}
+                </StyledChildren>
                 {loading && (
                     <StyledLoading>
                         <VscLoading />

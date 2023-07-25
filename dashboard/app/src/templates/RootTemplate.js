@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router'
 import { ENDPOINTS } from '../api/endpoints'
 import { FETCH } from '../api/api'
-import { links } from '../router/links'
+import { LINKS } from '../router/links'
 
 const StyledCurtain = styled.div`
     display: ${({ show }) => (show ? 'flex' : 'none')};
@@ -16,9 +16,9 @@ export const RootTemplate = ({ children }) => {
     const navigate = useNavigate()
     React.useEffect(() => {
         FETCH(ENDPOINTS.auth.me()).then((data) => {
-            if (window.location.pathname !== links.auth.signin()) {
+            if (window.location.pathname !== LINKS.auth.signin()) {
                 if (!data.data.signin) {
-                    navigate(links.auth.signinNext(window.location.pathname))
+                    navigate(LINKS.auth.signinNext(window.location.pathname))
                 }
             }
             setShow(false)

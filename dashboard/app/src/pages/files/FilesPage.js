@@ -24,7 +24,7 @@ import { TbReload } from 'react-icons/tb'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 import { Confirm } from '../../atoms/modalforms/Confirm'
 import { ChooseDevice } from '../../atoms/modalforms/ChooseDevice'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { useMessage } from '../../utils/messages'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 
@@ -142,7 +142,7 @@ const FolderMenu = ({
                         size={1.3}
                         tooltip={'OPEN IN TERMINAL'}
                         icon={<APPS.terminal.icon />}
-                        to={links.terminal.indexPath(path)}
+                        to={LINKS.terminal.indexPath(path)}
                     />
                     <Button
                         second
@@ -293,7 +293,7 @@ const FolderMenu = ({
                                         title: 'CHOOSE EDITOR TYPE',
                                         todo: (editorType) => {
                                             navigate(
-                                                links.editor.edit(
+                                                LINKS.editor.edit(
                                                     selectedItems[0].path,
                                                     editorType
                                                 )

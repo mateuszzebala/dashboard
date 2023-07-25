@@ -6,7 +6,7 @@ import { APPS } from '../apps/apps'
 import { FaReact } from 'react-icons/fa'
 import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
-import { links } from '../router/links'
+import { LINKS } from '../router/links'
 
 const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.leftbar.background};
@@ -59,7 +59,7 @@ const StyledMenuItems = styled.div`
 export const LeftBar = ({ close }) => {
     return (
         <StyledBar close={toBoolStr(close)}>
-            <Link to={links.home()}>
+            <Link to={LINKS.home()}>
                 <StyleDashboard>
                     <SiDjango /> <FaReact />
                     <br />

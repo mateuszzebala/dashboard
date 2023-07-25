@@ -8,7 +8,7 @@ import { FaBlog } from 'react-icons/fa'
 import { theme } from '../../theme/theme'
 import { SiDjango } from 'react-icons/si'
 import { BiSitemap, BiSolidDashboard } from 'react-icons/bi'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 
 const StyledButtons = styled.div`
     display: flex;
@@ -46,7 +46,7 @@ export const DashboardsMenu = ({ setOpen }) => {
                             setOpen(false)
                         }}
                         target={'_blank'}
-                        to={links.other.page()}
+                        to={LINKS.other.page()}
                         size={2}
                         icon={<BiSitemap />}
                     />
@@ -66,7 +66,7 @@ export const DashboardsMenu = ({ setOpen }) => {
                         onClick={() => {
                             setOpen(false)
                         }}
-                        to={links.home()}
+                        to={LINKS.home()}
                         size={2}
                         icon={<BiSolidDashboard />}
                     />
@@ -88,7 +88,7 @@ export const DashboardsMenu = ({ setOpen }) => {
                 >
                     <Button
                         target={'_blank'}
-                        to={links.other.admin()}
+                        to={LINKS.other.admin()}
                         size={2}
                         icon={<SiDjango />}
                     />
@@ -109,7 +109,7 @@ export const DashboardsMenu = ({ setOpen }) => {
                             setOpen(false)
                         }}
                         target={'_blank'}
-                        to={links.other.shoper()}
+                        to={LINKS.other.shoper()}
                         size={2}
                         icon={<AiOutlineShoppingCart />}
                     />
@@ -130,7 +130,7 @@ export const DashboardsMenu = ({ setOpen }) => {
                             setOpen(false)
                         }}
                         target={'_blank'}
-                        to={links.other.bloger()}
+                        to={LINKS.other.bloger()}
                         size={2}
                         icon={<FaBlog />}
                     />

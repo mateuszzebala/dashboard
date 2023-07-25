@@ -1,7 +1,7 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { MdOutlineAccountCircle, MdOutlineEmail } from 'react-icons/md'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { Input } from '../../atoms/Input'
 import { Typography } from '../../atoms/Typography'
 import { Button } from '../../atoms/Button'
@@ -47,7 +47,7 @@ export const AccountPage = () => {
             app={{
                 name: 'Account',
                 icon: MdOutlineAccountCircle,
-                link: links.account.index(),
+                link: LINKS.account.index(),
             }}
         >
             <StyledForm>

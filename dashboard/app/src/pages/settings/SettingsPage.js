@@ -1,7 +1,7 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { FiSettings } from 'react-icons/fi'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { ColorInput } from '../../atoms/ColorInput'
 import { useTheme } from '../../utils/hooks'
 import styled from 'styled-components'
@@ -75,7 +75,7 @@ export const SettingsPage = () => {
             app={{
                 name: 'Settings',
                 icon: FiSettings,
-                link: links.settings.index(),
+                link: LINKS.settings.index(),
             }}
             submenuChildren={<Button>SAVE</Button>}
         >

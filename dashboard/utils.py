@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.contrib import admin
+from dashboard.models import Configuration
 from dashboard.serializers import get_field_serializer
 
 def get_all_models():
@@ -76,3 +77,28 @@ def get_type_of_file(filename):
         return 'archive'
     else:
         return 'file'
+
+
+
+class Config:
+
+    @staticmethod
+    def get(name):
+        config = Configuration.objects.filter(name=name).first()
+        if config is None: return None
+        return config.value
+    
+    @staticmethod
+    def set(name, value):
+        config = Configuration.objects.filter(name=name).first()
+        if config is None:
+            config.value = value
+            config.save()
+        else:
+            config = Configuration(name=name, value=value)
+            config.save()
+    
+    @staticmethod
+    def exists(name):
+        config = Configuration.objects.filter(name=name).first()
+        return config is not None

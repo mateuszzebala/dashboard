@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { APPS } from '../../apps/apps'
 import {
     BsFillEyeFill,
@@ -26,8 +26,8 @@ const IconByModel = {
 
 const StyledModels = styled.div`
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap;
     a {
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
@@ -68,6 +68,7 @@ const StyledApp = styled.div`
 export const DatabasePage = () => {
     const [models, setModels] = React.useState([])
     const navigate = useNavigate()
+
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.models()).then((data) => {
             const newModels = {}
@@ -90,7 +91,7 @@ export const DatabasePage = () => {
                             <StyledModel
                                 key={model}
                                 onClick={() =>
-                                    navigate(links.database.model(model))
+                                    navigate(LINKS.database.model(model))
                                 }
                             >
                                 {IconByModel[model.toLowerCase()] ? (

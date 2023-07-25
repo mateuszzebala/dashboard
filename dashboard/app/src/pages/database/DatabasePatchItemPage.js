@@ -3,7 +3,7 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
 import { Button } from '../../atoms/Button'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { useParams } from 'react-router'
 
 const StyledWrapper = styled.div`
@@ -20,7 +20,7 @@ export const DatabasePatchItemPage = () => {
     return (
         <MainTemplate
             app={APPS.database}
-            topbarLink={links.database.model(modelName)}
+            topbarLink={LINKS.database.model(modelName)}
             title={`EDIT ${modelName.toUpperCase()}`}
             submenuChildren={
                 <>

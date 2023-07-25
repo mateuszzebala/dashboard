@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { FaRegSave } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
@@ -61,7 +61,7 @@ export const DatabasePutItemPage = () => {
     return (
         <MainTemplate
             app={APPS.database}
-            topbarLink={links.database.model(modelName)}
+            topbarLink={LINKS.database.model(modelName)}
             title={`NEW ${modelName.toUpperCase()}`}
         >
             <StyledWrapper>

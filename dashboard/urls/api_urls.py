@@ -7,7 +7,9 @@ views = [
     'auth',
     'terminal',
     'files',
-    'editor'
+    'editor',
+    'other',
+    'users'
 ]
 
 

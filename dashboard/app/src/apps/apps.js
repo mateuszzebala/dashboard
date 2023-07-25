@@ -3,7 +3,7 @@ import { AiOutlineBarChart, AiOutlineMessage } from 'react-icons/ai'
 import { BsTerminal, BsDatabase, BsFolder, BsKey } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
 import { FaRegEye } from 'react-icons/fa'
-import { links } from '../router/links'
+import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 
@@ -18,17 +18,17 @@ export const APPS = {
     home: {
         name: 'Home',
         icon: BiHomeAlt2,
-        link: links.home(),
+        link: LINKS.home(),
     },
     database: {
         name: 'Database',
         icon: BsDatabase,
-        link: links.database.index(),
+        link: LINKS.database.index(),
     },
     users: {
         name: 'Users',
         icon: FiUsers,
-        link: links.users.index(),
+        link: LINKS.users.index(),
         sublinks: () => {
             return {
                 ADMINS: '/',
@@ -39,29 +39,29 @@ export const APPS = {
     files: {
         name: 'Files',
         icon: BsFolder,
-        link: links.files.index(),
+        link: LINKS.files.index(),
         sublinks: () => {
             return {
-                ROOT: links.files.indexPath(SUBLINKS.FILES.root),
-                HOME: links.files.indexPath(SUBLINKS.FILES.home),
-                PROJECT: links.files.indexPath(SUBLINKS.FILES.project),
+                ROOT: LINKS.files.indexPath(SUBLINKS.FILES.root),
+                HOME: LINKS.files.indexPath(SUBLINKS.FILES.home),
+                PROJECT: LINKS.files.indexPath(SUBLINKS.FILES.project),
             }
         },
     },
     editor: {
         name: 'Editor',
         icon: BiEditAlt,
-        link: links.editor.index(),
+        link: LINKS.editor.index(),
     },
     terminal: {
         name: 'Terminal',
         icon: BsTerminal,
-        link: links.terminal.index(),
+        link: LINKS.terminal.index(),
         sublinks: () => {
             return {
-                ROOT: links.terminal.indexPath(SUBLINKS.TERMINAL.root),
-                HOME: links.terminal.indexPath(SUBLINKS.TERMINAL.home),
-                PROJECT: links.terminal.indexPath(SUBLINKS.TERMINAL.project),
+                ROOT: LINKS.terminal.indexPath(SUBLINKS.TERMINAL.root),
+                HOME: LINKS.terminal.indexPath(SUBLINKS.TERMINAL.home),
+                PROJECT: LINKS.terminal.indexPath(SUBLINKS.TERMINAL.project),
             }
         },
     },
@@ -69,7 +69,7 @@ export const APPS = {
     messages: {
         name: 'Messages',
         icon: AiOutlineMessage,
-        link: links.messages.index(),
+        link: LINKS.messages.index(),
         sublinks: () => {
             return {
                 ALL: '/',
@@ -87,17 +87,17 @@ export const APPS = {
     requests: {
         name: 'Requests',
         icon: FaRegEye,
-        link: links.requests.index(),
+        link: LINKS.requests.index(),
     },
     sessions: {
         name: 'Sessions',
         icon: BsKey,
-        link: links.sessions.index(),
+        link: LINKS.sessions.index(),
     },
     statistics: {
         name: 'Statistics',
         icon: AiOutlineBarChart,
-        link: links.statistics.index(),
+        link: LINKS.statistics.index(),
         sublinks: () => {
             return {
                 'PAGE ACTIVITY': '/',

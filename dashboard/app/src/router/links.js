@@ -1,6 +1,6 @@
 import { MANIFEST } from '../api/api'
 
-export const links = {
+export const LINKS = {
     home: () => '/dashboard/',
     database: {
         index: () => '/dashboard/database/',

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { IoClose } from 'react-icons/io5'
+import { MdOutlineMinimize } from 'react-icons/md'
+import { BsArrowUpShort } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
     position: fixed;
@@ -11,10 +13,6 @@ const StyledWrapper = styled.div`
     padding: 10px;
     background-color: ${({ theme }) => theme.modal.background};
     color: ${({ theme }) => theme.modal.font};
-    /* box-shadow: 0 0 8px -5px ${({ theme }) => theme.primary},
-        0 0 20px -5px ${({ theme }) => theme.primary},
-        0 0 40px -5px ${({ theme }) => theme.primary},
-        2px 2px 10px 0px ${({ theme }) => theme.primary}33; */
     box-shadow: 0px 0px 239.1px rgba(0, 0, 0, 0.028),
         0px 0px 291.6px rgba(0, 0, 0, 0.036),
         0px 0px 313.3px rgba(0, 0, 0, 0.041),
@@ -57,7 +55,7 @@ const StyledIcon = styled.span`
     font-size: 30px;
 `
 
-const StyledExitButton = styled.button`
+const StyledCircleButton = styled.button`
     background-color: transparent;
     border: 0;
     font-size: 30px;
@@ -79,18 +77,76 @@ const StyledExitButton = styled.button`
     }
 `
 
+const StyledMinimize = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: ${({ theme }) => theme.secondary};
+    box-shadow: 0 0 30px -10px ${({ theme }) => theme.primary};
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    padding: 10px;
+    border-radius: 7px;
+    font-size: 20px;
+    transform: translateX(-50%);
+    z-index: 30;
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    animation: fadein 0.3s ease;
+`
+
 export const Modal = ({ open, setOpen, title = '', children, icon = '' }) => {
+    const [minimize, setMinimize] = React.useState(false)
+
     if (!open) return ''
-    return (
-        <StyledWrapper>
-            <StyledCaption>
-                <StyledExitButton
+    if (minimize)
+        return (
+            <StyledMinimize>
+                <StyledIcon>{icon}</StyledIcon>
+                {title || 'Window'}
+                <StyledCircleButton
+                    onClick={() => {
+                        setMinimize(false)
+                    }}
+                >
+                    <BsArrowUpShort />
+                </StyledCircleButton>
+                <StyledCircleButton
                     onClick={() => {
                         setOpen(false)
+                        setMinimize(false)
                     }}
                 >
                     <IoClose />
-                </StyledExitButton>
+                </StyledCircleButton>
+            </StyledMinimize>
+        )
+    return (
+        <StyledWrapper>
+            <StyledCaption>
+                <div>
+                    <StyledCircleButton
+                        onClick={() => {
+                            setMinimize(true)
+                        }}
+                    >
+                        <MdOutlineMinimize />
+                    </StyledCircleButton>
+                    <StyledCircleButton
+                        onClick={() => {
+                            setOpen(false)
+                        }}
+                    >
+                        <IoClose />
+                    </StyledCircleButton>
+                </div>
                 <StyledTitle>{title}</StyledTitle>
                 <StyledIcon>{icon}</StyledIcon>
             </StyledCaption>

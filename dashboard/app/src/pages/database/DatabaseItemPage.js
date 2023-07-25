@@ -9,10 +9,10 @@ import { FETCH } from '../../api/api'
 import { fieldToString } from '../../utils/utils'
 import { Tooltip } from '../../atoms/Tooltip'
 import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { useModalForm } from '../../utils/hooks'
 import { Confirm } from '../../atoms/modalforms/Confirm'
-import { FaTrash } from 'react-icons/fa'
+import { FiTrash } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -59,7 +59,7 @@ export const DatabaseItemPage = () => {
                     <Button
                         size={1}
                         second
-                        to={links.database.patchItem(modelName, pk)}
+                        to={LINKS.database.patchItem(modelName, pk)}
                     >
                         EDIT
                     </Button>
@@ -70,7 +70,7 @@ export const DatabaseItemPage = () => {
                         onClick={() => {
                             ask({
                                 content: Confirm,
-                                icon: <FaTrash />,
+                                icon: <FiTrash />,
                                 title: 'DELETE ITEM?',
                                 todo: () => {
                                     FETCH(
@@ -78,7 +78,7 @@ export const DatabaseItemPage = () => {
                                         { method: 'DELETE' }
                                     ).then(() => {
                                         navigate(
-                                            links.database.model(modelName)
+                                            LINKS.database.model(modelName)
                                         )
                                     })
                                 },

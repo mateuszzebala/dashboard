@@ -40,3 +40,22 @@ class TestModel(models.Model):
     is_some = models.BooleanField(null=True)
     other = models.FileField(upload_to='To_REMOVE_Media/images')
     
+
+class Account(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='Media/dashboard/account/', null=True)
+    bio = models.TextField(null=True)
+    phone = models.CharField(max_length=15, null=True)
+    birth_date = models.DateField(null=True)
+    email_confirmed = models.BooleanField(default=False)
+    country = models.CharField(max_length=24, null=True)
+    address = models.CharField(max_length=32, null=True)
+    street = models.CharField(max_length=32, null=True)
+    city = models.CharField(max_length=32, null=True)
+    state = models.CharField(max_length=32, null=True)
+    zip_code = models.CharField(max_length=6, null=True)
+    website = models.CharField(max_length=64, null=True)
+    pronouns = models.CharField(max_length=16, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}"

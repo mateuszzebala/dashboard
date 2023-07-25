@@ -3,14 +3,13 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
 import { AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
-import { FETCH } from '../../api/api'
-import { ENDPOINTS } from '../../api/endpoints'
 import { useModalForm } from '../../utils/hooks'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 import { BiEditAlt } from 'react-icons/bi'
-import { links } from '../../router/links'
+import { LINKS } from '../../router/links'
 import { useNavigate } from 'react-router'
 import { getIconByFileType } from '../../organisms/files/ItemTile'
+import { GETCONFIG } from '../../api/configuration'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -71,9 +70,11 @@ export const EditorPage = () => {
     const navigate = useNavigate()
 
     React.useEffect(() => {
-        FETCH(ENDPOINTS.editor.last_and_liked()).then((data) => {
-            setLast(data.data.last)
-            setLiked(data.data.liked)
+        GETCONFIG('editor_last').then(async (val) => {
+            setLast(val.files)
+        })
+        GETCONFIG('editor_liked').then(async (val) => {
+            setLiked(val.files)
         })
     }, [])
 
@@ -95,7 +96,7 @@ export const EditorPage = () => {
                                         title: 'CHOOSE EDITOR TYPE',
                                         todo: (editorType) => {
                                             navigate(
-                                                links.editor.edit(
+                                                LINKS.editor.edit(
                                                     file.path,
                                                     editorType
                                                 )
@@ -103,9 +104,9 @@ export const EditorPage = () => {
                                         },
                                     })
                                 }}
-                                key={file.path}
+                                key={file}
                             >
-                                {getIconByFileType(file.type)} {file.basename}
+                                {getIconByFileType(file.type)} {file}
                             </StyledFile>
                         ))}
                     </StyledFiles>
@@ -125,7 +126,7 @@ export const EditorPage = () => {
                                         title: 'CHOOSE EDITOR TYPE',
                                         todo: (editorType) => {
                                             navigate(
-                                                links.editor.edit(
+                                                LINKS.editor.edit(
                                                     file.path,
                                                     editorType
                                                 )
@@ -133,9 +134,9 @@ export const EditorPage = () => {
                                         },
                                     })
                                 }}
-                                key={file.path}
+                                key={file}
                             >
-                                {getIconByFileType(file.type)} {file.basename}
+                                {getIconByFileType(file)} {file}
                             </StyledFile>
                         ))}
                     </StyledFiles>
