@@ -32,7 +32,7 @@ const StyledMenu = styled.div`
 `
 
 export const HostSelect = ({ name, endpoint }) => {
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const [hosts, setHosts] = React.useState([])
     const [inputValue, setInputValue] = React.useState('')
 
@@ -81,7 +81,7 @@ export const HostSelect = ({ name, endpoint }) => {
                         <Host
                             onContextMenu={(e) => {
                                 e.preventDefault()
-                                ask({
+                                modalForm({
                                     content: Confirm,
                                     title: 'DELETE',
                                     icon: <FiTrash />,

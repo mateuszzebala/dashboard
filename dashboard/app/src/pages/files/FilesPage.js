@@ -63,7 +63,7 @@ const FolderMenu = ({
     searchValue,
     setSearchValue,
 }) => {
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const { newMessage } = useMessage()
     const navigate = useNavigate()
 
@@ -71,7 +71,7 @@ const FolderMenu = ({
         selectedItems.length === 1 && selectedItems[0].is_file
 
     const handleNewFolder = () => {
-        ask({
+        modalForm({
             content: Prompt,
             title: 'FOLDER NAME',
             icon: <BsFolderPlus />,
@@ -87,7 +87,7 @@ const FolderMenu = ({
     }
 
     const handleNewFile = () => {
-        ask({
+        modalForm({
             content: Prompt,
             title: 'FILE NAME',
             icon: <BsFilePlus />,
@@ -164,7 +164,7 @@ const FolderMenu = ({
                         tooltip={'UPLOAD FILE'}
                         icon={<BsFileArrowUp />}
                         onClick={() => {
-                            ask({
+                            modalForm({
                                 content: Prompt,
                                 title: 'UPLOAD FILE',
                                 icon: <BsFileArrowUp />,
@@ -207,7 +207,7 @@ const FolderMenu = ({
                                 tooltip={'DELETE'}
                                 icon={<FiTrash />}
                                 onClick={() => {
-                                    ask({
+                                    modalForm({
                                         content: Confirm,
                                         title:
                                             selectedItems.length > 1
@@ -237,7 +237,7 @@ const FolderMenu = ({
                                 size={1.3}
                                 icon={<BsFileZip />}
                                 onClick={() => {
-                                    ask({
+                                    modalForm({
                                         content: ChooseDevice,
                                         title: 'Choose Device',
                                         icon: <BsFileZip />,
@@ -258,7 +258,7 @@ const FolderMenu = ({
                             tooltip={'RENAME'}
                             icon={<BiRename />}
                             onClick={() => {
-                                ask({
+                                modalForm({
                                     content: Prompt,
                                     icon: <BiRename />,
                                     title: 'FILE NAME',
@@ -287,7 +287,7 @@ const FolderMenu = ({
                                 tooltip={'EDIT'}
                                 icon={<BiEditAlt />}
                                 onClick={() => {
-                                    ask({
+                                    modalForm({
                                         content: EditorChooser,
                                         icon: <BiEditAlt />,
                                         title: 'CHOOSE EDITOR TYPE',

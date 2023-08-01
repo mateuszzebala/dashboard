@@ -7,10 +7,13 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
 `
 const StyledButtons = styled.div`
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: space-around;
 `
 
 export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
@@ -48,7 +51,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
                         todo(value)
                     }}
                 >
-                    NEXT
+                    SET
                 </Button>
             </StyledButtons>
         </StyledWrapper>

@@ -11,8 +11,8 @@ import { FaRegFileVideo } from 'react-icons/fa'
 import { BiEditAlt } from 'react-icons/bi'
 
 const StyledButtons = styled.div`
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(30px, 90px));
     gap: 20px;
     padding: 30px;
 `

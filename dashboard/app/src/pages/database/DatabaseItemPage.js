@@ -36,7 +36,7 @@ const StyledButtons = styled.div`
 
 export const DatabaseItemPage = () => {
     const { modelName, pk } = useParams()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const navigate = useNavigate()
     const [itemData, setItemData] = React.useState()
     const [modelData, setModelData] = React.useState()
@@ -68,7 +68,7 @@ export const DatabaseItemPage = () => {
                         second
                         size={1}
                         onClick={() => {
-                            ask({
+                            modalForm({
                                 content: Confirm,
                                 icon: <FiTrash />,
                                 title: 'DELETE ITEM?',

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Log, Configuration, TestModel, Account
+from .models import Log, Configuration, TestModel, Account, QrCodeAuth
 from django.contrib.auth.models import Permission
 from django.contrib.sessions.models import Session
 
@@ -27,5 +27,7 @@ class ConfigurationAdmin(admin.ModelAdmin):
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['id', 'state', 'country', 'website']
 
-    
+@admin.register(QrCodeAuth)
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ['url', 'token', 'datetime', 'user']
 

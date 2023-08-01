@@ -25,7 +25,7 @@ const StyledRightSide = styled.div`
 `
 
 const StyledContent = styled.article`
-    padding: 10px;
+    padding: ${({ padding }) => padding + 'px'};
     height: 100%;
     transition: width 0.3s;
     width: ${({ leftbarclose }) =>
@@ -49,6 +49,7 @@ export const MainTemplate = ({
     title = '',
     submenuChildren,
     topbarLink,
+    padding = 10,
 }) => {
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
@@ -75,7 +76,10 @@ export const MainTemplate = ({
                     />
                     <SubMenu>{submenuChildren}</SubMenu>
                 </StyledTopMenu>
-                <StyledContent leftbarclose={toBoolStr(leftbarClose)}>
+                <StyledContent
+                    padding={padding}
+                    leftbarclose={toBoolStr(leftbarClose)}
+                >
                     {children}
                 </StyledContent>
             </StyledRightSide>

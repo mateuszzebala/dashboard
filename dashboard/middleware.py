@@ -6,6 +6,7 @@ from django.urls import resolve
 from django.shortcuts import render
 from .models import Log
 from .utils import get_client_ip
+import requests
 
 colors_by_method = {
     'POST': 'white',
@@ -49,6 +50,13 @@ class DashboardMiddleware:
                 method = (request.POST.get('method') or request.method).upper()
                 url = request.get_full_path()
                 args = {}
+                country_code = None
+                the_same_device = Log.objects.filter(ip_v4=get_client_ip(request)).first()
+                if the_same_device is not None:
+                    country_code = the_same_device.country
+                else:
+                    res = requests.get(f'https://ipapi.co/{get_client_ip(request)}/json/').json()
+                    country_code = res.get("country_code")
 
                 log = Log(
                     ip_v4=get_client_ip(request),
@@ -59,6 +67,7 @@ class DashboardMiddleware:
                     user=request.user if request.user.is_authenticated else None,
                     session=None,
                     args=args,
+                    country=country_code
                 )
                 log.save()
 

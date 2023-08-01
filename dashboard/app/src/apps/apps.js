@@ -101,7 +101,7 @@ export const APPS = {
         sublinks: () => {
             return {
                 'PAGE ACTIVITY': '/',
-                'WORLD MAP': '/',
+                'WORLD MAP': LINKS.statistics.map(),
                 'SERVER EFFICIENCY ': '/',
             }
         },

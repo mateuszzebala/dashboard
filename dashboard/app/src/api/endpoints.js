@@ -23,6 +23,7 @@ export const ENDPOINTS = {
         csrf: () => API(['auth', 'csrf']),
         logout: () => API(['auth', 'logout']),
         me: () => API(['auth', 'me']),
+        qrcode: () => API(['auth', 'qrcode']),
     },
     terminal: {
         command: () => API(['terminal', 'command']),

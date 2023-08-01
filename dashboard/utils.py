@@ -102,3 +102,4 @@ class Config:
     def exists(name):
         config = Configuration.objects.filter(name=name).first()
         return config is not None
+    

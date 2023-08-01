@@ -11,6 +11,8 @@ import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
 import { useModalForm } from '../utils/hooks'
 import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
+import { FaQrcode } from 'react-icons/fa'
+import { LoadingImage } from '../atoms/LoadingImage'
 
 const StyledIcon = styled.span`
     display: flex;
@@ -37,7 +39,7 @@ const StyledWrapper = styled.span`
 
 export const TopBarIcons = ({ app, username }) => {
     const navigate = useNavigate()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     return (
         <StyledWrapper>
             <Link to={LINKS.account.index()}>
@@ -67,7 +69,25 @@ export const TopBarIcons = ({ app, username }) => {
             </Link>
             <StyledIcon
                 onClick={() => {
-                    ask({
+                    modalForm({
+                        content: () => (
+                            <LoadingImage
+                                src={ENDPOINTS.auth.qrcode()}
+                                alt="qrcode"
+                                width={300}
+                                height={300}
+                            />
+                        ),
+                        title: 'QRCODE',
+                        icon: <FaQrcode />,
+                    })
+                }}
+            >
+                <FaQrcode />
+            </StyledIcon>
+            <StyledIcon
+                onClick={() => {
+                    modalForm({
                         content: DashboardsMenu,
                         title: 'CHOOSE APP',
                         icon: <BiSolidGrid />,

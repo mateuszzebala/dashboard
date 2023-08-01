@@ -19,7 +19,7 @@ import { FiScissors } from 'react-icons/fi'
 export const VideoEditor = () => {
     const [searchParams] = useSearchParams()
     const { type } = useParams()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const navigate = useNavigate()
     const [data] = React.useState({})
     const [saveLoading] = React.useState(false)
@@ -59,7 +59,7 @@ export const VideoEditor = () => {
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
                         onClick={() => {
-                            ask({
+                            modalForm({
                                 content: EditorChooser,
                                 icon: <BiEditAlt />,
                                 title: 'CHOOSE EDITOR TYPE',

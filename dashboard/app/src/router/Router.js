@@ -26,6 +26,7 @@ import { DatabasePutItemPage } from '../pages/database/DatabasePutItemPage'
 import { FileEditorPage } from '../pages/editor/FileEditorPage'
 import { EditorPage } from '../pages/editor/EditorPage'
 import { DatabasePatchItemPage } from '../pages/database/DatabasePatchItemPage'
+import { StatisticsWorldMapPage } from '../pages/statistics/StatisticsWorldMapPage'
 
 const pages = {
     '/dashboard/': HomePage,
@@ -56,6 +57,7 @@ const pages = {
     '/dashboard/notes/': NotesPage,
 
     '/dashboard/statistics/': StatisticsPage,
+    '/dashboard/statistics/map/': StatisticsWorldMapPage,
 
     '/dashboard/map/': MapPage,
 

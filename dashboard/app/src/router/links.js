@@ -49,6 +49,7 @@ export const LINKS = {
     },
     statistics: {
         index: () => '/dashboard/statistics/',
+        map: () => '/dashboard/statistics/map/',
     },
     map: {
         index: () => '/dashboard/map/',

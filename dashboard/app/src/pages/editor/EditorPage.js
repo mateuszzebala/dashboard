@@ -10,6 +10,8 @@ import { LINKS } from '../../router/links'
 import { useNavigate } from 'react-router'
 import { getIconByFileType } from '../../organisms/files/ItemTile'
 import { GETCONFIG } from '../../api/configuration'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -66,15 +68,33 @@ const StyledColumn = styled.div`
 export const EditorPage = () => {
     const [last, setLast] = React.useState([])
     const [liked, setLiked] = React.useState([])
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const navigate = useNavigate()
 
     React.useEffect(() => {
         GETCONFIG('editor_last').then(async (val) => {
-            setLast(val.files)
+            setLast(
+                await Promise.all(
+                    val.files.map(
+                        async (file) =>
+                            (
+                                await FETCH(ENDPOINTS.editor.json(file))
+                            ).data
+                    )
+                )
+            )
         })
         GETCONFIG('editor_liked').then(async (val) => {
-            setLiked(val.files)
+            setLiked(
+                await Promise.all(
+                    val.files.map(
+                        async (file) =>
+                            (
+                                await FETCH(ENDPOINTS.editor.json(file))
+                            ).data
+                    )
+                )
+            )
         })
     }, [])
 
@@ -90,7 +110,7 @@ export const EditorPage = () => {
                         {liked.map((file) => (
                             <StyledFile
                                 onClick={() => {
-                                    ask({
+                                    modalForm({
                                         content: EditorChooser,
                                         icon: <BiEditAlt />,
                                         title: 'CHOOSE EDITOR TYPE',
@@ -104,9 +124,9 @@ export const EditorPage = () => {
                                         },
                                     })
                                 }}
-                                key={file}
+                                key={file.path}
                             >
-                                {getIconByFileType(file.type)} {file}
+                                {getIconByFileType(file.type)} {file.filename}
                             </StyledFile>
                         ))}
                     </StyledFiles>
@@ -120,7 +140,7 @@ export const EditorPage = () => {
                         {last.map((file) => (
                             <StyledFile
                                 onClick={() => {
-                                    ask({
+                                    modalForm({
                                         content: EditorChooser,
                                         icon: <BiEditAlt />,
                                         title: 'CHOOSE EDITOR TYPE',
@@ -134,9 +154,9 @@ export const EditorPage = () => {
                                         },
                                     })
                                 }}
-                                key={file}
+                                key={file.path}
                             >
-                                {getIconByFileType(file)} {file}
+                                {getIconByFileType(file.type)} {file.filename}
                             </StyledFile>
                         ))}
                     </StyledFiles>

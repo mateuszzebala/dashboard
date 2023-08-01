@@ -64,7 +64,7 @@ const StyledFooter = styled.div`
 
 export const DatabaseModelPage = () => {
     const { modelName } = useParams()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const [page, setPage] = React.useState(0)
     const [pages, setPages] = React.useState(2)
     const [searchQuery, setSearchQuery] = React.useState('')
@@ -151,7 +151,7 @@ export const DatabaseModelPage = () => {
                                     tooltip={'DELETE SELECTED'}
                                     icon={<FiTrash />}
                                     onClick={() => {
-                                        ask({
+                                        modalForm({
                                             content: Confirm,
                                             title: `Delete ${
                                                 selectedItems.length

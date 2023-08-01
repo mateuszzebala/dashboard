@@ -18,7 +18,7 @@ import { TbTemperature } from 'react-icons/tb'
 export const ImageEditor = () => {
     const [searchParams] = useSearchParams()
     const { type } = useParams()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const navigate = useNavigate()
     const [data] = React.useState({})
     const [saveLoading] = React.useState(false)
@@ -58,7 +58,7 @@ export const ImageEditor = () => {
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
                         onClick={() => {
-                            ask({
+                            modalForm({
                                 content: EditorChooser,
                                 icon: <BiEditAlt />,
                                 title: 'CHOOSE EDITOR TYPE',

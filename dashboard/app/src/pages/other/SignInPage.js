@@ -7,10 +7,10 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
-import { FaLock, FaReact } from 'react-icons/fa'
-import { SiDjango } from 'react-icons/si'
+import { FaLock, FaQrcode } from 'react-icons/fa'
 import { toBoolStr } from '../../utils/utils'
 import { useSearchParams } from 'react-router-dom'
+import { useModalForm } from '../../utils/hooks'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -31,7 +31,6 @@ const StyledBackgroundDecoration1 = styled.div`
     position: absolute;
     top: 0;
     padding: 0;
-
     clip-path: polygon(0 75%, 0% 100%, 100% 100%);
     @keyframes move-up {
         from {
@@ -50,7 +49,6 @@ const StyledBackgroundDecoration2 = styled.div`
     background-color: ${({ theme }) => theme.primary};
     position: absolute;
     top: 0;
-
     padding: 0;
     clip-path: polygon(100% 0, 0 0, 100% 25%);
     @keyframes move-down {
@@ -89,7 +87,12 @@ const StyledForm = styled.form`
     align-items: center;
     border-radius: 30px;
     color: ${({ theme }) => theme.primary};
-    box-shadow: 0 0 8px -6px ${({ theme }) => theme.primary};
+    box-shadow: 0px 0px 239.1px rgba(0, 0, 0, 0.028),
+        0px 0px 291.6px rgba(0, 0, 0, 0.036),
+        0px 0px 313.3px rgba(0, 0, 0, 0.041),
+        0px 0px 322.7px rgba(0, 0, 0, 0.045), 0px 0px 329px rgba(0, 0, 0, 0.05),
+        0px 0px 340.3px rgba(0, 0, 0, 0.059),
+        0px 0px 370.9px rgba(0, 0, 0, 0.076), 0px 0px 500px rgba(0, 0, 0, 0.15);
     @keyframes fade-in {
         from {
             opacity: 0;
@@ -109,9 +112,12 @@ const StyledError = styled.span`
     font-weight: bold;
 `
 
-const StyledIcon = styled.div`
-    font-size: 70px;
-    color: ${({ color }) => color};
+const StyledButtons = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 `
 
 export const SignInPage = () => {
@@ -121,6 +127,7 @@ export const SignInPage = () => {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [error, setError] = React.useState(false)
+    const modalForm = useModalForm()
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.auth.csrf()).then((data) => {
@@ -156,9 +163,6 @@ export const SignInPage = () => {
         <StyledWrapper>
             <StyledBackgroundDecoration1 />
             <StyledBackgroundDecoration2 />
-            <StyledIcon color="#2BA977">
-                <SiDjango />
-            </StyledIcon>
 
             <StyledForm onSubmit={handleSubmitForm}>
                 <Typography variant={'h6'}>ADMIN DASHBOARD</Typography>
@@ -178,12 +182,27 @@ export const SignInPage = () => {
                 <StyledError error={toBoolStr(error)}>
                     BAD USERNAME OR PASSWORD
                 </StyledError>
-                <Button loading={sending}>SIGN IN</Button>
+                <StyledButtons>
+                    <Button loading={sending}>SIGN IN</Button>
+                    <Button
+                        type="button"
+                        second
+                        icon={<FaQrcode />}
+                        onClick={() => {
+                            modalForm({
+                                content: () => (
+                                    <img
+                                        width={300}
+                                        src="https://clockwork-poznan.pl/wp-content/uploads/2021/09/qr-code.png"
+                                    />
+                                ),
+                                title: 'QRCODE',
+                                icon: <FaQrcode />,
+                            })
+                        }}
+                    />
+                </StyledButtons>
             </StyledForm>
-            <StyledIcon color="#00D8FF">
-                <FaReact />
-            </StyledIcon>
-
             <StyledLock>
                 <FaLock />
             </StyledLock>

@@ -96,7 +96,7 @@ export const ItemTile = ({
     ...props
 }) => {
     const wrapperRef = React.useRef()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const navigate = useNavigate()
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
@@ -124,7 +124,7 @@ export const ItemTile = ({
                     }
 
                     e.detail > 1 &&
-                        ask({
+                        modalForm({
                             content: EditorChooser,
                             icon: <BiEditAlt />,
                             title: 'CHOOSE EDITOR TYPE',

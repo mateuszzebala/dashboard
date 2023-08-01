@@ -102,8 +102,19 @@ const StyledMinimize = styled.div`
     animation: fadein 0.3s ease;
 `
 
-export const Modal = ({ open, setOpen, title = '', children, icon = '' }) => {
+export const Modal = ({
+    open,
+    setOpen,
+    minimizeIcon = false,
+    title = '',
+    children,
+    icon = '',
+}) => {
     const [minimize, setMinimize] = React.useState(false)
+
+    React.useEffect(() => {
+        setMinimize(false)
+    }, [children, title, icon])
 
     if (!open) return ''
     if (minimize)
@@ -111,13 +122,15 @@ export const Modal = ({ open, setOpen, title = '', children, icon = '' }) => {
             <StyledMinimize>
                 <StyledIcon>{icon}</StyledIcon>
                 {title || 'Window'}
-                <StyledCircleButton
-                    onClick={() => {
-                        setMinimize(false)
-                    }}
-                >
-                    <BsArrowUpShort />
-                </StyledCircleButton>
+                {minimizeIcon && (
+                    <StyledCircleButton
+                        onClick={() => {
+                            setMinimize(false)
+                        }}
+                    >
+                        <BsArrowUpShort />
+                    </StyledCircleButton>
+                )}
                 <StyledCircleButton
                     onClick={() => {
                         setOpen(false)
@@ -132,13 +145,15 @@ export const Modal = ({ open, setOpen, title = '', children, icon = '' }) => {
         <StyledWrapper>
             <StyledCaption>
                 <div>
-                    <StyledCircleButton
-                        onClick={() => {
-                            setMinimize(true)
-                        }}
-                    >
-                        <MdOutlineMinimize />
-                    </StyledCircleButton>
+                    {minimizeIcon && (
+                        <StyledCircleButton
+                            onClick={() => {
+                                setMinimize(true)
+                            }}
+                        >
+                            <MdOutlineMinimize />
+                        </StyledCircleButton>
+                    )}
                     <StyledCircleButton
                         onClick={() => {
                             setOpen(false)

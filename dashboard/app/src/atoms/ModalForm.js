@@ -1,9 +1,10 @@
 import React from 'react'
 import { Modal } from './Modal'
-import { useModalForm } from '../utils/hooks'
+import { ModalFormContext } from '../utils/hooks'
 
 export const ModalForm = () => {
-    const { modalForm } = useModalForm()
+    const [modalForm] = React.useContext(ModalFormContext)
+
     const [open, setOpen] = React.useState(!!modalForm.content)
 
     React.useEffect(() => {

@@ -15,11 +15,15 @@
    "cors_allowed_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
+      "http://192.168.100.35:8000",
+      "http://192.168.100.35:3000",
       "https://rskihfqlcq.cfolks.pl"
    ],
    "csrf_trusted_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
+      "http://192.168.100.35:8000",
+      "http://192.168.100.35:3000",
       "https://rskihfqlcq.cfolks.pl"
    ]
 }

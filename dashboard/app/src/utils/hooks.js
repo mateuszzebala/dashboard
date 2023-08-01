@@ -62,11 +62,11 @@ export const useTheme = () => {
 export const ModalFormContext = React.createContext([])
 
 export const useModalForm = () => {
-    const [modalForm, setModalForm] = React.useContext(ModalFormContext)
+    const setModalForm = React.useContext(ModalFormContext)[1]
 
     const ask = (form) => {
         setModalForm(form)
     }
 
-    return { modalForm, ask }
+    return ask
 }

@@ -116,7 +116,7 @@ const Terminal = ({ terminalContent }) => (
 export const TextEditor = () => {
     const [searchParams] = useSearchParams()
     const { type } = useParams()
-    const { ask } = useModalForm()
+    const modalForm = useModalForm()
     const navigate = useNavigate()
     const [data, setData] = React.useState({})
     const [value, setValue] = React.useState(false)
@@ -188,7 +188,7 @@ export const TextEditor = () => {
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
                         onClick={() => {
-                            ask({
+                            modalForm({
                                 content: EditorChooser,
                                 icon: <BiEditAlt />,
                                 title: 'CHOOSE EDITOR TYPE',
@@ -219,7 +219,7 @@ export const TextEditor = () => {
                         second
                         size={1.1}
                         onClick={() => {
-                            ask({
+                            modalForm({
                                 content: ChooseRunner,
                                 title: 'RUN',
                                 icon: <BsFillPlayFill />,
@@ -248,7 +248,7 @@ export const TextEditor = () => {
                                         { command, content: value }
                                     ).then((data) => {
                                         setRunLoading(false)
-                                        ask({
+                                        modalForm({
                                             content: Terminal,
                                             title: 'TERMINAL',
                                             icon: <APPS.terminal.icon />,

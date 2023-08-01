@@ -1,8 +1,14 @@
 from django.urls import path
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+from dashboard.models import QrCodeAuth
+from uuid import uuid4
+import qrcode
+import os
+import datetime
 
 @csrf_exempt
 def signin(request):
@@ -57,10 +63,29 @@ def is_superuser(fnc):
 
     return inner
 
+@is_superuser
+def generate_auth_qrcode(request):
+    token = str(uuid4())
+    url = request.build_absolute_uri() + token + '/'
+    image = qrcode.make(url)
+    os.makedirs('Media/dashboard/auth/qrcode/', exist_ok=True)
+    image.save(f'Media/dashboard/auth/qrcode/{token}.png')
+    code = QrCodeAuth(token=token, url=url, user=request.user, file=f'Media/dashboard/auth/qrcode/{token}.png')
+    code.save()
+    return FileResponse(open(f'Media/dashboard/auth/qrcode/{token}.png', 'rb'))
+
+def get_qrcode(request, token):
+    code = QrCodeAuth.objects.filter(token=token).first()
+    if code is None:
+        if (datetime.datetime.now() - code.datetime).total_seconds() < 60 * 60:
+            login(request, code.user)
+    return redirect('dashboard:app', path='/')
 
 urlpatterns = [
     path('signin/', signin), # SIGN IN USER
     path('logout/', logout_view), # SIGN IN USER
     path('csrf/', csrf), # GET CSRF TOKEN
     path('me/', me), # AM I SIGN IN?
+    path('qrcode/', generate_auth_qrcode), # GENERATE QR CODE
+    path('qrcode/<token>/', get_qrcode, name='getQRcode'), # GENERATE QR CODE
 ]
