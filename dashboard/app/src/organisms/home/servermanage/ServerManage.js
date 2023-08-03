@@ -5,9 +5,9 @@ import { Typography } from '../../../atoms/Typography'
 import { Theme } from '../../../atoms/Theme'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
-import { theme } from '../../../theme/theme'
 import { FiPower } from 'react-icons/fi'
 import { Button } from '../../../atoms/Button'
+import { useTheme } from '../../../utils/hooks'
 
 const StyledWrapper = styled.div`
     padding: 20px 50px;
@@ -41,6 +41,7 @@ const StyledToggle = styled.div`
 
 export const ServerManage = () => {
     const [configuration, setConfiguration] = React.useState({})
+    const [theme] = useTheme()
 
     React.useEffect(() => {
         if (configuration.enable_server !== undefined) {
@@ -63,12 +64,9 @@ export const ServerManage = () => {
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
                     value={{
-                        button: {
-                            background: configuration.enable_server
-                                ? theme.success
-                                : theme.error,
-                            font: theme.secondary,
-                        },
+                        primary: configuration.enable_server
+                            ? theme.success
+                            : theme.error,
                     }}
                 >
                     <Button
@@ -83,36 +81,6 @@ export const ServerManage = () => {
                     />
                 </Theme>
             </StyledToggle>
-            {/* <StyledToggle>
-                <Typography variant={'h4'}>PAGE</Typography>
-                <Theme
-                    value={{
-                        switch: {
-                            on: theme.success,
-                            off: theme.error,
-                            dot: theme.secondary,
-                        },
-                    }}
-                >
-                    <Switch
-                        value={configuration.enable_server}
-                        setValue={(val) => {
-                            setConfiguration((prev) => ({
-                                ...prev,
-                                enable_server: val(configuration.enable_server),
-                            }))
-                            newMessage({
-                                text: val(configuration.enable_server)
-                                    ? 'The page is now on'
-                                    : 'The page is now down',
-                                success: val(configuration.enable_server),
-                                error: !val(configuration.enable_server),
-                            })
-                        }}
-                        size={2}
-                    />
-                </Theme>
-            </StyledToggle> */}
             <StyledToggle>
                 <Typography variant={'h4'}>DEBUG</Typography>
                 <Switch

@@ -2,13 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button'
 import { Theme } from '../Theme'
-
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
-import { theme } from '../../theme/theme'
 import { SiDjango } from 'react-icons/si'
 import { BiSitemap, BiSolidDashboard } from 'react-icons/bi'
 import { LINKS } from '../../router/links'
+import { useTheme } from '../../utils/hooks'
 
 const StyledButtons = styled.div`
     display: flex;
@@ -30,15 +29,13 @@ const StyledColumn = styled.div`
 `
 
 export const DashboardsMenu = ({ setOpen }) => {
+    const [theme] = useTheme()
     return (
         <StyledButtons>
             <StyledColumn>
                 <Theme
                     value={{
-                        button: {
-                            background: theme.accent,
-                            font: theme.secondary,
-                        },
+                        primary: theme.accent,
                     }}
                 >
                     <Button
@@ -54,23 +51,14 @@ export const DashboardsMenu = ({ setOpen }) => {
                 <span>PAGE</span>
             </StyledColumn>
             <StyledColumn>
-                <Theme
-                    value={{
-                        button: {
-                            background: theme.primary,
-                            font: theme.secondary,
-                        },
+                <Button
+                    onClick={() => {
+                        setOpen(false)
                     }}
-                >
-                    <Button
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                        to={LINKS.home()}
-                        size={2}
-                        icon={<BiSolidDashboard />}
-                    />
-                </Theme>
+                    to={LINKS.home()}
+                    size={2}
+                    icon={<BiSolidDashboard />}
+                />
                 <span>
                     DASH
                     <br />
@@ -80,10 +68,7 @@ export const DashboardsMenu = ({ setOpen }) => {
             <StyledColumn>
                 <Theme
                     value={{
-                        button: {
-                            background: theme.success,
-                            font: theme.secondary,
-                        },
+                        primary: theme.success,
                     }}
                 >
                     <Button
@@ -98,10 +83,7 @@ export const DashboardsMenu = ({ setOpen }) => {
             <StyledColumn>
                 <Theme
                     value={{
-                        button: {
-                            background: theme.warning,
-                            font: theme.secondary,
-                        },
+                        primary: theme.warning,
                     }}
                 >
                     <Button
@@ -119,10 +101,7 @@ export const DashboardsMenu = ({ setOpen }) => {
             <StyledColumn>
                 <Theme
                     value={{
-                        button: {
-                            background: theme.error,
-                            font: theme.secondary,
-                        },
+                        primary: theme.error,
                     }}
                 >
                     <Button

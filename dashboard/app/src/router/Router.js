@@ -11,13 +11,11 @@ import { UsersPage } from '../pages/users/UsersPage'
 import { SignInPage } from '../pages/other/SignInPage'
 import { FinancePage } from '../pages/finance/FinancePage'
 import { TerminalPage } from '../pages/terminal/TerminalPage'
-
 import { NotesPage } from '../pages/notes/NotesPage'
 import { EmailPage } from '../pages/email/EmailPage'
 import { StatisticsPage } from '../pages/statistics/StatisticsPage'
 import { MapPage } from '../pages/map/MapPage'
 import { RequestsPage } from '../pages/requests/RequestsPage'
-import { AccountPage } from '../pages/account/AccountPage'
 import { SettingsPage } from '../pages/settings/SettingsPage'
 import { SearchPage } from '../pages/search/SearchPage'
 import { InfoPage } from '../pages/info/InfoPage'
@@ -27,6 +25,8 @@ import { FileEditorPage } from '../pages/editor/FileEditorPage'
 import { EditorPage } from '../pages/editor/EditorPage'
 import { DatabasePatchItemPage } from '../pages/database/DatabasePatchItemPage'
 import { StatisticsWorldMapPage } from '../pages/statistics/StatisticsWorldMapPage'
+import { UserPage } from '../pages/users/UserPage'
+import { MessagePage } from '../pages/messages/MessagePage'
 
 const pages = {
     '/dashboard/': HomePage,
@@ -45,8 +45,10 @@ const pages = {
     '/dashboard/editor/:type/': FileEditorPage,
 
     '/dashboard/messages/': MessagesPage,
+    '/dashboard/messages/:messageId/': MessagePage,
 
     '/dashboard/users/': UsersPage,
+    '/dashboard/users/:id/': UserPage,
 
     '/dashboard/finance/': FinancePage,
 
@@ -62,8 +64,6 @@ const pages = {
     '/dashboard/map/': MapPage,
 
     '/dashboard/requests/': RequestsPage,
-
-    '/dashboard/account/': AccountPage,
 
     '/dashboard/settings/': SettingsPage,
 

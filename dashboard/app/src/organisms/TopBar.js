@@ -4,8 +4,6 @@ import { TopBarIcons } from '../molecules/TopBarIcons'
 import { LINKS } from '../router/links'
 import { Link } from '../atoms/Link'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { FETCH } from '../api/api'
-import { ENDPOINTS } from '../api/endpoints'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -14,9 +12,10 @@ const StyledWrapper = styled.nav`
     z-index: 1;
     align-items: center;
     justify-content: space-between;
-    background-color: ${({ theme }) => theme.topbar.background};
-    color: ${({ theme }) => theme.topbar.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     overflow-x: scroll;
+    user-select: none;
     &::-webkit-scrollbar {
         height: 0;
     }
@@ -30,7 +29,7 @@ const StyledMenuButton = styled.button`
     place-items: center;
     background-color: transparent;
     border: 0;
-    color: ${({ theme }) => theme.topbar.font};
+    color: ${({ theme }) => theme.primary};
     border-radius: 8px;
     outline: 0 solid ${({ theme }) => theme.tertiary}aa;
     cursor: pointer;
@@ -51,7 +50,7 @@ const StyledTitle = styled.span`
     gap: 20px;
     padding: 0 10px;
     font-weight: 500;
-    color: ${({ theme }) => theme.topbar.font};
+    color: ${({ theme }) => theme.primary};
     text-decoration: none;
 `
 
@@ -71,15 +70,14 @@ const StyledLeftSide = styled.div`
     justify-content: center;
 `
 
-export const TopBar = ({ app, setClose, title, topbarLink }) => {
-    const [username, setUsername] = React.useState('')
-
-    React.useEffect(() => {
-        FETCH(ENDPOINTS.auth.me()).then((data) => {
-            setUsername(data.data.username)
-        })
-    }, [])
-
+export const TopBar = ({
+    app,
+    setClose,
+    title,
+    topbarLink,
+    setHideSubmenu,
+    hideSubmenu,
+}) => {
     function handleBurgerClick() {
         setClose((prev) => !prev)
     }
@@ -100,7 +98,11 @@ export const TopBar = ({ app, setClose, title, topbarLink }) => {
                     </StyledTitle>
                 </Link>
             </StyledLeftSide>
-            <TopBarIcons app={app} username={username} />
+            <TopBarIcons
+                app={app}
+                hideSubmenu={hideSubmenu}
+                setHideSubmenu={setHideSubmenu}
+            />
         </StyledWrapper>
     )
 }

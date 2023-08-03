@@ -9,7 +9,7 @@ import { FaSearch } from 'react-icons/fa'
 const StyledInput = styled.div`
     display: inline-flex;
     padding: 10px 15px;
-    border: 3px solid ${({ theme }) => theme.input.border};
+    border: 3px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     width: 300px;
     gap: 20px;

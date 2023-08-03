@@ -1,4 +1,5 @@
 import { terminalCodesToHtml } from 'terminal-codes-to-html'
+import String from 'string'
 
 export const toBoolStr = (variable) => {
     return variable ? '1' : ''
@@ -73,4 +74,27 @@ export const convertTerminalTextToHTML = (text) => {
     // text = text ? text.replace('\\n', '<br>').replace('\\r', '<br>') : ''
     text = terminalCodesToHtml(text || '')
     return text.trim()
+}
+
+export const centerEllipsis = (text, width) => {
+    if (text.length < width) return text
+    const toCut = Math.round(text.length - width / 2)
+    const leftSide = String(text).left(text.length - toCut)
+    const rightSide = String(text).right(text.length - toCut)
+    return `${leftSide}...${rightSide}`
+}
+
+export const getCursorByPosition = (top, left) => {
+    const cursors = {
+        'top-left': 'nw-resize',
+        'top-center': 'n-resize',
+        'top-right': 'ne-resize',
+        'center-left': 'e-resize',
+        'center-center': 'move',
+        'center-right': 'e-resize',
+        'bottom-left': 'ne-resize',
+        'bottom-center': 'n-resize',
+        'bottom-right': 'nw-resize',
+    }
+    return cursors[top + '-' + left]
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { CharFieldInput } from './fieldinputs/CharFieldInput'
 import { BooleanFieldInput } from './fieldinputs/BooleanFieldInput'
 import { TextFieldInput } from './fieldinputs/TextFieldInput'
@@ -11,6 +10,11 @@ import { TimeFieldInput } from './fieldinputs/TimeFieldInput'
 import { FileFieldInput } from './fieldinputs/FileFieldInput'
 import { DurationFieldInput } from './fieldinputs/DurationField'
 import { FloatFieldInput } from './fieldinputs/FloatField'
+import styled from 'styled-components'
+
+const StyledWrapper = styled.div`
+    padding: 10px;
+`
 
 const Inputs = {
     CharField: CharFieldInput,
@@ -29,5 +33,9 @@ const Inputs = {
 export const FieldInput = ({ field, onChange }) => {
     const Input = Inputs[field.type]
     if (!Input) return field.name
-    return <Input field={field} onChange={onChange} />
+    return (
+        <StyledWrapper>
+            <Input field={field} onChange={onChange} />
+        </StyledWrapper>
+    )
 }

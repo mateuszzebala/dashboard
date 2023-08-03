@@ -13,6 +13,7 @@ import { LINKS } from '../../router/links'
 import { useModalForm } from '../../utils/hooks'
 import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiTrash } from 'react-icons/fi'
+import { FieldInline } from '../../organisms/database/FieldInline'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -52,7 +53,10 @@ export const DatabaseItemPage = () => {
 
     return (
         <MainTemplate
-            app={APPS.database}
+            app={{
+                ...APPS.database,
+                link: LINKS.database.model(modelName),
+            }}
             title={`${modelName} - ${pk}`}
             submenuChildren={
                 <StyledButtons>
@@ -109,10 +113,15 @@ export const DatabaseItemPage = () => {
                                         )}
                                     >
                                         <StyledValue>
-                                            {fieldToString(
-                                                itemData.fields[fieldName],
-                                                modelData.fields[fieldName].type
-                                            )}
+                                            <FieldInline
+                                                type={
+                                                    modelData.fields[fieldName]
+                                                        .type
+                                                }
+                                                value={
+                                                    itemData.fields[fieldName]
+                                                }
+                                            />
                                         </StyledValue>
                                     </Tooltip>
                                 </Field>

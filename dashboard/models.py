@@ -266,11 +266,11 @@ class Log(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     method = models.CharField(choices=METHODS, max_length=10)
     path = models.CharField(max_length=512)
-    args = models.JSONField()
+    args = models.JSONField(null=True)
     status_code = models.IntegerField()
-    device = models.CharField(max_length=20, null=True)
+    device = models.CharField(max_length=80, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    session = models.ForeignKey(Session, on_delete=models.SET_NULL, null=True)
+    session = models.ForeignKey(Session, on_delete=models.SET_NULL, null=True, blank=True)
     country = models.CharField(choices=COUNTRIES, max_length=30, null=True)
 
     def __str__(self):
@@ -291,7 +291,7 @@ class TestModel(models.Model):
 
 class Account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='Media/dashboard/account/', null=True)
+    image = models.ImageField(upload_to='Media/dashboard/auth/account/', null=True, blank=True)
     bio = models.TextField(null=True)
     phone = models.CharField(max_length=15, null=True)
     birth_date = models.DateField(null=True)
@@ -310,7 +310,6 @@ class Account(models.Model):
 
 
 class QrCodeAuth(models.Model):
-    url = models.CharField(max_length=128)
     token = models.CharField(max_length=128)
     datetime = models.DateTimeField(auto_now_add=True)
     file = models.ImageField(upload_to='Media/dashboard/auth/qrcode')
@@ -318,3 +317,15 @@ class QrCodeAuth(models.Model):
 
     def __str__(self):
         return self.token
+    
+class Message(models.Model):
+    email = models.CharField(max_length=128)
+    text = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    datetime = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.email} - {self.datetime}"
+    
+

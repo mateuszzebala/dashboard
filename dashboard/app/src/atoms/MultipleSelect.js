@@ -10,8 +10,8 @@ const StyledOption = styled.button`
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: ${({ theme }) => theme.select.background};
-    color: ${({ theme }) => theme.select.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     border: 0;
     font-size: 15px;
     white-space: nowrap;
@@ -44,8 +44,8 @@ const StyledValueElem = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ${({ theme }) => theme.select.font};
-    color: ${({ theme }) => theme.select.background};
+    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.secondary};
     border: 0;
     border-radius: 5px;
     padding: 5px 10px;
@@ -154,7 +154,7 @@ const StyledWrapper = styled.div`
     display: inline-flex;
     flex-direction: column;
     width: 300px;
-    border: 3px solid ${({ theme }) => theme.select.font};
+    border: 3px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     position: relative;
 `

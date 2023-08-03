@@ -21,7 +21,7 @@ export const BooleanFieldInput = ({ field, onChange }) => {
 
     return (
         <StyledRow>
-            <Typography variant={'h3'}>{field.name}</Typography>
+            <Typography variant={'h3'}>{field.name.toUpperCase()}</Typography>
             {field.params.null ? (
                 <>
                     <SwitchWithNull
@@ -29,7 +29,6 @@ export const BooleanFieldInput = ({ field, onChange }) => {
                         value={value}
                         setValue={setValue}
                     />
-                    {value === null ? 'null' : value.toString()}
                 </>
             ) : (
                 <Switch size={1.4} value={value} setValue={setValue} />

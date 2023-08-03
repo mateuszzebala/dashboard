@@ -9,7 +9,7 @@ const StyledTop = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    color: ${({ theme }) => theme.leftbar.font};
+    color: ${({ theme }) => theme.secondary};
     font-size: 20px;
     text-transform: uppercase;
     background-color: ${({ theme }) => theme.secondary}11;
@@ -19,7 +19,7 @@ const StyledTop = styled.div`
     cursor: pointer;
 
     a {
-        color: ${({ theme }) => theme.leftbar.font};
+        color: ${({ theme }) => theme.secondary};
         text-decoration: none;
         font-size: 15px;
     }
@@ -47,7 +47,7 @@ const StyledDropdown = styled.div`
     gap: 10px;
     font-size: 15px;
     a {
-        color: ${({ theme }) => theme.leftbar.font};
+        color: ${({ theme }) => theme.secondary};
     }
 `
 

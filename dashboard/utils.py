@@ -91,7 +91,7 @@ class Config:
     @staticmethod
     def set(name, value):
         config = Configuration.objects.filter(name=name).first()
-        if config is None:
+        if config is not None:
             config.value = value
             config.save()
         else:

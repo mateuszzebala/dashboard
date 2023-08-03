@@ -11,20 +11,20 @@ const StyledTable = styled.table`
 
 const StyledField = styled.td`
     padding: 8px 20px;
-    border: 2px solid ${({ theme }) => theme.table.border};
+    border: 2px solid ${({ theme }) => theme.primary};
 `
 
 const StyledRow = styled.tr`
     td {
-        background-color: ${({ theme }) => theme.table.background};
-        color: ${({ theme }) => theme.table.font};
+        background-color: ${({ theme }) => theme.secondary};
+        color: ${({ theme }) => theme.primary};
     }
 `
 
 const StyledHeaderRow = styled.tr`
     td {
-        color: ${({ theme }) => theme.table.background};
-        background: ${({ theme }) => theme.table.font};
+        color: ${({ theme }) => theme.secondary};
+        background: ${({ theme }) => theme.primary};
         text-align: center;
     }
 `

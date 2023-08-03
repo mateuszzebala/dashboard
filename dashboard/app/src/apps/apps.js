@@ -7,13 +7,17 @@ import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 
-const SUBLINKS = {}
+export const SUBLINKS = {}
 
-export const initLinks = async () => {
+export const initSubLinks = async () => {
     SUBLINKS.TERMINAL = (await FETCH(ENDPOINTS.terminal.init())).data
     SUBLINKS.FILES = (await FETCH(ENDPOINTS.files.init())).data
+    SUBLINKS.DATABASE = Object.keys(
+        (await FETCH(ENDPOINTS.database.models())).data.models
+    )
+    return SUBLINKS
 }
-await initLinks()
+
 export const APPS = {
     home: {
         name: 'Home',
@@ -24,6 +28,11 @@ export const APPS = {
         name: 'Database',
         icon: BsDatabase,
         link: LINKS.database.index(),
+        sublinks: () =>
+            SUBLINKS.DATABASE.sort().reduce((obj, item) => {
+                obj[item] = LINKS.database.model(item)
+                return obj
+            }, {}),
     },
     users: {
         name: 'Users',

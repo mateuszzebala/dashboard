@@ -6,7 +6,7 @@ import { toBoolStr } from '../utils/utils'
 const StyledWrapper = styled.span`
     a {
         text-decoration: none;
-        color: ${({ theme }) => theme.link.font};
+        color: ${({ theme }) => theme.primary};
         font-size: 20px;
         display: inline-block;
         position: relative;
@@ -20,7 +20,7 @@ const StyledWrapper = styled.span`
             width: 0;
             transition: width 0.3s, left 0.3s;
             border-radius: 10px;
-            background-color: ${({ theme }) => theme.link.font};
+            background-color: ${({ theme }) => theme.primary};
         }
         &:hover::after {
             width: ${({ animation }) => (animation ? '100%' : '0')};

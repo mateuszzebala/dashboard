@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
     width: 100vw;
     height: 100vh;
     z-index: 100;
-    background-color: ${({ theme }) => theme.curtain.background};
+    background-color: ${({ theme }) => theme.secondary};
 `
 
 const LoadingBar = styled.div`
@@ -19,7 +19,7 @@ const LoadingBar = styled.div`
     position: fixed;
     top: 3px;
     left: 3px;
-    background-color: ${({ theme }) => theme.curtain.bar};
+    background-color: ${({ theme }) => theme.primary};
     @keyframes loading {
         from {
             width: 0;

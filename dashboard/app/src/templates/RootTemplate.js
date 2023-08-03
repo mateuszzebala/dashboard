@@ -1,35 +1,52 @@
 import React from 'react'
 import { Curtain } from '../atoms/Curtain'
-import { toBoolStr } from '../utils/utils'
-import styled from 'styled-components'
 import { useNavigate } from 'react-router'
 import { ENDPOINTS } from '../api/endpoints'
-import { FETCH } from '../api/api'
+import { FETCH, INIT } from '../api/api'
 import { LINKS } from '../router/links'
-
-const StyledCurtain = styled.div`
-    display: ${({ show }) => (show ? 'flex' : 'none')};
-`
+import { useUser } from '../utils/hooks'
+import { useSearchParams } from 'react-router-dom'
 
 export const RootTemplate = ({ children }) => {
     const [show, setShow] = React.useState(true)
+    const { user, setUser } = useUser()
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
+
     React.useEffect(() => {
-        FETCH(ENDPOINTS.auth.me()).then((data) => {
-            if (window.location.pathname !== LINKS.auth.signin()) {
-                if (!data.data.signin) {
+        setShow(true)
+        if (user) {
+            if (user.signin) {
+                if (window.location.pathname === LINKS.auth.signin())
+                    INIT().then(() => {
+                        console.log('tuta')
+                        setShow(false)
+                        navigate(searchParams.get('next') || LINKS.home())
+                    })
+                else {
+                    INIT().then(() => {
+                        setShow(false)
+                    })
+                }
+            } else {
+                if (window.location.pathname === LINKS.auth.signin()) {
+                    setShow(false)
+                } else {
                     navigate(LINKS.auth.signinNext(window.location.pathname))
                 }
             }
-            setShow(false)
+        }
+    }, [user])
+
+    React.useEffect(() => {
+        FETCH(ENDPOINTS.auth.me()).then((data) => {
+            setUser(data.data)
         })
     }, [])
 
     return (
         <>
-            <StyledCurtain show={toBoolStr(show)}>
-                <Curtain loading time={2} />
-            </StyledCurtain>
+            {show && <Curtain loading time={2} />}
             {!show && children}
         </>
     )

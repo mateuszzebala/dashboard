@@ -22,7 +22,7 @@ def get_model_info_view(reqeust, model_name):
     return JsonResponse({
         'model': model.__name__,
         'app': model._meta.app_label,
-        'actions': [*[action.short_description for action in admin.site._registry.get(model).actions], 'delete'],
+        'actions': [action.short_description for action in admin.site._registry.get(model).actions],
         'fields': dict((str(field.name), {
             'type': field.get_internal_type(),
             'relation': {
@@ -64,7 +64,6 @@ def select_items_view(request, model_name):
     pages = ceil(len(items) / length) if length != -1 else 1
     if length != -1: items = items[page*length:page*length+length]
     if not asc: items.reverse()
-
 
     return JsonResponse({
         'model': model.__name__,
@@ -148,18 +147,12 @@ def make_action_view(request, model_name):
     action = request.POST.get('action')
     primary_keys = list(map(lambda key: key, request.POST.get('primary_keys').split(',')))
     try:
-        if action == 'delete':
-            for pk in primary_keys:
-                item = model.objects.filter(pk=pk).first()
-                if item is not None:
-                     item.delete()
-        else:
-            actions = admin.site._registry.get(model).actions
-            actions = list(filter(lambda fnc: fnc.short_description == action, actions))
-            if len(actions) > 0:
-                action = actions[0]
-            for pk in primary_keys:
-                action(admin.site._registry.get(model), request, model.objects.filter(pk=pk))
+        actions = admin.site._registry.get(model).actions
+        actions = list(filter(lambda fnc: fnc.short_description == action, actions))
+        if len(actions) > 0:
+            action = actions[0]
+        for pk in primary_keys:
+            action(admin.site._registry.get(model), request, model.objects.filter(pk=pk))
     except:
         ...
     return JsonResponse({})

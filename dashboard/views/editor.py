@@ -5,6 +5,9 @@ import subprocess
 from dashboard.models import Configuration
 import os
 from dashboard.utils import get_type_of_file, Config
+import json
+from PIL import Image, ImageEnhance
+
 
 @is_superuser
 def save_file(request):
@@ -32,9 +35,9 @@ def run_command(request):
 @is_superuser
 def file_json(request):
     path = request.GET.get('path')
-
     return JsonResponse({
         'path': path,
+        'exists': os.path.exists(path),
         'filename': path.split(os.sep)[-1],
         'parent': os.path.abspath(os.path.join(path, os.pardir)),
         'type': get_type_of_file(path.split(os.sep)[-1])
@@ -43,7 +46,7 @@ def file_json(request):
 @is_superuser
 def save_image(request):
     path = request.GET.get('path')
-    print(request.POST.get('imageData'))
+    props = json.loads(request.POST.get('props'))
     return JsonResponse({})
 
         

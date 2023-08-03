@@ -1,3 +1,4 @@
+import { theme } from '../theme/theme'
 import { API } from './api'
 
 export const ENDPOINTS = {
@@ -23,7 +24,16 @@ export const ENDPOINTS = {
         csrf: () => API(['auth', 'csrf']),
         logout: () => API(['auth', 'logout']),
         me: () => API(['auth', 'me']),
-        qrcode: () => API(['auth', 'qrcode']),
+        profile: (username) => API(['auth', 'profile', username]),
+        qrcode: (
+            fillColor = theme.primary,
+            backgroundColor = theme.secondary
+        ) =>
+            API(['auth', 'qrcode'], {
+                datetime: new Date().toISOString(),
+                fillColor: fillColor.replace('#', '%23'),
+                backgroundColor: backgroundColor.replace('#', '%23'),
+            }),
     },
     terminal: {
         command: () => API(['terminal', 'command']),
@@ -39,12 +49,10 @@ export const ENDPOINTS = {
         remove: () => API(['files', 'remove']),
         touch: () => API(['files', 'touch']),
 
-        upload: (path) => API(['files', 'file', 'upload'], { path }),
+        upload: (path) => API(['files', 'upload'], { path }),
     },
     editor: {
         json: (path) => API(['editor', 'json'], { path }),
-        last_and_liked: () => API(['editor', 'last&liked']),
-        like: (path) => API(['editor', 'like'], { path }),
         save: {
             run: (path) => API(['editor', 'save', 'run'], { path }),
             text: (path) => API(['editor', 'save', 'text'], { path }),
@@ -54,5 +62,10 @@ export const ENDPOINTS = {
     other: {
         get_config: (name) => API(['other', 'config', 'get'], { name }),
         set_config: (name) => API(['other', 'config', 'set'], { name }),
+        time: () => API(['other', 'time']),
+    },
+    statistics: {
+        countries: () => API(['statistics', 'countries']),
+        country: (country) => API(['statistics', 'country', country]),
     },
 }

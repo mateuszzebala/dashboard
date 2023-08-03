@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { theme } from '../../theme/theme'
 import useResizeObserver from 'use-resize-observer'
+import { useModalForm, useTheme } from '../../utils/hooks'
+import { FaGlobeEurope } from 'react-icons/fa'
+import { CountryInfo } from './CountryInfo'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -18,13 +20,36 @@ const StyledSvgMap = styled.svg``
 const StyledPath = styled.path`
     stroke: ${({ theme }) => theme.primary};
     stroke-width: 1px;
-    fill: ${({ theme }) => theme.secondary};
+    fill: ${({ theme, color }) => (color ? color : theme.secondary)};
     cursor: pointer;
     stroke-linejoin: round;
 `
 
-const PathCountry = ({ ...props }) => {
-    return <StyledPath {...props} />
+const PathCountry = ({ color, ...props }) => {
+    const modalForm = useModalForm()
+    const [theme] = useTheme()
+    return (
+        <StyledPath
+            {...props}
+            color={
+                color &&
+                theme.primary +
+                    Math.round((color / 100) * 255)
+                        .toString(16)
+                        .padStart(2, '0')
+                        .toUpperCase()
+            }
+            onClick={(e) => {
+                e.detail > 1 &&
+                    modalForm({
+                        content: CountryInfo,
+                        title: props.title,
+                        icon: <FaGlobeEurope />,
+                        country: props.countryCode,
+                    })
+            }}
+        />
+    )
 }
 
 export const WorldMap = ({ scale, setScale, countries = {} }) => {
@@ -53,26 +78,37 @@ export const WorldMap = ({ scale, setScale, countries = {} }) => {
     React.useEffect(() => {
         setPos((prev) => ({
             ...prev,
+            left:
+                prev.left + (prev.width - (1 / scale) * wrapperSize.width) / 2,
+            top:
+                prev.top + (prev.height - (1 / scale) * wrapperSize.height) / 2,
             width: (1 / scale) * wrapperSize.width,
             height: (1 / scale) * wrapperSize.height,
         }))
     }, [scale, wrapperSize])
 
-    React.useEffect(() => {
-        Object.keys(countries).forEach((country) => {
-            const paths = svgRef.current.querySelectorAll(`.land#${country}`)
-            const color =
-                theme.accent +
-                Math.round((countries[country] / 100) * 255)
-                    .toString(16)
-                    .padStart(2, '0')
-                    .toUpperCase()
-
-            paths.forEach((path) => {
-                path.style.fill = color
-            })
+    const handleMouseDown = (e) => {
+        const clientX = e.clientX || e.touches[0].clientX
+        const clientY = e.clientY || e.touches[0].clientY
+        setMouse({
+            down: true,
+            top: pos.top,
+            left: pos.left,
+            x: clientX,
+            y: clientY,
         })
-    }, [countries])
+    }
+
+    const handleMouseMove = (e) => {
+        const clientX = e.clientX || e.touches[0].clientX
+        const clientY = e.clientY || e.touches[0].clientY
+        mouse.down &&
+            setPos((prev) => ({
+                ...prev,
+                left: mouse.left + (mouse.x - clientX) / scale,
+                top: mouse.top + (mouse.y - clientY) / scale,
+            }))
+    }
 
     return (
         <StyledWrapper
@@ -86,37 +122,29 @@ export const WorldMap = ({ scale, setScale, countries = {} }) => {
             scale={scale}
         >
             <StyledSvgMap
-                viewBox={`${pos.left} ${pos.top} ${pos.width} ${pos.height}`}
+                viewBox={`${pos.left} ${pos.top} ${
+                    pos.width < 0 ? 0 : pos.width
+                } ${pos.height < 0 ? 0 : pos.height}`}
                 ref={svgRef}
                 scale={scale}
-                onMouseDown={(e) => {
-                    setMouse({
-                        down: true,
-                        top: pos.top,
-                        left: pos.left,
-                        x: e.clientX,
-                        y: e.clientY,
-                    })
-                }}
+                onTouchStart={handleMouseDown}
+                onTouchMove={handleMouseMove}
+                onMouseDown={handleMouseDown}
                 onMouseUp={disableDrag}
+                onTouchEnd={disableDrag}
                 onMouseLeave={disableDrag}
-                onMouseMove={(e) => {
-                    mouse.down &&
-                        setPos((prev) => ({
-                            ...prev,
-                            left: mouse.left + (mouse.x - e.clientX) / scale,
-                            top: mouse.top + (mouse.y - e.clientY) / scale,
-                        }))
-                }}
+                onMouseMove={handleMouseMove}
             >
                 <g>
                     {COUNTRIES.map((country) => (
                         <PathCountry
                             key={country.country_code}
                             id={country.country_code}
+                            countryCode={country.country_code}
                             title={country.name}
                             className="land"
                             d={country.pos}
+                            color={countries[country.country_code]}
                         />
                     ))}
                 </g>

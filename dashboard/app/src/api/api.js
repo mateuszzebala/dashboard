@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ENDPOINTS } from './endpoints'
 import { LINKS } from '../router/links'
+import { initSubLinks } from '../apps/apps'
 
 const manifest_location = '/dashboard/manifest.json'
 
@@ -9,6 +10,10 @@ export const MANIFEST = await fetch(manifest_location).then(async (data) => {
 })
 
 export const API_URL = MANIFEST.api_url
+
+export const INIT = async () => {
+    return Promise.all([initSubLinks()])
+}
 
 export const API = (path, args = null) => {
     let url = API_URL

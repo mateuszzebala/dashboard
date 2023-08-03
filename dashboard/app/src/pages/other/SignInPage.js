@@ -5,12 +5,11 @@ import { Button } from '../../atoms/Button'
 import { Typography } from '../../atoms/Typography'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
-import { useNavigate } from 'react-router'
-import { LINKS } from '../../router/links'
 import { FaLock, FaQrcode } from 'react-icons/fa'
 import { toBoolStr } from '../../utils/utils'
-import { useSearchParams } from 'react-router-dom'
-import { useModalForm } from '../../utils/hooks'
+import { useModalForm, useUser } from '../../utils/hooks'
+import { ResetPassword } from '../../atoms/modalforms/ResetPassword'
+import { BiReset } from 'react-icons/bi'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -120,20 +119,17 @@ const StyledButtons = styled.div`
     gap: 10px;
 `
 
+const StyledResetPassword = styled.span`
+    cursor: pointer;
+`
+
 export const SignInPage = () => {
-    const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
     const [sending, setSending] = React.useState(false)
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [error, setError] = React.useState(false)
     const modalForm = useModalForm()
-
-    React.useEffect(() => {
-        FETCH(ENDPOINTS.auth.csrf()).then((data) => {
-            data.data.username && navigate(LINKS.home())
-        })
-    }, [])
+    const { setUser } = useUser()
 
     const handleSubmitForm = (e) => {
         e.preventDefault()
@@ -145,9 +141,9 @@ export const SignInPage = () => {
         })
             .then((data) => {
                 if (data.data.done) {
-                    if (searchParams.get('next'))
-                        navigate(searchParams.get('next'))
-                    else navigate(LINKS.home())
+                    FETCH(ENDPOINTS.auth.me()).then((dataUser) => {
+                        setUser(dataUser.data)
+                    })
                 } else {
                     setError(true)
                 }
@@ -202,6 +198,17 @@ export const SignInPage = () => {
                         }}
                     />
                 </StyledButtons>
+                <StyledResetPassword
+                    onClick={() => {
+                        modalForm({
+                            content: ResetPassword,
+                            title: 'RESET PASSWORD',
+                            icon: <BiReset />,
+                        })
+                    }}
+                >
+                    RESET PASSWORD
+                </StyledResetPassword>
             </StyledForm>
             <StyledLock>
                 <FaLock />

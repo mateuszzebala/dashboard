@@ -17,8 +17,7 @@ def get_field_serializer(value, field_type):
     if field_type == 'DurationField': return value and {
             'days': value.days, 'seconds': value.seconds
         }
-    if field_type == 'FileField': return value and value.path
-    if field_type ==  'ImageField': return value and value.path
+    if field_type == 'FileField': return None if not value else value.path
     return value
 
 def set_field_serializer(value, field_type):

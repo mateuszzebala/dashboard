@@ -9,6 +9,7 @@ views = [
     'files',
     'editor',
     'other',
+    'statistics',
     'users'
 ]
 

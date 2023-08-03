@@ -1,7 +1,106 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
+import { UserTile } from '../../organisms/users/UserTile'
+import { Input } from '../../atoms/Input'
+import styled from 'styled-components'
+import { Paginator } from '../../atoms/Paginator'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
+import { Button } from '../../atoms/Button'
+import { FloatingActionButton } from '../../atoms/FloatingActionButton'
+import { FaLock, FaLockOpen, FaPlus } from 'react-icons/fa'
+
+const StyledUsersGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
+    gap: 10px;
+    overflow-y: auto;
+    justify-content: center;
+    padding: 10px 5px;
+`
+
+const StyledContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+`
+const StyledPaginator = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0 0;
+`
+const StyledMenu = styled.div`
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+`
 
 export const UsersPage = () => {
-    return <MainTemplate app={APPS.users}></MainTemplate>
+    const [search, setSearch] = React.useState('')
+    const [users, setUsers] = React.useState([])
+    const [page, setPage] = React.useState(0)
+    const [admin, setAdmin] = React.useState(false)
+    const [pages, setPages] = React.useState(0)
+
+    React.useEffect(() => {
+        FETCH(
+            ENDPOINTS.database.items('User', {
+                page,
+                length: 30,
+                query: admin ? 'is_superuser=True' : search,
+            })
+        ).then((data) => {
+            setUsers(data.data.items.map((item) => item.fields))
+            setPages(data.data.pages)
+        })
+    }, [search, admin])
+
+    return (
+        <MainTemplate
+            app={APPS.users}
+            submenuChildren={
+                <StyledMenu>
+                    <Button
+                        second={!admin}
+                        onClick={() => {
+                            setAdmin((prev) => !prev)
+                        }}
+                    >
+                        {admin ? <FaLock /> : <FaLockOpen />}
+                        ADMINS
+                    </Button>
+                    <Input
+                        label={'SEARCH'}
+                        value={search}
+                        setValue={setSearch}
+                        disabled={admin}
+                    />
+
+                    <FloatingActionButton second size={1.3} icon={<FaPlus />} />
+                </StyledMenu>
+            }
+        >
+            <StyledContent>
+                <StyledUsersGrid>
+                    {users.map((user) => (
+                        <UserTile key={user.id} data={user} />
+                    ))}
+                </StyledUsersGrid>
+                {pages > 1 && (
+                    <StyledPaginator>
+                        <Paginator
+                            second
+                            pages={pages}
+                            value={page}
+                            setValue={setPage}
+                        />
+                    </StyledPaginator>
+                )}
+            </StyledContent>
+        </MainTemplate>
+    )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { APPS } from '../../apps/apps'
 import { FieldInput } from '../../organisms/database/FieldInput'
 import styled from 'styled-components'
@@ -15,12 +15,13 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     flex-direction: column;
     align-items: center;
+
     gap: 10px;
     padding: 30px 10px;
 `
 export const DatabasePutItemPage = () => {
     const { modelName } = useParams()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const [fields, setFields] = React.useState([])
     const [values, setValues] = React.useState({})
 
@@ -34,9 +35,9 @@ export const DatabasePutItemPage = () => {
             (field) => values[field] === null && !nullable[field]
         )
         console.log(err)
-        // FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
-        //     navigate(links.database.item(modelName, data.data.pk))
-        // })
+        FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
+            navigate(LINKS.database.item(modelName, data.data.pk))
+        })
     }
 
     React.useEffect(() => {
@@ -62,7 +63,7 @@ export const DatabasePutItemPage = () => {
         <MainTemplate
             app={APPS.database}
             topbarLink={LINKS.database.model(modelName)}
-            title={`NEW ${modelName.toUpperCase()}`}
+            title={modelName.toUpperCase()}
         >
             <StyledWrapper>
                 {fields.map((field) => (
@@ -79,8 +80,8 @@ export const DatabasePutItemPage = () => {
                     />
                 ))}
             </StyledWrapper>
-            <FloatingActionButton onClick={handleSave} size={1}>
-                <FaRegSave /> SAVE
+            <FloatingActionButton second onClick={handleSave} size={1.3}>
+                SAVE
             </FloatingActionButton>
         </MainTemplate>
     )

@@ -12,13 +12,13 @@ const StyledWrapper = styled.div`
 const StyledDraggableDot = styled.button`
     width: ${({ size }) => size * 18 + 'px'};
     height: ${({ size }) => size * 18 + 'px'};
-    background-color: ${({ theme }) => theme.range.dot};
+    background-color: ${({ theme }) => theme.primary};
     border-radius: 50%;
     cursor: move;
     position: absolute;
     border: 0;
     left: ${({ x }) => x + '%'};
-    outline: 0px solid ${({ theme }) => theme.range.dot}88;
+    outline: 0px solid ${({ theme }) => theme.primary}88;
     transition: outline-width 0.1s;
     &:focus,
     &:hover {
@@ -31,7 +31,7 @@ const StyledLine = styled.div`
     border-radius: ${({ size }) => size * 4 + 'px'};
     position: relative;
     width: 100%;
-    background-color: ${({ theme }) => theme.range.right};
+    background-color: ${({ theme }) => theme.tertiary};
     display: flex;
     align-items: center;
 `
@@ -41,7 +41,7 @@ const StyledRange = styled.div`
     width: calc(
         ${({ width }) => width + '%'} + ${({ size }) => size * 5 + 'px'}
     );
-    background-color: ${({ theme }) => theme.range.left};
+    background-color: ${({ theme }) => theme.primary};
 `
 
 export const Range = ({

@@ -27,7 +27,8 @@ export const CharFieldInput = ({ field, onChange }) => {
         return (
             <StyledField>
                 <Typography variant={'h3'}>
-                    {field.name} - <StyledType>{field.type}</StyledType>
+                    {field.name.toUpperCase()} -{' '}
+                    <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Select
                     data={field.params.choices}
@@ -40,7 +41,8 @@ export const CharFieldInput = ({ field, onChange }) => {
         return (
             <StyledField>
                 <Typography variant={'h3'}>
-                    {field.name} - <StyledType>{field.type}</StyledType>
+                    {field.name.toUpperCase()} -{' '}
+                    <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Input
                     maxLength={field.params.max_length}

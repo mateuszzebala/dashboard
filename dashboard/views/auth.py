@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
-from dashboard.models import QrCodeAuth
+from dashboard.models import QrCodeAuth, Account
 from uuid import uuid4
 import qrcode
 import os
@@ -41,6 +41,7 @@ def me(request):
             'signin': True,
             'username': request.user.username,
             'email': request.user.email,
+            'id': request.user.id,
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
             'is_superuser': request.user.is_superuser,
@@ -59,33 +60,51 @@ def is_superuser(fnc):
         if request.user.is_superuser:
             return fnc(*args, **kwargs)
         else:
-            return JsonResponse({})
+            return JsonResponse({
+                'error': 'You do not have access to this API. You should be a superuser.'
+            })
 
     return inner
 
 @is_superuser
 def generate_auth_qrcode(request):
     token = str(uuid4())
-    url = request.build_absolute_uri() + token + '/'
-    image = qrcode.make(url)
+    fillColor = request.GET.get('fillColor') or 'black'
+    backgroundColor = request.GET.get('backgroundColor') or 'white'
+    qr = qrcode.QRCode(border=2, box_size=10)
+    url = request.build_absolute_uri().split('?')[0]
+    qr.add_data(url + token + '/')
+    image = qr.make_image(fill_color=fillColor, back_color=backgroundColor)
     os.makedirs('Media/dashboard/auth/qrcode/', exist_ok=True)
     image.save(f'Media/dashboard/auth/qrcode/{token}.png')
-    code = QrCodeAuth(token=token, url=url, user=request.user, file=f'Media/dashboard/auth/qrcode/{token}.png')
+    code = QrCodeAuth(token=token, user=request.user, file=f'Media/dashboard/auth/qrcode/{token}.png')
     code.save()
     return FileResponse(open(f'Media/dashboard/auth/qrcode/{token}.png', 'rb'))
 
-def get_qrcode(request, token):
+def get_auth(request, token):
     code = QrCodeAuth.objects.filter(token=token).first()
-    if code is None:
-        if (datetime.datetime.now() - code.datetime).total_seconds() < 60 * 60:
+    if code is not None:
+        if code.datetime.today:
             login(request, code.user)
-    return redirect('dashboard:app', path='/')
+            os.remove(code.file.path)
+            code.delete()
+    return redirect('dashboard:app', path='')
+
+def profile_picture(request, username):
+    account = Account.objects.filter(user__username=username).first()
+    if account is not None:
+        image = account.image
+        if image:
+            return FileResponse(open(image.path, 'rb'))
+    return FileResponse(open('Media/dashboard/auth/account/default.png', 'rb'))
+
 
 urlpatterns = [
     path('signin/', signin), # SIGN IN USER
     path('logout/', logout_view), # SIGN IN USER
     path('csrf/', csrf), # GET CSRF TOKEN
     path('me/', me), # AM I SIGN IN?
+    path('profile/<username>/', profile_picture), # GET PROFILE PICTURE
     path('qrcode/', generate_auth_qrcode), # GENERATE QR CODE
-    path('qrcode/<token>/', get_qrcode, name='getQRcode'), # GENERATE QR CODE
+    path('qrcode/<token>/', get_auth), # AUTH BY QRCODE
 ]

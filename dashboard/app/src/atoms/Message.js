@@ -15,19 +15,19 @@ const StyledWrapper = styled.div`
         if (error) return theme.error
         if (warning) return theme.warning
         if (success) return theme.success
-        return theme.message.background
+        return theme.primary
     }};
     box-shadow: 0 0 8px -3px ${({ theme }) => theme.primary};
 `
 const StyledText = styled.span`
     font-size: 17px;
-    color: ${({ theme }) => theme.message.font};
+    color: ${({ theme }) => theme.secondary};
 `
 
 const StyledExitButton = styled.button`
     background-color: transparent;
     border: 0;
-    color: ${({ theme }) => theme.message.font};
+    color: ${({ theme }) => theme.secondary};
     display: grid;
     place-items: center;
     padding: 0;

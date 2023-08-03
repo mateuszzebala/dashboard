@@ -8,9 +8,9 @@ import { Tooltip } from './Tooltip'
 const StyledWrapper = styled.button`
     position: relative;
     background-color: ${({ theme, second }) =>
-        second ? theme.button.background + '22' : theme.button.background};
+        second ? theme.primary + '22' : theme.primary};
     color: ${({ theme, second }) =>
-        second ? theme.button.background : theme.button.font};
+        second ? theme.secondary : theme.secondary};
     border: 0;
     font-size: ${({ size }) => 20 * size + 'px'};
     width: ${({ icon, size }) => (icon ? 40 * size + 'px' : 'auto')};
@@ -20,11 +20,12 @@ const StyledWrapper = styled.button`
     border-radius: ${({ circle, size }) => (circle ? '50%' : size * 5 + 'px')};
     outline: 0 solid black;
     outline-color: ${({ theme, second }) =>
-        theme.button.background + (second ? '22' : '88')};
+        theme.primary + (second ? '22' : '88')};
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s, outline-color 0.3s, outline-width 0.1s;
+    transition: background 0.3s, color 0.3s, outline-color 0.3s,
+        outline-width 0.1s;
     flex-wrap: wrap;
     cursor: pointer;
     &:focus,
@@ -58,8 +59,7 @@ const StyledChildren = styled.span`
     justify-content: center;
     gap: 5px;
     opacity: ${({ loading }) => (loading ? 0 : 1)};
-    color: ${({ theme, second }) =>
-        second ? theme.button.background : theme.button.font};
+    color: ${({ theme, second }) => (second ? theme.primary : theme.secondary)};
 `
 
 export const Button = ({
@@ -86,10 +86,7 @@ export const Button = ({
                 second={toBoolStr(second)}
                 {...props}
             >
-                <StyledChildren
-                    second={second}
-                    loading={toBoolStr(loading)}
-                >
+                <StyledChildren second={second} loading={toBoolStr(loading)}>
                     {icon || children}
                 </StyledChildren>
                 {loading && (

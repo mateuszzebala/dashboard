@@ -9,9 +9,13 @@ import { BiEditAlt } from 'react-icons/bi'
 import { LINKS } from '../../router/links'
 import { useNavigate } from 'react-router'
 import { getIconByFileType } from '../../organisms/files/ItemTile'
-import { GETCONFIG } from '../../api/configuration'
+import { GETCONFIG, SETCONFIG } from '../../api/configuration'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
+import { Button } from '../../atoms/Button'
+import { Loading } from '../../atoms/Loading'
+import { SelectFile } from '../../atoms/modalforms/SelectFile'
+import { BsFileBreak, BsFolder } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -69,11 +73,12 @@ export const EditorPage = () => {
     const [last, setLast] = React.useState([])
     const [liked, setLiked] = React.useState([])
     const modalForm = useModalForm()
+    const [loading, setLoading] = React.useState({ liked: true, last: true })
     const navigate = useNavigate()
 
     React.useEffect(() => {
         GETCONFIG('editor_last').then(async (val) => {
-            setLast(
+            const lastFiles = (
                 await Promise.all(
                     val.files.map(
                         async (file) =>
@@ -82,10 +87,15 @@ export const EditorPage = () => {
                             ).data
                     )
                 )
-            )
+            ).filter((file) => file.exists)
+            SETCONFIG('editor_last', {
+                files: lastFiles.map((file) => file.path),
+            })
+            setLast(lastFiles)
+            setLoading((prev) => ({ ...prev, last: false }))
         })
         GETCONFIG('editor_liked').then(async (val) => {
-            setLiked(
+            const likedFiles = (
                 await Promise.all(
                     val.files.map(
                         async (file) =>
@@ -94,20 +104,55 @@ export const EditorPage = () => {
                             ).data
                     )
                 )
-            )
+            ).filter((file) => file.exists)
+            SETCONFIG('editor_liked', {
+                files: likedFiles.map((file) => file.path),
+            })
+            setLiked(likedFiles)
+            setLoading((prev) => ({ ...prev, liked: false }))
         })
     }, [])
 
     return (
-        <MainTemplate app={APPS.editor}>
+        <MainTemplate
+            app={APPS.editor}
+            submenuChildren={
+                <Button
+                    second
+                    size={1.1}
+                    onClick={() => {
+                        modalForm({
+                            content: SelectFile,
+                            title: 'OPEN FILE',
+                            icon: <BsFolder />,
+                            todo: (path) => {
+                                modalForm({
+                                    content: EditorChooser,
+                                    icon: <BiEditAlt />,
+                                    title: 'CHOOSE EDITOR TYPE',
+                                    todo: (editorType) => {
+                                        navigate(
+                                            LINKS.editor.edit(path, editorType)
+                                        )
+                                    },
+                                })
+                            },
+                        })
+                    }}
+                >
+                    <BsFileBreak /> OPEN FILE
+                </Button>
+            }
+        >
             <StyledWrapper>
                 <StyledColumn>
                     <StyledTitle>
-                        <AiOutlineHeart />
-                        LIKED
+                        <AiOutlineClockCircle />
+                        LAST
                     </StyledTitle>
+                    {loading.last && <Loading size={2} />}
                     <StyledFiles>
-                        {liked.map((file) => (
+                        {last.map((file) => (
                             <StyledFile
                                 onClick={() => {
                                     modalForm({
@@ -133,11 +178,12 @@ export const EditorPage = () => {
                 </StyledColumn>
                 <StyledColumn>
                     <StyledTitle>
-                        <AiOutlineClockCircle />
-                        LAST
+                        <AiOutlineHeart />
+                        LIKED
                     </StyledTitle>
+                    {loading.liked && <Loading size={2} />}
                     <StyledFiles>
-                        {last.map((file) => (
+                        {liked.map((file) => (
                             <StyledFile
                                 onClick={() => {
                                     modalForm({

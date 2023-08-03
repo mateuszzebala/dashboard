@@ -11,6 +11,7 @@ import { Counter } from '../../atoms/Counter'
 import { Button } from '../../atoms/Button'
 import { HiXMark } from 'react-icons/hi2'
 import { Theme } from '../../atoms/Theme'
+import { theme as orginalTheme } from '../../theme/theme'
 
 const StyledRow = styled.div`
     display: flex;
@@ -53,22 +54,52 @@ const SwitchSetting = ({ value, setValue, prop, text }) => {
     )
 }
 
+const ColorProp = ({ setColors, colorName, colors }) => {
+    return (
+        <StyledRow>
+            <Theme
+                value={{
+                    primary: orginalTheme[colorName],
+                }}
+            >
+                <Button
+                    onClick={() => {
+                        setColors((prev) => ({
+                            ...prev,
+                            [colorName]: orginalTheme[colorName],
+                        }))
+                    }}
+                    circle
+                    icon={<HiXMark />}
+                />
+            </Theme>
+            <ColorInput
+                value={colors[colorName]}
+                setValue={(val) => {
+                    setColors((prev) => ({ ...prev, [colorName]: val }))
+                }}
+            />
+            <Typography variant={'h2'}>{colorName.toUpperCase()}</Typography>
+        </StyledRow>
+    )
+}
+
 export const SettingsPage = () => {
-    const [theme, setTheme] = useTheme()
+    const [theme, updateTheme] = useTheme()
     const [value, setValue] = React.useState({})
-    const [primaryColor, setPrimaryColor] = React.useState(theme.primary)
-    const [secondaryColor, setSecondaryColor] = React.useState(theme.secondary)
-    const [successColor, setSuccessColor] = React.useState(theme.success)
-    const [accentColor, setAccentColor] = React.useState(theme.accent)
-    const [errorColor, setErrorColor] = React.useState(theme.error)
-    const [warningColor, setWarningColor] = React.useState(theme.warning)
-    const [tertiaryColor, setTertiaryColor] = React.useState(theme.tertiary)
+    const [colors, setColors] = React.useState({
+        primary: theme.primary,
+        secondary: theme.secondary,
+        success: theme.success,
+        accent: theme.accent,
+        error: theme.error,
+        warning: theme.warning,
+        tertiary: theme.tertiary,
+    })
 
     React.useEffect(() => {
-        setTheme({
-            primary: primaryColor,
-        })
-    }, [primaryColor])
+        updateTheme(colors)
+    }, [colors])
 
     return (
         <MainTemplate
@@ -82,167 +113,41 @@ export const SettingsPage = () => {
             <StyledWrapper>
                 <StyledSection>
                     <span>THEME</span>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.primary,
-                                    font: theme.secondary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setPrimaryColor(theme.primary)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={primaryColor}
-                            setValue={setPrimaryColor}
-                        />
-                        <Typography variant={'h2'}>PRIMARY</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.secondary,
-                                    font: theme.primary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setSecondaryColor(theme.secondary)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={secondaryColor}
-                            setValue={setSecondaryColor}
-                        />
-                        <Typography variant={'h2'}>SECONDARY</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.tertiary,
-                                    font: theme.secondary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setTertiaryColor(theme.tertiary)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={tertiaryColor}
-                            setValue={setTertiaryColor}
-                        />
-                        <Typography variant={'h2'}>TERTIARY</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.accent,
-                                    font: theme.primary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setAccentColor(theme.accent)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={accentColor}
-                            setValue={setAccentColor}
-                        />
-                        <Typography variant={'h2'}>ACCENT</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.success,
-                                    font: theme.primary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setSuccessColor(theme.success)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={successColor}
-                            setValue={setSuccessColor}
-                        />
-                        <Typography variant={'h2'}>SUCCESS</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.error,
-                                    font: theme.primary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setErrorColor(theme.error)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={errorColor}
-                            setValue={setErrorColor}
-                        />
-                        <Typography variant={'h2'}>ERROR</Typography>
-                    </StyledRow>
-                    <StyledRow>
-                        <Theme
-                            value={{
-                                button: {
-                                    background: theme.warning,
-                                    font: theme.primary,
-                                },
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    setWarningColor(theme.warning)
-                                }}
-                                circle
-                                icon={<HiXMark />}
-                            />
-                        </Theme>
-                        <ColorInput
-                            value={warningColor}
-                            setValue={setWarningColor}
-                        />
-                        <Typography variant={'h2'}>WARNING</Typography>
-                    </StyledRow>
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'primary'}
+                    />
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'secondary'}
+                    />
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'tertiary'}
+                    />
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'error'}
+                    />
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'warning'}
+                    />
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'success'}
+                    />
+                    <ColorProp
+                        setColors={setColors}
+                        colors={colors}
+                        colorName={'accent'}
+                    />
                 </StyledSection>
                 <StyledSection>
                     <span>MAIN</span>

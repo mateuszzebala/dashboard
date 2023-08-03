@@ -7,15 +7,15 @@ const StyledWrapper = styled.button`
     display: grid;
     place-items: center;
     background-color: ${({ value, theme }) =>
-        value ? theme.checkbox : 'white'};
+        value ? theme.primary : 'white'};
     font-size: ${({ size }) => size * 20 + 'px'};
     padding: 0px;
     border: ${({ size }) => size * 3 + 'px'} solid
-        ${({ theme }) => theme.checkbox};
+        ${({ theme }) => theme.primary};
     border-radius: ${({ size }) => size * 5 + 'px'};
     color: white;
     transition: background-color 0.3s, color 0.3s, outline-width 0.1s;
-    outline: 0px solid ${({ theme }) => theme.checkbox}88;
+    outline: 0px solid ${({ theme }) => theme.primary}88;
     cursor: pointer;
 
     svg {

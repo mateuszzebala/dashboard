@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { datetimeToString } from '../../../utils/utils'
+import moment from 'moment'
 
 const StyledLogItem = styled.div`
     display: inline-flex;
@@ -47,6 +48,7 @@ export const LogItem = ({
             <StyledRow>
                 <span>{ip_v4}</span>
                 <span>{datetimeToString(datetime)}</span>
+                <span>{moment(datetimeToString(datetime)).fromNow()}</span>
             </StyledRow>
             <StyledRow>
                 <StyledBold>{method}</StyledBold>

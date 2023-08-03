@@ -1,6 +1,10 @@
 import React from 'react'
 import { BiSolidGrid, BiUserCircle } from 'react-icons/bi'
-import { AiOutlineInfoCircle, AiOutlineMessage } from 'react-icons/ai'
+import {
+    AiOutlineClockCircle,
+    AiOutlineInfoCircle,
+    AiOutlineMessage,
+} from 'react-icons/ai'
 import { FiSettings } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,10 +13,13 @@ import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
-import { useModalForm } from '../utils/hooks'
+import { useModalForm, useTheme, useUser } from '../utils/hooks'
 import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
 import { FaQrcode } from 'react-icons/fa'
 import { LoadingImage } from '../atoms/LoadingImage'
+import { BsArrowBarUp } from 'react-icons/bs'
+import { ServerClock } from '../atoms/ServerClock'
+import { Tooltip } from '../atoms/Tooltip'
 
 const StyledIcon = styled.span`
     display: flex;
@@ -21,10 +28,12 @@ const StyledIcon = styled.span`
     align-items: center;
     gap: 5px;
     text-decoration: none !important;
-    color: ${({ theme }) => theme.topbar.font};
+    color: ${({ theme }) => theme.primary};
     transition: color 0.2s, background-color 0.2s;
     padding: 5px;
     border-radius: 20px;
+    transition: transform 0.3s;
+    transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
     &:hover {
         background-color: ${({ theme }) => theme.tertiary}44;
     }
@@ -37,76 +46,116 @@ const StyledWrapper = styled.span`
     color: ${({ theme }) => theme.primary};
 `
 
-export const TopBarIcons = ({ app, username }) => {
+export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
     const navigate = useNavigate()
     const modalForm = useModalForm()
+    const { user } = useUser()
+    const [theme] = useTheme()
     return (
         <StyledWrapper>
-            <Link to={LINKS.account.index()}>
-                <StyledIcon>
-                    {username}
-                    <BiUserCircle />
-                </StyledIcon>
-            </Link>
-            {InfoByApp[app.name] && (
-                <Link to={LINKS.info.app(app.name)}>
+            <Tooltip text="YOUR ACCOUNT">
+                <Link to={LINKS.users.user(user.id)}>
                     <StyledIcon>
-                        <AiOutlineInfoCircle />
+                        {user.username}
+                        <BiUserCircle />
                     </StyledIcon>
                 </Link>
-            )}
-
-            <Link to={LINKS.settings.index()}>
-                <StyledIcon>
-                    <FiSettings />
+            </Tooltip>
+            <Tooltip text="APP INFO">
+                {InfoByApp[app.name] && (
+                    <Link to={LINKS.info.app(app.name)}>
+                        <StyledIcon>
+                            <AiOutlineInfoCircle />
+                        </StyledIcon>
+                    </Link>
+                )}
+            </Tooltip>
+            <Tooltip text="SETTINGS">
+                <Link to={LINKS.settings.index()}>
+                    <StyledIcon>
+                        <FiSettings />
+                    </StyledIcon>
+                </Link>
+            </Tooltip>
+            <Tooltip text="MESSAGES">
+                <Link to={LINKS.messages.index()}>
+                    <StyledIcon>
+                        <AiOutlineMessage />
+                    </StyledIcon>
+                </Link>
+            </Tooltip>
+            <Tooltip text="GENERATE QRCODE">
+                <StyledIcon
+                    onClick={() => {
+                        modalForm({
+                            content: () => (
+                                <LoadingImage
+                                    src={ENDPOINTS.auth.qrcode(
+                                        theme.primary,
+                                        theme.secondary
+                                    )}
+                                    alt="qrcode"
+                                    width={400}
+                                    height={400}
+                                />
+                            ),
+                            title: 'QRCODE',
+                            icon: <FaQrcode />,
+                        })
+                    }}
+                >
+                    <FaQrcode />
                 </StyledIcon>
-            </Link>
-
-            <Link to={LINKS.messages.index()}>
-                <StyledIcon>
-                    <AiOutlineMessage />
+            </Tooltip>
+            <Tooltip text="SHOW/HIDE SUBMENU">
+                <StyledIcon
+                    rotate={hideSubmenu}
+                    onClick={() => {
+                        setHideSubmenu((prev) => !prev)
+                    }}
+                >
+                    <BsArrowBarUp />
                 </StyledIcon>
-            </Link>
-            <StyledIcon
-                onClick={() => {
-                    modalForm({
-                        content: () => (
-                            <LoadingImage
-                                src={ENDPOINTS.auth.qrcode()}
-                                alt="qrcode"
-                                width={300}
-                                height={300}
-                            />
-                        ),
-                        title: 'QRCODE',
-                        icon: <FaQrcode />,
-                    })
-                }}
-            >
-                <FaQrcode />
-            </StyledIcon>
-            <StyledIcon
-                onClick={() => {
-                    modalForm({
-                        content: DashboardsMenu,
-                        title: 'CHOOSE APP',
-                        icon: <BiSolidGrid />,
-                    })
-                }}
-            >
-                <BiSolidGrid />
-            </StyledIcon>
-            <StyledIcon
-                onClick={() => {
-                    FETCH(ENDPOINTS.auth.logout()).then((data) => {
-                        if (data.data.logout) {
-                            navigate(LINKS.auth.signin())
-                        }
-                    })
-                }}
-            >
-                <IoMdLogOut />
-            </StyledIcon>
+            </Tooltip>
+            <Tooltip text="CHOOSE APP">
+                <StyledIcon
+                    onClick={() => {
+                        modalForm({
+                            content: DashboardsMenu,
+                            title: 'CHOOSE APP',
+                            icon: <BiSolidGrid />,
+                        })
+                    }}
+                >
+                    <BiSolidGrid />
+                </StyledIcon>
+            </Tooltip>
+            <Tooltip text="SERVER TIME">
+                <StyledIcon
+                    onClick={() => {
+                        modalForm({
+                            content: ServerClock,
+                            title: 'SERVER TIME',
+                            icon: <AiOutlineClockCircle />,
+                        })
+                    }}
+                >
+                    <AiOutlineClockCircle />
+                </StyledIcon>
+            </Tooltip>
+            <Tooltip text="LOGOUT">
+                <StyledIcon
+                    onClick={() => {
+                        FETCH(ENDPOINTS.auth.logout()).then((data) => {
+                            if (data.data.logout) {
+                                navigate(LINKS.auth.signin())
+                            }
+                        })
+                    }}
+                >
+                    <IoMdLogOut />
+                </StyledIcon>
+            </Tooltip>
         </StyledWrapper>
     )
 }

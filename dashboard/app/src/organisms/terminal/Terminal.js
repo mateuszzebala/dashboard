@@ -8,6 +8,8 @@ import { BiBookmark } from 'react-icons/bi'
 import { convertTerminalTextToHTML } from '../../utils/utils'
 import { useSearchParams } from 'react-router-dom'
 import { FaStop } from 'react-icons/fa'
+import { useModalForm } from '../../utils/hooks'
+import { Prompt } from '../../atoms/modalforms/Prompt'
 
 const StyledWrapper = styled.div`
     position: relative;
@@ -49,7 +51,7 @@ const StyledErrors = styled.pre`
 export const Terminal = ({ path, setPath }) => {
     const [waiting, setWaiting] = React.useState(false)
     const [searchParams] = useSearchParams()
-
+    const modalForm = useModalForm()
     const [folderContent, setFolderContent] = React.useState('')
     const lastInputRef = React.useRef()
     const terminalRef = React.useRef()
@@ -189,14 +191,29 @@ export const Terminal = ({ path, setPath }) => {
         <StyledWrapper onClick={focusLastInput}>
             <FloatingActionButton
                 onClick={handleClear}
-                size={1.2}
+                size={1.3}
                 icon={<AiOutlineClear />}
+                second
             />
 
-            <FloatingActionButton size={1.2} right={80} icon={<BiBookmark />} />
+            <FloatingActionButton
+                size={1.3}
+                second
+                right={80}
+                icon={<BiBookmark />}
+                onClick={() => {
+                    modalForm({
+                        content: Prompt,
+                        label: 'BOOKMARK NAME',
+                        title: 'ADD BOOKMARK',
+                        icon: <BiBookmark />,
+                    })
+                }}
+            />
             {waiting && (
                 <FloatingActionButton
-                    size={1.2}
+                    second
+                    size={1.3}
                     right={140}
                     icon={<FaStop />}
                     onClick={handleStopProcess}

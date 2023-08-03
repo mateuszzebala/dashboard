@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Loading } from './Loading'
 
 const StyledImage = styled.img`
     width: ${({ width }) => width + 'px'};
@@ -10,7 +9,6 @@ const StyledImage = styled.img`
 const StyledLoading = styled.div`
     width: ${({ width }) => width + 'px'};
     height: ${({ height }) => height + 'px'};
-
     display: grid;
     place-items: center;
     background-color: ${({ theme }) => theme.primary}11;
@@ -24,15 +22,13 @@ export const LoadingImage = ({ ...props }) => {
         <>
             <StyledImage
                 {...props}
+                width={loading ? 0 : props.width}
+                height={loading ? 0 : props.height}
                 onLoad={() => {
                     setLoading(false)
                 }}
             />
-            {loading && (
-                <StyledLoading {...props}>
-                    <Loading size={2} />
-                </StyledLoading>
-            )}
+            {loading && <StyledLoading {...props}></StyledLoading>}
         </>
     )
 }

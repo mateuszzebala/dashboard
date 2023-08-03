@@ -13,8 +13,13 @@ const StyledWrapper = styled.div`
 `
 
 const StyledPageButton = styled.button`
-    background-color: ${({ theme }) => theme.button.background};
-    color: ${({ theme }) => theme.button.font};
+    background-color: ${({ theme, second }) =>
+        second ? theme.primary + '22' : theme.primary};
+    color: ${({ theme, second }) => (second ? theme.primary : theme.secondary)};
+    outline-color: ${({ theme, second }) =>
+        theme.primary + (second ? '22' : '88')};
+    outline-style: solid;
+    outline-width: 0;
     border: 0;
     border-radius: 50%;
     display: grid;
@@ -25,7 +30,6 @@ const StyledPageButton = styled.button`
     height: ${({ selected }) => (selected ? '45px' : '40px')};
     cursor: pointer;
     font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
-    outline: 0px solid ${({ theme }) => theme.button.background}88;
     transition: 0.1s outline-width, width 0.1s, height 0.1s;
     &:focus,
     &:hover {
@@ -33,10 +37,11 @@ const StyledPageButton = styled.button`
     }
 `
 
-export const Paginator = ({ value, setValue, pages }) => {
+export const Paginator = ({ value, setValue, pages, second }) => {
     return (
         <StyledWrapper>
             <StyledPageButton
+                second={second}
                 onClick={() => {
                     setValue((prev) => (prev > 0 ? prev - 1 : prev))
                 }}
@@ -46,6 +51,7 @@ export const Paginator = ({ value, setValue, pages }) => {
             {value > 2 && (
                 <>
                     <StyledPageButton
+                        second={second}
                         selected={toBoolStr(value == 0)}
                         onClick={() => {
                             setValue(0)
@@ -60,6 +66,7 @@ export const Paginator = ({ value, setValue, pages }) => {
                 if (Math.abs(value - page) >= 3) return ''
                 return (
                     <StyledPageButton
+                        second={second}
                         selected={toBoolStr(value == page)}
                         key={page}
                         onClick={() => {
@@ -75,6 +82,7 @@ export const Paginator = ({ value, setValue, pages }) => {
                 <>
                     {value < pages - 4 && <BsThreeDots />}
                     <StyledPageButton
+                        second={second}
                         selected={toBoolStr(value == pages - 1)}
                         onClick={() => {
                             setValue(pages - 1)
@@ -85,6 +93,7 @@ export const Paginator = ({ value, setValue, pages }) => {
                 </>
             )}
             <StyledPageButton
+                second={second}
                 onClick={() => {
                     setValue((prev) => (prev < pages - 1 ? prev - 1 : prev))
                 }}

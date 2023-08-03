@@ -12,9 +12,11 @@ export const LINKS = {
     },
     messages: {
         index: () => '/dashboard/messages/',
+        message: (messageId) => `/dashboard/messages/${messageId}/`,
     },
     users: {
         index: () => '/dashboard/users/',
+        user: (id) => `/dashboard/users/${id}/`,
     },
     editor: {
         index: () => '/dashboard/editor/',
@@ -56,9 +58,6 @@ export const LINKS = {
     },
     settings: {
         index: () => '/dashboard/settings/',
-    },
-    account: {
-        index: () => '/dashboard/account/',
     },
     sessions: {
         index: () => '/dashboard/sessions/',

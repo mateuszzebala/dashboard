@@ -9,9 +9,9 @@ const StyledWrapper = styled.div`
     min-width: 300px;
     max-width: 300px;
     border-radius: 3px;
-    border: 3px solid ${({ theme }) => theme.input.border};
-    background-color: ${({ theme }) => theme.input.background};
-    color: ${({ theme }) => theme.input.font};
+    border: 3px solid ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
 `
 
 const StyledLabel = styled.label`
@@ -20,8 +20,8 @@ const StyledLabel = styled.label`
     left: 5px;
     padding: 0 10px;
     font-size: 10px;
-    background-color: ${({ theme }) => theme.input.background};
-    color: ${({ theme }) => theme.input.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
 `
 const StyledIcon = styled.span`
     display: grid;
@@ -33,13 +33,16 @@ const StyledInput = styled.input`
     border: 0;
     font-size: 20px;
     width: 100%;
-    background-color: ${({ theme }) => theme.input.background};
-    color: ${({ theme }) => theme.input.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     &:focus {
         outline: none;
     }
     &::-webkit-file-upload-button {
         display: none;
+    }
+    &:disabled {
+        color: ${({ theme }) => theme.tertiary};
     }
 `
 
@@ -47,8 +50,8 @@ const StyledTextarea = styled.textarea`
     border: 0;
     font-size: 20px;
     width: 100%;
-    background-color: ${({ theme }) => theme.input.background};
-    color: ${({ theme }) => theme.input.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     &:focus {
         outline: none;
     }

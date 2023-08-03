@@ -8,5 +8,7 @@ export const GETCONFIG = async (name) => {
 }
 
 export const SETCONFIG = async (name, value) => {
-    return FETCH(ENDPOINTS.other.set_config(name), { value })
+    return FETCH(ENDPOINTS.other.set_config(name), {
+        value: JSON.stringify(value),
+    })
 }

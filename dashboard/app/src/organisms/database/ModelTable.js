@@ -8,16 +8,22 @@ import { HiSelector } from 'react-icons/hi'
 import { LINKS } from '../../router/links'
 import { useNavigate, useParams } from 'react-router'
 
+const StyledWrapper = styled.div`
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+`
+
 const StyledField = styled.td`
-    border: 2px solid ${({ theme }) => theme.table.border};
+    border: 2px solid ${({ theme }) => theme.primary};
     text-align: center;
     padding: 10px 10px;
     width: auto;
     display: table-cell;
     background-color: ${({ selected, theme }) =>
-        selected ? theme.table.font : theme.table.background} !important;
+        selected ? theme.primary : theme.secondary} !important;
     color: ${({ selected, theme }) =>
-        selected ? theme.table.background : theme.table.font} !important;
+        selected ? theme.secondary : theme.primary} !important;
 
     white-space: nowrap;
     max-width: 150px;
@@ -59,7 +65,7 @@ export const ModelTable = ({
     const { modelName } = useParams()
 
     return (
-        <>
+        <StyledWrapper>
             <Table>
                 <thead>
                     <HeaderRow>
@@ -151,6 +157,6 @@ export const ModelTable = ({
                         <Loading size={1.5} />
                     </StyledLoadingWrapper>
                 ))}
-        </>
+        </StyledWrapper>
     )
 }

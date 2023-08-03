@@ -3,16 +3,40 @@ import styled from 'styled-components'
 import { IoClose } from 'react-icons/io5'
 import { MdOutlineMinimize } from 'react-icons/md'
 import { BsArrowUpShort } from 'react-icons/bs'
+import { toBoolStr } from '../utils/utils'
+
+const StyledCurtain = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: ${({ transparentCurtain }) =>
+        transparentCurtain ? 'transparent' : '#00000044'};
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    animation: fadeIn 0.2s ease;
+`
 
 const StyledWrapper = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
     z-index: 300;
-    transform: translate(-50%, -50%);
+    max-width: 97%;
+    max-height: 97vh;
+
     padding: 10px;
-    background-color: ${({ theme }) => theme.modal.background};
-    color: ${({ theme }) => theme.modal.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     box-shadow: 0px 0px 239.1px rgba(0, 0, 0, 0.028),
         0px 0px 291.6px rgba(0, 0, 0, 0.036),
         0px 0px 313.3px rgba(0, 0, 0, 0.041),
@@ -23,11 +47,11 @@ const StyledWrapper = styled.div`
     @keyframes fade-in {
         from {
             opacity: 0;
-            transform: translate(-50%, -40%);
+            transform: translate(0, 20%);
         }
         to {
             opacity: 1;
-            transform: translate(-50%, -50%);
+            transform: translate(0, 0);
         }
     }
     animation: fade-in 0.5s forwards;
@@ -39,6 +63,7 @@ const StyledCaption = styled.div`
     justify-content: space-between;
     gap: 20px;
     padding-bottom: 10px;
+    white-space: nowrap;
     align-items: center;
 `
 
@@ -77,6 +102,12 @@ const StyledCircleButton = styled.button`
     }
 `
 
+const StyledContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+`
+
 const StyledMinimize = styled.div`
     display: flex;
     align-items: center;
@@ -109,8 +140,10 @@ export const Modal = ({
     title = '',
     children,
     icon = '',
+    transparentCurtain = false,
 }) => {
     const [minimize, setMinimize] = React.useState(false)
+    const curtainRef = React.useRef()
 
     React.useEffect(() => {
         setMinimize(false)
@@ -142,30 +175,38 @@ export const Modal = ({
             </StyledMinimize>
         )
     return (
-        <StyledWrapper>
-            <StyledCaption>
-                <div>
-                    {minimizeIcon && (
+        <StyledCurtain
+            transparentCurtain={toBoolStr(transparentCurtain)}
+            ref={curtainRef}
+            onClick={(e) => {
+                e.target === curtainRef.current && setOpen(false)
+            }}
+        >
+            <StyledWrapper>
+                <StyledCaption>
+                    <div>
+                        {minimizeIcon && (
+                            <StyledCircleButton
+                                onClick={() => {
+                                    setMinimize(true)
+                                }}
+                            >
+                                <MdOutlineMinimize />
+                            </StyledCircleButton>
+                        )}
                         <StyledCircleButton
                             onClick={() => {
-                                setMinimize(true)
+                                setOpen(false)
                             }}
                         >
-                            <MdOutlineMinimize />
+                            <IoClose />
                         </StyledCircleButton>
-                    )}
-                    <StyledCircleButton
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                    >
-                        <IoClose />
-                    </StyledCircleButton>
-                </div>
-                <StyledTitle>{title}</StyledTitle>
-                <StyledIcon>{icon}</StyledIcon>
-            </StyledCaption>
-            {children}
-        </StyledWrapper>
+                    </div>
+                    <StyledTitle>{title}</StyledTitle>
+                    <StyledIcon>{icon}</StyledIcon>
+                </StyledCaption>
+                <StyledContent>{children}</StyledContent>
+            </StyledWrapper>
+        </StyledCurtain>
     )
 }

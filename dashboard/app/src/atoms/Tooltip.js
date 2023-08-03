@@ -9,11 +9,12 @@ const StyledWrapper = styled.span`
 
 const StyledTooltip = styled.div`
     position: fixed;
-    background-color: ${({ theme }) => theme.tooltip.background};
-    color: ${({ theme }) => theme.tooltip.font};
+    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.secondary};
     padding: 5px;
     border-radius: 5px;
     left: ${({ x }) => x + 10 + 'px'};
+    transform: translateX(-50%);
     top: ${({ y }) => y + 10 + 'px'};
     opacity: 0;
     max-width: 300px;
@@ -22,7 +23,7 @@ const StyledTooltip = styled.div`
     z-index: 10;
     font-size: 18px;
     padding: 8px 12px;
-    word-break: break-all;
+    text-align: center;
     @keyframes fadein {
         from {
             opacity: 0;

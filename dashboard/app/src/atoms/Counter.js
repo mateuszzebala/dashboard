@@ -8,14 +8,14 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-size: ${({ size }) => size * 20 + 'px'};
-    background-color: ${({ theme }) => theme.counter.background};
-    color: ${({ theme }) => theme.counter.font};
-    border-radius: ${({ size }) => size * 20 + 'px'};
+    background-color: ${({ theme }) => theme.primary}22;
+    color: ${({ theme }) => theme.primary};
+    border-radius: ${({ size }) => size * 5 + 'px'};
 `
 const StyledInput = styled.input`
     border: 0;
     background-color: transparent;
-    color: ${({ theme }) => theme.counter.font};
+    color: ${({ theme }) => theme.primary};
     padding: 0;
     font-size: ${({ scaleSize }) => scaleSize * 17 + 'px'};
     text-align: center;
@@ -29,15 +29,15 @@ const StyledButton = styled.button`
     flex-direction: column;
     font-size: ${({ size }) => size * 15 + 'px'};
     align-items: center;
-    border-radius: ${({ size }) => size * 20 + 'px'};
-    color: ${({ theme }) => theme.counter.font};
+    border-radius: ${({ size }) => size * 5 + 'px'};
+    color: ${({ theme }) => theme.primary};
     cursor: pointer;
     height: ${({ size }) => size * 35 + 'px'};
-    background-color: ${({ theme }) => theme.counter.background};
+    background-color: transparent;
     border: 0;
     width: ${({ size }) => size * 35 + 'px'};
     justify-content: center;
-    outline: 0 solid ${({ theme }) => theme.counter.background}88;
+    outline: 0 solid ${({ theme }) => theme.primary};
     transition: 0.1s;
     &:hover,
     &:focus {
@@ -80,7 +80,6 @@ export const Counter = ({
                 />{' '}
                 {unit}
             </StyledRow>
-
             <StyledButton
                 size={size}
                 onClick={() => {

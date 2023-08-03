@@ -22,15 +22,18 @@ import {
     BsFiletypeXlsx,
 } from 'react-icons/bs'
 import { useModalForm } from '../../utils/hooks'
+import { Select } from '../../atoms/Select'
 
 const StyledWrapper = styled.div`
     max-width: 100%;
     flex-direction: column;
     gap: 20px;
     overflow-x: scroll;
-    padding: 30px 0;
+
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
+    height: 100%;
     &::-webkit-scrollbar {
         height: 0;
     }
@@ -56,7 +59,7 @@ const StyledMenuSide = styled.div`
 const StyledFooter = styled.div`
     display: flex;
     padding: 0 10px;
-    gap: 20px;
+
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -71,6 +74,7 @@ export const DatabaseModelPage = () => {
     const [length, setLength] = React.useState(10)
     const [orderBy, setOrderBy] = React.useState(null)
     const [asc, setAsc] = React.useState(true)
+    const [action, setAction] = React.useState()
     const [modelData, setModelData] = React.useState(false)
     const [data, setData] = React.useState([])
     const [fields, setFields] = React.useState([])
@@ -94,7 +98,7 @@ export const DatabaseModelPage = () => {
                 setFields(registeredFields)
             }
         })
-    }, [])
+    }, [modelName])
 
     const fetchItems = () => {
         FETCH(
@@ -112,7 +116,14 @@ export const DatabaseModelPage = () => {
         setSelectedItems([])
     }
 
-    React.useEffect(fetchItems, [page, length, orderBy, asc, searchQuery])
+    React.useEffect(fetchItems, [
+        page,
+        length,
+        orderBy,
+        asc,
+        searchQuery,
+        modelName,
+    ])
     React.useEffect(() => {
         setPage(0)
     }, [length, orderBy, asc, searchQuery])
@@ -224,6 +235,18 @@ export const DatabaseModelPage = () => {
                         )}
                     </StyledMenuSide>
                     <StyledMenuSide>
+                        <Select
+                            value={action}
+                            setValue={setAction}
+                            data={
+                                modelData.actions &&
+                                modelData.actions.map((action) =>
+                                    action.toUpperCase()
+                                )
+                            }
+                            emptyName="ACTIONS"
+                        />
+                        <Button second>MAKE</Button>
                         <Counter
                             value={length}
                             setValue={setLength}
@@ -259,11 +282,12 @@ export const DatabaseModelPage = () => {
                     <FloatingActionButton
                         to={LINKS.database.putItem(modelName)}
                         icon={<FaPlus />}
-                        circle
-                        size={1.5}
+                        second
+                        size={1.3}
                     />
                     <StyledFooter>
                         <Paginator
+                            second
                             value={page}
                             pages={pages}
                             setValue={setPage}

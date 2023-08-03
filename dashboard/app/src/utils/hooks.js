@@ -47,14 +47,13 @@ export const useTheme = () => {
     const [theme, setTheme] = React.useContext(ThemeContext)
     const [cookies, setCookies] = useCookies(['theme'])
 
-    React.useEffect(() => {
-        cookies.theme && setTheme && setTheme(cookies.theme)
-    }, [cookies])
-
     const updateTheme = (newTheme) => {
         setTheme((prev) => ({ ...prev, ...newTheme }))
-        setCookies('theme', theme)
     }
+
+    React.useEffect(() => {
+        setCookies('theme', theme)
+    }, [theme])
 
     return [theme, updateTheme]
 }
@@ -69,4 +68,18 @@ export const useModalForm = () => {
     }
 
     return ask
+}
+
+export const UserContext = React.createContext({})
+
+export const useUser = () => {
+    const [user, setUser] = React.useContext(UserContext)
+    return { user, setUser }
+}
+
+export const GlobalStateContext = React.createContext({})
+
+export const useGlobalState = () => {
+    const [globalState, setGlobalState] = React.useContext(UserContext)
+    return { globalState, setGlobalState }
 }

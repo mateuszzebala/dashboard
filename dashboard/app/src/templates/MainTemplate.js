@@ -30,8 +30,8 @@ const StyledContent = styled.article`
     transition: width 0.3s;
     width: ${({ leftbarclose }) =>
         leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
-    background-color: ${({ theme }) => theme.content.background};
-    color: ${({ theme }) => theme.content.font};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     overflow: auto;
 `
 
@@ -53,7 +53,7 @@ export const MainTemplate = ({
 }) => {
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
-
+    const [hideSubmenu, setHideSubmenu] = React.useState(cookies.hideSubmenu)
     React.useEffect(() => {
         if (cookies.leftbarClose === leftbarClose) return
         removeCookies(['leftbarClose'])
@@ -62,6 +62,15 @@ export const MainTemplate = ({
             expires: new Date(today.getFullYear() + 10, 1, 1),
         })
     }, [leftbarClose])
+
+    React.useEffect(() => {
+        if (cookies.showSubmenu === hideSubmenu) return
+        removeCookies(['hideSubmenu'])
+        const today = new Date()
+        setCookies(['hideSubmenu'], toBoolStr(hideSubmenu), {
+            expires: new Date(today.getFullYear() + 10, 1, 1),
+        })
+    }, [hideSubmenu])
 
     return (
         <StyledContainer>
@@ -73,8 +82,12 @@ export const MainTemplate = ({
                         app={app}
                         setClose={setLeftbarClose}
                         topbarLink={topbarLink}
+                        hideSubmenu={hideSubmenu}
+                        setHideSubmenu={setHideSubmenu}
                     />
-                    <SubMenu>{submenuChildren}</SubMenu>
+                    <SubMenu hideSubmenu={hideSubmenu}>
+                        {submenuChildren}
+                    </SubMenu>
                 </StyledTopMenu>
                 <StyledContent
                     padding={padding}

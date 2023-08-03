@@ -27,6 +27,7 @@ import { ChooseDevice } from '../../atoms/modalforms/ChooseDevice'
 import { LINKS } from '../../router/links'
 import { useMessage } from '../../utils/messages'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
+import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 
 const StyledMenu = styled.div`
     display: flex;
@@ -165,10 +166,9 @@ const FolderMenu = ({
                         icon={<BsFileArrowUp />}
                         onClick={() => {
                             modalForm({
-                                content: Prompt,
+                                content: FilePrompt,
                                 title: 'UPLOAD FILE',
                                 icon: <BsFileArrowUp />,
-                                type: 'file',
                                 todo: (val) => {
                                     FETCH(ENDPOINTS.files.upload(path), {
                                         file: val,

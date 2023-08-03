@@ -2,31 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { BsArrowDownShort } from 'react-icons/bs'
 import { toBoolStr } from '../utils/utils'
-import { Tooltip } from './Tooltip'
-import { useOnClickOutside } from '../utils/hooks'
 
-const StyledOption = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background-color: ${({ theme }) => theme.select.background};
-    color: ${({ theme }) => theme.select.font};
-    border: 0;
-    font-size: 18px;
-    white-space: nowrap;
-    cursor: pointer;
-    padding: 10px 10px;
-    text-align: center;
-    transition: background-color 0.2s;
-    &:hover {
-        background-color: ${({ theme }) => theme.select.font}22;
-    }
-`
+import { useModalForm, useOnClickOutside } from '../utils/hooks'
+import { SelectModal } from './modalforms/SelectModal'
+import { BiSelectMultiple } from 'react-icons/bi'
 
 const StyledValue = styled.div`
     display: flex;
     gap: 10px;
+    font-size: 20px;
     align-items: center;
     justify-content: flex-start;
     padding: 0 0 0 10px;
@@ -64,44 +48,11 @@ const ValueComponent = ({ value = [], dropdown, setDropdown, emptyName }) => {
     )
 }
 
-const OptionComponent = ({ data, value, onClick }) => {
-    const handleOptionClick = () => {
-        onClick(value)
-    }
-
-    return (
-        <StyledOption onClick={handleOptionClick}>
-            <Tooltip text={data[value]}>
-                <span>{data[value]}</span>
-            </Tooltip>
-        </StyledOption>
-    )
-}
-const StyledDropdown = styled.div`
-    display: flex;
-    flex-direction: column;
-    transition: max-height 0.3s;
-    max-height: ${({ dropdown }) => (dropdown ? '300px' : 0)};
-    overflow: scroll;
-    z-index: 0;
-    position: absolute;
-    top: 100%;
-    width: calc(100% + 6px);
-    left: -3px;
-    border: 3px solid ${({ theme }) => theme.select.border};
-    background-color: ${({ theme }) => theme.select.background};
-    border-width: 0 3px 3px;
-    &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-    z-index: ${({ hide }) => (hide ? 0 : 3)};
-`
 const StyledWrapper = styled.div`
     display: inline-flex;
     flex-direction: column;
     width: 300px;
-    border: 3px solid ${({ theme }) => theme.select.font};
+    border: 3px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     position: relative;
 `
@@ -115,7 +66,7 @@ export const Select = ({
     const [dropdown, setDropdown] = React.useState(null)
     const [hide, setHide] = React.useState(true)
     const timeoutRef = React.useRef()
-
+    const modalForm = useModalForm()
     React.useEffect(() => {
         if (dropdown === null) return
         if (dropdown) {
@@ -133,29 +84,26 @@ export const Select = ({
         setDropdown(false)
     })
     return (
-        <StyledWrapper ref={mainRef}>
+        <StyledWrapper
+            ref={mainRef}
+            onClick={() => {
+                modalForm({
+                    content: SelectModal,
+                    title: 'SELECT',
+                    icon: <BiSelectMultiple />,
+                    data: data,
+                    todo: (val) => {
+                        setValue(val)
+                    },
+                })
+            }}
+        >
             <ValueComponent
                 value={value}
                 dropdown={toBoolStr(dropdown)}
                 setDropdown={setDropdown}
                 emptyName={emptyName}
             />
-            <StyledDropdown
-                dropdown={toBoolStr(dropdown)}
-                hide={toBoolStr(hide)}
-            >
-                {Object.keys(data).map((name) => (
-                    <OptionComponent
-                        key={name}
-                        data={data}
-                        value={name}
-                        onClick={(val) => {
-                            setValue(data[val])
-                            setDropdown(false)
-                        }}
-                    />
-                ))}
-            </StyledDropdown>
         </StyledWrapper>
     )
 }

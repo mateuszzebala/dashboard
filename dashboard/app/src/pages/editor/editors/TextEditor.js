@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { range } from '../../../utils/utils'
+import { centerEllipsis, range } from '../../../utils/utils'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -18,8 +18,10 @@ import { useModalForm } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
 import { BsFillPlayFill } from 'react-icons/bs'
-import { AiOutlineHeart } from 'react-icons/ai'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { FaPlay } from 'react-icons/fa'
+import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
+import { TbReplaceFilled } from 'react-icons/tb'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -119,11 +121,45 @@ export const TextEditor = () => {
     const modalForm = useModalForm()
     const navigate = useNavigate()
     const [data, setData] = React.useState({})
+    const [liked, setLiked] = React.useState(false)
     const [value, setValue] = React.useState(false)
     const [command, setCommand] = React.useState('')
     const [loading, setLoading] = React.useState(true)
     const [runLoading, setRunLoading] = React.useState(false)
     const [saveLoading, setSaveLoading] = React.useState(false)
+
+    const addToLast = async () => {
+        GETCONFIG('editor_last').then((value) => {
+            SETCONFIG('editor_last', {
+                files: [
+                    ...new Set([searchParams.get('path'), ...value.files]),
+                ].slice(0, 50),
+            })
+        })
+        GETCONFIG('editor_liked').then((value) => {
+            setLiked(value.files.includes(searchParams.get('path')))
+        })
+    }
+
+    React.useEffect(() => {
+        addToLast()
+    }, [])
+
+    React.useEffect(() => {
+        GETCONFIG('editor_liked').then((value) => {
+            if (liked) {
+                SETCONFIG('editor_liked', {
+                    files: [searchParams.get('path'), ...value.files],
+                })
+            } else {
+                SETCONFIG('editor_liked', {
+                    files: value.files.filter(
+                        (file) => file !== searchParams.get('path')
+                    ),
+                })
+            }
+        })
+    }, [liked])
 
     const handleSave = () => {
         value !== false && setSaveLoading(true)
@@ -155,7 +191,11 @@ export const TextEditor = () => {
     return (
         <MainTemplate
             app={APPS.editor}
-            title={type.toUpperCase() + ' - ' + searchParams.get('path')}
+            title={
+                type.toUpperCase() +
+                ' - ' +
+                centerEllipsis(searchParams.get('path'), 50)
+            }
             submenuChildren={
                 <>
                     <Button
@@ -203,16 +243,15 @@ export const TextEditor = () => {
                             })
                         }}
                     />
+                    <Button second icon={<TbReplaceFilled />} size={1.3} />
                     <Button
                         second
                         onClick={() => {
-                            FETCH(
-                                ENDPOINTS.editor.like(searchParams.get('path'))
-                            )
+                            setLiked((prev) => !prev)
                         }}
                         tooltip={'LIKE'}
                         size={1.3}
-                        icon={<AiOutlineHeart />}
+                        icon={liked ? <AiFillHeart /> : <AiOutlineHeart />}
                     />
                     |
                     <Button
@@ -224,6 +263,7 @@ export const TextEditor = () => {
                                 title: 'RUN',
                                 icon: <BsFillPlayFill />,
                                 filename: data.filename,
+
                                 todo: (val) => {
                                     setCommand(val)
                                 },
@@ -251,6 +291,7 @@ export const TextEditor = () => {
                                         modalForm({
                                             content: Terminal,
                                             title: 'TERMINAL',
+                                            minimizeIcon: true,
                                             icon: <APPS.terminal.icon />,
                                             terminalContent:
                                                 data.data.output +

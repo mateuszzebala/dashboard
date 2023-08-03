@@ -22,8 +22,8 @@ const StyledRadio = styled.button`
     width: 20px;
     height: 20px;
     background-color: ${({ theme, checked }) =>
-        checked ? theme.radio : 'white'};
-    border: 3px solid ${({ theme }) => theme.radio};
+        checked ? theme.primary : 'white'};
+    border: 3px solid ${({ theme }) => theme.primary};
     border-radius: 50%;
     cursor: pointer;
 `

@@ -18,16 +18,16 @@ export const GlobalStyle = createGlobalStyle`
     font-family: var(--font-family);
   }
   ::-webkit-scrollbar {
-    width: ${({ theme }) => theme.scrollbar.width};
-    height: ${({ theme }) => theme.scrollbar.width};
+    width: 5px;
+    height: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.scrollbar.track};
+    background: ${({ theme }) => theme.secondary};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.scrollbar.thumb};
+    background: ${({ theme }) => theme.primary};
   }
 
 `

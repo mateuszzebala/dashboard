@@ -121,10 +121,8 @@ def upload_file(request):
     file = request.FILES.get('file')
     with open(os.path.join(path, file.name), "wb") as f:
         f.write(file.read())
+
     return JsonResponse({})
-
-
-
 
 
 urlpatterns = [

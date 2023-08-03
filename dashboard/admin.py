@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Log, Configuration, TestModel, Account, QrCodeAuth
+from .models import Log, Configuration, TestModel, Account, QrCodeAuth, Message
 from django.contrib.auth.models import Permission
 from django.contrib.sessions.models import Session
 
 @admin.register(Log)
 class LogAdmin(admin.ModelAdmin):
-    list_display = ['method', 'datetime', 'path']
+    list_display = ['method', 'datetime', 'path', 'country']
 
 @admin.register(TestModel)
 class TestModelAdmin(admin.ModelAdmin):
@@ -29,5 +29,8 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(QrCodeAuth)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['url', 'token', 'datetime', 'user']
+    list_display = ['token', 'datetime', 'user']
 
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['email', 'user', 'datetime', 'text', 'read']

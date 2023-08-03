@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom'
 import { LINKS } from '../router/links'
 
 const StyledBar = styled.nav`
-    background-color: ${({ theme }) => theme.leftbar.background};
-    color: ${({ theme }) => theme.leftbar.font};
+    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.secondary};
     height: 100vh;
     display: flex;
     align-items: center;
@@ -39,7 +39,7 @@ const StyleDashboard = styled.span`
     font-size: 25px;
     padding: 10px;
     text-align: center;
-    color: ${({ theme }) => theme.leftbar.font};
+    color: ${({ theme }) => theme.secondary};
 `
 const StyledMenuItems = styled.div`
     overflow-y: auto;

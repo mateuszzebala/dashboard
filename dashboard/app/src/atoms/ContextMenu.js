@@ -9,7 +9,7 @@ const StyledContextMenu = styled.div`
     position: fixed;
     left: ${({ x }) => x + 'px'};
     top: ${({ y }) => y + 'px'};
-    background-color: ${({ theme }) => theme.contextMenu.background};
+    background-color: ${({ theme }) => theme.secondary};
     display: flex;
     flex-direction: column;
     padding: 10px;
