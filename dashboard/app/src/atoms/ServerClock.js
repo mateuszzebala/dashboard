@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import clockImage from '../assets/atoms/clock.png'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { Loading } from './Loading'
@@ -18,7 +17,6 @@ const StyledAnalogClock = styled.div`
     background-position: center;
     background-size: cover;
     border-radius: 50%;
-    box-shadow: 0 0 10px -5px ${({ theme }) => theme.primary};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -134,11 +132,12 @@ export const ServerClock = () => {
     return (
         <StyledClockWrapper>
             <StyledTimeZone>UTC {time.time_zone}</StyledTimeZone>
-            <StyledAnalogClock bg={clockImage}>
+            <StyledAnalogClock>
                 <StyledHourHand hour={time.hour} />
                 <StyledMinuteHand minute={time.minute} />
                 <StyledSecondHand second={time.second} />
                 <StyledAnalogClockDot />
+                <ClockBoard />
             </StyledAnalogClock>
             <StyledDigitalClock>
                 {time.hour.toString().padStart(2, '0')}:
@@ -146,5 +145,197 @@ export const ServerClock = () => {
                 {time.second.toString().padStart(2, '0')}
             </StyledDigitalClock>
         </StyledClockWrapper>
+    )
+}
+
+const StyledClockBoard = styled.svg`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    path {
+        fill: ${({ theme }) => theme.primary};
+        stroke: ${({ theme }) => theme.primary};
+    }
+    text {
+        fill: ${({ theme }) => theme.primary};
+    }
+`
+
+const ClockBoard = () => {
+    return (
+        <StyledClockBoard
+            xmlns="http://www.w3.org/2000/svg"
+            width="400mm"
+            height="400mm"
+            version="1.1"
+            viewBox="0 0 400 400"
+            xmlSpace="preserve"
+        >
+            <defs>
+                <path d="M650.615 266.668H995.469V483.074H650.615z"></path>
+                <path d="M714.762 135.252H842.6099999999999V214.72500000000002H714.762z"></path>
+                <path d="M695.017 118.469H704.889V136.733H695.017z"></path>
+            </defs>
+            <g>
+                <text
+                    xmlSpace="preserve"
+                    style={{}}
+                    x="175.236"
+                    y="27.074"
+                    fill="#000"
+                    strokeWidth="0.313"
+                    fontFamily="Consolas"
+                    fontSize="41.722"
+                    fontStretch="normal"
+                    fontStyle="normal"
+                    fontVariant="normal"
+                    fontWeight="bold"
+                    transform="scale(.99716 1.00285)"
+                >
+                    <tspan x="175.236" y="27.074" strokeWidth="0.313">
+                        12
+                    </tspan>
+                </text>
+                <text
+                    xmlSpace="preserve"
+                    style={{}}
+                    x="-1.467"
+                    y="212.735"
+                    fill="#000"
+                    strokeWidth="0.313"
+                    fontFamily="Consolas"
+                    fontSize="41.722"
+                    fontStretch="normal"
+                    fontStyle="normal"
+                    fontVariant="normal"
+                    fontWeight="bold"
+                    transform="scale(.99716 1.00285)"
+                >
+                    <tspan x="-1.467" y="212.735" strokeWidth="0.313">
+                        9
+                    </tspan>
+                </text>
+                <text
+                    xmlSpace="preserve"
+                    style={{}}
+                    x="188.519"
+                    y="398.397"
+                    fill="#000"
+                    strokeWidth="0.313"
+                    fontFamily="Consolas"
+                    fontSize="41.722"
+                    fontStretch="normal"
+                    fontStyle="normal"
+                    fontVariant="normal"
+                    fontWeight="bold"
+                    transform="scale(.99716 1.00285)"
+                >
+                    <tspan x="188.519" y="398.397" strokeWidth="0.313">
+                        6
+                    </tspan>
+                </text>
+                <text
+                    xmlSpace="preserve"
+                    style={{}}
+                    x="380.359"
+                    y="212.735"
+                    fill="#000"
+                    strokeWidth="0.313"
+                    fontFamily="Consolas"
+                    fontSize="41.722"
+                    fontStretch="normal"
+                    fontStyle="normal"
+                    fontVariant="normal"
+                    fontWeight="bold"
+                    transform="scale(.99716 1.00285)"
+                >
+                    <tspan x="380.359" y="212.735" strokeWidth="0.313">
+                        3
+                    </tspan>
+                </text>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M99.576 375.133l8.24-15.412"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M25.972 300.782l14.121-8.676"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M26.184 99.72l12.929 7.444"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M99.614 26.26l7.701 12.857"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M290.987 41.131l8.625-15.18"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M358.637 107.57l14.993-8.95"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M372.197 300.454l-13.76-8.074"
+                ></path>
+                <path
+                    fill="#c83737"
+                    stroke="#000"
+                    strokeDasharray="none"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    strokeOpacity="1"
+                    strokeWidth="3.27"
+                    d="M299.445 374.496l-8.423-14.755"
+                ></path>
+            </g>
+        </StyledClockBoard>
     )
 }

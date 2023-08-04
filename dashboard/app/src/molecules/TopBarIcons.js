@@ -13,7 +13,7 @@ import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
-import { useModalForm, useTheme, useUser } from '../utils/hooks'
+import { useGlobalKey, useModalForm, useTheme, useUser } from '../utils/hooks'
 import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
 import { FaQrcode } from 'react-icons/fa'
 import { LoadingImage } from '../atoms/LoadingImage'
@@ -51,6 +51,16 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
     const modalForm = useModalForm()
     const { user } = useUser()
     const [theme] = useTheme()
+    useGlobalKey(
+        () => {
+            navigate(LINKS.info.app(app.name))
+        },
+        {
+            key: 'F1',
+            prevent: true,
+        },
+        InfoByApp[app.name]
+    )
     return (
         <StyledWrapper>
             <Tooltip text="YOUR ACCOUNT">

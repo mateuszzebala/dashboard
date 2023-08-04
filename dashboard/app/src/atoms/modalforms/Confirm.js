@@ -23,6 +23,7 @@ export const Confirm = ({ setOpen, todo = () => {} }) => {
                 NO
             </Button>
             <Button
+                onKey={'Enter'}
                 onClick={() => {
                     setOpen(false)
                     todo()

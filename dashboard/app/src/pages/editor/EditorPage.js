@@ -15,7 +15,7 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { Button } from '../../atoms/Button'
 import { Loading } from '../../atoms/Loading'
 import { SelectFile } from '../../atoms/modalforms/SelectFile'
-import { BsFileBreak, BsFolder } from 'react-icons/bs'
+import { BsFileBreak, BsFolder, BsFolder2Open } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -120,11 +120,16 @@ export const EditorPage = () => {
                 <Button
                     second
                     size={1.1}
+                    onKey={{
+                        key: 'o',
+                        prevent: true,
+                        ctrlKey: true,
+                    }}
                     onClick={() => {
                         modalForm({
                             content: SelectFile,
                             title: 'OPEN FILE',
-                            icon: <BsFolder />,
+                            icon: <BsFolder2Open />,
                             todo: (path) => {
                                 modalForm({
                                     content: EditorChooser,
@@ -140,7 +145,7 @@ export const EditorPage = () => {
                         })
                     }}
                 >
-                    <BsFileBreak /> OPEN FILE
+                    <BsFolder2Open /> OPEN
                 </Button>
             }
         >

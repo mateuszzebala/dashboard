@@ -9,6 +9,7 @@ import { BsCamera } from 'react-icons/bs'
 import { useModalForm } from '../../utils/hooks'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
+import { Input } from '../../atoms/Input'
 
 const StyledProfileImage = styled.div`
     width: 200px;
@@ -40,25 +41,37 @@ const StyledCameraButton = styled.button`
     }
 `
 
-const StyledWrapper = styled.div``
+const StyledWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+`
+const StyledInputs = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`
 
 export const UserPage = () => {
     const { id } = useParams()
-    const [userinfo, setUserinfo] = React.useState({})
+    const [accountInfo, setAccountInfo] = React.useState({})
+    const [data, setData] = React.useState({})
     const [profileImage, setProfileImage] = React.useState('')
     const modalForm = useModalForm()
 
     React.useEffect(() => {
-        FETCH(ENDPOINTS.database.item('User', id)).then((data) => {
-            setUserinfo(data.data.fields)
+        FETCH(ENDPOINTS.users.get(id)).then((data) => {
+            setAccountInfo(data.data)
+            setData(data.data)
         })
     }, [id])
     return (
-        <MainTemplate app={APPS.users}>
-            {userinfo.username && (
+        <MainTemplate app={APPS.users} title={accountInfo.username}>
+            {accountInfo.username && (
                 <StyledWrapper>
                     <StyledProfileImage
-                        src={ENDPOINTS.auth.profile(userinfo.username)}
+                        src={ENDPOINTS.auth.profile(accountInfo.username)}
                     >
                         <StyledCameraButton
                             onClick={() => {
@@ -77,8 +90,127 @@ export const UserPage = () => {
                             <BsCamera />
                         </StyledCameraButton>
                     </StyledProfileImage>
-                    {userinfo.username}
-                    <FloatingActionButton second>SAVE</FloatingActionButton>
+                    <StyledInputs>
+                        <Input
+                            value={data.username}
+                            setValue={(value) => {
+                                setData((prev) => ({
+                                    ...prev,
+                                    username: value,
+                                }))
+                            }}
+                            label={'USERNAME'}
+                        />
+                        <Input
+                            value={data.first_name}
+                            setValue={(value) => {
+                                setData((prev) => ({
+                                    ...prev,
+                                    first_name: value,
+                                }))
+                            }}
+                            label={'FIRST NAME'}
+                        />
+                        <Input
+                            value={data.last_name}
+                            setValue={(value) => {
+                                setData((prev) => ({
+                                    ...prev,
+                                    last_name: value,
+                                }))
+                            }}
+                            label={'LAST NAME'}
+                        />
+                        <Input
+                            value={data.email}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, email: value }))
+                            }}
+                            label={'EMAIL'}
+                        />
+                        <Input
+                            value={data.phone}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, phone: value }))
+                            }}
+                            label={'PHONE'}
+                        />
+                        <Input
+                            value={data.birth_date}
+                            setValue={(value) => {
+                                setData((prev) => ({
+                                    ...prev,
+                                    birth_date: value,
+                                }))
+                            }}
+                            label={'BIRTH DATE'}
+                            type="date"
+                        />
+                        <Input
+                            value={data.bio}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, bio: value }))
+                            }}
+                            label={'BIO'}
+                            textarea
+                        />
+                        <Input
+                            value={data.address}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, address: value }))
+                            }}
+                            label={'ADDRESS'}
+                        />
+                        <Input
+                            value={data.street}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, street: value }))
+                            }}
+                            label={'STREET'}
+                        />
+                        <Input
+                            value={data.city}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, city: value }))
+                            }}
+                            label={'CITY'}
+                        />
+                        <Input
+                            value={data.state}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, state: value }))
+                            }}
+                            label={'STATE'}
+                        />
+                        <Input
+                            value={data.zip_code}
+                            setValue={(value) => {
+                                setData((prev) => ({
+                                    ...prev,
+                                    zip_code: value,
+                                }))
+                            }}
+                            label={'ZIP CODE'}
+                        />
+                        <Input
+                            value={data.website}
+                            setValue={(value) => {
+                                setData((prev) => ({ ...prev, website: value }))
+                            }}
+                            label={'WEBSITE'}
+                        />
+                        <Input
+                            value={data.pronouns}
+                            setValue={(value) => {
+                                setData((prev) => ({
+                                    ...prev,
+                                    pronouns: value,
+                                }))
+                            }}
+                            label={'PRONOUNS'}
+                        />
+                    </StyledInputs>
+                    <FloatingActionButton size={1.1}>SAVE</FloatingActionButton>
                 </StyledWrapper>
             )}
         </MainTemplate>

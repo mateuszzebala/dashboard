@@ -39,6 +39,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
             />
             <StyledButtons>
                 <Button
+                    onKey={'Escape'}
                     onClick={() => {
                         setOpen(false)
                     }}
@@ -46,6 +47,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
                     CANCEL
                 </Button>
                 <Button
+                    onKey={'Enter'}
                     onClick={() => {
                         setOpen(false)
                         todo(value)

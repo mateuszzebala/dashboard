@@ -111,6 +111,11 @@ const FolderMenu = ({
                         <Button
                             second
                             size={1.3}
+                            onKey={{
+                                key: 'ArrowLeft',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
                             tooltip={'FOLDER UP'}
                             icon={<FaArrowLeft />}
                             onClick={() => {
@@ -122,6 +127,11 @@ const FolderMenu = ({
                         second
                         size={1.3}
                         tooltip={'SELECT ALL'}
+                        onKey={{
+                            key: 'a',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
                         icon={<FaCheck />}
                         onClick={() => {
                             setSelectedItems((prev) =>
@@ -133,6 +143,11 @@ const FolderMenu = ({
                         second
                         size={1.3}
                         tooltip={'RELOAD'}
+                        onKey={{
+                            key: 'r',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
                         icon={<TbReload />}
                         onClick={() => {
                             setReload((prev) => prev + 1)
@@ -203,6 +218,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 second
+                                onKey={'Delete'}
                                 size={1.3}
                                 tooltip={'DELETE'}
                                 icon={<FiTrash />}
@@ -257,6 +273,10 @@ const FolderMenu = ({
                             size={1.3}
                             tooltip={'RENAME'}
                             icon={<BiRename />}
+                            onKey={{
+                                key: 'F2',
+                                prevent: true,
+                            }}
                             onClick={() => {
                                 modalForm({
                                     content: Prompt,
@@ -286,6 +306,11 @@ const FolderMenu = ({
                                 size={1.3}
                                 tooltip={'EDIT'}
                                 icon={<BiEditAlt />}
+                                onKey={{
+                                    key: 'e',
+                                    ctrlKey: true,
+                                    prevent: true,
+                                }}
                                 onClick={() => {
                                     modalForm({
                                         content: EditorChooser,

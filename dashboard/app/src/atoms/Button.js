@@ -4,6 +4,7 @@ import { toBoolStr } from '../utils/utils'
 import { VscLoading } from 'react-icons/vsc'
 import { Link } from 'react-router-dom'
 import { Tooltip } from './Tooltip'
+import { useGlobalKey } from '../utils/hooks'
 
 const StyledWrapper = styled.button`
     position: relative;
@@ -13,7 +14,8 @@ const StyledWrapper = styled.button`
         second ? theme.secondary : theme.secondary};
     border: 0;
     font-size: ${({ size }) => 20 * size + 'px'};
-    width: ${({ icon, size }) => (icon ? 40 * size + 'px' : 'auto')};
+    width: ${({ icon, size, width }) =>
+        width ? width : icon ? 40 * size + 'px' : 'auto'};
     height: ${({ icon, size }) => (icon ? 40 * size + 'px' : 'auto')};
     padding: ${({ icon, size }) =>
         icon ? '0' : size * 10 + 'px ' + size * 20 + 'px'};
@@ -39,7 +41,7 @@ const StyledLoading = styled.span`
     position: absolute;
     width: 100%;
     height: 100%;
-
+    color: ${({ theme, second }) => (second ? theme.primary : theme.secondary)};
     place-items: center;
     padding: 0;
     @keyframes rotate {
@@ -72,9 +74,18 @@ export const Button = ({
     to,
     circle,
     second,
+    onKey,
     ...props
 }) => {
     const handleOnClick = (e) => !loading && onClick && onClick(e)
+
+    useGlobalKey(
+        (e) => {
+            handleOnClick(e)
+        },
+        onKey,
+        onKey
+    )
 
     const content = (
         <Tooltip text={tooltip}>
@@ -90,7 +101,7 @@ export const Button = ({
                     {icon || children}
                 </StyledChildren>
                 {loading && (
-                    <StyledLoading>
+                    <StyledLoading second={second}>
                         <VscLoading />
                     </StyledLoading>
                 )}

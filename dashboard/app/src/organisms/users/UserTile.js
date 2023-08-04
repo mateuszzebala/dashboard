@@ -8,8 +8,12 @@ import { FaLock } from 'react-icons/fa'
 const StyledWrapper = styled.div`
     box-shadow: 0 0 8px -5px ${({ theme }) => theme.primary};
     border-radius: 10px;
-    width: 100%;
     padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    justify-content: space-around;
     display: flex;
     cursor: pointer;
     transition: transform 0.2s;
@@ -20,20 +24,13 @@ const StyledWrapper = styled.div`
 
 const StyledProfile = styled.img`
     border-radius: 10%;
-    width: 70px;
-    height: 70px;
+    width: 70%;
+    height: 70%;
     aspect-ratio: 1/1;
+    box-shadow: 0 0 10px -6px ${({ theme }) => theme.primary};
 `
 
-const StyledRightSide = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-around;
-    padding: 0 10px;
-`
-
-const StyledUserText = styled.span`
+const StyledUsername = styled.span`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -49,11 +46,9 @@ export const UserTile = ({ data }) => {
             }}
         >
             <StyledProfile src={ENDPOINTS.auth.profile(data.username)} />
-            <StyledRightSide>
-                <StyledUserText>
-                    {data.is_superuser && <FaLock />} {data.username}
-                </StyledUserText>
-            </StyledRightSide>
+            <StyledUsername>
+                {data.is_superuser && <FaLock />} {data.username}
+            </StyledUsername>
         </StyledWrapper>
     )
 }

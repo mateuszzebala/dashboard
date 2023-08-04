@@ -5,12 +5,15 @@ import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import {
     BsArrowUpRightSquare,
+    BsFile,
     BsFileEarmarkBinary,
     BsFolder,
+    BsFolder2Open,
 } from 'react-icons/bs'
 import { FaArrowLeft } from 'react-icons/fa'
 import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
+import { Input } from '../Input'
 
 const StyledContent = styled.div`
     display: inline-flex;
@@ -35,6 +38,10 @@ const StyledItem = styled.div`
     max-width: 600px;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: translateX(10px);
+    }
 `
 
 const StyledName = styled.span`
@@ -46,8 +53,14 @@ const StyledName = styled.span`
 
 const StyledMenu = styled.div`
     display: flex;
+    overflow: scroll;
     gap: 10px;
+    padding: 10px;
     align-items: center;
+    &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
 `
 
 const StyledWrapper = styled.div`
@@ -58,12 +71,13 @@ const StyledWrapper = styled.div`
     height: min(600px, 95vh);
 `
 
-export const SelectFile = ({ todo, startPath }) => {
+export const SelectFile = ({ todo, startPath, setOpen }) => {
     const [path, setPath] = React.useState(startPath || '')
     const [folders, setFolders] = React.useState([])
     const [files, setFiles] = React.useState([])
     const [data, setData] = React.useState([])
     const [reload, setReload] = React.useState(0)
+    const [search, setSearch] = React.useState('')
 
     React.useEffect(() => {
         path &&
@@ -99,7 +113,7 @@ export const SelectFile = ({ todo, startPath }) => {
                         size={1.3}
                         target={'_blank'}
                         to={LINKS.files.indexPath(path)}
-                        icon={<BsArrowUpRightSquare />}
+                        icon={<BsFolder2Open />}
                     />
                     <Button
                         second
@@ -109,30 +123,54 @@ export const SelectFile = ({ todo, startPath }) => {
                             setReload((prev) => prev + 1)
                         }}
                     />
+                    <Input
+                        label="SEARCH"
+                        onKey={{
+                            key: 'f',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
+                        value={search}
+                        setValue={setSearch}
+                    />
                 </StyledMenu>
                 <StyledContent>
-                    {folders.map((folder) => (
-                        <StyledItem
-                            onClick={() => {
-                                setPath(folder.path)
-                            }}
-                            key={folder.name}
-                        >
-                            <BsFolder />
-                            <StyledName>{folder.name}</StyledName>
-                        </StyledItem>
-                    ))}
-                    {files.map((file) => (
-                        <StyledItem
-                            onClick={() => {
-                                todo(file.path)
-                            }}
-                            key={file.name}
-                        >
-                            <BsFileEarmarkBinary />
-                            <StyledName>{file.name}</StyledName>
-                        </StyledItem>
-                    ))}
+                    {folders
+                        .filter((folder) =>
+                            folder.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        )
+                        .map((folder) => (
+                            <StyledItem
+                                onClick={() => {
+                                    setPath(folder.path)
+                                    setSearch('')
+                                }}
+                                key={folder.name}
+                            >
+                                <BsFolder />
+                                <StyledName>{folder.name}</StyledName>
+                            </StyledItem>
+                        ))}
+                    {files
+                        .filter((file) =>
+                            file.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                        )
+                        .map((file) => (
+                            <StyledItem
+                                onClick={() => {
+                                    todo(file.path)
+                                    setOpen(false)
+                                }}
+                                key={file.name}
+                            >
+                                <BsFile />
+                                <StyledName>{file.name}</StyledName>
+                            </StyledItem>
+                        ))}
                 </StyledContent>
             </StyledWrapper>
         </>

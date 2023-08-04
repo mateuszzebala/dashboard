@@ -3,13 +3,8 @@ import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
 
 const StyledWrapper = styled.button`
-    background-color: ${({
-        theme: {
-            switch: { on, off },
-            error,
-        },
-        value,
-    }) => (value === null ? error : value ? on : off)};
+    background-color: ${({ theme: { primary, tertiary, error }, value }) =>
+        value === null ? error : value ? primary : tertiary};
     border: 0;
     transition: background-color 0.3s, outline 0.1s;
     border-radius: ${({ size }) => size * 7 + 'px'};

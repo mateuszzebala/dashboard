@@ -68,4 +68,7 @@ export const ENDPOINTS = {
         countries: () => API(['statistics', 'countries']),
         country: (country) => API(['statistics', 'country', country]),
     },
+    users: {
+        get: (userId) => API(['users', userId]),
+    },
 }

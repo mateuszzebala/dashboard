@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
+import { useGlobalKey } from '../utils/hooks'
 
 const StyledWrapper = styled.div`
     display: inline-flex;
@@ -67,10 +68,19 @@ export const Input = ({
     textarea,
     type = 'text',
     icon,
-
+    onKey,
     ...props
 }) => {
     const [tempValue, setTempValue] = React.useState(value)
+    const inputRef = React.useRef()
+
+    useGlobalKey(
+        () => {
+            inputRef.current.focus()
+        },
+        onKey,
+        onKey
+    )
 
     React.useEffect(() => {
         value !== tempValue && setTempValue(value)
@@ -83,6 +93,7 @@ export const Input = ({
             {textarea ? (
                 <StyledTextarea
                     type={type}
+                    ref={inputRef}
                     value={tempValue}
                     onChange={(e) => {
                         setTempValue(e.target.value)
@@ -94,6 +105,7 @@ export const Input = ({
                 <StyledInput
                     type={type}
                     value={tempValue}
+                    ref={inputRef}
                     onChange={(e) => {
                         setTempValue(e.target.value)
                         type === 'file' &&

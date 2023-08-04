@@ -12,11 +12,12 @@ import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FaLock, FaLockOpen, FaPlus } from 'react-icons/fa'
 
 const StyledUsersGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 300px));
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     overflow-y: auto;
     justify-content: center;
+    align-items: center;
     padding: 10px 5px;
 `
 
@@ -39,6 +40,10 @@ const StyledMenu = styled.div`
     width: 100%;
 `
 
+const StyledNoUsers = styled.span`
+    font-size: 30px;
+`
+
 export const UsersPage = () => {
     const [search, setSearch] = React.useState('')
     const [users, setUsers] = React.useState([])
@@ -47,11 +52,15 @@ export const UsersPage = () => {
     const [pages, setPages] = React.useState(0)
 
     React.useEffect(() => {
+        let query = admin ? 'is_superuser=True' : 'is_superuser=False'
+        if (search) {
+            query += `,username__contains=${search.toLowerCase()}`
+        }
         FETCH(
             ENDPOINTS.database.items('User', {
                 page,
                 length: 30,
-                query: admin ? 'is_superuser=True' : search,
+                query,
             })
         ).then((data) => {
             setUsers(data.data.items.map((item) => item.fields))
@@ -77,10 +86,9 @@ export const UsersPage = () => {
                         label={'SEARCH'}
                         value={search}
                         setValue={setSearch}
-                        disabled={admin}
                     />
 
-                    <FloatingActionButton second size={1.3} icon={<FaPlus />} />
+                    <FloatingActionButton size={1.3} icon={<FaPlus />} />
                 </StyledMenu>
             }
         >
@@ -89,7 +97,14 @@ export const UsersPage = () => {
                     {users.map((user) => (
                         <UserTile key={user.id} data={user} />
                     ))}
+                    {users.length < 1 && (
+                        <StyledNoUsers>
+                            NO USERS
+                            {search ? ` WITH USERNAME LIKE '${search}'` : ''}
+                        </StyledNoUsers>
+                    )}
                 </StyledUsersGrid>
+
                 {pages > 1 && (
                     <StyledPaginator>
                         <Paginator

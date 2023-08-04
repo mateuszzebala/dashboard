@@ -139,6 +139,11 @@ export const DatabaseModelPage = () => {
                             second
                             size={1.3}
                             icon={<FaCheck />}
+                            onKey={{
+                                key: 'a',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
                             onClick={() => {
                                 if (selectedItems && selectedItems.length === 0)
                                     setSelectedItems(
@@ -161,6 +166,7 @@ export const DatabaseModelPage = () => {
                                     size={1.3}
                                     tooltip={'DELETE SELECTED'}
                                     icon={<FiTrash />}
+                                    onKey={'Delete'}
                                     onClick={() => {
                                         modalForm({
                                             content: Confirm,
@@ -220,6 +226,11 @@ export const DatabaseModelPage = () => {
                                         modelName,
                                         selectedItems[0]
                                     )}
+                                    onKey={{
+                                        key: 'e',
+                                        ctrlKey: true,
+                                        prevent: true,
+                                    }}
                                 />
                                 <Button
                                     second
@@ -230,6 +241,11 @@ export const DatabaseModelPage = () => {
                                         modelName,
                                         selectedItems[0]
                                     )}
+                                    onKey={{
+                                        key: 'o',
+                                        ctrlKey: true,
+                                        prevent: true,
+                                    }}
                                 />
                             </>
                         )}
@@ -258,6 +274,11 @@ export const DatabaseModelPage = () => {
                         <Input
                             label={'QUERY'}
                             value={searchQuery}
+                            onKey={{
+                                key: 'f',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
                             setValue={setSearchQuery}
                         />
                     </StyledMenuSide>

@@ -4,6 +4,7 @@ import { IoClose } from 'react-icons/io5'
 import { MdOutlineMinimize } from 'react-icons/md'
 import { BsArrowUpShort } from 'react-icons/bs'
 import { toBoolStr } from '../utils/utils'
+import { useGlobalKey } from '../utils/hooks'
 
 const StyledCurtain = styled.div`
     display: flex;
@@ -113,6 +114,7 @@ const StyledMinimize = styled.div`
     align-items: center;
     gap: 10px;
     background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     box-shadow: 0 0 30px -10px ${({ theme }) => theme.primary};
     position: absolute;
     left: 50%;
@@ -141,6 +143,7 @@ export const Modal = ({
     children,
     icon = '',
     transparentCurtain = false,
+    escape = true,
 }) => {
     const [minimize, setMinimize] = React.useState(false)
     const curtainRef = React.useRef()
@@ -148,6 +151,14 @@ export const Modal = ({
     React.useEffect(() => {
         setMinimize(false)
     }, [children, title, icon])
+
+    useGlobalKey(
+        () => {
+            setOpen(false)
+        },
+        'Escape',
+        escape
+    )
 
     if (!open) return ''
     if (minimize)

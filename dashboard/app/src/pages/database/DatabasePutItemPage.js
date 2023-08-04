@@ -80,7 +80,7 @@ export const DatabasePutItemPage = () => {
                     />
                 ))}
             </StyledWrapper>
-            <FloatingActionButton second onClick={handleSave} size={1.3}>
+            <FloatingActionButton onClick={handleSave} size={1.3}>
                 SAVE
             </FloatingActionButton>
         </MainTemplate>

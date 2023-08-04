@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Loading } from '../../../atoms/Loading'
 import { Button } from '../../../atoms/Button'
 import { useParams } from 'react-router-dom'
-import { HiDownload } from 'react-icons/hi'
+import { HiDownload, HiOutlinePlay } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
 import { LINKS } from '../../../router/links'
 import { LuSave } from 'react-icons/lu'
@@ -17,11 +17,12 @@ import { convertTerminalTextToHTML } from '../../../utils/utils'
 import { useModalForm } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
-import { BsFillPlayFill } from 'react-icons/bs'
+import { BsFillPlayFill, BsFolder2Open } from 'react-icons/bs'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { FaPlay } from 'react-icons/fa'
 import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
 import { TbReplaceFilled } from 'react-icons/tb'
+import { SelectFile } from '../../../atoms/modalforms/SelectFile'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -180,7 +181,7 @@ export const TextEditor = () => {
             .catch(() => {
                 setLoading(false)
             })
-    }, [])
+    }, [searchParams])
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.editor.json(searchParams.get('path'))).then((data) => {
@@ -202,14 +203,40 @@ export const TextEditor = () => {
                         second
                         tooltip={'SAVE FILE'}
                         size={1.3}
+                        onKey={{
+                            key: 's',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
                         icon={<LuSave />}
                         loading={saveLoading}
                         onClick={handleSave}
                     />
                     <Button
                         second
+                        tooltip={'OPEN FILE'}
+                        onKey={{
+                            key: 'o',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
+                        size={1.3}
+                        icon={<BsFolder2Open />}
+                        onClick={() => {
+                            modalForm({
+                                content: SelectFile,
+                                title: 'OPEN FILE',
+                                icon: <BsFolder2Open />,
+                                todo: (val) => {
+                                    navigate(LINKS.editor.edit(val))
+                                },
+                            })
+                        }}
+                    />
+                    <Button
+                        second
                         to={LINKS.files.indexPath(data.parent)}
-                        tooltip={'OPEN FOLDER'}
+                        tooltip={'GO TO FOLDER'}
                         size={1.3}
                         icon={<APPS.files.icon />}
                     />
@@ -227,6 +254,11 @@ export const TextEditor = () => {
                         icon={<BiEditAlt />}
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
+                        onKey={{
+                            key: 'e',
+                            prevent: true,
+                            ctrlKey: true,
+                        }}
                         onClick={() => {
                             modalForm({
                                 content: EditorChooser,
@@ -250,18 +282,62 @@ export const TextEditor = () => {
                             setLiked((prev) => !prev)
                         }}
                         tooltip={'LIKE'}
+                        onKey={{
+                            key: 'l',
+                            prevent: true,
+                            ctrlKey: true,
+                        }}
                         size={1.3}
                         icon={liked ? <AiFillHeart /> : <AiOutlineHeart />}
                     />
                     |
                     <Button
                         second
-                        size={1.1}
+                        size={1.3}
+                        onKey={{
+                            key: 'F5',
+                            prevent: true,
+                        }}
+                        onClick={() => {
+                            if (value !== false && command) {
+                                setRunLoading(true)
+                                FETCH(
+                                    ENDPOINTS.editor.save.run(
+                                        searchParams.get('path')
+                                    ),
+                                    { command, content: value }
+                                ).then((data) => {
+                                    setRunLoading(false)
+                                    modalForm({
+                                        content: Terminal,
+                                        title: 'TERMINAL',
+                                        minimizeIcon: true,
+                                        icon: <APPS.terminal.icon />,
+                                        terminalContent:
+                                            data.data.output + data.data.errors,
+                                    })
+                                })
+                            } else {
+                                modalForm({
+                                    content: ChooseRunner,
+                                    title: 'RUN',
+                                    icon: <HiOutlinePlay />,
+                                    filename: data.filename,
+
+                                    todo: (val) => {
+                                        setCommand(val)
+                                    },
+                                })
+                            }
+                        }}
+                        icon={<HiOutlinePlay />}
+                    ></Button>
+                    <span
                         onClick={() => {
                             modalForm({
                                 content: ChooseRunner,
                                 title: 'RUN',
-                                icon: <BsFillPlayFill />,
+                                icon: <HiOutlinePlay />,
                                 filename: data.filename,
 
                                 todo: (val) => {
@@ -270,38 +346,8 @@ export const TextEditor = () => {
                             })
                         }}
                     >
-                        {command ? command.toUpperCase() : 'RUN'}
-                    </Button>
-                    {command.length >= 1 && (
-                        <Button
-                            second
-                            size={1.3}
-                            icon={<FaPlay />}
-                            loading={runLoading}
-                            onClick={() => {
-                                if (value !== false) {
-                                    setRunLoading(true)
-                                    FETCH(
-                                        ENDPOINTS.editor.save.run(
-                                            searchParams.get('path')
-                                        ),
-                                        { command, content: value }
-                                    ).then((data) => {
-                                        setRunLoading(false)
-                                        modalForm({
-                                            content: Terminal,
-                                            title: 'TERMINAL',
-                                            minimizeIcon: true,
-                                            icon: <APPS.terminal.icon />,
-                                            terminalContent:
-                                                data.data.output +
-                                                data.data.errors,
-                                        })
-                                    })
-                                }
-                            }}
-                        />
-                    )}
+                        {command}
+                    </span>
                 </>
             }
         >
@@ -331,10 +377,6 @@ export const TextEditor = () => {
                                     e.target.selectionStart =
                                         e.target.selectionEnd = start + 1
                                     setValue(e.target.value)
-                                }
-                                if (e.key === 's' && e.ctrlKey) {
-                                    e.preventDefault()
-                                    handleSave()
                                 }
                             }}
                             preformate
