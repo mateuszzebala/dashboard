@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Log, Configuration, TestModel, Account, QrCodeAuth, Message
 from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.models import Session
 
 @admin.register(Log)
@@ -34,3 +35,8 @@ class AccountAdmin(admin.ModelAdmin):
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
     list_display = ['email', 'user', 'datetime', 'text', 'read']
+
+
+@admin.register(ContentType)
+class ContentTypeAdmin(admin.ModelAdmin):
+    list_display = ['id', 'app_label', 'model']

@@ -8,7 +8,8 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { LINKS } from '../../router/links'
-import { FaRegSave } from 'react-icons/fa'
+import { LuSave } from 'react-icons/lu'
+import { RelationInput } from '../../organisms/database/RelationInput'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -23,6 +24,7 @@ export const DatabasePutItemPage = () => {
     const { modelName } = useParams()
     const navigate = useNavigate()
     const [fields, setFields] = React.useState([])
+    const [relations, setRelations] = React.useState([])
     const [values, setValues] = React.useState({})
 
     const handleSave = () => {
@@ -30,32 +32,53 @@ export const DatabasePutItemPage = () => {
             {},
             ...fields.map(({ name, params }) => ({ [name]: params.null }))
         )
-        console.log(nullable)
+        console.log(values)
         const err = Object.keys(values).some(
             (field) => values[field] === null && !nullable[field]
         )
         console.log(err)
-        FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
-            navigate(LINKS.database.item(modelName, data.data.pk))
-        })
+        !err &&
+            FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
+                navigate(LINKS.database.item(modelName, data.data.pk))
+            })
+        err && alert('error')
     }
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.model(modelName)).then((data) => {
-            const allFields = data.data.fields
-            const newFields = []
-            Object.keys(allFields).forEach((fieldName) => {
-                const fieldData = allFields[fieldName]
+            setFields(
+                Object.keys(data.data.fields).reduce((fieldsArray, key) => {
+                    const field = data.data.fields[key]
+                    if (field.relation.is || field.params.auto_created)
+                        return fieldsArray
+                    return [
+                        ...fieldsArray,
+                        {
+                            name: key,
+                            ...field,
+                        },
+                    ]
+                }, [])
+            )
+            setRelations(
+                Object.keys(data.data.fields).reduce((fieldsArray, key) => {
+                    const field = data.data.fields[key]
 
-                !fieldData.relation.is &&
-                    !fieldData.params.auto_created &&
-                    newFields.push({
-                        name: fieldName,
-                        type: fieldData.type,
-                        params: fieldData.params,
-                    })
-            })
-            setFields(newFields)
+                    if (
+                        !field.relation.is ||
+                        field.params.auto_created ||
+                        field.relation.type === 'one_to_many'
+                    )
+                        return fieldsArray
+                    return [
+                        ...fieldsArray,
+                        {
+                            name: key,
+                            ...field,
+                        },
+                    ]
+                }, [])
+            )
         })
     }, [])
 
@@ -79,10 +102,25 @@ export const DatabasePutItemPage = () => {
                         value={values[field.name]}
                     />
                 ))}
+                {relations.map((relation) => (
+                    <RelationInput
+                        setValue={(val) => {
+                            setValues((prev) => ({
+                                ...prev,
+                                [relation.name]: val,
+                            }))
+                        }}
+                        value={values[relation.name]}
+                        key={relation.name}
+                        relation={relation}
+                    />
+                ))}
             </StyledWrapper>
-            <FloatingActionButton onClick={handleSave} size={1.3}>
-                SAVE
-            </FloatingActionButton>
+            <FloatingActionButton
+                icon={<LuSave />}
+                onClick={handleSave}
+                size={1.4}
+            />
         </MainTemplate>
     )
 }

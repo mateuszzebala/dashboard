@@ -29,10 +29,9 @@ const StyledIcon = styled.span`
     gap: 5px;
     text-decoration: none !important;
     color: ${({ theme }) => theme.primary};
-    transition: color 0.2s, background-color 0.2s;
+    transition: color 0.2s, background-color 0.2s, transform 0.3s;
     padding: 5px;
     border-radius: 20px;
-    transition: transform 0.3s;
     transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
     &:hover {
         background-color: ${({ theme }) => theme.tertiary}44;
@@ -117,7 +116,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                     <FaQrcode />
                 </StyledIcon>
             </Tooltip>
-            <Tooltip text="SHOW/HIDE SUBMENU">
+            <Tooltip text={`${hideSubmenu ? 'SHOW' : 'HIDE'} SUBMENU`}>
                 <StyledIcon
                     rotate={hideSubmenu}
                     onClick={() => {

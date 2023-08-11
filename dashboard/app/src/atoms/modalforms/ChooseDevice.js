@@ -7,6 +7,8 @@ const StyledButtons = styled.div`
     display: flex;
     flex-direction: row;
     gap: 20px;
+    width: 100%;
+    justify-content: space-around;
     padding: 30px;
 `
 

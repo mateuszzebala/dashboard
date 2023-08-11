@@ -31,8 +31,8 @@ export const ENDPOINTS = {
         ) =>
             API(['auth', 'qrcode'], {
                 datetime: new Date().toISOString(),
-                fillColor: fillColor.replace('#', '%23'),
-                backgroundColor: backgroundColor.replace('#', '%23'),
+                fillColor,
+                backgroundColor,
             }),
     },
     terminal: {

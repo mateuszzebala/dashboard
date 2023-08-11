@@ -43,9 +43,31 @@ def get_field_options(field):
     else:
         return None
 
+def get_relation_items(item, field):
+    relation_type = get_relation_type_of_field(field)
+    
+    if relation_type == 'many_to_many':
+        try:
+            relation_items = getattr(item, field.name).all()
+            if relation_items.exists():
+                return [relation_item.pk for relation_item in relation_items]
+            else:
+                return []
+        except AttributeError:
+            return []
 
-def get_relation_items(item, field_name):
-    return ''
+    elif relation_type == 'many_to_one':
+        relation_item = getattr(item, field.name)
+        return relation_item.pk if relation_item else None
+    elif relation_type == 'one_to_many':
+        return None
+    elif relation_type == 'one_to_one':
+        try:
+            return getattr(item, field.name).pk
+        except AttributeError:
+            return None
+
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

@@ -51,6 +51,7 @@ const StyledTextarea = styled.textarea`
     border: 0;
     font-size: 20px;
     width: 100%;
+    height: 200px;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     &:focus {

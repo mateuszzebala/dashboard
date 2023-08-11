@@ -37,7 +37,9 @@ const StyledPageButton = styled.button`
     }
 `
 
-export const Paginator = ({ value, setValue, pages, second }) => {
+export const Paginator = ({ value, setValue, pages, second, minimum }) => {
+
+
     return (
         <StyledWrapper>
             <StyledPageButton
@@ -48,7 +50,7 @@ export const Paginator = ({ value, setValue, pages, second }) => {
             >
                 <FaArrowLeft />
             </StyledPageButton>
-            {value > 2 && (
+            {value > 2 && !minimum && (
                 <>
                     <StyledPageButton
                         second={second}
@@ -62,7 +64,8 @@ export const Paginator = ({ value, setValue, pages, second }) => {
                     {value > 3 && <BsThreeDots />}
                 </>
             )}
-            {range(1, pages).map((page) => {
+            {minimum && <StyledPageButton second={second}>{value + 1}</StyledPageButton>}
+            {!minimum && range(1, pages).map((page) => {
                 if (Math.abs(value - page) >= 3) return ''
                 return (
                     <StyledPageButton
@@ -78,7 +81,7 @@ export const Paginator = ({ value, setValue, pages, second }) => {
                 )
             })}
 
-            {value < pages - 3 && (
+            {value < pages - 3 && !minimum && (
                 <>
                     {value < pages - 4 && <BsThreeDots />}
                     <StyledPageButton
@@ -95,7 +98,7 @@ export const Paginator = ({ value, setValue, pages, second }) => {
             <StyledPageButton
                 second={second}
                 onClick={() => {
-                    setValue((prev) => (prev < pages - 1 ? prev - 1 : prev))
+                    setValue((prev) => (prev < pages - 1 ? prev + 1 : prev))
                 }}
             >
                 <FaArrowRight />

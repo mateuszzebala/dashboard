@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Modal } from '../../atoms/Modal'
-import { Input } from '../../atoms/Input'
-import { FETCH } from '../../api/api'
-import { ENDPOINTS } from '../../api/endpoints'
-import { FaSearch } from 'react-icons/fa'
+import { useModalForm } from '../../utils/hooks'
+import { SelectItemModal } from '../../atoms/modalforms/SelectItemModal'
+import { BiSearch } from 'react-icons/bi'
 
 const StyledInput = styled.div`
     display: inline-flex;
@@ -31,98 +29,32 @@ const StyledIcon = styled.div`
     justify-content: center;
 `
 
-const StyledWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px 0;
-    flex-direction: column;
-`
-
-const StyledItems = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 5px;
-    max-height: 400px;
-    overflow: scroll;
-    &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
-`
-
-const StyledItem = styled.div`
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    border-radius: 3px;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px;
-    transition: background-color 0.2s;
-    &:hover {
-        background-color: #00000011;
-    }
-`
-
-export const SelectItem = ({ modelName, value, setValue }) => {
-    const [inputValue, setInputValue] = React.useState('')
-    const [items, setItems] = React.useState([])
-    const [openModal, setOpenModal] = React.useState(false)
-    React.useEffect(() => {
-        FETCH(
-            ENDPOINTS.database.items(modelName, {
-                query: inputValue,
-                length: 20,
-            })
-        ).then((data) => {
-            setItems(data.data.items)
-        })
-    }, [inputValue])
+export const SelectItem = ({ modelName, multiple, value, setValue }) => {
+    const modalForm = useModalForm()
     return (
-        <>
-            <StyledInput
-                onClick={() => {
-                    setOpenModal(true)
-                }}
-            >
-                <StyledIcon>
-                    <FaSearch />
-                </StyledIcon>
-                <StyledValue>
-                    {value
+        <StyledInput
+            onClick={() => {
+                modalForm({
+                    content: SelectItemModal,
+                    title: `SELECT ${modelName.toUpperCase()}`,
+                    icon: <BiSearch />,
+                    modelName,
+                    value,
+                    multiple,
+                    setValue,
+                })
+            }}
+        >
+            <StyledIcon>
+                <BiSearch />
+            </StyledIcon>
+            <StyledValue>
+                {multiple && `${value.length} ITEMS`}
+                {!multiple &&
+                    (value
                         ? `${modelName} - ${value.str}`
-                        : `Select ${modelName}`}
-                </StyledValue>
-            </StyledInput>
-            <Modal
-                open={openModal}
-                setOpen={setOpenModal}
-                title={`Select - ${modelName}`}
-            >
-                <StyledWrapper>
-                    <Input
-                        label={'SEARCH'}
-                        value={inputValue}
-                        setValue={setInputValue}
-                    />
-                    <StyledItems>
-                        {items.map((item) => (
-                            <StyledItem
-                                onClick={() => {
-                                    setValue(item)
-                                    setOpenModal(false)
-                                }}
-                                key={item.pk}
-                            >
-                                {item.pk} - {item.str}
-                            </StyledItem>
-                        ))}
-                    </StyledItems>
-                </StyledWrapper>
-            </Modal>
-        </>
+                        : `SELECT ${modelName.toUpperCase()}`)}
+            </StyledValue>
+        </StyledInput>
     )
 }

@@ -137,7 +137,7 @@ def item_to_json(item):
         'pk': item.pk,
         'str': str(item),
         'fields': dict((field.name, get_field_serializer(getattr(item, field.name), field.get_internal_type())) for field in filter(lambda field: not field.is_relation, item.__class__._meta.get_fields())),
-        'relations': dict((field.name, get_relation_items(item, field.name)) for field in filter(lambda field: field.is_relation, item.__class__._meta.get_fields()) )
+        'relations': dict((field.name, get_relation_items(item, field)) for field in filter(lambda field: field.is_relation and not field.one_to_many, item.__class__._meta.get_fields()) )
     }
 
 @is_superuser

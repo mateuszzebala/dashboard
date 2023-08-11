@@ -34,7 +34,8 @@ export const TimeFieldInput = ({ field, onChange }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name} - <StyledType>{field.type}</StyledType>
+                {field.name.toUpperCase()} -{' '}
+                <StyledType>{field.type}</StyledType>
             </Typography>
             <Input step={1} type="time" value={value} setValue={setValue} />
         </StyledField>

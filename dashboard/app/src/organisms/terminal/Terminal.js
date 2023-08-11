@@ -17,6 +17,7 @@ const StyledWrapper = styled.div`
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
 `
+
 const StyledTerminal = styled.div``
 
 const StyledPrompt = styled.div`
@@ -184,7 +185,6 @@ export const Terminal = ({ path, setPath }) => {
             e.target.value = commandHistory[commandHistory.length + prev].value
             return prev
         })
-        console.log(historyCounter)
     }
 
     return (

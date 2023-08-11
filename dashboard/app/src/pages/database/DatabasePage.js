@@ -33,11 +33,14 @@ const StyledModels = styled.div`
         text-decoration: none;
     }
 `
-const StyledModel = styled.div`
+const StyledModel = styled.button`
     padding: 25px 40px;
     background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 0 5px 5px 0;
+    border: 0;
+    font-size: 18px;
     cursor: pointer;
     border-left: 3px solid ${({ theme }) => theme.primary};
     width: 100%;
@@ -46,8 +49,10 @@ const StyledModel = styled.div`
     gap: 10px;
     align-items: center;
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
-    &:hover {
+    &:hover,
+    &:focus {
         transform: scale(0.95);
+        outline: none;
     }
 `
 

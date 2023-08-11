@@ -16,21 +16,14 @@ export const INIT = async () => {
 }
 
 export const API = (path, args = null) => {
-    let url = API_URL
-    url += path.join('/')
-    url += '/'
+    let url = `${API_URL}${path.join('/')}/`
+
     if (args) {
-        url += '?'
-        Object.keys(args).forEach((argName) => {
-            url += argName
-            url += '='
-            url += args[argName]
-            url += '&'
-        })
-        let temp = [...url]
-        temp.splice(-1, 1)
-        url = temp.join('')
+        const params = new URLSearchParams(args)
+        url += `?${params.toString()}`
+ 
     }
+
     return url
 }
 

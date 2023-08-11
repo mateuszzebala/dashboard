@@ -48,8 +48,8 @@ export const Tooltip = ({ children, text = '' }) => {
     }
     const handleMouseMove = (e) => {
         setPosition({
-            x: e.clientX,
-            y: e.clientY,
+            x: e.pageX,
+            y: e.pageY,
         })
     }
 

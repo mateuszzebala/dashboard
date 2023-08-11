@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
 import { VscLoading } from 'react-icons/vsc'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Tooltip } from './Tooltip'
 import { useGlobalKey } from '../utils/hooks'
 
@@ -77,7 +77,9 @@ export const Button = ({
     onKey,
     ...props
 }) => {
-    const handleOnClick = (e) => !loading && onClick && onClick(e)
+    const navigate = useNavigate()
+    const handleOnClick = (e) =>
+        to ? navigate(to) : !loading && onClick && onClick(e)
 
     useGlobalKey(
         (e) => {
@@ -110,7 +112,7 @@ export const Button = ({
     )
 
     return to ? (
-        <Link to={to} {...props}>
+        <Link tabIndex={-1} to={to} {...props}>
             {content}
         </Link>
     ) : (

@@ -3,6 +3,7 @@
 import os
 import sys
 
+if sys.argv[1] == 'run': sys.argv = ['manage.py', 'runserver', '0.0.0.0:8000']
 
 def main():
     """Run administrative tasks."""

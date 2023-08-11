@@ -1,28 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { HiXMark } from 'react-icons/hi2'
-import { IoIosArrowDropdownCircle } from 'react-icons/io'
-import { toBoolStr } from '../utils/utils'
-import { Tooltip } from './Tooltip'
 import { useModalForm } from '../utils/hooks'
 import { MultipleSelectModal } from './modalforms/MultipleSelectModal'
 import { BiSelectMultiple } from 'react-icons/bi'
 import { IoClose } from 'react-icons/io5'
-
-const StyledValue = styled.div`
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 0 0 10px;
-    height: 40px;
-`
 
 const StyledValues = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: flex-start;
+    height: 40px;
     overflow-x: scroll;
     padding: 0 10px;
     border-left: 2px solid ${({ theme }) => theme.primary};
@@ -58,16 +46,22 @@ const StyledDropdownIcon = styled.button`
     display: grid;
     place-items: center;
     border: 0;
+    padding: 0 5px;
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.3s;
-    transform: ${({ dropdown }) =>
-        dropdown ? 'rotate(180deg)' : 'rotate(0deg)'};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+        background-color: ${({ theme }) => theme.primary};
+        color: ${({ theme }) => theme.secondary};
+    }
 `
 
 const StyledWrapper = styled.div`
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 300px;
     border: 3px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
@@ -78,37 +72,35 @@ export const MultipleSelect = ({ data, value = [], setValue }) => {
     const modalForm = useModalForm()
     return (
         <StyledWrapper>
-            <StyledValue>
-                <StyledDropdownIcon
-                    onClick={() => {
-                        modalForm({
-                            content: MultipleSelectModal,
-                            title: value.length < 1 && <span>SELECT</span>,
-                            icon: <BiSelectMultiple />,
-                            data,
-                            value,
-                            setValue,
-                        })
-                    }}
-                >
-                    <IoIosArrowDropdownCircle />
-                </StyledDropdownIcon>
+            <StyledDropdownIcon
+                onClick={() => {
+                    modalForm({
+                        content: MultipleSelectModal,
+                        title: 'SELECT',
+                        icon: <BiSelectMultiple />,
+                        data,
+                        value,
+                        setValue,
+                    })
+                }}
+            >
+                <BiSelectMultiple />
+            </StyledDropdownIcon>
 
-                <StyledValues>
-                    {value.map((val) => (
-                        <StyledValueElem
-                            key={val}
-                            onClick={() => {
-                                setValue((prev) => prev.filter((v) => v != val))
-                            }}
-                        >
-                            <span>{data[val]}</span>
-                            <IoClose />
-                        </StyledValueElem>
-                    ))}
-                    {value.length === 0 && <span>SELECT</span>}
-                </StyledValues>
-            </StyledValue>
+            <StyledValues>
+                {value.map((val) => (
+                    <StyledValueElem
+                        key={val}
+                        onClick={() => {
+                            setValue((prev) => prev.filter((v) => v != val))
+                        }}
+                    >
+                        <span>{data[val]}</span>
+                        <IoClose />
+                    </StyledValueElem>
+                ))}
+                {value.length === 0 && <span>SELECT</span>}
+            </StyledValues>
         </StyledWrapper>
     )
 }

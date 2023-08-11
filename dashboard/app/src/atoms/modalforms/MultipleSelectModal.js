@@ -2,13 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button'
 
-const OptionComponent = ({ checked, toggleValue, text }) => {
-    return (
-        <Button width={'100%'} second={!checked} onClick={toggleValue}>
-            {text}
-        </Button>
-    )
-}
 const StyledDropdown = styled.div`
     display: flex;
     flex-direction: column;
@@ -29,10 +22,11 @@ export const MultipleSelectModal = ({ data, value, setValue }) => {
     return (
         <StyledDropdown>
             {Object.keys(data).map((name) => (
-                <OptionComponent
+                <Button
                     key={name}
-                    text={data[name]}
-                    toggleValue={() => {
+                    width={'100%'}
+                    second={!val.includes(name)}
+                    onClick={() => {
                         if (val.includes(name)) {
                             setVal((prev) =>
                                 prev.filter((item) => item !== name)
@@ -45,8 +39,9 @@ export const MultipleSelectModal = ({ data, value, setValue }) => {
                             setValue((prev) => [...prev, name])
                         }
                     }}
-                    checked={val.includes(name)}
-                />
+                >
+                    {data[name]}
+                </Button>
             ))}
         </StyledDropdown>
     )

@@ -25,7 +25,8 @@ export const IntegerFieldInput = ({ field, onChange }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name} - <StyledType>{field.type}</StyledType>
+                {field.name.toUpperCase()} -{' '}
+                <StyledType>{field.type}</StyledType>
             </Typography>
             <Input type={'number'} value={value} setValue={setValue} />
         </StyledField>

@@ -36,7 +36,7 @@ const pages = {
     '/dashboard/database/': DatabasePage,
     '/dashboard/database/:modelName/': DatabaseModelPage,
     '/dashboard/database/:modelName/:pk/': DatabaseItemPage,
-    '/dashboard/database/:modelName/create/': DatabasePutItemPage,
+    '/dashboard/database/:modelName/add/': DatabasePutItemPage,
     '/dashboard/database/:modelName/edit/:pk': DatabasePatchItemPage,
 
     '/dashboard/files/': FilesPage,

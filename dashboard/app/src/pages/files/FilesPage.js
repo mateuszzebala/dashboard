@@ -255,10 +255,10 @@ const FolderMenu = ({
                                 onClick={() => {
                                     modalForm({
                                         content: ChooseDevice,
-                                        title: 'Choose Device',
+                                        title: 'CHOOSE DEVICE',
                                         icon: <BsFileZip />,
                                         todo: (device) => {
-                                            console.log(device)
+                                       
                                         },
                                     })
                                 }}

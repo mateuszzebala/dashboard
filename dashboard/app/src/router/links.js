@@ -6,7 +6,7 @@ export const LINKS = {
         index: () => '/dashboard/database/',
         model: (modelName) => `/dashboard/database/${modelName}/`,
         item: (modelName, pk) => `/dashboard/database/${modelName}/${pk}/`,
-        putItem: (modelName) => `/dashboard/database/${modelName}/create/`,
+        putItem: (modelName) => `/dashboard/database/${modelName}/add/`,
         patchItem: (modelName, pk) =>
             `/dashboard/database/${modelName}/edit/${pk}/`,
     },

@@ -3,13 +3,7 @@ import { Button } from '../../atoms/Button'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
-import {
-    BsArrowUpRightSquare,
-    BsFile,
-    BsFileEarmarkBinary,
-    BsFolder,
-    BsFolder2Open,
-} from 'react-icons/bs'
+import { BsFile, BsFolder, BsFolder2Open } from 'react-icons/bs'
 import { FaArrowLeft } from 'react-icons/fa'
 import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
@@ -30,7 +24,6 @@ const StyledItem = styled.div`
     display: flex;
     font-size: 20px;
     padding: 10px;
-    border-left: 3px solid ${({ theme }) => theme.primary};
     cursor: pointer;
     align-items: center;
     gap: 20px;

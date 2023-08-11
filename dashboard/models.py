@@ -287,10 +287,11 @@ class Configuration(models.Model):
 class TestModel(models.Model):
     is_some = models.BooleanField(null=True)
     other = models.FileField(upload_to='To_REMOVE_Media/images')
-    
+    rel = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, default=None)
+    rel2 = models.ManyToManyField(Configuration)
 
 class Account(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to='Media/dashboard/auth/account/', null=True, blank=True)
     bio = models.TextField(null=True)
     phone = models.CharField(max_length=15, null=True)
@@ -306,7 +307,7 @@ class Account(models.Model):
     pronouns = models.CharField(max_length=16, null=True)
 
     def __str__(self):
-        return f"{self.user.username}"
+        return f"{self.user.username}" if self.user else 'None'
 
 
 class QrCodeAuth(models.Model):

@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
 import { Input } from '../../../atoms/Input'
+import { AiOutlineUpload } from 'react-icons/ai'
+import { FaUpload } from 'react-icons/fa'
+import { FileInput } from '../../../atoms/FileInput'
 
 const StyledField = styled.div`
     display: flex;
@@ -17,21 +20,17 @@ const StyledType = styled.span`
 export const FileFieldInput = ({ field, onChange }) => {
     const [value, setValue] = React.useState('')
 
+    React.useEffect(() => {
+        onChange(value || null)
+    }, [value])
+
     return (
         <StyledField>
             <Typography variant={'h3'}>
                 {field.name.toUpperCase()} -{' '}
                 <StyledType>{field.type}</StyledType>
             </Typography>
-            <Input
-                type={'file'}
-                value={value}
-                setValue={() => {}}
-                onInput={(e) => {
-                    setValue(e.target.value)
-                    onChange(e.target.files ? e.target.files[0] : null)
-                }}
-            />
+            <FileInput value={value} setValue={setValue} />
         </StyledField>
     )
 }

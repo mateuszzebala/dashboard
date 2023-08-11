@@ -12,8 +12,9 @@ import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
 import { LINKS } from '../../router/links'
 import { useModalForm } from '../../utils/hooks'
 import { Confirm } from '../../atoms/modalforms/Confirm'
-import { FiTrash } from 'react-icons/fi'
+import { FiEdit, FiTrash } from 'react-icons/fi'
 import { FieldInline } from '../../organisms/database/FieldInline'
+import { RelationInline } from '../../organisms/database/RelationInline'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -40,16 +41,30 @@ export const DatabaseItemPage = () => {
     const modalForm = useModalForm()
     const navigate = useNavigate()
     const [itemData, setItemData] = React.useState()
+    const [fields, setFields] = React.useState()
+    const [relations, setRelations] = React.useState()
     const [modelData, setModelData] = React.useState()
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.model(modelName)).then((data) => {
             setModelData(data.data)
+            setRelations(
+                Object.keys(data.data.fields).filter(
+                    (field) =>
+                        data.data.fields[field].relation.is &&
+                        data.data.fields[field].relation.type !== 'one_to_many'
+                )
+            )
+            setFields(
+                Object.keys(data.data.fields).filter(
+                    (field) => !data.data.fields[field].relation.is
+                )
+            )
         })
         FETCH(ENDPOINTS.database.item(modelName, pk)).then((data) => {
             setItemData(data.data)
         })
-    }, [])
+    }, [modelName, pk])
 
     return (
         <MainTemplate
@@ -57,20 +72,28 @@ export const DatabaseItemPage = () => {
                 ...APPS.database,
                 link: LINKS.database.model(modelName),
             }}
-            title={`${modelName} - ${pk}`}
+            title={`${modelName.toUpperCase()} - ${pk}`}
             submenuChildren={
                 <StyledButtons>
                     <Button
-                        size={1}
+                        size={1.3}
+                        onKey={{
+                            key: 'e',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
                         second
                         to={LINKS.database.patchItem(modelName, pk)}
-                    >
-                        EDIT
-                    </Button>
+                        icon={<FiEdit />}
+                    />
 
                     <Button
                         second
-                        size={1}
+                        onKey={{
+                            key: 'Delete',
+                        }}
+                        size={1.3}
+                        icon={<FiTrash />}
                         onClick={() => {
                             modalForm({
                                 content: Confirm,
@@ -88,42 +111,63 @@ export const DatabaseItemPage = () => {
                                 },
                             })
                         }}
-                    >
-                        DELETE
-                    </Button>
+                    />
                 </StyledButtons>
             }
         >
             <StyledWrapper>
                 <Table>
                     <HeaderRow>
-                        <Field>FIELD</Field>
+                        <Field>FIELD NAME</Field>
                         <Field>VALUE</Field>
+                        <Field>TYPE</Field>
                     </HeaderRow>
-                    {modelData &&
+                    {fields &&
+                        modelData &&
                         itemData &&
-                        Object.keys(modelData.fields).map((fieldName) => (
+                        fields.map((fieldName) => (
                             <Row key={fieldName}>
                                 <Field>{fieldName}</Field>
                                 <Field>
-                                    <Tooltip
-                                        text={fieldToString(
-                                            itemData.fields[fieldName],
-                                            modelData.fields[fieldName].type
-                                        )}
-                                    >
-                                        <StyledValue>
-                                            <FieldInline
-                                                type={
-                                                    modelData.fields[fieldName]
-                                                        .type
-                                                }
-                                                value={
-                                                    itemData.fields[fieldName]
-                                                }
-                                            />
-                                        </StyledValue>
-                                    </Tooltip>
+                                    <StyledValue>
+                                        <FieldInline
+                                            type={
+                                                modelData.fields[fieldName].type
+                                            }
+                                            value={itemData.fields[fieldName]}
+                                        />
+                                    </StyledValue>
+                                </Field>
+                                <Field>
+                                    {modelData.fields[fieldName].type}
+                                </Field>
+                            </Row>
+                        ))}
+                    {relations &&
+                        modelData &&
+                        itemData &&
+                        relations.map((fieldName) => (
+                            <Row key={fieldName}>
+                                <Field>{fieldName}</Field>
+                                <Field>
+                                    <StyledValue>
+                                        <RelationInline
+                                            type={
+                                                modelData.fields[fieldName]
+                                                    .relation.type
+                                            }
+                                            value={
+                                                itemData.relations[fieldName]
+                                            }
+                                            model={
+                                                modelData.fields[fieldName]
+                                                    .relation.model
+                                            }
+                                        />
+                                    </StyledValue>
+                                </Field>
+                                <Field>
+                                    {modelData.fields[fieldName].type}
                                 </Field>
                             </Row>
                         ))}

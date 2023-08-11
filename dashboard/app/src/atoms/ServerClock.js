@@ -8,6 +8,7 @@ const StyledClockWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 10px;
 `
 
 const StyledAnalogClock = styled.div`

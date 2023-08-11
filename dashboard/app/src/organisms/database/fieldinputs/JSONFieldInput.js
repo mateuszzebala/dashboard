@@ -18,7 +18,11 @@ export const JSONFieldInput = ({ field, onChange }) => {
     const [value, setValue] = React.useState('')
 
     React.useEffect(() => {
-        onChange(value)
+        try {
+            onChange(JSON.stringify(JSON.parse(value)))
+        } catch {
+            onChange(field.params.null ? null : '{}')
+        }
     }, [value])
 
     return (

@@ -19,7 +19,6 @@ export const RootTemplate = ({ children }) => {
             if (user.signin) {
                 if (window.location.pathname === LINKS.auth.signin())
                     INIT().then(() => {
-                        console.log('tuta')
                         setShow(false)
                         navigate(searchParams.get('next') || LINKS.home())
                     })
