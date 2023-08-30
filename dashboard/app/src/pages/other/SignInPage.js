@@ -10,6 +10,7 @@ import { toBoolStr } from '../../utils/utils'
 import { useModalForm, useUser } from '../../utils/hooks'
 import { ResetPassword } from '../../atoms/modalforms/ResetPassword'
 import { BiReset } from 'react-icons/bi'
+import Logo from '../../assets/logos/with-name/logo-dark-colors.png'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -161,7 +162,7 @@ export const SignInPage = () => {
             <StyledBackgroundDecoration2 />
 
             <StyledForm onSubmit={handleSubmitForm}>
-                <Typography variant={'h6'}>ADMIN DASHBOARD</Typography>
+                <img src={Logo} width={150}/>
                 <Typography variant={'h1'}>SIGN IN</Typography>
 
                 <Input

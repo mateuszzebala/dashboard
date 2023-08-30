@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { TopBarIcons } from '../molecules/TopBarIcons'
 import { LINKS } from '../router/links'
 import { Link } from '../atoms/Link'
-import { AiOutlineMenu } from 'react-icons/ai'
+
+import {HiOutlineMenu} from 'react-icons/hi'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -86,7 +87,7 @@ export const TopBar = ({
         <StyledWrapper>
             <StyledLeftSide>
                 <StyledMenuButton onClick={handleBurgerClick}>
-                    <AiOutlineMenu />
+                    <HiOutlineMenu />
                 </StyledMenuButton>
                 <Link
                     animation={false}

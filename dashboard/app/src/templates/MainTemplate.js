@@ -54,6 +54,15 @@ export const MainTemplate = ({
     const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
     const [hideSubmenu, setHideSubmenu] = React.useState(cookies.hideSubmenu)
+
+    React.useEffect(()=>{
+        let windowTitle = `Dashboard - ${app.name}`
+        if(title){
+            windowTitle += ` - ${title}`
+        }
+        document.title = windowTitle
+    }, [app, title])
+  
     React.useEffect(() => {
         if (cookies.leftbarClose === leftbarClose) return
         removeCookies(['leftbarClose'])
