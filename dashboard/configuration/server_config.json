@@ -9,19 +9,18 @@
    },
    "allowed_hosts": [
       "localhost",
-      "192.168.100.35",
-      "rskihfqlcq.cfolks.pl"
+      "192.168.100.37"
    ],
    "cors_allowed_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
-      "http://192.168.100.35:8000",
-      "http://192.168.100.35:3000"
+      "http://192.168.100.37:8000",
+      "http://192.168.100.37:3000"
    ],
    "csrf_trusted_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
-      "http://192.168.100.35:8000",
-      "http://192.168.100.35:3000"
+      "http://192.168.100.37:8000",
+      "http://192.168.100.37:3000"
    ]
 }

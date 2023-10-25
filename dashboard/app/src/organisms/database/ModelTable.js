@@ -12,12 +12,13 @@ const StyledWrapper = styled.div`
     height: 100%;
     overflow-y: auto;
     width: 100%;
+  
 `
 
 const StyledField = styled.td`
     border: 2px solid ${({ theme }) => theme.primary};
     text-align: center;
-    padding: 10px 10px;
+    padding: 15px 10px;
     width: auto;
     display: table-cell;
     background-color: ${({ selected, theme }) =>
@@ -37,7 +38,7 @@ const StyledHeaderField = styled.div`
     font-weight: normal;
     display: flex;
     align-items: center;
-
+    padding: 8px 10px;
     justify-content: space-between;
     cursor: pointer;
 `

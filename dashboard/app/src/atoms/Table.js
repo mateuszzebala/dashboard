@@ -10,7 +10,7 @@ const StyledTable = styled.table`
 `
 
 const StyledField = styled.td`
-    padding: 8px 20px;
+    padding: 15px 20px;
     border: 2px solid ${({ theme }) => theme.primary};
 `
 

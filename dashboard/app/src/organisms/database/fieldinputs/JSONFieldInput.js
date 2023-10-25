@@ -14,8 +14,8 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const JSONFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const JSONFieldInput = ({ field, onChange, value: val }) => {
+    const [value, setValue] = React.useState(val ? JSON.stringify(val) : '')
 
     React.useEffect(() => {
         try {

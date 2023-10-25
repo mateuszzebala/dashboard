@@ -13,8 +13,8 @@ const StyledClockWrapper = styled.div`
 
 const StyledAnalogClock = styled.div`
     background-image: url(${({ bg }) => bg});
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     background-position: center;
     background-size: cover;
     border-radius: 50%;
@@ -168,8 +168,8 @@ const ClockBoard = () => {
     return (
         <StyledClockBoard
             xmlns="http://www.w3.org/2000/svg"
-            width="400mm"
-            height="400mm"
+            width="400"
+            height="400"
             version="1.1"
             viewBox="0 0 400 400"
             xmlSpace="preserve"
@@ -184,29 +184,26 @@ const ClockBoard = () => {
                     xmlSpace="preserve"
                     style={{}}
                     x="175.236"
-                    y="27.074"
+                    y="30"
                     fill="#000"
-                    strokeWidth="0.313"
-                    fontFamily="Consolas"
-                    fontSize="41.722"
+                    fontSize="41"
                     fontStretch="normal"
                     fontStyle="normal"
                     fontVariant="normal"
                     fontWeight="bold"
                     transform="scale(.99716 1.00285)"
                 >
-                    <tspan x="175.236" y="27.074" strokeWidth="0.313">
+                    <tspan x="175.236" y="30.074" strokeWidth="0.313">
                         12
                     </tspan>
                 </text>
                 <text
                     xmlSpace="preserve"
                     style={{}}
-                    x="-1.467"
+                    x="0"
                     y="212.735"
                     fill="#000"
                     strokeWidth="0.313"
-                    fontFamily="Consolas"
                     fontSize="41.722"
                     fontStretch="normal"
                     fontStyle="normal"
@@ -225,7 +222,6 @@ const ClockBoard = () => {
                     y="398.397"
                     fill="#000"
                     strokeWidth="0.313"
-                    fontFamily="Consolas"
                     fontSize="41.722"
                     fontStretch="normal"
                     fontStyle="normal"
@@ -244,7 +240,6 @@ const ClockBoard = () => {
                     y="212.735"
                     fill="#000"
                     strokeWidth="0.313"
-                    fontFamily="Consolas"
                     fontSize="41.722"
                     fontStretch="normal"
                     fontStyle="normal"
@@ -252,7 +247,7 @@ const ClockBoard = () => {
                     fontWeight="bold"
                     transform="scale(.99716 1.00285)"
                 >
-                    <tspan x="380.359" y="212.735" strokeWidth="0.313">
+                    <tspan x="370.359" y="212.735" strokeWidth="0.313">
                         3
                     </tspan>
                 </text>

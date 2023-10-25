@@ -43,10 +43,16 @@ const StyledWrapper = styled.div`
     user-select: none;
     position: relative;
     transition: transform 0.3s;
-    &:hover {
+
+`
+
+const StyledHoverWrapper = styled.div`
+    display: inline-block;
+    &:hover > *{
         transform: scale(0.9);
     }
 `
+
 const StyledFilename = styled.div`
     white-space: nowrap;
     width: 90%;
@@ -88,7 +94,6 @@ export const ItemTile = ({
     reload,
     access,
     item,
-
     setSelectedItems,
     setPos,
     filetype,
@@ -105,47 +110,49 @@ export const ItemTile = ({
 
     return (
         <Tooltip text={filename}>
-            <StyledWrapper
-                hidden={toBoolStr(hidden)}
-                ref={wrapperRef}
-                selected={toBoolStr(selected)}
-                {...props}
-                onClick={(e) => {
-                    !isFile &&
-                        !e.shiftKey &&
-                        e.detail === 1 &&
-                        setLocation(filename)
-                    if (e.detail === 1 && (isFile || e.shiftKey)) {
-                        setSelectedItems((prev) =>
-                            selected
-                                ? [...prev.filter((i) => i !== item)]
-                                : [...prev, item]
-                        )
-                    }
+            <StyledHoverWrapper>
+                <StyledWrapper
+                    hidden={toBoolStr(hidden)}
+                    ref={wrapperRef}
+                    selected={toBoolStr(selected)}
+                    {...props}
+                    onClick={(e) => {
+                        !isFile &&
+                            !e.shiftKey &&
+                            e.detail === 1 &&
+                            setLocation(filename)
+                        if (e.detail === 1 && (isFile || e.shiftKey)) {
+                            setSelectedItems((prev) =>
+                                selected
+                                    ? [...prev.filter((i) => i !== item)]
+                                    : [...prev, item]
+                            )
+                        }
 
-                    e.detail > 1 &&
-                        modalForm({
-                            content: EditorChooser,
-                            icon: <BiEditAlt />,
-                            title: 'CHOOSE EDITOR TYPE',
-                            todo: (editorType) => {
-                                navigate(
-                                    LINKS.editor.edit(item.path, editorType)
-                                )
-                            },
-                        })
-                }}
-            >
-                <StyledIcon>
-                    {isFile ? getIconByFileType(filetype) : <BsFolder />}
-                </StyledIcon>
-                <StyledFilename>{filename}</StyledFilename>
-                {!access && (
-                    <StyledLockIcon>
-                        <FaLock />
-                    </StyledLockIcon>
-                )}
-            </StyledWrapper>
+                        e.detail > 1 &&
+                            modalForm({
+                                content: EditorChooser,
+                                icon: <BiEditAlt />,
+                                title: 'CHOOSE EDITOR TYPE',
+                                todo: (editorType) => {
+                                    navigate(
+                                        LINKS.editor.edit(item.path, editorType)
+                                    )
+                                },
+                            })
+                    }}
+                >
+                    <StyledIcon>
+                        {isFile ? getIconByFileType(filetype) : <BsFolder />}
+                    </StyledIcon>
+                    <StyledFilename>{filename}</StyledFilename>
+                    {!access && (
+                        <StyledLockIcon>
+                            <FaLock />
+                        </StyledLockIcon>
+                    )}
+                </StyledWrapper>
+            </StyledHoverWrapper>
         </Tooltip>
     )
 }

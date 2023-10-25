@@ -10,6 +10,9 @@ import { useSearchParams } from 'react-router-dom'
 import { FaStop } from 'react-icons/fa'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from '../../atoms/modalforms/Prompt'
+import { LINKS } from '../../router/links'
+import { APPS } from '../../apps/apps'
+import { BsGear } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
     position: relative;
@@ -18,7 +21,9 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.primary};
 `
 
-const StyledTerminal = styled.div``
+const StyledTerminal = styled.div`
+    font-family: 'Fira Mono', monospace;
+`
 
 const StyledPrompt = styled.div`
     color: ${({ theme }) => theme.primary};
@@ -40,13 +45,13 @@ const StyledInput = styled.input`
 
 const StyledPre = styled.pre`
     display: inline;
-    font-family: var(--font-family) !important;
+    font-family: 'Fira Mono', monospace;
 `
 
 const StyledErrors = styled.pre`
     display: inline;
     color: ${({ theme }) => theme.error};
-    font-family: var(--font-family) !important;
+    font-family: 'Fira Mono', monospace;
 `
 
 export const Terminal = ({ path, setPath }) => {
@@ -195,7 +200,7 @@ export const Terminal = ({ path, setPath }) => {
                 icon={<AiOutlineClear />}
                 second
             />
-
+            <FloatingActionButton size={1.3} right={140} second icon={<APPS.files.icon/>} to={LINKS.files.indexPath(path)}/>
             <FloatingActionButton
                 size={1.3}
                 second
@@ -209,6 +214,12 @@ export const Terminal = ({ path, setPath }) => {
                         icon: <BiBookmark />,
                     })
                 }}
+            />
+            <FloatingActionButton
+                size={1.3}
+                icon={<BsGear />}
+                right={200}
+                second
             />
             {waiting && (
                 <FloatingActionButton

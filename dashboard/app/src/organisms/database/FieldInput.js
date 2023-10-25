@@ -14,6 +14,7 @@ import styled from 'styled-components'
 
 const StyledWrapper = styled.div`
     padding: 10px;
+ 
 `
 
 const Inputs = {
@@ -30,12 +31,12 @@ const Inputs = {
     FloatField: FloatFieldInput,
 }
 
-export const FieldInput = ({ field, onChange }) => {
+export const FieldInput = ({ field, onChange, value }) => {
     const Input = Inputs[field.type]
     if (!Input) return field.name
     return (
         <StyledWrapper>
-            <Input field={field} onChange={onChange} />
+            <Input field={field} onChange={onChange} value={value}/>
         </StyledWrapper>
     )
 }

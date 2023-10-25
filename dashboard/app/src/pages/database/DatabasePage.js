@@ -12,7 +12,7 @@ import {
     BsPersonFillGear,
     BsTable,
 } from 'react-icons/bs'
-import { FaUser, FaUsers } from 'react-icons/fa'
+import { FaQrcode, FaUser, FaUsers } from 'react-icons/fa'
 import { BiWrench } from 'react-icons/bi'
 
 const IconByModel = {
@@ -22,6 +22,9 @@ const IconByModel = {
     log: <BsFillEyeFill />,
     permission: <BsPersonFillGear />,
     configuration: <BiWrench />,
+    qrcodeauth: <FaQrcode/>,
+    message: <APPS.messages.icon/>,
+    account: <APPS.users.icon/>
 }
 
 const StyledModels = styled.div`
@@ -40,7 +43,7 @@ const StyledModel = styled.button`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 0 5px 5px 0;
     border: 0;
-    font-size: 18px;
+    font-size: 14px;
     cursor: pointer;
     border-left: 3px solid ${({ theme }) => theme.primary};
     width: 100%;
@@ -51,13 +54,13 @@ const StyledModel = styled.button`
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover,
     &:focus {
-        transform: scale(0.95);
+        transform: translate(20px, 0);
         outline: none;
     }
 `
 
 const StyledAppName = styled.span`
-    font-size: 20px;
+    font-size: 15px;
 `
 
 const StyledApp = styled.div`

@@ -43,7 +43,7 @@ const StyledTextArea = styled.textarea`
     overflow-wrap: normal;
     overflow-x: scroll;
     padding: 0;
-
+    font-family: 'Fira Mono', monospace;
     overflow: scroll;
     color: ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};

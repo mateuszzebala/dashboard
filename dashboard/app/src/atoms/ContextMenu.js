@@ -15,8 +15,8 @@ const StyledContextMenu = styled.div`
     padding: 10px;
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 2px 10px 10px 10px;
-    border: 3px solid ${({ theme }) => theme.primary};
     z-index: 20;
+    gap: 8px;
 `
 const StyledContextMenuItem = styled.button`
     background-color: transparent;
@@ -27,14 +27,15 @@ const StyledContextMenuItem = styled.button`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
+    transition: background-color 0.2s, transform 0.2s, outline 0.3s;
     border-radius: 5px;
     padding: 10px 30px;
-
+    outline: 0 solid ${({ theme }) => theme.tertiary}44;
     span {
         font-size: 20px;
     }
     &:hover {
+        outline-width: 4px;
         background-color: ${({ theme }) => theme.tertiary}44;
     }
 `
@@ -50,7 +51,7 @@ const StyledText = styled.span`
     font-size: 17px;
 `
 
-export const ContextMenu = ({ data = [], children }) => {
+export const ContextMenu = ({ data = [], children, wrapper=StyledWrapper, ...props }) => {
     const [show, setShow] = React.useState(false)
     const [position, setPosition] = React.useState({ x: 0, y: 0 })
     const thisRef = React.useRef()
@@ -62,11 +63,12 @@ export const ContextMenu = ({ data = [], children }) => {
     useOnClickOutside(thisRef, () => {
         setShow(false)
     })
+    const Wrapper = wrapper
     return (
         <>
-            <StyledWrapper onContextMenu={handleContextMenu}>
+            <Wrapper {...props} onContextMenu={handleContextMenu}>
                 {children}
-            </StyledWrapper>
+            </Wrapper>
             {show && (
                 <StyledContextMenu x={position.x} y={position.y} ref={thisRef}>
                     {data.map((item) => (

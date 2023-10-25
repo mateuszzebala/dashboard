@@ -12,12 +12,12 @@ const StyledRow = styled.div`
     justify-content: flex-start;
 `
 
-export const BooleanFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState(false)
+export const BooleanFieldInput = ({ field, value, onChange }) => {
+    const [val, setVal] = React.useState(value || false)
 
     React.useEffect(() => {
-        onChange(value)
-    }, [value])
+        onChange(val)
+    }, [val])
 
     return (
         <StyledRow>
@@ -26,12 +26,12 @@ export const BooleanFieldInput = ({ field, onChange }) => {
                 <>
                     <SwitchWithNull
                         size={1.4}
-                        value={value}
-                        setValue={setValue}
+                        value={val}
+                        setValue={setVal}
                     />
                 </>
             ) : (
-                <Switch size={1.4} value={value} setValue={setValue} />
+                <Switch size={1.4} value={val} setValue={setVal} />
             )}
         </StyledRow>
     )

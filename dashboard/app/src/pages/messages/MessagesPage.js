@@ -68,6 +68,8 @@ export const MessagesPage = () => {
                 length: 30,
                 query,
                 page,
+                orderBy: 'read',
+                asc: true
             })
         ).then((data) => {
             setPages(data.data.pages)

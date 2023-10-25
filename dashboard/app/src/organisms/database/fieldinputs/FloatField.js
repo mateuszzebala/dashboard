@@ -15,9 +15,9 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const FloatFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
-
+export const FloatFieldInput = ({ field, onChange, value: val }) => {
+    const [value, setValue] = React.useState(val ? parseFloat(val) : '')
+ 
     React.useEffect(() => {
         onChange(value)
     }, [value])

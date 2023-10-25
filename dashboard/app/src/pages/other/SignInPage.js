@@ -10,7 +10,7 @@ import { toBoolStr } from '../../utils/utils'
 import { useModalForm, useUser } from '../../utils/hooks'
 import { ResetPassword } from '../../atoms/modalforms/ResetPassword'
 import { BiReset } from 'react-icons/bi'
-import Logo from '../../assets/logos/with-name/logo-dark-colors.png'
+import Logo from '../../assets/logos/logo-light-colors.svg'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -162,7 +162,7 @@ export const SignInPage = () => {
             <StyledBackgroundDecoration2 />
 
             <StyledForm onSubmit={handleSubmitForm}>
-                <img src={Logo} width={150}/>
+               
                 <Typography variant={'h1'}>SIGN IN</Typography>
 
                 <Input
@@ -216,9 +216,9 @@ export const SignInPage = () => {
             </StyledLock>
             <StyledDeveloperName
                 target="_blank"
-                href="https://mateuszzebala.pl"
+                href="https://mateuszzebala.github.io"
             >
-                MATEUSZZEBALA
+                <img src={Logo} width={100}/>
             </StyledDeveloperName>
         </StyledWrapper>
     )

@@ -286,13 +286,16 @@ class Configuration(models.Model):
 
 class TestModel(models.Model):
     is_some = models.BooleanField(null=True)
-    other = models.FileField(upload_to='To_REMOVE_Media/images')
+    other = models.FileField(upload_to='Media/dashboard/test_model')
     rel = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, default=None)
     rel2 = models.ManyToManyField(Configuration)
 
+def account_image_path(instance, filename):
+    return f'Media/dashboard/auth/account/{filename}'
+
 class Account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to='Media/dashboard/auth/account/', null=True, blank=True)
+    image = models.ImageField(upload_to=account_image_path, null=True, blank=True)
     bio = models.TextField(null=True)
     phone = models.CharField(max_length=15, null=True)
     birth_date = models.DateField(null=True)

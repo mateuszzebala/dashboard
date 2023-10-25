@@ -2,14 +2,17 @@ import React from 'react'
 import { Button } from '../../atoms/Button'
 import { LINKS } from '../../router/links'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const StyledWrapper = styled.div`
     display: flex;
     overflow: auto;
-    gap: 5px;
-    padding: 5px;
-    &::-webkit-scrollbar {
-        height: 0;
+    gap: 10px;
+    a{
+        color: ${({theme})=>theme.primary};
+        &:hover{
+            text-decoration: underline;
+        }
     }
 `
 
@@ -18,13 +21,13 @@ const ManyToManyInline = ({ value, model }) => {
         return (
             <StyledWrapper>
                 {value.map((item) => (
-                    <Button
+                    <Link
                         key={item}
                         second
                         to={LINKS.database.item(model, item)}
                     >
                         {item}
-                    </Button>
+                    </Link>
                 ))}
             </StyledWrapper>
         )
@@ -33,9 +36,11 @@ const ManyToManyInline = ({ value, model }) => {
 const ManyToOneInline = ({ value, model }) => {
     if (value)
         return (
-            <Button second to={LINKS.database.item(model, value)}>
-                {value}
-            </Button>
+            <StyledWrapper>
+                <Link to={LINKS.database.item(model, value)}>
+                    {value}
+                </Link>
+            </StyledWrapper>
         )
     else return 'None'
 }
@@ -43,9 +48,11 @@ const ManyToOneInline = ({ value, model }) => {
 const OneToOneInline = ({ value, model }) => {
     if (value)
         return (
-            <Button second to={LINKS.database.item(model, value)}>
-                {value}
-            </Button>
+            <StyledWrapper>
+                <Link to={LINKS.database.item(model, value)}>
+                    {value}
+                </Link>
+            </StyledWrapper>
         )
     else return 'None'
 }

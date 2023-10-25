@@ -2,6 +2,9 @@ import React from 'react'
 import { SelectItem } from '../database/SelectItem'
 import styled from 'styled-components'
 import { Typography } from '../../atoms/Typography'
+import { toBoolStr } from '../../utils/utils'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
 
 const StyledField = styled.div`
     display: flex;
@@ -14,8 +17,17 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
+const StyledWrapper = styled.div`
+    padding: 10px;
+
+
+`
+
 const ManyToManyInput = ({ relation, value, setValue }) => {
     const [tempValue, setTempValue] = React.useState(value || [])
+
+
+
     React.useEffect(() => {
         setValue(tempValue.map((item) => item.pk))
     }, [tempValue])
@@ -38,8 +50,17 @@ const ManyToManyInput = ({ relation, value, setValue }) => {
 
 const ManyToOneInput = ({ relation, value, setValue }) => {
     const [tempValue, setTempValue] = React.useState(value)
+
+    React.useEffect(()=>{
+        if(value != undefined){
+            FETCH(ENDPOINTS.database.item(relation.relation.model, value)).then(data => {
+                setTempValue(data.data)
+            })
+        }
+    }, [])
+
     React.useEffect(() => {
-        setValue(tempValue || null)
+        setValue(tempValue ? tempValue.pk : null)
     }, [tempValue])
 
     return (
@@ -59,7 +80,17 @@ const ManyToOneInput = ({ relation, value, setValue }) => {
 
 const OneToOneInput = ({ relation, value, setValue }) => {
     const [tempValue, setTempValue] = React.useState(value)
+
+    React.useEffect(()=>{
+        if(value != undefined){
+            FETCH(ENDPOINTS.database.item(relation.relation.model, value)).then(data => {
+                setTempValue(data.data)
+            })
+        }
+    }, [])
+
     React.useEffect(() => {
+        
         setValue(tempValue ? tempValue.pk : null)
     }, [tempValue])
 
@@ -86,5 +117,9 @@ const RelationInputs = {
 
 export const RelationInput = ({ relation, ...props }) => {
     const Input = RelationInputs[relation.relation.type]
-    return <Input {...props} relation={relation} />
+    return (
+        <StyledWrapper>
+            <Input {...props} relation={relation} />
+        </StyledWrapper>
+    )
 }

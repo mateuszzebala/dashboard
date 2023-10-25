@@ -11,7 +11,6 @@ const StyledValue = styled.div`
     justify-content: flex-start;
     padding: 0 0 0 10px;
     height: 40px;
-    border-left: 2px solid ${({ theme }) => theme.primary};
 `
 
 const StyledDropdownIcon = styled.button`

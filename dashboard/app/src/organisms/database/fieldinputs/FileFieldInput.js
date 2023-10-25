@@ -17,8 +17,8 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const FileFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const FileFieldInput = ({ field, onChange, value: val }) => {
+    const [value, setValue] = React.useState(val || '')
 
     React.useEffect(() => {
         onChange(value || null)

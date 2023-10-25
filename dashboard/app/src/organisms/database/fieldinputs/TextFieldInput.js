@@ -14,12 +14,12 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const TextFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const TextFieldInput = ({ field, onChange, value }) => {
+    const [val, setVal] = React.useState(value || '')
 
     React.useEffect(() => {
-        onChange(value)
-    }, [value])
+        onChange(val)
+    }, [val])
 
     return (
         <StyledField>
@@ -27,7 +27,7 @@ export const TextFieldInput = ({ field, onChange }) => {
                 {field.name.toUpperCase()} -{' '}
                 <StyledType>{field.type}</StyledType>
             </Typography>
-            <Input textarea value={value} setValue={setValue} />
+            <Input textarea value={val} setValue={setVal} />
         </StyledField>
     )
 }

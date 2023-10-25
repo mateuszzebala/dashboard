@@ -13,7 +13,6 @@ const StyledValues = styled.div`
     height: 40px;
     overflow-x: scroll;
     padding: 0 10px;
-    border-left: 2px solid ${({ theme }) => theme.primary};
     &::-webkit-scrollbar {
         height: 0;
     }

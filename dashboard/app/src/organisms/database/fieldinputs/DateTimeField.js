@@ -15,11 +15,17 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const DateTimeFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const DateTimeFieldInput = ({ field, onChange, value: val }) => {
+    const [value, setValue] = React.useState(val || '')
 
     React.useEffect(() => {
-        if (value) {
+        if(value.year){
+            const { year, month, day, hour, minute, second } = value
+            const datetime = new Date(year, month, day, hour, minute, second)
+            setValue(datetime.toISOString().split('.')[0] || '')
+            onChange(JSON.stringify({year, month, day, hour, minute, second}))
+        }
+        else if (value) {
             const [date, time] = value.split('T')
             const [hours, minutes, seconds] = time.split(':')
             const [year, month, day] = date.split('-')
@@ -45,7 +51,7 @@ export const DateTimeFieldInput = ({ field, onChange }) => {
             <Input
                 step={1}
                 type="datetime-local"
-                value={value}
+                value={value.year ? '' : value}
                 setValue={setValue}
             />
         </StyledField>

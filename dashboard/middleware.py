@@ -22,6 +22,7 @@ def log_request(request, response):
     path = request.get_full_path()
     user = request.user
     username = user.username if request.user.is_authenticated else None
+    print()
     print(colored(f"{method} - {response.status_code} - {path} - {username} - {datetime.now()}", colors_by_method.get(method)))    
 
 

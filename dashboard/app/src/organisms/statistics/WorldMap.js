@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import useResizeObserver from 'use-resize-observer'
 import { useModalForm, useTheme } from '../../utils/hooks'
 import { CountryInfo } from './CountryInfo'
-import Flag from 'react-flags'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -44,13 +43,7 @@ const PathCountry = ({ color, ...props }) => {
                     modalForm({
                         content: CountryInfo,
                         title: props.title,
-                        icon: (
-                            <Flag
-                                name={props.countryCode}
-                                pngSize={30}
-                                format={'png'}
-                            />
-                        ),
+                        icon: <></>,
                         country: props.countryCode,
                     })
             }}

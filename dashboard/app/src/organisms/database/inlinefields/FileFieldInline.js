@@ -7,6 +7,15 @@ import { LINKS } from '../../../router/links'
 import { fieldToString } from '../../../utils/utils'
 import { Button } from '../../../atoms/Button'
 import { centerEllipsis } from '../../../utils/utils'
+import styled from 'styled-components'
+
+const StyledSpan = styled.span`
+    cursor: pointer;
+    &:hover{
+        text-decoration: underline;
+    }
+`
+
 
 export const FileFieldInline = ({ value, type }) => {
     const modalForm = useModalForm()
@@ -15,8 +24,7 @@ export const FileFieldInline = ({ value, type }) => {
     if (!value) return 'None'
 
     return (
-        <Button
-            second
+        <StyledSpan
             onClick={() => {
                 modalForm({
                     content: EditorChooser,
@@ -29,6 +37,6 @@ export const FileFieldInline = ({ value, type }) => {
             }}
         >
             {centerEllipsis(fieldToString(value, type), 50)}
-        </Button>
+        </StyledSpan>
     )
 }

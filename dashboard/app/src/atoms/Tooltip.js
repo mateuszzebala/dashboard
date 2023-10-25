@@ -3,8 +3,7 @@ import styled from 'styled-components'
 
 const StyledWrapper = styled.span`
     display: inline-block;
-    align-items: center;
-    justify-content: center;
+
 `
 
 const StyledTooltip = styled.div`

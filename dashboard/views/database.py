@@ -109,26 +109,28 @@ def patch_item_view(request, item):
 
 @is_superuser
 def put_item_view(request, model_name):
-
-
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
-    names_of_fields = list(map(lambda field: field.name, list(filter(lambda field: not field.is_relation, model._meta.get_fields()))))
+    names_of_fields = list(map(lambda field: field.name, list(filter(lambda field: not field.is_relation and not field.auto_created, model._meta.get_fields()))))
     names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation, model._meta.get_fields()))))
-    data_fields = dict(
-        (
-            field_name,
-            set_field_serializer(
-                request.FILES.get(f'{field_name}') or request.POST.get(f'{field_name}'), 
-                get_type_of_field(model, field_name)
-            )
-        ) for field_name in names_of_fields)
-    
+    item = model()
+ 
+    for field in names_of_fields:
+        set_field_serializer(
+            request.FILES.get(field) or request.POST.get(field), 
+            get_type_of_field(model, field),
+            get_field(model, field),
+            item
+        )
+   
     for relation in names_of_relations:
-        if relation_can_be_set(get_field(model, relation)):
-            data_fields.update({relation: set_relation_serialize(request.POST.get(f'relation_{relation}'), get_relation_type_of_field(get_field(model, relation)), get_field(model, relation))})
+        set_relation_serialize(
+            request.POST.get(relation),
+            get_relation_type_of_field(get_field(model, relation)),
+            get_field(model, relation),
+            item
+        )
 
-    item = model(**data_fields)
     item.save()
     return JsonResponse({'pk':item.pk})
 

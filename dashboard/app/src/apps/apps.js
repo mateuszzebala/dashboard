@@ -6,6 +6,7 @@ import { FaRegEye } from 'react-icons/fa'
 import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
+import { PiDatabaseBold } from 'react-icons/pi'
 
 export const SUBLINKS = {}
 
@@ -26,7 +27,7 @@ export const APPS = {
     },
     database: {
         name: 'Database',
-        icon: BsDatabase,
+        icon: PiDatabaseBold,
         link: LINKS.database.index(),
         sublinks: () =>
             SUBLINKS.DATABASE.sort().reduce((obj, item) => {

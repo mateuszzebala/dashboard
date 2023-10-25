@@ -15,8 +15,8 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const IntegerFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const IntegerFieldInput = ({ field, onChange, value: val }) => {
+    const [value, setValue] = React.useState(val ? parseInt(val) : '')
 
     React.useEffect(() => {
         onChange(value)

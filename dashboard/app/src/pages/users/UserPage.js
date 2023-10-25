@@ -10,6 +10,7 @@ import { useModalForm } from '../../utils/hooks'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 import { Input } from '../../atoms/Input'
+import { LuSave } from 'react-icons/lu'
 
 const StyledProfileImage = styled.div`
     width: 200px;
@@ -59,6 +60,11 @@ export const UserPage = () => {
     const [data, setData] = React.useState({})
     const [profileImage, setProfileImage] = React.useState('')
     const modalForm = useModalForm()
+
+    const handleSave = () => {
+        alert(data)
+    }
+
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.users.get(id)).then((data) => {
@@ -210,7 +216,7 @@ export const UserPage = () => {
                             label={'PRONOUNS'}
                         />
                     </StyledInputs>
-                    <FloatingActionButton size={1.1}>SAVE</FloatingActionButton>
+                    <FloatingActionButton size={1.4} icon={<LuSave />} onClick={handleSave}/>
                 </StyledWrapper>
             )}
         </MainTemplate>

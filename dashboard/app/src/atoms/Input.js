@@ -36,12 +36,14 @@ const StyledInput = styled.input`
     width: 100%;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
+    caret-color:${({ theme }) => theme.primary};
     &:focus {
         outline: none;
     }
     &::-webkit-file-upload-button {
         display: none;
     }
+    
     &:disabled {
         color: ${({ theme }) => theme.tertiary};
     }

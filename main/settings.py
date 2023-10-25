@@ -90,6 +90,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_ROOT = 'Media/'
+
 # LOGGING = {
 #     'version': 1,
 #     'disable_existing_loggers': True,

@@ -29,6 +29,7 @@ import { useMessage } from '../../utils/messages'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 
+
 const StyledMenu = styled.div`
     display: flex;
     justify-content: space-between;
@@ -67,7 +68,7 @@ const FolderMenu = ({
     const modalForm = useModalForm()
     const { newMessage } = useMessage()
     const navigate = useNavigate()
-
+    const [copied, setCopied] = React.useState({type: null, content: null})
     const isSelectedOneFile = () =>
         selectedItems.length === 1 && selectedItems[0].is_file
 
@@ -160,47 +161,28 @@ const FolderMenu = ({
                         icon={<APPS.terminal.icon />}
                         to={LINKS.terminal.indexPath(path)}
                     />
-                    <Button
-                        second
-                        size={1.3}
-                        tooltip={'NEW FILE'}
-                        icon={<BsFilePlus />}
-                        onClick={handleNewFile}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        tooltip={'NEW FOLDER'}
-                        icon={<BsFolderPlus />}
-                        onClick={handleNewFolder}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        tooltip={'UPLOAD FILE'}
-                        icon={<BsFileArrowUp />}
-                        onClick={() => {
-                            modalForm({
-                                content: FilePrompt,
-                                title: 'UPLOAD FILE',
-                                icon: <BsFileArrowUp />,
-                                todo: (val) => {
-                                    FETCH(ENDPOINTS.files.upload(path), {
-                                        file: val,
-                                    }).then(() => {
-                                        setReload((prev) => prev + 1)
-                                    })
-                                },
-                            })
-                        }}
-                    />
+                  
+             
 
-                    <Button
+                    {copied.type != null && <Button
                         second
                         size={1.3}
                         tooltip={'PASTE'}
                         icon={<BiPaste />}
-                    />
+                        key={{
+                            key: 'v',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
+                        onClick={()=>{
+                            modalForm({
+                                content: Confirm,
+                                title: 'PASTE HERE?',
+                                icon: <BiPaste />,
+                                todo: ()=>{}
+                            })
+                        }}
+                    />}
 
                     {selectedItems.length > 0 ? (
                         <>
@@ -209,12 +191,18 @@ const FolderMenu = ({
                                 size={1.3}
                                 tooltip={'COPY'}
                                 icon={<BiCopy />}
+                                onClick={()=>{
+                                    setCopied({type: 'COPY', content: selectedItems.map(item => item.path)})
+                                }}
                             />
                             <Button
                                 second
                                 size={1.3}
                                 tooltip={'CUT'}
                                 icon={<BiCut />}
+                                onClick={()=>{
+                                    setCopied({type: 'CUT', content: selectedItems.map(item => item.path)})
+                                }}
                             />
                             <Button
                                 second
@@ -352,10 +340,31 @@ const FolderMenu = ({
                 icon={<BsFolderPlus />}
                 onClick={handleNewFolder}
             />
+            <FloatingActionButton
+                second
+                size={1.3}
+                right={140}
+                tooltip={'UPLOAD FILE'}
+                icon={<BsFileArrowUp />}
+                onClick={() => {
+                    modalForm({
+                        content: FilePrompt,
+                        title: 'UPLOAD FILE',
+                        icon: <BsFileArrowUp />,
+                        todo: (val) => {
+                            FETCH(ENDPOINTS.files.upload(path), {
+                                file: val,
+                            }).then(() => {
+                                setReload((prev) => prev + 1)
+                            })
+                        },
+                    })
+                }}
+            />
             {data.parent !== path && (
                 <FloatingActionButton
                     second
-                    right={140}
+                    right={200}
                     size={1.3}
                     icon={<FaArrowLeft />}
                     onClick={() => {

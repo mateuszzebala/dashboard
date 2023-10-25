@@ -10,13 +10,14 @@ const StyledWrapper = styled.div`
     font-size: ${({ size }) => size * 20 + 'px'};
     background-color: ${({ theme }) => theme.primary}22;
     color: ${({ theme }) => theme.primary};
-    border-radius: ${({ size }) => size * 5 + 'px'};
+    border-radius: ${({ size }) => size * 20 + 'px'};
 `
 const StyledInput = styled.input`
     border: 0;
     background-color: transparent;
     color: ${({ theme }) => theme.primary};
     padding: 0;
+    font-weight: 400;
     font-size: ${({ scaleSize }) => scaleSize * 17 + 'px'};
     text-align: center;
     &:focus {
@@ -29,7 +30,7 @@ const StyledButton = styled.button`
     flex-direction: column;
     font-size: ${({ size }) => size * 15 + 'px'};
     align-items: center;
-    border-radius: ${({ size }) => size * 5 + 'px'};
+    border-radius: 50%;
     color: ${({ theme }) => theme.primary};
     cursor: pointer;
     height: ${({ size }) => size * 35 + 'px'};
@@ -37,18 +38,15 @@ const StyledButton = styled.button`
     border: 0;
     width: ${({ size }) => size * 35 + 'px'};
     justify-content: center;
-    outline: 0 solid ${({ theme }) => theme.primary};
-    transition: 0.1s;
-    &:hover,
-    &:focus {
-        outline-width: ${({ size }) => size * 3 + 'px'};
-    }
+
 `
 
 const StyledRow = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: center;
+    font-weight: 400;
+    align-items: center;  
+    font-size: ${({ scaleSize }) => scaleSize * 17 + 'px'};
 `
 
 export const Counter = ({
@@ -69,7 +67,7 @@ export const Counter = ({
             >
                 <FaMinus />
             </StyledButton>
-            <StyledRow>
+            <StyledRow scaleSize={size}>
                 <StyledInput
                     value={value}
                     scaleSize={size}

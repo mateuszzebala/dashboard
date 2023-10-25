@@ -15,11 +15,16 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const DateFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const DateFieldInput = ({ field, onChange, value: val }) => {
+    const [value, setValue] = React.useState(val || '')
 
     React.useEffect(() => {
-        if (value) {
+        if(value.year){
+            const { year, month, day } = value
+            setValue(`${year}/${month}/${day}`)
+            onChange(JSON.stringify({year, month, day}))
+        }
+        else if (value) {
             const [year, month, day] = value.split('-')
             onChange(
                 JSON.stringify({
@@ -37,7 +42,7 @@ export const DateFieldInput = ({ field, onChange }) => {
                 {field.name.toUpperCase()} -{' '}
                 <StyledType>{field.type}</StyledType>
             </Typography>
-            <Input type="date" value={value} setValue={setValue} />
+            <Input type="date" value={value.year ? '' : value} setValue={setValue} />
         </StyledField>
     )
 }

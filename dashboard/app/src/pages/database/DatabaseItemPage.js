@@ -23,6 +23,7 @@ const StyledWrapper = styled.div`
     align-items: flex-start;
     flex-wrap: wrap;
     width: 100%;
+
 `
 
 const StyledValue = styled.span`
@@ -75,18 +76,7 @@ export const DatabaseItemPage = () => {
             title={`${modelName.toUpperCase()} - ${pk}`}
             submenuChildren={
                 <StyledButtons>
-                    <Button
-                        size={1.3}
-                        onKey={{
-                            key: 'e',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        second
-                        to={LINKS.database.patchItem(modelName, pk)}
-                        icon={<FiEdit />}
-                    />
-
+                   
                     <Button
                         second
                         onKey={{
@@ -112,6 +102,18 @@ export const DatabaseItemPage = () => {
                             })
                         }}
                     />
+                    <Button
+                        size={1.3}
+                        onKey={{
+                            key: 'e',
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
+                        second
+                        to={LINKS.database.patchItem(modelName, pk)}
+                        icon={<FiEdit />}
+                    />
+
                 </StyledButtons>
             }
         >

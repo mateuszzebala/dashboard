@@ -15,13 +15,13 @@ const StyledType = styled.span`
     font-weight: 300;
 `
 
-export const CharFieldInput = ({ field, onChange }) => {
-    const [value, setValue] = React.useState('')
+export const CharFieldInput = ({ field, onChange, value }) => {
+    const [val, setVal] = React.useState(value || '')
 
     React.useEffect(() => {
-        value && onChange(value)
-        !value && onChange(null)
-    }, [value])
+        val && onChange(val)
+        !val && onChange(null)
+    }, [val])
 
     if (field.params.choices) {
         return (
@@ -32,8 +32,8 @@ export const CharFieldInput = ({ field, onChange }) => {
                 </Typography>
                 <Select
                     data={field.params.choices}
-                    value={value}
-                    setValue={setValue}
+                    value={val}
+                    setVal={setVal}
                 />
             </StyledField>
         )
@@ -47,7 +47,7 @@ export const CharFieldInput = ({ field, onChange }) => {
                 <Input
                     maxLength={field.params.max_length}
                     value={value}
-                    setValue={setValue}
+                    setVal={setVal}
                 />
             </StyledField>
         )

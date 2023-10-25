@@ -56,6 +56,16 @@ export const SelectItemModal = ({
     const [tempValue, setTempValue] = React.useState(value)
 
     React.useEffect(() => {
+        if(value.length > 0 && !value[0].pk){
+            value.forEach((pk)=>{
+                FETCH(ENDPOINTS.database.item(modelName, pk)).then(data => {
+                    setTempValue(prev => prev.map(item => item == pk ? data.data : item))
+                })
+            })
+        }
+        else{
+            console.log('TERAZ NIE')
+        }
         setTempValue(value)
     }, [value])
 
@@ -121,7 +131,7 @@ export const SelectItemModal = ({
                         )
                         .map((item) => (
                             <Button
-                                key={item.pk}
+                                key={item.pk ? item.pk : item}
                                 onClick={() => {
                                     setTempValue((prev) =>
                                         prev.filter((i) => i.pk !== item.pk)

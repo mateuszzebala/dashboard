@@ -15,14 +15,16 @@ import { ModelTable } from '../../organisms/database/ModelTable'
 import { Counter } from '../../atoms/Counter'
 import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
+import {PiExportBold} from 'react-icons/pi'
 import {
     BsArrowUpRightSquare,
-    BsFiletypeCsv,
-    BsFiletypeJson,
-    BsFiletypeXlsx,
 } from 'react-icons/bs'
+import {PiFunctionBold} from 'react-icons/pi'
 import { useModalForm } from '../../utils/hooks'
-import { Select } from '../../atoms/Select'
+import { Export } from '../../atoms/modalforms/Export'
+import { Actions } from '../../atoms/modalforms/Actions'
+import { useSearchParams } from 'react-router-dom'
+import { IoMdOpen } from 'react-icons/io'
 
 const StyledWrapper = styled.div`
     max-width: 100%;
@@ -68,17 +70,30 @@ const StyledFooter = styled.div`
 export const DatabaseModelPage = () => {
     const { modelName } = useParams()
     const modalForm = useModalForm()
-    const [page, setPage] = React.useState(0)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [page, setPage] = React.useState(searchParams.get('page') ? parseInt(searchParams.get('page')) : 0)
     const [pages, setPages] = React.useState(2)
-    const [searchQuery, setSearchQuery] = React.useState('')
-    const [length, setLength] = React.useState(10)
-    const [orderBy, setOrderBy] = React.useState(null)
-    const [asc, setAsc] = React.useState(true)
+    const [searchQuery, setSearchQuery] = React.useState(searchParams.get('query') || '')
+    const [length, setLength] = React.useState(searchParams.get('length') ? parseInt(searchParams.get('length')) : 10)
+    const [orderBy, setOrderBy] = React.useState(searchParams.get('orderBy') == 'null' ? null : searchParams.get('orderBy'))
+    const [asc, setAsc] = React.useState(searchParams.get('asc') == 'false' ? false : true)
     const [action, setAction] = React.useState()
     const [modelData, setModelData] = React.useState(false)
     const [data, setData] = React.useState([])
     const [fields, setFields] = React.useState([])
     const [selectedItems, setSelectedItems] = React.useState([])
+
+    React.useEffect(()=>{
+        setSearchParams(prev => ({
+            ...prev, 
+            page,
+            query: searchQuery, 
+            length, 
+            orderBy, 
+            asc: asc ? 'true' : 'false', 
+        }))
+    }, [page, searchQuery, length, orderBy, asc])
+
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.model(modelName)).then((res) => {
@@ -194,24 +209,35 @@ export const DatabaseModelPage = () => {
                                         })
                                     }}
                                 />
-                                <Button
-                                    second
-                                    size={1.3}
-                                    tooltip={'EXPORT JSON'}
-                                    icon={<BsFiletypeJson />}
+                                <Button 
+                                    second 
+                                    size={1.3} 
+                                    tooltip={'EXPORT'} 
+                                    icon={<PiExportBold/>}
+                                    onClick={()=>{
+                                        modalForm({
+                                            content: Export,
+                                            title: 'EXPORT',
+                                            icon: <PiExportBold/>,
+                                            todo: ()=>{}
+                                        })
+                                    }}
                                 />
-                                <Button
+                                {modelData.actions != undefined && modelData.actions.length != 0 && <Button 
+                                    size={1.2} 
                                     second
-                                    size={1.3}
-                                    tooltip={'EXPORT XLSX'}
-                                    icon={<BsFiletypeXlsx />}
-                                />
-                                <Button
-                                    second
-                                    size={1.3}
-                                    tooltip={'EXPORT CSV'}
-                                    icon={<BsFiletypeCsv />}
-                                />
+                                    onClick={()=>{
+                                        modalForm({
+                                            content: Actions,
+                                            title: 'MAKE ACTION',
+                                            actions: modelData.actions,
+                                            action,
+                                            setAction,
+                                            icon: <PiFunctionBold/>,
+                                            todo: ()=>{}
+                                        })
+                                    }}
+                                >ACTIONS</Button>}
                             </>
                         )}
 
@@ -236,7 +262,7 @@ export const DatabaseModelPage = () => {
                                     second
                                     size={1.3}
                                     tooltip={'SHOW ITEM'}
-                                    icon={<BsArrowUpRightSquare />}
+                                    icon={<IoMdOpen />}
                                     to={LINKS.database.item(
                                         modelName,
                                         selectedItems[0]
@@ -247,22 +273,14 @@ export const DatabaseModelPage = () => {
                                         prevent: true,
                                     }}
                                 />
+                  
+                                
                             </>
                         )}
+                       
                     </StyledMenuSide>
                     <StyledMenuSide>
-                        <Select
-                            value={action}
-                            setValue={setAction}
-                            data={
-                                modelData.actions &&
-                                modelData.actions.map((action) =>
-                                    action.toUpperCase()
-                                )
-                            }
-                            emptyName="ACTIONS"
-                        />
-                        <Button second>MAKE</Button>
+                       
                         <Counter
                             value={length}
                             setValue={setLength}

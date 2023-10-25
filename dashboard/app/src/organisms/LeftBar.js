@@ -7,7 +7,7 @@ import { FaReact } from 'react-icons/fa'
 import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
 import { LINKS } from '../router/links'
-import Logo from '../assets/logos/with-name/logo-light-colors.png'
+import Logo from '../assets/logos/logo-light-colors.svg'
 
 const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.primary};
@@ -41,6 +41,9 @@ const StyleDashboard = styled.span`
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.secondary};
+    img{
+        width: 120px;
+    }
 `
 const StyledMenuItems = styled.div`
     overflow-y: auto;
@@ -62,7 +65,7 @@ export const LeftBar = ({ close }) => {
         <StyledBar close={toBoolStr(close)}>
             <Link to={LINKS.home()}>
                 <StyleDashboard>
-                    <img width={150} src={Logo}/>
+                    <img src={Logo}/>
                    
                 </StyleDashboard>
             </Link>
