@@ -25,31 +25,31 @@ import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
     display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
-    justify-content: center;
+    justify-content: ${({list})=>list ? 'flex-start' : 'center'};
     align-items: center;
-    flex-direction: column;
+    flex-direction: ${({list})=>list ? 'row' : 'column'};
     gap: 10px;
     padding: 10px;
-    background-color: ${({ theme }) => theme.secondary};
+    background-color: ${({ theme }) => theme.primary}11;
     color: ${({ theme }) => theme.primary};
-    box-shadow: 0 0 5px -4px ${({ theme, selected }) => (selected ? theme.accent : theme.primary)};
     border-radius: 3px;
-    height: 100px;
-    border: 3px solid
-        ${({ theme, selected }) => (selected ? theme.primary : theme.secondary)};
-    width: 100px;
+    height: ${({list})=> list ? '50px' : '100px'};
+    border: 3px solid ${({ theme, selected }) => (selected ? theme.primary : 'transparent')};
+    width: ${({list})=>list ? '100%' : '100px'};
     font-size: 15px;
     cursor: pointer;
     user-select: none;
     position: relative;
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
 
 `
 
 const StyledHoverWrapper = styled.div`
     display: inline-block;
+    width: 100%;
     &:hover > *{
-        transform: scale(0.9);
+        transform: ${({list})=>list?'none':'scale(0.9)'};
+        background-color: ${({list, theme})=>list?theme.primary + '22':theme.primary + '11'};
     }
 `
 
@@ -60,10 +60,13 @@ const StyledFilename = styled.div`
     font-size: 15px;
     padding: 5px 0;
     text-overflow: ellipsis;
-    text-align: center;
+    text-align: ${({list})=>list ? 'left' : 'center'};
 `
 const StyledIcon = styled.div`
-    font-size: 35px;
+    font-size: ${({list})=>list ? '20px' : '35px'};
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const StyledLockIcon = styled.div`
@@ -98,6 +101,7 @@ export const ItemTile = ({
     setPos,
     filetype,
     hidden,
+    list,
     ...props
 }) => {
     const wrapperRef = React.useRef()
@@ -110,11 +114,12 @@ export const ItemTile = ({
 
     return (
         <Tooltip text={filename}>
-            <StyledHoverWrapper>
+            <StyledHoverWrapper list={toBoolStr(list)}>
                 <StyledWrapper
                     hidden={toBoolStr(hidden)}
                     ref={wrapperRef}
                     selected={toBoolStr(selected)}
+                    list={toBoolStr(list)}
                     {...props}
                     onClick={(e) => {
                         !isFile &&
@@ -142,10 +147,10 @@ export const ItemTile = ({
                             })
                     }}
                 >
-                    <StyledIcon>
+                    <StyledIcon list={toBoolStr(list)}>
                         {isFile ? getIconByFileType(filetype) : <BsFolder />}
                     </StyledIcon>
-                    <StyledFilename>{filename}</StyledFilename>
+                    <StyledFilename list={toBoolStr(list)}>{filename}</StyledFilename>
                     {!access && (
                         <StyledLockIcon>
                             <FaLock />

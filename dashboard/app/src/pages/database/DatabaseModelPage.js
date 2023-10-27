@@ -16,15 +16,18 @@ import { Counter } from '../../atoms/Counter'
 import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import {PiExportBold} from 'react-icons/pi'
-import {
-    BsArrowUpRightSquare,
-} from 'react-icons/bs'
 import {PiFunctionBold} from 'react-icons/pi'
 import { useModalForm } from '../../utils/hooks'
 import { Export } from '../../atoms/modalforms/Export'
 import { Actions } from '../../atoms/modalforms/Actions'
 import { useSearchParams } from 'react-router-dom'
 import { IoMdOpen } from 'react-icons/io'
+
+const StyledError = styled.span`
+    font-weight: 500;
+    font-size: 20px;
+    color: ${({theme})=>theme.error};
+`
 
 const StyledWrapper = styled.div`
     max-width: 100%;
@@ -82,7 +85,8 @@ export const DatabaseModelPage = () => {
     const [data, setData] = React.useState([])
     const [fields, setFields] = React.useState([])
     const [selectedItems, setSelectedItems] = React.useState([])
-
+    const [error, setError] = React.useState(null)
+    
     React.useEffect(()=>{
         setSearchParams(prev => ({
             ...prev, 
@@ -99,6 +103,10 @@ export const DatabaseModelPage = () => {
         FETCH(ENDPOINTS.database.model(modelName)).then((res) => {
             const resModelData = res.data
             setModelData(resModelData)
+            if(res.data.error){
+                setError(res.data.error)
+                return
+            }
             const registeredFields = Object.keys(res.data.fields)
                 .filter((field) => !resModelData.fields[field].relation.is)
                 .filter((field) => resModelData.fields[field].registered)
@@ -303,8 +311,8 @@ export const DatabaseModelPage = () => {
                 </StyledMenu>
             }
         >
-            {!modelData ? (
-                ''
+            {error || !modelData ? (
+                <StyledError>{error}</StyledError>
             ) : (
                 <StyledWrapper>
                     <ModelTable

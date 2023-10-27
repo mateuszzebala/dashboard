@@ -8,14 +8,14 @@ export const range = (start, end) => {
     return Array.from({ length: end - start + 1 }, (_, i) => i)
 }
 export const datetimeToString = (datetime) => {
-    let { year, month, day, hour, minute, second } = datetime
+    let { year, month, day, hours, minutes, seconds } = datetime
     if (month < 10) month = '0' + month
     if (day < 10) day = '0' + day
-    if (hour < 10) hour = '0' + hour
-    if (minute < 10) minute = '0' + minute
-    if (second < 10) second = '0' + second
+    if (hours < 10) hours = '0' + hours
+    if (minutes < 10) minutes = '0' + minutes
+    if (seconds < 10) seconds = '0' + seconds
 
-    return `${year}.${month}.${day} ${hour}:${minute}:${second}`
+    return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`
 }
 
 export const dateToString = (datetime) => {
@@ -26,12 +26,12 @@ export const dateToString = (datetime) => {
     return `${year}.${month}.${day}`
 }
 export const timeToString = (datetime) => {
-    let { hour, minute, second } = datetime
-    if (hour < 10) hour = '0' + hour
-    if (minute < 10) minute = '0' + minute
-    if (second < 10) second = '0' + second
+    let { hours, minutes, seconds } = datetime
+    if (hours < 10) hours = '0' + hours
+    if (minutes < 10) minutes = '0' + minutes
+    if (seconds < 10) seconds = '0' + seconds
 
-    return `${hour}:${minute}:${second}`
+    return `${hours}:${minutes}:${seconds}`
 }
 
 export const durationToString = (duration) => {

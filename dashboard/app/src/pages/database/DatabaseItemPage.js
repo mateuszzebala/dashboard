@@ -6,8 +6,6 @@ import { Button } from '../../atoms/Button'
 import { useNavigate, useParams } from 'react-router'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FETCH } from '../../api/api'
-import { fieldToString } from '../../utils/utils'
-import { Tooltip } from '../../atoms/Tooltip'
 import { Field, HeaderRow, Row, Table } from '../../atoms/Table'
 import { LINKS } from '../../router/links'
 import { useModalForm } from '../../utils/hooks'
@@ -15,6 +13,13 @@ import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import { FieldInline } from '../../organisms/database/FieldInline'
 import { RelationInline } from '../../organisms/database/RelationInline'
+
+const StyledError = styled.span`
+    font-weight: 500;
+    font-size: 20px;
+    color: ${({theme})=>theme.error};
+`
+
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -44,10 +49,15 @@ export const DatabaseItemPage = () => {
     const [itemData, setItemData] = React.useState()
     const [fields, setFields] = React.useState()
     const [relations, setRelations] = React.useState()
+    const [error, setError] = React.useState(null)
     const [modelData, setModelData] = React.useState()
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.model(modelName)).then((data) => {
+            if(data.data.error){
+                setError(data.data.error)
+                return
+            }
             setModelData(data.data)
             setRelations(
                 Object.keys(data.data.fields).filter(
@@ -118,62 +128,66 @@ export const DatabaseItemPage = () => {
             }
         >
             <StyledWrapper>
-                <Table>
-                    <HeaderRow>
-                        <Field>FIELD NAME</Field>
-                        <Field>VALUE</Field>
-                        <Field>TYPE</Field>
-                    </HeaderRow>
-                    {fields &&
-                        modelData &&
-                        itemData &&
-                        fields.map((fieldName) => (
-                            <Row key={fieldName}>
-                                <Field>{fieldName}</Field>
-                                <Field>
-                                    <StyledValue>
-                                        <FieldInline
-                                            type={
-                                                modelData.fields[fieldName].type
-                                            }
-                                            value={itemData.fields[fieldName]}
-                                        />
-                                    </StyledValue>
-                                </Field>
-                                <Field>
-                                    {modelData.fields[fieldName].type}
-                                </Field>
-                            </Row>
-                        ))}
-                    {relations &&
-                        modelData &&
-                        itemData &&
-                        relations.map((fieldName) => (
-                            <Row key={fieldName}>
-                                <Field>{fieldName}</Field>
-                                <Field>
-                                    <StyledValue>
-                                        <RelationInline
-                                            type={
-                                                modelData.fields[fieldName]
-                                                    .relation.type
-                                            }
-                                            value={
-                                                itemData.relations[fieldName]
-                                            }
-                                            model={
-                                                modelData.fields[fieldName]
-                                                    .relation.model
-                                            }
-                                        />
-                                    </StyledValue>
-                                </Field>
-                                <Field>
-                                    {modelData.fields[fieldName].type}
-                                </Field>
-                            </Row>
-                        ))}
-                </Table>
+                {error ? <StyledError>{error}</StyledError> : <Table>
+                    <thead>
+                        <HeaderRow>
+                            <Field>FIELD NAME</Field>
+                            <Field>VALUE</Field>
+                            <Field>TYPE</Field>
+                        </HeaderRow>
+                    </thead>
+                    <tbody>
+                        {fields &&
+                            modelData &&
+                            itemData &&
+                            fields.map((fieldName) => (
+                                <Row key={fieldName}>
+                                    <Field>{fieldName}</Field>
+                                    <Field>
+                                        <StyledValue>
+                                            <FieldInline
+                                                type={
+                                                    modelData.fields[fieldName].type
+                                                }
+                                                value={itemData.fields[fieldName]}
+                                            />
+                                        </StyledValue>
+                                    </Field>
+                                    <Field>
+                                        {modelData.fields[fieldName].type}
+                                    </Field>
+                                </Row>
+                            ))}
+                        {relations &&
+                            modelData &&
+                            itemData &&
+                            relations.map((fieldName) => (
+                                <Row key={fieldName}>
+                                    <Field>{fieldName}</Field>
+                                    <Field>
+                                        <StyledValue>
+                                            <RelationInline
+                                                type={
+                                                    modelData.fields[fieldName]
+                                                        .relation.type
+                                                }
+                                                value={
+                                                    itemData.relations[fieldName]
+                                                }
+                                                model={
+                                                    modelData.fields[fieldName]
+                                                        .relation.model
+                                                }
+                                            />
+                                        </StyledValue>
+                                    </Field>
+                                    <Field>
+                                        {modelData.fields[fieldName].type}
+                                    </Field>
+                                </Row>
+                            ))}
+                    </tbody>
+                </Table>}
             </StyledWrapper>
         </MainTemplate>
     )

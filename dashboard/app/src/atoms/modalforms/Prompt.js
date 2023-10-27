@@ -11,9 +11,12 @@ const StyledWrapper = styled.div`
     justify-content: center;
 `
 const StyledButtons = styled.div`
-    display: flex;
+   
+    gap: 5px;
+   
     width: 100%;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 50% 50%;
 `
 
 export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
@@ -39,6 +42,8 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
             />
             <StyledButtons>
                 <Button
+                    second
+                    width={'100%'}
                     onKey={'Escape'}
                     onClick={() => {
                         setOpen(false)
@@ -47,6 +52,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
                     CANCEL
                 </Button>
                 <Button
+                    width={'100%'}
                     onKey={'Enter'}
                     onClick={() => {
                         setOpen(false)

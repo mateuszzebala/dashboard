@@ -17,7 +17,7 @@ def get_models_view(reqeust):
 @is_superuser
 def get_model_info_view(reqeust, model_name):
     model = get_model(model_name)
-    if model is None: return error_message('Model does not exists', 400)
+    if model is None: return error_message(f'Model "{model_name}" does not exists or is not registered!', 400)
 
     return JsonResponse({
         'model': model.__name__,
@@ -45,7 +45,7 @@ def get_model_info_view(reqeust, model_name):
 @is_superuser
 def select_items_view(request, model_name):
     model = get_model(model_name)
-    if model is None: return error_message('Model does not exists', 400)
+    if model is None: return error_message(f'Model "{model_name}" does not exists or is not registered!', 400)
 
     length = int(request.GET.get('length')) or -1
     page = int((request.GET.get('page') or 0))
@@ -53,12 +53,27 @@ def select_items_view(request, model_name):
     asc = request.GET.get('asc') == 'true'
     query = request.GET.get('query') or ''
     pages = 0
-    try:
-        items = []
-        query = dict(equation.strip().split('=') for equation in query.split(','))
-        items = model.objects.filter(**query)
-    except:
-        items = model.objects.all()
+    queryError = False
+    
+    items = []
+
+    items = model.objects.all()
+    for equation in query.split(','):
+        if not '=' in equation: continue
+        split = equation.strip().split('=')
+        key, value = split
+        query = {}
+        try:
+            if len(split) < 2 or not key or not value:
+                continue
+            if value.lower() == 'true': 
+                value = True
+            elif value.lower() == 'false': 
+                value = False
+            query[key] = value
+            items = items.filter(**query)
+        except:
+            queryError = True
 
     items = list(items.order_by(order_by))
     pages = ceil(len(items) / length) if length != -1 else 1
@@ -68,7 +83,8 @@ def select_items_view(request, model_name):
     return JsonResponse({
         'model': model.__name__,
         'pages': pages,
-        'items': [item_to_json(item) for item in items]
+        'items': [item_to_json(item) for item in items],
+        'queryError': queryError
     })
 
 @is_superuser
@@ -134,6 +150,35 @@ def put_item_view(request, model_name):
     item.save()
     return JsonResponse({'pk':item.pk})
 
+
+@is_superuser
+def patch_item_view(request, model_name, pk):
+    model = get_model(model_name)
+    if model is None: return error_message('Model does not exists', 400)
+    names_of_fields = list(map(lambda field: field.name, list(filter(lambda field: not field.is_relation and not field.auto_created, model._meta.get_fields()))))
+    names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation, model._meta.get_fields()))))
+    item = model.objects.filter(pk=pk).first()
+    print(item, model)
+    for field in names_of_fields:
+        set_field_serializer(
+            request.FILES.get(field) or request.POST.get(field), 
+            get_type_of_field(model, field),
+            get_field(model, field),
+            item
+        )
+   
+    for relation in names_of_relations:
+        set_relation_serialize(
+            request.POST.get(relation),
+            get_relation_type_of_field(get_field(model, relation)),
+            get_field(model, relation),
+            item
+        )
+
+    item.save()
+    return JsonResponse({'pk':item.pk})
+
+
 def item_to_json(item):
     return {
         'pk': item.pk,
@@ -159,11 +204,89 @@ def make_action_view(request, model_name):
         ...
     return JsonResponse({})
 
+###############################
+
+
+
+@is_superuser
+def get_possible_items(request, model_name, field_name):
+    model = get_model(model_name)
+    if model is None: return error_message(f'Model "{model_name}" does not exists or is not registered!', 400)
+    field = get_field(model, field_name)
+    related_model = field.related_model
+
+    length = int(request.GET.get('length')) or -1
+    page = int((request.GET.get('page') or 0))
+    order_by = request.GET.get('order_by') or 'pk'
+    asc = request.GET.get('asc') == 'true'
+    query = request.GET.get('query') or ''
+    pages = 0
+    queryError = False
+
+    items = []
+
+    items = related_model.objects.all()
+    for equation in query.split(','):
+        if not '=' in equation: continue
+        split = equation.strip().split('=')
+        key, value = split
+        query = {}
+        try:
+            if len(split) < 2 or not key or not value:
+                continue
+            if value.lower() == 'true': 
+                value = True
+            elif value.lower() == 'false': 
+                value = False
+            query[key] = value
+            items = items.filter(**query)
+        except:
+            queryError = True
+
+    if field.one_to_one:
+        items = items.filter(**{f'{model_name.lower()}__isnull':True})
+
+    items = list(items.order_by(order_by))
+    pages = ceil(len(items) / length) if length != -1 else 1
+    if length != -1: items = items[page*length:page*length+length]
+    if not asc: items.reverse()
+
+    return JsonResponse({
+        'model': related_model.__name__,
+        'pages': pages,
+        'items': [item_to_json(item) for item in items],
+        'queryError': queryError
+    })
+
+###############################
+
+@is_superuser
+def get_relation_value(reuqest, model_name, field_name, pk):
+    model = get_model(model_name)
+    item = model.objects.filter(pk=pk).first()
+    if item is None: return JsonResponse({
+        'value': None
+    })
+    value = getattr(item, field_name)
+    field = get_field(model, field_name)
+
+    if field.many_to_many:
+        return JsonResponse({
+            'value': [item_to_json(item) for item in value]
+        })
+    return JsonResponse({
+        'value': item_to_json(value)
+    })
+
+
 urlpatterns = [
     path('', get_models_view), # GET MODELS
     path('<model_name>/', get_model_info_view), # GET MODEL INFO
-    path('<model_name>/create/', put_item_view), # GET MODEL INFO
+    path('<model_name>/create/', put_item_view), # CREATE MODEL VIEW
+    path('<model_name>/edit/<pk>/', patch_item_view), # EDIT MODEL VIEW
     path('<model_name>/items/', select_items_view), # GET ITEMS VIEW
+    path('<model_name>/<field_name>/possible/', get_possible_items), # GET POSSIBLE ITEMS VIEW
+    path('<model_name>/<field_name>/<pk>/value/', get_relation_value), # GET RELATION VALUE
     path('<model_name>/items/action/', make_action_view), # MAKE ACTION VIEW
     path('<model_name>/items/<pk>/', manage_item_view), # MANAGE ITEM  # POST: {'method':string}
 ]

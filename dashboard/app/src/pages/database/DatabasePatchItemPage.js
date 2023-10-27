@@ -40,35 +40,31 @@ export const DatabasePatchItemPage = () => {
     const [fields, setFields] = React.useState([])
     const [relations, setRelations] = React.useState([])
     const [values, setValues] = React.useState({})
+    const [initValues, setInitValues] = React.useState({})
     const [nullableErrors, setNullableErrors] = React.useState([])
+    const [loaded, setLoaded] = React.useState(false)
 
-    React.useEffect(()=>{
-        FETCH(ENDPOINTS.database.item(modelName, pk)).then(data => {
-            setValues({...data.data.fields, ...data.data.relations})
-        })
-    }, [])
 
     const handleSave = () => {
         const nullable = Object.assign(
             {},
-            ...fields.map(({ name, params }) => ({ [name]: params.null }))
+            ...fields.map(({ name, params }) => ({ [name]: params.null })),
+            ...relations.map(({ name, params }) => ({ [name]: params.null })),
         )
-        console.log(values)
-
         const nullableErrorFields = Object.keys(values).filter(
             (field) => values[field] === null && !nullable[field]
         )
-        console.log(values)
-
         setNullableErrors(nullableErrorFields)
+        console.log(values)
         nullableErrorFields.length === 0 &&
-            FETCH(ENDPOINTS.database.create(modelName), values).then((data) => {
+            FETCH(ENDPOINTS.database.edit(modelName, pk), values).then((data) => {
                 navigate(LINKS.database.item(modelName, data.data.pk))
             })
 
     }
 
     React.useEffect(() => {
+  
         FETCH(ENDPOINTS.database.model(modelName)).then((data) => {
             setFields(
                 Object.keys(data.data.fields).reduce((fieldsArray, key) => {
@@ -103,8 +99,13 @@ export const DatabasePatchItemPage = () => {
                     ]
                 }, [])
             )
+            FETCH(ENDPOINTS.database.item(modelName, pk)).then(data => {
+                setValues({...data.data.fields, ...data.data.relations})
+                setInitValues({...data.data.fields, ...data.data.relations})
+                setLoaded(true)
+            })
         })
-    }, [])
+    }, [modelName, pk])
 
     return (
         <MainTemplate
@@ -113,7 +114,7 @@ export const DatabasePatchItemPage = () => {
             title={modelName.toUpperCase()}
         >
             <StyledWrapper>
-                {relations.map((relation) => (
+                {loaded && relations.map((relation) => (
                     <StyledField key={relation.name}>
                         <RelationInput
                             setValue={(val) => {
@@ -124,17 +125,19 @@ export const DatabasePatchItemPage = () => {
                             }}
                             value={values[relation.name]}
                             key={relation.name}
-                            relation={relation}
+                            modelName={modelName}
+                            fieldName={relation.name}
+                            type={relation.relation.type}
                         />
                         {nullableErrors.includes(relation.name) && <StyledError>This field can not be null!</StyledError>}
                     </StyledField>
                 ))}
-                {fields.map((field) => (
+                {loaded && fields.map((field) => (
                     <StyledField key={field.name}>
                         <FieldInput
                             key={field.name}
                             field={field}
-                            value={values[field.name]}
+                            value={initValues[field.name]}
                             nullError={nullableErrors.includes(field.name)}
                             onChange={(val) => {
                                 setValues((prev) => ({

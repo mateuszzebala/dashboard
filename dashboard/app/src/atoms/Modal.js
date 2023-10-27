@@ -43,11 +43,11 @@ const StyledWrapper = styled.div`
     @keyframes fade-in {
         from {
             opacity: 0;
-            transform: translate(0, 20%);
+            transform: translate(0, 20%) scale(1.3);
         }
         to {
             opacity: 1;
-            transform: translate(0, 0);
+            transform: translate(0, 0) scale(1);
         }
     }
     animation: fade-in 0.5s forwards;

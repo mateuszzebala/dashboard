@@ -10,7 +10,7 @@ const StyledWrapper = styled.div`
     min-width: 300px;
     max-width: 300px;
     border-radius: 3px;
-    border: 3px solid ${({ theme }) => theme.primary};
+    border: 2px solid ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
 `
@@ -87,6 +87,7 @@ export const Input = ({
 
     React.useEffect(() => {
         value !== tempValue && setTempValue(value)
+        
     }, [value])
 
     return (

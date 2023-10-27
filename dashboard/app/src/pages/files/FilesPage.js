@@ -8,6 +8,7 @@ import {
     BsFolderPlus,
     BsFileZip,
     BsFileArrowUp,
+    BsGrid,
 } from 'react-icons/bs'
 import { Input } from '../../atoms/Input'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
@@ -15,7 +16,7 @@ import { HiDownload } from 'react-icons/hi'
 import styled from 'styled-components'
 import { FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
 import { FiTrash } from 'react-icons/fi'
-import { BiCopy, BiCut, BiEditAlt, BiPaste, BiRename } from 'react-icons/bi'
+import { BiCopy, BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -28,6 +29,9 @@ import { LINKS } from '../../router/links'
 import { useMessage } from '../../utils/messages'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
+import { Properties } from '../../atoms/modalforms/Properties'
+import { AiOutlineUnorderedList } from 'react-icons/ai'
+import { useCookies } from 'react-cookie'
 
 
 const StyledMenu = styled.div`
@@ -64,6 +68,8 @@ const FolderMenu = ({
     setReload,
     searchValue,
     setSearchValue,
+    list,
+    setList
 }) => {
     const modalForm = useModalForm()
     const { newMessage } = useMessage()
@@ -152,6 +158,15 @@ const FolderMenu = ({
                         icon={<TbReload />}
                         onClick={() => {
                             setReload((prev) => prev + 1)
+                        }}
+                    />
+                    <Button
+                        second
+                        size={1.3}
+                        tooltip={list ? 'LIST' : 'GRID'}
+                        icon={list ? <AiOutlineUnorderedList/> : <BsGrid/>}
+                        onClick={() => {
+                            setList(prev => !prev)
                         }}
                     />
                     <Button
@@ -256,27 +271,49 @@ const FolderMenu = ({
                         ''
                     )}
                     {selectedItems.length === 1 && (
-                        <Button
-                            second
-                            size={1.3}
-                            tooltip={'RENAME'}
-                            icon={<BiRename />}
-                            onKey={{
-                                key: 'F2',
-                                prevent: true,
-                            }}
-                            onClick={() => {
-                                modalForm({
-                                    content: Prompt,
-                                    icon: <BiRename />,
-                                    title: 'FILE NAME',
-                                    todo: (name) => {
-                                        console.log(name)
-                                    },
-                                    initValue: selectedItems[0].name,
-                                })
-                            }}
-                        />
+                        <>
+                            <Button
+                                second
+                                size={1.3}
+                                tooltip={'RENAME'}
+                                icon={<BiRename />}
+                                onKey={{
+                                    key: 'F2',
+                                    prevent: true,
+                                }}
+                                onClick={() => {
+                                    modalForm({
+                                        content: Prompt,
+                                        icon: <BiRename />,
+                                        title: 'FILE NAME',
+                                        todo: (name) => {
+                                            console.log(name)
+                                        },
+                                        initValue: selectedItems[0].name,
+                                    })
+                                }}
+                            />
+                            <Button
+                                second
+                                size={1.3}
+                                tooltip={'PROPERTIES'}
+                                icon={<BiInfoCircle />}
+                                onKey={{
+                                    key: 'i',
+                                    ctrlKey: true,
+                                    prevent: true,
+                                }}
+                                onClick={() => {
+                                    modalForm({
+                                        content: Properties,
+                                        icon: <BiInfoCircle />,
+                                        title: 'PROPERTIES',
+                                        item: selectedItems[0],
+                                        todo: () => {},
+                                    })
+                                }}
+                            />
+                        </>
                     )}
                     {isSelectedOneFile() && (
                         <>
@@ -385,7 +422,14 @@ export const FilesPage = () => {
     const [folders, setFolders] = React.useState([])
     const [data, setData] = React.useState({})
     const [searchValue, setSearchValue] = React.useState('')
+    const [cookies, setCookies] = useCookies()
+    const [list, setList] = React.useState(cookies.filesList === 'true' ? true : false)
     const [reload, setReload] = React.useState(0)
+
+    React.useEffect(()=>{
+        console.log(list)
+        setCookies('filesList', list)
+    }, [list])
 
     React.useEffect(() => {
         data.files &&
@@ -449,6 +493,8 @@ export const FilesPage = () => {
                     files={files}
                     setReload={setReload}
                     setSelectedItems={setSelectedItems}
+                    list={list}
+                    setList={setList}
                 />
             }
         >
@@ -458,6 +504,7 @@ export const FilesPage = () => {
                         <StyledError>Permission Error</StyledError>
                     )}
                     <FolderContent
+                        list={list}
                         selectedItems={selectedItems}
                         setSelectedItems={setSelectedItems}
                         path={path}

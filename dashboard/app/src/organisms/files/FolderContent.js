@@ -8,8 +8,10 @@ import { Loading } from '../../atoms/Loading'
 import { toBoolStr } from '../../utils/utils'
 
 const StyledWrapper = styled.div`
-    display: grid;
-    gap: 5px;
+    display: ${({list})=>list ? 'flex' : 'grid'};
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
     grid-template-columns: repeat(auto-fit, 100px);
     grid-template-rows: repeat(auto-fit, 100px);
     overflow: scroll;
@@ -46,7 +48,7 @@ export const FolderContent = ({
     folders,
     setFolders,
     reload,
-
+    list=false,
     setData,
 }) => {
     const [loading, setLoading] = React.useState(true)
@@ -140,7 +142,7 @@ export const FolderContent = ({
 
     React.useEffect(() => {
         setReloadPos((prev) => prev + 1)
-    }, [folders, files])
+    }, [folders, files, list])
 
     return (
         <>
@@ -156,6 +158,7 @@ export const FolderContent = ({
                 content={toBoolStr([...folders, ...files].length > 0)}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
+                list={toBoolStr(list)}
                 ref={contentRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => {
@@ -168,6 +171,7 @@ export const FolderContent = ({
             >
                 {folders.map((folder) => (
                     <ItemTile
+                        list={list}
                         item={folder}
                         access={folder.access}
                         reload={reloadPos}
@@ -184,6 +188,7 @@ export const FolderContent = ({
                 ))}
                 {files.map((file) => (
                     <ItemTile
+                        list={list}
                         item={file}
                         access={file.access}
                         reload={reloadPos}

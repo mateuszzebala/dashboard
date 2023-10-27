@@ -6,6 +6,8 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { Loading } from '../Loading'
 import { Paginator } from '../Paginator'
+import { Theme } from '../Theme'
+import { useTheme } from '../../utils/hooks'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -43,6 +45,7 @@ const StyledMenu = styled.div`
 
 export const SelectItemModal = ({
     modelName,
+    fieldName,
     multiple,
     setValue,
     value,
@@ -54,28 +57,28 @@ export const SelectItemModal = ({
     const [items, setItems] = React.useState([])
     const [loading, setLoading] = React.useState(true)
     const [tempValue, setTempValue] = React.useState(value)
+    const [queryError, setQueryError] = React.useState(false)
+    const [theme] = useTheme()
 
     React.useEffect(() => {
-        if(value.length > 0 && !value[0].pk){
+        if(value && value.length > 0 && !value[0].pk){
             value.forEach((pk)=>{
                 FETCH(ENDPOINTS.database.item(modelName, pk)).then(data => {
                     setTempValue(prev => prev.map(item => item == pk ? data.data : item))
                 })
             })
         }
-        else{
-            console.log('TERAZ NIE')
-        }
         setTempValue(value)
     }, [value])
 
     React.useEffect(() => {
         FETCH(
-            ENDPOINTS.database.items(modelName, { length: 20, page, query })
+            ENDPOINTS.database.possible_values(modelName, fieldName, { length: 20, page, query })
         ).then((data) => {
             setPages(data.data.pages)
             setItems(data.data.items)
             setLoading(false)
+            setQueryError(data.data.queryError)
         })
     }, [query, page])
 
@@ -86,7 +89,10 @@ export const SelectItemModal = ({
     return (
         <StyledWrapper>
             <StyledMenu>
-                <Input value={query} setValue={setQuery} label={'SEARCH'} />
+                <Theme value={{...theme, primary: queryError ? theme.error : theme.primary}}>
+                    <Input value={query} setValue={setQuery} label={'SEARCH'} />
+                </Theme>
+                
                 <Paginator
                     second
                     minimum
@@ -113,7 +119,7 @@ export const SelectItemModal = ({
                         second={
                             multiple
                                 ? !tempValue.map((i) => i.pk).includes(item.pk)
-                                : value !== item
+                                : value !== null ? value.pk !== item.pk : true
                         }
                         width={'100%'}
                     >

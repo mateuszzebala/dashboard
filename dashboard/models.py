@@ -285,10 +285,14 @@ class Configuration(models.Model):
 
 
 class TestModel(models.Model):
-    is_some = models.BooleanField(null=True)
-    other = models.FileField(upload_to='Media/dashboard/test_model')
-    rel = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, default=None)
-    rel2 = models.ManyToManyField(Configuration)
+    someBool = models.BooleanField(null=True)
+    fileField = models.FileField(upload_to='Media/dashboard/test_model', null=True, default=None)
+    oneToOneRel = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, default=None)
+    manyToManyRel = models.ManyToManyField(Configuration)
+    timeField = models.TimeField(null=True, default=None)
+    
+    def __str__(self):
+        return f'TestModel {self.pk}'
 
 def account_image_path(instance, filename):
     return f'Media/dashboard/auth/account/{filename}'

@@ -51,7 +51,7 @@ export const MainTemplate = ({
     topbarLink,
     padding = 10,
 }) => {
-    const [cookies, setCookies, removeCookies] = useCookies(['leftbarClose'])
+    const [cookies, setCookies, removeCookies] = useCookies()
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
     const [hideSubmenu, setHideSubmenu] = React.useState(cookies.hideSubmenu)
 

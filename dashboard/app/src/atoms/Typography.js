@@ -7,11 +7,11 @@ const StyledWrapper = styled.span`
     }
 `
 
-export const Typography = ({ variant, children }) => {
+export const Typography = ({ variant, children, ...props }) => {
     const Variant = variant || 'span'
     return (
         <StyledWrapper>
-            <Variant>{children}</Variant>
+            <Variant {...props}>{children}</Variant>
         </StyledWrapper>
     )
 }

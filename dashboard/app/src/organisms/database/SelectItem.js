@@ -7,7 +7,7 @@ import { BiSearch } from 'react-icons/bi'
 const StyledInput = styled.div`
     display: inline-flex;
     padding: 10px 15px;
-    border: 3px solid ${({ theme }) => theme.primary};
+    border: 2px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     width: 300px;
     gap: 20px;
@@ -29,19 +29,21 @@ const StyledIcon = styled.div`
     justify-content: center;
 `
 
-export const SelectItem = ({ modelName, multiple, value, setValue }) => {
+export const SelectItem = ({ modelName, fieldName, multiple, value, setValue, ...props }) => {
     const modalForm = useModalForm()
     return (
         <StyledInput
             onClick={() => {
                 modalForm({
                     content: SelectItemModal,
-                    title: `SELECT ${modelName.toUpperCase()}`,
+                    title: 'SELECT',
                     icon: <BiSearch />,
                     modelName,
+                    fieldName,
                     value,
                     multiple,
                     setValue,
+                    ...props
                 })
             }}
         >
@@ -53,7 +55,7 @@ export const SelectItem = ({ modelName, multiple, value, setValue }) => {
                 {!multiple &&
                     (value
                         ? `${modelName} - ${value.str}`
-                        : `SELECT ${modelName.toUpperCase()}`)}
+                        : 'SELECT')}
             </StyledValue>
         </StyledInput>
     )

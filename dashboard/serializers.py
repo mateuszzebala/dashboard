@@ -10,13 +10,13 @@ from pathlib import Path
 def get_field_serializer(value, field_type):
     if field_type == 'DateTimeField':
         return value and {
-            'year': value.year, 'month': value.month, 'day': value.day, 'hour': value.hour, 'minute': value.minute, 'second': value.second
+            'year': value.year, 'month': value.month, 'day': value.day, 'hours': value.hour, 'minutes': value.minute, 'seconds': value.second
         }
     if field_type == 'DateField': return value and {
             'year': value.year, 'month': value.month, 'day': value.day,
         }
     if field_type == 'TimeField': return value and {
-            'hour': value.hour, 'minute': value.minute, 'second': value.second
+            'hours': value.hour, 'minutes': value.minute, 'seconds': value.second
         }
     if field_type == 'DurationField': return value and {
             'days': value.days, 'seconds': value.seconds
@@ -25,6 +25,7 @@ def get_field_serializer(value, field_type):
     return value
 
 def set_field_serializer(value, field_type, field, item):
+   
     if field_type == 'AutoField': 
         return
     if field_type == 'DateTimeField': 
@@ -59,17 +60,21 @@ def set_field_serializer(value, field_type, field, item):
                 path = os.path.join(settings.BASE_DIR, upload_to, os.path.basename(value))
             parent_path = Path(os.path.dirname(path))
             parent_path.mkdir(parents=True, exist_ok=True)
-            shutil.copy(value, path)
+            try:
+                shutil.copy(value, path)
+            except shutil.SameFileError:
+                return
             getattr(item, field.name).name = path
             return
         setattr(item, field.name, value)
         return
     if field_type == 'BooleanField':
-        setattr(item, field.name, False if not value else True)
+        setattr(item, field.name, False if not value == 'true' else True)
         return
     setattr(item, field.name, value)
 
 def set_relation_serialize(value, relation, field, item):
+    if value == 'null': value = None
     if relation == 'one_to_one':
         rel_item = field.related_model.objects.filter(pk=value).first()
         setattr(item, field.name, rel_item)
@@ -80,8 +85,15 @@ def set_relation_serialize(value, relation, field, item):
         return
     if relation == 'many_to_many':
         item.save()
+        try:
+            if value is None:
+                getattr(item, field.name).clear()
+                return
+        except AttributeError:
+            return
         for pk in value.split(','):
-            getattr(item, field.name).add(pk)
+            if pk != 'null':
+                getattr(item, field.name).add(pk)
         return
     setattr(item, field.name, value)
     

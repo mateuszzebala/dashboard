@@ -33,7 +33,7 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                 <Select
                     data={field.params.choices}
                     value={val}
-                    setVal={setVal}
+                    setValue={setVal}
                 />
             </StyledField>
         )
@@ -46,8 +46,8 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                 </Typography>
                 <Input
                     maxLength={field.params.max_length}
-                    value={value}
-                    setVal={setVal}
+                    value={value || ''}
+                    setValue={setVal}
                 />
             </StyledField>
         )

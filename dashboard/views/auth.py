@@ -96,7 +96,7 @@ def profile_picture(request, username):
         image = account.image
         if image:
             return FileResponse(open(image.path, 'rb'))
-    return FileResponse(open('Media/dashboard/auth/account/default.png', 'rb'))
+    return FileResponse(open('Media/dashboard/auth/account/default.jpg', 'rb'))
 
 
 urlpatterns = [

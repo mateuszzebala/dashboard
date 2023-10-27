@@ -6,7 +6,7 @@ import { LINKS } from '../../router/links'
 import { FaLock } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
-    box-shadow: 0 0 8px -5px ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.primary}11;
     border-radius: 10px;
     padding: 5px;
     flex-direction: column;
