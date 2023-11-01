@@ -11,6 +11,12 @@ import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 import { Input } from '../../atoms/Input'
 import { LuCamera, LuSave } from 'react-icons/lu'
+import { IoMdLogOut } from 'react-icons/io'
+import { FiLogOut } from 'react-icons/fi'
+import { Button } from '../../atoms/Button'
+import { MdBlock } from 'react-icons/md'
+import { useMessage } from '../../utils/messages'
+import { Confirm } from '../../atoms/modalforms/Confirm'
 
 const StyledProfileImage = styled.div`
     width: 200px;
@@ -94,6 +100,14 @@ export const UserPage = () => {
     const modalForm = useModalForm()
     const [imageData, setImageData] = React.useState(null)
     const [reload, setReload] = React.useState(0)
+    const [active, setActive] = React.useState(null)
+    const {newMessage} = useMessage()
+
+    React.useEffect(()=>{
+        FETCH(ENDPOINTS.users.active(), {id}).then(data => {
+            setActive(data.data.active)
+        })
+    }, [id])
 
     const handleSave = () => {
         FETCH(ENDPOINTS.users.edit(id), {...data, profileImage}).then(data => {
@@ -119,7 +133,30 @@ export const UserPage = () => {
     }, [id, reload])
 
     return (
-        <MainTemplate app={APPS.users} title={accountInfo.username}>
+        <MainTemplate app={APPS.users} title={accountInfo.username} submenuChildren={<>
+            <Button icon={<FiLogOut/>} subContent={'LOGOUT'} second size={1.3} onClick={()=>{
+                FETCH(ENDPOINTS.users.logout(), {id}).then(()=>{
+                    newMessage({
+                        text: 'LOGOUT SUCCESSFUL',
+                        success: true
+                    })
+                })
+            }}/>
+            <Button icon={<MdBlock />} subContent={'ACTIVE'} second size={1.3} onClick={()=>{
+                modalForm({
+                    content: Confirm,
+                    title: 'ACTIVE',
+                    text: active ? 'is_active = false' : 'is_active = true',
+                    icon: <MdBlock/>,
+                    todo: () => {
+                        FETCH(ENDPOINTS.users.active(), {id, active: !active}).then(data => {
+                            setActive(data.data.active)
+
+                        })
+                    }
+                })
+            }}/>
+        </>}>
             {accountInfo.username && (
                 <StyledWrapper>
                     {(accountInfo.first_name || accountInfo.last_name) && <StyledHeader>{accountInfo.first_name} {accountInfo.last_name}</StyledHeader>}

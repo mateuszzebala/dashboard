@@ -1,6 +1,6 @@
 from django.urls import path
 from django.http import JsonResponse
-from .auth import is_superuser
+from .auth import dashboard_access
 import subprocess
 from dashboard.models import Configuration
 import os
@@ -9,7 +9,7 @@ import json
 from PIL import Image, ImageEnhance
 
 
-@is_superuser
+@dashboard_access
 def save_file(request):
     path = request.GET.get('path')
     content = request.POST.get('content').encode()
@@ -17,7 +17,7 @@ def save_file(request):
         file.write(content)
     return JsonResponse({})
 
-@is_superuser
+@dashboard_access
 def run_command(request):
     path = request.GET.get('path')
     command = request.POST.get('command')
@@ -32,7 +32,7 @@ def run_command(request):
     })
 
 
-@is_superuser
+@dashboard_access
 def file_json(request):
     path = request.GET.get('path')
     return JsonResponse({
@@ -43,17 +43,39 @@ def file_json(request):
         'type': get_type_of_file(path.split(os.sep)[-1])
     })
 
-@is_superuser
+@dashboard_access
 def save_image(request):
     path = request.GET.get('path')
     props = json.loads(request.POST.get('props'))
     return JsonResponse({})
 
-        
+@dashboard_access
+def liked_and_last(request):
+    with open("configuration/liked&last.json", "r") as json_file:
+        configuration = json.load(json_file)
+
+    action = request.POST.get('action')
+    if action == 'ADD':
+        what = request.POST.get('what')
+        if what == 'like':
+            configuration['likes'].append(request.POST.get('path'))
+        if what == 'last':
+            configuration['last'] = [request.POST.get('path'), *configuration['last']]
+    if action == 'REMOVE':
+        what = request.POST.get('what')
+        if what == 'like':
+            configuration['likes'] = list(filter(lambda path: path != request.POST.get('path'), configuration['likes']))
+        if what == 'last':
+            configuration['last'] = list(filter(lambda path: path != request.POST.get('path'), configuration['last']))
+
+    with open("configuration/liked&last.json", "w") as json_file:
+        json.dump(configuration, json_file, indent=4)
+    return JsonResponse(configuration)
 
 urlpatterns = [
     path('json/', file_json), # GET INTO ABOUT FILE IN JSON
     path('save/run/', run_command), # RUN COMMAND IN FILE LOCATION
     path('save/text/', save_file), # SAVE FILE
+    path('liked&last/', liked_and_last), # SAVE FILE
     path('save/image/', save_image), # SAVE IMAGE
 ]

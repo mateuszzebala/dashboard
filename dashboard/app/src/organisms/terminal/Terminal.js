@@ -19,10 +19,12 @@ const StyledWrapper = styled.div`
     height: 100%;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
+    font-weight: bold;
 `
 
 const StyledTerminal = styled.div`
     font-family: 'Fira Mono', monospace;
+  font-weight: bold;
 `
 
 const StyledPrompt = styled.div`
@@ -34,6 +36,8 @@ const StyledInput = styled.input`
     color: ${({ theme }) => theme.primary};
     border: 0;
     font-size: 18px;
+    font-family: 'Fira Mono', monospace;
+    font-weight: bold;
     padding: 0 5px;
     &:focus {
         outline: none;
@@ -46,24 +50,27 @@ const StyledInput = styled.input`
 const StyledPre = styled.pre`
     display: inline;
     font-family: 'Fira Mono', monospace;
+    font-weight: bold;
 `
 
 const StyledErrors = styled.pre`
     display: inline;
     color: ${({ theme }) => theme.error};
     font-family: 'Fira Mono', monospace;
+    font-weight: bold;
 `
+
 
 export const Terminal = ({ path, setPath }) => {
     const [waiting, setWaiting] = React.useState(false)
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const modalForm = useModalForm()
     const [folderContent, setFolderContent] = React.useState('')
     const lastInputRef = React.useRef()
     const terminalRef = React.useRef()
     const [commandHistory, setCommandHistory] = React.useState([])
     const [historyCounter, setHistoryCounter] = React.useState(-1)
-
+    const [os, setOs] = React.useState('Linux')
     const [prompts, setPrompts] = React.useState([])
 
     const focusLastInput = () => {
@@ -82,7 +89,7 @@ export const Terminal = ({ path, setPath }) => {
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.terminal.init(), {
-            path: searchParams.get('path') || 'null',
+            path: searchParams.get('path') || null,
         }).then((data) => {
             setPath(data.data.path)
             setFolderContent(data.data.folder_content)
@@ -94,8 +101,19 @@ export const Terminal = ({ path, setPath }) => {
                     sent: false,
                 },
             ])
+            setOs(data.data.os)
         })
-    }, [searchParams])
+    }, [])
+
+
+    React.useEffect(()=>{
+        setSearchParams({path})
+        path && FETCH(ENDPOINTS.terminal.init(), {
+            path
+        }).then((data) => {
+            setFolderContent(data.data.folder_content)
+        })
+    }, [path])
 
     const handleClear = () => {
         setPrompts([
@@ -120,11 +138,7 @@ export const Terminal = ({ path, setPath }) => {
             newPrompts[index].sent = true
             return newPrompts
         })
-        setCommandHistory((prev) => {
-            const newHistory = [...prev]
-            newHistory.push(prompt)
-            return newHistory
-        })
+        setCommandHistory((prev) => [prompt, ...prev])
         setWaiting(true)
         FETCH(ENDPOINTS.terminal.command(), {
             command: e.target.value,
@@ -181,15 +195,47 @@ export const Terminal = ({ path, setPath }) => {
     }
 
     const handleArrowButtonDown = (c, index, e) => {
+        e.preventDefault()
         setHistoryCounter((prev) => {
-            if (prev + c < 0 && (prev + c) * -1 <= commandHistory.length) {
-                e.target.value =
-                    commandHistory[commandHistory.length + prev + c].value
-                return prev + c
-            }
-            e.target.value = commandHistory[commandHistory.length + prev].value
-            return prev
+            let newCounter = prev + c
+            if (newCounter < 0) newCounter = 0
+            if (newCounter > commandHistory.length - 1) newCounter = commandHistory.length - 1
+            return newCounter
         })
+    }
+
+    React.useEffect(()=>{
+        if(lastInputRef.current && commandHistory[historyCounter]) lastInputRef.current.value = commandHistory[historyCounter].value
+    }, [historyCounter])
+
+    React.useEffect(()=>{
+        console.log(commandHistory)
+    }, [commandHistory])
+
+    const PromptInput = ({index}) => {
+        return (
+            <StyledInput
+                ref={lastInputRef}
+                autoFocus
+                value={prompts[index].value || ''}
+                disabled={prompts[index].sent}
+                onKeyDown={(e) => {
+                    e.key === 'Enter' &&
+                        handleEnterDown(prompts[index], e)
+                    e.key === 'Tab' && handleTabDown(index, e)
+                    e.key === 'ArrowDown' &&
+                        handleArrowButtonDown(-1, index, e)
+                    e.key === 'ArrowUp' &&
+                        handleArrowButtonDown(1, index, e)
+                }}
+                onChange={(e) => {
+                    handleInputChange(index, e)
+                }}
+                onInput={(e) => {
+                    handleInputChange(index, e)
+                }}
+            />
+        )
     }
 
     return (
@@ -212,6 +258,7 @@ export const Terminal = ({ path, setPath }) => {
                         label: 'BOOKMARK NAME',
                         title: 'ADD BOOKMARK',
                         icon: <BiBookmark />,
+                        setButton: 'ADD'
                     })
                 }}
             />
@@ -225,7 +272,7 @@ export const Terminal = ({ path, setPath }) => {
                 <FloatingActionButton
                     second
                     size={1.3}
-                    right={140}
+                    right={260}
                     icon={<FaStop />}
                     onClick={handleStopProcess}
                 />
@@ -234,31 +281,18 @@ export const Terminal = ({ path, setPath }) => {
             <StyledTerminal ref={terminalRef}>
                 {Object.keys(prompts).map((index) => (
                     <StyledPrompt key={index}>
-                        <div>{prompts[index].path}</div>
-                        <div>
-                            $
-                            <StyledInput
-                                ref={lastInputRef}
-                                autoFocus
-                                value={prompts[index].value || ''}
-                                disabled={prompts[index].sent}
-                                onKeyDown={(e) => {
-                                    e.key === 'Enter' &&
-                                        handleEnterDown(prompts[index], e)
-                                    e.key === 'Tab' && handleTabDown(index, e)
-                                    e.key === 'ArrowDown' &&
-                                        handleArrowButtonDown(1, index, e)
-                                    e.key === 'ArrowUp' &&
-                                        handleArrowButtonDown(-1, index, e)
-                                }}
-                                onChange={(e) => {
-                                    handleInputChange(index, e)
-                                }}
-                                onInput={(e) => {
-                                    handleInputChange(index, e)
-                                }}
-                            />
-                        </div>
+                        {os === 'Linux' || os === 'Darwin' && (
+                            <>
+                                <div>{prompts[index].path}</div>
+                                <div>
+                                    $
+                                    <PromptInput index={index}/>
+                                </div>
+                            </>
+                        )}
+                        {os === 'Windows' && (
+                            <div>{prompts[index].path}&gt;<PromptInput index={index}/></div>
+                        )}
                         {prompts[index].output ? (
                             <>
                                 <br />

@@ -55,6 +55,17 @@ const StyledLoading = styled.span`
     animation: rotate 1s linear infinite;
 `
 
+const StyledSubContent = styled.span`
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    font-weight: 600;
+    transform: translateX(-50%);
+    font-size: ${({size})=>size * 6}px;
+    color: ${({theme, second})=> second ? theme.primary : theme.secondary};
+    white-space: nowrap;
+`
+
 const StyledChildren = styled.span`
     display: inline-flex;
     align-items: center;
@@ -75,6 +86,7 @@ export const Button = ({
     circle,
     second,
     onKey,
+    subContent='',
     ...props
 }) => {
     const navigate = useNavigate()
@@ -107,6 +119,9 @@ export const Button = ({
                         <VscLoading />
                     </StyledLoading>
                 )}
+                <StyledSubContent size={size} second={toBoolStr(second)}>
+                    {subContent}
+                </StyledSubContent>
             </StyledWrapper>
         </Tooltip>
     )

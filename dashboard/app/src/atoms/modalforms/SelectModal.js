@@ -8,7 +8,6 @@ const StyledDropdown = styled.div`
     max-height: 300px;
     overflow: scroll;
     align-items: stretch;
-    width: 200px;
     padding: 5px;
     gap: 5px;
     &::-webkit-scrollbar {
@@ -30,17 +29,17 @@ export const SelectModal = ({ data, todo, setOpen, value }) => {
             >
                 -
             </Button>
-            {Object.keys(data).map((name) => (
+            {Object.keys(data).map((id) => (
                 <Button
                     width={'100%'}
-                    key={name}
-                    second={value !== name}
+                    key={id}
+                    second={value != id}
                     onClick={() => {
-                        todo(name)
+                        todo(id)
                         setOpen(false)
                     }}
                 >
-                    {data[name]}
+                    {data[id]}
                 </Button>
             ))}
         </StyledDropdown>

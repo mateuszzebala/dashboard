@@ -54,10 +54,10 @@ def me(request):
         
         })
 
-def is_superuser(fnc):
+def dashboard_access(fnc):
     def inner(*args, **kwargs):
         request = args[0]
-        if request.user.is_superuser:
+        if request.user.is_superuser or request.user.groups.filter(name='dashboard_admin').exists():
             return fnc(*args, **kwargs)
         else:
             return JsonResponse({
@@ -66,7 +66,7 @@ def is_superuser(fnc):
 
     return inner
 
-@is_superuser
+@dashboard_access
 def generate_auth_qrcode(request):
     token = str(uuid4())
     fillColor = request.GET.get('fillColor') or 'black'

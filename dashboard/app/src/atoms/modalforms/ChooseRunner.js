@@ -11,6 +11,9 @@ const StyledButtons = styled.div`
     flex-direction: row;
     gap: 20px;
     padding: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 `
 
 const StyledColumn = styled.div`

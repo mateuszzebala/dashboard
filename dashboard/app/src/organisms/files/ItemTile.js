@@ -30,18 +30,18 @@ const StyledWrapper = styled.div`
     flex-direction: ${({list})=>list ? 'row' : 'column'};
     gap: 10px;
     padding: 10px;
+    opacity: ${({dragging, selected, isFile}) => (dragging && (selected || isFile)) ? '40%' : 1};
     background-color: ${({ theme }) => theme.primary}11;
     color: ${({ theme }) => theme.primary};
     border-radius: 3px;
     height: ${({list})=> list ? '50px' : '100px'};
-    border: 3px solid ${({ theme, selected }) => (selected ? theme.primary : 'transparent')};
+    border: ${({selected, isFile, dragging})=>dragging ? (!isFile && !selected) ? '5px' : '3px' : '3px'} solid ${({ theme, selected, toDrop, dragging }) => toDrop ? theme.accent : ((selected || dragging) ? theme.primary : 'transparent')};
     width: ${({list})=>list ? '100%' : '100px'};
     font-size: 15px;
     cursor: pointer;
     user-select: none;
     position: relative;
-    transition: transform 0.3s, background-color 0.3s;
-
+    transition: transform 0.3s, background-color 0.3s, border-color 0.3s, border-width 0.2s;                                                                                                                    
 `
 
 const StyledHoverWrapper = styled.div`
@@ -99,14 +99,18 @@ export const ItemTile = ({
     item,
     setSelectedItems,
     setPos,
+    toDrop,
     filetype,
     hidden,
     list,
+    dragging,
+    setDragging,
     ...props
 }) => {
     const wrapperRef = React.useRef()
     const modalForm = useModalForm()
     const navigate = useNavigate()
+    const [moveDragging, setMoveDragging] = React.useState(false)
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
         setPos(bcr)
@@ -118,9 +122,29 @@ export const ItemTile = ({
                 <StyledWrapper
                     hidden={toBoolStr(hidden)}
                     ref={wrapperRef}
+                    dragging={toBoolStr(dragging)}
                     selected={toBoolStr(selected)}
                     list={toBoolStr(list)}
+                    toDrop={toBoolStr(toDrop)}
+                    isFile={toBoolStr(isFile)}
                     {...props}
+                    onMouseMove={(e)=>{
+                        const movement = Math.abs(e.movementX) + Math.abs(e.movementY)
+                        if(moveDragging && movement > 5) setDragging(true)
+                    }}
+                    onMouseUp={()=>{
+                        setMoveDragging(false)
+                    }}
+                    onMouseLeave={()=>{
+                        setMoveDragging(false)
+                    }}
+                    onMouseDown={(e)=>{
+                        if(selected && !e.shiftKey) setMoveDragging(true)
+                        else if(!selected && !e.shiftKey) {
+                            setSelectedItems([item])
+                            setMoveDragging(true)
+                        }
+                    }}
                     onClick={(e) => {
                         !isFile &&
                             !e.shiftKey &&

@@ -8,6 +8,7 @@ export const range = (start, end) => {
     return Array.from({ length: end - start + 1 }, (_, i) => i)
 }
 export const datetimeToString = (datetime) => {
+    console.log(datetime)
     let { year, month, day, hours, minutes, seconds } = datetime
     if (month < 10) month = '0' + month
     if (day < 10) day = '0' + day
@@ -98,3 +99,13 @@ export const getCursorByPosition = (top, left) => {
     }
     return cursors[top + '-' + left]
 }
+
+export const downloadURL = (url, filename) => {
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', filename)
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+}
+

@@ -1,15 +1,14 @@
 import React from 'react'
-import { BiSolidGrid, BiUserCircle } from 'react-icons/bi'
+import { BiSolidGrid } from 'react-icons/bi'
 import {
     AiOutlineClockCircle,
     AiOutlineInfoCircle,
-    AiOutlineMessage,
+    AiOutlineUser,
 } from 'react-icons/ai'
-import { FiSettings } from 'react-icons/fi'
+import { FiLogOut, FiSettings } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { LINKS } from '../router/links'
-import { IoMdLogOut } from 'react-icons/io'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
@@ -17,7 +16,7 @@ import { useGlobalKey, useModalForm, useTheme, useUser } from '../utils/hooks'
 import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
 import { FaQrcode } from 'react-icons/fa'
 import { LoadingImage } from '../atoms/LoadingImage'
-import { BsArrowBarUp } from 'react-icons/bs'
+import { BsArrowBarUp, BsQrCode } from 'react-icons/bs'
 import { ServerClock } from '../atoms/ServerClock'
 import { Tooltip } from '../atoms/Tooltip'
 
@@ -30,7 +29,7 @@ const StyledIcon = styled.span`
     text-decoration: none !important;
     color: ${({ theme }) => theme.primary};
     transition: color 0.2s, background-color 0.2s, transform 0.3s;
-    padding: 5px;
+    padding: 7px;
     border-radius: 20px;
     transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
     &:hover {
@@ -66,7 +65,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                 <Link to={LINKS.users.user(user.id)}>
                     <StyledIcon>
                         {user.username}
-                        <BiUserCircle />
+                        <AiOutlineUser />
                     </StyledIcon>
                 </Link>
             </Tooltip>
@@ -83,13 +82,6 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                 <Link to={LINKS.settings.index()}>
                     <StyledIcon>
                         <FiSettings />
-                    </StyledIcon>
-                </Link>
-            </Tooltip>
-            <Tooltip text="MESSAGES">
-                <Link to={LINKS.messages.index()}>
-                    <StyledIcon>
-                        <AiOutlineMessage />
                     </StyledIcon>
                 </Link>
             </Tooltip>
@@ -113,7 +105,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                         })
                     }}
                 >
-                    <FaQrcode />
+                    <BsQrCode />
                 </StyledIcon>
             </Tooltip>
             <Tooltip text={`${hideSubmenu ? 'SHOW' : 'HIDE'} SUBMENU`}>
@@ -162,7 +154,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                         })
                     }}
                 >
-                    <IoMdLogOut />
+                    <FiLogOut />
                 </StyledIcon>
             </Tooltip>
         </StyledWrapper>

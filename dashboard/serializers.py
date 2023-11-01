@@ -24,29 +24,42 @@ def get_field_serializer(value, field_type):
     if field_type == 'FileField': return None if not value else value.path
     return value
 
+
 def set_field_serializer(value, field_type, field, item):
    
     if field_type == 'AutoField': 
         return
     if field_type == 'DateTimeField': 
-        value = json.loads(value)
-        value = value and datetime.datetime(value['year'], value['month'], value['day'], value['hours'], value['minutes'], value['seconds'])
-        setattr(item, field.name, value)
+        try:
+            value = json.loads(value)
+            value = value and datetime.datetime(value['year'], value['month'], value['day'], value['hours'], value['minutes'], value['seconds'])
+            setattr(item, field.name, value)
+        except:
+            field.null and setattr(item, field.name, None)
         return
-    if field_type == 'DateField': 
-        value = json.loads(value)
-        value = value and datetime.date(value['year'], value['month'], value['day'])
-        setattr(item, field.name, value)
+    if field_type == 'DateField':
+        try:
+            value = json.loads(value)
+            value = value and datetime.date(value['year'], value['month'], value['day'])
+            setattr(item, field.name, value)
+        except:
+            field.null and setattr(item, field.name, None)
         return
     if field_type == 'TimeField':
-        value = json.loads(value)
-        value = value and datetime.time(value['hours'], value['minutes'], value['seconds'])
-        setattr(item, field.name, value)
+        try:
+            value = json.loads(value)
+            value = value and datetime.time(value['hours'], value['minutes'], value['seconds'])
+            setattr(item, field.name, value)
+        except:
+            field.null and setattr(item, field.name, None)
         return
-    if field_type == 'DurationField': 
-        value = json.loads(value)
-        value = value and datetime.timedelta(value['days'], value['seconds'])
-        setattr(item, field.name, value)
+    if field_type == 'DurationField':
+        try:
+            value = json.loads(value)
+            value = value and datetime.timedelta(value['days'], value['seconds'])
+            setattr(item, field.name, value)
+        except:
+            field.null and setattr(item, field.name, None)
         return
     if field_type == 'JSONField':
         setattr(item, field.name, json.loads(value))
@@ -85,15 +98,15 @@ def set_relation_serialize(value, relation, field, item):
         return
     if relation == 'many_to_many':
         item.save()
+
         try:
             if value is None:
                 getattr(item, field.name).clear()
                 return
-        except AttributeError:
-            return
-        for pk in value.split(','):
-            if pk != 'null':
-                getattr(item, field.name).add(pk)
+            for pk in value.split(','):
+                if pk != 'null' and pk != '':
+                    getattr(item, field.name).add(pk)
+        except AttributeError: return
         return
     setattr(item, field.name, value)
     

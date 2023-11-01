@@ -3,9 +3,9 @@ from django.http import JsonResponse
 from dashboard.configuration.config import SERVER_CONFIG, save_configuration
 from django.conf import settings
 from dashboard.models import Log
-from .auth import is_superuser
+from .auth import dashboard_access
 
-@is_superuser
+@dashboard_access
 def manage_server_configuration_view(request):
     if request.POST.get('method') == 'PATCH':
         enable_server = request.POST.get('enable_server') == "true"
@@ -25,7 +25,7 @@ def manage_server_configuration_view(request):
         save_configuration()
     return JsonResponse(dict((name, bool(value)) for name, value in SERVER_CONFIG.CONFIGURATION.items()))
 
-@is_superuser
+@dashboard_access
 def manage_allowed_hosts_view(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.ALLOWED_HOSTS = request.POST.get('hosts').split(',')
@@ -33,7 +33,7 @@ def manage_allowed_hosts_view(request):
         save_configuration()
     return JsonResponse({'hosts':SERVER_CONFIG.GET_ALLOWED_HOSTS()})
 
-@is_superuser
+@dashboard_access
 def manage_cors_allowed_origins_view(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.CORS_ALLOWED_ORIGINS = request.POST.get('hosts').split(',')
@@ -41,7 +41,7 @@ def manage_cors_allowed_origins_view(request):
         save_configuration()
     return JsonResponse({'hosts':SERVER_CONFIG.CORS_ALLOWED_ORIGINS})
 
-@is_superuser
+@dashboard_access
 def manage_csrf_trusted_origins_view(request):
     if request.POST.get('method') == 'PATCH':
         SERVER_CONFIG.CSRF_TRUSTED_ORIGINS = request.POST.get('hosts').split(',')
@@ -49,7 +49,7 @@ def manage_csrf_trusted_origins_view(request):
         save_configuration()
     return JsonResponse({'hosts':SERVER_CONFIG.CSRF_TRUSTED_ORIGINS})
 
-@is_superuser
+@dashboard_access
 def get_last_logs_view(request):
     last_logs = list(Log.objects.all().order_by('datetime').reverse())[0:50]
     return JsonResponse({
@@ -60,9 +60,9 @@ def get_last_logs_view(request):
                     'year': log.datetime.year, 
                     'month': log.datetime.month, 
                     'day': log.datetime.day,
-                    'hour': log.datetime.hour,
-                    'minute': log.datetime.minute,
-                    'second': log.datetime.second
+                    'hours': log.datetime.hour,
+                    'minutes': log.datetime.minute,
+                    'seconds': log.datetime.second
                 },
                 'method': log.method,
                 'path': log.path,

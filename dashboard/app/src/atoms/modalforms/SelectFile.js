@@ -8,43 +8,51 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
 import { Input } from '../Input'
+import { centerEllipsis } from '../../utils/utils'
 
-const StyledContent = styled.div`
+export const StyledPath = styled.span`
+    font-size: 20px;
+`
+
+export const StyledContent = styled.div`
     display: inline-flex;
     flex-direction: column;
-
-    gap: 10px;
-    padding: 10px 10px;
+    width: 100%;
+    gap: 8px;
+    padding: 5px 5px;
     overflow-y: scroll;
-
+    align-items: center;
     overflow-x: hidden;
     height: 100%;
 `
-const StyledItem = styled.div`
+export const StyledItem = styled.div`
     display: flex;
-    font-size: 20px;
-    padding: 10px;
+    padding: 13px 15px;
     cursor: pointer;
     align-items: center;
     gap: 20px;
-    border-radius: 0 5px 5px 0;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 300;
     max-width: 600px;
-    background-color: ${({ theme }) => theme.secondary};
-    color: ${({ theme }) => theme.primary};
-    transition: transform 0.3s ease;
-    &:hover {
-        transform: translateX(10px);
+    background-color: ${({ theme, selected }) => selected ? theme.primary : theme.primary + '22'};
+    color: ${({ theme, selected }) => selected ? theme.secondary : theme.primary};
+    outline: ${({ selected }) => selected ? 4 : 0}px solid ${({ theme, selected }) => selected ? theme.primary + '88' : theme.primary + '22'};
+    transition: transform 0.3s ease, color 0.2s, background-color 0.2s, outline-width 0.2s;
+    &:hover{
+        outline-width: 4px;
     }
 `
 
-const StyledName = styled.span`
+export const StyledName = styled.span`
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 80%;
     overflow: hidden;
 `
 
-const StyledMenu = styled.div`
+export const StyledMenu = styled.div`
     display: flex;
     overflow: scroll;
     gap: 10px;
@@ -56,9 +64,10 @@ const StyledMenu = styled.div`
     }
 `
 
-const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     width: min(600px, 95vw);
     height: min(600px, 95vh);
@@ -127,6 +136,7 @@ export const SelectFile = ({ todo, startPath, setOpen }) => {
                         setValue={setSearch}
                     />
                 </StyledMenu>
+                <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
                 <StyledContent>
                     {folders
                         .filter((folder) =>

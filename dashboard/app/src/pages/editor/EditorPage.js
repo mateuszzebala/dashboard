@@ -16,6 +16,7 @@ import { Button } from '../../atoms/Button'
 import { Loading } from '../../atoms/Loading'
 import { SelectFile } from '../../atoms/modalforms/SelectFile'
 import { BsFileBreak, BsFolder, BsFolder2Open } from 'react-icons/bs'
+import { centerEllipsis } from '../../utils/utils'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -52,9 +53,7 @@ const StyledFile = styled.div`
     border-radius: 0 5px 5px 0;
     border-left: 3px solid ${({ theme }) => theme.primary};
     transition: transform 0.3s;
-    &:hover {
-        transform: scale(0.95);
-    }
+
 `
 const StyledTitle = styled.h1`
     display: inline-flex;
@@ -119,7 +118,10 @@ export const EditorPage = () => {
             submenuChildren={
                 <Button
                     second
-                    size={1.1}
+                    size={1.3}
+                    subContent='OPEN'
+                    tooltip={'OPEN FILE'}
+                    icon={<BsFolder2Open /> }
                     onKey={{
                         key: 'o',
                         prevent: true,
@@ -144,9 +146,7 @@ export const EditorPage = () => {
                             },
                         })
                     }}
-                >
-                    <BsFolder2Open /> OPEN
-                </Button>
+                />
             }
         >
             <StyledWrapper>
@@ -176,7 +176,7 @@ export const EditorPage = () => {
                                 }}
                                 key={file.path}
                             >
-                                {getIconByFileType(file.type)} {file.filename}
+                                {getIconByFileType(file.type)} {centerEllipsis(file.filename, 30)}
                             </StyledFile>
                         ))}
                     </StyledFiles>

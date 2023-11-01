@@ -16,13 +16,17 @@ const StyledType = styled.span`
 `
 
 export const CharFieldInput = ({ field, onChange, value }) => {
-    const [val, setVal] = React.useState(value || '')
+    const [val, setVal] = React.useState(value ? (field.params.choices && value) ? field.params.choices.indexOf(value) : value : null)
 
     React.useEffect(() => {
-        val && onChange(val)
-        !val && onChange(null)
+        if(field.params.choices){
+            val && onChange(field.params.choices[val])
+        }
+        else{
+            val && onChange(val)
+        }
     }, [val])
-
+    
     if (field.params.choices) {
         return (
             <StyledField>
@@ -31,9 +35,12 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                     <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Select
+                    emptyName={`Select ${field.name}`}
                     data={field.params.choices}
                     value={val}
-                    setValue={setVal}
+                    setValue={(newValue)=>{
+                        setVal(newValue)
+                    }}
                 />
             </StyledField>
         )
@@ -46,7 +53,7 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                 </Typography>
                 <Input
                     maxLength={field.params.max_length}
-                    value={value || ''}
+                    value={val || ''}
                     setValue={setVal}
                 />
             </StyledField>

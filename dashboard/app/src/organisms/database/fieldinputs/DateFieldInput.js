@@ -37,16 +37,15 @@ export const DateFieldInput = ({ field, onChange, value: val }) => {
             return
         }
         const {year, month, day} = val
+        console.log(val)
         onChange(JSON.stringify(val))
         const datetime = new Date(year, month, day, 0, 0, 0)
         setValue(date.format(datetime, 'YYYY-MM-DD'))
-        
-    }, [val])
+    }, [])
 
     const handleOnChange = (value) => {
         if(!value) {
             setValue(null)
-            console.log('TAK JEST NULLEM')
             return
         }
         setValue(value)

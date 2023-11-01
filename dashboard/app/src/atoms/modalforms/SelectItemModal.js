@@ -50,6 +50,7 @@ export const SelectItemModal = ({
     setValue,
     value,
     setOpen,
+    parentPK,
 }) => {
     const [query, setQuery] = React.useState('')
     const [page, setPage] = React.useState(0)
@@ -61,14 +62,14 @@ export const SelectItemModal = ({
     const [theme] = useTheme()
 
     React.useEffect(() => {
-        if(value && value.length > 0 && !value[0].pk){
-            value.forEach((pk)=>{
-                FETCH(ENDPOINTS.database.item(modelName, pk)).then(data => {
-                    setTempValue(prev => prev.map(item => item == pk ? data.data : item))
-                })
+        if(parentPK){
+            FETCH(ENDPOINTS.database.relation_value(modelName, fieldName, parentPK)).then(data => {
+                setTempValue(data.data.value)
             })
         }
-        setTempValue(value)
+        else{
+            setTempValue(value)
+        }
     }, [value])
 
     React.useEffect(() => {
@@ -119,7 +120,7 @@ export const SelectItemModal = ({
                         second={
                             multiple
                                 ? !tempValue.map((i) => i.pk).includes(item.pk)
-                                : value !== null ? value.pk !== item.pk : true
+                                : (value && item) ? value.pk !== item.pk : true
                         }
                         width={'100%'}
                     >

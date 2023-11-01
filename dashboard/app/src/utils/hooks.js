@@ -63,11 +63,9 @@ export const ModalFormContext = React.createContext([])
 export const useModalForm = () => {
     const setModalForm = React.useContext(ModalFormContext)[1]
 
-    const ask = (form) => {
+    return (form) => {
         setModalForm(form)
     }
-
-    return ask
 }
 
 export const UserContext = React.createContext({})
@@ -120,4 +118,18 @@ export const useGlobalKey = (callback, key, enable = true) => {
             document.removeEventListener('keydown', handleKeyDown)
         }
     }, [key, todo])
+}
+
+
+export const LoadingContext = React.createContext([])
+
+export const useLoading = () => {
+    const setLoading = React.useContext(LoadingContext)[1]
+    return (obj) => {
+        if (obj.show) {
+            setLoading(obj)
+        } else {
+            setLoading({ show: false })
+        }
+    }
 }

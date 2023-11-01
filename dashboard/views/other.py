@@ -4,28 +4,28 @@ from dashboard.models import Configuration
 from dashboard.utils import Config
 import json
 import datetime, time
-from .auth import is_superuser
+from .auth import dashboard_access
 
-@is_superuser
+@dashboard_access
 def set_config(request): 
     name = request.GET.get('name')
     value = json.loads(request.POST.get('value'))
     Config.set(name, value)
     return JsonResponse({})
 
-@is_superuser
+@dashboard_access
 def get_config(request): 
     name = request.GET.get('name')
     return JsonResponse({
         'value': Config.get(name)
     })
 
-@is_superuser
+@dashboard_access
 def config(request):
     configs = Configuration.objects.all()
     return JsonResponse(dict((conf.name, conf.value) for conf in configs))
 
-@is_superuser
+@dashboard_access
 def get_time(request): 
     now = datetime.datetime.now()
     return JsonResponse({

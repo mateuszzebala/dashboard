@@ -55,7 +55,7 @@ export const DatabasePatchItemPage = () => {
             (field) => values[field] === null && !nullable[field]
         )
         setNullableErrors(nullableErrorFields)
-        console.log(values)
+        console.log(nullableErrorFields)
         nullableErrorFields.length === 0 &&
             FETCH(ENDPOINTS.database.edit(modelName, pk), values).then((data) => {
                 navigate(LINKS.database.item(modelName, data.data.pk))
@@ -78,7 +78,7 @@ export const DatabasePatchItemPage = () => {
                             ...field,
                         },
                     ]
-                }, [])
+                }, []).filter(field => field.params.editable)
             )
             setRelations(
                 Object.keys(data.data.fields).reduce((fieldsArray, key) => {
@@ -97,7 +97,7 @@ export const DatabasePatchItemPage = () => {
                             ...field,
                         },
                     ]
-                }, [])
+                }, []).filter(field => field.params.editable)
             )
             FETCH(ENDPOINTS.database.item(modelName, pk)).then(data => {
                 setValues({...data.data.fields, ...data.data.relations})
@@ -128,6 +128,7 @@ export const DatabasePatchItemPage = () => {
                             modelName={modelName}
                             fieldName={relation.name}
                             type={relation.relation.type}
+                            parentPK={pk}
                         />
                         {nullableErrors.includes(relation.name) && <StyledError>This field can not be null!</StyledError>}
                     </StyledField>

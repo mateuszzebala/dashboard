@@ -10,6 +10,7 @@ const StyledInput = styled.div`
     border: 2px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     width: 300px;
+    background-color: ${({ theme }) => theme.secondary};
     gap: 20px;
     font-size: 18px;
     align-items: center;

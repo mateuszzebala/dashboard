@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useModalForm } from '../utils/hooks'
 import { SelectModal } from './modalforms/SelectModal'
 import { BiSelectMultiple } from 'react-icons/bi'
+import { Button } from './Button'
 
 const StyledValue = styled.div`
     display: flex;
@@ -23,7 +24,6 @@ const StyledDropdownIcon = styled.button`
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.3s;
-    background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     transition: background-color 0.3s, color 0.3s;
     &:hover {
@@ -36,7 +36,8 @@ const StyledWrapper = styled.div`
     display: inline-flex;
     flex-direction: row;
     width: 300px;
-    border: 3px solid ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.secondary};
+    border: 2px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     position: relative;
 `
@@ -46,29 +47,36 @@ export const Select = ({
     value = null,
     setValue,
     emptyName = 'SELECT',
+    asButton,
+    ...props
 }) => {
     const modalForm = useModalForm()
+    const handleOnClick = () => {
+        modalForm({
+            content: SelectModal,
+            title: emptyName,
+            icon: props.icon ? props.icon : <BiSelectMultiple />,
+            data: data,
+            value,
+            todo: (val) => {
+                setValue(val)
+            },
+        })
+    }
+
+    if(asButton){
+        return <Button {...props} onClick={handleOnClick}>{props.children}</Button>
+    }
 
     return (
         <StyledWrapper
-            onClick={() => {
-                modalForm({
-                    content: SelectModal,
-                    title: emptyName,
-                    icon: <BiSelectMultiple />,
-                    data: data,
-                    value,
-                    todo: (val) => {
-                        setValue(val)
-                    },
-                })
-            }}
+            onClick={handleOnClick}
         >
             <StyledDropdownIcon>
                 <BiSelectMultiple />
             </StyledDropdownIcon>
             <StyledValue>
-                {!value ? <span>{emptyName}</span> : data[value]}
+                {value == null ? <span>{emptyName}</span> : data[value]}
             </StyledValue>
         </StyledWrapper>
     )

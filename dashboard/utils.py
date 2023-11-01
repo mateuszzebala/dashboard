@@ -2,6 +2,9 @@ from django.http import JsonResponse
 from django.contrib import admin
 from dashboard.models import Configuration
 from dashboard.serializers import get_field_serializer
+import zipfile
+import os
+from pathlib import Path
 
 def get_all_models():
     return admin.site._registry
@@ -125,3 +128,51 @@ class Config:
         config = Configuration.objects.filter(name=name).first()
         return config is not None
     
+
+def create_zip_file(paths, zip_path):
+    empty_zip_data = b'PK\x05\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+    with open(zip_path, 'wb') as zip_file:
+        zip_file.write(empty_zip_data)
+
+    zipObj = zipfile.ZipFile(zip_path, 'w')
+    parent_path = Path(paths[0]).parent
+    for path in paths:
+        zipObj.write(path, os.path.relpath(path, parent_path))
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                zipObj.write(os.path.join(root, file), os.path.relpath(os.path.join(root, file), parent_path))
+            for dir in dirs:
+                zipObj.write(os.path.join(root, dir), os.path.relpath(os.path.join(root, dir), parent_path))
+
+    zipObj.close()
+
+
+def free_filename(filename, path):
+    fullpath = os.path.join(path, filename)
+    split_filename = filename.split('.')
+    if len(split_filename) > 1:
+        ext = split_filename[-1]
+        basename = ".".join(split_filename[:-1])
+    else:
+        ext = None
+        basename = filename
+    new_filename = filename
+    counter = 1
+
+    while os.path.exists(fullpath):
+        new_filename = f"{basename} ({counter})"
+        if ext is not None:
+            new_filename += f'.{ext}'
+        fullpath = os.path.join(path, new_filename)
+        counter += 1
+    return new_filename
+
+
+def free_folder_name(folder_name, path):
+    fullpath = os.path.join(path, folder_name)
+    counter = 1
+    new_folder_name = folder_name
+    while os.path.exists(fullpath):
+        new_folder_name = f"{folder_name}-{counter}"
+        counter += 1
+    return new_folder_name

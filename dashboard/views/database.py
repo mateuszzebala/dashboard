@@ -6,15 +6,15 @@ from dashboard.serializers import get_field_serializer, set_field_serializer, se
 from html import unescape
 from django.contrib import admin
 from math import ceil
-from .auth import is_superuser
+from .auth import dashboard_access
 
-@is_superuser
+@dashboard_access
 def get_models_view(reqeust):
     return JsonResponse({
         'models': dict((model.__name__, model._meta.app_label) for model in get_all_models())
     })
 
-@is_superuser
+@dashboard_access
 def get_model_info_view(reqeust, model_name):
     model = get_model(model_name)
     if model is None: return error_message(f'Model "{model_name}" does not exists or is not registered!', 400)
@@ -38,11 +38,11 @@ def get_model_info_view(reqeust, model_name):
                 'choices': get_field_options(field),
             },
             'registered': field.name in admin.site._registry.get(model).list_display
-        }) for field in model._meta.get_fields()),
+        }) for field in filter(lambda field: field.editable, model._meta.get_fields())),
 
 })
 
-@is_superuser
+@dashboard_access
 def select_items_view(request, model_name):
     model = get_model(model_name)
     if model is None: return error_message(f'Model "{model_name}" does not exists or is not registered!', 400)
@@ -87,7 +87,7 @@ def select_items_view(request, model_name):
         'queryError': queryError
     })
 
-@is_superuser
+@dashboard_access
 def manage_item_view(request, model_name, pk):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
@@ -100,16 +100,16 @@ def manage_item_view(request, model_name, pk):
 
     return get_item_view(request, item)
 
-@is_superuser
+@dashboard_access
 def get_item_view(request, item):
     return JsonResponse(item_to_json(item))
 
-@is_superuser
+@dashboard_access
 def delete_item_view(request, item):
     item.delete()
     return JsonResponse({'done': True})
 
-@is_superuser
+@dashboard_access
 def patch_item_view(request, item):
     field = request.POST.get('field')
     value_post = unescape(request.POST.get('value') or '')
@@ -123,12 +123,12 @@ def patch_item_view(request, item):
     return JsonResponse({'done': True})
 
 
-@is_superuser
+@dashboard_access
 def put_item_view(request, model_name):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
     names_of_fields = list(map(lambda field: field.name, list(filter(lambda field: not field.is_relation and not field.auto_created, model._meta.get_fields()))))
-    names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation, model._meta.get_fields()))))
+    names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation and field.editable, model._meta.get_fields()))))
     item = model()
  
     for field in names_of_fields:
@@ -151,14 +151,13 @@ def put_item_view(request, model_name):
     return JsonResponse({'pk':item.pk})
 
 
-@is_superuser
+@dashboard_access
 def patch_item_view(request, model_name, pk):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
     names_of_fields = list(map(lambda field: field.name, list(filter(lambda field: not field.is_relation and not field.auto_created, model._meta.get_fields()))))
-    names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation, model._meta.get_fields()))))
+    names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation and not field.one_to_many, model._meta.get_fields()))))
     item = model.objects.filter(pk=pk).first()
-    print(item, model)
     for field in names_of_fields:
         set_field_serializer(
             request.FILES.get(field) or request.POST.get(field), 
@@ -166,7 +165,6 @@ def patch_item_view(request, model_name, pk):
             get_field(model, field),
             item
         )
-   
     for relation in names_of_relations:
         set_relation_serialize(
             request.POST.get(relation),
@@ -184,10 +182,10 @@ def item_to_json(item):
         'pk': item.pk,
         'str': str(item),
         'fields': dict((field.name, get_field_serializer(getattr(item, field.name), field.get_internal_type())) for field in filter(lambda field: not field.is_relation, item.__class__._meta.get_fields())),
-        'relations': dict((field.name, get_relation_items(item, field)) for field in filter(lambda field: field.is_relation and not field.one_to_many, item.__class__._meta.get_fields()) )
+        'relations': dict((field.name, get_relation_items(item, field)) for field in filter(lambda field: field.is_relation and not field.one_to_many and field.editable, item.__class__._meta.get_fields()) )
     }
 
-@is_superuser
+@dashboard_access
 def make_action_view(request, model_name):
     model = get_model(model_name)
     if model is None: return error_message('Model does not exists', 400)
@@ -204,11 +202,8 @@ def make_action_view(request, model_name):
         ...
     return JsonResponse({})
 
-###############################
 
-
-
-@is_superuser
+@dashboard_access
 def get_possible_items(request, model_name, field_name):
     model = get_model(model_name)
     if model is None: return error_message(f'Model "{model_name}" does not exists or is not registered!', 400)
@@ -258,9 +253,7 @@ def get_possible_items(request, model_name, field_name):
         'queryError': queryError
     })
 
-###############################
-
-@is_superuser
+@dashboard_access
 def get_relation_value(reuqest, model_name, field_name, pk):
     model = get_model(model_name)
     item = model.objects.filter(pk=pk).first()
@@ -269,13 +262,12 @@ def get_relation_value(reuqest, model_name, field_name, pk):
     })
     value = getattr(item, field_name)
     field = get_field(model, field_name)
-
     if field.many_to_many:
         return JsonResponse({
-            'value': [item_to_json(item) for item in value]
+            'value': [item_to_json(item) for item in value.all()] if value.exists() else []
         })
     return JsonResponse({
-        'value': item_to_json(value)
+        'value': None #item_to_json(value)
     })
 
 

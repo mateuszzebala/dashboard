@@ -263,7 +263,7 @@ COUNTRIES = (
 
 class Log(models.Model):
     ip_v4 = models.CharField(max_length=20)
-    datetime = models.DateTimeField(auto_now_add=True)
+    datetime = models.DateTimeField(auto_now=True)
     method = models.CharField(choices=METHODS, max_length=10)
     path = models.CharField(max_length=512)
     args = models.JSONField(null=True)

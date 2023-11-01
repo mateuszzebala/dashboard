@@ -1,12 +1,13 @@
 import { BiEditAlt, BiHomeAlt2 } from 'react-icons/bi'
 import { AiOutlineBarChart, AiOutlineMessage } from 'react-icons/ai'
-import { BsTerminal, BsDatabase, BsFolder, BsKey } from 'react-icons/bs'
+import {BsFolder, BsKey } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
-import { FaRegEye } from 'react-icons/fa'
+import { FaRegEye, FaTerminal } from 'react-icons/fa'
 import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { PiDatabaseBold } from 'react-icons/pi'
+import { HiOutlineTerminal } from 'react-icons/hi'
 
 export const SUBLINKS = {}
 
@@ -65,7 +66,7 @@ export const APPS = {
     },
     terminal: {
         name: 'Terminal',
-        icon: BsTerminal,
+        icon: HiOutlineTerminal,
         link: LINKS.terminal.index(),
         sublinks: () => {
             return {

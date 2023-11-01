@@ -92,6 +92,7 @@ export const DatabaseItemPage = () => {
                         onKey={{
                             key: 'Delete',
                         }}
+                        subContent={'DELETE'}
                         size={1.3}
                         icon={<FiTrash />}
                         onClick={() => {
@@ -114,6 +115,7 @@ export const DatabaseItemPage = () => {
                     />
                     <Button
                         size={1.3}
+                        subContent={'EDIT'}
                         onKey={{
                             key: 'e',
                             ctrlKey: true,

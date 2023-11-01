@@ -1,12 +1,12 @@
 from django.http import JsonResponse
-from .auth import is_superuser
+from .auth import dashboard_access
 from django.urls import path
 import datetime
 from dashboard.models import Log
 from dashboard.serializers import get_field_serializer
 from django.db.models import Count
 
-@is_superuser
+@dashboard_access
 def get_countries_statistics(request):
     logs = Log.objects.filter(country__isnull=False).values('country').annotate(total=Count('country'))
     countries = dict((log['country'], log['total']) for log in logs)
@@ -17,7 +17,7 @@ def get_countries_statistics(request):
         'countries': countries
     })
 
-@is_superuser
+@dashboard_access
 def get_country_info(request, country):
     today = datetime.datetime.now()
     month_logs = Log.objects.filter(country=country, datetime__year=today.year, datetime__month=today.month)

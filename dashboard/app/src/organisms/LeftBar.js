@@ -17,7 +17,6 @@ const StyledBar = styled.nav`
     align-items: center;
     flex-direction: column;
     padding: 20px 0 0;
-
     width: 230px;
     overflow-x: hidden;
     z-index: 2;

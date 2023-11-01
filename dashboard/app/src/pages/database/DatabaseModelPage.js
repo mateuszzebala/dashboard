@@ -6,7 +6,7 @@ import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import { LINKS } from '../../router/links'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
-import { FaCheck, FaPlus } from 'react-icons/fa'
+import { FaCheck, FaPlus, FaSearch, FaSort } from 'react-icons/fa'
 import { Button } from '../../atoms/Button'
 import { Paginator } from '../../atoms/Paginator'
 import { Input } from '../../atoms/Input'
@@ -17,11 +17,16 @@ import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import {PiExportBold} from 'react-icons/pi'
 import {PiFunctionBold} from 'react-icons/pi'
-import { useModalForm } from '../../utils/hooks'
+import { useModalForm, useTheme } from '../../utils/hooks'
 import { Export } from '../../atoms/modalforms/Export'
 import { Actions } from '../../atoms/modalforms/Actions'
 import { useSearchParams } from 'react-router-dom'
 import { IoMdOpen } from 'react-icons/io'
+import { Theme } from '../../atoms/Theme'
+import { Select } from '../../atoms/Select'
+import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
+import { BsCheckAll } from 'react-icons/bs'
+import { Prompt } from '../../atoms/modalforms/Prompt'
 
 const StyledError = styled.span`
     font-weight: 500;
@@ -86,7 +91,9 @@ export const DatabaseModelPage = () => {
     const [fields, setFields] = React.useState([])
     const [selectedItems, setSelectedItems] = React.useState([])
     const [error, setError] = React.useState(null)
-    
+    const [queryError, setQueryError] = React.useState(false)
+    const [theme] = useTheme()
+
     React.useEffect(()=>{
         setSearchParams(prev => ({
             ...prev, 
@@ -133,6 +140,8 @@ export const DatabaseModelPage = () => {
                 query: searchQuery,
             })
         ).then((res) => {
+            if(res.data.queryError) setQueryError(true)
+            else setQueryError(false)
             setData(res.data)
             setPages(res.data.pages)
         })
@@ -161,12 +170,13 @@ export const DatabaseModelPage = () => {
                         <Button
                             second
                             size={1.3}
-                            icon={<FaCheck />}
+                            icon={<BsCheckAll />}
                             onKey={{
                                 key: 'a',
                                 ctrlKey: true,
                                 prevent: true,
                             }}
+                            subContent={'SELECT'}
                             onClick={() => {
                                 if (selectedItems && selectedItems.length === 0)
                                     setSelectedItems(
@@ -177,8 +187,29 @@ export const DatabaseModelPage = () => {
                         />
                         <Button
                             second
+                            subContent={'NEW'}
                             to={LINKS.database.putItem(modelName)}
                             icon={<FaPlus />}
+                            size={1.3}
+                        />
+                        <Select
+                            asButton
+                            subContent={'ORDER BY'}
+                            data={modelData ? Object.keys(modelData.fields) : []}
+                            value={modelData ? Object.keys(modelData.fields).indexOf(orderBy) : 0}
+                            setValue={(val)=>{
+                                setOrderBy(Object.keys(modelData.fields)[val])
+                            }}
+                            second
+                            icon={<FaSort />}
+                            size={1.3}
+
+                        />
+                        <Button
+                            subContent={asc ? 'ASC' : 'DESC'}
+                            second
+                            icon={asc ? <AiOutlineSortAscending/> : <AiOutlineSortDescending/>}
+                            onClick={()=>setAsc(prev => !prev)}
                             size={1.3}
                         />
 
@@ -189,6 +220,7 @@ export const DatabaseModelPage = () => {
                                     size={1.3}
                                     tooltip={'DELETE SELECTED'}
                                     icon={<FiTrash />}
+                                    subContent={'DELETE'}
                                     onKey={'Delete'}
                                     onClick={() => {
                                         modalForm({
@@ -220,7 +252,8 @@ export const DatabaseModelPage = () => {
                                 <Button 
                                     second 
                                     size={1.3} 
-                                    tooltip={'EXPORT'} 
+                                    tooltip={'EXPORT'}
+                                    subContent={'EXPORT'}
                                     icon={<PiExportBold/>}
                                     onClick={()=>{
                                         modalForm({
@@ -234,6 +267,7 @@ export const DatabaseModelPage = () => {
                                 {modelData.actions != undefined && modelData.actions.length != 0 && <Button 
                                     size={1.2} 
                                     second
+                                    subContent={'ACTION'}
                                     onClick={()=>{
                                         modalForm({
                                             content: Actions,
@@ -255,6 +289,7 @@ export const DatabaseModelPage = () => {
                                     second
                                     size={1.3}
                                     tooltip={'EDIT ITEM'}
+                                    subContent={'EDIT'}
                                     icon={<FiEdit />}
                                     to={LINKS.database.patchItem(
                                         modelName,
@@ -270,6 +305,7 @@ export const DatabaseModelPage = () => {
                                     second
                                     size={1.3}
                                     tooltip={'SHOW ITEM'}
+                                    subContent={'SHOW'}
                                     icon={<IoMdOpen />}
                                     to={LINKS.database.item(
                                         modelName,
@@ -297,15 +333,27 @@ export const DatabaseModelPage = () => {
                             unit="rows"
                             size={1.2}
                         />
-                        <Input
-                            label={'QUERY'}
-                            value={searchQuery}
+                        <Button
+                            icon={<FaSearch/>}
+                            second
+                            size={1.3}
                             onKey={{
-                                key: 'f',
                                 ctrlKey: true,
-                                prevent: true,
+                                key: 'f',
+                                prevent: true
                             }}
-                            setValue={setSearchQuery}
+                            subContent={'QUERY'}
+                            onClick={()=>{
+                                modalForm({
+                                    content: Prompt,
+                                    title: 'QUERY',
+                                    initValue: searchQuery,
+                                    setButton: 'SEARCH',
+                                    todo: (val)=>{
+                                        setSearchQuery(val)
+                                    }
+                                })
+                            }}
                         />
                     </StyledMenuSide>
                 </StyledMenu>

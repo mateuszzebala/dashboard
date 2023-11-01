@@ -4,28 +4,23 @@
       "debug": true,
       "new_users": true,
       "ddos_block": true,
-      "save_requests": true,
+      "save_requests": false,
       "credientals": true
    },
    "allowed_hosts": [
       "localhost",
-      "192.168.100.37",
-      "192.168.1.2"
+      "10.0.0.2"
    ],
    "cors_allowed_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
-      "http://192.168.100.37:8000",
-      "http://192.168.100.37:3000",
-      "http://192.168.1.2:8000",
-      "http://192.168.1.2:3000"
+      "http://10.0.0.2:8000",
+      "http://10.0.0.2:3000"
    ],
    "csrf_trusted_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
-      "http://192.168.100.37:8000",
-      "http://192.168.100.37:3000",
-      "http://192.168.1.2:8000",
-      "http://192.168.1.2:3000"
+      "http://10.0.0.2:8000",
+      "http://10.0.0.2:3000"
    ]
 }

@@ -5,10 +5,11 @@ import { LINKS } from '../router/links'
 import { Link } from '../atoms/Link'
 
 import {HiOutlineMenu} from 'react-icons/hi'
+import { toBoolStr } from '../utils/utils'
 
 const StyledWrapper = styled.nav`
     display: flex;
-    padding: 20px 10px;
+    padding: ${({submenuExists}) => submenuExists ? '20px 10px 10px' : '20px 10px'};
     width: 100%;
     z-index: 1;
     align-items: center;
@@ -61,6 +62,7 @@ const StyledSubTitle = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-weight: 400;
     justify-content: center;
 `
 
@@ -78,13 +80,16 @@ export const TopBar = ({
     topbarLink,
     setHideSubmenu,
     hideSubmenu,
+    submenuExists
 }) => {
     function handleBurgerClick() {
         setClose((prev) => !prev)
     }
 
     return (
-        <StyledWrapper>
+        <StyledWrapper
+            submenuExists={toBoolStr(submenuExists)}
+        >
             <StyledLeftSide>
                 <StyledMenuButton onClick={handleBurgerClick}>
                     <HiOutlineMenu />

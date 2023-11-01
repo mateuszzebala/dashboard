@@ -44,20 +44,16 @@ export const DatabasePutItemPage = () => {
     const [nullableErrors, setNullableErrors] = React.useState([])
 
     const handleSave = () => {
-        console.log('SIEMA')
         const nullable = Object.assign(
             {},
             ...fields.map(({ name, params }) => {
-                console.log(params, name)
                 return ({ [name]: params.null })
             })
         )
-        console.log(nullable)
 
         const nullableErrorFields = Object.keys(values).filter(
             (field) => values[field] === null && !nullable[field]
         )
-        console.log(values)
 
         setNullableErrors(nullableErrorFields)
         nullableErrorFields.length === 0 &&
@@ -130,24 +126,24 @@ export const DatabasePutItemPage = () => {
                         {nullableErrors.includes(relation.name) && <StyledError>This field can not be null!</StyledError>}
                     </StyledField>
                 ))}
-                {fields.map((field) => (
+                {fields.map((field) =>  (
                     <StyledField key={field.name}>
                         <FieldInput
                             key={field.name}
                             field={field}
                             nullError={nullableErrors.includes(field.name)}
+                            value={values[field.name]}
                             onChange={(val) => {
                                 setValues((prev) => ({
                                     ...prev,
                                     [field.name]: val,
                                 }))
                             }}
-                            value={values[field.name]}
                         />
                         {nullableErrors.includes(field.name) && <StyledError>This field can not be null!</StyledError>}
                     </StyledField>
                 ))}
-               
+            
             </StyledWrapper>
             <FloatingActionButton
                 icon={<LuSave />}

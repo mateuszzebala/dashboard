@@ -19,7 +19,7 @@ const StyledButtons = styled.div`
     grid-template-columns: 50% 50%;
 `
 
-export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
+export const Prompt = ({ setOpen, todo = () => {}, initValue, setButton, ...props }) => {
     const [value, setValue] = React.useState(initValue || '')
     const wrapperRef = React.useRef()
 
@@ -59,7 +59,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, ...props }) => {
                         todo(value)
                     }}
                 >
-                    SET
+                    {setButton ? setButton : 'SET'}
                 </Button>
             </StyledButtons>
         </StyledWrapper>

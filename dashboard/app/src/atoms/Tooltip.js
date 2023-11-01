@@ -8,9 +8,9 @@ const StyledWrapper = styled.span`
 
 const StyledTooltip = styled.div`
     position: fixed;
+    text-overflow: ellipsis;
     background-color: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.secondary};
-    padding: 5px;
     border-radius: 5px;
     left: ${({ x }) => x + 10 + 'px'};
     transform: translateX(-50%);
@@ -20,8 +20,9 @@ const StyledTooltip = styled.div`
     overflow: hidden;
     white-space: pre-wrap;
     z-index: 10;
-    font-size: 18px;
-    padding: 8px 12px;
+    font-size: 14px;
+    user-select: none;
+    padding: 5px 10px;
     text-align: center;
     @keyframes fadein {
         from {

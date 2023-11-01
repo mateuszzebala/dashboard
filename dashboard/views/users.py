@@ -2,11 +2,12 @@ from django.urls import path
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from dashboard.models import Account
-from .auth import is_superuser
+from .auth import dashboard_access
 from datetime import date
+from django.contrib.sessions.models import Session
 
 
-@is_superuser
+@dashboard_access
 def get_account(request, userId):
     user = User.objects.filter(id=userId).first()
     account = Account.objects.filter(user__id=userId).first()
@@ -29,7 +30,7 @@ def get_account(request, userId):
         'pronouns': account.pronouns,
     })
 
-@is_superuser
+@dashboard_access
 def edit_user(request, userId):
     user = User.objects.filter(id=userId).first()
     account = Account.objects.filter(user__id=userId).first()
@@ -53,7 +54,35 @@ def edit_user(request, userId):
     account.save()
     return JsonResponse({})
 
+
+@dashboard_access
+def logout_user(request):
+    user_pk = request.POST.get('id')
+    user = User.objects.filter(pk=user_pk).first()
+    if user is not None:
+        sessions = Session.objects.all()
+        for session in sessions:
+            if int(session.get_decoded().get('_auth_user_id')) == user.id:
+                session.delete()
+    return JsonResponse({})
+
+
+@dashboard_access
+def active_user(request):
+    user_pk = request.POST.get('id')
+    active = request.POST.get('active') == 'true'
+    user = User.objects.filter(pk=user_pk).first()
+    if user is not None and request.POST.get('active') is not None:
+        user.is_active = active
+        user.save()
+    return JsonResponse({
+        'active': user.is_active
+    })
+
+
 urlpatterns = [
-    path('<userId>/', get_account),
+    path('logout/', logout_user),
+    path('<int:userId>/', get_account),
     path('edit/<userId>/', edit_user),
+    path('active/', active_user),
 ]

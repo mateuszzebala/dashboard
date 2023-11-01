@@ -78,10 +78,10 @@ export const UsersPage = () => {
                         onClick={() => {
                             setAdmin((prev) => !prev)
                         }}
-                    >
-                        {admin ? <FaLock /> : <FaLockOpen />}
-                        ADMINS
-                    </Button>
+                        icon={admin ? <FaLock /> : <FaLockOpen />}
+                        subContent={admin ? 'ADMINS' : 'NORMAL'}
+                        size={1.3}
+                    />
                     <Input
                         label={'SEARCH'}
                         value={search}

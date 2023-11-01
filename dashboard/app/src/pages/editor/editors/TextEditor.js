@@ -17,9 +17,8 @@ import { convertTerminalTextToHTML } from '../../../utils/utils'
 import { useModalForm } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
-import { BsFillPlayFill, BsFolder2Open } from 'react-icons/bs'
+import { BsFolder2Open } from 'react-icons/bs'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { FaPlay } from 'react-icons/fa'
 import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
 import { TbReplaceFilled } from 'react-icons/tb'
 import { SelectFile } from '../../../atoms/modalforms/SelectFile'
@@ -41,7 +40,6 @@ const StyledTextArea = styled.textarea`
     resize: none;
     white-space: pre;
     overflow-wrap: normal;
-    overflow-x: scroll;
     padding: 0;
     font-family: 'Fira Mono', monospace;
     overflow: scroll;
@@ -203,6 +201,7 @@ export const TextEditor = () => {
                         second
                         tooltip={'SAVE FILE'}
                         size={1.3}
+                        subContent={'SAVE'}
                         onKey={{
                             key: 's',
                             ctrlKey: true,
@@ -215,6 +214,7 @@ export const TextEditor = () => {
                     <Button
                         second
                         tooltip={'OPEN FILE'}
+                        subContent={'OPEN'}
                         onKey={{
                             key: 'o',
                             ctrlKey: true,
@@ -235,6 +235,7 @@ export const TextEditor = () => {
                     />
                     <Button
                         second
+                        subContent={'FOLDER'}
                         to={LINKS.files.indexPath(data.parent)}
                         tooltip={'GO TO FOLDER'}
                         size={1.3}
@@ -243,6 +244,7 @@ export const TextEditor = () => {
                     <Button
                         second
                         tooltip={'DOWNLOAD FILE'}
+                        subContent={'DOWNLOAD'}
                         size={1.3}
                         target={'_blank'}
                         download="true"
@@ -252,6 +254,7 @@ export const TextEditor = () => {
                     <Button
                         second
                         icon={<BiEditAlt />}
+                        subContent={'EDITOR'}
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
                         onKey={{
@@ -275,13 +278,14 @@ export const TextEditor = () => {
                             })
                         }}
                     />
-                    <Button second icon={<TbReplaceFilled />} size={1.3} />
+                    <Button second icon={<TbReplaceFilled />} size={1.3} subContent={'REPLACE'}/>
                     <Button
                         second
                         onClick={() => {
                             setLiked((prev) => !prev)
                         }}
                         tooltip={'LIKE'}
+                        subContent={liked ? 'UNLIKE' : 'LIKE'}
                         onKey={{
                             key: 'l',
                             prevent: true,
@@ -294,6 +298,7 @@ export const TextEditor = () => {
                     <Button
                         second
                         size={1.3}
+                        subContent={'RUN'}
                         onKey={{
                             key: 'F5',
                             prevent: true,

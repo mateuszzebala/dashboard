@@ -47,15 +47,16 @@ export const ENDPOINTS = {
         content: () => API(['files', 'content']),
         init: () => API(['files', 'init']),
         file: (path) => API(['files', 'file'], { path }),
-
         mkdir: () => API(['files', 'mkdir']),
         remove: () => API(['files', 'remove']),
         touch: () => API(['files', 'touch']),
-
         upload: (path) => API(['files', 'upload'], { path }),
+        zip: () => API(['files', 'zip']),
+        move: () => API(['files', 'move']),
     },
     editor: {
         json: (path) => API(['editor', 'json'], { path }),
+        liked_and_last: () => API(['editor', 'liked&last']),
         save: {
             run: (path) => API(['editor', 'save', 'run'], { path }),
             text: (path) => API(['editor', 'save', 'text'], { path }),
@@ -72,7 +73,9 @@ export const ENDPOINTS = {
         country: (country) => API(['statistics', 'country', country]),
     },
     users: {
+        logout: () => API(['users', 'logout']),
         get: (userId) => API(['users', userId]),
         edit: (userId) => API(['users', 'edit', userId]),
+        active: () => API(['users', 'active']),
     },
 }

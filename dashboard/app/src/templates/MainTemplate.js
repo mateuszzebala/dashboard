@@ -47,7 +47,7 @@ export const MainTemplate = ({
     app,
     children,
     title = '',
-    submenuChildren,
+    submenuChildren = '',
     topbarLink,
     padding = 10,
 }) => {
@@ -93,6 +93,7 @@ export const MainTemplate = ({
                         topbarLink={topbarLink}
                         hideSubmenu={hideSubmenu}
                         setHideSubmenu={setHideSubmenu}
+                        submenuExists={toBoolStr(submenuChildren)}
                     />
                     <SubMenu hideSubmenu={hideSubmenu}>
                         {submenuChildren}

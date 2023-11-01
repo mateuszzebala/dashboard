@@ -1,136 +1,263 @@
-from django.urls import path
-from django.http import JsonResponse, FileResponse
-from .auth import is_superuser
-from pathlib import Path
-from django.conf import settings
 import os
 import shutil
-from dashboard.utils import get_type_of_file
+from pathlib import Path
+from django.urls import path
+from django.conf import settings
+from django.http import JsonResponse, FileResponse
+from dashboard.utils import get_type_of_file, create_zip_file, free_filename, free_folder_name
+from dashboard.views.auth import dashboard_access
 
-@is_superuser
+
+# GET CONTENT OF FOLDER VIEW
+# POST (path: path to folder)
+# RETURN {files: [], folders: [], permission_error: true|false, sep, parent}
+
+
+@dashboard_access
 def get_content_of_folder(request):
-
-    path = request.POST.get('path')
-    list_path = path.split(os.sep)
-
+    parent_path = request.POST.get('path')
+    list_path = parent_path.split(os.sep)
     permission_error = False
-
     files, folders = [], []
+
     try:
-        content = os.scandir(path)
+        content = os.scandir(parent_path)
     except PermissionError:
         permission_error = True
         content = []
-    
-    for item in content:
 
-        if os.path.isfile(item):
+    for current_item in content:
+        if os.path.isfile(current_item):
             files.append({
-                'name': item.name,
-                'path': os.sep.join([*list_path, item.name]),
+                'name': current_item.name,
+                'path': os.sep.join([*list_path, current_item.name]),
                 'is_file': True,
-                'access': os.access(os.sep.join([*list_path, item.name]), os.W_OK),
-                'type': get_type_of_file(item.name)
+                'access': os.access(os.sep.join([*list_path, current_item.name]), os.W_OK),
+                'type': get_type_of_file(current_item.name)
             })
         else:
             folders.append({
-                'name': item.name,
+                'name': current_item.name,
+                'path': os.sep.join([*list_path, current_item.name]),
                 'is_file': False,
-                'path': os.sep.join([*list_path, item.name]),
-                'access': os.access(os.sep.join([*list_path, item.name]), os.W_OK)
+                'access': os.access(os.sep.join([*list_path, current_item.name]), os.W_OK)
             })
-    
+
     return JsonResponse({
         'files': files,
         'folders': folders,
-        'permission_error': permission_error ,
+        'permission_error': permission_error,
         'sep': os.sep,
-        'parent': os.path.abspath(os.path.join(path, os.pardir))
+        'parent': os.path.abspath(os.path.join(parent_path, os.pardir))
     })
 
-@is_superuser
+
+# INIT FILES VIEW
+# POST (path: this is init path of files, if is null then home path is init)
+# RETURN: {root, path, home, project} - paths
+
+@dashboard_access
 def init_files(request):
-    path = request.POST.get('path') if request.POST.get('path') != 'null' else Path.home() 
+    startup_path = request.POST.get('path') if request.POST.get('path') != 'null' else Path.home()
     return JsonResponse({
         'root': str(os.path.abspath(os.sep)),
-        'path': str(path),
+        'path': str(startup_path),
         'home': str(Path.home()),
         'project': str(settings.BASE_DIR),
     })
 
-@is_superuser
-def get_file(request):
-    path = request.GET.get('path')
-    return FileResponse(open(path, 'rb'))
+
+# GET FILE VIEW
+# POST (path: path to file)
+# RETURN: file
+
+@dashboard_access
+def get_file_content(request):
+    path_to_file = request.GET.get('path')
+    return FileResponse(open(path_to_file, 'rb'))
 
 
-@is_superuser
+# CREATE DIRECTORY VIEW
+# POST (path: parent path of new directory, name: name of new directory)
+# RETURN {done: true|false} - false if permission error or folder already exists
+
+
+@dashboard_access
 def mkdir(request):
-    try:
-        path = request.POST.get('path')
-        name = request.POST.get('name')
-        os.mkdir(os.path.join(path, name))
-        return JsonResponse({
-            'done': True
-        })
-    except:
+    parent_path = request.POST.get('path')
+    folder_name = request.POST.get('name')
+
+    fullpath = os.path.join(parent_path, folder_name)
+    if os.path.exists(fullpath):
         return JsonResponse({
             'done': False
         })
-    
-@is_superuser
+
+    try:
+        os.mkdir(fullpath)
+        return JsonResponse({
+            'done': True
+        })
+    except PermissionError:
+        return JsonResponse({
+            'done': False
+        })
+
+# REMOVE FILES AND FOLDERS VIEW
+# POST (paths: string of paths to remove joined by ';;;')
+# RETURN: {}
+
+
+@dashboard_access
 def remove(request):
     paths = request.POST.get('paths')
-    errors = 0
+    for current_path in paths.split(';;;'):
+        if os.path.exists(current_path) and os.access(current_path, os.W_OK):
+            if os.path.isfile(current_path):
+                os.remove(current_path)
+            else:
+                shutil.rmtree(current_path)
+    return JsonResponse({})
 
-    for path in paths.split(';;;'):
-        if os.path.isfile(path):
-            try:
-                os.remove(path)
-            except PermissionError:
-                errors += 1
-        else:
-            try:
-                shutil.rmtree(path)
-            except PermissionError:
-                errors += 1
+
+# CREATE FILE VIEW
+# POST (path: path of parent directory, name: filename of new file)
+# RETURN: if file created than {error: null}
+
+@dashboard_access
+def create_file(request):
+    parent_path = request.POST.get('path')
+
+    if not os.path.exists(parent_path):
+        return JsonResponse({
+            'error': 'Parent path does not exists'
+        })
+
+    if not os.access(parent_path, os.W_OK):
+        return JsonResponse({
+            'error': 'I do not have access to this directory'
+        })
+
+    filename = request.POST.get('name')
+    fullpath = os.path.join(parent_path, filename)
+
+    if os.path.exists(fullpath):
+        return JsonResponse({
+            'error': 'File with this name already exists'
+        })
+
+    file = open(fullpath, 'w')
+    file.close()
+
+    if os.path.exists(fullpath):
+        return JsonResponse({
+            'error': None
+        })
+    else:
+        return JsonResponse({
+            'error': 'File created but does not exists'
+        })
+
+
+# UPLOAD FILE VIEW
+# (path: path of parent to upload file, file: file to upload)
+# RETURN: {}
+
+@dashboard_access
+def upload_file(request):
+    parent_path = request.GET.get('path')
+    file_to_upload = request.FILES.get('file')
+    with open(os.path.join(parent_path, file_to_upload.name), "wb") as f:
+        f.write(file_to_upload.read())
+    return JsonResponse({})
+
+
+# ZIP FILES VIEW
+# POST (toSave: path to save zip file, filename: filename of zip, items: paths to zip joined by ';;;')
+# RETURN {path: path to saved file (sometimes from temp files)}
+
+@dashboard_access
+def zip_files(request):
+    filename = 'temp.zip'
+    destination_path = os.path.join(settings.TEMP_ROOT, 'dashboard')
+
+    if request.POST.get('toSave') != 'null':
+        destination_path = request.POST.get('toSave')
+
+    if not os.path.exists(destination_path):
+        return JsonResponse({
+            'error': 'Path to save does not exists'
+        })
+
+    if not os.access(destination_path, os.W_OK):
+        return JsonResponse({
+            'error': 'I do not have access to this directory'
+        })
+
+    if request.POST.get('filename') != 'null':
+        filename = request.POST.get('filename')
+
+    if not filename.endswith('.zip'):
+        filename += '.zip'
+
+    paths = request.POST.get('items').split(';;;')
+    path_to_save = os.path.join(destination_path, filename)
+
+    if os.path.exists(path_to_save):
+        os.remove(path_to_save)
+
+    create_zip_file(paths, path_to_save)
     return JsonResponse({
-        'errors': errors > 0
+        'path': path_to_save
     })
 
-@is_superuser
-def touch(request):
-    path = request.POST.get('path')
-    name = request.POST.get('name')
-    file = open(os.path.join(path, name), 'w')
-    file.close()
-    return JsonResponse({})
 
-    
-@is_superuser
-def save_file(request):
-    path = request.GET.get('path')
-    content = request.POST.get('content').encode()
-    with open(path, 'wb') as file: 
-        file.write(content)
-    return JsonResponse({})
+# MOVE FILES AND FOLDER VIEW
+# POST (moveTo: path to folder, items: paths of items to move to this folder)
+# RETURN: {}
 
-@is_superuser
-def upload_file(request):
-    path = request.GET.get('path')
-    file = request.FILES.get('file')
-    with open(os.path.join(path, file.name), "wb") as f:
-        f.write(file.read())
+@dashboard_access
+def move_files_view(request):
+    move_to = request.POST.get('moveTo')
+    items_to_move = request.POST.get('items').split(';;;')
+    copy_mode = request.POST.get('copy') == 'true'
 
+    if not os.path.exists(move_to):
+        return JsonResponse({
+            'error': 'Destination path does not exists'
+        })
+
+    for item_to_move in items_to_move:
+        print(item_to_move)
+        try:
+            if os.path.exists(item_to_move):
+                if os.path.isfile(item_to_move):
+                    filename = os.path.basename(item_to_move)
+                    filename = free_filename(filename, move_to)
+                    new_full_path = os.path.join(move_to, filename)
+                    shutil.copy(item_to_move, new_full_path)
+                    if not copy_mode:
+                        os.remove(item_to_move)
+                else:
+                    folder_name = os.path.basename(item_to_move)
+                    folder_name = free_filename(folder_name, move_to)
+                    new_full_path = os.path.join(move_to, folder_name)
+                    shutil.copytree(item_to_move, new_full_path)
+                    if not copy_mode:
+                        shutil.rmtree(item_to_move)
+        except PermissionError:
+            ...
     return JsonResponse({})
 
 
 urlpatterns = [
-    path('content/', get_content_of_folder), # GET CONTENT OF FOLER
-    path('file/', get_file), # GET FILE
-    path('init/', init_files), # INIT FILES
-    path('mkdir/', mkdir), # MAKE DIR
-    path('remove/', remove), # REMOVE
-    path('touch/', touch), # TOUCH
-    path('upload/', upload_file), # UPLOAD FILE
+    path('content/', get_content_of_folder),
+    path('file/', get_file_content),
+    path('init/', init_files),
+    path('mkdir/', mkdir),
+    path('remove/', remove),
+    path('touch/', create_file),
+    path('upload/', upload_file),
+    path('zip/', zip_files),
+    path('move/', move_files_view),
 ]

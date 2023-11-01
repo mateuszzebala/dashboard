@@ -2,12 +2,13 @@ import React from 'react'
 import { GlobalStyle } from './theme/globalStyle'
 import { Router } from './router/Router'
 import { BrowserRouter } from 'react-router-dom'
-import styled, { ThemeProvider, useTheme } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { MessageGroup } from './molecules/MessageGroup'
 import { MessageContext } from './utils/messages'
 import { RootTemplate } from './templates/RootTemplate'
 import {
     GlobalStateContext,
+    LoadingContext,
     ModalFormContext,
     ThemeContext,
     UserContext,
@@ -15,6 +16,7 @@ import {
 import { theme } from './theme/theme'
 import { ModalForm } from './atoms/ModalForm'
 import { useCookies } from 'react-cookie'
+import { LoadingWindow } from './atoms/LoadingWindow'
 
 const StyledWrapper = styled.div`
     min-height: 100vh;
@@ -24,6 +26,7 @@ export const App = () => {
     const [customTheme, setCustomTheme] = React.useState(theme)
     const [messages, setMessages] = React.useState([])
     const [modalForm, setModalForm] = React.useState({})
+    const [loading, setLoading] = React.useState({})
     const [user, setUser] = React.useState(null)
     const [globalState, setGlobalState] = React.useState({})
     const [cookies] = useCookies()
@@ -42,23 +45,27 @@ export const App = () => {
                         <GlobalStateContext.Provider
                             value={[globalState, setGlobalState]}
                         >
-                            <ModalFormContext.Provider
-                                value={[modalForm, setModalForm]}
+                            <LoadingContext.Provider
+                                value={[loading, setLoading]}
                             >
-                                <MessageContext.Provider
-                                    value={[messages, setMessages]}
+                                <ModalFormContext.Provider
+                                    value={[modalForm, setModalForm]}
                                 >
-                                    <StyledWrapper>
-                                        <GlobalStyle />
-                                        <MessageGroup />
-                                        <ModalForm />
-
-                                        <RootTemplate>
-                                            <Router />
-                                        </RootTemplate>
-                                    </StyledWrapper>
-                                </MessageContext.Provider>
-                            </ModalFormContext.Provider>
+                                    <MessageContext.Provider
+                                        value={[messages, setMessages]}
+                                    >
+                                        <StyledWrapper>
+                                            <GlobalStyle />
+                                            <MessageGroup />
+                                            <ModalForm />
+                                            <LoadingWindow />
+                                            <RootTemplate>
+                                                <Router />
+                                            </RootTemplate>
+                                        </StyledWrapper>
+                                    </MessageContext.Provider>
+                                </ModalFormContext.Provider>
+                            </LoadingContext.Provider>
                         </GlobalStateContext.Provider>
                     </UserContext.Provider>
                 </BrowserRouter>

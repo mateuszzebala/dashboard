@@ -6,7 +6,7 @@ const StyledSubMenu = styled.div`
     display: flex;
     gap: 10px;
     padding: ${({ exists, hideSubmenu }) =>
-        exists && !hideSubmenu ? '10px' : '0 10px'};
+        exists && !hideSubmenu ? '5px 10px 10px 10px' : '0 10px'};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     z-index: 2;

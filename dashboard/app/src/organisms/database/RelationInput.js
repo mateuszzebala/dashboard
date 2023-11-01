@@ -2,15 +2,13 @@ import React from 'react'
 import { SelectItem } from '../database/SelectItem'
 import styled from 'styled-components'
 import { Typography } from '../../atoms/Typography'
-import { toBoolStr } from '../../utils/utils'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
-import { useParams } from 'react-router'
 
 const StyledField = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
 `
 
@@ -24,7 +22,7 @@ const StyledWrapper = styled.div`
 
 `
 
-const ManyToManyInput = ({ value, setValue, fieldName, modelName }) => {
+const ManyToManyInput = ({ value, setValue, fieldName, modelName, ...props }) => {
     const [tempValue, setTempValue] = React.useState(value || [])
 
     React.useEffect(() => {
@@ -43,6 +41,7 @@ const ManyToManyInput = ({ value, setValue, fieldName, modelName }) => {
                 multiple
                 modelName={modelName}
                 fieldName={fieldName}
+                parentPK={props.parentPK}
             />
         </StyledField>
     )

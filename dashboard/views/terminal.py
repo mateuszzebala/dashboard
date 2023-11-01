@@ -1,6 +1,8 @@
+import platform
+
 from django.urls import path
 from django.http import JsonResponse
-from .auth import is_superuser
+from .auth import dashboard_access
 import subprocess
 from pathlib import Path
 import re
@@ -10,19 +12,18 @@ from django.conf import settings
 
 processes = {}
 
-@is_superuser
+@dashboard_access
 def kill_process(request):
     if processes.get(request.user.id) is not None:
         for process in processes[request.user.id]:
             try:
-                print(process)
                 process.terminate()
                 process.kill()
             except:
                 return JsonResponse({'done':False})
     return JsonResponse({'done':True})
 
-@is_superuser
+@dashboard_access
 def command(request):
     path = request.POST.get('path').split(os.sep)
     cmd = request.POST.get('command')
@@ -49,7 +50,7 @@ def command(request):
     })
 
 
-@is_superuser
+@dashboard_access
 def init_terminal(request):
     path = request.POST.get('path') if request.POST.get('path') != 'null' else Path.home() 
     return JsonResponse({
@@ -58,6 +59,7 @@ def init_terminal(request):
         'home': str(Path.home()),
         'project': str(settings.BASE_DIR),
         'folder_content': os.listdir(path),
+        'os': platform.system(),
     })
 
 
