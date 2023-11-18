@@ -174,6 +174,7 @@ export const ImageEditor = () => {
                         tooltip={'SAVE IMAGE'}
                         size={1.3}
                         icon={<LuSave />}
+                        subContent={'SAVE'}
                         onKey={{
                             key: 's',
                             ctrlKey: true,
@@ -200,6 +201,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'OPEN FILE'}
+                        subContent={'OPEN'}
                         onKey={{
                             key: 'o',
                             ctrlKey: true,
@@ -219,6 +221,7 @@ export const ImageEditor = () => {
                         }}
                     />
                     <Button
+                        subContent={'FOLDER'}
                         second
                         to={LINKS.files.indexPath(image.parent)}
                         tooltip={'GO TO FOLDER'}
@@ -227,6 +230,7 @@ export const ImageEditor = () => {
                     />
                     <Button
                         second
+                        subContent={'DOWNLOAD'}
                         tooltip={'DOWNLOAD IMAGE'}
                         size={1.3}
                         target={'_blank'}
@@ -236,6 +240,7 @@ export const ImageEditor = () => {
                     />
                     <Button
                         second
+                        subContent={'EDITOR'}
                         icon={<BiEditAlt />}
                         size={1.3}
                         tooltip={'CHOOSE EDITOR'}
@@ -261,9 +266,10 @@ export const ImageEditor = () => {
                             })
                         }}
                     />
-                    <Button second icon={<TbReplaceFilled />} size={1.3} />
+                    <Button subContent={'REPLACE'} second icon={<TbReplaceFilled />} size={1.3} />
                     <Button
                         second
+                        subContent={liked ? 'UNLIKE' : 'LIKE'}
                         onKey={{
                             key: 'l',
                             prevent: true,
@@ -272,7 +278,7 @@ export const ImageEditor = () => {
                         onClick={() => {
                             setLiked((prev) => !prev)
                         }}
-                        tooltip={'LIKE'}
+                        tooltip={liked ? 'UNLIKE' : 'LIKE'}
                         size={1.3}
                         icon={liked ? <AiFillHeart /> : <AiOutlineHeart />}
                     />
@@ -280,6 +286,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'BRIGHTNESS'}
+                        subContent={'BRIGHT...'}
                         onKey={{
                             key: '!',
                             shiftKey: true,
@@ -308,6 +315,7 @@ export const ImageEditor = () => {
                     />
                     <Button
                         second
+                        subContent={'CONTRAST'}
                         tooltip={'CONTRAST'}
                         size={1.3}
                         onKey={{
@@ -338,6 +346,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'COLORS'}
+                        subContent={'COLORS'}
                         size={1.3}
                         onKey={{
                             key: '#',
@@ -367,6 +376,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'CROP'}
+                        subContent={'CROP'}
                         onKey={{
                             key: '$',
                             shiftKey: true,
@@ -385,6 +395,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'SATURATION'}
+                        subContent={'SATUR...'}
                         size={1.3}
                         onKey={{
                             key: '%',
@@ -414,6 +425,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'BLUR'}
+                        subContent={'BLUR'}
                         size={1.3}
                         onKey={{
                             key: '^',
@@ -443,6 +455,7 @@ export const ImageEditor = () => {
                     <Button
                         second
                         tooltip={'INVERT'}
+                        subContent={'INVERT'}
                         size={1.3}
                         onKey={{
                             key: '&',

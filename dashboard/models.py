@@ -259,9 +259,9 @@ COUNTRIES = (
 )
 
 
-
-
-class Log(models.Model):
+class RequestLog(models.Model):
+    browser_type = models.CharField(max_length=32, null=True)
+    device_type = models.CharField(max_length=32, null=True)
     ip_v4 = models.CharField(max_length=20)
     datetime = models.DateTimeField(auto_now=True)
     method = models.CharField(choices=METHODS, max_length=10)

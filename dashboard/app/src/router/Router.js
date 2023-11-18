@@ -24,9 +24,10 @@ import { DatabasePutItemPage } from '../pages/database/DatabasePutItemPage'
 import { FileEditorPage } from '../pages/editor/FileEditorPage'
 import { EditorPage } from '../pages/editor/EditorPage'
 import { DatabasePatchItemPage } from '../pages/database/DatabasePatchItemPage'
-import { StatisticsWorldMapPage } from '../pages/statistics/StatisticsWorldMapPage'
+import { StatisticsWorldMapPage } from '../pages/statistics/subpages/StatisticsWorldMapPage'
 import { UserPage } from '../pages/users/UserPage'
 import { MessagePage } from '../pages/messages/MessagePage'
+import { StatisticsBrowsersPage } from '../pages/statistics/subpages/StatisticsBrowsersPage'
 
 const pages = {
     '/dashboard/': HomePage,
@@ -60,6 +61,7 @@ const pages = {
 
     '/dashboard/statistics/': StatisticsPage,
     '/dashboard/statistics/map/': StatisticsWorldMapPage,
+    '/dashboard/statistics/browsers/': StatisticsBrowsersPage,
 
     '/dashboard/map/': MapPage,
 

@@ -4,7 +4,7 @@ from dashboard.configuration.config import SERVER_CONFIG
 from django.http import JsonResponse
 from django.urls import resolve
 from django.shortcuts import render
-from .models import Log
+from .models import RequestLog
 from .utils import get_client_ip
 import requests
 
@@ -51,14 +51,14 @@ class DashboardMiddleware:
                 url = request.get_full_path()
                 args = {}
                 country_code = None
-                the_same_device = Log.objects.filter(ip_v4=get_client_ip(request)).first()
+                the_same_device = RequestLog.objects.filter(ip_v4=get_client_ip(request)).first()
                 if the_same_device is not None:
                     country_code = the_same_device.country
                 else:
                     res = requests.get(f'https://ipapi.co/{get_client_ip(request)}/json/').json()
                     country_code = res.get("country_code")
 
-                log = Log(
+                log = RequestLog(
                     ip_v4=get_client_ip(request),
                     method=method,
                     path=url.split('?')[0],

@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Log, Configuration, TestModel, Account, QrCodeAuth, Message
+from .models import RequestLog, Configuration, TestModel, Account, QrCodeAuth, Message
 from django.contrib.auth.models import Permission
 from django.contrib.sessions.models import Session
 
-@admin.register(Log)
-class LogAdmin(admin.ModelAdmin):
+@admin.register(RequestLog)
+class RequestLogAdmin(admin.ModelAdmin):
     list_display = ['method', 'datetime', 'path', 'country']
 
 @admin.register(TestModel)

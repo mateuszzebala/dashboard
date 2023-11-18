@@ -2,7 +2,7 @@ from django.urls import path
 from django.http import JsonResponse
 from dashboard.configuration.config import SERVER_CONFIG, save_configuration
 from django.conf import settings
-from dashboard.models import Log
+from dashboard.models import RequestLog
 from .auth import dashboard_access
 
 @dashboard_access
@@ -51,7 +51,7 @@ def manage_csrf_trusted_origins_view(request):
 
 @dashboard_access
 def get_last_logs_view(request):
-    last_logs = list(Log.objects.all().order_by('datetime').reverse())[0:50]
+    last_logs = list(RequestLog.objects.all().order_by('datetime').reverse())[0:50]
     return JsonResponse({
         'logs': [
             {

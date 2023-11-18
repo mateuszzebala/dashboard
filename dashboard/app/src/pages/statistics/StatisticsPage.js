@@ -7,32 +7,42 @@ import { AiOutlineLineChart } from 'react-icons/ai'
 import { BiServer } from 'react-icons/bi'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
+import { BsBrowserSafari } from 'react-icons/bs'
+import { MdDevicesOther } from 'react-icons/md'
+import { FaMoneyBillTransfer } from 'react-icons/fa6'
 
 const StyledWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    gap: 10px;
     height: 100%;
     align-items: center;
     justify-content: center;
+      padding: 10px 0;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
 `
 const StyledTile = styled.div`
-    box-shadow: 0 0 8px -5px ${({ theme }) => theme.primary};
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 47%;
-    height: 47%;
+    width: 100%;
+    height: 100%;
     font-size: 20px;
-    transition: transform 0.2s;
     padding: 20px;
     gap: 10px;
     flex-direction: column;
     text-align: center;
-    &:hover {
-        transform: scale(0.95);
+    transition: background-color 0.3s;
+    &:hover{
+      background-color: ${({theme})=>theme.primary}22;
+      svg{
+        transform: scale(115%) rotate(10deg);
+      }
+    }
+    svg{
+      transition: transform 0.3s;
+      font-size: 100px;
     }
 `
 
@@ -49,12 +59,16 @@ export const StatisticsPage = () => {
                         navigate(LINKS.statistics.map())
                     }}
                 >
-                    <FaGlobeEurope /> WORLD MAP
+                    <FaGlobeEurope /> MAP
                 </StyledTile>
                 <StyledTile>
                     <BiServer /> SERVER EFFICIENCY
                 </StyledTile>
-                <StyledTile>MAP</StyledTile>
+                <StyledTile><MdDevicesOther/> OPERATING SYSTEMS</StyledTile>
+                <StyledTile onClick={()=>{
+                    navigate(LINKS.statistics.browsers())
+                }}><BsBrowserSafari/> BROWSERS</StyledTile>
+                <StyledTile><FaMoneyBillTransfer/> FINANCES</StyledTile>
             </StyledWrapper>
         </MainTemplate>
     )

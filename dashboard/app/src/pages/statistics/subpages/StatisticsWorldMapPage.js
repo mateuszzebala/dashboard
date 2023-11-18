@@ -1,12 +1,12 @@
 import React from 'react'
-import { MainTemplate } from '../../templates/MainTemplate'
-import { APPS } from '../../apps/apps'
-import { Input } from '../../atoms/Input'
-import { WorldMap } from '../../organisms/statistics/WorldMap'
-import { FloatingActionButton } from '../../atoms/FloatingActionButton'
+import { MainTemplate } from '../../../templates/MainTemplate'
+import { APPS } from '../../../apps/apps'
+import { Input } from '../../../atoms/Input'
+import { WorldMap } from '../../../organisms/statistics/WorldMap'
+import { FloatingActionButton } from '../../../atoms/FloatingActionButton'
 import { FaMinus, FaPlus } from 'react-icons/fa'
-import { FETCH } from '../../api/api'
-import { ENDPOINTS } from '../../api/endpoints'
+import { FETCH } from '../../../api/api'
+import { ENDPOINTS } from '../../../api/endpoints'
 
 export const StatisticsWorldMapPage = () => {
     const [scale, setScale] = React.useState(2)

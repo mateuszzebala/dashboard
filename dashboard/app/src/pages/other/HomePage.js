@@ -7,6 +7,7 @@ import { ServerManage } from '../../organisms/home/servermanage/ServerManage'
 import { APPS } from '../../apps/apps'
 import { HostSelect } from '../../organisms/home/hosts/HostSelect'
 import { ENDPOINTS } from '../../api/endpoints'
+import { FinanceWidget } from '../../organisms/home/financewidget/FinanceWidget'
 
 const StyledPage = styled.main`
     scroll-behavior: smooth;
@@ -42,6 +43,14 @@ const StyledHosts = styled.div`
     height: 100%;
 `
 
+const StyledColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 20px;
+`
+
 export const HomePage = () => {
     return (
         <MainTemplate app={APPS.home}>
@@ -50,6 +59,7 @@ export const HomePage = () => {
                     <AppList />
                     <ServerManage />
                     <LogsList />
+
                 </StyledWidgets>
                 <StyledHosts>
                     <HostSelect
