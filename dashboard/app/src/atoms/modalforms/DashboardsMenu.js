@@ -80,42 +80,6 @@ export const DashboardsMenu = ({ setOpen }) => {
                 </Theme>
                 <span>ADMIN</span>
             </StyledColumn>
-            <StyledColumn>
-                <Theme
-                    value={{
-                        primary: theme.warning,
-                    }}
-                >
-                    <Button
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                        target={'_blank'}
-                        to={LINKS.other.shoper()}
-                        size={2}
-                        icon={<AiOutlineShoppingCart />}
-                    />
-                </Theme>
-                <span>SHOPER</span>
-            </StyledColumn>
-            <StyledColumn>
-                <Theme
-                    value={{
-                        primary: theme.error,
-                    }}
-                >
-                    <Button
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                        target={'_blank'}
-                        to={LINKS.other.bloger()}
-                        size={2}
-                        icon={<FaBlog />}
-                    />
-                </Theme>
-                <span>BLOGER</span>
-            </StyledColumn>
         </StyledButtons>
     )
 }

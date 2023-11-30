@@ -46,9 +46,7 @@ export const LINKS = {
     requests: {
         index: () => '/dashboard/requests/',
     },
-    finance: {
-        index: () => '/dashboard/finance/',
-    },
+
     statistics: {
         index: () => '/dashboard/statistics/',
         map: () => '/dashboard/statistics/map/',
@@ -59,6 +57,7 @@ export const LINKS = {
     },
     settings: {
         index: () => '/dashboard/settings/',
+        byApp: (page) => `/dashboard/settings/?page=${page}`,
     },
     sessions: {
         index: () => '/dashboard/sessions/',
@@ -73,12 +72,23 @@ export const LINKS = {
     info: {
         app: (appName) => `/dashboard/info/${appName}/`,
         index: () => '/dashboard/info/',
+    }, 
+
+    finance: {
+        index: () => '/dashboard/finance/',
     },
 
+    shop: {
+        index: () => '/dashboard/shop/',
+        products: () => '/dashboard/shop/products/',
+        orders: () => '/dashboard/shop/orders/',
+        carts: () => '/dashboard/shop/carts/',
+    },
+    calendar: {
+        index: () => '/dashboard/calendar/',
+    },
     other: {
         admin: () => `${MANIFEST.page_url}/admin/`,
         page: () => MANIFEST.page_url,
-        shoper: () => `${MANIFEST.page_url}/shoper/`,
-        bloger: () => `${MANIFEST.page_url}/bloger/`,
     },
 }

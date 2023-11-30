@@ -7,6 +7,7 @@ import { toBoolStr } from '../utils/utils'
 const StyledTop = styled.div`
     display: flex;
     align-items: center;
+    user-select: none;
     justify-content: space-between;
     gap: 10px;
     color: ${({ theme }) => theme.secondary};
@@ -15,6 +16,7 @@ const StyledTop = styled.div`
     background-color: ${({ theme }) => theme.secondary}11;
     border-radius: 5px;
     padding: 15px 10px;
+    font-weight: bold;
     width: 90%;
     cursor: pointer;
 
@@ -46,6 +48,7 @@ const StyledDropdown = styled.div`
     transition: max-height 0.2s, padding 0.2s;
     gap: 10px;
     font-size: 15px;
+    user-select: none;
     a {
         color: ${({ theme }) => theme.secondary};
     }

@@ -188,6 +188,7 @@ export const UserPage = () => {
                         <StyledGroup>
                             <StyledTitle>Main</StyledTitle>
                             <Input
+                                size={1.1}
                                 value={data.username}
                                 setValue={(value) => {
                                     setData((prev) => ({
@@ -198,6 +199,7 @@ export const UserPage = () => {
                                 label={'USERNAME'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.first_name}
                                 setValue={(value) => {
                                     setData((prev) => ({
@@ -208,6 +210,7 @@ export const UserPage = () => {
                                 label={'FIRST NAME'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.last_name}
                                 setValue={(value) => {
                                     setData((prev) => ({
@@ -218,6 +221,7 @@ export const UserPage = () => {
                                 label={'LAST NAME'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.email}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, email: value }))
@@ -225,6 +229,7 @@ export const UserPage = () => {
                                 label={'EMAIL'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.phone}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, phone: value }))
@@ -236,6 +241,7 @@ export const UserPage = () => {
                         <StyledGroup>
                             <StyledTitle>Address</StyledTitle>
                             <Input
+                                size={1.1}
                                 value={data.address}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, address: value }))
@@ -243,6 +249,7 @@ export const UserPage = () => {
                                 label={'ADDRESS'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.street}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, street: value }))
@@ -250,6 +257,7 @@ export const UserPage = () => {
                                 label={'STREET'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.city}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, city: value }))
@@ -257,6 +265,7 @@ export const UserPage = () => {
                                 label={'CITY'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.state}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, state: value }))
@@ -264,6 +273,7 @@ export const UserPage = () => {
                                 label={'STATE'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.zip_code}
                                 setValue={(value) => {
                                     setData((prev) => ({
@@ -277,6 +287,7 @@ export const UserPage = () => {
                         <StyledGroup>
                             <StyledTitle>Informations</StyledTitle>
                             <Input
+                                size={1.1}
                                 value={data.birth_date}
                                 setValue={(value) => {
                                     setData((prev) => ({
@@ -288,6 +299,7 @@ export const UserPage = () => {
                                 type="date"
                             />
                             <Input
+                                size={1.1}
                                 value={data.bio}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, bio: value }))
@@ -296,6 +308,7 @@ export const UserPage = () => {
                                 textarea
                             />
                             <Input
+                                size={1.1}
                                 value={data.website}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, website: value }))
@@ -303,6 +316,7 @@ export const UserPage = () => {
                                 label={'WEBSITE'}
                             />
                             <Input
+                                size={1.1}
                                 value={data.pronouns}
                                 setValue={(value) => {
                                     setData((prev) => ({

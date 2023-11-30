@@ -109,3 +109,6 @@ export const downloadURL = (url, filename) => {
     link.remove()
 }
 
+export const objectEquals = (obj1, obj2) => {
+    return Object.keys(obj1).every(key => obj1[key] === obj2[key])
+}

@@ -44,17 +44,22 @@ export const ServerManage = () => {
     const [theme] = useTheme()
 
     React.useEffect(() => {
-        if (configuration.enable_server !== undefined) {
-            FETCH(ENDPOINTS.home.configuration(), {
-                method: 'PATCH',
-                ...configuration,
-            })
+        if (configuration['server.config.enable_server'] !== undefined) {
+            FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify(configuration)})
         }
     }, [configuration])
 
     React.useEffect(() => {
-        FETCH(ENDPOINTS.home.configuration()).then((data) => {
-            setConfiguration(data.data)
+        FETCH(ENDPOINTS.settings.get()).then((data) => {
+            console.log(data.data)
+            setConfiguration({
+                'server.config.enable_server': data.data['server.config.enable_server'],
+                'server.config.debug': data.data['server.config.debug'],
+                'server.config.new_users': data.data['server.config.new_users'],
+                'server.config.ddos_block': data.data['server.config.ddos_block'],
+                'server.config.save_requests': data.data['server.config.save_requests'],
+                'server.config.credientals': data.data['server.config.credientals'],
+            })
         })
     }, [])
 
@@ -64,7 +69,7 @@ export const ServerManage = () => {
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
                     value={{
-                        primary: configuration.enable_server
+                        primary: configuration['server.config.enable_server']
                             ? theme.success
                             : theme.error,
                     }}
@@ -73,7 +78,7 @@ export const ServerManage = () => {
                         onClick={() => {
                             setConfiguration((prev) => ({
                                 ...prev,
-                                enable_server: !prev.enable_server,
+                                'server.config.enable_server': !prev['server.config.enable_server'],
                             }))
                         }}
                         icon={<FiPower />}
@@ -84,11 +89,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>DEBUG</Typography>
                 <Switch
-                    value={configuration.debug}
+                    value={configuration['server.config.debug']}
                     setValue={(val) => {
                         setConfiguration((prev) => ({
                             ...prev,
-                            debug: val(configuration.debug),
+                            'server.config.debug': val(configuration['server.config.debug']),
                         }))
                     }}
                     size={2}
@@ -97,11 +102,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>NEW USERS</Typography>
                 <Switch
-                    value={configuration.new_users}
+                    value={configuration['server.config.new_users']}
                     setValue={(val) => {
                         setConfiguration((prev) => ({
                             ...prev,
-                            new_users: val(configuration.new_users),
+                            'server.config.new_users': val(configuration['server.config.new_users']),
                         }))
                     }}
                     size={2}
@@ -110,11 +115,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>DDoS BLOCK</Typography>
                 <Switch
-                    value={configuration.ddos_block}
+                    value={configuration['server.config.ddos_block']}
                     setValue={(val) => {
                         setConfiguration((prev) => ({
                             ...prev,
-                            ddos_block: val(configuration.ddos_block),
+                            'server.config.ddos_block': val(configuration['server.config.ddos_block']),
                         }))
                     }}
                     size={2}
@@ -123,11 +128,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>SAVE REQUESTS</Typography>
                 <Switch
-                    value={configuration.save_requests}
+                    value={configuration['server.config.save_requests']}
                     setValue={(val) => {
                         setConfiguration((prev) => ({
                             ...prev,
-                            save_requests: val(configuration.save_requests),
+                            'server.config.save_requests': val(configuration['server.config.save_requests']),
                         }))
                     }}
                     size={2}

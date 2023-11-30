@@ -9,6 +9,8 @@ import { FaPlus } from 'react-icons/fa'
 import { useModalForm } from '../../../utils/hooks'
 import { Confirm } from '../../../atoms/modalforms/Confirm'
 import { FiTrash } from 'react-icons/fi'
+import { Prompt } from '../../../atoms/modalforms/Prompt'
+import { MdOutlineNetworkCheck } from 'react-icons/md'
 
 const StyledWrapper = styled.div`
     padding: 20px;
@@ -29,12 +31,13 @@ const StyledMenu = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
 `
 
 export const HostSelect = ({ name, endpoint }) => {
     const modalForm = useModalForm()
     const [hosts, setHosts] = React.useState([])
-    const [inputValue, setInputValue] = React.useState('')
 
     React.useEffect(() => {
         FETCH(endpoint).then((data) => {
@@ -52,28 +55,22 @@ export const HostSelect = ({ name, endpoint }) => {
     }, [hosts])
 
     const handleAddHost = () => {
-        setHosts((prev) => {
-            if (!inputValue) return prev
-            const newHosts = prev.slice()
-            newHosts.push(inputValue)
-            setInputValue('')
-            return newHosts
+        modalForm({
+            content: Prompt,
+            title: 'HOST',
+            icon: <MdOutlineNetworkCheck/>,
+            label: 'HOST',
+            todo: (val) => {
+                setHosts((prev) => [...prev, val])
+            }
         })
     }
 
     return (
         <StyledWrapper>
-            <Typography variant={'h3'}>{name.toUpperCase()}</Typography>
             <StyledMenu>
-                <Input
-                    label="ADD"
-                    value={inputValue}
-                    setValue={setInputValue}
-                    onKeyUp={(e) => {
-                        e.key === 'Enter' && handleAddHost()
-                    }}
-                />
-                <Button onClick={handleAddHost} icon={<FaPlus />} />
+                <Typography variant={'h3'}>{name.toUpperCase()}</Typography>
+                <Button onClick={handleAddHost} size={1.2} icon={<FaPlus />} />
             </StyledMenu>
             <StyledHosts>
                 {hosts && hosts.length > 0 ? (
@@ -84,6 +81,7 @@ export const HostSelect = ({ name, endpoint }) => {
                                 modalForm({
                                     content: Confirm,
                                     title: 'DELETE',
+                                    text: 'DELETE HOST?',
                                     icon: <FiTrash />,
                                     todo: () => {
                                         host !== 'localhost' &&

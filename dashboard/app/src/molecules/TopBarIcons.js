@@ -19,6 +19,7 @@ import { LoadingImage } from '../atoms/LoadingImage'
 import { BsArrowBarUp, BsQrCode } from 'react-icons/bs'
 import { ServerClock } from '../atoms/ServerClock'
 import { Tooltip } from '../atoms/Tooltip'
+import { APPS } from '../apps/apps'
 
 const StyledIcon = styled.span`
     display: flex;
@@ -29,7 +30,7 @@ const StyledIcon = styled.span`
     text-decoration: none !important;
     color: ${({ theme }) => theme.primary};
     transition: color 0.2s, background-color 0.2s, transform 0.3s;
-    padding: 7px;
+    padding: 10px;
     border-radius: 20px;
     transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
     &:hover {
@@ -79,7 +80,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                 )}
             </Tooltip>
             <Tooltip text="SETTINGS">
-                <Link to={LINKS.settings.index()}>
+                <Link to={Object.keys(APPS).includes(app.name.toLowerCase()) ? LINKS.settings.byApp(app.name.toLowerCase()) : LINKS.settings.byApp(APPS.home.name.toLowerCase())}>
                     <StyledIcon>
                         <FiSettings />
                     </StyledIcon>
@@ -118,12 +119,12 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                     <BsArrowBarUp />
                 </StyledIcon>
             </Tooltip>
-            <Tooltip text="CHOOSE APP">
+            <Tooltip text="CHOOSE PAGE">
                 <StyledIcon
                     onClick={() => {
                         modalForm({
                             content: DashboardsMenu,
-                            title: 'CHOOSE APP',
+                            title: 'CHOOSE PAGE',
                             icon: <BiSolidGrid />,
                         })
                     }}

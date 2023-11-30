@@ -6,6 +6,7 @@ views = [
     'home',
     'auth',
     'terminal',
+    'settings',
     'files',
     'editor',
     'other',

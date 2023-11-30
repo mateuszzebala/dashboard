@@ -28,6 +28,11 @@ import { StatisticsWorldMapPage } from '../pages/statistics/subpages/StatisticsW
 import { UserPage } from '../pages/users/UserPage'
 import { MessagePage } from '../pages/messages/MessagePage'
 import { StatisticsBrowsersPage } from '../pages/statistics/subpages/StatisticsBrowsersPage'
+import { ShopPage } from '../pages/shop/ShopPage'
+import { ShopCartsPage } from '../pages/shop/ShopCartsPage'
+import { ShopProductsPage } from '../pages/shop/ShopProductsPage'
+import { ShopOrdersPage } from '../pages/shop/ShopOrdersPage'
+import { CalendarPage } from '../pages/calendar/CalendarPage'
 
 const pages = {
     '/dashboard/': HomePage,
@@ -48,10 +53,17 @@ const pages = {
     '/dashboard/messages/': MessagesPage,
     '/dashboard/messages/:messageId/': MessagePage,
 
+    '/dashboard/calendar/': CalendarPage,
+
     '/dashboard/users/': UsersPage,
     '/dashboard/users/:id/': UserPage,
 
     '/dashboard/finance/': FinancePage,
+
+    '/dashboard/shop/': ShopPage,
+    '/dashboard/shop/carts/': ShopCartsPage,
+    '/dashboard/shop/products/': ShopProductsPage,
+    '/dashboard/shop/orders/': ShopOrdersPage,
 
     '/dashboard/terminal/': TerminalPage,
 

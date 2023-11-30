@@ -31,8 +31,8 @@ class SERVER_CONFIG:
 
 
 def load_configuration():
-    config = open('dashboard/configuration/server_config.json', 'r')
-    data = json.load(config)
+    config = open('dashboard/configuration/settings.json', 'r')
+    data = json.load(config).get('server')
     SERVER_CONFIG.CONFIGURATION = data.get('config')
     SERVER_CONFIG.ALLOWED_HOSTS = data.get('allowed_hosts')
     SERVER_CONFIG.CORS_ALLOWED_ORIGINS = data.get('cors_allowed_origins')
@@ -41,13 +41,14 @@ def load_configuration():
 
 
 def save_configuration():
-    with open('dashboard/configuration/server_config.json', 'w', encoding='utf-8') as config:
-        json.dump({
-            'config':SERVER_CONFIG.CONFIGURATION, 
-            'allowed_hosts': SERVER_CONFIG.ALLOWED_HOSTS,
-            'cors_allowed_origins': SERVER_CONFIG.CORS_ALLOWED_ORIGINS,
-            'csrf_trusted_origins': SERVER_CONFIG.CSRF_TRUSTED_ORIGINS,
-        }, config, indent=3)
+    with open('dashboard/configuration/settings.json', 'r', encoding='utf-8') as last_conf:
+        conf = json.load(last_conf)
+    conf['server'] = {}
+    conf['server']['config'] = SERVER_CONFIG.CONFIGURATION
+    conf['server']['allowed_hosts'] = SERVER_CONFIG.ALLOWED_HOSTS
+    conf['server']['cors_allowed_origins'] = SERVER_CONFIG.CORS_ALLOWED_ORIGINS
+    conf['server']['csrf_trusted_origins'] = SERVER_CONFIG.CSRF_TRUSTED_ORIGINS
+    with open('dashboard/configuration/settings.json', 'w', encoding='utf-8') as config:
+        json.dump(conf, config, indent=4)
 
-    
 load_configuration()

@@ -262,12 +262,6 @@ export const Terminal = ({ path, setPath }) => {
                     })
                 }}
             />
-            <FloatingActionButton
-                size={1.3}
-                icon={<BsGear />}
-                right={200}
-                second
-            />
             {waiting && (
                 <FloatingActionButton
                     second
@@ -281,7 +275,8 @@ export const Terminal = ({ path, setPath }) => {
             <StyledTerminal ref={terminalRef}>
                 {Object.keys(prompts).map((index) => (
                     <StyledPrompt key={index}>
-                        {os === 'Linux' || os === 'Darwin' && (
+                        
+                        {(os === 'Linux' || os === 'Darwin') && (
                             <>
                                 <div>{prompts[index].path}</div>
                                 <div>

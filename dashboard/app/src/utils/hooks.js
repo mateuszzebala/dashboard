@@ -64,7 +64,7 @@ export const useModalForm = () => {
     const setModalForm = React.useContext(ModalFormContext)[1]
 
     return (form) => {
-        setModalForm(form)
+        setModalForm(prev => [...prev, form])
     }
 }
 

@@ -16,19 +16,22 @@ const StyledDropdown = styled.div`
     }
 `
 
-export const SelectModal = ({ data, todo, setOpen, value }) => {
+export const SelectModal = ({ data, todo, setOpen, value, canBeNull }) => {
+  
     return (
         <StyledDropdown>
-            <Button
-                width={'100%'}
-                second={value !== null}
-                onClick={() => {
-                    todo(null)
-                    setOpen(false)
-                }}
-            >
-                -
-            </Button>
+            {canBeNull && 
+                <Button
+                    width={'100%'}
+                    second={value !== null}
+                    onClick={() => {
+                        todo(null)
+                        setOpen(false)
+                    }}
+                >
+                    -
+                </Button>
+            }
             {Object.keys(data).map((id) => (
                 <Button
                     width={'100%'}

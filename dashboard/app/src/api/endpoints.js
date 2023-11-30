@@ -78,4 +78,8 @@ export const ENDPOINTS = {
         edit: (userId) => API(['users', 'edit', userId]),
         active: () => API(['users', 'active']),
     },
+    settings: {
+        set: () => API(['settings', 'set']),
+        get: () => API(['settings', 'get']),
+    },
 }

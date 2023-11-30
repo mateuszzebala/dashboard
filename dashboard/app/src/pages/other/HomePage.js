@@ -7,7 +7,6 @@ import { ServerManage } from '../../organisms/home/servermanage/ServerManage'
 import { APPS } from '../../apps/apps'
 import { HostSelect } from '../../organisms/home/hosts/HostSelect'
 import { ENDPOINTS } from '../../api/endpoints'
-import { FinanceWidget } from '../../organisms/home/financewidget/FinanceWidget'
 
 const StyledPage = styled.main`
     scroll-behavior: smooth;
@@ -33,23 +32,14 @@ const StyledWidgets = styled.div`
 `
 
 const StyledHosts = styled.div`
-    display: flex;
-    scroll-snap-align: start;
-    align-items: stretch;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 31%);
+    justify-content: justify-content;
     padding: 20px;
     gap: 20px;
-    flex-wrap: wrap;
     height: 100%;
 `
 
-const StyledColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  gap: 20px;
-`
 
 export const HomePage = () => {
     return (

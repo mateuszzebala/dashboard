@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { FiSettings } from 'react-icons/fi'
+import { FiServer, FiSettings } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
 import { ColorInput } from '../../atoms/ColorInput'
 import { useTheme } from '../../utils/hooks'
@@ -12,6 +12,16 @@ import { Button } from '../../atoms/Button'
 import { HiXMark } from 'react-icons/hi2'
 import { Theme } from '../../atoms/Theme'
 import { theme as orginalTheme } from '../../theme/theme'
+import { LuComponent, LuSave } from 'react-icons/lu'
+import { MdLockReset, MdOutlineColorLens } from 'react-icons/md'
+import { useSearchParams } from 'react-router-dom'
+import { APPS } from '../../apps/apps'
+import { Input } from '../../atoms/Input'
+import { Select } from '../../atoms/Select'
+import { FaLinux } from 'react-icons/fa'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
+import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 
 const StyledRow = styled.div`
     display: flex;
@@ -84,9 +94,238 @@ const ColorProp = ({ setColors, colorName, colors }) => {
     )
 }
 
+const SettingsByPage = {
+    colors: ({colors, setColors}) => (
+        <StyledSection>
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'primary'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'secondary'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'tertiary'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'error'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'warning'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'success'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'accent'}
+            />
+        </StyledSection>
+    ),
+    dashboard: ({value, setValue}) => (
+        <StyledSection>
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.dashboards_menu'}
+                text={'Show Dashboards Menu'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.topbar_username'}
+                text={'Show Username In TopBar'}
+            />
+
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.topbar_app_icon'}
+                text={'Show TopBar app icon'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.leftbar_technology_icons'}
+                text={'Show Leftbar technology icons'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.leftbar_app_icons'}
+                text={'Show Leftbar app icons'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.leftbar_arrow_icons'}
+                text={'Show Leftbar arrow icons'}
+            />
+        </StyledSection>
+    ),
+    home: ({value, setValue}) => (
+        <StyledSection>
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'home.app_list_widget'}
+                text={'App List Widget'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'home.server_config_widget'}
+                text={'Server Config Widget'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'home.logs_widget'}
+                text={'Logs Widget'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'home.reload_logs'}
+                text={'Reload Logs'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'home.hosts_widgets'}
+                text={'Hosts Widgets'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'home.finance_widget'}
+                text={'Finance Widgets'}
+            />
+        </StyledSection>
+    ),
+    database: ({value, setValue}) => (
+        <StyledSection>
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'database.show_on_right_click'}
+                text={'Show on right click'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'database.show_all_columns'}
+                text={'Show all columns'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'database.export.json'}
+                text={'JSON Export'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'database.export.xlsx'}
+                text={'XLSX Export'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'database.export.csv'}
+                text={'CSV Export'}
+            />
+            <StyledRow>
+                <Counter value={value['database.default_number_of_rows'] || 10} setValue={(val)=>{
+                    try{
+                        setValue(prev => ({...prev, 'database.default_number_of_rows': val(prev['database.default_number_of_rows'] || 10)}))
+                    }
+                    catch{
+                        setValue(prev => ({...prev, 'database.default_number_of_rows': val}))
+                    }
+                }} min={1} size={1.3} unit="rows" />
+                <Typography variant={'h3'}>
+                    DEFAULT NUMBER OF ROWS
+                </Typography>
+            </StyledRow>
+        </StyledSection>
+    ),
+    terminal: ({value, setValue}) => (
+        <StyledSection>
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'terminal.auto_clear'}
+                text={'AUTO CLEAR'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'terminal.bookmarks'}
+                text={'BOOKMARKS'}
+            />
+            <Select canBeNull={false} second asButton setValue={(val)=>{
+                setValue(prev => ({...prev, 'terminal.sh_type': val}))
+            }} value={value['terminal.sh_type']} data={{
+                zsh: 'ZSH',
+                bash: 'BASH',
+                sh: 'SH',
+            }}><FaLinux/> Interpreter {value['terminal.sh_type'] ?.toUpperCase()}</Select> 
+
+            
+        </StyledSection>
+    ),
+    requests: ({value, setValue}) => (
+        <StyledSection>
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'requests.save_requests'}
+                text={'SAVE REQUESTS'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'requests.save_admin_requests'}
+                text={'SAVE ADMIN REQUESTS'}
+            />
+        </StyledSection>
+    ),
+    shop: ({value, setValue}) => (
+        <StyledSection>
+            <Input label={'SHOP NAME'} value={value['shop.name']} setValue={(val) => setValue(prev => ({...prev, 'shop.name': val}))}/>
+        </StyledSection>
+    )
+}
+
 export const SettingsPage = () => {
     const [theme, updateTheme] = useTheme()
+    const [searchParams, setSearchParams] = useSearchParams()
     const [value, setValue] = React.useState({})
+    const [page, setPage] = React.useState(searchParams.get('page') || 'home')
+    const [saved, setSaved] = React.useState(true)
+    const [initValue, setInitValue] = React.useState({})
+    const [saveLoading, setSaveLoading] = React.useState(false)
+
+    React.useEffect(()=>{
+        FETCH(ENDPOINTS.settings.get()).then(data => {
+            setInitValue(data.data)
+            setValue(data.data)
+        })
+    }, [])
+
     const [colors, setColors] = React.useState({
         primary: theme.primary,
         secondary: theme.secondary,
@@ -97,215 +336,69 @@ export const SettingsPage = () => {
         tertiary: theme.tertiary,
     })
 
+    React.useEffect(()=>{
+        if(searchParams.get('page') !== page){
+            setSearchParams(prev => ({...prev, page}))
+        }
+    }, [page])
+
+    React.useEffect(()=>{
+        if(searchParams.get('page') !== page){
+            if(!SettingsByPage[page]){
+                setPage('home')
+            }
+            else setPage(searchParams.get('page'))
+        }
+    }, [searchParams])
+
+  
+
     React.useEffect(() => {
         updateTheme(colors)
     }, [colors])
 
+
+    React.useEffect(()=>{
+        if(Object.keys(value).some(key => value[key] !== initValue[key])){
+            setSaved(false)
+        }
+        else{
+            setSaved(true)
+        }
+    }, [value])
+
     return (
         <MainTemplate
+            title={page.toUpperCase()}
             app={{
                 name: 'Settings',
                 icon: FiSettings,
                 link: LINKS.settings.index(),
             }}
-            submenuChildren={<Button>SAVE</Button>}
+            submenuChildren={<>
+                <Theme value={{...theme, primary: saved ? theme.success : theme.error}}>
+                    <FloatingActionButton loading={saveLoading} subContent='SAVE' onClick={()=>{
+                        setSaveLoading(true)
+                        FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify(value)}).then(() => {
+                            setSaved(true)
+                            setSaveLoading(false)
+                        })
+                    }} icon={<LuSave/>} size={1.6}/>
+                </Theme>
+                <Button onClick={()=>{setPage('colors')}} subContent='COLORS' second={page !== 'colors'} icon={<MdOutlineColorLens />} size={1.4}></Button>
+                <Button onClick={()=>{setPage('dashboard')}} subContent='DASHBO...' second={page !== 'page'} icon={<LuComponent />} size={1.4}></Button>
+                | 
+                {Object.values(APPS).filter(app => SettingsByPage[app.name.toLowerCase()]).map(app => <Button key={app.name} onClick={()=>{setPage(app.name.toLowerCase())}} subContent={app.name.toUpperCase()} second={page !== app.name.toLowerCase()} icon={<app.icon/>} size={1.4} />)}
+            </>}
         >
             <StyledWrapper>
-                <StyledSection>
-                    <span>THEME</span>
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'primary'}
-                    />
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'secondary'}
-                    />
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'tertiary'}
-                    />
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'error'}
-                    />
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'warning'}
-                    />
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'success'}
-                    />
-                    <ColorProp
-                        setColors={setColors}
-                        colors={colors}
-                        colorName={'accent'}
-                    />
-                </StyledSection>
-                <StyledSection>
-                    <span>MAIN</span>
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'dashboards_menu'}
-                        text={'Show Dashboards Menu'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'topbar_username'}
-                        text={'Show Username In TopBar'}
-                    />
-
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'topbar_app_icon'}
-                        text={'Show TopBar app icon'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'leftbar_technology_icons'}
-                        text={'Show Leftbar technology icons'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'leftbar_app_icons'}
-                        text={'Show Leftbar app icons'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'leftbar_arrow_icons'}
-                        text={'Show Leftbar arrow icons'}
-                    />
-                </StyledSection>
-                <StyledSection>
-                    <span>HOME</span>
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'app_list_widget'}
-                        text={'App List Widget'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'server_config_widget'}
-                        text={'Server Config Widget'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'logs_widget'}
-                        text={'Logs Widget'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'reload_logs'}
-                        text={'Reload Logs'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'hosts_widgets'}
-                        text={'Hosts Widgets'}
-                    />
-                </StyledSection>
-                <StyledSection>
-                    <span>DATABASE</span>
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'item_show_right_click'}
-                        text={'Show on right click'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'json_export'}
-                        text={'JSON Export'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'xlsx_export'}
-                        text={'XLSX Export'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'csv_export'}
-                        text={'CSV Export'}
-                    />
-                    <StyledRow>
-                        <Counter value={10} min={1} size={1.3} unit="rows" />
-                        <Typography variant={'h3'}>
-                            Default rows number
-                        </Typography>
-                    </StyledRow>
-                </StyledSection>
-                <StyledSection>
-                    <span>TERMINAL</span>
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'auto_clear'}
-                        text={'Auto Clear'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'bookmarks_terminal'}
-                        text={'Bookmarks'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'windows_unix_terminal'}
-                        text={'Windows/Unix'}
-                    />
-                </StyledSection>
-                <StyledSection>
-                    <span>FILES</span>
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'windows_unix_files'}
-                        text={'WINDOWS/UNIX'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'grid_list_files'}
-                        text={'GRID/LIST'}
-                    />
-                </StyledSection>
-                <StyledSection>
-                    <span>REQUESTS</span>
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'save_requests'}
-                        text={'SAVE REQUESTS'}
-                    />
-                    <SwitchSetting
-                        value={value}
-                        setValue={setValue}
-                        prop={'save_admin'}
-                        text={'SAVE ADMIN'}
-                    />
-                </StyledSection>
+                {page === 'colors' && <SettingsByPage.colors colors={colors} setColors={setColors}/>}
+                {page === 'dashboard' && <SettingsByPage.dashboard value={value} setValue={setValue}/>}
+                {page === 'home' &&  <SettingsByPage.home value={value} setValue={setValue}/>}
+                {page === 'database' &&  <SettingsByPage.database value={value} setValue={setValue}/>}
+                {page === 'terminal' &&  <SettingsByPage.terminal value={value} setValue={setValue}/>}
+                {page === 'requests' &&  <SettingsByPage.requests value={value} setValue={setValue}/>}
+                {page === 'shop' &&  <SettingsByPage.shop value={value} setValue={setValue}/>}
             </StyledWrapper>
         </MainTemplate>
     )

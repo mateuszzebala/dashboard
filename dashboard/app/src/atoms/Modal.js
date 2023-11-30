@@ -31,7 +31,7 @@ const StyledCurtain = styled.div`
 `
 
 const StyledWrapper = styled.div`
-    z-index: 300;
+    z-index: ${({zIndex})=>zIndex};
     max-width: 97%;
     max-height: 97vh;
 
@@ -43,14 +43,14 @@ const StyledWrapper = styled.div`
     @keyframes fade-in {
         from {
             opacity: 0;
-            transform: translate(0, 20%) scale(1.3);
+            transform: translate(0, 20px) scale(1.3) rotateX(30deg);
         }
         to {
             opacity: 1;
-            transform: translate(0, 0) scale(1);
+            transform: translate(0, 0) scale(1) rotateX(0deg);
         }
     }
-    animation: fade-in 0.5s forwards;
+    animation: fade-in 0.3s forwards;
 `
 
 const StyledCaption = styled.div`
@@ -133,14 +133,16 @@ const StyledMinimize = styled.div`
 export const Modal = ({
     open,
     setOpen,
+    minimize, 
+    setMinimize,
     minimizeIcon = false,
     title = '',
     children,
     icon = '',
     transparentCurtain = false,
     escape = true,
+    zIndex = 0,
 }) => {
-    const [minimize, setMinimize] = React.useState(false)
     const curtainRef = React.useRef()
 
     React.useEffect(() => {
@@ -158,27 +160,7 @@ export const Modal = ({
     if (!open) return ''
     if (minimize)
         return (
-            <StyledMinimize>
-                <StyledIcon>{icon}</StyledIcon>
-                {title || 'Window'}
-                {minimizeIcon && (
-                    <StyledCircleButton
-                        onClick={() => {
-                            setMinimize(false)
-                        }}
-                    >
-                        <BsArrowUpShort />
-                    </StyledCircleButton>
-                )}
-                <StyledCircleButton
-                    onClick={() => {
-                        setOpen(false)
-                        setMinimize(false)
-                    }}
-                >
-                    <IoClose />
-                </StyledCircleButton>
-            </StyledMinimize>
+            ''
         )
     return (
         <StyledCurtain
@@ -188,7 +170,7 @@ export const Modal = ({
                 e.target === curtainRef.current && setOpen(false)
             }}
         >
-            <StyledWrapper>
+            <StyledWrapper zIndex={zIndex + 10000}>
                 <StyledCaption>
                     <div>
                         {minimizeIcon && (

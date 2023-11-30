@@ -9,17 +9,22 @@
    },
    "allowed_hosts": [
       "localhost",
-      "10.0.0.2"
+      "10.0.0.2",
+      "192.168.100.35"
    ],
    "cors_allowed_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
+      "http://192.168.100.35:8000",
+      "http://192.168.100.35:3000",
       "http://10.0.0.2:8000",
       "http://10.0.0.2:3000"
    ],
    "csrf_trusted_origins": [
       "http://localhost:3000",
       "http://localhost:8000",
+      "http://192.168.100.35:8000",
+      "http://192.168.100.35:3000",
       "http://10.0.0.2:8000",
       "http://10.0.0.2:3000"
    ]

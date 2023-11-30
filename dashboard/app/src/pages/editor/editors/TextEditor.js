@@ -84,7 +84,7 @@ const StyledIde = styled.div`
 `
 
 const StyledTerminal = styled.pre`
-    font-family: var(--font-family);
+    font-family: 'Fira Mono';
     color: ${({ theme }) => theme.primary};
     font-size: 20px;
     overflow: scroll;

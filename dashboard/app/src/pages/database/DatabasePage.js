@@ -10,19 +10,20 @@ import {
     BsFillEyeFill,
     BsFillKeyFill,
     BsPersonFillGear,
+    BsQrCode,
     BsTable,
 } from 'react-icons/bs'
-import { FaQrcode, FaUser, FaUsers } from 'react-icons/fa'
+import { FaUser, FaUsers } from 'react-icons/fa'
 import { BiWrench } from 'react-icons/bi'
 
 const IconByModel = {
     user: <FaUser />,
     group: <FaUsers />,
     session: <BsFillKeyFill />,
-    log: <BsFillEyeFill />,
+    requestlog: <BsFillEyeFill />,
     permission: <BsPersonFillGear />,
     configuration: <BiWrench />,
-    qrcodeauth: <FaQrcode/>,
+    qrcodeauth: <BsQrCode/>,
     message: <APPS.messages.icon/>,
     account: <APPS.users.icon/>
 }
@@ -56,6 +57,9 @@ const StyledModel = styled.button`
     &:focus {
         transform: translate(20px, 0);
         outline: none;
+    }
+    svg{
+        font-size: 20px;
     }
 `
 

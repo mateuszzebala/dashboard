@@ -9,16 +9,17 @@ import styled from 'styled-components'
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 5px;
-
+    gap: 10px;
+    font-size: 120%;
     color: ${({ theme }) => theme.primary};
-    h1 {
+    h1, h2, h3, h4, h5, h6 {
         margin: 0;
+        font-weight: 500;
         color: ${({ theme }) => theme.primary};
     }
     p {
         margin: 0;
-
+        font-weight: 200;
         color: ${({ theme }) => theme.primary};
     }
 `

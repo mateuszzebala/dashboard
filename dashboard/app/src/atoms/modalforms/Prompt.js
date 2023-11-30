@@ -30,6 +30,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, setButton, ...prop
     return (
         <StyledWrapper ref={wrapperRef}>
             <Input
+                size={1.5}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                         setOpen(false)
@@ -42,6 +43,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, setButton, ...prop
             />
             <StyledButtons>
                 <Button
+                    size={1.1}
                     second
                     width={'100%'}
                     onKey={'Escape'}
@@ -52,6 +54,7 @@ export const Prompt = ({ setOpen, todo = () => {}, initValue, setButton, ...prop
                     CANCEL
                 </Button>
                 <Button
+                    size={1.1}
                     width={'100%'}
                     onKey={'Enter'}
                     onClick={() => {

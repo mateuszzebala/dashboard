@@ -48,8 +48,14 @@ export const Select = ({
     setValue,
     emptyName = 'SELECT',
     asButton,
+    canBeNull=true,
     ...props
 }) => {
+
+    React.useEffect(()=>{
+        !canBeNull && value === null && setValue(Object.keys(data)[0])
+    }, [value])
+
     const modalForm = useModalForm()
     const handleOnClick = () => {
         modalForm({
@@ -57,6 +63,7 @@ export const Select = ({
             title: emptyName,
             icon: props.icon ? props.icon : <BiSelectMultiple />,
             data: data,
+            canBeNull,
             value,
             todo: (val) => {
                 setValue(val)

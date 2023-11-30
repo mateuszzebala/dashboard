@@ -14,6 +14,7 @@ const StyledLogItem = styled.div`
         transform: translateX(10px);
     }
 `
+
 const StyledRow = styled.div`
     display: flex;
     gap: 10px;

@@ -11,13 +11,19 @@ const StyledBox = styled.div`
     transition: box-shadow 0.2s;
     cursor: pointer;
     background-color: ${({ theme }) => theme.secondary};
-    transition: transform 0.3s;
+    transition: background 0.3s;
     a {
         color: ${({ theme }) => theme.primary};
         text-decoration: none;
     }
-    &:hover {
-        transform: scale(0.9);
+    svg{
+        transition: transform 0.3s;
+    }
+    :hover svg{
+        transform: scale(0.8);
+    }
+    :hover{
+        background: ${({theme})=>theme.primary}22;
     }
 `
 const StyledName = styled.div``
@@ -30,7 +36,7 @@ const StyledLink = styled.div`
     justify-content: center;
 `
 const StyledIcon = styled.div`
-    font-size: 30px;
+    font-size: 40px;
 `
 
 export const AppItem = ({ icon, name = '', link }) => {

@@ -39,6 +39,7 @@ const StyledTile = styled.div`
       svg{
         transform: scale(115%) rotate(10deg);
       }
+      text-decoration: underline;
     }
     svg{
       transition: transform 0.3s;

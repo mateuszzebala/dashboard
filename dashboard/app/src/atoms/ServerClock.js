@@ -3,12 +3,17 @@ import styled from 'styled-components'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { Loading } from './Loading'
+import { Button } from './Button'
+import { useModalForm } from '../utils/hooks'
+import { Prompt } from './modalforms/Prompt'
+import { AiOutlineClockCircle } from 'react-icons/ai'
 
 const StyledClockWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 10px;
+    align-items: center;
 `
 
 const StyledAnalogClock = styled.div`
@@ -97,6 +102,8 @@ export const ServerClock = () => {
         second: 10,
     })
     const [loading, setLoading] = React.useState(true)
+    const modalForm = useModalForm()
+
     React.useEffect(() => {
         FETCH(ENDPOINTS.other.time()).then((data) => {
             setTime(data.data)
@@ -145,6 +152,17 @@ export const ServerClock = () => {
                 {time.minute.toString().padStart(2, '0')}:
                 {time.second.toString().padStart(2, '0')}
             </StyledDigitalClock>
+            <Button onClick={()=>{
+                modalForm({
+                    content: Prompt,
+                    title: 'SET SERVER TIME',
+                    icon: <AiOutlineClockCircle/>,
+                    type: 'datetime-local',
+                    todo: (val)=>{
+                        console.log(val)
+                    }
+                })
+            }}>SET TIME</Button>
         </StyledClockWrapper>
     )
 }

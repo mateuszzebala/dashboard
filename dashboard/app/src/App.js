@@ -25,7 +25,7 @@ const StyledWrapper = styled.div`
 export const App = () => {
     const [customTheme, setCustomTheme] = React.useState(theme)
     const [messages, setMessages] = React.useState([])
-    const [modalForm, setModalForm] = React.useState({})
+    const [modalForm, setModalForm] = React.useState([])
     const [loading, setLoading] = React.useState({})
     const [user, setUser] = React.useState(null)
     const [globalState, setGlobalState] = React.useState({})

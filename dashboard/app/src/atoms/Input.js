@@ -6,33 +6,33 @@ import { useGlobalKey } from '../utils/hooks'
 const StyledWrapper = styled.div`
     display: inline-flex;
     position: relative;
-    padding: 8px;
-    min-width: 300px;
-    max-width: 300px;
-    border-radius: 3px;
-    border: 2px solid ${({ theme }) => theme.primary};
+    padding: ${({size})=>size*8+'px'};
+    min-width: ${({size})=>size*300+'px'};
+    max-width: ${({size})=>size*300+'px'};
+    border-radius: ${({size})=>size*3+'px'};
+    border: ${({size})=>size*2+'px'} solid ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
 `
 
 const StyledLabel = styled.label`
     position: absolute;
-    top: -3px;
-    left: 5px;
-    padding: 0 10px;
-    font-size: 10px;
+    top: ${({size})=>size*(-3)+'px'};
+    left: ${({size})=>size*5+'px'};
+    padding: 0 ${({size})=>size*10+'px'};
+    font-size: ${({size})=>size*10+'px'};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
 `
 const StyledIcon = styled.span`
     display: grid;
     place-items: center;
-    padding: 0 5px;
+    padding: 0 ${({size})=>size*5+'px'};
 `
 
 const StyledInput = styled.input`
     border: 0;
-    font-size: 20px;
+    font-size: ${({size})=>size*20+'px'};
     width: 100%;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
@@ -51,9 +51,9 @@ const StyledInput = styled.input`
 
 const StyledTextarea = styled.textarea`
     border: 0;
-    font-size: 20px;
+    font-size: ${({size})=>size*20+'px'};
     width: 100%;
-    height: 200px;
+    height: ${({size})=>size*200+'px'};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     &:focus {
@@ -71,6 +71,7 @@ export const Input = ({
     textarea,
     type = 'text',
     icon,
+    size=1,
     onKey,
     ...props
 }) => {
@@ -87,16 +88,16 @@ export const Input = ({
 
     React.useEffect(() => {
         value !== tempValue && setTempValue(value)
-        
     }, [value])
 
     return (
-        <StyledWrapper>
-            {icon && <StyledIcon>{icon}</StyledIcon>}
-            <StyledLabel label={toBoolStr(label)}>{label || ''}</StyledLabel>
+        <StyledWrapper size={size}>
+            {icon && <StyledIcon size={size}>{icon}</StyledIcon>}
+            <StyledLabel size={size} label={toBoolStr(label)}>{label || ''}</StyledLabel>
             {textarea ? (
                 <StyledTextarea
                     type={type}
+                    size={size}
                     ref={inputRef}
                     value={tempValue}
                     onChange={(e) => {
@@ -108,6 +109,7 @@ export const Input = ({
             ) : (
                 <StyledInput
                     type={type}
+                    size={size}
                     value={tempValue}
                     ref={inputRef}
                     onChange={(e) => {

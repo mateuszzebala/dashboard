@@ -2,12 +2,13 @@ import { BiEditAlt, BiHomeAlt2 } from 'react-icons/bi'
 import { AiOutlineBarChart, AiOutlineMessage } from 'react-icons/ai'
 import {BsFolder, BsKey } from 'react-icons/bs'
 import { FiUsers } from 'react-icons/fi'
-import { FaRegEye, FaTerminal } from 'react-icons/fa'
+import { FaRegEye, FaRegMoneyBillAlt, FaTerminal } from 'react-icons/fa'
 import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { PiDatabaseBold } from 'react-icons/pi'
-import { HiOutlineTerminal } from 'react-icons/hi'
+import { HiOutlineMail, HiOutlineShoppingBag, HiOutlineTerminal } from 'react-icons/hi'
+import { MdCalendarMonth } from 'react-icons/md'
 
 export const SUBLINKS = {}
 
@@ -89,12 +90,33 @@ export const APPS = {
             }
         },
     },
-    // email: {
-    //     name: 'Email',
-    //     icon: HiOutlineMail,
-    //     link: links.email.index(),
-    // },
-
+    email: {
+        name: 'Email',
+        icon: HiOutlineMail,
+        link: LINKS.email.index(),
+    },
+    finance: {
+        name: 'Finance',
+        icon: FaRegMoneyBillAlt,
+        link: LINKS.finance.index(),
+    },
+    shop: {
+        name: 'Shop',
+        icon: HiOutlineShoppingBag,
+        link: LINKS.shop.index(),
+        sublinks: () => {
+            return {
+                PRODUCTS: LINKS.shop.products(),
+                ORDERS: LINKS.shop.orders(),
+                CARTS: LINKS.shop.carts(),
+            }
+        },
+    },
+    calendar: {
+        name: 'Calendar',
+        icon: MdCalendarMonth,
+        link: LINKS.calendar.index(),
+    },
     requests: {
         name: 'Requests',
         icon: FaRegEye,

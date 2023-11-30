@@ -1,0 +1,72 @@
+{
+    "database": {
+        "show_on_right_click": true,
+        "show_all_columns": true,
+        "export": {
+            "json": true,
+            "xlsx": true,
+            "csv": true
+        },
+        "default_number_of_rows": 12
+    },
+    "terminal": {
+        "sh_type": "zsh",
+        "bookmarks": true,
+        "auto_clear": true
+    },
+    "shop": {
+        "name": "dsdsddsdsd"
+    },
+    "requests": {
+        "save_requests": true,
+        "save_admin_requests": true
+    },
+    "default_number_of_rows": 15,
+    "home": {
+        "app_list_widget": true,
+        "server_config_widget": false,
+        "logs_widget": true,
+        "reload_logs": true,
+        "hosts_widgets": true,
+        "finance_widget": true
+    },
+    "dashboard": {
+        "dashboards_menu": true,
+        "topbar_username": true,
+        "topbar_app_icon": true,
+        "leftbar_technology_icons": false,
+        "leftbar_arrow_icons": true,
+        "leftbar_app_icons": false
+    },
+    "server": {
+        "config": {
+            "enable_server": true,
+            "debug": false,
+            "new_users": true,
+            "ddos_block": true,
+            "save_requests": false,
+            "credientals": true
+        },
+        "allowed_hosts": [
+            "localhost",
+            "10.0.0.2",
+            "192.168.100.35"
+        ],
+        "cors_allowed_origins": [
+            "http://localhost:3000",
+            "http://localhost:8000",
+            "http://192.168.100.35:8000",
+            "http://192.168.100.35:3000",
+            "http://10.0.0.2:8000",
+            "http://10.0.0.2:3000"
+        ],
+        "csrf_trusted_origins": [
+            "http://localhost:3000",
+            "http://localhost:8000",
+            "http://192.168.100.35:8000",
+            "http://192.168.100.35:3000",
+            "http://10.0.0.2:8000",
+            "http://10.0.0.2:3000"
+        ]
+    }
+}

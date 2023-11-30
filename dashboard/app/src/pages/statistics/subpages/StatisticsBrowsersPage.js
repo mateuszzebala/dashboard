@@ -42,7 +42,7 @@ const StyledBrowser = styled.div`
     text-align: right;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-weight: bold;
+    font-weight: normal;
   }
 `
 

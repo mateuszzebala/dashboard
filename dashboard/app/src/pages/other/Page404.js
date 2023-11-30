@@ -13,9 +13,10 @@ const StyledWrapper = styled.div`
     font-size: 60px;
     flex-direction: column;
     justify-content: center;
+    color: ${({theme})=>theme.primary};
     align-items: center;
     h1 {
-        text-shadow: 5px 5px 0 ${({ theme }) => theme.tertiary};
+        text-shadow: 5px 5px 5px ${({ theme }) => theme.tertiary};
     }
 `
 
