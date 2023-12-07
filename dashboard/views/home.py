@@ -1,9 +1,10 @@
 from django.urls import path
 from django.http import JsonResponse
-from dashboard.configuration.config import SERVER_CONFIG, save_configuration
+from dashboard.configuration.config import set_settings_prop, SERVER_CONFIG, load_configuration
 from django.conf import settings
 from dashboard.models import RequestLog
 from .auth import dashboard_access
+from dashboard.views.settings import settings_json_file_path
 
 @dashboard_access
 def manage_server_configuration_view(request):
@@ -14,40 +15,35 @@ def manage_server_configuration_view(request):
         ddos_block = request.POST.get('ddos_block') == "true"
         credientals = request.POST.get('credientals') == "true"
         save_requests = request.POST.get('save_requests') == "true"
-        SERVER_CONFIG.CONFIGURATION['enable_server'] = enable_server
-        SERVER_CONFIG.CONFIGURATION['debug'] = debug
-        SERVER_CONFIG.CONFIGURATION['new_users'] = new_users
-        SERVER_CONFIG.CONFIGURATION['ddos_block'] = ddos_block
-        SERVER_CONFIG.CONFIGURATION['credientals'] = credientals
-        SERVER_CONFIG.CONFIGURATION['save_requests'] = save_requests
-        settings.DEBUG = debug
-        settings.CORS_ALLOW_CREDENTIALS = credientals
-        save_configuration()
+        set_settings_prop('server.config.enable_server', enable_server)
+        set_settings_prop('server.config.debug', debug)
+        set_settings_prop('server.config.new_users', new_users)
+        set_settings_prop('server.config.ddos_block', ddos_block)
+        set_settings_prop('server.config.credientals', credientals)
+        set_settings_prop('server.config.save_requests', save_requests)
+        load_configuration()
     return JsonResponse(dict((name, bool(value)) for name, value in SERVER_CONFIG.CONFIGURATION.items()))
 
 @dashboard_access
 def manage_allowed_hosts_view(request):
     if request.POST.get('method') == 'PATCH':
-        SERVER_CONFIG.ALLOWED_HOSTS = request.POST.get('hosts').split(',')
-        settings.ALLOWED_HOSTS = SERVER_CONFIG.ALLOWED_HOSTS
-        save_configuration()
+        set_settings_prop('server.allowed_hosts', request.POST.get('hosts').split(','))
+        load_configuration()
     return JsonResponse({'hosts':SERVER_CONFIG.GET_ALLOWED_HOSTS()})
 
 @dashboard_access
 def manage_cors_allowed_origins_view(request):
     if request.POST.get('method') == 'PATCH':
-        SERVER_CONFIG.CORS_ALLOWED_ORIGINS = request.POST.get('hosts').split(',')
-        settings.CORS_ALLOWED_ORIGINS = SERVER_CONFIG.CORS_ALLOWED_ORIGINS
-        save_configuration()
-    return JsonResponse({'hosts':SERVER_CONFIG.CORS_ALLOWED_ORIGINS})
+        set_settings_prop('server.cors_allowed_origins', request.POST.get('hosts').split(','))
+        load_configuration()
+    return JsonResponse({'hosts':SERVER_CONFIG.GET_CORS_ALLOWED_ORIGINS()})
 
 @dashboard_access
 def manage_csrf_trusted_origins_view(request):
     if request.POST.get('method') == 'PATCH':
-        SERVER_CONFIG.CSRF_TRUSTED_ORIGINS = request.POST.get('hosts').split(',')
-        settings.CSRF_TRUSTED_ORIGINS = SERVER_CONFIG.CSRF_TRUSTED_ORIGINS
-        save_configuration()
-    return JsonResponse({'hosts':SERVER_CONFIG.CSRF_TRUSTED_ORIGINS})
+        set_settings_prop('server.csrf_trusted_origins', request.POST.get('hosts').split(','))
+        load_configuration()
+    return JsonResponse({'hosts':SERVER_CONFIG.GET_CSRF_TRUSTED_ORIGINS()})
 
 @dashboard_access
 def get_last_logs_view(request):

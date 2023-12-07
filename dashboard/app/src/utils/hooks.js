@@ -133,3 +133,11 @@ export const useLoading = () => {
         }
     }
 }
+
+
+export const SettingsContext = React.createContext({})
+
+export const useSettings = () => {
+    const [settings, setSettings] = React.useContext(SettingsContext)
+    return [ settings, setSettings ]
+}

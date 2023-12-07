@@ -8,7 +8,9 @@ import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
 import { LINKS } from '../router/links'
 import Logo from '../assets/logos/logo-light-colors.svg'
-import { useModalForm } from '../utils/hooks'
+import { useModalForm, useSettings } from '../utils/hooks'
+import { FETCH } from '../api/api'
+import { ENDPOINTS } from '../api/endpoints'
 
 const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.primary};
@@ -74,22 +76,19 @@ const LGBTFlag = styled.div`
     cursor: wait;
     div{
         width: 180px;
-        height: 7px;
-        
+        height: 21px;
     }
-    div:nth-child(1){background-color: #E40303;}
-    div:nth-child(2){background-color: #FF8C00;}
-    div:nth-child(3){background-color: #FFED00;}
-    div:nth-child(4){background-color: #008026;}
-    div:nth-child(5){background-color: #24408E;}
-    div:nth-child(6){background-color: #732982;}
+    div:nth-child(1){background-color: #FFFFFF;}
+    div:nth-child(2){background-color: #DC143C;}
 `
 
 export const LeftBar = ({ close }) => {
+    const [settings] = useSettings()
+    
     const modalForm = useModalForm()
     return (
         <StyledBar close={toBoolStr(close)}>
-            <LGBTFlag onClick={()=>{
+            {settings['dashboard.polish_flag'] && <LGBTFlag onClick={()=>{
                 modalForm({
                     content: ()=><>
                         <img width={300} src="https://images.photowall.com/products/52624/lgbt-grungy-heart.jpg?h=699&q=85"/>
@@ -100,11 +99,7 @@ export const LeftBar = ({ close }) => {
             }}>
                 <div></div>
                 <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </LGBTFlag>
+            </LGBTFlag>}
             <Link to={LINKS.home()}>
                 <StyleDashboard>
                     <img src={Logo}/>
@@ -113,6 +108,7 @@ export const LeftBar = ({ close }) => {
             </Link>
             <StyledMenuItems>
                 {Object.values(APPS).map((app) => {
+                    if (!settings[`dashboard.app.${app.name.toLowerCase()}`]) return ''
                     return (
                         <LeftBarItem
                             key={app.name}

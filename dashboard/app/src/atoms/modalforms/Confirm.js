@@ -21,7 +21,7 @@ const StyledButtons = styled.div`
   
 `
 
-export const Confirm = ({ setOpen, todo = () => {}, text='' }) => {
+export const Confirm = ({ setOpen, todo = () => {}, text='', yesText='YES', noText='NO' }) => {
     return (
         <StyledWrapper>
             <StyledTitle>{text}</StyledTitle>
@@ -30,10 +30,10 @@ export const Confirm = ({ setOpen, todo = () => {}, text='' }) => {
                     onClick={() => {
                         setOpen(false)
                     }}
-                    size={1.5}
+                    size={1.3}
                     second
                 >
-                    NO
+                    {noText}
                 </Button>
                 <Button
                     onKey={'Enter'}
@@ -41,9 +41,9 @@ export const Confirm = ({ setOpen, todo = () => {}, text='' }) => {
                         setOpen(false)
                         todo()
                     }}
-                    size={1.5}
+                    size={1.3}
                 >
-                    YES
+                    {yesText}
                 </Button>
             </StyledButtons>
         </StyledWrapper>

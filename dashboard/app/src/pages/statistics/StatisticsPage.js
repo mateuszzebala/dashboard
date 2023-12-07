@@ -69,7 +69,6 @@ export const StatisticsPage = () => {
                 <StyledTile onClick={()=>{
                     navigate(LINKS.statistics.browsers())
                 }}><BsBrowserSafari/> BROWSERS</StyledTile>
-                <StyledTile><FaMoneyBillTransfer/> FINANCES</StyledTile>
             </StyledWrapper>
         </MainTemplate>
     )

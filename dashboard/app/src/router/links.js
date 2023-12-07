@@ -39,6 +39,7 @@ export const LINKS = {
     },
     email: {
         index: () => '/dashboard/email/',
+        inbox: (mail) => `/dashboard/email/inbox?mail=${mail}`,
     },
     notes: {
         index: () => '/dashboard/notes/',

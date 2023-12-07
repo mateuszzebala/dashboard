@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
+import { FiMinus, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 
 const StyledWrapper = styled.div`
@@ -8,9 +9,9 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-size: ${({ size }) => size * 20 + 'px'};
-    background-color: ${({ theme }) => theme.primary}22;
+    background-color: ${({ theme }) => theme.quaternary};
     color: ${({ theme }) => theme.primary};
-    border-radius: ${({ size }) => size * 20 + 'px'};
+    border-radius: ${({ size }) => size * 10 + 'px'};
 `
 const StyledInput = styled.input`
     border: 0;
@@ -30,10 +31,15 @@ const StyledButton = styled.button`
     flex-direction: column;
     font-size: ${({ size }) => size * 15 + 'px'};
     align-items: center;
-    border-radius: 50%;
+    border-radius: ${({ size }) => size * 10 + 'px'};
     color: ${({ theme }) => theme.primary};
     cursor: pointer;
     height: ${({ size }) => size * 35 + 'px'};
+    outline: 0 solid ${({theme})=>theme.quaternary};
+    transition: outline-width 0.1s;
+    &:hover, &:focus{
+        outline-width: 5px;
+    }
     background-color: transparent;
     border: 0;
     width: ${({ size }) => size * 35 + 'px'};
@@ -65,7 +71,7 @@ export const Counter = ({
                 }}
                 size={size}
             >
-                <FaMinus />
+                <FiMinus />
             </StyledButton>
             <StyledRow scaleSize={size}>
                 <StyledInput
@@ -73,9 +79,9 @@ export const Counter = ({
                     scaleSize={size}
                     size={2}
                     onChange={(e) => {
-                        setValue(e.target.value ? parseInt(e.target.value) : 0)
+                        setValue(prev => e.target.value ? parseInt(e.target.value) : 0)
                     }}
-                />{' '}
+                />
                 {unit}
             </StyledRow>
             <StyledButton
@@ -84,7 +90,7 @@ export const Counter = ({
                     setValue((prev) => (prev + 1 <= max ? prev + 1 : prev))
                 }}
             >
-                <FaPlus />
+                <FiPlus />
             </StyledButton>
         </StyledWrapper>
     )

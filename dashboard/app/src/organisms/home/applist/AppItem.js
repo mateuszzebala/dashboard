@@ -26,7 +26,10 @@ const StyledBox = styled.div`
         background: ${({theme})=>theme.primary}22;
     }
 `
-const StyledName = styled.div``
+const StyledName = styled.div`
+    text-transform: uppercase;
+    font-size: 14px;
+`
 const StyledLink = styled.div`
     display: flex;
     flex-direction: column;
@@ -36,7 +39,7 @@ const StyledLink = styled.div`
     justify-content: center;
 `
 const StyledIcon = styled.div`
-    font-size: 40px;
+    font-size: 32px;
 `
 
 export const AppItem = ({ icon, name = '', link }) => {

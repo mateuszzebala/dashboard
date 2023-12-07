@@ -146,7 +146,9 @@ export const UserPage = () => {
                 modalForm({
                     content: Confirm,
                     title: 'ACTIVE',
-                    text: active ? 'is_active = false' : 'is_active = true',
+                    text: 'SET ACTIVE AS',
+                    yesText: active ? 'False' : 'True',
+                    noText: active ? 'True' : 'False',
                     icon: <MdBlock/>,
                     todo: () => {
                         FETCH(ENDPOINTS.users.active(), {id, active: !active}).then(data => {

@@ -1,14 +1,7 @@
-import { BiEditAlt, BiHomeAlt2 } from 'react-icons/bi'
-import { AiOutlineBarChart, AiOutlineMessage } from 'react-icons/ai'
-import {BsFolder, BsKey } from 'react-icons/bs'
-import { FiUsers } from 'react-icons/fi'
-import { FaRegEye, FaRegMoneyBillAlt, FaTerminal } from 'react-icons/fa'
+import { FiBarChart, FiDatabase, FiEdit2, FiEye, FiFolder, FiHome, FiKey, FiMail, FiTerminal, FiUsers } from 'react-icons/fi'
 import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
-import { PiDatabaseBold } from 'react-icons/pi'
-import { HiOutlineMail, HiOutlineShoppingBag, HiOutlineTerminal } from 'react-icons/hi'
-import { MdCalendarMonth } from 'react-icons/md'
 
 export const SUBLINKS = {}
 
@@ -24,12 +17,12 @@ export const initSubLinks = async () => {
 export const APPS = {
     home: {
         name: 'Home',
-        icon: BiHomeAlt2,
+        icon: FiHome,
         link: LINKS.home(),
     },
     database: {
         name: 'Database',
-        icon: PiDatabaseBold,
+        icon: FiDatabase,
         link: LINKS.database.index(),
         sublinks: () =>
             SUBLINKS.DATABASE.sort().reduce((obj, item) => {
@@ -50,7 +43,7 @@ export const APPS = {
     },
     files: {
         name: 'Files',
-        icon: BsFolder,
+        icon: FiFolder,
         link: LINKS.files.index(),
         sublinks: () => {
             return {
@@ -62,12 +55,12 @@ export const APPS = {
     },
     editor: {
         name: 'Editor',
-        icon: BiEditAlt,
+        icon: FiEdit2,
         link: LINKS.editor.index(),
     },
     terminal: {
         name: 'Terminal',
-        icon: HiOutlineTerminal,
+        icon: FiTerminal,
         link: LINKS.terminal.index(),
         sublinks: () => {
             return {
@@ -77,59 +70,24 @@ export const APPS = {
             }
         },
     },
-
-    messages: {
-        name: 'Messages',
-        icon: AiOutlineMessage,
-        link: LINKS.messages.index(),
-        sublinks: () => {
-            return {
-                ALL: '/',
-                READ: '/',
-                UNREAD: '/',
-            }
-        },
-    },
     email: {
         name: 'Email',
-        icon: HiOutlineMail,
+        icon: FiMail,
         link: LINKS.email.index(),
-    },
-    finance: {
-        name: 'Finance',
-        icon: FaRegMoneyBillAlt,
-        link: LINKS.finance.index(),
-    },
-    shop: {
-        name: 'Shop',
-        icon: HiOutlineShoppingBag,
-        link: LINKS.shop.index(),
-        sublinks: () => {
-            return {
-                PRODUCTS: LINKS.shop.products(),
-                ORDERS: LINKS.shop.orders(),
-                CARTS: LINKS.shop.carts(),
-            }
-        },
-    },
-    calendar: {
-        name: 'Calendar',
-        icon: MdCalendarMonth,
-        link: LINKS.calendar.index(),
     },
     requests: {
         name: 'Requests',
-        icon: FaRegEye,
+        icon: FiEye,
         link: LINKS.requests.index(),
     },
     sessions: {
         name: 'Sessions',
-        icon: BsKey,
+        icon: FiKey,
         link: LINKS.sessions.index(),
     },
     statistics: {
         name: 'Statistics',
-        icon: AiOutlineBarChart,
+        icon: FiBarChart,
         link: LINKS.statistics.index(),
         sublinks: () => {
             return {

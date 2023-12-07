@@ -62,7 +62,7 @@ export const ModalForm = () => {
     const [modalForm, setModalForm] = React.useContext(ModalFormContext)
     return (
         <>
-            <StyledTaskBar>
+            {/* <StyledTaskBar>
                 {range(0, modalForm.length - 1).map(index => {
                     const form = modalForm[index]
                     return (
@@ -71,7 +71,7 @@ export const ModalForm = () => {
                         }} key={form.title}>{form.icon}</StyledTaskBarIcon>
                     )
                 })}
-            </StyledTaskBar>
+            </StyledTaskBar> */}
             {range(0, modalForm.length - 1).map(index => {
                 const form = modalForm[index]
                 return (

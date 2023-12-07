@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { AppItem } from './AppItem.js'
 import { APPS } from '../../../apps/apps'
+import { useSettings } from '../../../utils/hooks.js'
 
 const StyledGrid = styled.div`
     display: grid;
@@ -22,9 +23,11 @@ const StyledGrid = styled.div`
 `
 
 export const AppList = () => {
+    const [settings] = useSettings()
     return (
         <StyledGrid>
             {Object.values(APPS).map((app) => {
+                if (!settings[`dashboard.app.${app.name.toLowerCase()}`]) return ''
                 const Icon = app.icon
                 return (
                     <AppItem

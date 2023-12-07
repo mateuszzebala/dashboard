@@ -6,10 +6,12 @@ import { Link } from '../atoms/Link'
 
 import {HiOutlineMenu} from 'react-icons/hi'
 import { toBoolStr } from '../utils/utils'
+import { useSettings } from '../utils/hooks'
 
 const StyledWrapper = styled.nav`
     display: flex;
-    padding: ${({submenuExists}) => submenuExists ? '20px 10px 10px' : '20px 10px'};
+    transition: padding 0.3s;
+    padding: ${({submenuExists, hideSubmenu}) => submenuExists ? !hideSubmenu ? '20px 10px 10px' : '20px 10px' : '20px 10px'};
     width: 100%;
     z-index: 1;
     align-items: center;
@@ -82,6 +84,8 @@ export const TopBar = ({
     hideSubmenu,
     submenuExists
 }) => {
+    const [settings] = useSettings()
+    
     function handleBurgerClick() {
         setClose((prev) => !prev)
     }
@@ -89,6 +93,7 @@ export const TopBar = ({
     return (
         <StyledWrapper
             submenuExists={toBoolStr(submenuExists)}
+            hideSubmenu={toBoolStr(hideSubmenu)}
         >
             <StyledLeftSide>
                 <StyledMenuButton onClick={handleBurgerClick}>
@@ -99,7 +104,8 @@ export const TopBar = ({
                     to={topbarLink ? topbarLink : app.link || LINKS.home()}
                 >
                     <StyledTitle>
-                        {<app.icon />} {app.name.toUpperCase()}
+                        {settings['dashboard.topbar_app_icon'] && <app.icon />}
+                        {app.name.toUpperCase()}
                         <StyledSubTitle>{title}</StyledSubTitle>
                     </StyledTitle>
                 </Link>

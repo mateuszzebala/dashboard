@@ -7,30 +7,28 @@ import { useNavigate } from 'react-router-dom'
 import { LINKS } from '../../router/links'
 import { APPS } from '../../apps/apps'
 import {
-    BsFillEyeFill,
-    BsFillKeyFill,
     BsPersonFillGear,
     BsQrCode,
     BsTable,
 } from 'react-icons/bs'
-import { FaUser, FaUsers } from 'react-icons/fa'
 import { BiWrench } from 'react-icons/bi'
+import { FiEye, FiKey, FiUser, FiUsers } from 'react-icons/fi'
 
 const IconByModel = {
-    user: <FaUser />,
-    group: <FaUsers />,
-    session: <BsFillKeyFill />,
-    requestlog: <BsFillEyeFill />,
+    user: <FiUser />,
+    group: <FiUsers />,
+    session: <FiKey />,
+    requestlog: <FiEye />,
     permission: <BsPersonFillGear />,
     configuration: <BiWrench />,
     qrcodeauth: <BsQrCode/>,
-    message: <APPS.messages.icon/>,
-    account: <APPS.users.icon/>
+    account: <FiUser/>
 }
 
 const StyledModels = styled.div`
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     a {
         color: ${({ theme }) => theme.primary};
@@ -44,22 +42,22 @@ const StyledModel = styled.button`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 0 5px 5px 0;
     border: 0;
-    font-size: 14px;
+    flex-direction: column;
     cursor: pointer;
     border-left: 3px solid ${({ theme }) => theme.primary};
     width: 100%;
-    max-width: 300px;
+    font-size: 15px;
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover,
     &:focus {
-        transform: translate(20px, 0);
+        transform: scale(0.95);
         outline: none;
     }
     svg{
-        font-size: 20px;
+        font-size: 30px;
     }
 `
 

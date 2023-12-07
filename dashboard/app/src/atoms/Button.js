@@ -87,6 +87,7 @@ export const Button = ({
     second,
     onKey,
     subContent='',
+    width,
     ...props
 }) => {
     const navigate = useNavigate()
@@ -109,6 +110,7 @@ export const Button = ({
                 circle={toBoolStr(circle)}
                 size={size}
                 second={toBoolStr(second)}
+                width={width}
                 {...props}
             >
                 <StyledChildren second={second} loading={toBoolStr(loading)}>

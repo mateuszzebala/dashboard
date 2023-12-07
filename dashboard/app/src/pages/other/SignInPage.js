@@ -169,11 +169,13 @@ export const SignInPage = () => {
                     value={username}
                     setValue={setUsername}
                     label={'USERNAME'}
+                    size={1.1}
                 />
                 <Input
                     value={password}
                     setValue={setPassword}
                     type="password"
+                    size={1.1}
                     label={'PASSWORD'}
                 />
                 <StyledError error={toBoolStr(error)}>

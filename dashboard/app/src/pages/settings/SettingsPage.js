@@ -3,7 +3,7 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { FiServer, FiSettings } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
 import { ColorInput } from '../../atoms/ColorInput'
-import { useTheme } from '../../utils/hooks'
+import { useSettings, useTheme } from '../../utils/hooks'
 import styled from 'styled-components'
 import { Typography } from '../../atoms/Typography'
 import { Switch } from '../../atoms/Switch'
@@ -115,6 +115,11 @@ const SettingsByPage = {
             <ColorProp
                 setColors={setColors}
                 colors={colors}
+                colorName={'quaternary'}
+            />
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
                 colorName={'error'}
             />
             <ColorProp
@@ -145,6 +150,12 @@ const SettingsByPage = {
             <SwitchSetting
                 value={value}
                 setValue={setValue}
+                prop={'dashboard.polish_flag'}
+                text={'Show Polish Flag'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
                 prop={'dashboard.topbar_username'}
                 text={'Show Username In TopBar'}
             />
@@ -158,12 +169,6 @@ const SettingsByPage = {
             <SwitchSetting
                 value={value}
                 setValue={setValue}
-                prop={'dashboard.leftbar_technology_icons'}
-                text={'Show Leftbar technology icons'}
-            />
-            <SwitchSetting
-                value={value}
-                setValue={setValue}
                 prop={'dashboard.leftbar_app_icons'}
                 text={'Show Leftbar app icons'}
             />
@@ -172,6 +177,61 @@ const SettingsByPage = {
                 setValue={setValue}
                 prop={'dashboard.leftbar_arrow_icons'}
                 text={'Show Leftbar arrow icons'}
+            />
+            <span>APPS</span>
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.database'}
+                text={'Database App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.users'}
+                text={'Users App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.files'}
+                text={'Files App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.editor'}
+                text={'Editor App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.terminal'}
+                text={'Terminal App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.email'}
+                text={'Email App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.requests'}
+                text={'Requests App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.sessions'}
+                text={'Sessions App'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.app.statistics'}
+                text={'Statistics App'}
             />
         </StyledSection>
     ),
@@ -303,9 +363,11 @@ const SettingsByPage = {
             />
         </StyledSection>
     ),
-    shop: ({value, setValue}) => (
+    email: ({value, setValue}) => (
         <StyledSection>
-            <Input label={'SHOP NAME'} value={value['shop.name']} setValue={(val) => setValue(prev => ({...prev, 'shop.name': val}))}/>
+            <Input label={'SMTP ADDRESS'} value={value['email.smtp']} setValue={(val) => setValue(prev => ({...prev, 'email.smtp': val}))}/>
+            <Input type='number' label={'PORT'} value={value['email.port']} setValue={(val) => setValue(prev => ({...prev, 'email.port': val}))}/>
+            <Input type='password' label={'SMTP PASSWORD'} value={value['email.password']} setValue={(val) => setValue(prev => ({...prev, 'email.password': val}))}/>
         </StyledSection>
     )
 }
@@ -313,6 +375,7 @@ const SettingsByPage = {
 export const SettingsPage = () => {
     const [theme, updateTheme] = useTheme()
     const [searchParams, setSearchParams] = useSearchParams()
+    const [settings, setSettings] = useSettings()
     const [value, setValue] = React.useState({})
     const [page, setPage] = React.useState(searchParams.get('page') || 'home')
     const [saved, setSaved] = React.useState(true)
@@ -321,8 +384,9 @@ export const SettingsPage = () => {
 
     React.useEffect(()=>{
         FETCH(ENDPOINTS.settings.get()).then(data => {
-            setInitValue(data.data)
+            
             setValue(data.data)
+            setInitValue(data.data)
         })
     }, [])
 
@@ -330,6 +394,7 @@ export const SettingsPage = () => {
         primary: theme.primary,
         secondary: theme.secondary,
         success: theme.success,
+        quaternary: theme.quaternary,
         accent: theme.accent,
         error: theme.error,
         warning: theme.warning,
@@ -382,13 +447,16 @@ export const SettingsPage = () => {
                         FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify(value)}).then(() => {
                             setSaved(true)
                             setSaveLoading(false)
+                            FETCH(ENDPOINTS.settings.get()).then(data => {
+                                setSettings(data.data)
+                            })
                         })
                     }} icon={<LuSave/>} size={1.6}/>
                 </Theme>
                 <Button onClick={()=>{setPage('colors')}} subContent='COLORS' second={page !== 'colors'} icon={<MdOutlineColorLens />} size={1.4}></Button>
-                <Button onClick={()=>{setPage('dashboard')}} subContent='DASHBO...' second={page !== 'page'} icon={<LuComponent />} size={1.4}></Button>
+                <Button onClick={()=>{setPage('dashboard')}} subContent='DASHBO...' second={page !== 'dashboard'} icon={<LuComponent />} size={1.4}></Button>
                 | 
-                {Object.values(APPS).filter(app => SettingsByPage[app.name.toLowerCase()]).map(app => <Button key={app.name} onClick={()=>{setPage(app.name.toLowerCase())}} subContent={app.name.toUpperCase()} second={page !== app.name.toLowerCase()} icon={<app.icon/>} size={1.4} />)}
+                {Object.values(APPS).filter(app => settings[`dashboard.app.${app.name.toLowerCase()}`] !== false).filter(app => SettingsByPage[app.name.toLowerCase()]).map(app => <Button key={app.name} onClick={()=>{setPage(app.name.toLowerCase())}} subContent={app.name.toUpperCase()} second={page !== app.name.toLowerCase()} icon={<app.icon/>} size={1.4} />)}
             </>}
         >
             <StyledWrapper>
@@ -398,7 +466,7 @@ export const SettingsPage = () => {
                 {page === 'database' &&  <SettingsByPage.database value={value} setValue={setValue}/>}
                 {page === 'terminal' &&  <SettingsByPage.terminal value={value} setValue={setValue}/>}
                 {page === 'requests' &&  <SettingsByPage.requests value={value} setValue={setValue}/>}
-                {page === 'shop' &&  <SettingsByPage.shop value={value} setValue={setValue}/>}
+                {page === 'email' &&  <SettingsByPage.email value={value} setValue={setValue}/>}
             </StyledWrapper>
         </MainTemplate>
     )

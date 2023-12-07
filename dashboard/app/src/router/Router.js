@@ -6,15 +6,11 @@ import { DatabasePage } from '../pages/database/DatabasePage'
 import { DatabaseModelPage } from '../pages/database/DatabaseModelPage'
 import { DatabaseItemPage } from '../pages/database/DatabaseItemPage'
 import { FilesPage } from '../pages/files/FilesPage'
-import { MessagesPage } from '../pages/messages/MessagesPage'
 import { UsersPage } from '../pages/users/UsersPage'
 import { SignInPage } from '../pages/other/SignInPage'
-import { FinancePage } from '../pages/finance/FinancePage'
 import { TerminalPage } from '../pages/terminal/TerminalPage'
-import { NotesPage } from '../pages/notes/NotesPage'
 import { EmailPage } from '../pages/email/EmailPage'
 import { StatisticsPage } from '../pages/statistics/StatisticsPage'
-import { MapPage } from '../pages/map/MapPage'
 import { RequestsPage } from '../pages/requests/RequestsPage'
 import { SettingsPage } from '../pages/settings/SettingsPage'
 import { SearchPage } from '../pages/search/SearchPage'
@@ -26,76 +22,60 @@ import { EditorPage } from '../pages/editor/EditorPage'
 import { DatabasePatchItemPage } from '../pages/database/DatabasePatchItemPage'
 import { StatisticsWorldMapPage } from '../pages/statistics/subpages/StatisticsWorldMapPage'
 import { UserPage } from '../pages/users/UserPage'
-import { MessagePage } from '../pages/messages/MessagePage'
 import { StatisticsBrowsersPage } from '../pages/statistics/subpages/StatisticsBrowsersPage'
-import { ShopPage } from '../pages/shop/ShopPage'
-import { ShopCartsPage } from '../pages/shop/ShopCartsPage'
-import { ShopProductsPage } from '../pages/shop/ShopProductsPage'
-import { ShopOrdersPage } from '../pages/shop/ShopOrdersPage'
-import { CalendarPage } from '../pages/calendar/CalendarPage'
+import { EmailInboxPage } from '../pages/email/EmailInboxPage'
+import { APPS } from '../apps/apps'
+import { useSettings } from '../utils/hooks'
 
 const pages = {
-    '/dashboard/': HomePage,
+    '/dashboard/': {page: HomePage, app: APPS.home},
 
-    '/dashboard/signin/': SignInPage,
+    '/dashboard/signin/': {page: SignInPage, app: null},
 
-    '/dashboard/database/': DatabasePage,
-    '/dashboard/database/:modelName/': DatabaseModelPage,
-    '/dashboard/database/:modelName/:pk/': DatabaseItemPage,
-    '/dashboard/database/:modelName/add/': DatabasePutItemPage,
-    '/dashboard/database/:modelName/edit/:pk': DatabasePatchItemPage,
+    '/dashboard/database/': {page: DatabasePage, app: APPS.database},
+    '/dashboard/database/:modelName/': {page: DatabaseModelPage, app: APPS.database},
+    '/dashboard/database/:modelName/:pk/': {page: DatabaseItemPage, app: APPS.database},
+    '/dashboard/database/:modelName/add/': {page: DatabasePutItemPage, app: APPS.database},
+    '/dashboard/database/:modelName/edit/:pk': {page: DatabasePatchItemPage, app: APPS.database},
 
-    '/dashboard/files/': FilesPage,
+    '/dashboard/files/': {page: FilesPage, app: APPS.files},
 
-    '/dashboard/editor/': EditorPage,
-    '/dashboard/editor/:type/': FileEditorPage,
+    '/dashboard/editor/': {page: EditorPage, app: APPS.editor},
+    '/dashboard/editor/:type/': {page: FileEditorPage, app: APPS.editor},
 
-    '/dashboard/messages/': MessagesPage,
-    '/dashboard/messages/:messageId/': MessagePage,
+    '/dashboard/users/': {page: UsersPage, app: APPS.users},
+    '/dashboard/users/:id/': {page: UserPage, app: APPS.users},
 
-    '/dashboard/calendar/': CalendarPage,
+    '/dashboard/terminal/': {page: TerminalPage, app: APPS.terminal},
 
-    '/dashboard/users/': UsersPage,
-    '/dashboard/users/:id/': UserPage,
+    '/dashboard/email/': {page: EmailPage, app: APPS.email},
+    '/dashboard/email/inbox/': {page: EmailInboxPage, app: APPS.email},
 
-    '/dashboard/finance/': FinancePage,
+    '/dashboard/statistics/': {page: StatisticsPage, app: APPS.statistics},
+    '/dashboard/statistics/map/': {page: StatisticsWorldMapPage, app: APPS.statistics},
+    '/dashboard/statistics/browsers/': {page: StatisticsBrowsersPage, app: APPS.statistics},
 
-    '/dashboard/shop/': ShopPage,
-    '/dashboard/shop/carts/': ShopCartsPage,
-    '/dashboard/shop/products/': ShopProductsPage,
-    '/dashboard/shop/orders/': ShopOrdersPage,
+    '/dashboard/requests/': {page: RequestsPage, app: APPS.requests},
 
-    '/dashboard/terminal/': TerminalPage,
+    '/dashboard/settings/': {page: SettingsPage, app: null},
 
-    '/dashboard/email/': EmailPage,
+    '/dashboard/sessions/': {page: SessionsPage, app: APPS.sessions},
 
-    '/dashboard/notes/': NotesPage,
+    '/dashboard/search/': {page: SearchPage, app: null},
 
-    '/dashboard/statistics/': StatisticsPage,
-    '/dashboard/statistics/map/': StatisticsWorldMapPage,
-    '/dashboard/statistics/browsers/': StatisticsBrowsersPage,
+    '/dashboard/info/:appName/': {page: InfoPage, app: null},
+    '/dashboard/info/': {page: InfoPage, app: null},
 
-    '/dashboard/map/': MapPage,
-
-    '/dashboard/requests/': RequestsPage,
-
-    '/dashboard/settings/': SettingsPage,
-
-    '/dashboard/sessions/': SessionsPage,
-
-    '/dashboard/search/': SearchPage,
-
-    '/dashboard/info/:appName/': InfoPage,
-    '/dashboard/info/': InfoPage,
-
-    '*': Page404,
+    '*': {page: Page404, app: null},
 }
 
 export const Router = () => {
+    const [settings] = useSettings()
     return (
         <Routes>
             {Object.keys(pages).map((path) => {
-                const Elem = pages[path]
+                if (pages[path].app && !settings[`dashboard.app.${pages[path].app.name.toLowerCase()}`]) return ''
+                const Elem = pages[path].page
                 return <Route key={path} path={path} element={<Elem />} />
             })}
         </Routes>

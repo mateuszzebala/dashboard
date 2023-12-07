@@ -85,6 +85,11 @@ export const centerEllipsis = (text, width) => {
     return `${leftSide}...${rightSide}`
 }
 
+export const ellipsis = (text, width) => {
+    if (text.length < width) return text
+    return text.slice(0, width) + '...'
+}
+
 export const getCursorByPosition = (top, left) => {
     const cursors = {
         'top-left': 'nw-resize',

@@ -14,10 +14,10 @@ import { APPS } from '../../apps/apps'
 import { ModelTable } from '../../organisms/database/ModelTable'
 import { Counter } from '../../atoms/Counter'
 import { Confirm } from '../../atoms/modalforms/Confirm'
-import { FiEdit, FiTrash } from 'react-icons/fi'
+import { FiCheck, FiEdit, FiPlus, FiSearch, FiTrash } from 'react-icons/fi'
 import {PiExportBold} from 'react-icons/pi'
 import {PiFunctionBold} from 'react-icons/pi'
-import { useModalForm, useTheme } from '../../utils/hooks'
+import { useModalForm, useSettings, useTheme } from '../../utils/hooks'
 import { Export } from '../../atoms/modalforms/Export'
 import { Actions } from '../../atoms/modalforms/Actions'
 import { useSearchParams } from 'react-router-dom'
@@ -78,11 +78,12 @@ const StyledFooter = styled.div`
 export const DatabaseModelPage = () => {
     const { modelName } = useParams()
     const modalForm = useModalForm()
+    const [settings] = useSettings()
     const [searchParams, setSearchParams] = useSearchParams()
     const [page, setPage] = React.useState(searchParams.get('page') ? parseInt(searchParams.get('page')) : 0)
     const [pages, setPages] = React.useState(2)
     const [searchQuery, setSearchQuery] = React.useState(searchParams.get('query') || '')
-    const [length, setLength] = React.useState(searchParams.get('length') ? parseInt(searchParams.get('length')) : 10)
+    const [length, setLength] = React.useState(searchParams.get('length') ? parseInt(searchParams.get('length')) : settings['database.default_number_of_rows'])
     const [orderBy, setOrderBy] = React.useState(searchParams.get('orderBy') == 'null' ? null : searchParams.get('orderBy'))
     const [asc, setAsc] = React.useState(searchParams.get('asc') == 'false' ? false : true)
     const [action, setAction] = React.useState()
@@ -170,7 +171,7 @@ export const DatabaseModelPage = () => {
                         <Button
                             second
                             size={1.3}
-                            icon={<BsCheckAll />}
+                            icon={<FiCheck />}
                             onKey={{
                                 key: 'a',
                                 ctrlKey: true,
@@ -189,7 +190,7 @@ export const DatabaseModelPage = () => {
                             second
                             subContent={'NEW'}
                             to={LINKS.database.putItem(modelName)}
-                            icon={<FaPlus />}
+                            icon={<FiPlus />}
                             size={1.3}
                         />
                         <Select
@@ -330,11 +331,11 @@ export const DatabaseModelPage = () => {
                             setValue={setLength}
                             min={0}
                             max={1000}
-                            unit="rows"
-                            size={1.2}
+                            unit="Rows"
+                            size={1.3}
                         />
                         <Button
-                            icon={<FaSearch/>}
+                            icon={<FiSearch/>}
                             second
                             size={1.3}
                             onKey={{
@@ -346,6 +347,7 @@ export const DatabaseModelPage = () => {
                             onClick={()=>{
                                 modalForm({
                                     content: Prompt,
+                                    icon: <FiSearch/>,
                                     title: 'QUERY',
                                     initValue: searchQuery,
                                     setButton: 'SEARCH',

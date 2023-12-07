@@ -20,7 +20,7 @@ const StyledTooltip = styled.div`
     overflow: hidden;
     white-space: pre-wrap;
     z-index: 10;
-    font-size: 14px;
+    font-size: 16px;
     user-select: none;
     padding: 5px 10px;
     text-align: center;
@@ -36,7 +36,7 @@ const StyledTooltip = styled.div`
     animation-delay: 1s;
 `
 
-export const Tooltip = ({ children, text = '' }) => {
+export const Tooltip = ({ children, text = '', wrapper: Wrapper = StyledWrapper, ...props }) => {
     const [show, setShow] = React.useState(false)
     const [position, setPosition] = React.useState(false)
 
@@ -54,10 +54,11 @@ export const Tooltip = ({ children, text = '' }) => {
     }
 
     return (
-        <StyledWrapper
+        <Wrapper
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
+            {...props}
         >
             {children}
             {show && text && (
@@ -65,6 +66,6 @@ export const Tooltip = ({ children, text = '' }) => {
                     {text}
                 </StyledTooltip>
             )}
-        </StyledWrapper>
+        </Wrapper>
     )
 }

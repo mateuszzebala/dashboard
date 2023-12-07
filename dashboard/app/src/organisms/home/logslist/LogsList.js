@@ -27,7 +27,8 @@ const StyledList = styled.div`
     }
 `
 
-export const LogsList = () => {
+
+export const LogsList = ({reloadEachSecond=false}) => {
     const [logs, setLogs] = React.useState([])
 
     const handleReload = () => {
@@ -35,7 +36,17 @@ export const LogsList = () => {
             setLogs(data.data.logs)
         })
     }
-    React.useEffect(handleReload, [])
+
+    React.useEffect(() => {
+        handleReload()
+        if(reloadEachSecond){
+            const interval = setInterval(() => {
+                handleReload()
+            }, 1000)
+            return () => clearInterval(interval)
+        }
+    }, [])
+
     return (
         <StyledWrapper>
             <StyledList onClick={handleReload}>

@@ -10,6 +10,7 @@ import {
     GlobalStateContext,
     LoadingContext,
     ModalFormContext,
+    SettingsContext,
     ThemeContext,
     UserContext,
 } from './utils/hooks'
@@ -17,6 +18,8 @@ import { theme } from './theme/theme'
 import { ModalForm } from './atoms/ModalForm'
 import { useCookies } from 'react-cookie'
 import { LoadingWindow } from './atoms/LoadingWindow'
+import { FETCH } from './api/api'
+import { ENDPOINTS } from './api/endpoints'
 
 const StyledWrapper = styled.div`
     min-height: 100vh;
@@ -25,6 +28,7 @@ const StyledWrapper = styled.div`
 export const App = () => {
     const [customTheme, setCustomTheme] = React.useState(theme)
     const [messages, setMessages] = React.useState([])
+    const [settings, setSettings] = React.useState({})
     const [modalForm, setModalForm] = React.useState([])
     const [loading, setLoading] = React.useState({})
     const [user, setUser] = React.useState(null)
@@ -35,6 +39,9 @@ export const App = () => {
         if (cookies.theme) {
             setCustomTheme(cookies.theme)
         }
+        FETCH(ENDPOINTS.settings.get()).then(data => {
+            setSettings(data.data)
+        })
     }, [])
 
     return (
@@ -45,27 +52,31 @@ export const App = () => {
                         <GlobalStateContext.Provider
                             value={[globalState, setGlobalState]}
                         >
-                            <LoadingContext.Provider
-                                value={[loading, setLoading]}
+                            <SettingsContext.Provider
+                                value={[settings, setSettings]}
                             >
-                                <ModalFormContext.Provider
-                                    value={[modalForm, setModalForm]}
+                                <LoadingContext.Provider
+                                    value={[loading, setLoading]}
                                 >
-                                    <MessageContext.Provider
-                                        value={[messages, setMessages]}
+                                    <ModalFormContext.Provider
+                                        value={[modalForm, setModalForm]}
                                     >
-                                        <StyledWrapper>
-                                            <GlobalStyle />
-                                            <MessageGroup />
-                                            <ModalForm />
-                                            <LoadingWindow />
-                                            <RootTemplate>
-                                                <Router />
-                                            </RootTemplate>
-                                        </StyledWrapper>
-                                    </MessageContext.Provider>
-                                </ModalFormContext.Provider>
-                            </LoadingContext.Provider>
+                                        <MessageContext.Provider
+                                            value={[messages, setMessages]}
+                                        >
+                                            <StyledWrapper>
+                                                <GlobalStyle />
+                                                <MessageGroup />
+                                                <ModalForm />
+                                                <LoadingWindow />
+                                                <RootTemplate>
+                                                    <Router />
+                                                </RootTemplate>
+                                            </StyledWrapper>
+                                        </MessageContext.Provider>
+                                    </ModalFormContext.Provider>
+                                </LoadingContext.Provider>
+                            </SettingsContext.Provider>
                         </GlobalStateContext.Provider>
                     </UserContext.Provider>
                 </BrowserRouter>

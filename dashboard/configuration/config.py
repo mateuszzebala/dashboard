@@ -1,5 +1,9 @@
-
+from django.conf import settings
 import json
+
+settings_json_file_path = 'dashboard/configuration/settings.json'
+
+
 
 class SERVER_CONFIG:
     CONFIGURATION = {}
@@ -26,29 +30,47 @@ class SERVER_CONFIG:
 
     def GET_ALLOWED_HOSTS():
         return SERVER_CONFIG.ALLOWED_HOSTS
+
+    def GET_CORS_ALLOWED_ORIGINS():
+        return SERVER_CONFIG.CORS_ALLOWED_ORIGINS
+
+    def GET_CSRF_TRUSTED_ORIGINS():
+        return SERVER_CONFIG.CSRF_TRUSTED_ORIGINS
     
 
 
+def set_settings_prop(prop, value):
+    with open(settings_json_file_path, 'r') as config_file:
+        data = json.load(config_file)
+
+    key_splited = prop.split('.')
+    root = data
+    for key in key_splited[:-1]:
+        if root.get(key) is None:
+            root[key] = {}
+        root = root[key]
+    root[key_splited[-1]] = value
+
+    with open(settings_json_file_path, 'w') as config_file:
+        data = json.dump(data, config_file, indent=4)
+
+def get_settings(*args):
+    with open(settings_json_file_path, 'r') as config:
+        return json.load(config)
 
 def load_configuration():
-    config = open('dashboard/configuration/settings.json', 'r')
-    data = json.load(config).get('server')
+    data = get_settings().get('server')
     SERVER_CONFIG.CONFIGURATION = data.get('config')
     SERVER_CONFIG.ALLOWED_HOSTS = data.get('allowed_hosts')
     SERVER_CONFIG.CORS_ALLOWED_ORIGINS = data.get('cors_allowed_origins')
     SERVER_CONFIG.CSRF_TRUSTED_ORIGINS = data.get('csrf_trusted_origins')
-    config.close()
+    
+    settings.DEBUG = SERVER_CONFIG.DEBUG()
+    settings.ALLOWED_HOSTS = SERVER_CONFIG.GET_ALLOWED_HOSTS()
+    settings.CORS_ALLOWED_ORIGINS = SERVER_CONFIG.GET_CORS_ALLOWED_ORIGINS()
+    settings.CSRF_TRUSTED_ORIGINS = SERVER_CONFIG.GET_CSRF_TRUSTED_ORIGINS()
+    settings.CORS_ALLOW_CREDENTIALS = SERVER_CONFIG.CREDENTIALS()
 
-
-def save_configuration():
-    with open('dashboard/configuration/settings.json', 'r', encoding='utf-8') as last_conf:
-        conf = json.load(last_conf)
-    conf['server'] = {}
-    conf['server']['config'] = SERVER_CONFIG.CONFIGURATION
-    conf['server']['allowed_hosts'] = SERVER_CONFIG.ALLOWED_HOSTS
-    conf['server']['cors_allowed_origins'] = SERVER_CONFIG.CORS_ALLOWED_ORIGINS
-    conf['server']['csrf_trusted_origins'] = SERVER_CONFIG.CSRF_TRUSTED_ORIGINS
-    with open('dashboard/configuration/settings.json', 'w', encoding='utf-8') as config:
-        json.dump(conf, config, indent=4)
-
-load_configuration()
+def init():
+    load_configuration()
+    

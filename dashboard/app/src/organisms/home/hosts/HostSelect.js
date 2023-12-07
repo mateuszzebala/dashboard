@@ -57,9 +57,10 @@ export const HostSelect = ({ name, endpoint }) => {
     const handleAddHost = () => {
         modalForm({
             content: Prompt,
-            title: 'HOST',
+            title: 'ADD HOST',
             icon: <MdOutlineNetworkCheck/>,
             label: 'HOST',
+            setButton: 'ADD',
             todo: (val) => {
                 setHosts((prev) => [...prev, val])
             }
@@ -76,12 +77,11 @@ export const HostSelect = ({ name, endpoint }) => {
                 {hosts && hosts.length > 0 ? (
                     hosts.map((host) => (
                         <Host
-                            onContextMenu={(e) => {
-                                e.preventDefault()
+                            onClick={(e) => {
                                 modalForm({
                                     content: Confirm,
                                     title: 'DELETE',
-                                    text: 'DELETE HOST?',
+                                    text: 'DO YOU WANT TO DELETE HOST?',
                                     icon: <FiTrash />,
                                     todo: () => {
                                         host !== 'localhost' &&

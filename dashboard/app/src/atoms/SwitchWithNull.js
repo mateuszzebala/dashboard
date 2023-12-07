@@ -14,7 +14,7 @@ const StyledWrapper = styled.button`
     position: relative;
     cursor: pointer;
     outline: 0px solid
-        ${({ theme, value }) => (value ? theme.primary : theme.tertiary)}88;
+        ${({ theme, value }) => (value === null ? theme.error : value ? theme.primary : theme.tertiary)}88;
     &:focus,
     &:hover {
         outline-width: ${({ size }) => size * 2 + 'px'};

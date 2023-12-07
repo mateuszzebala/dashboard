@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { toBoolStr } from '../utils/utils'
+import { useSettings } from '../utils/hooks'
 
 const StyledTop = styled.div`
     display: flex;
@@ -67,6 +68,8 @@ const StyledDropdownIcon = styled.div`
 
 export const LeftBarItem = ({ app, sublinks = {} }) => {
     const [dropdown, setDropdown] = React.useState(false)
+    const [settings] = useSettings()
+
     return (
         <StyledWrapper>
             <StyledTop
@@ -74,14 +77,16 @@ export const LeftBarItem = ({ app, sublinks = {} }) => {
                     setDropdown((prev) => !prev)
                 }}
             >
-                <app.icon />
+                {settings['dashboard.leftbar_app_icons'] && <app.icon />}
                 <Link to={app.link}>{app.name}</Link>
-                <StyledDropdownIcon
-                    sublinkslength={Object.keys(sublinks).length}
-                    dropdown={toBoolStr(dropdown)}
-                >
-                    <MdKeyboardArrowRight />
-                </StyledDropdownIcon>
+                {settings['dashboard.leftbar_arrow_icons'] && (
+                    <StyledDropdownIcon
+                        sublinkslength={Object.keys(sublinks).length}
+                        dropdown={toBoolStr(dropdown)}
+                    >
+                        <MdKeyboardArrowRight />
+                    </StyledDropdownIcon>
+                )}
             </StyledTop>
             <StyledDropdown
                 dropdown={toBoolStr(dropdown)}

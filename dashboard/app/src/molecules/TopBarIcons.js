@@ -5,14 +5,14 @@ import {
     AiOutlineInfoCircle,
     AiOutlineUser,
 } from 'react-icons/ai'
-import { FiLogOut, FiSettings } from 'react-icons/fi'
+import { FiClock, FiGrid, FiInfo, FiLogOut, FiSettings, FiUser } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
-import { useGlobalKey, useModalForm, useTheme, useUser } from '../utils/hooks'
+import { useGlobalKey, useModalForm, useSettings, useTheme, useUser } from '../utils/hooks'
 import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
 import { FaQrcode } from 'react-icons/fa'
 import { LoadingImage } from '../atoms/LoadingImage'
@@ -40,6 +40,7 @@ const StyledIcon = styled.span`
 const StyledWrapper = styled.span`
     display: flex;
     padding: 0 10px;
+    gap: 3px;
     align-items: center;
     justify-content: center;
     color: ${({ theme }) => theme.primary};
@@ -48,6 +49,7 @@ const StyledWrapper = styled.span`
 export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
     const navigate = useNavigate()
     const modalForm = useModalForm()
+    const [settings] = useSettings()
     const { user } = useUser()
     const [theme] = useTheme()
     useGlobalKey(
@@ -65,8 +67,8 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
             <Tooltip text="YOUR ACCOUNT">
                 <Link to={LINKS.users.user(user.id)}>
                     <StyledIcon>
-                        {user.username}
-                        <AiOutlineUser />
+                        {settings['dashboard.topbar_username'] && user.username}
+                        <FiUser />
                     </StyledIcon>
                 </Link>
             </Tooltip>
@@ -74,7 +76,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                 {InfoByApp[app.name] && (
                     <Link to={LINKS.info.app(app.name)}>
                         <StyledIcon>
-                            <AiOutlineInfoCircle />
+                            <FiInfo />
                         </StyledIcon>
                     </Link>
                 )}
@@ -119,30 +121,32 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                     <BsArrowBarUp />
                 </StyledIcon>
             </Tooltip>
-            <Tooltip text="CHOOSE PAGE">
-                <StyledIcon
-                    onClick={() => {
-                        modalForm({
-                            content: DashboardsMenu,
-                            title: 'CHOOSE PAGE',
-                            icon: <BiSolidGrid />,
-                        })
-                    }}
-                >
-                    <BiSolidGrid />
-                </StyledIcon>
-            </Tooltip>
+            {settings['dashboard.dashboards_menu'] && 
+                <Tooltip text="CHOOSE PAGE">
+                    <StyledIcon
+                        onClick={() => {
+                            modalForm({
+                                content: DashboardsMenu,
+                                title: 'CHOOSE PAGE',
+                                icon: <FiGrid />,
+                            })
+                        }}
+                    >
+                        <FiGrid />
+                    </StyledIcon>
+                </Tooltip>
+            }
             <Tooltip text="SERVER TIME">
                 <StyledIcon
                     onClick={() => {
                         modalForm({
                             content: ServerClock,
                             title: 'SERVER TIME',
-                            icon: <AiOutlineClockCircle />,
+                            icon: <FiClock />,
                         })
                     }}
                 >
-                    <AiOutlineClockCircle />
+                    <FiClock />
                 </StyledIcon>
             </Tooltip>
             <Tooltip text="LOGOUT">

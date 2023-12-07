@@ -7,15 +7,12 @@
             "xlsx": true,
             "csv": true
         },
-        "default_number_of_rows": 12
+        "default_number_of_rows": 60
     },
     "terminal": {
         "sh_type": "zsh",
         "bookmarks": true,
         "auto_clear": true
-    },
-    "shop": {
-        "name": "dsdsddsdsd"
     },
     "requests": {
         "save_requests": true,
@@ -24,33 +21,46 @@
     "default_number_of_rows": 15,
     "home": {
         "app_list_widget": true,
-        "server_config_widget": false,
+        "server_config_widget": true,
         "logs_widget": true,
-        "reload_logs": true,
+        "reload_logs": false,
         "hosts_widgets": true,
-        "finance_widget": true
+        "finance_widget": false
     },
     "dashboard": {
         "dashboards_menu": true,
         "topbar_username": true,
         "topbar_app_icon": true,
-        "leftbar_technology_icons": false,
+        "leftbar_app_icons": true,
         "leftbar_arrow_icons": true,
-        "leftbar_app_icons": false
+        "polish_flag": false,
+        "app": {
+            "home": true,
+            "database": true,
+            "users": true,
+            "files": true,
+            "editor": true,
+            "terminal": true,
+            "email": true,
+            "requests": true,
+            "sessions": true,
+            "statistics": true
+        }
     },
     "server": {
         "config": {
             "enable_server": true,
-            "debug": false,
+            "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": false,
+            "save_requests": true,
             "credientals": true
         },
         "allowed_hosts": [
             "localhost",
             "10.0.0.2",
-            "192.168.100.35"
+            "192.168.100.35",
+            "manjaro"
         ],
         "cors_allowed_origins": [
             "http://localhost:3000",
@@ -68,5 +78,10 @@
             "http://10.0.0.2:8000",
             "http://10.0.0.2:3000"
         ]
+    },
+    "email": {
+        "password": "adminadminadminadmin",
+        "port": "447",
+        "smtp": "smtp.url.com"
     }
 }

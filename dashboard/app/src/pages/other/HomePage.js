@@ -7,6 +7,7 @@ import { ServerManage } from '../../organisms/home/servermanage/ServerManage'
 import { APPS } from '../../apps/apps'
 import { HostSelect } from '../../organisms/home/hosts/HostSelect'
 import { ENDPOINTS } from '../../api/endpoints'
+import { useSettings } from '../../utils/hooks'
 
 const StyledPage = styled.main`
     scroll-behavior: smooth;
@@ -32,8 +33,9 @@ const StyledWidgets = styled.div`
 `
 
 const StyledHosts = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 31%);
+    display: flex;
+    flex-wrap: wrap;
+    
     justify-content: justify-content;
     padding: 20px;
     gap: 20px;
@@ -42,29 +44,31 @@ const StyledHosts = styled.div`
 
 
 export const HomePage = () => {
+    const [settings] = useSettings() 
     return (
         <MainTemplate app={APPS.home}>
             <StyledPage page={APPS.home.name}>
                 <StyledWidgets>
-                    <AppList />
-                    <ServerManage />
-                    <LogsList />
-
+                    {settings['home.app_list_widget'] && <AppList />}
+                    {settings['home.server_config_widget'] && <ServerManage />}
+                    {settings['home.logs_widget'] && <LogsList reloadEachSecond={settings['home.reload_logs']}/>}
                 </StyledWidgets>
-                <StyledHosts>
-                    <HostSelect
-                        endpoint={ENDPOINTS.home.allowed_hosts()}
-                        name={'ALLOWED HOSTS'}
-                    />
-                    <HostSelect
-                        endpoint={ENDPOINTS.home.cors_allowed_origins()}
-                        name={'CORS ALLOWED ORIGINS'}
-                    />
-                    <HostSelect
-                        endpoint={ENDPOINTS.home.csrf_trusted_origins()}
-                        name={'CSRF TRUSTED ORIGINS'}
-                    />
-                </StyledHosts>
+                {settings['home.hosts_widgets'] && (
+                    <StyledHosts>
+                        <HostSelect
+                            endpoint={ENDPOINTS.home.allowed_hosts()}
+                            name={'ALLOWED HOSTS'}
+                        />
+                        <HostSelect
+                            endpoint={ENDPOINTS.home.cors_allowed_origins()}
+                            name={'CORS ALLOWED ORIGINS'}
+                        />
+                        <HostSelect
+                            endpoint={ENDPOINTS.home.csrf_trusted_origins()}
+                            name={'CSRF TRUSTED ORIGINS'}
+                        />
+                    </StyledHosts>
+                )}
             </StyledPage>
         </MainTemplate>
     )
