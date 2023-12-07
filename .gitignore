@@ -7,3 +7,5 @@ venv
 **/__init__.py
 **/node_modules/**
 Media/**
+temp
+temp/**
