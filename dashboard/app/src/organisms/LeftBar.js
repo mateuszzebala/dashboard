@@ -1,16 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
-import { SiDjango } from 'react-icons/si'
 import { APPS } from '../apps/apps'
-import { FaHeart, FaReact, FaRegHeart } from 'react-icons/fa'
 import { toBoolStr } from '../utils/utils'
 import { Link } from 'react-router-dom'
 import { LINKS } from '../router/links'
 import Logo from '../assets/logos/logo-light-colors.svg'
 import { useModalForm, useSettings } from '../utils/hooks'
-import { FETCH } from '../api/api'
-import { ENDPOINTS } from '../api/endpoints'
+import { GiPoland } from 'react-icons/gi'
 
 const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.primary};
@@ -62,11 +59,11 @@ const StyledMenuItems = styled.div`
     }
 `
 
-const LGBTFlag = styled.div`
-    width: 180px;
-    height: 42px;
+const PolishFlag = styled.div`
+    width: 230px;
+    height: 50px;
     position: fixed;
-    top: 20px;
+    top: 0px;
     left: -80px;
     transform-origin: center;
     transform: rotate(-45deg);
@@ -75,11 +72,17 @@ const LGBTFlag = styled.div`
     align-items: center;
     cursor: wait;
     div{
-        width: 180px;
-        height: 21px;
+        width: 230px;
+        height: 25px;
     }
     div:nth-child(1){background-color: #FFFFFF;}
     div:nth-child(2){background-color: #DC143C;}
+`
+
+const StyledFlag = styled.img`
+    width: 100%;
+    border-radius: 17px;
+    border: solid 5px ${({theme})=>theme.primary};
 `
 
 export const LeftBar = ({ close }) => {
@@ -88,18 +91,18 @@ export const LeftBar = ({ close }) => {
     const modalForm = useModalForm()
     return (
         <StyledBar close={toBoolStr(close)}>
-            {settings['dashboard.polish_flag'] && <LGBTFlag onClick={()=>{
+            {settings['dashboard.polish_flag'] && <PolishFlag onClick={()=>{
                 modalForm({
                     content: ()=><>
-                        <img width={300} src="https://images.photowall.com/products/52624/lgbt-grungy-heart.jpg?h=699&q=85"/>
+                        <StyledFlag src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/400px-Flag_of_Poland.svg.png"/>
                     </>,
-                    title: 'FREE LOVE',
-                    icon: <FaRegHeart />
+                    title: 'POLES FOR EVERYONE',
+                    icon: <GiPoland />
                 })
             }}>
                 <div></div>
                 <div></div>
-            </LGBTFlag>}
+            </PolishFlag>}
             <Link to={LINKS.home()}>
                 <StyleDashboard>
                     <img src={Logo}/>

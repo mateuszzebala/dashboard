@@ -6,17 +6,18 @@ import styled from 'styled-components'
 import { FaInbox } from 'react-icons/fa'
 import { FiArrowLeft, FiEdit, FiMail, FiMenu, FiPlus, FiSend, FiStar, FiTrash } from 'react-icons/fi'
 import { MdSnooze } from 'react-icons/md'
-import { AiFillWarning, AiOutlineWarning } from 'react-icons/ai'
+import { AiOutlineWarning } from 'react-icons/ai'
 import { LINKS } from '../../router/links'
 import { Button } from '../../atoms/Button'
 import { Tooltip } from '../../atoms/Tooltip'
+import { CreateEmail } from './CreateEmail'
 
 
 const StyledMenu = styled.div`
     display: flex;
-    gap: 5px;
+    gap: 7px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-direction: column;
     width: ${({open})=> open ? '250px' : '70px'};
     transition: width 0.3s;
@@ -35,10 +36,15 @@ const StyledMenu = styled.div`
 
 const StyledWrapper = styled.div`
     height: 100%;
+    display: flex;
+    width: 100%;
 `
 
-const StyledContent = styled.div``
-
+const StyledContent = styled.div`
+    display: flex;
+    width: 100%;
+    padding: 5px;
+`
 
 const StyledMenuButton = styled.button`
     background-color: ${({theme, active})=> active ? theme.primary : theme.primary + '22'};
@@ -65,7 +71,7 @@ const StyledMenuButton = styled.button`
 `
 
 const PAGES = {
-    compose: {name: 'Plus', icon: <FiPlus/>},
+    compose: {name: 'Compose', icon: <FiPlus/>},
     inbox: {name: 'Inbox', icon: <FaInbox/>},
     starred: {name: 'Starred', icon: <FiStar/>},
     snoozed: {name: 'Snoozed', icon: <MdSnooze/>},
@@ -107,7 +113,12 @@ export const EmailInboxPage = () => {
                     ))}
                 </StyledMenu>
                 <StyledContent>
+                    {currectPage === 'compose' && <CreateEmail />}
+                    {currectPage !== 'compose' && 
+                        <>
 
+                        </>
+                    }
                 </StyledContent>
             </StyledWrapper>
         </MainTemplate>

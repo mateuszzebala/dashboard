@@ -30,7 +30,7 @@ const StyledIcon = styled.div`
     justify-content: center;
 `
 
-export const SelectItem = ({ modelName, fieldName, multiple, value, setValue, ...props }) => {
+export const SelectItem = ({ modelName, fieldName, multiple, value, setValue, thisModel, ...props }) => {
     const modalForm = useModalForm()
     return (
         <StyledInput
@@ -55,7 +55,7 @@ export const SelectItem = ({ modelName, fieldName, multiple, value, setValue, ..
                 {multiple && `${value.length} ITEMS`}
                 {!multiple &&
                     (value
-                        ? `${modelName} - ${value.str}`
+                        ? `${thisModel} - ${value.str}`
                         : 'SELECT')}
             </StyledValue>
         </StyledInput>

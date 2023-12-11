@@ -15,6 +15,7 @@ const StyledContainer = styled.main`
     max-width: 100vw;
     position: relative;
     overflow: hidden;
+    user-select: none;
 `
 
 const StyledRightSide = styled.div`
@@ -33,6 +34,7 @@ const StyledContent = styled.article`
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     overflow: auto;
+    user-select: auto;
 `
 
 const StyledTopMenu = styled.div`
@@ -41,6 +43,7 @@ const StyledTopMenu = styled.div`
     width: ${({ leftbarclose }) =>
         leftbarclose ? '100vw' : 'calc(100vw - 200px)'};
     transition: width 0.3s;
+    user-select: none;
 `
 
 export const MainTemplate = ({

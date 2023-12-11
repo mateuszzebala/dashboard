@@ -2,16 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledWrapper = styled.label`
-    height: 40px;
+    height: 45px;
     width: 80px;
     background-color: ${({ value }) => value};
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid ${({ theme }) => theme.primary};
+    border: 2.5px solid ${({ theme }) => theme.primary};
 `
 
 const StyledInput = styled.input`
@@ -37,7 +37,7 @@ export const ColorInput = ({ value, setValue }) => {
                 ref={inputRef}
                 type={'color'}
                 id={id}
-                onBlur={(e) => {
+                onInput={(e) => {
                     setValue(e.target.value)
                     setWrapperColor(e.target.value)
                 }}

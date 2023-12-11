@@ -10,13 +10,10 @@ export const LINKS = {
         patchItem: (modelName, pk) =>
             `/dashboard/database/${modelName}/edit/${pk}/`,
     },
-    messages: {
-        index: () => '/dashboard/messages/',
-        message: (messageId) => `/dashboard/messages/${messageId}/`,
-    },
     users: {
         index: () => '/dashboard/users/',
         user: (id) => `/dashboard/users/${id}/`,
+        new: () => '/dashboard/users/new/',
     },
     editor: {
         index: () => '/dashboard/editor/',
@@ -40,9 +37,7 @@ export const LINKS = {
     email: {
         index: () => '/dashboard/email/',
         inbox: (mail) => `/dashboard/email/inbox?mail=${mail}`,
-    },
-    notes: {
-        index: () => '/dashboard/notes/',
+        newsletter: () => '/dashboard/email/newsletter/',
     },
     requests: {
         index: () => '/dashboard/requests/',
@@ -52,9 +47,6 @@ export const LINKS = {
         index: () => '/dashboard/statistics/',
         map: () => '/dashboard/statistics/map/',
         browsers: () => '/dashboard/statistics/browsers/',
-    },
-    map: {
-        index: () => '/dashboard/map/',
     },
     settings: {
         index: () => '/dashboard/settings/',
@@ -74,22 +66,9 @@ export const LINKS = {
         app: (appName) => `/dashboard/info/${appName}/`,
         index: () => '/dashboard/info/',
     }, 
-
-    finance: {
-        index: () => '/dashboard/finance/',
-    },
-
-    shop: {
-        index: () => '/dashboard/shop/',
-        products: () => '/dashboard/shop/products/',
-        orders: () => '/dashboard/shop/orders/',
-        carts: () => '/dashboard/shop/carts/',
-    },
-    calendar: {
-        index: () => '/dashboard/calendar/',
-    },
     other: {
         admin: () => `${MANIFEST.page_url}/admin/`,
         page: () => MANIFEST.page_url,
+        components: () => '/dashboard/components/',
     },
 }

@@ -9,26 +9,27 @@ import { useGlobalKey } from '../utils/hooks'
 const StyledWrapper = styled.button`
     position: relative;
     background-color: ${({ theme, second }) =>
-        second ? theme.primary + '22' : theme.primary};
+        second ? theme.quaternary : theme.primary};
     color: ${({ theme, second }) =>
         second ? theme.secondary : theme.secondary};
     border: 0;
     font-size: ${({ size }) => 20 * size + 'px'};
     width: ${({ icon, size, width }) =>
-        width ? width : icon ? 40 * size + 'px' : 'auto'};
-    height: ${({ icon, size }) => (icon ? 40 * size + 'px' : 'auto')};
+        width ? width : icon ? 43 * size + 'px' : 'auto'};
+    height: ${({ size }) => (43 * size + 'px')};
     padding: ${({ icon, size }) =>
         icon ? '0' : size * 10 + 'px ' + size * 20 + 'px'};
     border-radius: ${({ circle, size }) => (circle ? '50%' : size * 5 + 'px')};
     outline: 0 solid black;
     outline-color: ${({ theme, second }) =>
-        theme.primary + (second ? '22' : '88')};
+        second ? theme.quaternary : theme.primary}88;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.3s, color 0.3s, outline-color 0.3s,
         outline-width 0.1s;
     flex-wrap: wrap;
+    user-select: none;
     cursor: pointer;
     &:focus,
     &:hover {
@@ -113,11 +114,11 @@ export const Button = ({
                 width={width}
                 {...props}
             >
-                <StyledChildren second={second} loading={toBoolStr(loading)}>
+                <StyledChildren second={toBoolStr(second)} loading={toBoolStr(loading)}>
                     {icon || children}
                 </StyledChildren>
                 {loading && (
-                    <StyledLoading second={second}>
+                    <StyledLoading second={toBoolStr(second)}>
                         <VscLoading />
                     </StyledLoading>
                 )}

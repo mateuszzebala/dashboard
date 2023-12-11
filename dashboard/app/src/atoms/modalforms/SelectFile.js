@@ -9,6 +9,9 @@ import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
 import { Input } from '../Input'
 import { centerEllipsis } from '../../utils/utils'
+import { FiSearch } from 'react-icons/fi'
+import { useModalForm } from '../../utils/hooks'
+import { Prompt } from './Prompt'
 
 export const StyledPath = styled.span`
     font-size: 20px;
@@ -80,6 +83,9 @@ export const SelectFile = ({ todo, startPath, setOpen }) => {
     const [data, setData] = React.useState([])
     const [reload, setReload] = React.useState(0)
     const [search, setSearch] = React.useState('')
+    
+    const modalForm = useModalForm()
+
 
     React.useEffect(() => {
         path &&
@@ -125,16 +131,28 @@ export const SelectFile = ({ todo, startPath, setOpen }) => {
                             setReload((prev) => prev + 1)
                         }}
                     />
-                    <Input
-                        label="SEARCH"
+                    <Button
+                        second
+                        size={1.3}
+                        icon={<FiSearch />}
                         onKey={{
                             key: 'f',
                             ctrlKey: true,
                             prevent: true,
                         }}
-                        value={search}
-                        setValue={setSearch}
+                        onClick={() => {
+                            modalForm({
+                                content: Prompt,
+                                title: 'SEARCH',
+                                icon: <FiSearch/>,
+                                initValue: search,
+                                todo: (val) => {
+                                    setSearch(val)
+                                } 
+                            })
+                        }}
                     />
+                   
                 </StyledMenu>
                 <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
                 <StyledContent>

@@ -378,7 +378,7 @@ export const DatabaseModelPage = () => {
 
                     <FloatingActionButton
                         to={LINKS.database.putItem(modelName)}
-                        icon={<FaPlus />}
+                        icon={<FiPlus />}
                         second
                         size={1.3}
                     />

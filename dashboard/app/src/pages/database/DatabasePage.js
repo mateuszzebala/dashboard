@@ -44,11 +44,12 @@ const StyledModel = styled.button`
     border: 0;
     flex-direction: column;
     cursor: pointer;
-    border-left: 3px solid ${({ theme }) => theme.primary};
+    border-left: 3.5px solid ${({ theme }) => theme.primary};
     width: 100%;
     font-size: 15px;
     display: flex;
     gap: 12px;
+    text-transform: uppercase;
     align-items: center;
     transition: transform 0.2s, background-color 0.2s, color 0.2s;
     &:hover,
@@ -57,7 +58,7 @@ const StyledModel = styled.button`
         outline: none;
     }
     svg{
-        font-size: 30px;
+        font-size: 24px;
     }
 `
 

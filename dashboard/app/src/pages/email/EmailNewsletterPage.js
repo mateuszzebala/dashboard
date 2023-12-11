@@ -2,10 +2,8 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 
-export const RequestsPage = () => {
+export const EmailNewsletterPage = () => {
     return (
-        <MainTemplate app={APPS.requests}>
-
-        </MainTemplate>
+        <MainTemplate app={APPS.email} title='NEWSLETTER'></MainTemplate>
     )
 }

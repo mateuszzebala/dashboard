@@ -126,6 +126,7 @@ export const DatabasePatchItemPage = () => {
                             value={values[relation.name]}
                             key={relation.name}
                             modelName={modelName}
+                            thisModel={relation.relation.model}
                             fieldName={relation.name}
                             type={relation.relation.type}
                             parentPK={pk}

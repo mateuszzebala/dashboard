@@ -42,7 +42,7 @@ def get_field(model, field_name):
 def get_field_options(field):
     if hasattr(field, 'choices'):
         if field.choices is None: return None
-        return [choice[0] for choice in field.choices]
+        return field.choices
     else:
         return None
 

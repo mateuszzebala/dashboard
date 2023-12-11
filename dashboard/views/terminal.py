@@ -1,5 +1,4 @@
 import platform
-
 from django.urls import path
 from django.http import JsonResponse
 from .auth import dashboard_access
@@ -9,6 +8,7 @@ import re
 import signal
 import os
 from django.conf import settings
+from dashboard.configuration.config import get_settings
 
 processes = {}
 
@@ -27,7 +27,9 @@ def kill_process(request):
 def command(request):
     path = request.POST.get('path').split(os.sep)
     cmd = request.POST.get('command')
-    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=os.sep.join(path))
+    linux_interpreter = get_settings().get('terminal').get('sh_type')
+    print(linux_interpreter)
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=os.sep.join(path), executable=linux_interpreter)
     if processes.get(request.user.id) is None:
         processes[request.user.id] = []
     processes[request.user.id].append(process)

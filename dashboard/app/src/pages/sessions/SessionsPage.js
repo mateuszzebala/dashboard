@@ -8,8 +8,8 @@ export const SessionsPage = () => {
     return <MainTemplate app={APPS.sessions}
         submenuChildren={
             <>
-                <Button second={!active} onClick={()=>{setActive(true)}}>ACTIVE</Button>
-                <Button second={active} onClick={()=>{setActive(false)}}>INACTIVE</Button>
+                <Button size={1.2} second={!active} onClick={()=>{setActive(true)}}>ACTIVE</Button>
+                <Button size={1.2} second={active} onClick={()=>{setActive(false)}}>INACTIVE</Button>
             </>
         }
     >

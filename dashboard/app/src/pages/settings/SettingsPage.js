@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { FiServer, FiSettings } from 'react-icons/fi'
+import { FiSettings } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
 import { ColorInput } from '../../atoms/ColorInput'
 import { useSettings, useTheme } from '../../utils/hooks'
@@ -13,22 +13,19 @@ import { HiXMark } from 'react-icons/hi2'
 import { Theme } from '../../atoms/Theme'
 import { theme as orginalTheme } from '../../theme/theme'
 import { LuComponent, LuSave } from 'react-icons/lu'
-import { MdLockReset, MdOutlineColorLens } from 'react-icons/md'
+import { MdOutlineColorLens } from 'react-icons/md'
 import { useSearchParams } from 'react-router-dom'
 import { APPS } from '../../apps/apps'
 import { Input } from '../../atoms/Input'
 import { Select } from '../../atoms/Select'
-import { FaLinux } from 'react-icons/fa'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
-import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 
 const StyledRow = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-
     text-transform: uppercase;
     h2,
     h3 {
@@ -89,7 +86,7 @@ const ColorProp = ({ setColors, colorName, colors }) => {
                     setColors((prev) => ({ ...prev, [colorName]: val }))
                 }}
             />
-            <Typography variant={'h2'}>{colorName.toUpperCase()}</Typography>
+            <Typography variant={'h3'}>{colorName.toUpperCase()}</Typography>
         </StyledRow>
     )
 }
@@ -336,14 +333,19 @@ const SettingsByPage = {
                 prop={'terminal.bookmarks'}
                 text={'BOOKMARKS'}
             />
-            <Select canBeNull={false} second asButton setValue={(val)=>{
-                setValue(prev => ({...prev, 'terminal.sh_type': val}))
-            }} value={value['terminal.sh_type']} data={{
-                zsh: 'ZSH',
-                bash: 'BASH',
-                sh: 'SH',
-            }}><FaLinux/> Interpreter {value['terminal.sh_type'] ?.toUpperCase()}</Select> 
+            <StyledRow>
+                <Select emptyName='INTERPRETER' canBeNull={false} second setValue={(val)=>{
+                    setValue(prev => ({...prev, 'terminal.sh_type': val}))
+                }} value={value['terminal.sh_type']} data={{
+                    zsh: 'ZSH',
+                    bash: 'BASH',
+                    sh: 'SH',
+                    cmd: 'CMD',
+                    powershell: 'POWERSHELL',
+                }}/>
+                <Typography variant={'h3'}>INTERPRETER</Typography>
 
+            </StyledRow>
             
         </StyledSection>
     ),
@@ -442,7 +444,7 @@ export const SettingsPage = () => {
             }}
             submenuChildren={<>
                 <Theme value={{...theme, primary: saved ? theme.success : theme.error}}>
-                    <FloatingActionButton loading={saveLoading} subContent='SAVE' onClick={()=>{
+                    <Button loading={saveLoading} subContent='SAVE' onClick={()=>{
                         setSaveLoading(true)
                         FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify(value)}).then(() => {
                             setSaved(true)
@@ -451,8 +453,9 @@ export const SettingsPage = () => {
                                 setSettings(data.data)
                             })
                         })
-                    }} icon={<LuSave/>} size={1.6}/>
+                    }} icon={<LuSave/>} size={1.4}/>
                 </Theme>
+                |
                 <Button onClick={()=>{setPage('colors')}} subContent='COLORS' second={page !== 'colors'} icon={<MdOutlineColorLens />} size={1.4}></Button>
                 <Button onClick={()=>{setPage('dashboard')}} subContent='DASHBO...' second={page !== 'dashboard'} icon={<LuComponent />} size={1.4}></Button>
                 | 

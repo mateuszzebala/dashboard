@@ -42,7 +42,7 @@ export const App = () => {
         FETCH(ENDPOINTS.settings.get()).then(data => {
             setSettings(data.data)
         })
-    }, [])
+    }, [user])
 
     return (
         <ThemeContext.Provider value={[customTheme, setCustomTheme]}>

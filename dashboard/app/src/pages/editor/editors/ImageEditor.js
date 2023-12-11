@@ -23,6 +23,7 @@ import { IoInvertModeOutline } from 'react-icons/io5'
 import { FETCH } from '../../../api/api'
 import { useMessage } from '../../../utils/messages'
 import { SelectFile } from '../../../atoms/modalforms/SelectFile'
+import { FiDownload, FiEdit, FiImage, FiSave } from 'react-icons/fi'
 
 const StyledImageWrapper = styled.div`
     display: inline-block;
@@ -161,19 +162,19 @@ export const ImageEditor = () => {
 
     return (
         <MainTemplate
-            app={APPS.editor}
-            title={
-                type.toUpperCase() +
-                ' - ' +
-                centerEllipsis(searchParams.get('path'), 50)
-            }
+            app={{
+                name: 'IMAGE EDITOR',
+                icon: FiImage,
+                link: LINKS.editor.index()
+            }}
+            title={centerEllipsis(searchParams.get('path'), 50)}
             submenuChildren={
                 <>
                     <Button
                         second
                         tooltip={'SAVE IMAGE'}
-                        size={1.3}
-                        icon={<LuSave />}
+                        size={1.4}
+                        icon={<FiSave />}
                         subContent={'SAVE'}
                         onKey={{
                             key: 's',
@@ -199,50 +200,28 @@ export const ImageEditor = () => {
                         }}
                     />
                     <Button
-                        second
-                        tooltip={'OPEN FILE'}
-                        subContent={'OPEN'}
-                        onKey={{
-                            key: 'o',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        size={1.3}
-                        icon={<BsFolder2Open />}
-                        onClick={() => {
-                            modalForm({
-                                content: SelectFile,
-                                title: 'OPEN FILE',
-                                icon: <BsFolder2Open />,
-                                todo: (val) => {
-                                    navigate(LINKS.editor.edit(val, 'image'))
-                                },
-                            })
-                        }}
-                    />
-                    <Button
                         subContent={'FOLDER'}
                         second
                         to={LINKS.files.indexPath(image.parent)}
                         tooltip={'GO TO FOLDER'}
-                        size={1.3}
+                        size={1.4}
                         icon={<APPS.files.icon />}
                     />
                     <Button
                         second
                         subContent={'DOWNLOAD'}
                         tooltip={'DOWNLOAD IMAGE'}
-                        size={1.3}
+                        size={1.4}
                         target={'_blank'}
                         download="true"
                         to={ENDPOINTS.files.file(searchParams.get('path'))}
-                        icon={<HiDownload />}
+                        icon={<FiDownload />}
                     />
                     <Button
                         second
                         subContent={'EDITOR'}
-                        icon={<BiEditAlt />}
-                        size={1.3}
+                        icon={<FiEdit />}
+                        size={1.4}
                         tooltip={'CHOOSE EDITOR'}
                         onKey={{
                             key: 'e',
@@ -252,7 +231,7 @@ export const ImageEditor = () => {
                         onClick={() => {
                             modalForm({
                                 content: EditorChooser,
-                                icon: <BiEditAlt />,
+                                icon: <FiEdit />,
                                 title: 'CHOOSE EDITOR TYPE',
 
                                 todo: (editorType) => {
@@ -266,7 +245,7 @@ export const ImageEditor = () => {
                             })
                         }}
                     />
-                    <Button subContent={'REPLACE'} second icon={<TbReplaceFilled />} size={1.3} />
+                    <Button subContent={'REPLACE'} second icon={<TbReplaceFilled />} size={1.4} />
                     <Button
                         second
                         subContent={liked ? 'UNLIKE' : 'LIKE'}
@@ -279,7 +258,7 @@ export const ImageEditor = () => {
                             setLiked((prev) => !prev)
                         }}
                         tooltip={liked ? 'UNLIKE' : 'LIKE'}
-                        size={1.3}
+                        size={1.4}
                         icon={liked ? <AiFillHeart /> : <AiOutlineHeart />}
                     />
                     |
@@ -293,7 +272,7 @@ export const ImageEditor = () => {
                             ctrlKey: true,
                             prevent: true,
                         }}
-                        size={1.3}
+                        size={1.4}
                         icon={<BsFillBrightnessHighFill />}
                         onClick={() => {
                             modalForm({
@@ -317,7 +296,7 @@ export const ImageEditor = () => {
                         second
                         subContent={'CONTRAST'}
                         tooltip={'CONTRAST'}
-                        size={1.3}
+                        size={1.4}
                         onKey={{
                             key: '@',
                             shiftKey: true,
@@ -347,7 +326,7 @@ export const ImageEditor = () => {
                         second
                         tooltip={'COLORS'}
                         subContent={'COLORS'}
-                        size={1.3}
+                        size={1.4}
                         onKey={{
                             key: '#',
                             shiftKey: true,
@@ -383,7 +362,7 @@ export const ImageEditor = () => {
                             ctrlKey: true,
                             prevent: true,
                         }}
-                        size={1.3}
+                        size={1.4}
                         icon={<BiCrop />}
                         onClick={() => {
                             setCrop((prev) => ({
@@ -396,7 +375,7 @@ export const ImageEditor = () => {
                         second
                         tooltip={'SATURATION'}
                         subContent={'SATUR...'}
-                        size={1.3}
+                        size={1.4}
                         onKey={{
                             key: '%',
                             shiftKey: true,
@@ -426,7 +405,7 @@ export const ImageEditor = () => {
                         second
                         tooltip={'BLUR'}
                         subContent={'BLUR'}
-                        size={1.3}
+                        size={1.4}
                         onKey={{
                             key: '^',
                             shiftKey: true,
@@ -456,7 +435,7 @@ export const ImageEditor = () => {
                         second
                         tooltip={'INVERT'}
                         subContent={'INVERT'}
-                        size={1.3}
+                        size={1.4}
                         onKey={{
                             key: '&',
                             shiftKey: true,

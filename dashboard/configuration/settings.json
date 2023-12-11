@@ -7,7 +7,7 @@
             "xlsx": true,
             "csv": true
         },
-        "default_number_of_rows": 60
+        "default_number_of_rows": 30
     },
     "terminal": {
         "sh_type": "zsh",

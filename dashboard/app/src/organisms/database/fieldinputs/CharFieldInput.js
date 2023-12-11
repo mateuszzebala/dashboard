@@ -35,8 +35,12 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                     <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Select
-                    emptyName={`Select ${field.name}`}
-                    data={field.params.choices}
+                    emptyName={`SELECT ${field.name.toUpperCase()}`}
+                    data={field.params.choices.reduce((obj, choice) => {
+                        const [key, value] = choice
+                        obj[key] = value
+                        return obj
+                    }, {})}
                     value={val}
                     setValue={(newValue)=>{
                         setVal(newValue)

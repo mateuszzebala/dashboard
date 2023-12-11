@@ -22,6 +22,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
 import { TbReplaceFilled } from 'react-icons/tb'
 import { SelectFile } from '../../../atoms/modalforms/SelectFile'
+import { FiCode, FiDownload, FiEdit, FiPlay, FiSave } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -56,13 +57,16 @@ const StyledLines = styled.div`
     font-size: 20px;
     display: flex;
     padding: 0;
-    width: 50px;
+    width: 40px;
     height: ${({ height }) => height * 30 + 'px'};
     line-height: 1.2;
     flex-direction: column;
     text-align: right;
     color: ${({ theme }) => theme.tertiary};
-
+    span{
+        font-family: 'Fira Mono', monospace !important;
+        font-weight: bold;
+    }
     &::-webkit-scrollbar {
         height: 0;
         width: 0;
@@ -84,7 +88,7 @@ const StyledIde = styled.div`
 `
 
 const StyledTerminal = styled.pre`
-    font-family: 'Fira Mono';
+    font-family: 'Fira Mono', monospace;
     color: ${({ theme }) => theme.primary};
     font-size: 20px;
     overflow: scroll;
@@ -189,73 +193,51 @@ export const TextEditor = () => {
 
     return (
         <MainTemplate
-            app={APPS.editor}
-            title={
-                type.toUpperCase() +
-                ' - ' +
-                centerEllipsis(searchParams.get('path'), 50)
-            }
+            app={{
+                name: 'TEXT EDITOR',
+                icon: FiCode,
+                link: LINKS.editor.index()
+            }}
+            title={centerEllipsis(searchParams.get('path'), 50)}
             submenuChildren={
                 <>
                     <Button
                         second
                         tooltip={'SAVE FILE'}
-                        size={1.3}
+                        size={1.4}
                         subContent={'SAVE'}
                         onKey={{
                             key: 's',
                             ctrlKey: true,
                             prevent: true,
                         }}
-                        icon={<LuSave />}
+                        icon={<FiSave />}
                         loading={saveLoading}
                         onClick={handleSave}
-                    />
-                    <Button
-                        second
-                        tooltip={'OPEN FILE'}
-                        subContent={'OPEN'}
-                        onKey={{
-                            key: 'o',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        size={1.3}
-                        icon={<BsFolder2Open />}
-                        onClick={() => {
-                            modalForm({
-                                content: SelectFile,
-                                title: 'OPEN FILE',
-                                icon: <BsFolder2Open />,
-                                todo: (val) => {
-                                    navigate(LINKS.editor.edit(val))
-                                },
-                            })
-                        }}
                     />
                     <Button
                         second
                         subContent={'FOLDER'}
                         to={LINKS.files.indexPath(data.parent)}
                         tooltip={'GO TO FOLDER'}
-                        size={1.3}
+                        size={1.4}
                         icon={<APPS.files.icon />}
                     />
                     <Button
                         second
                         tooltip={'DOWNLOAD FILE'}
                         subContent={'DOWNLOAD'}
-                        size={1.3}
+                        size={1.4}
                         target={'_blank'}
                         download="true"
                         to={ENDPOINTS.files.file(searchParams.get('path'))}
-                        icon={<HiDownload />}
+                        icon={<FiDownload />}
                     />
                     <Button
                         second
-                        icon={<BiEditAlt />}
+                        icon={<FiEdit />}
                         subContent={'EDITOR'}
-                        size={1.3}
+                        size={1.4}
                         tooltip={'CHOOSE EDITOR'}
                         onKey={{
                             key: 'e',
@@ -265,7 +247,7 @@ export const TextEditor = () => {
                         onClick={() => {
                             modalForm({
                                 content: EditorChooser,
-                                icon: <BiEditAlt />,
+                                icon: <FiEdit />,
                                 title: 'CHOOSE EDITOR TYPE',
                                 todo: (editorType) => {
                                     navigate(
@@ -278,7 +260,7 @@ export const TextEditor = () => {
                             })
                         }}
                     />
-                    <Button second icon={<TbReplaceFilled />} size={1.3} subContent={'REPLACE'}/>
+                    <Button second icon={<TbReplaceFilled />} size={1.4} subContent={'REPLACE'}/>
                     <Button
                         second
                         onClick={() => {
@@ -291,13 +273,13 @@ export const TextEditor = () => {
                             prevent: true,
                             ctrlKey: true,
                         }}
-                        size={1.3}
+                        size={1.4}
                         icon={liked ? <AiFillHeart /> : <AiOutlineHeart />}
                     />
                     |
                     <Button
                         second
-                        size={1.3}
+                        size={1.4}
                         subContent={'RUN'}
                         onKey={{
                             key: 'F5',
@@ -326,7 +308,7 @@ export const TextEditor = () => {
                                 modalForm({
                                     content: ChooseRunner,
                                     title: 'RUN',
-                                    icon: <HiOutlinePlay />,
+                                    icon: <FiPlay />,
                                     filename: data.filename,
 
                                     todo: (val) => {
@@ -335,7 +317,7 @@ export const TextEditor = () => {
                                 })
                             }
                         }}
-                        icon={<HiOutlinePlay />}
+                        icon={<FiPlay />}
                     ></Button>
                     <span
                         onClick={() => {

@@ -47,12 +47,13 @@ const ManyToManyInput = ({ value, setValue, fieldName, modelName, ...props }) =>
     )
 }
 
-const ManyToOneInput = ({ value, setValue, fieldName, modelName }) => {
+const ManyToOneInput = ({ value, setValue, fieldName, modelName, parentPK, ...props }) => {
     const [tempValue, setTempValue] = React.useState(value)
 
     React.useEffect(()=>{
         if(value != undefined){
-            FETCH(ENDPOINTS.database.relation_value(modelName, fieldName, value)).then(data => {
+            FETCH(ENDPOINTS.database.relation_value(modelName, fieldName, parentPK)).then(data => {
+                console.log(data.data, props.thisModel)
                 setTempValue(data.data.value)
             })
         }
@@ -73,17 +74,18 @@ const ManyToOneInput = ({ value, setValue, fieldName, modelName }) => {
                 setValue={setTempValue}
                 modelName={modelName}
                 fieldName={fieldName}
+                {...props}
             />
         </StyledField>
     )
 }
 
-const OneToOneInput = ({ value, setValue, fieldName, modelName }) => {
+const OneToOneInput = ({ value, setValue, fieldName, modelName, parentPK }) => {
     const [tempValue, setTempValue] = React.useState(value)
 
     React.useEffect(()=>{
         if(value != undefined){
-            FETCH(ENDPOINTS.database.relation_value(modelName, fieldName, value)).then(data => {
+            FETCH(ENDPOINTS.database.relation_value(modelName, fieldName, parentPK)).then(data => {
                 setTempValue(data.data.value)
             })
         }

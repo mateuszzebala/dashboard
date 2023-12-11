@@ -35,7 +35,7 @@ const StyledWrapper = styled.div`
     color: ${({ theme }) => theme.primary};
     border-radius: 3px;
     height: ${({list})=> list ? '50px' : '100px'};
-    border: ${({selected, isFile, dragging})=>dragging ? (!isFile && !selected) ? '5px' : '3px' : '3px'} solid ${({ theme, selected, toDrop, dragging }) => toDrop ? theme.accent : ((selected || dragging) ? theme.primary : 'transparent')};
+    border: ${({selected, isFile, dragging})=>dragging ? (!isFile && !selected) ? '5px' : '3px' : '3px'} solid ${({ theme, selected, toDrop, dragging }) => toDrop ? theme.accent : ((selected && dragging) ? theme.primary : selected ? theme.primary : 'transparent')};
     width: ${({list})=>list ? '100%' : '100px'};
     font-size: 15px;
     cursor: pointer;
@@ -110,7 +110,7 @@ export const ItemTile = ({
     const wrapperRef = React.useRef()
     const modalForm = useModalForm()
     const navigate = useNavigate()
-    const [moveDragging, setMoveDragging] = React.useState(false)
+
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
         setPos(bcr)
@@ -127,23 +127,10 @@ export const ItemTile = ({
                     list={toBoolStr(list)}
                     toDrop={toBoolStr(toDrop)}
                     isFile={toBoolStr(isFile)}
-                    {...props}
-                    onMouseMove={(e)=>{
-                        const movement = Math.abs(e.movementX) + Math.abs(e.movementY)
-                        if(moveDragging && movement > 5) setDragging(true)
-                    }}
-                    onMouseUp={()=>{
-                        setMoveDragging(false)
-                    }}
-                    onMouseLeave={()=>{
-                        setMoveDragging(false)
-                    }}
+                 
                     onMouseDown={(e)=>{
-                        if(selected && !e.shiftKey) setMoveDragging(true)
-                        else if(!selected && !e.shiftKey) {
-                            setSelectedItems([item])
-                            setMoveDragging(true)
-                        }
+                        if(selected && !e.shiftKey) setDragging(true)
+                        else if(!selected && !e.shiftKey) setSelectedItems([item])
                     }}
                     onClick={(e) => {
                         !isFile &&
@@ -170,6 +157,7 @@ export const ItemTile = ({
                                 },
                             })
                     }}
+                    {...props}
                 >
                     <StyledIcon list={toBoolStr(list)}>
                         {isFile ? getIconByFileType(filetype) : <BsFolder />}

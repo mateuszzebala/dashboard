@@ -74,6 +74,13 @@ export const APPS = {
         name: 'Email',
         icon: FiMail,
         link: LINKS.email.index(),
+        sublinks: () => {
+            return {
+                'EMAILS': LINKS.email.index(),
+                'NEWSLETTER': LINKS.email.newsletter(),
+                'SMTP SERVER': LINKS.settings.byApp('email'),
+            }
+        },
     },
     requests: {
         name: 'Requests',

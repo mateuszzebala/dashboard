@@ -9,19 +9,18 @@ import {
     BsFileZip,
     BsFileArrowUp,
     BsGrid,
-    BsFolder, BsCheck2All, BsCheckAll,
+    BsFolder, BsCheckAll,
 } from 'react-icons/bs'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { HiDownload, HiOutlineLockClosed } from 'react-icons/hi'
 import styled from 'styled-components'
-import { FaArrowLeft, FaCheck, FaSearch } from 'react-icons/fa'
-import { FiTrash } from 'react-icons/fi'
+import { FaArrowLeft } from 'react-icons/fa'
+import { FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
 import { BiCopy, BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useLoading, useModalForm } from '../../utils/hooks'
-import { TbReload } from 'react-icons/tb'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 import { Confirm } from '../../atoms/modalforms/Confirm'
 import { ChooseDevice } from '../../atoms/modalforms/ChooseDevice'
@@ -30,7 +29,6 @@ import { useMessage } from '../../utils/messages'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 import { Properties } from '../../atoms/modalforms/Properties'
-import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { useCookies } from 'react-cookie'
 import { SelectFolder } from '../../atoms/modalforms/SelectFolder'
 import { downloadURL } from '../../utils/utils'
@@ -124,7 +122,7 @@ const FolderMenu = ({
                         <Button
                             subContent='UP'
                             second
-                            size={1.3}
+                            size={1.4}
                             onKey={{
                                 key: 'ArrowLeft',
                                 ctrlKey: true,
@@ -139,10 +137,10 @@ const FolderMenu = ({
                     )}
                     <Button
                         second
-                        size={1.3}
+                        size={1.4}
                         subContent='SELECT'
                         tooltip={'SELECT ALL'}
-                        icon={<BsCheckAll />}
+                        icon={<FiCheck />}
                         onClick={() => {
                             setSelectedItems((prev) =>
                                 prev.length > 0 ? [] : [...folders, ...files]
@@ -151,7 +149,7 @@ const FolderMenu = ({
                     />
                     <Button
                         second
-                        size={1.3}
+                        size={1.4}
                         subContent='RELOAD'
                         tooltip={'RELOAD'}
                         onKey={{
@@ -159,24 +157,24 @@ const FolderMenu = ({
                             ctrlKey: true,
                             prevent: true,
                         }}
-                        icon={<TbReload />}
+                        icon={<FiRotateCw />}
                         onClick={() => {
                             setReload((prev) => prev + 1)
                         }}
                     />
                     <Button
                         second
-                        size={1.3}
+                        size={1.4}
                         subContent={list ? 'LIST' : 'GRID'}
                         tooltip={list ? 'LIST' : 'GRID'}
-                        icon={list ? <AiOutlineUnorderedList/> : <BsGrid/>}
+                        icon={list ? <FiList/> : <FiGrid/>}
                         onClick={() => {
                             setList(prev => !prev)
                         }}
                     />
                     <Button
                         second
-                        size={1.3}
+                        size={1.4}
                         subContent='TERMINAL'
                         tooltip={'OPEN IN TERMINAL'}
                         icon={<APPS.terminal.icon />}
@@ -184,7 +182,7 @@ const FolderMenu = ({
                     />
                     {copied.type != null && <Button
                         second
-                        size={1.3}
+                        size={1.4}
                         tooltip={'PASTE'}
                         subContent='PASTE'
                         icon={<BiPaste />}
@@ -214,7 +212,7 @@ const FolderMenu = ({
                         <>
                             <Button
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'COPY'}
                                 subContent='COPY'
                                 onKey={{
@@ -222,7 +220,7 @@ const FolderMenu = ({
                                     prevent: true,
                                     ctrlKey: true
                                 }}
-                                icon={<BiCopy />}
+                                icon={<FiCopy />}
                                 onClick={()=>{
                                     setCopied({
                                         type: 'COPY', 
@@ -232,7 +230,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'CUT'}
                                 onKey={{
                                     key: 'x',
@@ -251,7 +249,7 @@ const FolderMenu = ({
                             <Button
                                 second
                                 onKey={'Delete'}
-                                size={1.3}
+                                size={1.4}
                                 subContent='DELETE'
                                 tooltip={'DELETE'}
                                 icon={<FiTrash />}
@@ -286,7 +284,7 @@ const FolderMenu = ({
                                 second
                                 tooltip={'MAKE ZIP'}
                                 subContent='ZIP'
-                                size={1.3}
+                                size={1.4}
                                 icon={<BsFileZip />}
                                 onClick={() => {
                                     modalForm({
@@ -348,7 +346,7 @@ const FolderMenu = ({
                                 icon={<BsFileZip/>}
                                 subContent='UNZIP'
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'UNZIP'}
                             />}
                         </>
@@ -359,7 +357,7 @@ const FolderMenu = ({
                             
                             <Button
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'RENAME'}
                                 subContent='RENAME'
                                 icon={<BiRename />}
@@ -382,7 +380,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'PROPERTIES'}
                                 subContent='PROPER...'
                                 icon={<BiInfoCircle />}
@@ -408,7 +406,7 @@ const FolderMenu = ({
                             <Button
                                 second
                                 tooltip={'ENCRYPT'}
-                                size={1.3}
+                                size={1.4}
                                 icon={<HiOutlineLockClosed />}
                                 subContent='ENCRYPT'
                                 onClick={() => {
@@ -427,7 +425,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'DOWNLOAD'}
                                 subContent='DOWNL...'
                                 icon={<HiDownload />}
@@ -438,7 +436,7 @@ const FolderMenu = ({
                             />
                             <Button
                                 second
-                                size={1.3}
+                                size={1.4}
                                 tooltip={'EDIT'}
                                 subContent='EDIT'
                                 icon={<BiEditAlt />}
@@ -471,18 +469,18 @@ const FolderMenu = ({
                         second
                         tooltip={'SEARCH'}
                         subContent='SEARCH'
-                        size={1.3}
+                        size={1.4}
                         onKey={{
                             key: 'f',
                             ctrlKey: true,
                             prevent: true
                         }}
-                        icon={<FaSearch />}
+                        icon={<FiSearch />}
                         onClick={() => {
                             modalForm({
                                 content: Prompt,
                                 title: 'SEARCH',
-                                icon: <FaSearch />,
+                                icon: <FiSearch />,
                                 setButton: 'SEARCH',
                                 type: 'text',
                                 initValue: searchValue,
@@ -501,12 +499,12 @@ const FolderMenu = ({
                 icon={<BsFilePlus />}
                 subContent={'+FILE'}
                 tooltip={'NEW FILE'}
-                size={1.3}
+                size={1.4}
                 right={80}
                 onClick={handleNewFile}
             />
             <FloatingActionButton
-                size={1.3}
+                size={1.4}
                 second
                 tooltip={'NEW FOLDER'}
                 subContent={'+FOLDER'}
@@ -515,7 +513,7 @@ const FolderMenu = ({
             />
             <FloatingActionButton
                 second
-                size={1.3}
+                size={1.4}
                 subContent={'UPLOAD'}
                 right={140}
                 tooltip={'UPLOAD FILE'}
@@ -541,7 +539,7 @@ const FolderMenu = ({
                     subContent={'UP'}
                     tooltip={'UP'}
                     right={200}
-                    size={1.3}
+                    size={1.4}
                     icon={<FaArrowLeft />}
                     onClick={() => {
                         setPath(data.parent)

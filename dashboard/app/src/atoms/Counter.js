@@ -34,15 +34,15 @@ const StyledButton = styled.button`
     border-radius: ${({ size }) => size * 10 + 'px'};
     color: ${({ theme }) => theme.primary};
     cursor: pointer;
-    height: ${({ size }) => size * 35 + 'px'};
+    height: ${({ size }) => size * 43 + 'px'};
     outline: 0 solid ${({theme})=>theme.quaternary};
     transition: outline-width 0.1s;
     &:hover, &:focus{
-        outline-width: 5px;
+        outline-width: ${({ size }) => size * 3 + 'px'};
     }
     background-color: transparent;
     border: 0;
-    width: ${({ size }) => size * 35 + 'px'};
+    width: ${({ size }) => size * 43 + 'px'};
     justify-content: center;
 
 `

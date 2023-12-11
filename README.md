@@ -47,3 +47,12 @@
 19. Change logo and icons
 20. Add shoper integrity
 21. Input, Counter and some more atoms to edit (becuase they are ugly)
+
+
+
+EMAIL PAGE:
+it should have possibility of saveing to newsletter and send emails for each
+it should have possibility of makeing email in word-like editor
+it should have possibility of connecting to smtp server
+
+

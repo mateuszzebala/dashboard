@@ -26,6 +26,9 @@ import { StatisticsBrowsersPage } from '../pages/statistics/subpages/StatisticsB
 import { EmailInboxPage } from '../pages/email/EmailInboxPage'
 import { APPS } from '../apps/apps'
 import { useSettings } from '../utils/hooks'
+import { EmailNewsletterPage } from '../pages/email/EmailNewsletterPage'
+import { ComponentsPage } from '../pages/other/ComponentsPage'
+import { NewUserPage } from '../pages/users/NewUserPage'
 
 const pages = {
     '/dashboard/': {page: HomePage, app: APPS.home},
@@ -44,12 +47,14 @@ const pages = {
     '/dashboard/editor/:type/': {page: FileEditorPage, app: APPS.editor},
 
     '/dashboard/users/': {page: UsersPage, app: APPS.users},
+    '/dashboard/users/new/': {page: NewUserPage, app: APPS.users},
     '/dashboard/users/:id/': {page: UserPage, app: APPS.users},
 
     '/dashboard/terminal/': {page: TerminalPage, app: APPS.terminal},
 
     '/dashboard/email/': {page: EmailPage, app: APPS.email},
     '/dashboard/email/inbox/': {page: EmailInboxPage, app: APPS.email},
+    '/dashboard/email/newsletter/': {page: EmailNewsletterPage, app: APPS.email},
 
     '/dashboard/statistics/': {page: StatisticsPage, app: APPS.statistics},
     '/dashboard/statistics/map/': {page: StatisticsWorldMapPage, app: APPS.statistics},
@@ -66,6 +71,8 @@ const pages = {
     '/dashboard/info/:appName/': {page: InfoPage, app: null},
     '/dashboard/info/': {page: InfoPage, app: null},
 
+    '/dashboard/components/': {page: ComponentsPage, app: null},
+    
     '*': {page: Page404, app: null},
 }
 

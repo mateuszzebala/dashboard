@@ -11,9 +11,9 @@ const StyledLoading = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 15px 20px;
   border-radius: 7px;
-  gap: 10px;
+  gap: 15px;
   position: fixed;
   box-shadow: 0 0 10px -5px ${({theme})=>theme.primary};
   bottom: 20px;

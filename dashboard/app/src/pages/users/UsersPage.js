@@ -13,6 +13,8 @@ import { FaLock, FaLockOpen, FaPlus } from 'react-icons/fa'
 import { FiPlay, FiPlus, FiSearch } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from '../../atoms/modalforms/Prompt'
+import { LINKS } from '../../router/links'
+import { useSearchParams } from 'react-router-dom'
 
 const StyledUsersGrid = styled.div`
     display: flex;
@@ -42,15 +44,23 @@ const StyledNoUsers = styled.span`
 `
 
 export const UsersPage = () => {
+
+    const [searchParams, setSearchParams] = useSearchParams()
+
     const [search, setSearch] = React.useState('')
     const [users, setUsers] = React.useState([])
     const [page, setPage] = React.useState(0)
-    const [admin, setAdmin] = React.useState(false)
+    const [admins, setAdmins] = React.useState(searchParams.get('admins') === 'true' || false)
     const [pages, setPages] = React.useState(0)
     const modalForm = useModalForm()
 
+    React.useEffect(()=>{
+        setSearchParams(prev => ({...prev, admins}))
+    }, [admins])
+
+
     React.useEffect(() => {
-        let query = admin ? 'is_superuser=True' : 'is_superuser=False'
+        let query = admins ? 'is_superuser=True' : 'is_superuser=False'
         if (search) {
             query += `,username__contains=${search.toLowerCase()}`
         }
@@ -64,7 +74,7 @@ export const UsersPage = () => {
             setUsers(data.data.items.map((item) => item.fields))
             setPages(data.data.pages)
         })
-    }, [search, admin])
+    }, [search, admins])
 
     return (
         <MainTemplate
@@ -72,12 +82,12 @@ export const UsersPage = () => {
             submenuChildren={
                 <>
                     <Button
-                        second={!admin}
+                        second={!admins}
                         onClick={() => {
-                            setAdmin((prev) => !prev)
+                            setAdmins((prev) => !prev)
                         }}
-                        icon={admin ? <FaLock /> : <FaLockOpen />}
-                        subContent={admin ? 'ADMINS' : 'NORMAL'}
+                        icon={admins ? <FaLock /> : <FaLockOpen />}
+                        subContent={admins ? 'ADMINS' : 'NORMAL'}
                         size={1.3}
                     />
                     <Button
@@ -102,7 +112,7 @@ export const UsersPage = () => {
                         subContent={'SEARCH'}
                         size={1.3}
                     />
-                    <Button second size={1.3} icon={<FiPlus />} subContent='NEW' />
+                    <Button to={LINKS.users.new()} second size={1.3} icon={<FiPlus />} subContent='NEW' />
                 </>
             }
         >

@@ -8,9 +8,10 @@ const StyledWrapper = styled.div`
     position: relative;
     padding: ${({size})=>size*8+'px'};
     min-width: ${({size})=>size*300+'px'};
+    height: ${({textarea, size}) => textarea ? 'auto' : size * 45 + 'px'};
     max-width: ${({size})=>size*300+'px'};
     border-radius: ${({size})=>size*3+'px'};
-    border: ${({size})=>size*2+'px'} solid ${({ theme }) => theme.primary};
+    border: ${({size})=>size*2.5+'px'} solid ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
 `
@@ -19,6 +20,7 @@ const StyledLabel = styled.label`
     position: absolute;
     top: ${({size})=>size*(-3)+'px'};
     left: ${({size})=>size*5+'px'};
+    user-select: none;
     padding: 0 ${({size})=>size*10+'px'};
     font-size: ${({size})=>size*10+'px'};
     background-color: ${({ theme }) => theme.secondary};
@@ -37,6 +39,7 @@ const StyledInput = styled.input`
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     caret-color:${({ theme }) => theme.primary};
+
     &:focus {
         outline: none;
     }
@@ -47,13 +50,14 @@ const StyledInput = styled.input`
     &:disabled {
         color: ${({ theme }) => theme.tertiary};
     }
-`
+    `
 
 const StyledTextarea = styled.textarea`
     border: 0;
-    font-size: ${({size})=>size*20+'px'};
+    caret-color: ${({ theme }) => theme.primary};
+    font-size: ${({ size })=> size * 20 + 'px'};
     width: 100%;
-    height: ${({size})=>size*200+'px'};
+    height: ${({ size })=> size * 200 + 'px'};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     &:focus {
@@ -91,7 +95,7 @@ export const Input = ({
     }, [value])
 
     return (
-        <StyledWrapper size={size}>
+        <StyledWrapper size={size} textarea={toBoolStr(textarea)}>
             {icon && <StyledIcon size={size}>{icon}</StyledIcon>}
             <StyledLabel size={size} label={toBoolStr(label)}>{label || ''}</StyledLabel>
             {textarea ? (

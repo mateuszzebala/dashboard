@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { range, toBoolStr } from '../utils/utils'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 import { BsThreeDots } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
@@ -14,10 +14,10 @@ const StyledWrapper = styled.div`
 
 const StyledPageButton = styled.button`
     background-color: ${({ theme, second }) =>
-        second ? theme.primary + '22' : theme.primary};
+        second ? theme.quaternary : theme.primary};
     color: ${({ theme, second }) => (second ? theme.primary : theme.secondary)};
     outline-color: ${({ theme, second }) =>
-        theme.primary + (second ? '22' : '88')};
+        second ? theme.quaternary : theme.primary}88;
     outline-style: solid;
     outline-width: 0;
     border: 0;
@@ -48,7 +48,7 @@ export const Paginator = ({ value, setValue, pages, second, minimum }) => {
                     setValue((prev) => (prev > 0 ? prev - 1 : prev))
                 }}
             >
-                <FaArrowLeft />
+                <IoIosArrowBack />
             </StyledPageButton>
             {value > 2 && !minimum && (
                 <>
@@ -101,7 +101,7 @@ export const Paginator = ({ value, setValue, pages, second, minimum }) => {
                     setValue((prev) => (prev < pages - 1 ? prev + 1 : prev))
                 }}
             >
-                <FaArrowRight />
+                <IoIosArrowForward />
             </StyledPageButton>
         </StyledWrapper>
     )

@@ -45,11 +45,13 @@ const StyledTaskBarIcon = styled.button`
 const ModalFormWindow = ({form, setModalForm, zIndex}) => {
     const [open, setOpen] = React.useState(!!form.content)
     const [minimize, setMinimize] = React.useState(false)
-    const {content: Content, icon, ...props} = form
+    const {content: Content, icon, onExit = () => {}, ...props} = form
 
     React.useEffect(()=>{
         !open && setModalForm(prev => prev.filter(f => f.title !== form.title))
+        !open && onExit()
     }, [open])
+
 
     return (
         <Modal minimize={minimize} setMinimize={setMinimize} icon={icon} open={open} setOpen={setOpen} {...props}>

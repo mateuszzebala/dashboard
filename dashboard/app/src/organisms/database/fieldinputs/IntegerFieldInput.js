@@ -16,7 +16,7 @@ const StyledType = styled.span`
 `
 
 export const IntegerFieldInput = ({ field, onChange, value: val }) => {
-    const [value, setValue] = React.useState(val ? parseInt(val) : '')
+    const [value, setValue] = React.useState(val ? parseInt(val) : null)
 
     React.useEffect(() => {
         onChange(value)

@@ -52,7 +52,7 @@ export const DatabasePutItemPage = () => {
         )
 
         const nullableErrorFields = Object.keys(values).filter(
-            (field) => values[field] === null && !nullable[field]
+            (field) => values[field] == null && !nullable[field]
         )
 
         setNullableErrors(nullableErrorFields)

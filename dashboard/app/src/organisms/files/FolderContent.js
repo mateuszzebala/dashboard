@@ -123,7 +123,7 @@ export const FolderContent = ({
             modalForm({
                 content: Confirm,
                 title: 'MOVE ITEMS',
-                text: `Move ${selectedItems.length} item${selectedItems.length > 1 && 's'} to ${centerEllipsis(toDropElement.name, 20)}?`,
+                text: `MOVE ${selectedItems.length} ITEM${selectedItems.length > 1 ? 'S' : ''} TO ${centerEllipsis(toDropElement.name, 20).toUpperCase()}?`,
                 icon: <MdOutlineDriveFileMove/>,
                 todo: ()=>{
                     load({show: true, text: 'MOVING ITEMS'})
@@ -146,9 +146,7 @@ export const FolderContent = ({
 
     }
 
-    const handleMouseMove = (e) => {
-        setDragItemsPos({x: e.clientX, y: e.clientY})
-        e.preventDefault()
+    React.useEffect(()=>{
         if(dragging){
             const toDropElements = [...folders, ...files].filter((item) => {
                 const bcr = pos[item.name]
@@ -158,19 +156,19 @@ export const FolderContent = ({
             }).filter(item => !selectedItems.includes(item)).filter(item => !item.is_file)
             setToDropElement(toDropElements.length > 0 ? toDropElements[0] : null)
         }
-        else if (selectRect.mouseDown) {
-            setSelectRect((prev) => ({
-                ...prev,
-                show: prev.mouseDown,
-                x2: e.clientX,
-                y2: e.clientY,
-            }))
+    }, [dragging, dragItemsPos])
+
+    const handleMouseMove = (e) => {
+        setDragItemsPos({x: e.clientX, y: e.clientY})
+        e.preventDefault()
+        if (selectRect.mouseDown) {
             const rectPosition = {
                 top: selectRect.y1 < selectRect.y2 ? selectRect.y1 : selectRect.y2,
                 left: selectRect.x1 < selectRect.x2 ? selectRect.x1 : selectRect.x2,
                 width: Math.abs(selectRect.x1 - selectRect.x2),
                 height: Math.abs(selectRect.y1 - selectRect.y2)
             }
+
             const newSelectedItems = [...folders, ...files].filter((item) => {
                 const bcr = pos[item.name]
                 return (
@@ -180,6 +178,13 @@ export const FolderContent = ({
                     bcr.y < rectPosition.top + rectPosition.height
                 )
             })
+
+            setSelectRect((prev) => ({
+                ...prev,
+                show: prev.mouseDown,
+                x2: e.clientX,
+                y2: e.clientY,
+            }))
 
             setSelectedItems((prev) =>
                 e.shiftKey ? [...new Set([...prev, ...newSelectedItems])] : newSelectedItems
@@ -223,7 +228,9 @@ export const FolderContent = ({
                 onMouseUp={handleMouseUp}
                 list={toBoolStr(list)}
                 ref={contentRef}
-                onMouseMove={handleMouseMove}
+                onMouseMove={!dragging ? handleMouseMove : (e) => {
+                    setDragItemsPos({x: e.clientX, y: e.clientY})
+                }}
                 onMouseLeave={() => {
                     setSelectRect((prev) => ({
                         ...prev,

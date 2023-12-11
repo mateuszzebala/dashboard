@@ -7,6 +7,7 @@ const StyledWrapper = styled.div`
     justify-content: center;
     height: ${({ size }) => size * 20 + 'px'};
     width: 100%;
+    min-width: 200px;
 `
 
 const StyledDraggableDot = styled.button`

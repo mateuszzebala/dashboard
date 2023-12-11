@@ -255,11 +255,18 @@ def get_possible_items(request, model_name, field_name):
 
 @dashboard_access
 def get_relation_value(reuqest, model_name, field_name, pk):
+
     model = get_model(model_name)
+    if model is None: return error_message('Model does not exists', 400)
     item = model.objects.filter(pk=pk).first()
-    if item is None: return JsonResponse({
-        'value': None
-    })
+    print('-------------------------------------')
+    print(item)
+    print('-------------------------------------')
+    if item is None: 
+        return JsonResponse({
+            'value': None
+        })
+
     value = getattr(item, field_name)
     field = get_field(model, field_name)
     if field.many_to_many:
