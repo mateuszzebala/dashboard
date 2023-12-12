@@ -38,6 +38,8 @@ export const LINKS = {
         index: () => '/dashboard/email/',
         inbox: (mail) => `/dashboard/email/inbox?mail=${mail}`,
         newsletter: () => '/dashboard/email/newsletter/',
+        add: () => '/dashboard/email/add/',
+        read: (id) => `/dashboard/email/read/?id=${id}`,
     },
     requests: {
         index: () => '/dashboard/requests/',

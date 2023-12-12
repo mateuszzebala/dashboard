@@ -54,6 +54,12 @@ export const ENDPOINTS = {
         zip: () => API(['files', 'zip']),
         move: () => API(['files', 'move']),
     },
+    email: {
+        send: () => API(['email', 'send']),
+        all: () => API(['email', 'all']),
+        info: (email) => API(['email', 'info', email]),
+        inbox: (email, args={}) => API(['email', 'inbox', email], args),
+    },
     editor: {
         json: (path) => API(['editor', 'json'], { path }),
         liked_and_last: () => API(['editor', 'liked&last']),

@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import RequestLog, Configuration, TestModel, Account, QrCodeAuth, Message
+from .models import RequestLog, Configuration, TestModel, Account, QrCodeAuth, Email
 from django.contrib.auth.models import Permission
 from django.contrib.sessions.models import Session
+
 
 @admin.register(RequestLog)
 class RequestLogAdmin(admin.ModelAdmin):
@@ -28,9 +29,9 @@ class AccountAdmin(admin.ModelAdmin):
     list_display = ['id', 'state', 'country', 'website']
 
 @admin.register(QrCodeAuth)
-class AccountAdmin(admin.ModelAdmin):
+class QrCodeAdmin(admin.ModelAdmin):
     list_display = ['token', 'datetime', 'user']
 
-@admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
-    list_display = ['email', 'user', 'datetime', 'text', 'read']
+@admin.register(Email)
+class EmailAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email']

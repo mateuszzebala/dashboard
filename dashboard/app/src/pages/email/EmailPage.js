@@ -3,13 +3,14 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
 import { Button } from '../../atoms/Button'
-import { FiPlus, FiSearch, FiStar } from 'react-icons/fi'
+import { FiPlus, FiSearch } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
 import { BsStar, BsStarFill } from 'react-icons/bs'
-import { MdStarOutline } from 'react-icons/md'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -34,6 +35,11 @@ const StyledEmail = styled.div`
     font-weight: 300;
     transition: transform 0.3s;
     width: 100%;
+    span{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     &:hover{
         transform: scale(0.98);
     }
@@ -43,15 +49,14 @@ export const EmailPage = () => {
     const modalForm = useModalForm()
     const navigate = useNavigate()
     const [searchValue, setSearchValue] = React.useState('')
-    
-    const [emails, setEmails] = React.useState([
-        {email: 'contact@email.com', star: true, name: 'Contact'},
-        {email: 'orders@email.com', star: false, name: 'Orders'},
-        {email: 'coe@email.com', star: false, name: 'CEO'},
-        {email: 'jobs@email.com', star: false, name: 'Jobs'},
-        {email: 'cto@email.com', star: false, name: 'CTO'},
-        {email: 'mateusz.zebala@email.com', star: true, name: 'Mateusz Zębala'},
-    ])
+
+    const [emails, setEmails] = React.useState([])
+
+    React.useEffect(()=>{
+        FETCH(ENDPOINTS.email.all()).then(data => {
+            setEmails(data.data.emails)
+        })
+    }, [])
 
     return (
         <MainTemplate app={APPS.email}
@@ -84,6 +89,7 @@ export const EmailPage = () => {
                     second 
                     size={1.3} 
                     subContent='NEW'
+                    to={LINKS.email.add()}
                 />
             </>}
         >

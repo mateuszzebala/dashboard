@@ -10,7 +10,11 @@ import { AiOutlineWarning } from 'react-icons/ai'
 import { LINKS } from '../../router/links'
 import { Button } from '../../atoms/Button'
 import { Tooltip } from '../../atoms/Tooltip'
-import { CreateEmail } from './CreateEmail'
+import { CreateEmail } from './inboxPages/CreateEmail'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
+import { Loading } from '../../atoms/Loading'
+import { toBoolStr } from '../../utils/utils'
 
 
 const StyledMenu = styled.div`
@@ -46,6 +50,47 @@ const StyledContent = styled.div`
     padding: 5px;
 `
 
+const StyledEmailsList = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100%;
+    overflow: auto;
+`
+
+const StyledIcons = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.1s;
+`
+
+const StyledEmail = styled.div`
+    padding: 0 15px;
+    background: ${({theme})=>theme.primary}22;
+    width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    border-radius: 0 7px 7px 0;
+    border-left: 3px solid ${({theme})=>theme.primary};
+    overflow: hidden;
+    &:hover .items{
+        opacity: 1;
+    }
+    span{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: inline-flex;
+        white-space: nowrap;
+    }
+`
+
+
 const StyledMenuButton = styled.button`
     background-color: ${({theme, active})=> active ? theme.primary : theme.primary + '22'};
     border: 0;
@@ -70,6 +115,14 @@ const StyledMenuButton = styled.button`
     }
 `
 
+const StyledLoading = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+`
+
 const PAGES = {
     compose: {name: 'Compose', icon: <FiPlus/>},
     inbox: {name: 'Inbox', icon: <FaInbox/>},
@@ -84,21 +137,38 @@ const PAGES = {
 
 export const EmailInboxPage = () => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [currectPage, setCurrentPage] = React.useState('inbox')
+    const [currentPage, setCurrentPage] = React.useState('inbox')
     const navigate = useNavigate()
     const [menuOpen, setMenuOpen] = React.useState(true)
+    const [emailInfo, setEmailInfo] = React.useState({})
+    const [receivedEmails, setReceivedEmails] = React.useState([])
+    const [loading, setLoading] = React.useState(true)
+
+    React.useEffect(()=>{
+        FETCH(ENDPOINTS.email.info(searchParams.get('mail'))).then(data => {
+            setEmailInfo(data.data)
+        })
+        FETCH(ENDPOINTS.email.inbox(searchParams.get('mail'), {
+            length: 5,
+            folder: 'inbox',
+            page: 0
+        })).then(data => {
+            setReceivedEmails(data.data.emails)
+            setLoading(false)
+        })
+    }, [searchParams.get('mail')])
 
     React.useEffect(()=>{
         setSearchParams({
             mail: searchParams.get('mail'),
-            page: currectPage, 
+            page: currentPage, 
         })
-    }, [currectPage])
+    }, [currentPage])
 
     return (
         <MainTemplate 
             app={APPS.email} 
-            title={searchParams.get('mail')}
+            title={emailInfo.email}
             submenuChildren={
                 <>
                     <Button to={LINKS.email.index()} size={1.3} second icon={<FiArrowLeft/>} subContent='EMAILS'/>
@@ -107,18 +177,28 @@ export const EmailInboxPage = () => {
             }
         >
             <StyledWrapper>
-                <StyledMenu open={menuOpen}>
+                <StyledMenu open={toBoolStr(menuOpen)}>
                     {Object.keys(PAGES).map(page => (
-                        <Tooltip text={PAGES[page].name} key={page} wrapper={StyledMenuButton} open={menuOpen} onClick={()=>{setCurrentPage(page)}} active={currectPage === page}>{PAGES[page].icon} <span>{PAGES[page].name}</span></Tooltip>
+                        <Tooltip text={PAGES[page].name} key={page} wrapper={StyledMenuButton} open={toBoolStr(menuOpen)} onClick={()=>{setCurrentPage(page)}} active={currentPage === page}>{PAGES[page].icon} <span>{PAGES[page].name}</span></Tooltip>
                     ))}
                 </StyledMenu>
                 <StyledContent>
-                    {currectPage === 'compose' && <CreateEmail />}
-                    {currectPage !== 'compose' && 
-                        <>
-
-                        </>
-                    }
+                    {loading && <StyledLoading><Loading size={2} /></StyledLoading>}
+                    {!loading && <>
+                        {currentPage === 'compose' && <CreateEmail emailInfo={emailInfo}/>}
+                        {currentPage !== 'compose' && 
+                            <StyledEmailsList menuOpen={toBoolStr(menuOpen)}>
+                                {receivedEmails.map(email => (
+                                    <StyledEmail key={email}>
+                                        <span><b>{email.from}</b> &nbsp; {email.subject}</span>
+                                        <StyledIcons className='icons'>
+                                            <FiTrash/>
+                                        </StyledIcons>
+                                    </StyledEmail>
+                                ))}
+                            </StyledEmailsList>
+                        }
+                    </>}
                 </StyledContent>
             </StyledWrapper>
         </MainTemplate>

@@ -12,7 +12,7 @@ import {
     BsTable,
 } from 'react-icons/bs'
 import { BiWrench } from 'react-icons/bi'
-import { FiEye, FiKey, FiUser, FiUsers } from 'react-icons/fi'
+import { FiEye, FiKey, FiMail, FiUser, FiUsers } from 'react-icons/fi'
 
 const IconByModel = {
     user: <FiUser />,
@@ -22,7 +22,8 @@ const IconByModel = {
     permission: <BsPersonFillGear />,
     configuration: <BiWrench />,
     qrcodeauth: <BsQrCode/>,
-    account: <FiUser/>
+    account: <FiUser/>,
+    email: <FiMail/>
 }
 
 const StyledModels = styled.div`

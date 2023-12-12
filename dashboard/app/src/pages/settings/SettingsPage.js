@@ -344,9 +344,7 @@ const SettingsByPage = {
                     powershell: 'POWERSHELL',
                 }}/>
                 <Typography variant={'h3'}>INTERPRETER</Typography>
-
             </StyledRow>
-            
         </StyledSection>
     ),
     requests: ({value, setValue}) => (
@@ -365,13 +363,7 @@ const SettingsByPage = {
             />
         </StyledSection>
     ),
-    email: ({value, setValue}) => (
-        <StyledSection>
-            <Input label={'SMTP ADDRESS'} value={value['email.smtp']} setValue={(val) => setValue(prev => ({...prev, 'email.smtp': val}))}/>
-            <Input type='number' label={'PORT'} value={value['email.port']} setValue={(val) => setValue(prev => ({...prev, 'email.port': val}))}/>
-            <Input type='password' label={'SMTP PASSWORD'} value={value['email.password']} setValue={(val) => setValue(prev => ({...prev, 'email.password': val}))}/>
-        </StyledSection>
-    )
+
 }
 
 export const SettingsPage = () => {
@@ -469,7 +461,6 @@ export const SettingsPage = () => {
                 {page === 'database' &&  <SettingsByPage.database value={value} setValue={setValue}/>}
                 {page === 'terminal' &&  <SettingsByPage.terminal value={value} setValue={setValue}/>}
                 {page === 'requests' &&  <SettingsByPage.requests value={value} setValue={setValue}/>}
-                {page === 'email' &&  <SettingsByPage.email value={value} setValue={setValue}/>}
             </StyledWrapper>
         </MainTemplate>
     )

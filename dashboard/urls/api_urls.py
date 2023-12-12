@@ -11,7 +11,8 @@ views = [
     'editor',
     'other',
     'statistics',
-    'users'
+    'users',
+    'email'
 ]
 
 

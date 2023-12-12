@@ -326,12 +326,25 @@ class QrCodeAuth(models.Model):
     def __str__(self):
         return self.token
     
-class Message(models.Model):
+class Email(models.Model):
+    name = models.CharField(max_length=32)
     email = models.CharField(max_length=128)
-    text = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    datetime = models.DateTimeField(auto_now_add=True)
-    read = models.BooleanField(default=False)
+    smtp = models.CharField(max_length=256)
+    imap = models.CharField(max_length=256)
+    star = models.BooleanField(default=False)
+    port_smtp = models.IntegerField(default=587)
+    port_imap = models.IntegerField(default=587)
+    password = models.CharField(max_length=64)
+
+    def json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'smtp': self.smtp,
+            'imap': self.imap,
+            'star': self.star,
+        }
 
     def __str__(self):
-        return f"{self.email} - {self.datetime}"
+        return self.email

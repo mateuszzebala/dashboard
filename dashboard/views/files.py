@@ -229,7 +229,6 @@ def move_files_view(request):
         })
 
     for item_to_move in items_to_move:
-        print(item_to_move)
         try:
             if os.path.exists(item_to_move):
                 if os.path.isfile(item_to_move):
