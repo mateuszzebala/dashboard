@@ -7,7 +7,7 @@ from dashboard.models import Email
 import ssl
 import imaplib
 import email as emaillib
-
+import re
 
 @dashboard_access
 def get_emails(request):
@@ -56,16 +56,29 @@ def read_inbox(request, email):
             for response in msg:
                 if isinstance(response, tuple):
                     msg = emaillib.message_from_bytes(response[1])
-                    subject, encoding = emaillib.header.decode_header(msg.get('Subject'))[0]
+                    subject, encoding = emaillib.header.decode_header(msg['Subject'])[0]
                     if isinstance(subject, bytes):
-                        subject = subject.decode(encoding)
+                        subject = subject.decode(encoding or 'utf-8')
                     
                     fromHeader, encoding = emaillib.header.decode_header(msg.get('From'))[0]
+
                     if isinstance(fromHeader, bytes):
-                        fromHeader = fromHeader.decode(encoding)
+                        fromHeader = fromHeader.decode(encoding or 'utf-8')
+
+                    fromHeader = str(fromHeader)
+                    pattern = re.compile(r'"?(?P<name>[\w\s]+)"?\s?<(?P<email>[\w\.-]+@[\w\.-]+)>')
+                    match = pattern.search(str(fromHeader))
+                    if match:
+                        fromName = match.group('name')
+                        fromEmail = match.group('email')
+                    else:
+                        fromName = fromHeader
+                        fromEmail = fromHeader
                 
                     email_info['subject'] = subject
-                    email_info['from'] = fromHeader
+                    email_info['fromName'] = fromName
+                    email_info['fromEmail'] = fromEmail
+                    email_info['id'] = email_index
 
                     if msg.is_multipart():
                         for part in msg.walk():
@@ -83,7 +96,7 @@ def read_inbox(request, email):
                     if content_type in ("text/plain", "text/html"):
                         email_info['body'] = body
                 email_info
-                emails.append(email_info)
+            emails.append(email_info)
     return JsonResponse({
         'email_counter': email_counter,
         'emails': [eml for eml in emails]

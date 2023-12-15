@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
     font-size: ${({ size }) => size * 20 + 'px'};
     background-color: ${({ theme }) => theme.quaternary};
     color: ${({ theme }) => theme.primary};
-    border-radius: ${({ size }) => size * 10 + 'px'};
+    border-radius: ${({ size }) => size * 5 + 'px'};
 `
 const StyledInput = styled.input`
     border: 0;
@@ -19,7 +19,7 @@ const StyledInput = styled.input`
     color: ${({ theme }) => theme.primary};
     padding: 0;
     font-weight: 400;
-    font-size: ${({ scaleSize }) => scaleSize * 17 + 'px'};
+    font-size: ${({ scaleSize }) => scaleSize * 15 + 'px'};
     text-align: center;
     &:focus {
         outline: none;
@@ -29,9 +29,9 @@ const StyledInput = styled.input`
 const StyledButton = styled.button`
     display: flex;
     flex-direction: column;
-    font-size: ${({ size }) => size * 15 + 'px'};
+    font-size: ${({ size }) => size * 20 + 'px'};
     align-items: center;
-    border-radius: ${({ size }) => size * 10 + 'px'};
+    border-radius: ${({ size }) => size * 5 + 'px'};
     color: ${({ theme }) => theme.primary};
     cursor: pointer;
     height: ${({ size }) => size * 43 + 'px'};
@@ -50,9 +50,10 @@ const StyledButton = styled.button`
 const StyledRow = styled.div`
     display: flex;
     flex-direction: row;
-    font-weight: 400;
+    font-weight: 300;
+
     align-items: center;  
-    font-size: ${({ scaleSize }) => scaleSize * 17 + 'px'};
+    font-size: ${({ scaleSize }) => scaleSize * 15 + 'px'};
 `
 
 export const Counter = ({

@@ -3,51 +3,31 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { FaInbox } from 'react-icons/fa'
-import { FiArrowLeft, FiEdit, FiMail, FiMenu, FiPlus, FiSend, FiStar, FiTrash } from 'react-icons/fi'
-import { MdSnooze } from 'react-icons/md'
-import { AiOutlineWarning } from 'react-icons/ai'
+import { FiArrowLeft, FiBell, FiDownload, FiMenu, FiPlus, FiTrash } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
 import { Button } from '../../atoms/Button'
-import { Tooltip } from '../../atoms/Tooltip'
-import { CreateEmail } from './inboxPages/CreateEmail'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { Loading } from '../../atoms/Loading'
 import { toBoolStr } from '../../utils/utils'
+import { Counter } from '../../atoms/Counter'
+import { Paginator } from '../../atoms/Paginator'
 
-
-const StyledMenu = styled.div`
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: ${({open})=> open ? '250px' : '70px'};
-    transition: width 0.3s;
-    align-items: stretch;
-    height: 100%;
-    padding: 10px;
-    overflow: scroll;
-    ::-webkit-scrollbar{
-        width: 0;
-    }
-    span{
-        display: ${({open})=> open ? 'inline-block' : 'none'};
-        white-space: nowrap;
-    }
-`
 
 const StyledWrapper = styled.div`
-    height: 100%;
     display: flex;
     width: 100%;
+    height: 100%;
+    padding: 5px;
 `
 
-const StyledContent = styled.div`
-    display: flex;
-    width: 100%;
-    padding: 5px;
+const StyledFromMail = styled.b`
+    padding: 0 10px;
+    font-weight: 500;
+`
+
+const StyledSubject = styled.span`
+    font-weight: 100;
 `
 
 const StyledEmailsList = styled.div`
@@ -73,15 +53,13 @@ const StyledEmail = styled.div`
     width: 100%;
     font-size: 15px;
     cursor: pointer;
-    min-height: 45px;
+    min-height: 55px;
     display: flex;
     align-items: center;
-    border-radius: 0 7px 7px 0;
-    border-left: 3px solid ${({theme})=>theme.primary};
+    justify-content: space-between;
+    border-radius: 7px;
     overflow: hidden;
-    &:hover .items{
-        opacity: 1;
-    }
+    :hover .icons{ opacity: 1; }
     span{
         text-overflow: ellipsis;
         overflow: hidden;
@@ -90,30 +68,14 @@ const StyledEmail = styled.div`
     }
 `
 
-
-const StyledMenuButton = styled.button`
-    background-color: ${({theme, active})=> active ? theme.primary : theme.primary + '22'};
+const StyledActionIcon = styled.button`
+    font-size: 20px;
+    background-color: transparent;
     border: 0;
-    color: ${({theme, active})=> active ? theme.secondary : theme.primary};
-    padding: 15px 10px;
-    height: ${({active})=> active ? '70px' : '50px'};
-    border-radius: 5px;
-    font-size: 15px;
     cursor: pointer;
-    display: flex;
-    font-weight: ${({active}) => active ? 'bold' : 'normal'};
-    gap: 8px;
-    align-items: center;
-    justify-content: ${({open}) => open ? 'flex-start' : 'center'};
-    outline: 0px ${({theme, active}) => active ? theme.primary + '88' : theme.primary + '22'} solid;
-    transition: height 0.3s, background-color 0.3s, justify-content 0.3s;
-    &:focus, &:hover{
-        outline-width: 4px;
-    }
-    svg{
-        font-size: 20px;
-    }
+    color: ${({theme})=>theme.primary};
 `
+
 
 const StyledLoading = styled.div`
     display: flex;
@@ -121,85 +83,96 @@ const StyledLoading = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
+
 `
 
-const PAGES = {
-    compose: {name: 'Compose', icon: <FiPlus/>},
-    inbox: {name: 'Inbox', icon: <FaInbox/>},
-    starred: {name: 'Starred', icon: <FiStar/>},
-    snoozed: {name: 'Snoozed', icon: <MdSnooze/>},
-    sent: {name: 'Sent', icon: <FiSend/>},
-    drafts: {name: 'Drafts', icon: <FiEdit/>},
-    spam: {name: 'Spam', icon: <AiOutlineWarning/>},
-    allEmails: {name: 'All Emails', icon: <FiMail/>},
-    bin: {name: 'Bin', icon: <FiTrash/>},
-}
+const StyledSubMenu = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    > div{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+`
 
 export const EmailInboxPage = () => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [currentPage, setCurrentPage] = React.useState('inbox')
-    const navigate = useNavigate()
-    const [menuOpen, setMenuOpen] = React.useState(true)
     const [emailInfo, setEmailInfo] = React.useState({})
     const [receivedEmails, setReceivedEmails] = React.useState([])
     const [loading, setLoading] = React.useState(true)
+    const [length, setLength] = React.useState(30)
+    const [page, setPage] = React.useState(0)
+    const [pages, setPages] = React.useState(30)
+    const navigate = useNavigate()
 
     React.useEffect(()=>{
         FETCH(ENDPOINTS.email.info(searchParams.get('mail'))).then(data => {
             setEmailInfo(data.data)
         })
-        FETCH(ENDPOINTS.email.inbox(searchParams.get('mail'), {
-            length: 5,
-            folder: 'inbox',
-            page: 0
-        })).then(data => {
-            setReceivedEmails(data.data.emails)
-            setLoading(false)
-        })
     }, [searchParams.get('mail')])
 
     React.useEffect(()=>{
-        setSearchParams({
-            mail: searchParams.get('mail'),
-            page: currentPage, 
+        setLoading(true)
+        const currentPageNumber = page
+        const currentLength = length
+        FETCH(ENDPOINTS.email.inbox(searchParams.get('mail'), {
+            length,
+            folder: 'inbox',
+            page,
+        })).then(data => {
+            setPages(Math.ceil(data.data.email_counter / length))
+            setReceivedEmails(data.data.emails)
+            console.log(currentLength, length)
+            currentLength === length && currentPageNumber === page && setLoading(false)
         })
-    }, [currentPage])
+    }, [emailInfo, length, page])
 
     return (
         <MainTemplate 
             app={APPS.email} 
             title={emailInfo.email}
             submenuChildren={
-                <>
-                    <Button to={LINKS.email.index()} size={1.3} second icon={<FiArrowLeft/>} subContent='EMAILS'/>
-                    <Button onClick={()=>setMenuOpen(prev => !prev)} size={1.3} second icon={<FiMenu/>} subContent='MENU'/>
-                </>
+                <StyledSubMenu>
+                    <div>
+                        <Button to={LINKS.email.index()} size={1.3} second icon={<FiArrowLeft/>} subContent='EMAILS'/>
+                        <Button size={1.3} second icon={<FiPlus/>} subContent='COMPOSE'/>
+                    </div>
+                    <div>
+                        <Paginator value={page} setValue={setPage} pages={pages} second/>  
+                        <Counter value={length} setValue={setLength} min={0} max={1000} unit='Emails' size={1.3}/>
+                    </div>    
+                </StyledSubMenu>
             }
         >
             <StyledWrapper>
-                <StyledMenu open={toBoolStr(menuOpen)}>
-                    {Object.keys(PAGES).map(page => (
-                        <Tooltip text={PAGES[page].name} key={page} wrapper={StyledMenuButton} open={toBoolStr(menuOpen)} onClick={()=>{setCurrentPage(page)}} active={currentPage === page}>{PAGES[page].icon} <span>{PAGES[page].name}</span></Tooltip>
-                    ))}
-                </StyledMenu>
-                <StyledContent>
-                    {loading && <StyledLoading><Loading size={2} /></StyledLoading>}
-                    {!loading && <>
-                        {currentPage === 'compose' && <CreateEmail emailInfo={emailInfo}/>}
-                        {currentPage !== 'compose' && 
-                            <StyledEmailsList menuOpen={toBoolStr(menuOpen)}>
-                                {receivedEmails.map(email => (
-                                    <StyledEmail key={email}>
-                                        <span><b>{email.from}</b> &nbsp; {email.subject}</span>
-                                        <StyledIcons className='icons'>
-                                            <FiTrash/>
-                                        </StyledIcons>
-                                    </StyledEmail>
-                                ))}
-                            </StyledEmailsList>
-                        }
-                    </>}
-                </StyledContent>
+                {loading && <StyledLoading><Loading size={2} /></StyledLoading>}
+                {!loading && (
+                    <StyledEmailsList>
+                        {receivedEmails.map(email => (
+                            <StyledEmail key={email}>
+                                <span onClick={()=>{
+                                    navigate(LINKS.email.read(email.id))
+                                }}>
+                                    <StyledFromMail>{email.fromName || email.fromEmail}</StyledFromMail>
+                                    <StyledSubject>{email.subject}</StyledSubject>
+                                </span>
+                                <StyledIcons className='icons'>
+                                    <StyledActionIcon>
+                                        <FiDownload/>
+                                    </StyledActionIcon>
+                                    <StyledActionIcon>
+                                        <FiBell/>
+                                    </StyledActionIcon>
+                                    <StyledActionIcon>
+                                        <FiTrash/>
+                                    </StyledActionIcon>
+                                </StyledIcons>
+                            </StyledEmail>
+                        ))}
+                    </StyledEmailsList>
+                )}
             </StyledWrapper>
         </MainTemplate>
     )

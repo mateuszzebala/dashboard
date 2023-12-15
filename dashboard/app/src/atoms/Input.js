@@ -14,11 +14,13 @@ const StyledWrapper = styled.div`
     border: ${({size})=>size*2.5+'px'} solid ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
+    outline: ${({focus, size})=>focus?3*size+'px' : 0} solid${({ theme }) =>theme.quaternary};
+    transition: outline-width 0.1s;
 `
 
 const StyledLabel = styled.label`
     position: absolute;
-    top: ${({size})=>size*(-3)+'px'};
+    top: ${({size})=>size*(-2.5)+'px'};
     left: ${({size})=>size*5+'px'};
     user-select: none;
     padding: 0 ${({size})=>size*10+'px'};
@@ -80,6 +82,7 @@ export const Input = ({
     ...props
 }) => {
     const [tempValue, setTempValue] = React.useState(value)
+    const [focus, setFocus] = React.useState(false)
     const inputRef = React.useRef()
 
     useGlobalKey(
@@ -95,12 +98,14 @@ export const Input = ({
     }, [value])
 
     return (
-        <StyledWrapper size={size} textarea={toBoolStr(textarea)}>
+        <StyledWrapper size={size} textarea={toBoolStr(textarea)} focus={toBoolStr(focus)}>
             {icon && <StyledIcon size={size}>{icon}</StyledIcon>}
             <StyledLabel size={size} label={toBoolStr(label)}>{label || ''}</StyledLabel>
             {textarea ? (
                 <StyledTextarea
                     type={type}
+                    onFocus={()=>{setFocus(true)}}
+                    onBlur={()=>{setFocus(false)}}
                     size={size}
                     ref={inputRef}
                     value={tempValue}
@@ -114,6 +119,8 @@ export const Input = ({
                 <StyledInput
                     type={type}
                     size={size}
+                    onFocus={()=>{setFocus(true)}}
+                    onBlur={()=>{setFocus(false)}}
                     value={tempValue}
                     ref={inputRef}
                     onChange={(e) => {

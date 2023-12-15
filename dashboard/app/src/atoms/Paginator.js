@@ -21,7 +21,7 @@ const StyledPageButton = styled.button`
     outline-style: solid;
     outline-width: 0;
     border: 0;
-    border-radius: 50%;
+    border-radius: 10%;
     display: grid;
     place-items: center;
     padding: 5px;

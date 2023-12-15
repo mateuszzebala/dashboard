@@ -39,6 +39,7 @@ export const LINKS = {
         inbox: (mail) => `/dashboard/email/inbox?mail=${mail}`,
         newsletter: () => '/dashboard/email/newsletter/',
         add: () => '/dashboard/email/add/',
+        compose: () => '/dashboard/email/compose/',
         read: (id) => `/dashboard/email/read/?id=${id}`,
     },
     requests: {
