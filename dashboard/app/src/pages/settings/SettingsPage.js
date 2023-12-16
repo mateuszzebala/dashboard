@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { FiSettings } from 'react-icons/fi'
+import { FiSettings, FiX } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
 import { ColorInput } from '../../atoms/ColorInput'
 import { useSettings, useTheme } from '../../utils/hooks'
@@ -13,7 +13,7 @@ import { HiXMark } from 'react-icons/hi2'
 import { Theme } from '../../atoms/Theme'
 import { theme as orginalTheme } from '../../theme/theme'
 import { LuComponent, LuSave } from 'react-icons/lu'
-import { MdOutlineColorLens } from 'react-icons/md'
+import { MdOutlineColorLens, MdOutlineLineStyle, MdOutlineStyle } from 'react-icons/md'
 import { useSearchParams } from 'react-router-dom'
 import { APPS } from '../../apps/apps'
 import { Input } from '../../atoms/Input'
@@ -27,9 +27,11 @@ const StyledRow = styled.div`
     justify-content: flex-start;
     gap: 20px;
     text-transform: uppercase;
+    width: 100%;
     h2,
     h3 {
         font-weight: 500;
+        white-space: nowrap;
     }
 `
 
@@ -92,7 +94,7 @@ const ColorProp = ({ setColors, colorName, colors }) => {
 }
 
 const SettingsByPage = {
-    colors: ({colors, setColors}) => (
+    colors: ({ colors, setColors, value, setValue }) => (
         <StyledSection>
             <ColorProp
                 setColors={setColors}
@@ -134,9 +136,37 @@ const SettingsByPage = {
                 colors={colors}
                 colorName={'accent'}
             />
+
+            <StyledSection>
+                <StyledRow>
+                    <Select label={'FONT FAMILY'} emptyName='FONT FAMILY' canBeNull={false} second setValue={(val) => {
+                        setValue(prev => ({ ...prev, 'dashboard.style.fontFamily': val }))
+                    }} value={value['dashboard.style.fontFamily']} data={{
+                        'Rubik': 'Rubik',
+                        'Montserrat': 'Montserrat',
+                        'Ubuntu': 'Ubuntu',
+                        'Fira Mono': 'Fira Mono',
+                        'Jetbrains Mono': 'Jetbrains Mono',
+                        'Ubuntu Mono': 'Ubuntu Mono',
+                    }} />
+                    <Typography variant={'h3'}>FONT FAMILY</Typography>
+                </StyledRow>
+                <StyledRow>
+                    <Select label={'FONT FAMILY MONO'} emptyName='FONT FAMILY MONO' canBeNull={false} second setValue={(val) => {
+                        setValue(prev => ({ ...prev, 'dashboard.style.fontFamilyMono': val }))
+                    }} value={value['dashboard.style.fontFamilyMono']} data={{
+                        'Fira Mono': 'Fira Mono',
+                        'Ubuntu Mono': 'Ubuntu Mono',
+                        'Jetbrains Mono': 'Jetbrains Mono',
+                    }} />
+                    <Typography variant={'h3'}>MONO FONT FAMILY</Typography>
+                </StyledRow>
+
+            </StyledSection>
+
         </StyledSection>
     ),
-    dashboard: ({value, setValue}) => (
+    dashboard: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting
                 value={value}
@@ -156,7 +186,12 @@ const SettingsByPage = {
                 prop={'dashboard.topbar_username'}
                 text={'Show Username In TopBar'}
             />
-
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.topbar_submenu_toggler'}
+                text={'Show Submenu Toggler'}
+            />
             <SwitchSetting
                 value={value}
                 setValue={setValue}
@@ -232,7 +267,7 @@ const SettingsByPage = {
             />
         </StyledSection>
     ),
-    home: ({value, setValue}) => (
+    home: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting
                 value={value}
@@ -267,12 +302,12 @@ const SettingsByPage = {
             <SwitchSetting
                 value={value}
                 setValue={setValue}
-                prop={'home.finance_widget'}
-                text={'Finance Widgets'}
+                prop={'home.informations_widget'}
+                text={'Informations Widget'}
             />
         </StyledSection>
     ),
-    database: ({value, setValue}) => (
+    database: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting
                 value={value}
@@ -305,12 +340,12 @@ const SettingsByPage = {
                 text={'CSV Export'}
             />
             <StyledRow>
-                <Counter value={value['database.default_number_of_rows'] || 10} setValue={(val)=>{
-                    try{
-                        setValue(prev => ({...prev, 'database.default_number_of_rows': val(prev['database.default_number_of_rows'] || 10)}))
+                <Counter value={value['database.default_number_of_rows'] || 10} setValue={(val) => {
+                    try {
+                        setValue(prev => ({ ...prev, 'database.default_number_of_rows': val(prev['database.default_number_of_rows'] || 10) }))
                     }
-                    catch{
-                        setValue(prev => ({...prev, 'database.default_number_of_rows': val}))
+                    catch {
+                        setValue(prev => ({ ...prev, 'database.default_number_of_rows': val }))
                     }
                 }} min={1} size={1.3} unit="rows" />
                 <Typography variant={'h3'}>
@@ -319,7 +354,7 @@ const SettingsByPage = {
             </StyledRow>
         </StyledSection>
     ),
-    terminal: ({value, setValue}) => (
+    terminal: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting
                 value={value}
@@ -334,20 +369,20 @@ const SettingsByPage = {
                 text={'BOOKMARKS'}
             />
             <StyledRow>
-                <Select emptyName='INTERPRETER' canBeNull={false} second setValue={(val)=>{
-                    setValue(prev => ({...prev, 'terminal.sh_type': val}))
+                <Select emptyName='INTERPRETER' canBeNull={false} second setValue={(val) => {
+                    setValue(prev => ({ ...prev, 'terminal.sh_type': val }))
                 }} value={value['terminal.sh_type']} data={{
                     zsh: 'ZSH',
                     bash: 'BASH',
                     sh: 'SH',
                     cmd: 'CMD',
                     powershell: 'POWERSHELL',
-                }}/>
+                }} />
                 <Typography variant={'h3'}>INTERPRETER</Typography>
             </StyledRow>
         </StyledSection>
     ),
-    requests: ({value, setValue}) => (
+    requests: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting
                 value={value}
@@ -376,9 +411,9 @@ export const SettingsPage = () => {
     const [initValue, setInitValue] = React.useState({})
     const [saveLoading, setSaveLoading] = React.useState(false)
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         FETCH(ENDPOINTS.settings.get()).then(data => {
-            
+
             setValue(data.data)
             setInitValue(data.data)
         })
@@ -395,33 +430,33 @@ export const SettingsPage = () => {
         tertiary: theme.tertiary,
     })
 
-    React.useEffect(()=>{
-        if(searchParams.get('page') !== page){
-            setSearchParams(prev => ({...prev, page}))
+    React.useEffect(() => {
+        if (searchParams.get('page') !== page) {
+            setSearchParams(prev => ({ ...prev, page }))
         }
     }, [page])
 
-    React.useEffect(()=>{
-        if(searchParams.get('page') !== page){
-            if(!SettingsByPage[page]){
+    React.useEffect(() => {
+        if (searchParams.get('page') !== page) {
+            if (!SettingsByPage[page]) {
                 setPage('home')
             }
             else setPage(searchParams.get('page'))
         }
     }, [searchParams])
 
-  
+
 
     React.useEffect(() => {
         updateTheme(colors)
     }, [colors])
 
 
-    React.useEffect(()=>{
-        if(Object.keys(value).some(key => value[key] !== initValue[key])){
+    React.useEffect(() => {
+        if (Object.keys(value).some(key => value[key] !== initValue[key])) {
             setSaved(false)
         }
-        else{
+        else {
             setSaved(true)
         }
     }, [value])
@@ -435,32 +470,32 @@ export const SettingsPage = () => {
                 link: LINKS.settings.index(),
             }}
             submenuChildren={<>
-                <Theme value={{...theme, primary: saved ? theme.success : theme.error}}>
-                    <Button loading={saveLoading} subContent='SAVE' onClick={()=>{
+                <Theme value={{ ...theme, primary: saved ? theme.success : theme.error }}>
+                    <Button loading={saveLoading} subContent='SAVE' onClick={() => {
                         setSaveLoading(true)
-                        FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify(value)}).then(() => {
+                        FETCH(ENDPOINTS.settings.set(), { settings: JSON.stringify(value) }).then(() => {
                             setSaved(true)
                             setSaveLoading(false)
                             FETCH(ENDPOINTS.settings.get()).then(data => {
                                 setSettings(data.data)
                             })
                         })
-                    }} icon={<LuSave/>} size={1.4}/>
+                    }} icon={<LuSave />} size={1.4} />
                 </Theme>
                 |
-                <Button onClick={()=>{setPage('colors')}} subContent='COLORS' second={page !== 'colors'} icon={<MdOutlineColorLens />} size={1.4}></Button>
-                <Button onClick={()=>{setPage('dashboard')}} subContent='DASHBO...' second={page !== 'dashboard'} icon={<LuComponent />} size={1.4}></Button>
-                | 
-                {Object.values(APPS).filter(app => settings[`dashboard.app.${app.name.toLowerCase()}`] !== false).filter(app => SettingsByPage[app.name.toLowerCase()]).map(app => <Button key={app.name} onClick={()=>{setPage(app.name.toLowerCase())}} subContent={app.name.toUpperCase()} second={page !== app.name.toLowerCase()} icon={<app.icon/>} size={1.4} />)}
+                <Button onClick={() => { setPage('style') }} subContent='STYLE' second={page !== 'style'} icon={<MdOutlineStyle />} size={1.4}></Button>
+                <Button onClick={() => { setPage('dashboard') }} subContent='DASHBO...' second={page !== 'dashboard'} icon={<LuComponent />} size={1.4}></Button>
+                |
+                {Object.values(APPS).filter(app => settings[`dashboard.app.${app.name.toLowerCase()}`] !== false).filter(app => SettingsByPage[app.name.toLowerCase()]).map(app => <Button key={app.name} onClick={() => { setPage(app.name.toLowerCase()) }} subContent={app.name.toUpperCase()} second={page !== app.name.toLowerCase()} icon={<app.icon />} size={1.4} />)}
             </>}
         >
             <StyledWrapper>
-                {page === 'colors' && <SettingsByPage.colors colors={colors} setColors={setColors}/>}
-                {page === 'dashboard' && <SettingsByPage.dashboard value={value} setValue={setValue}/>}
-                {page === 'home' &&  <SettingsByPage.home value={value} setValue={setValue}/>}
-                {page === 'database' &&  <SettingsByPage.database value={value} setValue={setValue}/>}
-                {page === 'terminal' &&  <SettingsByPage.terminal value={value} setValue={setValue}/>}
-                {page === 'requests' &&  <SettingsByPage.requests value={value} setValue={setValue}/>}
+                {page === 'style' && <SettingsByPage.colors colors={colors} setColors={setColors} value={value} setValue={setValue} />}
+                {page === 'dashboard' && <SettingsByPage.dashboard value={value} setValue={setValue} />}
+                {page === 'home' && <SettingsByPage.home value={value} setValue={setValue} />}
+                {page === 'database' && <SettingsByPage.database value={value} setValue={setValue} />}
+                {page === 'terminal' && <SettingsByPage.terminal value={value} setValue={setValue} />}
+                {page === 'requests' && <SettingsByPage.requests value={value} setValue={setValue} />}
             </StyledWrapper>
         </MainTemplate>
     )

@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.contrib import admin
-from dashboard.models import Configuration
 from dashboard.serializers import get_field_serializer
 import zipfile
 import os
@@ -103,31 +102,6 @@ def get_type_of_file(filename):
     else:
         return 'file'
 
-
-
-class Config:
-
-    @staticmethod
-    def get(name):
-        config = Configuration.objects.filter(name=name).first()
-        if config is None: return None
-        return config.value
-    
-    @staticmethod
-    def set(name, value):
-        config = Configuration.objects.filter(name=name).first()
-        if config is not None:
-            config.value = value
-            config.save()
-        else:
-            config = Configuration(name=name, value=value)
-            config.save()
-    
-    @staticmethod
-    def exists(name):
-        config = Configuration.objects.filter(name=name).first()
-        return config is not None
-    
 
 def create_zip_file(paths, zip_path):
     empty_zip_data = b'PK\x05\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'

@@ -14,7 +14,7 @@ const StyledTop = styled.div`
     color: ${({ theme }) => theme.secondary};
     font-size: 20px;
     text-transform: uppercase;
-    background-color: ${({ theme }) => theme.secondary}11;
+    background-color: ${({ theme }) => theme.secondary}05;
     border-radius: 5px;
     padding: 15px 10px;
     font-weight: bold;

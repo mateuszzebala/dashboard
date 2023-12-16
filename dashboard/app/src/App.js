@@ -46,7 +46,11 @@ export const App = () => {
 
     return (
         <ThemeContext.Provider value={[customTheme, setCustomTheme]}>
-            <ThemeProvider theme={customTheme}>
+            <ThemeProvider theme={{
+                ...customTheme, 
+                fontFamily: settings['dashboard.style.fontFamily'],
+                monoFontFamily: settings['dashboard.style.fontFamilyMono']
+            }}>
                 <BrowserRouter>
                     <UserContext.Provider value={[user, setUser]}>
                         <GlobalStateContext.Provider

@@ -4,6 +4,7 @@ import { API } from './api'
 export const ENDPOINTS = {
     home: {
         logs: () => API(['home', 'logs']),
+        informations: () => API(['home', 'informations']),
     },
     database: {
         models: () => API(['database']),

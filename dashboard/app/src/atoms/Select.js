@@ -34,6 +34,8 @@ const StyledWrapper = styled.div`
     display: inline-flex;
     flex-direction: row;
     cursor: pointer;
+    min-width: ${({size})=>size*300+'px'};
+    max-width: ${({size})=>size*300+'px'};
     width: ${({size})=>size*300+'px'};
     background-color: ${({ theme }) => theme.secondary};
     border: 2.5px solid ${({ theme }) => theme.primary};
@@ -48,12 +50,24 @@ const StyledWrapper = styled.div`
     }
 `
 
+const StyledLabel = styled.label`
+    position: absolute;
+    top: ${({size})=>size*(-2.5)+'px'};
+    left: ${({size})=>size*5+'px'};
+    user-select: none;
+    padding: 0 ${({size})=>size*10+'px'};
+    font-size: ${({size})=>size*10+'px'};
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
+`
+
 export const Select = ({
     data,
     value = null,
     setValue,
     emptyName = 'SELECT',
     asButton,
+    label,
     canBeNull=true,
     size=1,
     ...props
@@ -93,6 +107,7 @@ export const Select = ({
             onClick={handleOnClick}
             size={size}
         >
+            <StyledLabel size={size} label={toBoolStr(label)}>{label || ''}</StyledLabel>
             <StyledValue size={size}>
                 {data[value] === null ? <span>{emptyName}</span> : data[value]}
             </StyledValue>

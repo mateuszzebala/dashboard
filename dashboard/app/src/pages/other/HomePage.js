@@ -7,7 +7,13 @@ import { ServerManage } from '../../organisms/home/servermanage/ServerManage'
 import { APPS } from '../../apps/apps'
 import { HostManager } from '../../organisms/home/hosts/HostManager'
 import { ENDPOINTS } from '../../api/endpoints'
-import { useSettings } from '../../utils/hooks'
+import { useModalForm, useSettings } from '../../utils/hooks'
+import { FETCH } from '../../api/api'
+import { capitalize } from '../../utils/utils'
+import { FloatingActionButton } from '../../atoms/FloatingActionButton'
+import { FiInfo, FiServer } from 'react-icons/fi'
+import { ServerInformations } from '../../atoms/modalforms/ServerInformations'
+import { FaInfoCircle } from 'react-icons/fa'
 
 const StyledPage = styled.main`
     scroll-behavior: smooth;
@@ -34,21 +40,27 @@ const StyledWidgets = styled.div`
 
 const StyledHosts = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 20px;
     gap: 20px;
     height: 100%;
     > *{
-        width: 100%;
+        width: 33%;
     }
 `
 
 
+
+
 export const HomePage = () => {
     const [settings] = useSettings() 
+    const modalForm = useModalForm()
+
     return (
         <MainTemplate app={APPS.home}>
+           
             <StyledPage page={APPS.home.name}>
+                
                 <StyledWidgets>
                     {settings['home.app_list_widget'] && <AppList />}
                     {settings['home.server_config_widget'] && <ServerManage />}
@@ -70,7 +82,17 @@ export const HomePage = () => {
                         />
                     </StyledHosts>
                 )}
+                {settings['home.informations_widget'] && 
+                    <FloatingActionButton icon={<FaInfoCircle/>} size={1.4} onClick={()=>{
+                        modalForm({
+                            content: ServerInformations,
+                            title: 'INFORMATIONS',
+                            icon: <FaInfoCircle/>
+                        })
+                    }}/>
+                }
             </StyledPage>
+            
         </MainTemplate>
     )
 }

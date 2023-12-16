@@ -25,18 +25,18 @@ import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;
     display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
-    justify-content: ${({list})=>list ? 'flex-start' : 'center'};
+    justify-content: ${({ list }) => list ? 'flex-start' : 'center'};
     align-items: center;
-    flex-direction: ${({list})=>list ? 'row' : 'column'};
+    flex-direction: ${({ list }) => list ? 'row' : 'column'};
     gap: 10px;
     padding: 10px;
-    opacity: ${({dragging, selected, isFile}) => (dragging && (selected || isFile)) ? '40%' : 1};
-    background-color: ${({ theme }) => theme.primary}11;
+    opacity: ${({ dragging, selected, isFile }) => (dragging && (selected || isFile)) ? '40%' : 1};
+    background-color: ${({ theme }) => theme.quaternary};
     color: ${({ theme }) => theme.primary};
     border-radius: 3px;
-    height: ${({list})=> list ? '50px' : '100px'};
-    border: ${({selected, isFile, dragging})=>dragging ? (!isFile && !selected) ? '5px' : '3px' : '3px'} solid ${({ theme, selected, toDrop, dragging }) => toDrop ? theme.accent : ((selected && dragging) ? theme.primary : selected ? theme.primary : 'transparent')};
-    width: ${({list})=>list ? '100%' : '100px'};
+    height: ${({ list }) => list ? '50px' : '100px'};
+    border: ${({ selected, isFile, dragging }) => dragging ? (!isFile && !selected) ? '3px' : '3px' : '3px'} solid ${({ theme, selected, toDrop, dragging }) => toDrop ? theme.accent : ((selected && dragging) ? theme.primary : selected ? theme.primary : 'transparent')};
+    width: ${({ list }) => list ? '100%' : '100px'};
     font-size: 15px;
     cursor: pointer;
     user-select: none;
@@ -51,8 +51,8 @@ const StyledHoverWrapper = styled.div`
         outline: none;
     }
     &:hover > *, &:focus > *{
-        transform: ${({list})=>list?'none':'scale(0.9)'};
-        background-color: ${({list, theme})=>list?theme.primary + '22':theme.primary + '11'};
+        transform: ${({ list }) => list ? 'none' : 'scale(0.9)'};
+        background-color: ${({ list, theme }) => list ? theme.primary + '22' : theme.quaternary};
     }
 `
 
@@ -63,10 +63,10 @@ const StyledFilename = styled.div`
     font-size: 15px;
     padding: 5px 0;
     text-overflow: ellipsis;
-    text-align: ${({list})=>list ? 'left' : 'center'};
+    text-align: ${({ list }) => list ? 'left' : 'center'};
 `
 const StyledIcon = styled.div`
-    font-size: ${({list})=>list ? '20px' : '35px'};
+    font-size: ${({ list }) => list ? '20px' : '35px'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,10 +130,10 @@ export const ItemTile = ({
                     list={toBoolStr(list)}
                     toDrop={toBoolStr(toDrop)}
                     isFile={toBoolStr(isFile)}
-                 
-                    onMouseDown={(e)=>{
-                        if(selected && !e.shiftKey) setDragging(true)
-                        else if(!selected && !e.shiftKey) setSelectedItems([item])
+
+                    onMouseDown={(e) => {
+                        if (selected && !e.shiftKey) setDragging(true)
+                        else if (!selected && !e.shiftKey) setSelectedItems([item])
                     }}
                     onClick={(e) => {
                         !isFile &&

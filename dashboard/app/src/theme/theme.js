@@ -1,4 +1,4 @@
-const primary = '#181915'
+const primary = '#0f0f0e'
 const secondary = '#ffffff'
 const tertiary = '#969696'
 const quaternary = '#E0E0E0'

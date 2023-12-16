@@ -9,7 +9,7 @@ import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
 import { Input } from '../Input'
 import { centerEllipsis } from '../../utils/utils'
-import { FiSearch } from 'react-icons/fi'
+import { FiArrowLeft, FiRefreshCcw, FiRefreshCw, FiSearch } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from './Prompt'
 
@@ -30,7 +30,7 @@ export const StyledContent = styled.div`
 `
 export const StyledItem = styled.div`
     display: flex;
-    padding: 13px 15px;
+    padding: 15px 15px;
     cursor: pointer;
     align-items: center;
     gap: 20px;
@@ -39,9 +39,9 @@ export const StyledItem = styled.div`
     font-size: 18px;
     font-weight: 300;
     max-width: 600px;
-    background-color: ${({ theme, selected }) => selected ? theme.primary : theme.primary + '22'};
+    background-color: ${({ theme, selected }) => selected ? theme.primary : theme.quaternary};
     color: ${({ theme, selected }) => selected ? theme.secondary : theme.primary};
-    outline: ${({ selected }) => selected ? 4 : 0}px solid ${({ theme, selected }) => selected ? theme.primary + '88' : theme.primary + '22'};
+    outline: ${({ selected }) => selected ? 4 : 0}px solid ${({ theme, selected }) => selected ? theme.primary + '88' : theme.quaternary + '88'};
     transition: transform 0.3s ease, color 0.2s, background-color 0.2s, outline-width 0.2s;
     &:hover{
         outline-width: 4px;
@@ -61,10 +61,18 @@ export const StyledMenu = styled.div`
     gap: 10px;
     padding: 10px;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     &::-webkit-scrollbar {
         height: 0;
         width: 0;
     }
+`
+
+export const StyledMenuButtons = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
 `
 
 export const StyledWrapper = styled.div`
@@ -108,53 +116,48 @@ export const SelectFile = ({ todo, startPath, setOpen }) => {
         <>
             <StyledWrapper>
                 <StyledMenu>
-                    <Button
-                        second
-                        size={1.3}
-                        onClick={() => {
-                            setPath(data.parent)
-                        }}
-                        icon={<FaArrowLeft />}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        target={'_blank'}
-                        to={LINKS.files.indexPath(path)}
-                        icon={<BsFolder2Open />}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        icon={<TbReload />}
-                        onClick={() => {
-                            setReload((prev) => prev + 1)
-                        }}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        icon={<FiSearch />}
-                        onKey={{
-                            key: 'f',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        onClick={() => {
-                            modalForm({
-                                content: Prompt,
-                                title: 'SEARCH',
-                                icon: <FiSearch/>,
-                                initValue: search,
-                                todo: (val) => {
-                                    setSearch(val)
-                                } 
-                            })
-                        }}
-                    />
-                   
+                    <StyledMenuButtons>
+                        <Button
+                            second
+                            size={1.3}
+                            onClick={() => {
+                                setPath(data.parent)
+                            }}
+                            icon={<FiArrowLeft />}
+                        />
+                        <Button
+                            second
+                            size={1.3}
+                            icon={<FiRefreshCw />}
+                            onClick={() => {
+                                setReload((prev) => prev + 1)
+                            }}
+                        />
+                        <Button
+                            second
+                            size={1.3}
+                            icon={<FiSearch />}
+                            onKey={{
+                                key: 'f',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
+                            onClick={() => {
+                                modalForm({
+                                    content: Prompt,
+                                    title: 'SEARCH',
+                                    icon: <FiSearch/>,
+                                    initValue: search,
+                                    todo: (val) => {
+                                        setSearch(val)
+                                    } 
+                                })
+                            }}
+                        />
+                    </StyledMenuButtons>
+                    <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
                 </StyledMenu>
-                <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
+                
                 <StyledContent>
                     {folders
                         .filter((folder) =>

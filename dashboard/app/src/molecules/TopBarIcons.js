@@ -112,16 +112,18 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                     <BsQrCode />
                 </StyledIcon>
             </Tooltip>
-            <Tooltip text={`${hideSubmenu ? 'SHOW' : 'HIDE'} SUBMENU`}>
-                <StyledIcon
-                    rotate={hideSubmenu}
-                    onClick={() => {
-                        setHideSubmenu((prev) => !prev)
-                    }}
-                >
-                    <BsArrowBarUp />
-                </StyledIcon>
-            </Tooltip>
+            {settings['dashboard.topbar_submenu_toggler'] &&
+                <Tooltip text={`${hideSubmenu ? 'SHOW' : 'HIDE'} SUBMENU`}>
+                    <StyledIcon
+                        rotate={hideSubmenu}
+                        onClick={() => {
+                            setHideSubmenu((prev) => !prev)
+                        }}
+                    >
+                        <BsArrowBarUp />
+                    </StyledIcon>
+                </Tooltip>
+            }
             {settings['dashboard.dashboards_menu'] &&
                 <Tooltip text="CHOOSE PAGE">
                     <StyledIcon

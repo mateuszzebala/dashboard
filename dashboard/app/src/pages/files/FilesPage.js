@@ -8,15 +8,13 @@ import {
     BsFolderPlus,
     BsFileZip,
     BsFileArrowUp,
-    BsGrid,
-    BsFolder, BsCheckAll,
+    BsFolder,
 } from 'react-icons/bs'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { HiDownload, HiOutlineLockClosed } from 'react-icons/hi'
 import styled from 'styled-components'
-import { FaArrowLeft } from 'react-icons/fa'
-import { FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
-import { BiCopy, BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
+import { FiArrowLeft, FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
+import { BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -40,8 +38,6 @@ const StyledMenu = styled.div`
     width: 100%;
     gap: 10px;
 `
-
-
 
 const StyledError = styled.div`
     color: ${({ theme }) => theme.error};
@@ -75,7 +71,7 @@ const FolderMenu = ({
     const modalForm = useModalForm()
     const { newMessage } = useMessage()
     const navigate = useNavigate()
-    const [copied, setCopied] = React.useState({type: null, content: null})
+    const [copied, setCopied] = React.useState({ type: null, content: null })
     const isSelectedOneFile = () => selectedItems.length === 1 && selectedItems[0].is_file
     const [searchParams] = useSearchParams()
     const load = useLoading()
@@ -129,7 +125,7 @@ const FolderMenu = ({
                                 prevent: true,
                             }}
                             tooltip={'FOLDER UP'}
-                            icon={<FaArrowLeft />}
+                            icon={<FiArrowLeft />}
                             onClick={() => {
                                 setPath(data.parent)
                             }}
@@ -167,7 +163,7 @@ const FolderMenu = ({
                         size={1.4}
                         subContent={list ? 'LIST' : 'GRID'}
                         tooltip={list ? 'LIST' : 'GRID'}
-                        icon={list ? <FiList/> : <FiGrid/>}
+                        icon={list ? <FiList /> : <FiGrid />}
                         onClick={() => {
                             setList(prev => !prev)
                         }}
@@ -191,17 +187,17 @@ const FolderMenu = ({
                             ctrlKey: true,
                             prevent: true,
                         }}
-                        onClick={()=>{
+                        onClick={() => {
                             modalForm({
                                 content: Confirm,
                                 title: 'PASTE',
                                 text: 'PASTE ITEMS HERE?',
                                 icon: <BiPaste />,
-                                todo: ()=>{
-                                    load({show: true, text: 'PASTING'})
-                                    FETCH(ENDPOINTS.files.move(), {moveTo: path, items: copied.content.join(';;;'), copy: copied.type === 'COPY'}).then(data => {
+                                todo: () => {
+                                    load({ show: true, text: 'PASTING' })
+                                    FETCH(ENDPOINTS.files.move(), { moveTo: path, items: copied.content.join(';;;'), copy: copied.type === 'COPY' }).then(data => {
                                         setReload(prev => prev + 1)
-                                        load({show: false})
+                                        load({ show: false })
                                     })
                                 }
                             })
@@ -221,9 +217,9 @@ const FolderMenu = ({
                                     ctrlKey: true
                                 }}
                                 icon={<FiCopy />}
-                                onClick={()=>{
+                                onClick={() => {
                                     setCopied({
-                                        type: 'COPY', 
+                                        type: 'COPY',
                                         content: selectedItems.map(item => item.path)
                                     })
                                 }}
@@ -239,9 +235,9 @@ const FolderMenu = ({
                                 }}
                                 subContent='CUT'
                                 icon={<BiCut />}
-                                onClick={()=>{
+                                onClick={() => {
                                     setCopied({
-                                        type: 'CUT', 
+                                        type: 'CUT',
                                         content: selectedItems.map(item => item.path)
                                     })
                                 }}
@@ -262,13 +258,13 @@ const FolderMenu = ({
                                             : 'Delete 1 item?',
                                         icon: <FiTrash />,
                                         todo: () => {
-                                            load({show: true, text: 'DELETING'})
+                                            load({ show: true, text: 'DELETING' })
                                             FETCH(ENDPOINTS.files.remove(), {
                                                 paths: selectedItems
                                                     .map((item) => item.path)
                                                     .join(';;;'),
                                             }).then((data) => {
-                                                load({show: false})
+                                                load({ show: false })
                                                 setReload((prev) => prev + 1)
                                                 data.data.errors &&
                                                     newMessage({
@@ -292,40 +288,40 @@ const FolderMenu = ({
                                         title: 'SAVE LOCATION',
                                         icon: <BsFileZip />,
                                         todo: (device) => {
-                                            if(device === 'server'){
+                                            if (device === 'server') {
                                                 modalForm({
                                                     content: SelectFolder,
-                                                    icon: <BsFolder/>,
+                                                    icon: <BsFolder />,
                                                     title: 'SELECT FOLDER TO SAVE',
                                                     startPath: searchParams.get('path'),
-                                                    todo: (path)=>{
+                                                    todo: (path) => {
                                                         modalForm({
                                                             content: Prompt,
                                                             title: 'FILENAME',
                                                             icon: <BsFileZip />,
                                                             setButton: device === 'server' ? 'SAVE' : 'DOWNLOAD',
                                                             todo: (filename) => {
-                                                                load({show: true, text: 'ZIPPING'})
-                                                                FETCH(ENDPOINTS.files.zip(), {filename, toSave: path, items: selectedItems.map(item => item.path).join(';;;')}).then(data => {
-                                                                    if(device === 'computer'){
+                                                                load({ show: true, text: 'ZIPPING' })
+                                                                FETCH(ENDPOINTS.files.zip(), { filename, toSave: path, items: selectedItems.map(item => item.path).join(';;;') }).then(data => {
+                                                                    if (device === 'computer') {
                                                                         downloadURL(ENDPOINTS.files.file(data.data.path), filename)
                                                                     }
-                                                                    load({show: false})
+                                                                    load({ show: false })
                                                                 })
                                                             }
                                                         })
                                                     }
                                                 })
                                             }
-                                            else{
+                                            else {
                                                 modalForm({
                                                     content: Prompt,
                                                     title: 'FILENAME',
                                                     icon: <BsFileZip />,
                                                     setButton: device === 'server' ? 'SAVE' : 'DOWNLOAD',
                                                     todo: (filename) => {
-                                                        FETCH(ENDPOINTS.files.zip(), {filename, toSave: null, items: selectedItems.map(item => item.path).join(';;;')}).then(data => {
-                                                            if(device === 'computer'){
+                                                        FETCH(ENDPOINTS.files.zip(), { filename, toSave: null, items: selectedItems.map(item => item.path).join(';;;') }).then(data => {
+                                                            if (device === 'computer') {
                                                                 const link = document.createElement('a')
                                                                 link.href = ENDPOINTS.files.file(data.data.path)
                                                                 link.setAttribute('download', filename)
@@ -337,13 +333,13 @@ const FolderMenu = ({
                                                     }
                                                 })
                                             }
-                                            
+
                                         },
                                     })
                                 }}
                             />
-                            {selectedItems[0].name.endsWith('.zip') && <Button 
-                                icon={<BsFileZip/>}
+                            {selectedItems[0].name.endsWith('.zip') && <Button
+                                icon={<BsFileZip />}
                                 subContent='UNZIP'
                                 second
                                 size={1.4}
@@ -351,10 +347,10 @@ const FolderMenu = ({
                             />}
                         </>
                     )}
-         
+
                     {selectedItems.length === 1 && (
                         <>
-                            
+
                             <Button
                                 second
                                 size={1.4}
@@ -395,7 +391,7 @@ const FolderMenu = ({
                                         icon: <BiInfoCircle />,
                                         title: 'PROPERTIES',
                                         item: selectedItems[0],
-                                        todo: () => {},
+                                        todo: () => { },
                                     })
                                 }}
                             />
@@ -417,9 +413,9 @@ const FolderMenu = ({
                                         setButton: 'ENCRYPT',
                                         type: 'password',
                                         todo: () => {
-                                        
+
                                         },
-                                        
+
                                     })
                                 }}
                             />
@@ -429,7 +425,7 @@ const FolderMenu = ({
                                 tooltip={'DOWNLOAD'}
                                 subContent='DOWNL...'
                                 icon={<HiDownload />}
-                                onClick={()=>{
+                                onClick={() => {
                                     downloadURL(ENDPOINTS.files.file(selectedItems[0].path), selectedItems[0].name)
                                 }}
                                 download
@@ -487,35 +483,31 @@ const FolderMenu = ({
                                 todo: (query) => {
                                     setSearchValue(query)
                                 },
-                                
+
                             })
                         }}
                     />
-                
+
                 </StyledMenuSide>
             </StyledMenu>
-            <FloatingActionButton
-                second
-                icon={<BsFilePlus />}
-                subContent={'+FILE'}
-                tooltip={'NEW FILE'}
-                size={1.4}
-                right={80}
-                onClick={handleNewFile}
-            />
-            <FloatingActionButton
-                size={1.4}
-                second
-                tooltip={'NEW FOLDER'}
-                subContent={'+FOLDER'}
-                icon={<BsFolderPlus />}
-                onClick={handleNewFolder}
-            />
+            {data.parent !== path && (
+                <FloatingActionButton
+                    second
+                    subContent={'UP'}
+                    tooltip={'UP'}
+                    right={230}
+                    size={1.4}
+                    icon={<FiArrowLeft />}
+                    onClick={() => {
+                        setPath(data.parent)
+                    }}
+                />
+            )}
             <FloatingActionButton
                 second
                 size={1.4}
                 subContent={'UPLOAD'}
-                right={140}
+                right={160}
                 tooltip={'UPLOAD FILE'}
                 icon={<BsFileArrowUp />}
                 onClick={() => {
@@ -533,19 +525,25 @@ const FolderMenu = ({
                     })
                 }}
             />
-            {data.parent !== path && (
-                <FloatingActionButton
-                    second
-                    subContent={'UP'}
-                    tooltip={'UP'}
-                    right={200}
-                    size={1.4}
-                    icon={<FaArrowLeft />}
-                    onClick={() => {
-                        setPath(data.parent)
-                    }}
-                />
-            )}
+            <FloatingActionButton
+                second
+                icon={<BsFilePlus />}
+                subContent={'+FILE'}
+                tooltip={'NEW FILE'}
+                size={1.4}
+                right={90}
+                onClick={handleNewFile}
+            />
+            <FloatingActionButton
+                size={1.4}
+                second
+                tooltip={'NEW FOLDER'}
+                subContent={'+FOLDER'}
+                icon={<BsFolderPlus />}
+                onClick={handleNewFolder}
+            />
+
+
         </>
     )
 }
@@ -565,7 +563,7 @@ export const FilesPage = () => {
     const [list, setList] = React.useState(cookies.filesList === 'true')
     const [reload, setReload] = React.useState(0)
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         setCookies('filesList', list)
     }, [list])
 

@@ -54,7 +54,7 @@ const StyledCameraButton = styled.button`
 `
 
 const StyledGroup = styled.div`
-    background-color: ${({theme})=>theme.primary}11;
+    background-color: ${({ theme }) => theme.primary}11;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -86,7 +86,7 @@ const StyledTitle = styled.span`
 const StyledHeader = styled.h1`
     font-size: 30px;
     margin: 0;
-    background-color: ${({theme})=>theme.primary}11;
+    background-color: ${({ theme }) => theme.primary}11;
     display: inline-flex;
     width: 100%;
     padding: 30px;
@@ -107,34 +107,34 @@ export const UserPage = () => {
     const [imageData, setImageData] = React.useState(null)
     const [reload, setReload] = React.useState(0)
     const [active, setActive] = React.useState(null)
-    const {newMessage} = useMessage()
+    const { newMessage } = useMessage()
     const [savedData, setSavedData] = React.useState(true)
     const [saving, setSaving] = React.useState(false)
     const [otherImage, setOtherImage] = React.useState(false)
 
-    React.useEffect(()=>{
-        if(objectEquals(accountInfo, data) && !otherImage) setSavedData(true)
+    React.useEffect(() => {
+        if (objectEquals(accountInfo, data) && !otherImage) setSavedData(true)
         else setSavedData(false)
     }, [data, profileImage])
 
-    React.useEffect(()=>{
-        FETCH(ENDPOINTS.users.active(), {id}).then(data => {
+    React.useEffect(() => {
+        FETCH(ENDPOINTS.users.active(), { id }).then(data => {
             setActive(data.data.active)
         })
     }, [id])
 
     const handleSave = () => {
         setSaving(true)
-        FETCH(ENDPOINTS.users.edit(id), {...data, profileImage}).then(data => {
+        FETCH(ENDPOINTS.users.edit(id), { ...data, profileImage }).then(data => {
             setReload(prev => prev + 1)
             setSaving(false)
         })
     }
 
-    React.useEffect(()=>{
-        if(profileImage){
+    React.useEffect(() => {
+        if (profileImage) {
             const reader = new FileReader()
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 setImageData(event.target.result)
             }
             reader.readAsDataURL(profileImage)
@@ -151,30 +151,30 @@ export const UserPage = () => {
 
     return (
         <MainTemplate app={APPS.users} title={accountInfo.username} submenuChildren={<>
-            <Button icon={<FiLogOut/>} subContent={'LOGOUT'} second size={1.3} onClick={()=>{
-                FETCH(ENDPOINTS.users.logout(), {id}).then(()=>{
+            <Button icon={<FiLogOut />} subContent={'LOGOUT'} second size={1.3} onClick={() => {
+                FETCH(ENDPOINTS.users.logout(), { id }).then(() => {
                     newMessage({
                         text: 'LOGOUT SUCCESSFUL',
                         success: true
                     })
                 })
-            }}/>
-            <Button icon={<MdBlock />} subContent={'ACTIVE'} second size={1.3} onClick={()=>{
+            }} />
+            <Button icon={<MdBlock />} subContent={'ACTIVE'} second size={1.3} onClick={() => {
                 modalForm({
                     content: Confirm,
                     title: 'ACTIVE',
                     text: 'SET ACTIVE AS',
                     yesText: active ? 'False' : 'True',
                     noText: active ? 'True' : 'False',
-                    icon: <MdBlock/>,
+                    icon: <MdBlock />,
                     todo: () => {
-                        FETCH(ENDPOINTS.users.active(), {id, active: !active}).then(data => {
+                        FETCH(ENDPOINTS.users.active(), { id, active: !active }).then(data => {
                             setActive(data.data.active)
                         })
                     }
                 })
-            }}/>
-            <Button second icon={<MdPassword/>} size={1.3} subContent='PASSWORD'/>
+            }} />
+            <Button second icon={<MdPassword />} size={1.3} subContent='PASSWORD' />
         </>}>
             {accountInfo.username && (
                 <StyledWrapper>
@@ -204,7 +204,7 @@ export const UserPage = () => {
                         </StyledProfileImage>
                     </StyledGroup>
                     <StyledInputs>
-                  
+
                         <StyledGroup>
                             <StyledTitle>Main</StyledTitle>
                             <Input
@@ -257,13 +257,14 @@ export const UserPage = () => {
                                 label={'PHONE'}
                             />
                         </StyledGroup>
-                      
+
                         <StyledGroup>
                             <StyledTitle>Address</StyledTitle>
-                            <Select 
-                                emptyName='COUNTRY' 
+                            <Select
+                                emptyName='COUNTRY'
                                 canBeNull
                                 size={1.1}
+                                label={'COUNTRY'}
                                 value={data.country}
                                 setValue={(value) => {
                                     setData((prev) => ({ ...prev, country: value }))
@@ -345,9 +346,10 @@ export const UserPage = () => {
                                 }}
                                 label={'WEBSITE'}
                             />
-                            <Select 
-                                emptyName='GENDER' 
+                            <Select
+                                emptyName='GENDER'
                                 canBeNull
+                                label={'GENDER'}
                                 size={1.1}
                                 value={data.gender}
                                 setValue={(value) => {
@@ -368,8 +370,8 @@ export const UserPage = () => {
                             />
                         </StyledGroup>
                     </StyledInputs>
-                    <Theme value={{...theme, primary: savedData ? theme.success : theme.error}}>
-                        <FloatingActionButton loading={saving} size={1.5} icon={<FiSave />} onClick={handleSave}/>
+                    <Theme value={{ ...theme, primary: savedData ? theme.success : theme.error }}>
+                        <FloatingActionButton loading={saving} size={1.5} icon={<FiSave />} onClick={handleSave} />
                     </Theme>
                 </StyledWrapper>
             )}

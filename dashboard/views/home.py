@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.conf import settings
 from dashboard.models import RequestLog
 from .auth import dashboard_access
+import platform
+import sys
 
 @dashboard_access
 def get_last_logs_view(request):
@@ -28,6 +30,20 @@ def get_last_logs_view(request):
         ]
     })
 
+@dashboard_access
+def get_server_information(request):
+    return JsonResponse({
+        'Machine': platform.machine(),
+        'System': platform.system(),
+        'Computer': platform.uname().node,
+        'Python version': sys.version.split(" ")[0],
+        'Installed apps': ", ".join(list(map(lambda app: app.split('.')[-1], settings.INSTALLED_APPS))),
+        'Database type': settings.DATABASES['default']['ENGINE'].split('.')[-1],
+        'Timezone': settings.TIME_ZONE,
+        'Language': settings.LANGUAGE_CODE
+    })
+
 urlpatterns = [
     path('logs/', get_last_logs_view), # GET LAST LOGS 
+    path('informations/', get_server_information), # GET LAST LOGS 
 ]

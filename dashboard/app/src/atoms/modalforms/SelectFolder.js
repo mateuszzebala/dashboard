@@ -7,8 +7,11 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
 import { Input } from '../Input'
-import {StyledContent, StyledItem, StyledMenu, StyledName, StyledWrapper, StyledPath} from './SelectFile'
+import {StyledContent, StyledItem, StyledMenu, StyledName, StyledWrapper, StyledPath, StyledMenuButtons} from './SelectFile'
 import { centerEllipsis } from '../../utils/utils'
+import { FiArrowLeft, FiFolder, FiRefreshCw, FiSearch } from 'react-icons/fi'
+import { Prompt } from './Prompt'
+import { useModalForm } from '../../utils/hooks'
 
 export const SelectFolder = ({ todo, startPath, setOpen }) => {
     const [path, setPath] = React.useState(startPath || '')
@@ -17,6 +20,7 @@ export const SelectFolder = ({ todo, startPath, setOpen }) => {
     const [reload, setReload] = React.useState(0)
     const [search, setSearch] = React.useState('')
     const [value, setValue] = React.useState(null)
+    const modalForm = useModalForm()
     
     React.useEffect(() => {
         path &&
@@ -38,51 +42,65 @@ export const SelectFolder = ({ todo, startPath, setOpen }) => {
         <>
             <StyledWrapper>
                 <StyledMenu>
-                    <Button
-                        second
-                        size={1.3}
-                        onClick={() => {
-                            setPath(data.parent)
-                        }}
-                        icon={<FaArrowLeft />}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        target={'_blank'}
-                        to={LINKS.files.indexPath(path)}
-                        icon={<BsFolder2Open />}
-                    />
-                    <Button
-                        second
-                        size={1.3}
-                        icon={<TbReload />}
-                        onClick={() => {
-                            setReload((prev) => prev + 1)
-                        }}
-                    />
-                    <Input
-                        label="SEARCH"
-                        onKey={{
-                            key: 'f',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        value={search}
-                        setValue={setSearch}
-                    />
-                    {value !== null && <Button
-                        value={search}
-                        setValue={setSearch}
-                        size={1.3}
-                        icon={<FaArrowRight/>}
-                        onClick={()=>{
-                            todo(value)
-                            setOpen(false)
-                        }}
-                    />}
+                    <StyledMenuButtons>
+                        <Button
+                            second
+                            size={1.3}
+                            onClick={() => {
+                                setPath(data.parent)
+                            }}
+                            icon={<FiArrowLeft />}
+                        />
+                        <Button
+                            second
+                            size={1.3}
+                            target={'_blank'}
+                            to={LINKS.files.indexPath(path)}
+                            icon={<FiFolder />}
+                        />
+                        <Button
+                            second
+                            size={1.3}
+                            icon={<FiRefreshCw />}
+                            onClick={() => {
+                                setReload((prev) => prev + 1)
+                            }}
+                        />
+                        <Button
+                            second
+                            size={1.3}
+                            icon={<FiSearch />}
+                            onKey={{
+                                key: 'f',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
+                            onClick={() => {
+                                modalForm({
+                                    content: Prompt,
+                                    title: 'SEARCH',
+                                    icon: <FiSearch/>,
+                                    initValue: search,
+                                    todo: (val) => {
+                                        setSearch(val)
+                                    } 
+                                })
+                            }}
+                        />
+                        <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
+                        {value !== null && <Button
+                            value={search}
+                            setValue={setSearch}
+                            size={1.3}
+                            icon={<FaArrowRight/>}
+                            onClick={()=>{
+                                todo(value)
+                                setOpen(false)
+                            }}
+                        />}
+                    </StyledMenuButtons>
+                    
                 </StyledMenu>
-                <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
                 <StyledContent>
                     {folders
                         .filter((folder) =>

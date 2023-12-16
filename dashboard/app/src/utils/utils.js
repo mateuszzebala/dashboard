@@ -97,9 +97,9 @@ export const getCursorByPosition = (top, left) => {
         'center-left': 'e-resize',
         'center-center': 'move',
         'center-right': 'e-resize',
-        'bottom-left': 'ne-resize',
+        'bottom-left': 'sw-resize',
         'bottom-center': 'n-resize',
-        'bottom-right': 'nw-resize',
+        'bottom-right': 'se-resize',
     }
     return cursors[top + '-' + left]
 }
@@ -116,3 +116,5 @@ export const downloadURL = (url, filename) => {
 export const objectEquals = (obj1, obj2) => {
     return Object.keys(obj1).every(key => obj1[key] === obj2[key])
 }
+
+export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)

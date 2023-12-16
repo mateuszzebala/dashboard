@@ -86,7 +86,7 @@ def get_auth(request, token):
     if code is not None:
         if code.datetime.today:
             login(request, code.user)
-            os.remove(code.file.path)
+            #os.remove(code.file.path)
             code.delete()
     return redirect('dashboard:app', path='')
 

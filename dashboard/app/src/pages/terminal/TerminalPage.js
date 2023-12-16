@@ -7,12 +7,12 @@ import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { BiBookmark } from 'react-icons/bi'
 import { convertTerminalTextToHTML } from '../../utils/utils'
 import { useSearchParams } from 'react-router-dom'
-import { FaStop } from 'react-icons/fa'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 import { LINKS } from '../../router/links'
 import { APPS } from '../../apps/apps'
 import { MainTemplate } from '../../templates/MainTemplate'
+import { FiBookmark, FiStopCircle } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     position: relative;
@@ -23,22 +23,28 @@ const StyledWrapper = styled.div`
 `
 
 const StyledTerminal = styled.div`
-    font-family: 'Fira Mono', monospace;
+    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
   font-weight: bold;
 `
 
 const StyledPrompt = styled.div`
     color: ${({ theme }) => theme.primary};
+    
     font-size: 18px;
+    >div{
+        display: flex;
+        align-items: center;
+    }
 `
 const StyledInput = styled.input`
-    background-color: transparent;
     color: ${({ theme }) => theme.primary};
     border: 0;
     font-size: 18px;
-    font-family: 'Fira Mono', monospace;
+    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
     font-weight: bold;
     padding: 0 5px;
+    width: 100%;
+
     &:focus {
         outline: none;
     }
@@ -49,14 +55,14 @@ const StyledInput = styled.input`
 
 const StyledPre = styled.pre`
     display: inline;
-    font-family: 'Fira Mono', monospace;
+    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
     font-weight: bold;
 `
 
 const StyledErrors = styled.pre`
     display: inline;
     color: ${({ theme }) => theme.error};
-    font-family: 'Fira Mono', monospace;
+    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
     font-weight: bold;
 `
 
@@ -107,8 +113,8 @@ export const TerminalPage = () => {
     }, [])
 
 
-    React.useEffect(()=>{
-        setSearchParams({path})
+    React.useEffect(() => {
+        setSearchParams({ path })
         path && FETCH(ENDPOINTS.terminal.init(), {
             path
         }).then((data) => {
@@ -205,15 +211,15 @@ export const TerminalPage = () => {
         })
     }
 
-    React.useEffect(()=>{
-        if(lastInputRef.current && commandHistory[historyCounter]) lastInputRef.current.value = commandHistory[historyCounter].value
+    React.useEffect(() => {
+        if (lastInputRef.current && commandHistory[historyCounter]) lastInputRef.current.value = commandHistory[historyCounter].value
     }, [historyCounter])
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         console.log(commandHistory)
     }, [commandHistory])
 
-    const PromptInput = ({index}) => {
+    const PromptInput = ({ index }) => {
         return (
             <StyledInput
                 ref={lastInputRef}
@@ -242,18 +248,31 @@ export const TerminalPage = () => {
     return (
         <MainTemplate app={APPS.terminal} title={path}>
             <StyledWrapper onClick={focusLastInput}>
+                {waiting && (
+                    <FloatingActionButton
+                        second
+                        size={1.4}
+                        right={230}
+                        icon={<FiStopCircle />}
+                        onClick={handleStopProcess}
+                        subContent='STOP'
+                    />
+                )}
                 <FloatingActionButton
-                    onClick={handleClear}
-                    size={1.3}
-                    icon={<AiOutlineClear />}
+                    size={1.4}
+                    right={160}
                     second
+                    icon={<APPS.files.icon />}
+                    to={LINKS.files.indexPath(path)}
+                    subContent='LOCATION'
+
                 />
-                <FloatingActionButton size={1.3} right={140} second icon={<APPS.files.icon/>} to={LINKS.files.indexPath(path)}/>
                 <FloatingActionButton
-                    size={1.3}
+                    size={1.4}
                     second
-                    right={80}
-                    icon={<BiBookmark />}
+                    right={90}
+                    icon={<FiBookmark />}
+                    subContent='BOOKMARK'
                     onClick={() => {
                         modalForm({
                             content: Prompt,
@@ -264,31 +283,29 @@ export const TerminalPage = () => {
                         })
                     }}
                 />
-                {waiting && (
-                    <FloatingActionButton
-                        second
-                        size={1.3}
-                        right={260}
-                        icon={<FaStop />}
-                        onClick={handleStopProcess}
-                    />
-                )}
+                <FloatingActionButton
+                    onClick={handleClear}
+                    subContent='CLEAR'
+                    size={1.4}
+                    icon={<AiOutlineClear />}
+                    second
+                />
 
                 <StyledTerminal ref={terminalRef}>
                     {Object.keys(prompts).map((index) => (
                         <StyledPrompt key={index}>
-                            
+
                             {(os === 'Linux' || os === 'Darwin') && (
                                 <>
                                     <div>{prompts[index].path}</div>
                                     <div>
                                         $
-                                        <PromptInput index={index}/>
+                                        <PromptInput index={index} />
                                     </div>
                                 </>
                             )}
                             {os === 'Windows' && (
-                                <div>{prompts[index].path}&gt;<PromptInput index={index}/></div>
+                                <div>{prompts[index].path}&gt;<PromptInput index={index} /></div>
                             )}
                             {prompts[index].output ? (
                                 <>

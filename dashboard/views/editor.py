@@ -2,9 +2,8 @@ from django.urls import path
 from django.http import JsonResponse
 from .auth import dashboard_access
 import subprocess
-from dashboard.models import Configuration
 import os
-from dashboard.utils import get_type_of_file, Config
+from dashboard.utils import get_type_of_file
 import json
 from PIL import Image, ImageEnhance
 
@@ -49,33 +48,9 @@ def save_image(request):
     props = json.loads(request.POST.get('props'))
     return JsonResponse({})
 
-@dashboard_access
-def liked_and_last(request):
-    with open("configuration/liked&last.json", "r") as json_file:
-        configuration = json.load(json_file)
-
-    action = request.POST.get('action')
-    if action == 'ADD':
-        what = request.POST.get('what')
-        if what == 'like':
-            configuration['likes'].append(request.POST.get('path'))
-        if what == 'last':
-            configuration['last'] = [request.POST.get('path'), *configuration['last']]
-    if action == 'REMOVE':
-        what = request.POST.get('what')
-        if what == 'like':
-            configuration['likes'] = list(filter(lambda path: path != request.POST.get('path'), configuration['likes']))
-        if what == 'last':
-            configuration['last'] = list(filter(lambda path: path != request.POST.get('path'), configuration['last']))
-
-    with open("configuration/liked&last.json", "w") as json_file:
-        json.dump(configuration, json_file, indent=4)
-    return JsonResponse(configuration)
-
 urlpatterns = [
     path('json/', file_json), # GET INTO ABOUT FILE IN JSON
     path('save/run/', run_command), # RUN COMMAND IN FILE LOCATION
     path('save/text/', save_file), # SAVE FILE
-    path('liked&last/', liked_and_last), # SAVE FILE
     path('save/image/', save_image), # SAVE IMAGE
 ]

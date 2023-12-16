@@ -41,14 +41,36 @@ const StyleDashboard = styled.span`
     text-align: center;
     color: ${({ theme }) => theme.secondary};
     cursor: pointer;
-    outline: 0px solid ${({theme})=>theme.secondary}88;
-    border-radius: 5px;
+    outline: 0px dashed ${({ theme }) => theme.secondary}88;
+    border-radius: 3px;
     transition: outline-width 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     &:focus{
         outline-width: 3px;
     }
-    img{
-        width: 120px;
+    span{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 30px;
+    }
+
+    span:first-child{
+        background-color: ${({theme})=>theme.primary};;
+        color: ${({theme})=>theme.secondary};
+        font-weight: bold;
+    }
+    
+    span:last-child{
+        color: ${({theme})=>theme.primary};
+        background-color: ${({theme})=>theme.secondary};
+        font-weight: lighter;
     }
 
 `
@@ -91,7 +113,7 @@ const PolishFlag = styled.div`
 const StyledFlag = styled.img`
     width: 100%;
     border-radius: 17px;
-    border: solid 5px ${({theme})=>theme.primary};
+    border: solid 5px ${({ theme }) => theme.primary};
 `
 
 export const LeftBar = ({ close }) => {
@@ -100,10 +122,10 @@ export const LeftBar = ({ close }) => {
     const modalForm = useModalForm()
     return (
         <StyledBar close={toBoolStr(close)}>
-            {settings['dashboard.polish_flag'] && <PolishFlag onClick={()=>{
+            {settings['dashboard.polish_flag'] && <PolishFlag onClick={() => {
                 modalForm({
-                    content: ()=><>
-                        <StyledFlag src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/400px-Flag_of_Poland.svg.png"/>
+                    content: () => <>
+                        <StyledFlag src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/400px-Flag_of_Poland.svg.png" />
                     </>,
                     title: 'POLES FOR EVERYONE',
                     icon: <GiPoland />
@@ -112,8 +134,9 @@ export const LeftBar = ({ close }) => {
                 <div></div>
                 <div></div>
             </PolishFlag>}
-            <StyleDashboard tabIndex={0} onClick={()=>navigate(LINKS.home())}>
-                <img src={Logo}/>
+            <StyleDashboard tabIndex={0} onClick={() => navigate(LINKS.home())}>
+                <span>DASH</span>
+                <span>BOARD</span>
             </StyleDashboard>
             <StyledMenuItems>
                 {Object.values(APPS).map((app) => {

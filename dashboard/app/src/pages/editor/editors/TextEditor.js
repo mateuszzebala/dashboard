@@ -6,22 +6,16 @@ import { ENDPOINTS } from '../../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Loading } from '../../../atoms/Loading'
 import { Button } from '../../../atoms/Button'
-import { useParams } from 'react-router-dom'
-import { HiDownload, HiOutlinePlay } from 'react-icons/hi'
+import { HiOutlinePlay } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
 import { LINKS } from '../../../router/links'
-import { LuSave } from 'react-icons/lu'
 import { MainTemplate } from '../../../templates/MainTemplate'
-import { BiEditAlt } from 'react-icons/bi'
 import { convertTerminalTextToHTML } from '../../../utils/utils'
 import { useModalForm, useSettings, useTheme } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
-import { BsFolder2Open } from 'react-icons/bs'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
 import { TbReplaceFilled } from 'react-icons/tb'
-import { SelectFile } from '../../../atoms/modalforms/SelectFile'
 import { FiCode, FiDownload, FiEdit, FiPlay, FiSave } from 'react-icons/fi'
 import { Theme } from '../../../atoms/Theme'
 import { FilePrompt } from '../../../atoms/modalforms/FilePrompt'
@@ -44,7 +38,7 @@ const StyledTextArea = styled.textarea`
     white-space: pre;
     overflow-wrap: normal;
     padding: 0;
-    font-family: 'Fira Mono', monospace;
+    font-family: ${({theme})=>theme.monoFontFamily}, monospace;
     overflow: scroll;
     color: ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
@@ -66,7 +60,7 @@ const StyledLines = styled.div`
     text-align: right;
     color: ${({ theme }) => theme.tertiary};
     span{
-        font-family: 'Fira Mono', monospace !important;
+        font-family: ${({theme})=>theme.monoFontFamily}, monospace !important;
         font-weight: bold;
     }
     &::-webkit-scrollbar {
@@ -90,7 +84,7 @@ const StyledIde = styled.div`
 `
 
 const StyledTerminal = styled.pre`
-    font-family: 'Fira Mono', monospace;
+    font-family: ${({theme})=>theme.monoFontFamily}, monospace;
     color: ${({ theme }) => theme.primary};
     font-size: 20px;
     overflow: scroll;

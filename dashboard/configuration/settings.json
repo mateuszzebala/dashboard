@@ -18,14 +18,13 @@
         "save_requests": true,
         "save_admin_requests": true
     },
-    "default_number_of_rows": 15,
     "home": {
         "app_list_widget": true,
         "server_config_widget": true,
         "logs_widget": true,
         "reload_logs": false,
         "hosts_widgets": true,
-        "finance_widget": false
+        "informations_widget": true
     },
     "dashboard": {
         "dashboards_menu": true,
@@ -45,14 +44,19 @@
             "requests": true,
             "sessions": true,
             "statistics": true
-        }
+        },
+        "style": {
+            "fontFamily": "Rubik",
+            "fontFamilyMono": "Fira Mono"
+        },
+        "topbar_submenu_toggler": true
     },
     "editor": {
         "liked": [
             {
-                "name": "testfile.txt",
-                "path": "/home/mateusz/Desktop/testfile.txt",
-                "type": "file"
+                "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "type": "image"
             },
             {
                 "name": ".bash_profile",
@@ -67,8 +71,18 @@
         ],
         "last": [
             {
+                "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "type": "image"
+            },
+            {
                 "name": "testfile.txt",
                 "path": "/home/mateusz/Desktop/testfile.txt",
+                "type": "file"
+            },
+            {
+                "name": "7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
+                "path": "/home/mateusz/.npm/_cacache/content-v2/sha512/de/13/7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
                 "type": "file"
             },
             {
@@ -99,9 +113,7 @@
             "http://192.168.100.35:8000",
             "http://192.168.100.35:3000",
             "http://10.0.0.2:8000",
-            "http://10.0.0.2:3000",
-            "http://manjaro:8000",
-            "http://manjaro:3000"
+            "http://10.0.0.2:3000"
         ],
         "csrf_trusted_origins": [
             "http://localhost:3000",

@@ -2,28 +2,26 @@ import React from 'react'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '../../../atoms/Button'
-import { useParams } from 'react-router-dom'
-import { HiDownload, HiOutlineColorSwatch } from 'react-icons/hi'
+import { HiOutlineColorSwatch } from 'react-icons/hi'
 import { APPS } from '../../../apps/apps'
 import { LINKS } from '../../../router/links'
-import { LuSave } from 'react-icons/lu'
 import { MainTemplate } from '../../../templates/MainTemplate'
-import { BiCrop, BiEditAlt, BiSolidDropletHalf } from 'react-icons/bi'
-import { useModalForm } from '../../../utils/hooks'
+import { BiCrop, BiSolidDropletHalf } from 'react-icons/bi'
+import { useModalForm, useSettings, useTheme } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
-import { BsFillBrightnessHighFill, BsFolder2Open } from 'react-icons/bs'
+import { BsFillBrightnessHighFill } from 'react-icons/bs'
 import { IoMdContrast } from 'react-icons/io'
 import { TbBlur, TbReplaceFilled } from 'react-icons/tb'
-import { centerEllipsis, getCursorByPosition } from '../../../utils/utils'
-import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
+import { centerEllipsis, getCursorByPosition, objectEquals } from '../../../utils/utils'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import styled from 'styled-components'
 import { RangeChooser } from '../../../atoms/modalforms/RangeChooser'
 import { IoInvertModeOutline } from 'react-icons/io5'
 import { FETCH } from '../../../api/api'
 import { useMessage } from '../../../utils/messages'
-import { SelectFile } from '../../../atoms/modalforms/SelectFile'
 import { FiDownload, FiEdit, FiImage, FiSave } from 'react-icons/fi'
+import { FilePrompt } from '../../../atoms/modalforms/FilePrompt'
+import { Theme } from '../../../atoms/Theme'
 
 const StyledImageWrapper = styled.div`
     display: inline-block;
@@ -49,7 +47,7 @@ const StyledCrop = styled.div`
     top: ${({ crop }) => crop.y + '%'};
     width: ${({ crop }) => crop.width + '%'};
     height: ${({ crop }) => crop.height + '%'};
-    background-color: ${({ theme }) => theme.secondary}22;
+    background-color: ${({ theme }) => theme.secondary}33;
     border-radius: 4px;
     border: 3px solid ${({ theme }) => theme.primary};
     display: grid;
@@ -61,8 +59,23 @@ const StyledCrop = styled.div`
 `
 
 const CropDot = ({ top, left, setCrop }) => {
+    const [drag, setDrag] = React.useState(false)
+
     return (
         <StyledCropDot
+            onMouseDown={() => {
+                setDrag(true)
+            }}
+            onMouseUp={() => {
+                setDrag(false)
+            }}
+            onMouseMove={(event) => {
+                if (!drag) return
+                if (top == 'center' && left == 'center') {
+                    
+                    setCrop(prev => ({ ...prev, x: 0, y: 0 }))
+                }
+            }}
             cursor={getCursorByPosition(top, left)}
             top={top}
             left={left}
@@ -71,8 +84,8 @@ const CropDot = ({ top, left, setCrop }) => {
 }
 
 const StyledCropDot = styled.div`
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     position: absolute;
     cursor: ${({ cursor }) => cursor};
     top: ${({ top }) =>
@@ -98,13 +111,16 @@ const StyledImage = styled.img`
 
 export const ImageEditor = () => {
     const [searchParams] = useSearchParams()
-    const { type } = useParams()
     const modalForm = useModalForm()
     const navigate = useNavigate()
     const [liked, setLiked] = React.useState(false)
+    const [saved, setSaved] = React.useState(true)
+    const [theme] = useTheme()
     const [image, setImage] = React.useState({})
     const [saveLoading, setSaveLoading] = React.useState(false)
     const { newMessage } = useMessage()
+    const [settings, setSettings, saveSettings] = useSettings()
+    
     const [crop, setCrop] = React.useState({
         show: false,
         x: 10,
@@ -112,14 +128,31 @@ export const ImageEditor = () => {
         width: 80,
         height: 80,
     })
-    const [style, setStyle] = React.useState({
+
+    const defaultConfig = {
         colors: 0,
         saturation: 100,
         blur: 0,
         brightness: 100,
         contrast: 100,
         invert: 0,
-    })
+    }
+
+    React.useEffect(() => {
+        image && saveSettings(prev => ({ ...prev, 'editor.last': [{ name: image.filename, path: image.path, type: image.type }, ...prev['editor.last'].filter(file => file.path !== image.path)] }))
+    }, [image])
+
+    const [style, setStyle] = React.useState(defaultConfig)
+
+    React.useEffect(() => {
+        const path = searchParams.get('path')
+        setLiked(settings['editor.liked'].some(file => file.path === path))
+    }, [settings])
+
+    React.useEffect(() => {
+        if (objectEquals(defaultConfig, style)) setSaved(true)
+        else setSaved(false)
+    }, [style])
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.editor.json(searchParams.get('path'))).then((data) => {
@@ -127,37 +160,25 @@ export const ImageEditor = () => {
         })
     }, [])
 
-    const addToLast = async () => {
-        GETCONFIG('editor_last').then((value) => {
-            SETCONFIG('editor_last', {
-                files: [
-                    ...new Set([searchParams.get('path'), ...value.files]),
-                ].slice(0, 50),
+    const handleSave = () => {
+        setSaveLoading(true)
+        FETCH(
+            ENDPOINTS.editor.save.image(
+                searchParams.get('path')
+            ),
+            {
+                props: JSON.stringify(style),
+            }
+        ).then(() => {
+            setSaveLoading(false)
+            newMessage({
+                text: 'IMAGE SAVED',
             })
-        })
-        GETCONFIG('editor_liked').then((value) => {
-            setLiked(value.files.includes(searchParams.get('path')))
         })
     }
 
     React.useEffect(() => {
-        addToLast()
-    }, [])
-
-    React.useEffect(() => {
-        GETCONFIG('editor_liked').then((value) => {
-            if (liked) {
-                SETCONFIG('editor_liked', {
-                    files: [searchParams.get('path'), ...value.files],
-                })
-            } else {
-                SETCONFIG('editor_liked', {
-                    files: value.files.filter(
-                        (file) => file !== searchParams.get('path')
-                    ),
-                })
-            }
-        })
+        saveSettings()
     }, [liked])
 
     return (
@@ -170,35 +191,21 @@ export const ImageEditor = () => {
             title={centerEllipsis(searchParams.get('path'), 50)}
             submenuChildren={
                 <>
-                    <Button
-                        second
-                        tooltip={'SAVE IMAGE'}
-                        size={1.4}
-                        icon={<FiSave />}
-                        subContent={'SAVE'}
-                        onKey={{
-                            key: 's',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        loading={saveLoading}
-                        onClick={() => {
-                            setSaveLoading(true)
-                            FETCH(
-                                ENDPOINTS.editor.save.image(
-                                    searchParams.get('path')
-                                ),
-                                {
-                                    props: JSON.stringify(style),
-                                }
-                            ).then(() => {
-                                setSaveLoading(false)
-                                newMessage({
-                                    text: 'IMAGE SAVED',
-                                })
-                            })
-                        }}
-                    />
+                    <Theme value={{ ...theme, primary: saved ? theme.success : theme.error }}>
+                        <Button
+                            tooltip={'SAVE IMAGE'}
+                            size={1.4}
+                            icon={<FiSave />}
+                            subContent={'SAVE'}
+                            onKey={{
+                                key: 's',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
+                            loading={saveLoading}
+                            onClick={handleSave}
+                        />
+                    </Theme>
                     <Button
                         subContent={'FOLDER'}
                         second
@@ -245,7 +252,20 @@ export const ImageEditor = () => {
                             })
                         }}
                     />
-                    <Button subContent={'REPLACE'} second icon={<TbReplaceFilled />} size={1.4} />
+                    <Button
+                        onClick={() => {
+                            modalForm({
+                                content: FilePrompt,
+                                title: 'REPLACE IMAGE',
+                                icon: <TbReplaceFilled />,
+                                todo: () => { },
+                            })
+                        }}
+                        subContent={'REPLACE'}
+                        second
+                        icon={<TbReplaceFilled />}
+                        size={1.4}
+                    />
                     <Button
                         second
                         subContent={liked ? 'UNLIKE' : 'LIKE'}
@@ -255,7 +275,13 @@ export const ImageEditor = () => {
                             ctrlKey: true,
                         }}
                         onClick={() => {
-                            setLiked((prev) => !prev)
+                            const path = searchParams.get('path')
+                            if (liked) {
+                                saveSettings(prev => ({ ...prev, 'editor.liked': prev['editor.liked'].filter(file => file.path !== path) }))
+                            }
+                            else {
+                                saveSettings(prev => ({ ...prev, 'editor.liked': [{ name: image.filename, path: image.path, type: image.type }, ...prev['editor.liked']] }))
+                            }
                         }}
                         tooltip={liked ? 'UNLIKE' : 'LIKE'}
                         size={1.4}

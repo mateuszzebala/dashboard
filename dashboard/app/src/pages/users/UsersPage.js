@@ -40,7 +40,7 @@ const StyledPaginator = styled.div`
 `
 
 const StyledNoUsers = styled.span`
-    font-size: 30px;
+    font-size: 20px;
 `
 
 export const UsersPage = () => {
@@ -123,7 +123,7 @@ export const UsersPage = () => {
                     ))}
                     {users.length < 1 && (
                         <StyledNoUsers>
-                            NO USERS
+                            THERE IS NO USERS
                             {search ? ` WITH USERNAME LIKE '${search}'` : ''}
                         </StyledNoUsers>
                     )}

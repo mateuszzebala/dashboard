@@ -276,24 +276,6 @@ class RequestLog(models.Model):
     def __str__(self):
         return f"{self.method} - {self.path}"
 
-class Configuration(models.Model):
-    name = models.CharField(max_length=32)
-    value = models.JSONField()
-
-    def __str__(self):
-        return self.name
-
-
-class TestModel(models.Model):
-    someBool = models.BooleanField(null=True)
-    fileField = models.FileField(upload_to='Media/dashboard/test_model', null=True, default=None)
-    oneToOneRel = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, default=None)
-    manyToManyRel = models.ManyToManyField(Configuration)
-    timeField = models.TimeField(null=True, default=None)
-    
-    def __str__(self):
-        return f'TestModel {self.pk}'
-
 def account_image_path(instance, filename):
     return f'Media/dashboard/auth/account/{filename}'
 
