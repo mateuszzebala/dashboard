@@ -9,21 +9,21 @@ import { toBoolStr } from '../utils/utils'
 
 const StyledValue = styled.div`
     display: flex;
-    gap: 10px;
+    gap: ${({size})=>size*10+'px'};
     align-items: center;
     justify-content: flex-start;
-    padding: 0 0 0 10px;
-    height: 40px;
-    font-size: 20px;
+    padding: 0 0 0 ${({size})=>size*10+'px'};;
+    height: ${({size})=>size*40+'px'};;
+    font-size: ${({size})=>size*20+'px'};
 `
 
 const StyledDropdownIcon = styled.span`
-    font-size: 25px;
+    font-size: ${({size})=>size*25+'px'};
     padding: 0;
     display: grid;
     place-items: center;
     border: 0;
-    padding: 0 5px;
+    padding: 0 ${({size})=>size*5+'px'};
     background-color: transparent;
     color: ${({ theme }) => theme.primary};
     transform: rotate(${({rotate}) => rotate ? '180deg' : '0deg'});
@@ -34,17 +34,17 @@ const StyledWrapper = styled.div`
     display: inline-flex;
     flex-direction: row;
     cursor: pointer;
-    width: 300px;
+    width: ${({size})=>size*300+'px'};
     background-color: ${({ theme }) => theme.secondary};
     border: 2.5px solid ${({ theme }) => theme.primary};
-    border-radius: 3px;
+    border-radius: ${({size})=>size*3+'px'};
     justify-content: space-between;
-    height: 45px;
+    height: ${({size})=>size*45+'px'};
     position: relative;
     outline: 0px solid ${({theme})=>theme.quaternary};
     transition: outline-width 0.1s;
     &:hover{
-        outline-width: 3px;
+        outline-width: ${({size})=>size*3+'px'};
     }
 `
 
@@ -55,7 +55,7 @@ export const Select = ({
     emptyName = 'SELECT',
     asButton,
     canBeNull=true,
-
+    size=1,
     ...props
 }) => {
     const [isOpen, setIsOpen] = React.useState(false)
@@ -85,17 +85,18 @@ export const Select = ({
     }
 
     if(asButton){
-        return <Button {...props} onClick={handleOnClick}>{props.children}</Button>
+        return <Button size={size} {...props} onClick={handleOnClick}>{props.children}</Button>
     }
 
     return (
         <StyledWrapper
             onClick={handleOnClick}
+            size={size}
         >
-            <StyledValue>
-                {data[value] == null ? <span>{emptyName}</span> : data[value]}
+            <StyledValue size={size}>
+                {data[value] === null ? <span>{emptyName}</span> : data[value]}
             </StyledValue>
-            <StyledDropdownIcon rotate={toBoolStr(isOpen)}>
+            <StyledDropdownIcon size={size} rotate={toBoolStr(isOpen)}>
                 <IoIosArrowDown />
             </StyledDropdownIcon>
         </StyledWrapper>

@@ -14,7 +14,7 @@ import { LuSave } from 'react-icons/lu'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { BiEditAlt } from 'react-icons/bi'
 import { convertTerminalTextToHTML } from '../../../utils/utils'
-import { useModalForm } from '../../../utils/hooks'
+import { useModalForm, useSettings, useTheme } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
 import { BsFolder2Open } from 'react-icons/bs'
@@ -23,6 +23,8 @@ import { GETCONFIG, SETCONFIG } from '../../../api/configuration'
 import { TbReplaceFilled } from 'react-icons/tb'
 import { SelectFile } from '../../../atoms/modalforms/SelectFile'
 import { FiCode, FiDownload, FiEdit, FiPlay, FiSave } from 'react-icons/fi'
+import { Theme } from '../../../atoms/Theme'
+import { FilePrompt } from '../../../atoms/modalforms/FilePrompt'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -120,49 +122,34 @@ const Terminal = ({ terminalContent }) => (
 
 export const TextEditor = () => {
     const [searchParams] = useSearchParams()
-    const { type } = useParams()
     const modalForm = useModalForm()
+    const [theme] = useTheme()
     const navigate = useNavigate()
     const [data, setData] = React.useState({})
     const [liked, setLiked] = React.useState(false)
     const [value, setValue] = React.useState(false)
+    const [savedValue, setSavedValue] = React.useState('')
     const [command, setCommand] = React.useState('')
     const [loading, setLoading] = React.useState(true)
     const [runLoading, setRunLoading] = React.useState(false)
     const [saveLoading, setSaveLoading] = React.useState(false)
+    const [settings, setSettings, saveSettings] = useSettings()
+    const [saved, setSaved] = React.useState(true)
 
-    const addToLast = async () => {
-        GETCONFIG('editor_last').then((value) => {
-            SETCONFIG('editor_last', {
-                files: [
-                    ...new Set([searchParams.get('path'), ...value.files]),
-                ].slice(0, 50),
-            })
-        })
-        GETCONFIG('editor_liked').then((value) => {
-            setLiked(value.files.includes(searchParams.get('path')))
-        })
-    }
+    React.useEffect(()=>{
+        if(savedValue === value) setSaved(true)
+        else setSaved(false)
+    }, [value])
 
-    React.useEffect(() => {
-        addToLast()
-    }, [])
+    React.useEffect(()=>{
+        data && saveSettings(prev => ({...prev, 'editor.last': [{name: data.filename, path: data.path, type: data.type}, ...prev['editor.last'].filter(file => file.path !== data.path)]}))
+    }, [data])
 
-    React.useEffect(() => {
-        GETCONFIG('editor_liked').then((value) => {
-            if (liked) {
-                SETCONFIG('editor_liked', {
-                    files: [searchParams.get('path'), ...value.files],
-                })
-            } else {
-                SETCONFIG('editor_liked', {
-                    files: value.files.filter(
-                        (file) => file !== searchParams.get('path')
-                    ),
-                })
-            }
-        })
-    }, [liked])
+    React.useEffect(()=>{
+        const path = searchParams.get('path')
+        setLiked(settings['editor.liked'].some(file => file.path === path))
+    }, [settings])
+
 
     const handleSave = () => {
         value !== false && setSaveLoading(true)
@@ -171,6 +158,8 @@ export const TextEditor = () => {
                 content: value,
             }).then(() => {
                 setSaveLoading(false)
+                setSaved(true)
+                setSavedValue(value)
             })
     }
 
@@ -178,6 +167,7 @@ export const TextEditor = () => {
         FETCH(ENDPOINTS.files.file(searchParams.get('path')))
             .then((data) => {
                 setValue(data.data)
+                setSavedValue(data.data)
                 setLoading(false)
             })
             .catch(() => {
@@ -191,6 +181,10 @@ export const TextEditor = () => {
         })
     }, [searchParams])
 
+    React.useEffect(()=>{
+        saveSettings()
+    }, [liked])
+
     return (
         <MainTemplate
             app={{
@@ -201,20 +195,21 @@ export const TextEditor = () => {
             title={centerEllipsis(searchParams.get('path'), 50)}
             submenuChildren={
                 <>
-                    <Button
-                        second
-                        tooltip={'SAVE FILE'}
-                        size={1.4}
-                        subContent={'SAVE'}
-                        onKey={{
-                            key: 's',
-                            ctrlKey: true,
-                            prevent: true,
-                        }}
-                        icon={<FiSave />}
-                        loading={saveLoading}
-                        onClick={handleSave}
-                    />
+                    <Theme value={{...theme, primary: saved ? theme.success : theme.error}}>
+                        <Button
+                            tooltip={'SAVE FILE'}
+                            size={1.4}
+                            subContent={'SAVE'}
+                            onKey={{
+                                key: 's',
+                                ctrlKey: true,
+                                prevent: true,
+                            }}
+                            icon={<FiSave />}
+                            loading={saveLoading}
+                            onClick={handleSave}
+                        />
+                    </Theme>
                     <Button
                         second
                         subContent={'FOLDER'}
@@ -260,11 +255,30 @@ export const TextEditor = () => {
                             })
                         }}
                     />
-                    <Button second icon={<TbReplaceFilled />} size={1.4} subContent={'REPLACE'}/>
+                    <Button 
+                        second 
+                        icon={<TbReplaceFilled />} 
+                        size={1.4} 
+                        subContent={'REPLACE'}
+                        onClick={()=>{
+                            modalForm({
+                                content: FilePrompt,
+                                title: 'REPLACE FILE',
+                                icon: <TbReplaceFilled/>,
+                                todo: ()=>{},
+                            })
+                        }}
+                    />
                     <Button
                         second
                         onClick={() => {
-                            setLiked((prev) => !prev)
+                            const path = searchParams.get('path')
+                            if(liked){
+                                saveSettings(prev => ({...prev, 'editor.liked': prev['editor.liked'].filter(file => file.path !== path)}))
+                            }
+                            else{
+                                saveSettings(prev => ({...prev, 'editor.liked': [{name: data.filename, path: data.path, type: data.type}, ...prev['editor.liked']]}))
+                            }
                         }}
                         tooltip={'LIKE'}
                         subContent={liked ? 'UNLIKE' : 'LIKE'}
@@ -280,6 +294,7 @@ export const TextEditor = () => {
                     <Button
                         second
                         size={1.4}
+                        loading={runLoading}
                         subContent={'RUN'}
                         onKey={{
                             key: 'F5',
@@ -295,6 +310,8 @@ export const TextEditor = () => {
                                     { command, content: value }
                                 ).then((data) => {
                                     setRunLoading(false)
+                                    setSaved(true)
+                                    setSavedValue(value)
                                     modalForm({
                                         content: Terminal,
                                         title: 'TERMINAL',

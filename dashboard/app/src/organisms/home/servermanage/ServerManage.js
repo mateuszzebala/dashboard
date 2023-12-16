@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Switch } from '../../../atoms/Switch'
 import { Typography } from '../../../atoms/Typography'
@@ -7,7 +7,7 @@ import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { FiPower } from 'react-icons/fi'
 import { Button } from '../../../atoms/Button'
-import { useTheme } from '../../../utils/hooks'
+import { useSettings, useTheme } from '../../../utils/hooks'
 
 const StyledWrapper = styled.div`
     padding: 20px 50px;
@@ -40,28 +40,35 @@ const StyledToggle = styled.div`
 `
 
 export const ServerManage = () => {
-    const [configuration, setConfiguration] = React.useState({})
     const [theme] = useTheme()
+    const [config, setConfig] = useState({})
+    const [settings, setSettings] = useSettings()
 
     React.useEffect(() => {
-        if (configuration['server.config.enable_server'] !== undefined) {
-            FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify(configuration)})
-        }
-    }, [configuration])
-
-    React.useEffect(() => {
-        FETCH(ENDPOINTS.settings.get()).then((data) => {
-            console.log(data.data)
-            setConfiguration({
-                'server.config.enable_server': data.data['server.config.enable_server'],
-                'server.config.debug': data.data['server.config.debug'],
-                'server.config.new_users': data.data['server.config.new_users'],
-                'server.config.ddos_block': data.data['server.config.ddos_block'],
-                'server.config.save_requests': data.data['server.config.save_requests'],
-                'server.config.credientals': data.data['server.config.credientals'],
-            })
+        setConfig({
+            enable_server: settings['server.config.enable_server'],
+            debug: settings['server.config.debug'],
+            new_users: settings['server.config.new_users'],
+            ddos_block: settings['server.config.ddos_block'],
+            save_requests: settings['server.config.save_requests'],
         })
     }, [])
+
+    React.useEffect(() => {
+        FETCH(ENDPOINTS.settings.set(), {
+            settings: JSON.stringify({
+                'server.config.enable_server': config.enable_server,
+                'server.config.debug': config.debug,
+                'server.config.new_users': config.new_users,
+                'server.config.ddos_block': config.ddos_block,
+                'server.config.save_requests': config.save_requests,
+            })
+        }).then(() => {
+            FETCH(ENDPOINTS.settings.get()).then(data => {
+                setSettings(data.data)
+            })
+        })
+    }, [config])
 
     return (
         <StyledWrapper>
@@ -69,16 +76,16 @@ export const ServerManage = () => {
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
                     value={{
-                        primary: configuration['server.config.enable_server']
+                        primary: config.enable_server
                             ? theme.success
                             : theme.error,
                     }}
                 >
                     <Button
                         onClick={() => {
-                            setConfiguration((prev) => ({
+                            setConfig((prev) => ({
                                 ...prev,
-                                'server.config.enable_server': !prev['server.config.enable_server'],
+                                enable_server: !prev.enable_server,
                             }))
                         }}
                         icon={<FiPower />}
@@ -89,11 +96,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>DEBUG</Typography>
                 <Switch
-                    value={configuration['server.config.debug']}
+                    value={config.debug}
                     setValue={(val) => {
-                        setConfiguration((prev) => ({
+                        setConfig((prev) => ({
                             ...prev,
-                            'server.config.debug': val(configuration['server.config.debug']),
+                            debug: val(config.debug),
                         }))
                     }}
                     size={2}
@@ -102,11 +109,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>NEW USERS</Typography>
                 <Switch
-                    value={configuration['server.config.new_users']}
+                    value={config.new_users}
                     setValue={(val) => {
-                        setConfiguration((prev) => ({
+                        setConfig((prev) => ({
                             ...prev,
-                            'server.config.new_users': val(configuration['server.config.new_users']),
+                            new_users: val(config.new_users),
                         }))
                     }}
                     size={2}
@@ -115,11 +122,11 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>DDoS BLOCK</Typography>
                 <Switch
-                    value={configuration['server.config.ddos_block']}
+                    value={config.ddos_block}
                     setValue={(val) => {
-                        setConfiguration((prev) => ({
+                        setConfig((prev) => ({
                             ...prev,
-                            'server.config.ddos_block': val(configuration['server.config.ddos_block']),
+                            ddos_block: val(config.ddos_block),
                         }))
                     }}
                     size={2}
@@ -128,29 +135,16 @@ export const ServerManage = () => {
             <StyledToggle>
                 <Typography variant={'h4'}>SAVE REQUESTS</Typography>
                 <Switch
-                    value={configuration['server.config.save_requests']}
+                    value={config.save_requests}
                     setValue={(val) => {
-                        setConfiguration((prev) => ({
+                        setConfig((prev) => ({
                             ...prev,
-                            'server.config.save_requests': val(configuration['server.config.save_requests']),
+                            save_requests: val(config.save_requests),
                         }))
                     }}
                     size={2}
                 />
             </StyledToggle>
-            {/*<StyledToggle>*/}
-            {/*    <Typography variant={'h4'}>CREDENTIALS</Typography>*/}
-            {/*    <Switch*/}
-            {/*        value={configuration.credientals}*/}
-            {/*        setValue={(val) => {*/}
-            {/*            setConfiguration((prev) => ({*/}
-            {/*                ...prev,*/}
-            {/*                credientals: val(configuration.credientals),*/}
-            {/*            }))*/}
-            {/*        }}*/}
-            {/*        size={2}*/}
-            {/*    />*/}
-            {/*</StyledToggle>*/}
         </StyledWrapper>
     )
 }

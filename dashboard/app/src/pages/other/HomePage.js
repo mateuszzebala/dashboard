@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { LogsList } from '../../organisms/home/logslist/LogsList'
 import { ServerManage } from '../../organisms/home/servermanage/ServerManage'
 import { APPS } from '../../apps/apps'
-import { HostSelect } from '../../organisms/home/hosts/HostSelect'
+import { HostManager } from '../../organisms/home/hosts/HostManager'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useSettings } from '../../utils/hooks'
 
@@ -34,12 +34,13 @@ const StyledWidgets = styled.div`
 
 const StyledHosts = styled.div`
     display: flex;
-    flex-wrap: wrap;
-    
-    justify-content: justify-content;
+    flex-direction: column;
     padding: 20px;
     gap: 20px;
     height: 100%;
+    > *{
+        width: 100%;
+    }
 `
 
 
@@ -55,17 +56,17 @@ export const HomePage = () => {
                 </StyledWidgets>
                 {settings['home.hosts_widgets'] && (
                     <StyledHosts>
-                        <HostSelect
-                            endpoint={ENDPOINTS.home.allowed_hosts()}
+                        <HostManager
                             name={'ALLOWED HOSTS'}
+                            hostKey={'server.allowed_hosts'}
                         />
-                        <HostSelect
-                            endpoint={ENDPOINTS.home.cors_allowed_origins()}
+                        <HostManager
                             name={'CORS ALLOWED ORIGINS'}
+                            hostKey={'server.cors_allowed_origins'}
                         />
-                        <HostSelect
-                            endpoint={ENDPOINTS.home.csrf_trusted_origins()}
+                        <HostManager
                             name={'CSRF TRUSTED ORIGINS'}
+                            hostKey={'server.csrf_trusted_origins'}
                         />
                     </StyledHosts>
                 )}

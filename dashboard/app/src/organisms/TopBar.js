@@ -7,6 +7,8 @@ import { Link } from '../atoms/Link'
 import {HiOutlineMenu} from 'react-icons/hi'
 import { toBoolStr } from '../utils/utils'
 import { useSettings } from '../utils/hooks'
+import { FiMenu } from 'react-icons/fi'
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai'
 
 const StyledWrapper = styled.nav`
     display: flex;
@@ -41,7 +43,7 @@ const StyledMenuButton = styled.button`
         stroke-width: 1.4px;
     }
     transition: outline-width 0.1s;
-    &:hover {
+    &:hover, &:focus {
         outline-width: 3px;
     }
 `
@@ -73,12 +75,21 @@ const StyledLeftSide = styled.div`
     gap: 10px;
     align-items: center;
     justify-content: center;
+    a{
+        outline: 0 solid ${({ theme }) => theme.tertiary}aa;
+        transition: transform 0.1s;
+        border-radius: 3px;
+    }
+    a:focus{
+        outline-width: 3px;
+    }
 `
 
 export const TopBar = ({
     app,
     setClose,
     title,
+    close,
     topbarLink,
     setHideSubmenu,
     hideSubmenu,
@@ -97,7 +108,7 @@ export const TopBar = ({
         >
             <StyledLeftSide>
                 <StyledMenuButton onClick={handleBurgerClick}>
-                    <HiOutlineMenu />
+                    {!close ?  <AiOutlineMenuFold /> : <AiOutlineMenuUnfold/>}
                 </StyledMenuButton>
                 <Link
                     animation={false}

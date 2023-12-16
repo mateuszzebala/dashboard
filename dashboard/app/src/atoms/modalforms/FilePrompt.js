@@ -24,7 +24,7 @@ const StyledButtons = styled.div`
 `
 
 const StyledDropArea = styled.div`
-    box-shadow: 0 0 8px -3px ${({ theme }) => theme.primary};
+    /* box-shadow: 0 0 8px -3px ${({ theme }) => theme.primary}; */
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -33,14 +33,21 @@ const StyledDropArea = styled.div`
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s;
-    border: dashed 3px ${({ theme }) => theme.primary};
+    border: dashed 4px ${({ theme }) => theme.primary};
     text-overflow: ellipsis;
     padding: 5px;
     white-space: nowrap;
     overflow: hidden;
     border-radius: 20px;
-    &:hover {
-        background-color: ${({ theme }) => theme.primary}22;
+    >*{
+        transition: transform 0.2s;
+    }
+    &:hover, &:focus {
+        background-color: ${({ theme }) => theme.quaternary};
+        > *{
+            transform: scale(0.9);
+
+        }
     }
     h5 {
         font-size: 20px;

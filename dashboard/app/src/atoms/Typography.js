@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const StyledWrapper = styled.span`
     * {
+        color: ${({theme})=>theme.primary};
         margin: 0;
     }
 `

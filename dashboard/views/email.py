@@ -27,11 +27,11 @@ def send_email(request):
     msg = MIMEText(request.POST.get('content'))
     msg['Subject'] = request.POST.get('subject')
     msg['From'] = email.email
-    msg['To'] = request.POST.get('to')
+    msg['To'] = request.POST.get('recipients')
     with smtplib.SMTP(email.smtp, email.port_smtp) as smtp_server:
         smtp_server.starttls()
         smtp_server.login(email.email, email.password)
-        smtp_server.sendmail(email.email, request.POST.get('to'), msg.as_string())
+        smtp_server.sendmail(email.email, request.POST.get('recipients'), msg.as_string())
     return JsonResponse({})
 
 

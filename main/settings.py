@@ -1,17 +1,16 @@
 from pathlib import Path
-from dashboard.configuration.config import SERVER_CONFIG, init
+from dashboard.configuration.settings import SETTINGS
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-init()
+SETTINGS.init()
 
 SECRET_KEY = 'django-insecure-(hdjli*-jg0cp5v*)r59*i)7lyix&7*-d$=u8oaifiao+ky64l'
-
-DEBUG = SERVER_CONFIG.DEBUG()
-ALLOWED_HOSTS = SERVER_CONFIG.GET_ALLOWED_HOSTS()
-CORS_ALLOWED_ORIGINS = SERVER_CONFIG.GET_CORS_ALLOWED_ORIGINS()
-CSRF_TRUSTED_ORIGINS = SERVER_CONFIG.GET_CSRF_TRUSTED_ORIGINS()
-CORS_ALLOW_CREDENTIALS = SERVER_CONFIG.CREDENTIALS()
+DEBUG = SETTINGS.get('server.config.debug')
+ALLOWED_HOSTS = SETTINGS.get('server.allowed_hosts')
+CORS_ALLOWED_ORIGINS = SETTINGS.get('server.cors_allowed_origins')
+CSRF_TRUSTED_ORIGINS = SETTINGS.get('server.csrf_trusted_origins')
+CORS_ALLOW_CREDENTIALS = SETTINGS.get('server.config.credientals')
 
 INSTALLED_APPS = [
     'corsheaders',

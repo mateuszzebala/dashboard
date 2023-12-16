@@ -8,7 +8,7 @@ import re
 import signal
 import os
 from django.conf import settings
-from dashboard.configuration.config import get_settings
+from dashboard.configuration.settings import SETTINGS
 
 processes = {}
 
@@ -27,7 +27,7 @@ def kill_process(request):
 def command(request):
     path = request.POST.get('path').split(os.sep)
     cmd = request.POST.get('command')
-    linux_interpreter = get_settings().get('terminal').get('sh_type')
+    linux_interpreter = SETTINGS.get('terminal.sh_type')
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=os.sep.join(path), executable=linux_interpreter)
     if processes.get(request.user.id) is None:
         processes[request.user.id] = []

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
 import { APPS } from '../apps/apps'
 import { toBoolStr } from '../utils/utils'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { LINKS } from '../router/links'
 import Logo from '../assets/logos/logo-light-colors.svg'
 import { useModalForm, useSettings } from '../utils/hooks'
@@ -40,10 +40,19 @@ const StyleDashboard = styled.span`
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.secondary};
+    cursor: pointer;
+    outline: 0px solid ${({theme})=>theme.secondary}88;
+    border-radius: 5px;
+    transition: outline-width 0.1s;
+    &:focus{
+        outline-width: 3px;
+    }
     img{
         width: 120px;
     }
+
 `
+
 const StyledMenuItems = styled.div`
     overflow-y: auto;
     width: 100%;
@@ -87,7 +96,7 @@ const StyledFlag = styled.img`
 
 export const LeftBar = ({ close }) => {
     const [settings] = useSettings()
-    
+    const navigate = useNavigate()
     const modalForm = useModalForm()
     return (
         <StyledBar close={toBoolStr(close)}>
@@ -103,12 +112,9 @@ export const LeftBar = ({ close }) => {
                 <div></div>
                 <div></div>
             </PolishFlag>}
-            <Link to={LINKS.home()}>
-                <StyleDashboard>
-                    <img src={Logo}/>
-
-                </StyleDashboard>
-            </Link>
+            <StyleDashboard tabIndex={0} onClick={()=>navigate(LINKS.home())}>
+                <img src={Logo}/>
+            </StyleDashboard>
             <StyledMenuItems>
                 {Object.values(APPS).map((app) => {
                     if (!settings[`dashboard.app.${app.name.toLowerCase()}`]) return ''

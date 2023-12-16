@@ -23,11 +23,13 @@ def get_account(request, userId):
         'address': account.address,
         'street': account.street,
         'city': account.city,
+        'country': account.country,
         'phone': account.phone,
         'state': account.state,
         'zip_code': account.zip_code,
         'website': account.website,
         'pronouns': account.pronouns,
+        'gender': account.gender,
     })
 
 @dashboard_access
@@ -44,12 +46,14 @@ def edit_user(request, userId):
     account.address = request.POST.get('address')
     account.street = request.POST.get('street')
     account.city = request.POST.get('city')
+    account.country = request.POST.get('country')
     account.phone = request.POST.get('phone')
     account.state = request.POST.get('state')
     account.zip_code = request.POST.get('zip_code')
     account.website = request.POST.get('website')
     account.pronouns = request.POST.get('pronouns')
     account.image = request.FILES.get('profileImage') or account.image
+    account.gender = request.POST.get('gender')
     user.save()
     account.save()
     return JsonResponse({})

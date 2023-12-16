@@ -31,6 +31,7 @@ import { ComponentsPage } from '../pages/other/ComponentsPage'
 import { NewUserPage } from '../pages/users/NewUserPage'
 import { AddEmailPage } from '../pages/email/AddEmailPage'
 import { ShowEmailPage } from '../pages/email/inboxPages/ShowEmailPage'
+import { ComposeEmailPage } from '../pages/email/ComposeEmailPage'
 
 const pages = {
     '/dashboard/': {page: HomePage, app: APPS.home},
@@ -59,6 +60,7 @@ const pages = {
     '/dashboard/email/newsletter/': {page: EmailNewsletterPage, app: APPS.email},
     '/dashboard/email/add/': {page: AddEmailPage, app: APPS.email},
     '/dashboard/email/read/': {page: ShowEmailPage, app: APPS.email},
+    '/dashboard/email/compose/': {page: ComposeEmailPage, app: APPS.email},
 
     '/dashboard/statistics/': {page: StatisticsPage, app: APPS.statistics},
     '/dashboard/statistics/map/': {page: StatisticsWorldMapPage, app: APPS.statistics},

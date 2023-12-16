@@ -6,17 +6,22 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import { BsCamera } from 'react-icons/bs'
-import { useModalForm } from '../../utils/hooks'
+import { useModalForm, useTheme } from '../../utils/hooks'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 import { Input } from '../../atoms/Input'
 import { LuCamera, LuSave } from 'react-icons/lu'
 import { IoMdLogOut } from 'react-icons/io'
-import { FiLogOut } from 'react-icons/fi'
+import { FiCamera, FiLogOut, FiSave } from 'react-icons/fi'
 import { Button } from '../../atoms/Button'
-import { MdBlock } from 'react-icons/md'
+import { MdBlock, MdPassword } from 'react-icons/md'
 import { useMessage } from '../../utils/messages'
 import { Confirm } from '../../atoms/modalforms/Confirm'
+import { Select } from '../../atoms/Select'
+import { Theme } from '../../atoms/Theme'
+import { objectEquals } from '../../utils/utils'
+import { GENDERS } from '../../data/genders'
+import { COUNTRIES } from '../../data/countries'
 
 const StyledProfileImage = styled.div`
     width: 200px;
@@ -44,7 +49,7 @@ const StyledCameraButton = styled.button`
     transition: color 0.3s, background-color 0.3s;
     &:hover {
         color: ${({ theme }) => theme.primary};
-        background-color: ${({ theme }) => theme.secondary}88;
+        background-color: ${({ theme }) => theme.secondary}AA;
     }
 `
 
@@ -94,6 +99,7 @@ const StyledHeader = styled.h1`
 
 export const UserPage = () => {
     const { id } = useParams()
+    const [theme] = useTheme()
     const [accountInfo, setAccountInfo] = React.useState({})
     const [data, setData] = React.useState({})
     const [profileImage, setProfileImage] = React.useState('')
@@ -102,6 +108,14 @@ export const UserPage = () => {
     const [reload, setReload] = React.useState(0)
     const [active, setActive] = React.useState(null)
     const {newMessage} = useMessage()
+    const [savedData, setSavedData] = React.useState(true)
+    const [saving, setSaving] = React.useState(false)
+    const [otherImage, setOtherImage] = React.useState(false)
+
+    React.useEffect(()=>{
+        if(objectEquals(accountInfo, data) && !otherImage) setSavedData(true)
+        else setSavedData(false)
+    }, [data, profileImage])
 
     React.useEffect(()=>{
         FETCH(ENDPOINTS.users.active(), {id}).then(data => {
@@ -110,8 +124,10 @@ export const UserPage = () => {
     }, [id])
 
     const handleSave = () => {
+        setSaving(true)
         FETCH(ENDPOINTS.users.edit(id), {...data, profileImage}).then(data => {
             setReload(prev => prev + 1)
+            setSaving(false)
         })
     }
 
@@ -129,6 +145,7 @@ export const UserPage = () => {
         FETCH(ENDPOINTS.users.get(id)).then((data) => {
             setAccountInfo(data.data)
             setData(data.data)
+            setOtherImage(false)
         })
     }, [id, reload])
 
@@ -153,15 +170,15 @@ export const UserPage = () => {
                     todo: () => {
                         FETCH(ENDPOINTS.users.active(), {id, active: !active}).then(data => {
                             setActive(data.data.active)
-
                         })
                     }
                 })
             }}/>
+            <Button second icon={<MdPassword/>} size={1.3} subContent='PASSWORD'/>
         </>}>
             {accountInfo.username && (
                 <StyledWrapper>
-                    {(accountInfo.first_name || accountInfo.last_name) && <StyledHeader>{accountInfo.first_name} {accountInfo.last_name}</StyledHeader>}
+                    {/* {(accountInfo.first_name || accountInfo.last_name) && <StyledHeader>{accountInfo.first_name} {accountInfo.last_name}</StyledHeader>} */}
                     <StyledGroup>
                         <StyledTitle>Profile Image</StyledTitle>
                         <StyledProfileImage
@@ -177,11 +194,12 @@ export const UserPage = () => {
                                         setValue: setProfileImage,
                                         todo: (value) => {
                                             setProfileImage(value)
+                                            setOtherImage(true)
                                         },
                                     })
                                 }}
                             >
-                                <LuCamera />
+                                <FiCamera />
                             </StyledCameraButton>
                         </StyledProfileImage>
                     </StyledGroup>
@@ -242,6 +260,16 @@ export const UserPage = () => {
                       
                         <StyledGroup>
                             <StyledTitle>Address</StyledTitle>
+                            <Select 
+                                emptyName='COUNTRY' 
+                                canBeNull
+                                size={1.1}
+                                value={data.country}
+                                setValue={(value) => {
+                                    setData((prev) => ({ ...prev, country: value }))
+                                }}
+                                data={COUNTRIES}
+                            />
                             <Input
                                 size={1.1}
                                 value={data.address}
@@ -317,6 +345,16 @@ export const UserPage = () => {
                                 }}
                                 label={'WEBSITE'}
                             />
+                            <Select 
+                                emptyName='GENDER' 
+                                canBeNull
+                                size={1.1}
+                                value={data.gender}
+                                setValue={(value) => {
+                                    setData((prev) => ({ ...prev, gender: value }))
+                                }}
+                                data={GENDERS}
+                            />
                             <Input
                                 size={1.1}
                                 value={data.pronouns}
@@ -330,7 +368,9 @@ export const UserPage = () => {
                             />
                         </StyledGroup>
                     </StyledInputs>
-                    <FloatingActionButton size={1.4} icon={<LuSave />} onClick={handleSave}/>
+                    <Theme value={{...theme, primary: savedData ? theme.success : theme.error}}>
+                        <FloatingActionButton loading={saving} size={1.5} icon={<FiSave />} onClick={handleSave}/>
+                    </Theme>
                 </StyledWrapper>
             )}
         </MainTemplate>

@@ -6,10 +6,9 @@ import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import { LINKS } from '../../router/links'
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
-import { FaCheck, FaPlus, FaSearch, FaSort } from 'react-icons/fa'
+import { FaSort } from 'react-icons/fa'
 import { Button } from '../../atoms/Button'
 import { Paginator } from '../../atoms/Paginator'
-import { Input } from '../../atoms/Input'
 import { APPS } from '../../apps/apps'
 import { ModelTable } from '../../organisms/database/ModelTable'
 import { Counter } from '../../atoms/Counter'
@@ -22,10 +21,8 @@ import { Export } from '../../atoms/modalforms/Export'
 import { Actions } from '../../atoms/modalforms/Actions'
 import { useSearchParams } from 'react-router-dom'
 import { IoMdOpen } from 'react-icons/io'
-import { Theme } from '../../atoms/Theme'
 import { Select } from '../../atoms/Select'
 import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
-import { BsCheckAll } from 'react-icons/bs'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 
 const StyledError = styled.span`
@@ -93,7 +90,6 @@ export const DatabaseModelPage = () => {
     const [selectedItems, setSelectedItems] = React.useState([])
     const [error, setError] = React.useState(null)
     const [queryError, setQueryError] = React.useState(false)
-    const [theme] = useTheme()
 
     React.useEffect(()=>{
         setSearchParams(prev => ({

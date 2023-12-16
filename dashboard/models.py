@@ -297,6 +297,13 @@ class TestModel(models.Model):
 def account_image_path(instance, filename):
     return f'Media/dashboard/auth/account/{filename}'
 
+GENDERS = (
+    ('woman', 'Woman'),
+    ('man', 'Man'),
+    ('other', 'Other'),
+    ('prefer_not_to_say', 'Prefer Not to Say')
+)
+
 class Account(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to=account_image_path, null=True, blank=True)
@@ -304,7 +311,7 @@ class Account(models.Model):
     phone = models.CharField(max_length=15, null=True)
     birth_date = models.DateField(null=True)
     email_confirmed = models.BooleanField(default=False)
-    country = models.CharField(max_length=24, null=True)
+    country = models.CharField(choices=COUNTRIES, max_length=24, null=True)
     address = models.CharField(max_length=32, null=True)
     street = models.CharField(max_length=32, null=True)
     city = models.CharField(max_length=32, null=True)
@@ -312,6 +319,7 @@ class Account(models.Model):
     zip_code = models.CharField(max_length=6, null=True)
     website = models.CharField(max_length=64, null=True)
     pronouns = models.CharField(max_length=16, null=True)
+    gender = models.CharField(choices=GENDERS, max_length=17, null=True)
 
     def __str__(self):
         return f"{self.user.username}" if self.user else 'None'

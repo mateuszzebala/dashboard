@@ -45,7 +45,7 @@ const StyledModel = styled.button`
     border: 0;
     flex-direction: column;
     cursor: pointer;
-    border-left: 3.5px solid ${({ theme }) => theme.primary};
+    border-left: 2.5px solid ${({ theme }) => theme.primary};
     width: 100%;
     font-size: 15px;
     display: flex;

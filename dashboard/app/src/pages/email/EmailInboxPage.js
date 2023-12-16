@@ -137,7 +137,7 @@ export const EmailInboxPage = () => {
                 <StyledSubMenu>
                     <div>
                         <Button to={LINKS.email.index()} size={1.3} second icon={<FiArrowLeft/>} subContent='EMAILS'/>
-                        <Button size={1.3} second icon={<FiPlus/>} subContent='COMPOSE'/>
+                        <Button size={1.3} second icon={<FiPlus/>} subContent='COMPOSE' to={LINKS.email.compose(searchParams.get('mail'))}/>
                     </div>
                     <div>
                         <Paginator value={page} setValue={setPage} pages={pages} second/>  

@@ -92,6 +92,7 @@ export const MainTemplate = ({
                     <TopBar
                         title={title}
                         app={app}
+                        close={leftbarClose}
                         setClose={setLeftbarClose}
                         topbarLink={topbarLink}
                         hideSubmenu={hideSubmenu}

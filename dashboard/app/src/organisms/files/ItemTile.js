@@ -41,13 +41,16 @@ const StyledWrapper = styled.div`
     cursor: pointer;
     user-select: none;
     position: relative;
-    transition: transform 0.3s, background-color 0.3s, border-color 0.3s, border-width 0.2s;                                                                                                                    
+    transition: transform 0.3s, background-color 0.3s, border-color 0.1s, border-width 0.2s;   
 `
 
 const StyledHoverWrapper = styled.div`
     display: inline-block;
     width: 100%;
-    &:hover > *{
+    &:focus{
+        outline: none;
+    }
+    &:hover > *, &:focus > *{
         transform: ${({list})=>list?'none':'scale(0.9)'};
         background-color: ${({list, theme})=>list?theme.primary + '22':theme.primary + '11'};
     }
@@ -118,7 +121,7 @@ export const ItemTile = ({
 
     return (
         <Tooltip text={filename}>
-            <StyledHoverWrapper list={toBoolStr(list)}>
+            <StyledHoverWrapper list={toBoolStr(list)} tabIndex={0}>
                 <StyledWrapper
                     hidden={toBoolStr(hidden)}
                     ref={wrapperRef}

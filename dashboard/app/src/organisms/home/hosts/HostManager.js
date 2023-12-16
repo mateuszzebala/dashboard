@@ -6,11 +6,12 @@ import { Button } from '../../../atoms/Button'
 import { Input } from '../../../atoms/Input'
 import { Typography } from '../../../atoms/Typography'
 import { FaPlus } from 'react-icons/fa'
-import { useModalForm } from '../../../utils/hooks'
+import { useModalForm, useSettings } from '../../../utils/hooks'
 import { Confirm } from '../../../atoms/modalforms/Confirm'
 import { FiTrash } from 'react-icons/fi'
 import { Prompt } from '../../../atoms/modalforms/Prompt'
 import { MdOutlineNetworkCheck } from 'react-icons/md'
+import { ENDPOINTS } from '../../../api/endpoints'
 
 const StyledWrapper = styled.div`
     padding: 20px;
@@ -35,23 +36,19 @@ const StyledMenu = styled.div`
     justify-content: space-between;
 `
 
-export const HostSelect = ({ name, endpoint }) => {
+export const HostManager = ({ name, hostKey }) => {
     const modalForm = useModalForm()
     const [hosts, setHosts] = React.useState([])
+    const [settings] = useSettings()
 
-    React.useEffect(() => {
-        FETCH(endpoint).then((data) => {
-            setHosts(data.data.hosts)
-        })
+    React.useEffect(()=>{
+        setHosts(settings[hostKey])
     }, [])
 
-    React.useEffect(() => {
-        if (hosts && hosts.length !== 0) {
-            FETCH(endpoint, {
-                method: 'PATCH',
-                hosts: hosts,
-            })
-        }
+    React.useEffect(()=>{
+        hosts.length && FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify({
+            [hostKey]: hosts
+        })})
     }, [hosts])
 
     const handleAddHost = () => {
@@ -81,7 +78,7 @@ export const HostSelect = ({ name, endpoint }) => {
                                 modalForm({
                                     content: Confirm,
                                     title: 'DELETE',
-                                    text: 'DO YOU WANT TO DELETE HOST?',
+                                    text: `DELETE ${host} HOST?`,
                                     icon: <FiTrash />,
                                     todo: () => {
                                         host !== 'localhost' &&
@@ -98,7 +95,7 @@ export const HostSelect = ({ name, endpoint }) => {
                         />
                     ))
                 ) : (
-                    <Typography variant={'h4'}>
+                    <Typography variant={'span'}>
                         There are not allowed hosts
                     </Typography>
                 )}

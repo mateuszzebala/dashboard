@@ -36,10 +36,10 @@ export const LINKS = {
     },
     email: {
         index: () => '/dashboard/email/',
-        inbox: (mail) => `/dashboard/email/inbox?mail=${mail}`,
+        inbox: (mail) => `/dashboard/email/inbox/?mail=${mail}`,
         newsletter: () => '/dashboard/email/newsletter/',
         add: () => '/dashboard/email/add/',
-        compose: () => '/dashboard/email/compose/',
+        compose: (mail) => `/dashboard/email/compose/?mail=${mail}`,
         read: (id) => `/dashboard/email/read/?id=${id}`,
     },
     requests: {

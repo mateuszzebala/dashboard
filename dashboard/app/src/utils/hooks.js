@@ -1,5 +1,7 @@
 import React from 'react'
 import { useCookies } from 'react-cookie'
+import { FETCH } from '../api/api'
+import { ENDPOINTS } from '../api/endpoints'
 
 export const useOnClickOutside = (ref, handler) => {
     React.useEffect(() => {
@@ -139,5 +141,14 @@ export const SettingsContext = React.createContext({})
 
 export const useSettings = () => {
     const [settings, setSettings] = React.useContext(SettingsContext)
-    return [ settings, setSettings ]
+
+    const saveSettings = (newSettings=()=>settings) => {
+        FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify((newSettings(settings)))}).then(data => {
+            FETCH(ENDPOINTS.settings.get()).then(data => {
+                setSettings(data.data)
+            })
+        })
+    }
+
+    return [ settings, setSettings, saveSettings]
 }

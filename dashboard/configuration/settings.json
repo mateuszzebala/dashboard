@@ -47,13 +47,44 @@
             "statistics": true
         }
     },
+    "editor": {
+        "liked": [
+            {
+                "name": "testfile.txt",
+                "path": "/home/mateusz/Desktop/testfile.txt",
+                "type": "file"
+            },
+            {
+                "name": ".bash_profile",
+                "path": "/home/mateusz/.bash_profile",
+                "type": "file"
+            },
+            {
+                "name": ".bashrc",
+                "path": "/home/mateusz/.bashrc",
+                "type": "file"
+            }
+        ],
+        "last": [
+            {
+                "name": "testfile.txt",
+                "path": "/home/mateusz/Desktop/testfile.txt",
+                "type": "file"
+            },
+            {
+                "name": ".bash_profile",
+                "path": "/home/mateusz/.bash_profile",
+                "type": "file"
+            }
+        ]
+    },
     "server": {
         "config": {
             "enable_server": true,
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": false,
+            "save_requests": true,
             "credientals": true
         },
         "allowed_hosts": [
@@ -68,7 +99,9 @@
             "http://192.168.100.35:8000",
             "http://192.168.100.35:3000",
             "http://10.0.0.2:8000",
-            "http://10.0.0.2:3000"
+            "http://10.0.0.2:3000",
+            "http://manjaro:8000",
+            "http://manjaro:3000"
         ],
         "csrf_trusted_origins": [
             "http://localhost:3000",
@@ -78,10 +111,5 @@
             "http://10.0.0.2:8000",
             "http://10.0.0.2:3000"
         ]
-    },
-    "email": {
-        "password": "adminadminadminadmin",
-        "port": "447",
-        "smtp": "smtp.url.com"
     }
 }

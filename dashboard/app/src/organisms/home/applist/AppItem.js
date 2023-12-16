@@ -1,6 +1,6 @@
 import React from 'react'
 import { IoAppsSharp } from 'react-icons/io5'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledBox = styled.div`
@@ -22,7 +22,8 @@ const StyledBox = styled.div`
     :hover svg{
         transform: scale(0.8);
     }
-    :hover{
+    :hover, :focus{
+        outline: none;
         background: ${({theme})=>theme.primary}22;
     }
 `
@@ -43,14 +44,13 @@ const StyledIcon = styled.div`
 `
 
 export const AppItem = ({ icon, name = '', link }) => {
+    const navigate = useNavigate()
     return (
-        <StyledBox>
-            <Link to={link}>
-                <StyledLink>
-                    <StyledIcon>{icon || <IoAppsSharp />}</StyledIcon>
-                    <StyledName>{name}</StyledName>
-                </StyledLink>
-            </Link>
+        <StyledBox tabIndex={0} onClick={()=>navigate(link)}>
+            <StyledLink>
+                <StyledIcon>{icon || <IoAppsSharp />}</StyledIcon>
+                <StyledName>{name}</StyledName>
+            </StyledLink>
         </StyledBox>
     )
 }

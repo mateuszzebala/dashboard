@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
 `
 
 const StyledTitle = styled.span`
-  font-size: 20px;
+  font-size: 17px;
 `
 
 const StyledButtons = styled.div`

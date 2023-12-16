@@ -26,8 +26,8 @@ const StyledTop = styled.div`
         text-decoration: none;
         font-size: 15px;
     }
-
-    &:hover a {
+    &:hover a, a:focus{
+        outline: none;
         text-decoration: underline;
     }
 `
@@ -52,6 +52,10 @@ const StyledDropdown = styled.div`
     user-select: none;
     a {
         color: ${({ theme }) => theme.secondary};
+        &:hover, &:focus{
+            outline: none;
+            text-decoration: underline;
+        }
     }
 `
 
@@ -93,7 +97,7 @@ export const LeftBarItem = ({ app, sublinks = {} }) => {
                 sublinkslength={Object.keys(sublinks).length}
             >
                 {Object.keys(sublinks).map((link) => (
-                    <Link key={link} to={sublinks[link]}>
+                    <Link key={link} to={sublinks[link]} tabIndex={dropdown ? 0 : -1}>
                         {link}
                     </Link>
                 ))}

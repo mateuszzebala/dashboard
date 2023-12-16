@@ -8,7 +8,6 @@ export const range = (start, end) => {
     return Array.from({ length: end - start + 1 }, (_, i) => i)
 }
 export const datetimeToString = (datetime) => {
-    console.log(datetime)
     let { year, month, day, hours, minutes, seconds } = datetime
     if (month < 10) month = '0' + month
     if (day < 10) day = '0' + day

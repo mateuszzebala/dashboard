@@ -1,6 +1,6 @@
 from termcolor import colored
 from datetime import datetime
-from dashboard.configuration.config import SERVER_CONFIG
+from dashboard.configuration.settings import SETTINGS
 from django.http import JsonResponse
 from django.urls import resolve
 from django.shortcuts import render
@@ -30,7 +30,7 @@ class DashboardMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if not SERVER_CONFIG.ENABLE_SERVER():
+        if not SETTINGS.get('server.config.enable_server'):
             try:
                 resolver_match = resolve(request.path_info)
                 view_func = resolver_match.func
@@ -39,9 +39,9 @@ class DashboardMiddleware:
                     return render(request, 'server_disabled.html', status=401)
             except:
                 return render(request, 'server_disabled.html', status=401)
-        
+
         response = self.get_response(request)
-        if SERVER_CONFIG.SAVE_REQUESTS():
+        if SETTINGS.get('server.config.save_requests'):
 
             resolver_match = resolve(request.path_info)
             view_func = resolver_match.func

@@ -3,7 +3,7 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
 import { AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
-import { useModalForm } from '../../utils/hooks'
+import { useModalForm, useSettings } from '../../utils/hooks'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 import { BiEditAlt } from 'react-icons/bi'
 import { LINKS } from '../../router/links'
@@ -17,6 +17,7 @@ import { Loading } from '../../atoms/Loading'
 import { SelectFile } from '../../atoms/modalforms/SelectFile'
 import { BsFileBreak, BsFolder, BsFolder2Open } from 'react-icons/bs'
 import { centerEllipsis } from '../../utils/utils'
+import { FiFolder } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -53,7 +54,9 @@ const StyledFile = styled.div`
     border-radius: 0 5px 5px 0;
     border-left: 3px solid ${({ theme }) => theme.primary};
     transition: transform 0.3s;
-
+    &:hover, &:focus{
+        transform: scale(0.95);
+    }
 `
 const StyledTitle = styled.h1`
     display: inline-flex;
@@ -72,44 +75,12 @@ export const EditorPage = () => {
     const [last, setLast] = React.useState([])
     const [liked, setLiked] = React.useState([])
     const modalForm = useModalForm()
-    const [loading, setLoading] = React.useState({ liked: true, last: true })
+    const [settings] = useSettings()
     const navigate = useNavigate()
 
     React.useEffect(() => {
-        GETCONFIG('editor_last').then(async (val) => {
-            const lastFiles = (
-                await Promise.all(
-                    val.files.map(
-                        async (file) =>
-                            (
-                                await FETCH(ENDPOINTS.editor.json(file))
-                            ).data
-                    )
-                )
-            ).filter((file) => file.exists)
-            SETCONFIG('editor_last', {
-                files: lastFiles.map((file) => file.path),
-            })
-            setLast(lastFiles)
-            setLoading((prev) => ({ ...prev, last: false }))
-        })
-        GETCONFIG('editor_liked').then(async (val) => {
-            const likedFiles = (
-                await Promise.all(
-                    val.files.map(
-                        async (file) =>
-                            (
-                                await FETCH(ENDPOINTS.editor.json(file))
-                            ).data
-                    )
-                )
-            ).filter((file) => file.exists)
-            SETCONFIG('editor_liked', {
-                files: likedFiles.map((file) => file.path),
-            })
-            setLiked(likedFiles)
-            setLoading((prev) => ({ ...prev, liked: false }))
-        })
+        setLast(settings['editor.last'])
+        setLiked(settings['editor.liked'])
     }, [])
 
     return (
@@ -118,10 +89,10 @@ export const EditorPage = () => {
             submenuChildren={
                 <Button
                     second
-                    size={1.3}
+                    size={1.4}
                     subContent='OPEN'
                     tooltip={'OPEN FILE'}
-                    icon={<BsFolder2Open /> }
+                    icon={<FiFolder /> }
                     onKey={{
                         key: 'o',
                         prevent: true,
@@ -155,7 +126,6 @@ export const EditorPage = () => {
                         <AiOutlineClockCircle />
                         LAST
                     </StyledTitle>
-                    {loading.last && <Loading size={2} />}
                     <StyledFiles>
                         {last.map((file) => (
                             <StyledFile
@@ -176,7 +146,7 @@ export const EditorPage = () => {
                                 }}
                                 key={file.path}
                             >
-                                {getIconByFileType(file.type)} {centerEllipsis(file.filename, 30)}
+                                {getIconByFileType(file.type)} {centerEllipsis(file.name, 30)}
                             </StyledFile>
                         ))}
                     </StyledFiles>
@@ -186,7 +156,6 @@ export const EditorPage = () => {
                         <AiOutlineHeart />
                         LIKED
                     </StyledTitle>
-                    {loading.liked && <Loading size={2} />}
                     <StyledFiles>
                         {liked.map((file) => (
                             <StyledFile
@@ -207,7 +176,7 @@ export const EditorPage = () => {
                                 }}
                                 key={file.path}
                             >
-                                {getIconByFileType(file.type)} {file.filename}
+                                {getIconByFileType(file.type)} {centerEllipsis(file.name, 30)}
                             </StyledFile>
                         ))}
                     </StyledFiles>

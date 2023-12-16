@@ -21,19 +21,22 @@ import { ServerClock } from '../atoms/ServerClock'
 import { Tooltip } from '../atoms/Tooltip'
 import { APPS } from '../apps/apps'
 
-const StyledIcon = styled.span`
+const StyledIcon = styled.button`
     display: flex;
     cursor: pointer;
     font-size: 20px;
     align-items: center;
     gap: 5px;
+    background-color: transparent;
+    border: 0;
     text-decoration: none !important;
     color: ${({ theme }) => theme.primary};
     transition: color 0.2s, background-color 0.2s, transform 0.3s;
     padding: 10px;
     border-radius: 20px;
     transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
-    &:hover {
+    &:hover, &:focus{
+        outline: none;
         background-color: ${({ theme }) => theme.tertiary}44;
     }
 `
@@ -65,28 +68,26 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
     return (
         <StyledWrapper>
             <Tooltip text="YOUR ACCOUNT">
-                <Link to={LINKS.users.user(user.id)}>
-                    <StyledIcon>
-                        {settings['dashboard.topbar_username'] && user.username}
-                        <FiUser />
-                    </StyledIcon>
-                </Link>
+                <StyledIcon onClick={() => navigate(LINKS.users.user(user.id))}>
+                    {settings['dashboard.topbar_username'] && user.username}
+                    <FiUser />
+                </StyledIcon>
             </Tooltip>
             <Tooltip text="APP INFO">
                 {InfoByApp[app.name] && (
-                    <Link to={LINKS.info.app(app.name)}>
-                        <StyledIcon>
-                            <FiInfo />
-                        </StyledIcon>
-                    </Link>
+                    <StyledIcon onClick={() => {
+                        navigate(LINKS.info.app(app.name))
+                    }}>
+                        <FiInfo />
+                    </StyledIcon>
                 )}
             </Tooltip>
             <Tooltip text="SETTINGS">
-                <Link to={Object.keys(APPS).includes(app.name.toLowerCase()) ? LINKS.settings.byApp(app.name.toLowerCase()) : LINKS.settings.byApp(APPS.home.name.toLowerCase())}>
-                    <StyledIcon>
-                        <FiSettings />
-                    </StyledIcon>
-                </Link>
+                <StyledIcon onClick={() => {
+                    navigate(Object.keys(APPS).includes(app.name.toLowerCase()) ? LINKS.settings.byApp(app.name.toLowerCase()) : LINKS.settings.byApp(APPS.home.name.toLowerCase()))
+                }}>
+                    <FiSettings />
+                </StyledIcon>
             </Tooltip>
             <Tooltip text="GENERATE QRCODE">
                 <StyledIcon
@@ -121,7 +122,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                     <BsArrowBarUp />
                 </StyledIcon>
             </Tooltip>
-            {settings['dashboard.dashboards_menu'] && 
+            {settings['dashboard.dashboards_menu'] &&
                 <Tooltip text="CHOOSE PAGE">
                     <StyledIcon
                         onClick={() => {
