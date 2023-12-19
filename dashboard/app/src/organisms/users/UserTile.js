@@ -12,6 +12,7 @@ const StyledWrapper = styled.button`
     flex-direction: column;
     align-items: center;
     width: 200px;
+    box-shadow: 0 0 20px -10px ${({ theme }) => theme.quaternary};
     height: 200px;
     justify-content: space-around;
     display: flex;
@@ -26,7 +27,7 @@ const StyledWrapper = styled.button`
 `
 
 const StyledProfile = styled.img`
-    border-radius: 5%;
+    border-radius: 10%;
     width: 70%;
     height: 70%;
     aspect-ratio: 1/1;

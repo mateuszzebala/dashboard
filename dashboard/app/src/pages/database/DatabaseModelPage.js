@@ -166,7 +166,7 @@ export const DatabaseModelPage = () => {
                     <StyledMenuSide>
                         <Button
                             second
-                            size={1.3}
+                            size={1.4}
                             icon={<FiCheck />}
                             onKey={{
                                 key: 'a',
@@ -187,7 +187,7 @@ export const DatabaseModelPage = () => {
                             subContent={'NEW'}
                             to={LINKS.database.putItem(modelName)}
                             icon={<FiPlus />}
-                            size={1.3}
+                            size={1.4}
                         />
                         <Select
                             asButton
@@ -199,7 +199,7 @@ export const DatabaseModelPage = () => {
                             }}
                             second
                             icon={<FaSort />}
-                            size={1.3}
+                            size={1.4}
 
                         />
                         <Button
@@ -207,14 +207,14 @@ export const DatabaseModelPage = () => {
                             second
                             icon={asc ? <AiOutlineSortAscending/> : <AiOutlineSortDescending/>}
                             onClick={()=>setAsc(prev => !prev)}
-                            size={1.3}
+                            size={1.4}
                         />
 
                         {selectedItems.length >= 1 && (
                             <>
                                 <Button
                                     second
-                                    size={1.3}
+                                    size={1.4}
                                     tooltip={'DELETE SELECTED'}
                                     icon={<FiTrash />}
                                     subContent={'DELETE'}
@@ -248,7 +248,7 @@ export const DatabaseModelPage = () => {
                                 />
                                 <Button 
                                     second 
-                                    size={1.3} 
+                                    size={1.4} 
                                     tooltip={'EXPORT'}
                                     subContent={'EXPORT'}
                                     icon={<PiExportBold/>}
@@ -262,7 +262,7 @@ export const DatabaseModelPage = () => {
                                     }}
                                 />
                                 {modelData.actions != undefined && modelData.actions.length != 0 && <Button 
-                                    size={1.2} 
+                                    size={1.4} 
                                     second
                                     subContent={'ACTION'}
                                     onClick={()=>{
@@ -284,7 +284,7 @@ export const DatabaseModelPage = () => {
                             <>
                                 <Button
                                     second
-                                    size={1.3}
+                                    size={1.4}
                                     tooltip={'EDIT ITEM'}
                                     subContent={'EDIT'}
                                     icon={<FiEdit />}
@@ -300,7 +300,7 @@ export const DatabaseModelPage = () => {
                                 />
                                 <Button
                                     second
-                                    size={1.3}
+                                    size={1.4}
                                     tooltip={'SHOW ITEM'}
                                     subContent={'SHOW'}
                                     icon={<IoMdOpen />}
@@ -328,12 +328,12 @@ export const DatabaseModelPage = () => {
                             min={0}
                             max={1000}
                             unit="Rows"
-                            size={1.3}
+                            size={1.4}
                         />
                         <Button
                             icon={<FiSearch/>}
                             second
-                            size={1.3}
+                            size={1.4}
                             onKey={{
                                 ctrlKey: true,
                                 key: 'f',
@@ -376,7 +376,7 @@ export const DatabaseModelPage = () => {
                         to={LINKS.database.putItem(modelName)}
                         icon={<FiPlus />}
                         second
-                        size={1.3}
+                        size={1.4}
                     />
                     <StyledFooter>
                         <Paginator

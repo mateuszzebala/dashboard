@@ -16,6 +16,7 @@ const StyledWrapper = styled.div`
 const StyledInput = styled.input`
     border: 0;
     background-color: transparent;
+    width: ${({ scaleSize }) => scaleSize * 50 + 'px'};
     color: ${({ theme }) => theme.primary};
     padding: 0;
     font-weight: 400;

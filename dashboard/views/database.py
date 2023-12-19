@@ -266,12 +266,14 @@ def get_relation_value(reuqest, model_name, field_name, pk):
 
     value = getattr(item, field_name)
     field = get_field(model, field_name)
+
     if field.many_to_many:
         return JsonResponse({
             'value': [item_to_json(item) for item in value.all()] if value.exists() else []
         })
+    
     return JsonResponse({
-        'value': None #item_to_json(value)
+        'value': item_to_json(value)
     })
 
 

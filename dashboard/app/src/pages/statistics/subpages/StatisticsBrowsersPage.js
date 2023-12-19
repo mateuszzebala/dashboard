@@ -2,119 +2,119 @@ import React from 'react'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { APPS } from '../../../apps/apps'
 import styled from 'styled-components'
-import { FiChrome } from 'react-icons/fi'
-import { BsBrowserEdge, BsBrowserSafari } from 'react-icons/bs'
-import { GoBrowser } from 'react-icons/go'
-import { BiLogoOpera } from 'react-icons/bi'
-import { FaChrome, FaFirefoxBrowser, FaInternetExplorer } from 'react-icons/fa'
-import { SiBrave, SiTorbrowser, SiVivaldi } from 'react-icons/si'
-
+import { Icon } from '@iconify/react'
 
 const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 5px;
-  padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 5px;
+	padding: 20px;
 `
 
 const StyledBrowser = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  cursor: pointer;
-  background-color: ${({theme})=>theme.primary}11;
-  border-radius: 7px;
-  font-size: 20px;
-  align-items: center;
-  span:first-child{
-    display: inline-flex;
-    gap: 10px;
-    width: 80%;
-    align-items: center;
-    svg{
-      font-size: 30px;
-    }
-  }
-  span:last-child{
-    width: 20%;
-    text-align: right;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-weight: normal;
-  }
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	cursor: pointer;
+	background-color: ${({ theme }) => theme.quaternary}88;
+	border-radius: 7px;
+	font-size: 20px;
+	align-items: center;
+	span:first-child{
+		display: inline-flex;
+		gap: 10px;
+		width: 80%;
+		align-items: center;
+		svg{
+			font-size: 30px;
+		}
+	}
+	span:last-child{
+		width: 20%;
+		text-align: right;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		font-weight: normal;
+	}
 `
 
 const StyledPercentBar = styled.div`
-  @keyframes animate{
-    from{
-      transform: scaleX(0%);
-    }
-    to{
-      transform: scaleX(100%);
-    }
-  }
-  transform-origin: left center;
-  height: 15px;
-  border-radius: 5px;
-  width: ${({value})=>value}%;
-  animation: animate 1s ease forwards;
-  background-color: ${({theme})=>theme.primary};
+	@keyframes animate{
+		from{
+			transform: scaleX(0%);
+		}
+		to{
+			transform: scaleX(100%);
+		}
+	}
+	transform-origin: left center;
+	height: 10px;
+	border-radius: 5px;
+	width: ${({ value }) => value}%;
+	animation: animate 1s ease forwards;
+	background-color: ${({ theme }) => theme.primary};
 `
 
 
 const browserData = [
     {
-        name: 'Chrome/Chromium',
-        icon: <FaChrome/>,
+        name: 'Chrome',
+        icon: <Icon icon={'logos:chrome'} />,
         percent: 51,
     },
     {
         name: 'Edge',
-        icon: <BsBrowserEdge/>,
+        icon: <Icon icon={'logos:microsoft-edge'} />,
         percent: 25,
     },
     {
         name: 'Opera',
-        icon: <BiLogoOpera/>,
+        icon: <Icon icon={'logos:opera'} />,
         percent: 12,
     },
     {
         name: 'Firefox',
-        icon: <FaFirefoxBrowser/>,
+        icon: <Icon icon={'logos:firefox'} />,
         percent: 4,
     },
     {
         name: 'Brave',
-        icon: <SiBrave/>,
+        icon: <Icon icon={'logos:brave'} />,
         percent: 2,
     },
     {
         name: 'Safari',
-        icon: <BsBrowserSafari/>,
+        icon: <Icon icon={'logos:safari'} />,
         percent: 2,
     },
     {
         name: 'Tor',
-        icon: <SiTorbrowser/>,
+        icon: <Icon icon={'logos:tor-browser'} />,
         percent: 1,
     },
     {
         name: 'Vivaldi',
-        icon: <SiVivaldi/>,
+        icon: <Icon icon={'logos:vivaldi-icon'} />,
         percent: 1,
     },
     {
         name: 'Internet Explorer',
-        icon: <FaInternetExplorer/>,
+        icon: <Icon icon={'logos:internetexplorer'} />,
+        percent: 1,
+    },
+    {
+        name: 'Arc',
+        icon: <Icon icon={'logos:arc'} />,
         percent: 1,
     },
     {
         name: 'Other',
-        icon: <GoBrowser/>,
+        icon: <Icon icon={'icon-park:browser'} />,
         percent: 1,
     },
+
 
 ]
 
@@ -124,7 +124,7 @@ export const StatisticsBrowsersPage = () => {
             <StyledWrapper>
                 {browserData.map(browser => (
                     <StyledBrowser key={browser.name}>
-                        <span>{browser.icon} <StyledPercentBar value={browser.percent}/> {browser.percent}%</span>
+                        <span>{browser.icon} <StyledPercentBar value={browser.percent} /> {browser.percent}%</span>
                         <span>{browser.name}</span>
                     </StyledBrowser>
                 ))}

@@ -25,7 +25,8 @@ export const FloatFieldInput = ({ field, onChange, value: val }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name.toUpperCase()} - <StyledType>{field.type}</StyledType>
+                {field.name.toUpperCase()}<br/>
+                <StyledType>{field.type}</StyledType>
             </Typography>
             <Input
                 step={0.00001}

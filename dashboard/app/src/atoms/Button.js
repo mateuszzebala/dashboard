@@ -93,7 +93,7 @@ export const Button = ({
 }) => {
     const navigate = useNavigate()
     const handleOnClick = (e) =>
-        to ? navigate(to) : !loading && onClick && onClick(e)
+        !loading && onClick && onClick(e)
 
     useGlobalKey(
         (e) => {

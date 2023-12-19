@@ -3,9 +3,8 @@ import styled from 'styled-components'
 import { LeftBarItem } from '../molecules/LeftBarItem'
 import { APPS } from '../apps/apps'
 import { toBoolStr } from '../utils/utils'
-import { Link, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { LINKS } from '../router/links'
-import Logo from '../assets/logos/logo-light-colors.svg'
 import { useModalForm, useSettings } from '../utils/hooks'
 import { GiPoland } from 'react-icons/gi'
 
@@ -120,6 +119,14 @@ export const LeftBar = ({ close }) => {
     const [settings] = useSettings()
     const navigate = useNavigate()
     const modalForm = useModalForm()
+    const location = useLocation()
+    const [currectApp, setCurrentApp] = React.useState('None')
+
+    React.useEffect(()=>{
+        const appFromUrl = location.pathname.split('/').slice(1)[1]
+        setCurrentApp(appFromUrl === '' ? '' : appFromUrl || 'None')
+    }, [])
+
     return (
         <StyledBar close={toBoolStr(close)}>
             {settings['dashboard.polish_flag'] && <PolishFlag onClick={() => {
@@ -143,6 +150,7 @@ export const LeftBar = ({ close }) => {
                     if (!settings[`dashboard.app.${app.name.toLowerCase()}`]) return ''
                     return (
                         <LeftBarItem
+                            active={app.name === APPS.home.name ? currectApp === '' : app.name.toLowerCase() === currectApp.toLowerCase()}
                             key={app.name}
                             app={app}
                             sublinks={app.sublinks && app.sublinks()}

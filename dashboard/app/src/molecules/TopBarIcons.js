@@ -24,7 +24,7 @@ import { APPS } from '../apps/apps'
 const StyledIcon = styled.button`
     display: flex;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     align-items: center;
     gap: 5px;
     background-color: transparent;

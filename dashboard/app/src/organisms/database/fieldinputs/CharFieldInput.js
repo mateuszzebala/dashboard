@@ -16,11 +16,20 @@ const StyledType = styled.span`
 `
 
 export const CharFieldInput = ({ field, onChange, value }) => {
-    const [val, setVal] = React.useState(value ? (field.params.choices && value) ? field.params.choices.indexOf(value) : value : null)
+    let selectedItem = null
+    if(field.params.choices && value) selectedItem = field.params.choices.find(i => (i[0] == value || i[1] == value))
+
+    const [val, setVal] = React.useState(field.params.choices ? selectedItem ? selectedItem[0] : value : (value || null))
 
     React.useEffect(() => {
         if(field.params.choices){
-            val && onChange(field.params.choices[val])
+            const selectedOption = field.params.choices.find(element => element[0] === val)
+            if (selectedOption){
+                val && onChange(selectedOption[1])
+            }
+            else{
+                val && onChange(null)
+            }
         }
         else{
             val && onChange(val)
@@ -52,7 +61,7 @@ export const CharFieldInput = ({ field, onChange, value }) => {
         return (
             <StyledField>
                 <Typography variant={'h3'}>
-                    {field.name.toUpperCase()} -{' '}
+                    {field.name.toUpperCase()}<br/>
                     <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Input

@@ -11,7 +11,7 @@ const StyledTable = styled.table`
 
 const StyledField = styled.td`
     padding: 15px 20px;
-    border: 2px solid ${({ theme }) => theme.primary};
+    border: 1px solid ${({ theme }) => theme.primary};
 `
 
 const StyledRow = styled.tr`
@@ -26,6 +26,7 @@ const StyledHeaderRow = styled.tr`
         color: ${({ theme }) => theme.secondary};
         background: ${({ theme }) => theme.primary};
         text-align: center;
+        padding: 20px;
     }
 `
 

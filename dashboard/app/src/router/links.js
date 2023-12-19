@@ -72,6 +72,8 @@ export const LINKS = {
     other: {
         admin: () => `${MANIFEST.page_url}/admin/`,
         page: () => MANIFEST.page_url,
+        shoper: () => '/shoper/',
+        bloger: () => '/bloger/',
         components: () => '/dashboard/components/',
     },
 }

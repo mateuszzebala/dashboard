@@ -216,7 +216,7 @@ export const TerminalPage = () => {
     }, [historyCounter])
 
     React.useEffect(() => {
-        console.log(commandHistory)
+        //console.log(commandHistory)
     }, [commandHistory])
 
     const PromptInput = ({ index }) => {

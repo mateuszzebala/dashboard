@@ -12,7 +12,7 @@ import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 import { Input } from '../../atoms/Input'
 import { LuCamera, LuSave } from 'react-icons/lu'
 import { IoMdLogOut } from 'react-icons/io'
-import { FiCamera, FiLogOut, FiSave } from 'react-icons/fi'
+import { FiCamera, FiDatabase, FiEdit, FiLogOut, FiSave } from 'react-icons/fi'
 import { Button } from '../../atoms/Button'
 import { MdBlock, MdPassword } from 'react-icons/md'
 import { useMessage } from '../../utils/messages'
@@ -22,6 +22,7 @@ import { Theme } from '../../atoms/Theme'
 import { objectEquals } from '../../utils/utils'
 import { GENDERS } from '../../data/genders'
 import { COUNTRIES } from '../../data/countries'
+import { LINKS } from '../../router/links'
 
 const StyledProfileImage = styled.div`
     width: 200px;
@@ -175,10 +176,10 @@ export const UserPage = () => {
                 })
             }} />
             <Button second icon={<MdPassword />} size={1.3} subContent='PASSWORD' />
+            <Button second to={LINKS.database.item('Account', id)} icon={<FiDatabase />} size={1.3} subContent='SHOW IN' />
         </>}>
             {accountInfo.username && (
                 <StyledWrapper>
-                    {/* {(accountInfo.first_name || accountInfo.last_name) && <StyledHeader>{accountInfo.first_name} {accountInfo.last_name}</StyledHeader>} */}
                     <StyledGroup>
                         <StyledTitle>Profile Image</StyledTitle>
                         <StyledProfileImage

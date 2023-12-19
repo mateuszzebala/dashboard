@@ -28,7 +28,7 @@ export const JSONFieldInput = ({ field, onChange, value: val }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name.toUpperCase()} -{' '}
+                {field.name.toUpperCase()}<br/>
                 <StyledType>{field.type}</StyledType>
             </Typography>
             <Input textarea type="text" value={value} setValue={setValue} />

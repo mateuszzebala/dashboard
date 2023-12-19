@@ -13,10 +13,9 @@ import { HiXMark } from 'react-icons/hi2'
 import { Theme } from '../../atoms/Theme'
 import { theme as orginalTheme } from '../../theme/theme'
 import { LuComponent, LuSave } from 'react-icons/lu'
-import { MdOutlineColorLens, MdOutlineLineStyle, MdOutlineStyle } from 'react-icons/md'
+import { MdOutlineStyle } from 'react-icons/md'
 import { useSearchParams } from 'react-router-dom'
 import { APPS } from '../../apps/apps'
-import { Input } from '../../atoms/Input'
 import { Select } from '../../atoms/Select'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
@@ -26,7 +25,6 @@ const StyledRow = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-    text-transform: uppercase;
     width: 100%;
     h2,
     h3 {

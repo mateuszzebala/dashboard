@@ -6,6 +6,8 @@ import { SiDjango } from 'react-icons/si'
 import { BiSitemap, BiSolidDashboard } from 'react-icons/bi'
 import { LINKS } from '../../router/links'
 import { useTheme } from '../../utils/hooks'
+import { FiShoppingBag } from 'react-icons/fi'
+import { FaBlogger } from 'react-icons/fa'
 
 const StyledButtons = styled.div`
     display: flex;
@@ -77,6 +79,36 @@ export const DashboardsMenu = ({ setOpen }) => {
                     />
                 </Theme>
                 <span>ADMIN</span>
+            </StyledColumn>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        primary: theme.warning,
+                    }}
+                >
+                    <Button
+                        target={'_blank'}
+                        to={LINKS.other.shoper()}
+                        size={2}
+                        icon={<FiShoppingBag />}
+                    />
+                </Theme>
+                <span>SHOPER</span>
+            </StyledColumn>
+            <StyledColumn>
+                <Theme
+                    value={{
+                        primary: theme.error,
+                    }}
+                >
+                    <Button
+                        target={'_blank'}
+                        to={LINKS.other.bloger()}
+                        size={2}
+                        icon={<FaBlogger />}
+                    />
+                </Theme>
+                <span>BLOGER</span>
             </StyledColumn>
         </StyledButtons>
     )

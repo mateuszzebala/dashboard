@@ -20,7 +20,7 @@ export const StatisticsWorldMapPage = () => {
 
     return (
         <MainTemplate padding={0} app={APPS.statistics} title="WORLD MAP">
-            <WorldMap scale={scale} setScale={setScale} countries={countries} />
+            {/* <WorldMap scale={scale} setScale={setScale} countries={countries} /> */}
             <FloatingActionButton
                 bottom={70}
                 icon={<FaPlus />}

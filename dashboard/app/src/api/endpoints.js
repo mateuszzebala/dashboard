@@ -65,8 +65,6 @@ export const ENDPOINTS = {
         },
     },
     other: {
-        get_config: (name) => API(['other', 'config', 'get'], { name }),
-        set_config: (name) => API(['other', 'config', 'set'], { name }),
         time: () => API(['other', 'time']),
     },
     statistics: {

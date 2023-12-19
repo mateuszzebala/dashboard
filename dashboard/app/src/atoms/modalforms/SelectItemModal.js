@@ -7,7 +7,9 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { Loading } from '../Loading'
 import { Paginator } from '../Paginator'
 import { Theme } from '../Theme'
-import { useTheme } from '../../utils/hooks'
+import { useModalForm, useTheme } from '../../utils/hooks'
+import { FiSearch } from 'react-icons/fi'
+import { Prompt } from './Prompt'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -39,7 +41,7 @@ const StyledMenu = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 10px;
 `
 
@@ -60,6 +62,7 @@ export const SelectItemModal = ({
     const [tempValue, setTempValue] = React.useState(value)
     const [queryError, setQueryError] = React.useState(false)
     const [theme] = useTheme()
+    const modalForm = useModalForm()
 
     React.useEffect(() => {
         if(parentPK){
@@ -90,8 +93,16 @@ export const SelectItemModal = ({
     return (
         <StyledWrapper>
             <StyledMenu>
-                <Theme value={{...theme, primary: queryError ? theme.error : theme.primary}}>
-                    <Input value={query} setValue={setQuery} label={'SEARCH'} />
+                <Theme value={{...theme, quaternary: queryError ? theme.error : theme.quaternary}}>
+                    <Button second icon={<FiSearch/>} onClick={()=>{
+                        modalForm({
+                            content: Prompt,
+                            title: 'SEARCH',
+                            icon: <FiSearch/>,
+                            todo: (val) => setQuery(val),
+                            initValue: query
+                        })
+                    }}/>
                 </Theme>
                 
                 <Paginator

@@ -54,6 +54,11 @@
     "editor": {
         "liked": [
             {
+                "name": "testfile.txt",
+                "path": "/home/mateusz/Desktop/testfile.txt",
+                "type": "file"
+            },
+            {
                 "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
                 "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
                 "type": "image"
@@ -71,9 +76,14 @@
         ],
         "last": [
             {
-                "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
-                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "name": "8b36dba890b8f90cb279138730a45bea_original.avif",
+                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/8b36dba890b8f90cb279138730a45bea_original.avif",
                 "type": "image"
+            },
+            {
+                "name": ".bash_profile",
+                "path": "/home/mateusz/.bash_profile",
+                "type": "file"
             },
             {
                 "name": "testfile.txt",
@@ -81,13 +91,13 @@
                 "type": "file"
             },
             {
-                "name": "7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
-                "path": "/home/mateusz/.npm/_cacache/content-v2/sha512/de/13/7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
-                "type": "file"
+                "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
+                "type": "image"
             },
             {
-                "name": ".bash_profile",
-                "path": "/home/mateusz/.bash_profile",
+                "name": "7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
+                "path": "/home/mateusz/.npm/_cacache/content-v2/sha512/de/13/7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
                 "type": "file"
             }
         ]

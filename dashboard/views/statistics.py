@@ -10,7 +10,7 @@ from django.db.models import Count
 def get_countries_statistics(request):
     logs = RequestLog.objects.filter(country__isnull=False).values('country').annotate(total=Count('country'))
     countries = dict((log['country'], log['total']) for log in logs)
-    max_value = max(countries.values())
+    max_value = max(*countries.values())
     for country, value in countries.items():
         countries[country] = 100/max_value*value
     return JsonResponse({

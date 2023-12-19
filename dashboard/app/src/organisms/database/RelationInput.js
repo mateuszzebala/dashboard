@@ -32,7 +32,7 @@ const ManyToManyInput = ({ value, setValue, fieldName, modelName, ...props }) =>
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {fieldName.toUpperCase()} -{' '}
+                {fieldName.toUpperCase()}<br/>
                 <StyledType>Many To Many</StyledType>
             </Typography>
             <SelectItem
@@ -53,7 +53,6 @@ const ManyToOneInput = ({ value, setValue, fieldName, modelName, parentPK, ...pr
     React.useEffect(()=>{
         if(value != undefined){
             FETCH(ENDPOINTS.database.relation_value(modelName, fieldName, parentPK)).then(data => {
-                console.log(data.data, props.thisModel)
                 setTempValue(data.data.value)
             })
         }
@@ -66,7 +65,7 @@ const ManyToOneInput = ({ value, setValue, fieldName, modelName, parentPK, ...pr
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {fieldName.toUpperCase()} -{' '}
+                {fieldName.toUpperCase()}<br/>
                 <StyledType>Many To One</StyledType>
             </Typography>
             <SelectItem
@@ -99,7 +98,7 @@ const OneToOneInput = ({ value, setValue, fieldName, modelName, parentPK }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {fieldName.toUpperCase()} -{' '}
+                {fieldName.toUpperCase()}<br/>
                 <StyledType>One To One</StyledType>
             </Typography>
             <SelectItem

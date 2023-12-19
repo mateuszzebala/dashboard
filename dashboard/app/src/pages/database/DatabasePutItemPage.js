@@ -10,6 +10,7 @@ import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { LINKS } from '../../router/links'
 import { LuSave } from 'react-icons/lu'
 import { RelationInput } from '../../organisms/database/RelationInput'
+import { FiSave } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -146,7 +147,7 @@ export const DatabasePutItemPage = () => {
             
             </StyledWrapper>
             <FloatingActionButton
-                icon={<LuSave />}
+                icon={<FiSave />}
                 onClick={handleSave}
                 size={1.4}
             />

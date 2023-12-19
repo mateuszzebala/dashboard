@@ -70,7 +70,7 @@ const StyledDropdownIcon = styled.div`
     }};
 `
 
-export const LeftBarItem = ({ app, sublinks = {} }) => {
+export const LeftBarItem = ({ app, active, sublinks = {} }) => {
     const [dropdown, setDropdown] = React.useState(false)
     const [settings] = useSettings()
 
@@ -80,6 +80,7 @@ export const LeftBarItem = ({ app, sublinks = {} }) => {
                 onClick={() => {
                     setDropdown((prev) => !prev)
                 }}
+                active={toBoolStr(active)}
             >
                 {settings['dashboard.leftbar_app_icons'] && <app.icon />}
                 <Link to={app.link}>{app.name}</Link>

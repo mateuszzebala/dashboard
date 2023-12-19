@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import { useModalForm } from '../../utils/hooks'
 import { SelectItemModal } from '../../atoms/modalforms/SelectItemModal'
 import { BiSearch } from 'react-icons/bi'
+import { FiSearch } from 'react-icons/fi'
 
 const StyledInput = styled.div`
     display: inline-flex;
     padding: 10px 15px;
-    border: 2px solid ${({ theme }) => theme.primary};
+    border: 2.5px solid ${({ theme }) => theme.primary};
     border-radius: 3px;
     width: 300px;
     background-color: ${({ theme }) => theme.secondary};
@@ -49,7 +50,7 @@ export const SelectItem = ({ modelName, fieldName, multiple, value, setValue, th
             }}
         >
             <StyledIcon>
-                <BiSearch />
+                <FiSearch />
             </StyledIcon>
             <StyledValue>
                 {multiple && `${value.length} ITEMS`}

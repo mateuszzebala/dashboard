@@ -33,7 +33,7 @@ export const DurationFieldInput = ({ field, onChange }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name} - <StyledType>{field.type}</StyledType>
+                {field.name}<br/><StyledType>{field.type}</StyledType>
             </Typography>
             <Input type={'number'} value={value} setValue={setValue} />
         </StyledField>

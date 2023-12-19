@@ -54,7 +54,7 @@ export const DateFieldInput = ({ field, onChange, value: val }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name.toUpperCase()} -{' '}
+                {field.name.toUpperCase()}<br/>
                 <StyledType>{field.type}</StyledType>
             </Typography>
             <Input type="date" value={value} setValue={handleOnChange} />

@@ -24,7 +24,7 @@ export const TextFieldInput = ({ field, onChange, value }) => {
     return (
         <StyledField>
             <Typography variant={'h3'}>
-                {field.name.toUpperCase()} -{' '}
+                {field.name.toUpperCase()}<br/>
                 <StyledType>{field.type}</StyledType>
             </Typography>
             <Input textarea value={val} setValue={setVal} />

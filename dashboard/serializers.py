@@ -98,9 +98,8 @@ def set_relation_serialize(value, relation, field, item):
         return
     if relation == 'many_to_many':
         item.save()
-
         try:
-            if value is None:
+            if len(value) == 0:
                 getattr(item, field.name).clear()
                 return
             for pk in value.split(','):

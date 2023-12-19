@@ -16,7 +16,7 @@ import { centerEllipsis, getCursorByPosition, objectEquals } from '../../../util
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import styled from 'styled-components'
 import { RangeChooser } from '../../../atoms/modalforms/RangeChooser'
-import { IoInvertModeOutline } from 'react-icons/io5'
+import { IoInvertModeOutline, IoResize } from 'react-icons/io5'
 import { FETCH } from '../../../api/api'
 import { useMessage } from '../../../utils/messages'
 import { FiDownload, FiEdit, FiImage, FiSave } from 'react-icons/fi'
@@ -482,6 +482,37 @@ export const ImageEditor = () => {
                                     setStyle((prev) => ({
                                         ...prev,
                                         invert: val,
+                                    }))
+                                },
+                            })
+                        }}
+                    />
+                    <Button
+                        second
+                        tooltip={'RESIZE'}
+                        subContent={'RESIZE'}
+                        size={1.4}
+                        onKey={{
+                            key: '&',
+                            shiftKey: true,
+                            ctrlKey: true,
+                            prevent: true,
+                        }}
+                        icon={<IoResize />}
+                        onClick={() => {
+                            modalForm({
+                                content: RangeChooser,
+                                title: 'RESIZE',
+                                icon: <IoResize />,
+                                min: 0,
+                                max: 3,
+                                step: 0.1,
+                                start: style.resize,
+                                transparentCurtain: true,
+                                todo: (val) => {
+                                    setStyle((prev) => ({
+                                        ...prev,
+                                        resize: val,
                                     }))
                                 },
                             })

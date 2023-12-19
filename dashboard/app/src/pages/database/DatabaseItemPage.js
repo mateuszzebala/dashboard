@@ -13,11 +13,13 @@ import { Confirm } from '../../atoms/modalforms/Confirm'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import { FieldInline } from '../../organisms/database/FieldInline'
 import { RelationInline } from '../../organisms/database/RelationInline'
+import { PiExportBold } from 'react-icons/pi'
+import { Export } from '../../atoms/modalforms/Export'
 
 const StyledError = styled.span`
     font-weight: 500;
     font-size: 20px;
-    color: ${({theme})=>theme.error};
+    color: ${({ theme }) => theme.error};
 `
 
 
@@ -54,7 +56,7 @@ export const DatabaseItemPage = () => {
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.model(modelName)).then((data) => {
-            if(data.data.error){
+            if (data.data.error) {
                 setError(data.data.error)
                 return
             }
@@ -86,14 +88,14 @@ export const DatabaseItemPage = () => {
             title={`${modelName.toUpperCase()} - ${pk}`}
             submenuChildren={
                 <StyledButtons>
-                   
+
                     <Button
                         second
                         onKey={{
                             key: 'Delete',
                         }}
                         subContent={'DELETE'}
-                        size={1.3}
+                        size={1.4}
                         icon={<FiTrash />}
                         onClick={() => {
                             modalForm({
@@ -114,7 +116,7 @@ export const DatabaseItemPage = () => {
                         }}
                     />
                     <Button
-                        size={1.3}
+                        size={1.4}
                         subContent={'EDIT'}
                         onKey={{
                             key: 'e',
@@ -124,6 +126,21 @@ export const DatabaseItemPage = () => {
                         second
                         to={LINKS.database.patchItem(modelName, pk)}
                         icon={<FiEdit />}
+                    />
+                    <Button 
+                        second 
+                        size={1.4} 
+                        tooltip={'EXPORT'}
+                        subContent={'EXPORT'}
+                        icon={<PiExportBold/>}
+                        onClick={()=>{
+                            modalForm({
+                                content: Export,
+                                title: 'EXPORT',
+                                icon: <PiExportBold/>,
+                                todo: ()=>{}
+                            })
+                        }}
                     />
 
                 </StyledButtons>
