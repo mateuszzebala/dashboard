@@ -91,7 +91,6 @@ export const Button = ({
     width,
     ...props
 }) => {
-    const navigate = useNavigate()
     const handleOnClick = (e) =>
         !loading && onClick && onClick(e)
 

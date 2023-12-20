@@ -25,29 +25,36 @@ def kill_process(request):
 
 @dashboard_access
 def command(request):
-    path = request.POST.get('path').split(os.sep)
+    path = request.POST.get('path')
+    path_splitted = request.POST.get('path').split(os.sep)
     cmd = request.POST.get('command')
-    linux_interpreter = SETTINGS.get('terminal.sh_type')
-    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=os.sep.join(path), executable=linux_interpreter)
+    interpreter = SETTINGS.get('terminal.sh_type')
+
+    if interpreter == 'cmd':
+        interpreter = 'C:\Windows\System32\cmd.exe'
+
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=path, executable=interpreter)
+    
     if processes.get(request.user.id) is None:
         processes[request.user.id] = []
     processes[request.user.id].append(process)
     output, errors = process.communicate()
     processes[request.user.id].remove(process)
-    
     request.session.save()
+
     if cmd.startswith('cd ') and len(errors) == 0:
-        folder = cmd.split(' ')[1]
+        folder = cmd[2:]
         if folder == '..':
-            path = path[:-1]
+            slesh_position = path.rfind(os.sep)
+            path = path[:slesh_position]
         else:
-            path.append(folder)
+            path = os.path.join(path, folder)
 
     return JsonResponse({
         'output': output.decode(),
         'errors': errors.decode(),
-        'path': os.sep.join(path),
-        'folder_content': os.listdir(os.sep.join(path))
+        'path': path,
+        'folder_content': os.listdir(path)
     })
 
 

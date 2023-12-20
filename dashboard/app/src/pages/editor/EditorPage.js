@@ -12,8 +12,8 @@ import { getIconByFileType } from '../../organisms/files/ItemTile'
 import { Button } from '../../atoms/Button'
 import { SelectFile } from '../../atoms/modalforms/SelectFile'
 import { BsFolder2Open } from 'react-icons/bs'
-import { centerEllipsis } from '../../utils/utils'
-import { FiFolder } from 'react-icons/fi'
+import { centerEllipsis, toBoolStr } from '../../utils/utils'
+import { FiFolder, FiTrash } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -50,8 +50,15 @@ const StyledFile = styled.div`
     border-radius: 0 5px 5px 0;
     border-left: 3px solid ${({ theme }) => theme.primary};
     transition: transform 0.3s;
+    justify-content: space-between;
+
     &:hover, &:focus{
-        transform: scale(0.95);
+        transform: ${({deleteMode}) => deleteMode ? '' : 'scale(0.95)'};
+    }
+    >span{
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
     }
 `
 const StyledTitle = styled.h1`
@@ -70,50 +77,54 @@ const StyledColumn = styled.div`
 export const EditorPage = () => {
     const [last, setLast] = React.useState([])
     const [liked, setLiked] = React.useState([])
+    const [deleteMode, setDeleteMode] = React.useState(false)
     const modalForm = useModalForm()
-    const [settings] = useSettings()
+    const [settings, setSettings, saveSettings] = useSettings()
     const navigate = useNavigate()
 
     React.useEffect(() => {
         setLast(settings['editor.last'])
         setLiked(settings['editor.liked'])
-    }, [])
+    }, [settings])
 
     return (
         <MainTemplate
             app={APPS.editor}
             submenuChildren={
-                <Button
-                    second
-                    size={1.4}
-                    subContent='OPEN'
-                    tooltip={'OPEN FILE'}
-                    icon={<FiFolder /> }
-                    onKey={{
-                        key: 'o',
-                        prevent: true,
-                        ctrlKey: true,
-                    }}
-                    onClick={() => {
-                        modalForm({
-                            content: SelectFile,
-                            title: 'OPEN FILE',
-                            icon: <BsFolder2Open />,
-                            todo: (path) => {
-                                modalForm({
-                                    content: EditorChooser,
-                                    icon: <BiEditAlt />,
-                                    title: 'CHOOSE EDITOR TYPE',
-                                    todo: (editorType) => {
-                                        navigate(
-                                            LINKS.editor.edit(path, editorType)
-                                        )
-                                    },
-                                })
-                            },
-                        })
-                    }}
-                />
+                <>
+                    <Button
+                        second
+                        size={1.4}
+                        subContent='OPEN'
+                        tooltip={'OPEN FILE'}
+                        icon={<FiFolder /> }
+                        onKey={{
+                            key: 'o',
+                            prevent: true,
+                            ctrlKey: true,
+                        }}
+                        onClick={() => {
+                            modalForm({
+                                content: SelectFile,
+                                title: 'OPEN FILE',
+                                icon: <BsFolder2Open />,
+                                todo: (path) => {
+                                    modalForm({
+                                        content: EditorChooser,
+                                        icon: <BiEditAlt />,
+                                        title: 'CHOOSE EDITOR TYPE',
+                                        todo: (editorType) => {
+                                            navigate(
+                                                LINKS.editor.edit(path, editorType)
+                                            )
+                                        },
+                                    })
+                                },
+                            })
+                        }}
+                    />
+                    <Button onClick={()=>setDeleteMode(prev => !prev)} second={!deleteMode} size={1.4} tooltip={'REMOVE FILE LIST'} subContent='DELETE' icon={<FiTrash/>}/>
+                </>
             }
         >
             <StyledWrapper>
@@ -125,7 +136,10 @@ export const EditorPage = () => {
                     <StyledFiles>
                         {last.map((file) => (
                             <StyledFile
-                                onClick={() => {
+                                deleteMode={toBoolStr(deleteMode)}
+                                onClick={deleteMode ? () => {
+                                    saveSettings(prev => ({...prev, 'editor.last': prev['editor.last'].filter(f => f.path != file.path)}))
+                                } : () => {
                                     modalForm({
                                         content: EditorChooser,
                                         icon: <BiEditAlt />,
@@ -142,7 +156,8 @@ export const EditorPage = () => {
                                 }}
                                 key={file.path}
                             >
-                                {getIconByFileType(file.type)} {centerEllipsis(file.name, 30)}
+                                <span>{getIconByFileType(file.type)} {centerEllipsis(file.name, 30)}</span>
+                                {deleteMode && <FiTrash/>}
                             </StyledFile>
                         ))}
                     </StyledFiles>
@@ -155,7 +170,10 @@ export const EditorPage = () => {
                     <StyledFiles>
                         {liked.map((file) => (
                             <StyledFile
-                                onClick={() => {
+                                deleteMode={toBoolStr(deleteMode)}
+                                onClick={deleteMode ? () => {
+                                    saveSettings(prev => ({...prev, 'editor.liked': prev['editor.liked'].filter(f => f.path != file.path)}))
+                                } : () => {
                                     modalForm({
                                         content: EditorChooser,
                                         icon: <BiEditAlt />,
@@ -172,7 +190,8 @@ export const EditorPage = () => {
                                 }}
                                 key={file.path}
                             >
-                                {getIconByFileType(file.type)} {centerEllipsis(file.name, 30)}
+                                <span>{getIconByFileType(file.type)} {centerEllipsis(file.name, 30)}</span>
+                                {deleteMode && <FiTrash/>}
                             </StyledFile>
                         ))}
                     </StyledFiles>

@@ -374,7 +374,6 @@ const SettingsByPage = {
                     bash: 'BASH',
                     sh: 'SH',
                     cmd: 'CMD',
-                    powershell: 'POWERSHELL',
                 }} />
                 <Typography variant={'h3'}>INTERPRETER</Typography>
             </StyledRow>

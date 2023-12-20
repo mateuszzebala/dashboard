@@ -3,7 +3,6 @@ import { Button } from '../../../atoms/Button'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { Input } from '../../../atoms/Input'
-import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledForm = styled.div`

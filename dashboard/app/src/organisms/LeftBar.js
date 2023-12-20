@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { LINKS } from '../router/links'
 import { useModalForm, useSettings } from '../utils/hooks'
 import { GiPoland } from 'react-icons/gi'
+import { DashboardIcon } from './DashboardIcon'
 
 const StyledBar = styled.nav`
     background-color: ${({ theme }) => theme.primary};
@@ -34,45 +35,6 @@ const StyledBar = styled.nav`
     }
 `
 
-const StyleDashboard = styled.span`
-    font-size: 25px;
-    padding: 10px;
-    text-align: center;
-    color: ${({ theme }) => theme.secondary};
-    cursor: pointer;
-    outline: 0px dashed ${({ theme }) => theme.secondary}88;
-    border-radius: 3px;
-    transition: outline-width 0.1s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    &:focus{
-        outline-width: 3px;
-    }
-    span{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 5px;
-        border-radius: 5px;
-        font-size: 30px;
-    }
-
-    span:first-child{
-        background-color: ${({theme})=>theme.primary};;
-        color: ${({theme})=>theme.secondary};
-        font-weight: bold;
-    }
-    
-    span:last-child{
-        color: ${({theme})=>theme.primary};
-        background-color: ${({theme})=>theme.secondary};
-        font-weight: lighter;
-    }
-
-`
 
 const StyledMenuItems = styled.div`
     overflow-y: auto;
@@ -141,10 +103,7 @@ export const LeftBar = ({ close }) => {
                 <div></div>
                 <div></div>
             </PolishFlag>}
-            <StyleDashboard tabIndex={0} onClick={() => navigate(LINKS.home())}>
-                <span>DASH</span>
-                <span>BOARD</span>
-            </StyleDashboard>
+            <DashboardIcon tabIndex={0} onClick={() => navigate(LINKS.home())}/>
             <StyledMenuItems>
                 {Object.values(APPS).map((app) => {
                     if (!settings[`dashboard.app.${app.name.toLowerCase()}`]) return ''

@@ -41,7 +41,7 @@ export const ENDPOINTS = {
     files: {
         content: () => API(['files', 'content']),
         init: () => API(['files', 'init']),
-        file: (path) => API(['files', 'file'], { path }),
+        file: (path) => API(['files', 'file'], { path, datetime: new Date().toISOString(), }),
         mkdir: () => API(['files', 'mkdir']),
         remove: () => API(['files', 'remove']),
         touch: () => API(['files', 'touch']),
@@ -50,14 +50,17 @@ export const ENDPOINTS = {
         move: () => API(['files', 'move']),
     },
     email: {
-        send: () => API(['email', 'send']),
         all: () => API(['email', 'all']),
+        send: () => API(['email', 'send']),
+        star: () => API(['email', 'star']),
+        connect: () => API(['email', 'connect']),
         info: (email) => API(['email', 'info', email]),
         inbox: (email, args={}) => API(['email', 'inbox', email], args),
     },
     editor: {
         json: (path) => API(['editor', 'json'], { path }),
         liked_and_last: () => API(['editor', 'liked&last']),
+        replace: (path) => API(['editor', 'replace'], { path }),
         save: {
             run: (path) => API(['editor', 'save', 'run'], { path }),
             text: (path) => API(['editor', 'save', 'text'], { path }),

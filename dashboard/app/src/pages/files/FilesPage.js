@@ -13,12 +13,12 @@ import {
 import { FloatingActionButton } from '../../atoms/FloatingActionButton'
 import { HiDownload, HiOutlineLockClosed } from 'react-icons/hi'
 import styled from 'styled-components'
-import { FiArrowLeft, FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
+import { FiArrowUp, FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
 import { BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useLoading, useModalForm } from '../../utils/hooks'
+import { useLoading, useModalForm, useSettings } from '../../utils/hooks'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 import { Confirm } from '../../atoms/modalforms/Confirm'
 import { ChooseDevice } from '../../atoms/modalforms/ChooseDevice'
@@ -65,8 +65,6 @@ const FolderMenu = ({
     setReload,
     searchValue,
     setSearchValue,
-    list,
-    setList
 }) => {
     const modalForm = useModalForm()
     const { newMessage } = useMessage()
@@ -75,6 +73,8 @@ const FolderMenu = ({
     const isSelectedOneFile = () => selectedItems.length === 1 && selectedItems[0].is_file
     const [searchParams] = useSearchParams()
     const load = useLoading()
+    const [settings, setSettings, saveSettings] = useSettings()
+
 
     const handleNewFolder = () => {
         modalForm({
@@ -125,7 +125,7 @@ const FolderMenu = ({
                                 prevent: true,
                             }}
                             tooltip={'FOLDER UP'}
-                            icon={<FiArrowLeft />}
+                            icon={<FiArrowUp />}
                             onClick={() => {
                                 setPath(data.parent)
                             }}
@@ -161,11 +161,11 @@ const FolderMenu = ({
                     <Button
                         second
                         size={1.4}
-                        subContent={list ? 'LIST' : 'GRID'}
-                        tooltip={list ? 'LIST' : 'GRID'}
-                        icon={list ? <FiList /> : <FiGrid />}
+                        subContent={settings['files.list'] ? 'LIST' : 'GRID'}
+                        tooltip={settings['files.list'] ? 'LIST' : 'GRID'}
+                        icon={settings['files.list'] ? <FiList /> : <FiGrid />}
                         onClick={() => {
-                            setList(prev => !prev)
+                            saveSettings(prev => ({...prev, 'files.list': !prev['files.list']}))
                         }}
                     />
                     <Button
@@ -497,7 +497,7 @@ const FolderMenu = ({
                     tooltip={'UP'}
                     right={230}
                     size={1.4}
-                    icon={<FiArrowLeft />}
+                    icon={<FiArrowUp />}
                     onClick={() => {
                         setPath(data.parent)
                     }}
@@ -559,13 +559,9 @@ export const FilesPage = () => {
         permission_error: false,
     })
     const [searchValue, setSearchValue] = React.useState('')
-    const [cookies, setCookies] = useCookies()
-    const [list, setList] = React.useState(cookies.filesList === 'true')
     const [reload, setReload] = React.useState(0)
+    const [settings] = useSettings()
 
-    React.useEffect(() => {
-        setCookies('filesList', list)
-    }, [list])
 
     React.useEffect(() => {
         data.files && setFiles(data.files.filter((file) => file.name.toLowerCase().includes(searchValue.toLowerCase())))
@@ -613,8 +609,6 @@ export const FilesPage = () => {
                     files={files}
                     setReload={setReload}
                     setSelectedItems={setSelectedItems}
-                    list={list}
-                    setList={setList}
                 />
             }
         >
@@ -624,7 +618,7 @@ export const FilesPage = () => {
                         <StyledError>Permission Error</StyledError>
                     )}
                     <FolderContent
-                        list={list}
+                        list={settings['files.list']}
                         selectedItems={selectedItems}
                         setSelectedItems={setSelectedItems}
                         path={path}

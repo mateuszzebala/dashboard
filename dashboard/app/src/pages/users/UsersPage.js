@@ -2,15 +2,13 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import { UserTile } from '../../organisms/users/UserTile'
-import { Input } from '../../atoms/Input'
 import styled from 'styled-components'
 import { Paginator } from '../../atoms/Paginator'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { Button } from '../../atoms/Button'
-import { FloatingActionButton } from '../../atoms/FloatingActionButton'
-import { FaLock, FaLockOpen, FaPlus } from 'react-icons/fa'
-import { FiPlay, FiPlus, FiSearch } from 'react-icons/fi'
+import { FaLock, FaLockOpen } from 'react-icons/fa'
+import { FiPlus, FiSearch, FiUserPlus } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from '../../atoms/modalforms/Prompt'
 import { LINKS } from '../../router/links'
@@ -112,7 +110,7 @@ export const UsersPage = () => {
                         subContent={'SEARCH'}
                         size={1.3}
                     />
-                    <Button to={LINKS.users.new()} second size={1.3} icon={<FiPlus />} subContent='NEW' />
+                    <Button to={LINKS.users.new()} second size={1.3} icon={<FiUserPlus />} subContent='NEW' />
                 </>
             }
         >

@@ -5,10 +5,12 @@ import {
     BsFileEarmarkImage,
     BsFileExcel,
     BsFileMusic,
+    BsFileSpreadsheet,
     BsFileWord,
 } from 'react-icons/bs'
 import { FaRegFileVideo } from 'react-icons/fa'
 import { BiEditAlt } from 'react-icons/bi'
+import { FiCode, FiEdit, FiImage, FiMusic, FiType, FiVideo } from 'react-icons/fi'
 
 const StyledButtons = styled.div`
     display: grid;
@@ -35,7 +37,7 @@ export const EditorChooser = ({ setOpen, todo = () => {} }) => {
                         todo('text')
                     }}
                     size={2}
-                    icon={<BiEditAlt />}
+                    icon={<FiCode />}
                 />
                 <span>TEXT</span>
             </StyledColumn>
@@ -46,53 +48,57 @@ export const EditorChooser = ({ setOpen, todo = () => {} }) => {
                         todo('image')
                     }}
                     size={2}
-                    icon={<BsFileEarmarkImage />}
+                    icon={<FiImage />}
                 />
                 <span>IMAGE</span>
             </StyledColumn>
             <StyledColumn>
                 <Button
+                    second
                     onClick={() => {
                         setOpen(false)
                         todo('video')
                     }}
                     size={2}
-                    icon={<FaRegFileVideo />}
+                    icon={<FiVideo />}
                 />
-                <span>VIDEO</span>
+                <span>VIDEO v2</span>
             </StyledColumn>
             <StyledColumn>
                 <Button
+                    second
                     onClick={() => {
                         setOpen(false)
                         todo('audio')
                     }}
                     size={2}
-                    icon={<BsFileMusic />}
+                    icon={<FiMusic />}
                 />
-                <span>AUDIO</span>
+                <span>AUDIO v2</span>
             </StyledColumn>
             <StyledColumn>
                 <Button
+                    second
                     onClick={() => {
                         setOpen(false)
                         todo('docs')
                     }}
                     size={2}
-                    icon={<BsFileWord />}
+                    icon={<FiType />}
                 />
-                <span>DOCS</span>
+                <span>DOCS v2</span>
             </StyledColumn>
             <StyledColumn>
                 <Button
+                    second
                     onClick={() => {
                         setOpen(false)
                         todo('sheets')
                     }}
                     size={2}
-                    icon={<BsFileExcel />}
+                    icon={<BsFileSpreadsheet/>}
                 />
-                <span>SHEETS</span>
+                <span>SHEETS v2</span>
             </StyledColumn>
         </StyledButtons>
     )

@@ -11,6 +11,7 @@ import { useModalForm, useUser } from '../../utils/hooks'
 import { ResetPassword } from '../../atoms/modalforms/ResetPassword'
 import { BiReset } from 'react-icons/bi'
 import Logo from '../../assets/logos/logo-light-colors.svg'
+import { DashboardIcon } from '../../organisms/DashboardIcon'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -220,7 +221,7 @@ export const SignInPage = () => {
                 target="_blank"
                 href="https://mateuszzebala.github.io"
             >
-                <img src={Logo} width={100}/>
+                <DashboardIcon/>
             </StyledDeveloperName>
         </StyledWrapper>
     )

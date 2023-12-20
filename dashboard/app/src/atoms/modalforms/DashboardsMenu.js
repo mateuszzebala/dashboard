@@ -2,114 +2,86 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button } from '../Button'
 import { Theme } from '../Theme'
-import { SiDjango } from 'react-icons/si'
-import { BiSitemap, BiSolidDashboard } from 'react-icons/bi'
 import { LINKS } from '../../router/links'
 import { useTheme } from '../../utils/hooks'
-import { FiShoppingBag } from 'react-icons/fi'
-import { FaBlogger } from 'react-icons/fa'
 
 const StyledButtons = styled.div`
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 30px;
-`
-
-const StyledColumn = styled.div`
-    display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    gap: 10px;
-    text-align: center;
+    gap: 8px;
+    padding: 20px;
+    width: 100%;
+    a, span {
+        width: 100%;
+        display: flex;
+    }
 `
 
 export const DashboardsMenu = ({ setOpen }) => {
     const [theme] = useTheme()
     return (
         <StyledButtons>
-            <StyledColumn>
-                <Theme
-                    value={{
-                        primary: theme.accent,
-                    }}
-                >
-                    <Button
-                        onClick={() => {
-                            setOpen(false)
-                        }}
-                        target={'_blank'}
-                        to={LINKS.other.page()}
-                        size={2}
-                        icon={<BiSitemap />}
-                    />
-                </Theme>
-                <span>PAGE</span>
-            </StyledColumn>
-            <StyledColumn>
+            <Theme
+                value={{
+                    primary: theme.accent,
+                }}
+            >
                 <Button
                     onClick={() => {
                         setOpen(false)
                     }}
-                    to={LINKS.home()}
-                    size={2}
-                    icon={<BiSolidDashboard />}
-                />
-                <span>
-                    DASH
-                    <br />
-                    BOARD
-                </span>
-            </StyledColumn>
-            <StyledColumn>
-                <Theme
-                    value={{
-                        primary: theme.success,
-                    }}
-                >
-                    <Button
-                        target={'_blank'}
-                        to={LINKS.other.admin()}
-                        size={2}
-                        icon={<SiDjango />}
-                    />
-                </Theme>
-                <span>ADMIN</span>
-            </StyledColumn>
-            <StyledColumn>
-                <Theme
-                    value={{
-                        primary: theme.warning,
-                    }}
-                >
-                    <Button
-                        target={'_blank'}
-                        to={LINKS.other.shoper()}
-                        size={2}
-                        icon={<FiShoppingBag />}
-                    />
-                </Theme>
-                <span>SHOPER</span>
-            </StyledColumn>
-            <StyledColumn>
-                <Theme
-                    value={{
-                        primary: theme.error,
-                    }}
-                >
-                    <Button
-                        target={'_blank'}
-                        to={LINKS.other.bloger()}
-                        size={2}
-                        icon={<FaBlogger />}
-                    />
-                </Theme>
-                <span>BLOGER</span>
-            </StyledColumn>
+                    target={'_blank'}
+                    to={LINKS.other.page()}
+                    size={1.4}
+                    width={'100%'}
+                >PAGE</Button>
+            </Theme>
+            <Button
+                onClick={() => {
+                    setOpen(false)
+                }}
+                to={LINKS.home()}
+                size={1.4}
+                width={'100%'}
+            >DASHBOARD</Button>
+            <Theme
+                value={{
+                    primary: theme.success,
+                }}
+            >
+                <Button
+                    target={'_blank'}
+                    to={LINKS.other.admin()}
+                    size={1.4}
+                    width={'100%'}
+                >ADMIN</Button>
+            </Theme>
+            <Theme
+                value={{
+                    primary: theme.warning,
+                }}
+            >
+                <Button
+                    target={'_blank'}
+                    to={LINKS.other.shoper()}
+                    size={1.4}
+                    width={'100%'}
+                >SHOPER</Button>
+            </Theme>
+            <Theme
+                value={{
+                    primary: theme.error,
+                }}
+            >
+                <Button
+                    target={'_blank'}
+                    to={LINKS.other.bloger()}
+                    size={1.4}
+                    width={'100%'}
+                >BLOGER</Button>
+            </Theme>
         </StyledButtons>
     )
 }

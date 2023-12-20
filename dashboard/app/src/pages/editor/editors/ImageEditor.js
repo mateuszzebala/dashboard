@@ -7,7 +7,7 @@ import { APPS } from '../../../apps/apps'
 import { LINKS } from '../../../router/links'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { BiCrop, BiSolidDropletHalf } from 'react-icons/bi'
-import { useModalForm, useSettings, useTheme } from '../../../utils/hooks'
+import { useLoading, useModalForm, useSettings, useTheme } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { BsFillBrightnessHighFill } from 'react-icons/bs'
 import { IoMdContrast } from 'react-icons/io'
@@ -120,7 +120,8 @@ export const ImageEditor = () => {
     const [saveLoading, setSaveLoading] = React.useState(false)
     const { newMessage } = useMessage()
     const [settings, setSettings, saveSettings] = useSettings()
-    
+    const load = useLoading()
+
     const [crop, setCrop] = React.useState({
         show: false,
         x: 10,
@@ -139,7 +140,7 @@ export const ImageEditor = () => {
     }
 
     React.useEffect(() => {
-        image && saveSettings(prev => ({ ...prev, 'editor.last': [{ name: image.filename, path: image.path, type: image.type }, ...prev['editor.last'].filter(file => file.path !== image.path)] }))
+        image.path && saveSettings(prev => ({ ...prev, 'editor.last': [{ name: image.filename, path: image.path, type: image.type }, ...prev['editor.last'].filter(file => file.path !== image.path)] }))
     }, [image])
 
     const [style, setStyle] = React.useState(defaultConfig)
@@ -258,7 +259,17 @@ export const ImageEditor = () => {
                                 content: FilePrompt,
                                 title: 'REPLACE IMAGE',
                                 icon: <TbReplaceFilled />,
-                                todo: () => { },
+                                todo: (val) => {
+                                    load({
+                                        text: 'REPLACEING',
+                                        show: true
+                                    })
+                                    FETCH(ENDPOINTS.editor.replace(searchParams.get('path')), {
+                                        file: val,
+                                    }).then(()=>{
+                                        load({show: false})
+                                    })
+                                },
                             })
                         }}
                         subContent={'REPLACE'}

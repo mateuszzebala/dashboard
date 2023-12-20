@@ -38,25 +38,23 @@ const StyledModels = styled.div`
 `
 const StyledModel = styled.button`
     padding: 25px 40px;
-    background-color: ${({ theme }) => theme.secondary};
+    background-color: ${({ theme }) => theme.quaternary};
     color: ${({ theme }) => theme.primary};
-    box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
-    border-radius: 0 5px 5px 0;
+    border-radius: 5px;
     border: 0;
     flex-direction: column;
     cursor: pointer;
-    border-left: 2.5px solid ${({ theme }) => theme.primary};
     width: 100%;
     font-size: 15px;
     display: flex;
     gap: 12px;
     text-transform: uppercase;
     align-items: center;
-    transition: transform 0.2s, background-color 0.2s, color 0.2s;
-    &:hover,
-    &:focus {
+    transition: transform 0.2s, outline-width 0.2s;
+    outline: 0 solid ${({theme})=>theme.quaternary}88;
+    &:hover, &:focus {
+        outline-width: 5px;
         transform: scale(0.95);
-        outline: none;
     }
     svg{
         font-size: 24px;

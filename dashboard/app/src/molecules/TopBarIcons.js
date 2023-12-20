@@ -1,13 +1,7 @@
 import React from 'react'
-import { BiSolidGrid } from 'react-icons/bi'
-import {
-    AiOutlineClockCircle,
-    AiOutlineInfoCircle,
-    AiOutlineUser,
-} from 'react-icons/ai'
 import { FiClock, FiGrid, FiInfo, FiLogOut, FiSettings, FiUser } from 'react-icons/fi'
 import styled from 'styled-components'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LINKS } from '../router/links'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
@@ -16,10 +10,11 @@ import { useGlobalKey, useModalForm, useSettings, useTheme, useUser } from '../u
 import { DashboardsMenu } from '../atoms/modalforms/DashboardsMenu'
 import { FaQrcode } from 'react-icons/fa'
 import { LoadingImage } from '../atoms/LoadingImage'
-import { BsArrowBarUp, BsQrCode } from 'react-icons/bs'
+import { BsArrowBarUp, BsQrCode, BsQrCodeScan } from 'react-icons/bs'
 import { ServerClock } from '../atoms/ServerClock'
 import { Tooltip } from '../atoms/Tooltip'
 import { APPS } from '../apps/apps'
+import { HiQrcode } from 'react-icons/hi'
 
 const StyledIcon = styled.button`
     display: flex;
@@ -105,11 +100,11 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                                 />
                             ),
                             title: 'QRCODE',
-                            icon: <FaQrcode />,
+                            icon: <BsQrCodeScan />,
                         })
                     }}
                 >
-                    <BsQrCode />
+                    <BsQrCodeScan />
                 </StyledIcon>
             </Tooltip>
             {settings['dashboard.topbar_submenu_toggler'] &&

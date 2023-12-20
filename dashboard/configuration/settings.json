@@ -10,7 +10,7 @@
         "default_number_of_rows": 30
     },
     "terminal": {
-        "sh_type": "zsh",
+        "sh_type": "cmd",
         "bookmarks": true,
         "auto_clear": true
     },
@@ -46,61 +46,14 @@
             "statistics": true
         },
         "style": {
-            "fontFamily": "Rubik",
-            "fontFamilyMono": "Fira Mono"
+            "fontFamily": "Montserrat",
+            "fontFamilyMono": "Jetbrains Mono"
         },
         "topbar_submenu_toggler": true
     },
     "editor": {
-        "liked": [
-            {
-                "name": "testfile.txt",
-                "path": "/home/mateusz/Desktop/testfile.txt",
-                "type": "file"
-            },
-            {
-                "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
-                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
-                "type": "image"
-            },
-            {
-                "name": ".bash_profile",
-                "path": "/home/mateusz/.bash_profile",
-                "type": "file"
-            },
-            {
-                "name": ".bashrc",
-                "path": "/home/mateusz/.bashrc",
-                "type": "file"
-            }
-        ],
-        "last": [
-            {
-                "name": "8b36dba890b8f90cb279138730a45bea_original.avif",
-                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/8b36dba890b8f90cb279138730a45bea_original.avif",
-                "type": "image"
-            },
-            {
-                "name": ".bash_profile",
-                "path": "/home/mateusz/.bash_profile",
-                "type": "file"
-            },
-            {
-                "name": "testfile.txt",
-                "path": "/home/mateusz/Desktop/testfile.txt",
-                "type": "file"
-            },
-            {
-                "name": "Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
-                "path": "/home/mateusz/Code/dashboard/Media/Media/dashboard/auth/account/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall_RKfB0FV.png",
-                "type": "image"
-            },
-            {
-                "name": "7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
-                "path": "/home/mateusz/.npm/_cacache/content-v2/sha512/de/13/7b35ab2462f3032d0639e609d6dcd43e99eb0401ea53aa583e5446e3ef3cea10c055361cdc19861ea85a3f4e5633e9e42215ca751dcb0264efa71a04bcce",
-                "type": "file"
-            }
-        ]
+        "liked": [],
+        "last": []
     },
     "server": {
         "config": {
@@ -113,25 +66,23 @@
         },
         "allowed_hosts": [
             "localhost",
-            "10.0.0.2",
-            "192.168.100.35",
+            "192.168.100.37",
             "manjaro"
         ],
         "cors_allowed_origins": [
             "http://localhost:3000",
             "http://localhost:8000",
-            "http://192.168.100.35:8000",
-            "http://192.168.100.35:3000",
-            "http://10.0.0.2:8000",
-            "http://10.0.0.2:3000"
+            "http://192.168.100.37:8000",
+            "http://192.168.100.37:3000"
         ],
         "csrf_trusted_origins": [
             "http://localhost:3000",
             "http://localhost:8000",
-            "http://192.168.100.35:8000",
-            "http://192.168.100.35:3000",
-            "http://10.0.0.2:8000",
-            "http://10.0.0.2:3000"
+            "http://192.168.100.37:8000",
+            "http://192.168.100.37:3000"
         ]
+    },
+    "files": {
+        "list": false
     }
 }

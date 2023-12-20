@@ -14,6 +14,7 @@ const StyledWrapper = styled.div`
     background-color: ${({ theme }) => theme.secondary};
 `
 
+
 const LoadingBar = styled.div`
     height: 10px;
     position: fixed;
@@ -35,8 +36,8 @@ export const Curtain = ({ loading = false, time = 3 }) => {
     if (!loading) return ''
     return (
         <StyledWrapper>
-            <Loading size={3} />
             <LoadingBar time={time} />
+            <Loading size={2} />
         </StyledWrapper>
     )
 }

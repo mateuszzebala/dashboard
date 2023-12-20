@@ -9,7 +9,7 @@ import { LINKS } from '../../router/links'
 import { TbReload } from 'react-icons/tb'
 import { Input } from '../Input'
 import { centerEllipsis } from '../../utils/utils'
-import { FiArrowLeft, FiRefreshCcw, FiRefreshCw, FiSearch } from 'react-icons/fi'
+import { FiArrowLeft, FiFile, FiFolder, FiRefreshCcw, FiRefreshCw, FiSearch } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from './Prompt'
 
@@ -173,7 +173,7 @@ export const SelectFile = ({ todo, startPath, setOpen }) => {
                                 }}
                                 key={folder.name}
                             >
-                                <BsFolder />
+                                <FiFolder />
                                 <StyledName>{folder.name}</StyledName>
                             </StyledItem>
                         ))}
@@ -191,7 +191,7 @@ export const SelectFile = ({ todo, startPath, setOpen }) => {
                                 }}
                                 key={file.name}
                             >
-                                <BsFile />
+                                <FiFile />
                                 <StyledName>{file.name}</StyledName>
                             </StyledItem>
                         ))}

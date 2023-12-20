@@ -180,7 +180,7 @@ def upload_file(request):
 def zip_files(request):
     filename = 'temp.zip'
     destination_path = os.path.join(settings.TEMP_ROOT, 'dashboard')
-    os.mkdir(destination_path, exist_ok=True)
+    os.makedirs(destination_path)
 
     if request.POST.get('toSave') != 'null':
         destination_path = request.POST.get('toSave')

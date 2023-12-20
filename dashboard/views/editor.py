@@ -48,8 +48,19 @@ def save_image(request):
     props = json.loads(request.POST.get('props'))
     return JsonResponse({})
 
+
+@dashboard_access
+def file_replace(request):
+    path = request.GET.get('path')
+    file_to_upload = request.FILES.get('file')
+    with open(path, "wb") as f:
+        f.write(file_to_upload.read())
+    return JsonResponse({})
+
+
 urlpatterns = [
     path('json/', file_json), # GET INTO ABOUT FILE IN JSON
+    path('replace/', file_replace), # GET INTO ABOUT FILE IN JSON
     path('save/run/', run_command), # RUN COMMAND IN FILE LOCATION
     path('save/text/', save_file), # SAVE FILE
     path('save/image/', save_image), # SAVE IMAGE

@@ -29,9 +29,8 @@ const StyledEmail = styled.div`
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-    border-radius: 0 3px 3px 0;
+    border-radius: 3px;
     font-size: 20px;
-    border-left: 3px solid ${({theme})=>theme.primary};
     font-weight: 300;
     transition: transform 0.3s;
     width: 100%;
@@ -39,9 +38,6 @@ const StyledEmail = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    &:hover{
-        transform: scale(0.98);
     }
 `
 
@@ -95,12 +91,16 @@ export const EmailPage = () => {
         >
             <StyledWrapper>
                 {emails.filter(email => email.email.includes(searchValue)).sort((x, y) => (x.star === y.star)? 0 : x.star? -1 : 1).map(email => (
-                    <StyledEmail onClick={()=>{
-                        navigate(LINKS.email.inbox(email.email))
-                    }} key={email.email}>
+                    <StyledEmail key={email.email}>
                         <span onClick={()=>{
-                            alert(email.email)
-                        }}>{email.star ? <BsStarFill/> : <BsStar/> }</span> {email.email} - {email.name}
+                            FETCH(ENDPOINTS.email.star(), {email: email.email, star: !email.star}).then(() => {
+                                FETCH(ENDPOINTS.email.all()).then(data => {
+                                    setEmails(data.data.emails)
+                                })
+                            })
+                        }}>{email.star ? <BsStarFill/> : <BsStar/> }</span> <span onClick={()=>{
+                            navigate(LINKS.email.inbox(email.email))
+                        }}>{email.email} - {email.name}</span>
                     </StyledEmail>
                 ))}
             </StyledWrapper>

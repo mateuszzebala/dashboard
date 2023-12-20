@@ -11,7 +11,7 @@ import { APPS } from '../../../apps/apps'
 import { LINKS } from '../../../router/links'
 import { MainTemplate } from '../../../templates/MainTemplate'
 import { convertTerminalTextToHTML } from '../../../utils/utils'
-import { useModalForm, useSettings, useTheme } from '../../../utils/hooks'
+import { useLoading, useModalForm, useSettings, useTheme } from '../../../utils/hooks'
 import { EditorChooser } from '../../../atoms/modalforms/EditorChooser'
 import { ChooseRunner } from '../../../atoms/modalforms/ChooseRunner'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
@@ -129,6 +129,7 @@ export const TextEditor = () => {
     const [saveLoading, setSaveLoading] = React.useState(false)
     const [settings, setSettings, saveSettings] = useSettings()
     const [saved, setSaved] = React.useState(true)
+    const load = useLoading()
 
     React.useEffect(()=>{
         if(savedValue === value) setSaved(true)
@@ -136,7 +137,7 @@ export const TextEditor = () => {
     }, [value])
 
     React.useEffect(()=>{
-        data && saveSettings(prev => ({...prev, 'editor.last': [{name: data.filename, path: data.path, type: data.type}, ...prev['editor.last'].filter(file => file.path !== data.path)]}))
+        data.path && saveSettings(prev => ({...prev, 'editor.last': [{name: data.filename, path: data.path, type: data.type}, ...prev['editor.last'].filter(file => file.path !== data.path)]}))
     }, [data])
 
     React.useEffect(()=>{
@@ -157,7 +158,8 @@ export const TextEditor = () => {
             })
     }
 
-    React.useEffect(() => {
+    const handleReload = () => {
+        setLoading(true)
         FETCH(ENDPOINTS.files.file(searchParams.get('path')))
             .then((data) => {
                 setValue(data.data)
@@ -167,7 +169,9 @@ export const TextEditor = () => {
             .catch(() => {
                 setLoading(false)
             })
-    }, [searchParams])
+    }
+
+    React.useEffect(handleReload, [searchParams])
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.editor.json(searchParams.get('path'))).then((data) => {
@@ -259,7 +263,18 @@ export const TextEditor = () => {
                                 content: FilePrompt,
                                 title: 'REPLACE FILE',
                                 icon: <TbReplaceFilled/>,
-                                todo: ()=>{},
+                                todo: (val)=>{
+                                    load({
+                                        text: 'REPLACEING',
+                                        show: true
+                                    })
+                                    FETCH(ENDPOINTS.editor.replace(searchParams.get('path')), {
+                                        file: val,
+                                    }).then(()=>{
+                                        load({show: false})
+                                        handleReload()
+                                    })
+                                },
                             })
                         }}
                     />

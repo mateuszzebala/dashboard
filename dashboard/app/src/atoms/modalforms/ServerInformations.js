@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { ENDPOINTS } from '../../api/endpoints'
 import { capitalize } from '../../utils/utils'
 import { FETCH } from '../../api/api'
+import { Field, Row, Table } from '../Table'
 
 const StyledInformation = styled.div`
     display: flex;
@@ -25,9 +26,15 @@ export const ServerInformations = () => {
 
     return (
         <StyledInformation>
-            {Object.keys(informations).map(infoKey => (
-                <span key={infoKey}><b>{capitalize(infoKey)}:</b>&nbsp;{informations[infoKey]}</span>
-            ))}
+            <Table>
+                {Object.keys(informations).map(infoKey => (
+                    <Row key={infoKey}>
+                        <Field>{capitalize(infoKey)}</Field>
+                        <Field>{informations[infoKey]}</Field>
+                    </Row>
+                ))}
+            </Table>
+            
         </StyledInformation>
     )
 }

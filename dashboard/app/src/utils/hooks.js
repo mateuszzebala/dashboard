@@ -144,9 +144,7 @@ export const useSettings = () => {
 
     const saveSettings = (newSettings=()=>settings) => {
         FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify((newSettings(settings)))}).then(data => {
-            FETCH(ENDPOINTS.settings.get()).then(data => {
-                setSettings(data.data)
-            })
+            setSettings(data.data)
         })
     }
 

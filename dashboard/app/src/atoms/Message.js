@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
 import { HiXMark } from 'react-icons/hi2'
+import { FiX } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: inline-flex;
@@ -61,7 +62,7 @@ export const Message = ({
                     onClose(id)
                 }}
             >
-                <HiXMark />
+                <FiX />
             </StyledExitButton>
         </StyledWrapper>
     )
