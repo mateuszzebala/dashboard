@@ -46,7 +46,7 @@ class DashboardMiddleware:
             resolver_match = resolve(request.path_info)
             view_func = resolver_match.func
             app_name = view_func.__module__.split('.')[0]
-            if app_name != 'dashboard':
+            if app_name != 'dashboard' or SETTINGS.get('dashboard.save_dashboard_requests'):
                 method = (request.POST.get('method') or request.method).upper()
                 url = request.get_full_path()
                 args = {}

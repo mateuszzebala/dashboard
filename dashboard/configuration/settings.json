@@ -31,6 +31,7 @@
         "topbar_username": true,
         "topbar_app_icon": true,
         "leftbar_app_icons": true,
+        "save_dashboard_requests": false,
         "leftbar_arrow_icons": true,
         "polish_flag": false,
         "app": {
@@ -46,14 +47,25 @@
             "statistics": true
         },
         "style": {
-            "fontFamily": "Montserrat",
+            "fontFamily": "Rubik",
             "fontFamilyMono": "Jetbrains Mono"
         },
         "topbar_submenu_toggler": true
     },
     "editor": {
         "liked": [],
-        "last": []
+        "last": [
+            {
+                "name": "Skan_20231218.png",
+                "path": "C:\\Users\\Mateusz\\code\\dashboard\\Media\\Media\\dashboard\\auth\\account\\Skan_20231218.png",
+                "type": "image"
+            },
+            {
+                "name": "5",
+                "path": "C:\\Users\\Mateusz\\Desktop\\test\\5",
+                "type": "file"
+            }
+        ]
     },
     "server": {
         "config": {
@@ -61,7 +73,7 @@
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": true,
+            "save_requests": false,
             "credientals": true
         },
         "allowed_hosts": [

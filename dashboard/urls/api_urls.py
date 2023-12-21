@@ -12,7 +12,8 @@ views = [
     'other',
     'statistics',
     'users',
-    'email'
+    'email',
+    'requests'
 ]
 
 

@@ -57,7 +57,7 @@ const StyledModel = styled.button`
         transform: scale(0.95);
     }
     svg{
-        font-size: 24px;
+        font-size: 28px;
     }
 `
 

@@ -86,7 +86,7 @@ export const UsersPage = () => {
                         }}
                         icon={admins ? <FaLock /> : <FaLockOpen />}
                         subContent={admins ? 'ADMINS' : 'NORMAL'}
-                        size={1.3}
+                        size={1.4}
                     />
                     <Button
                         second
@@ -108,9 +108,9 @@ export const UsersPage = () => {
                         }}
                         icon={<FiSearch/>}
                         subContent={'SEARCH'}
-                        size={1.3}
+                        size={1.4}
                     />
-                    <Button to={LINKS.users.new()} second size={1.3} icon={<FiUserPlus />} subContent='NEW' />
+                    <Button to={LINKS.users.new()} second size={1.4} icon={<FiUserPlus />} subContent='NEW' />
                 </>
             }
         >

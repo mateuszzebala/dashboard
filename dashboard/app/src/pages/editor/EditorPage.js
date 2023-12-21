@@ -2,7 +2,7 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
-import { AiOutlineClockCircle, AiOutlineHeart } from 'react-icons/ai'
+import { AiOutlineHeart } from 'react-icons/ai'
 import { useModalForm, useSettings } from '../../utils/hooks'
 import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
 import { BiEditAlt } from 'react-icons/bi'
@@ -13,7 +13,7 @@ import { Button } from '../../atoms/Button'
 import { SelectFile } from '../../atoms/modalforms/SelectFile'
 import { BsFolder2Open } from 'react-icons/bs'
 import { centerEllipsis, toBoolStr } from '../../utils/utils'
-import { FiFolder, FiTrash } from 'react-icons/fi'
+import { FiClock, FiFolder, FiTrash } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -130,7 +130,7 @@ export const EditorPage = () => {
             <StyledWrapper>
                 <StyledColumn>
                     <StyledTitle>
-                        <AiOutlineClockCircle />
+                        <FiClock />
                         LAST
                     </StyledTitle>
                     <StyledFiles>
@@ -160,6 +160,7 @@ export const EditorPage = () => {
                                 {deleteMode && <FiTrash/>}
                             </StyledFile>
                         ))}
+                        {last.length == 0 && <span>LIST IS EMPTY</span>}
                     </StyledFiles>
                 </StyledColumn>
                 <StyledColumn>
@@ -194,6 +195,7 @@ export const EditorPage = () => {
                                 {deleteMode && <FiTrash/>}
                             </StyledFile>
                         ))}
+                        {last.length == 0 && <span>LIST IS EMPTY</span>}
                     </StyledFiles>
                 </StyledColumn>
             </StyledWrapper>

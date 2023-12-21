@@ -5,7 +5,7 @@ import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 
 const StyledWrapper = styled.div`
-    box-shadow: 0 0 8px -5px ${({ theme }) => theme.primary};
+    box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     padding: 10px;
     height: 100%;
     width: 100%;

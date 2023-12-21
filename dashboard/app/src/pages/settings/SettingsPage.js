@@ -1,6 +1,6 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { FiSettings, FiX } from 'react-icons/fi'
+import { FiSettings } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
 import { ColorInput } from '../../atoms/ColorInput'
 import { useSettings, useTheme } from '../../utils/hooks'
@@ -207,6 +207,12 @@ const SettingsByPage = {
                 setValue={setValue}
                 prop={'dashboard.leftbar_arrow_icons'}
                 text={'Show Leftbar arrow icons'}
+            />
+            <SwitchSetting
+                value={value}
+                setValue={setValue}
+                prop={'dashboard.save_dashboard_requests'}
+                text={'Save Dashboard Requests'}
             />
             <span>APPS</span>
             <SwitchSetting

@@ -74,7 +74,6 @@ const PolishFlag = styled.div`
 const StyledFlag = styled.img`
     width: 100%;
     border-radius: 17px;
-    border: solid 5px ${({ theme }) => theme.primary};
 `
 
 export const LeftBar = ({ close }) => {

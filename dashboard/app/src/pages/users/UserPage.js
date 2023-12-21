@@ -84,20 +84,6 @@ const StyledTitle = styled.span`
     font-size: 20px;
 `
 
-const StyledHeader = styled.h1`
-    font-size: 30px;
-    margin: 0;
-    background-color: ${({ theme }) => theme.primary}11;
-    display: inline-flex;
-    width: 100%;
-    padding: 30px;
-    align-items: center;
-    justify-content: center;
-    font-weight: 300;
-    text-align: center;
-    border-radius: 7px;
-`
-
 export const UserPage = () => {
     const { id } = useParams()
     const [theme] = useTheme()
@@ -152,7 +138,7 @@ export const UserPage = () => {
 
     return (
         <MainTemplate app={APPS.users} title={accountInfo.username} submenuChildren={<>
-            <Button icon={<FiLogOut />} subContent={'LOGOUT'} second size={1.3} onClick={() => {
+            <Button icon={<FiLogOut />} subContent={'LOGOUT'} second size={1.4} onClick={() => {
                 FETCH(ENDPOINTS.users.logout(), { id }).then(() => {
                     newMessage({
                         text: 'LOGOUT SUCCESSFUL',
@@ -160,7 +146,7 @@ export const UserPage = () => {
                     })
                 })
             }} />
-            <Button icon={<MdBlock />} subContent={'ACTIVE'} second size={1.3} onClick={() => {
+            <Button icon={<MdBlock />} subContent={'ACTIVE'} second size={1.4} onClick={() => {
                 modalForm({
                     content: Confirm,
                     title: 'ACTIVE',
@@ -175,8 +161,8 @@ export const UserPage = () => {
                     }
                 })
             }} />
-            <Button second icon={<MdPassword />} size={1.3} subContent='PASSWORD' />
-            <Button second to={LINKS.database.item('Account', id)} icon={<FiDatabase />} size={1.3} subContent='SHOW IN' />
+            <Button second icon={<MdPassword />} size={1.4} subContent='PASSWORD' />
+            <Button second to={LINKS.database.item('Account', id)} icon={<FiDatabase />} size={1.4} subContent='SHOW IN' />
         </>}>
             {accountInfo.username && (
                 <StyledWrapper>
