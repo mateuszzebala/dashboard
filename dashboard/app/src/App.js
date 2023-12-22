@@ -15,9 +15,8 @@ import {
     UserContext,
 } from './utils/hooks'
 import { theme } from './theme/theme'
-import { ModalForm } from './atoms/ModalForm'
+import { LoadingWindow, ModalForm } from './atoms'
 import { useCookies } from 'react-cookie'
-import { LoadingWindow } from './atoms/LoadingWindow'
 import { FETCH } from './api/api'
 import { ENDPOINTS } from './api/endpoints'
 

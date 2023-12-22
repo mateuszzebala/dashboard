@@ -1,4 +1,4 @@
-import { Input } from './Input'
+import { Input } from './inputs/Input'
 import React from 'react'
 
 export const FormField = ({ name, type }) => {

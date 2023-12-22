@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from '../../../atoms/Button'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 import styled from 'styled-components'
 
 const StyledForm = styled.div`

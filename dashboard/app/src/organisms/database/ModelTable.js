@@ -1,6 +1,6 @@
-import { Table, HeaderRow, Row, Field } from '../../atoms/Table'
+import { Table, HeaderRow, Row, Field } from '../../atoms'
 import React from 'react'
-import { Loading } from '../../atoms/Loading'
+import { Loading } from '../../atoms'
 import { Tooltip } from '../../atoms/Tooltip'
 import { fieldToString, toBoolStr } from '../../utils/utils'
 import styled from 'styled-components'

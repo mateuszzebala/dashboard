@@ -1,11 +1,11 @@
 import React from 'react'
-import { Modal } from './Modal'
-import { ModalFormContext } from '../utils/hooks'
+import { Modal } from '../Modal'
+import { ModalFormContext } from '../../utils/hooks'
 import styled from 'styled-components'
 import { FaDatabase, FaEdit, FaTerminal } from 'react-icons/fa'
 import { IoBagOutline, IoBrowsersOutline } from 'react-icons/io5'
 import { BsTerminal } from 'react-icons/bs'
-import { objectEquals, range } from '../utils/utils'
+import { objectEquals, range } from '../../utils/utils'
 
 const StyledTaskBar = styled.div`
     position: fixed;

@@ -5,7 +5,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai'
 import { useParams } from 'react-router'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
-import { Link } from '../../atoms/Link'
+import { Link } from '../../atoms'
 
 const StyledWrapper = styled.div`
     display: flex;

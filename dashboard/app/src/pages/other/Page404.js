@@ -1,12 +1,9 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { Typography } from '../../atoms/Typography'
+import { Link, Typography } from '../../atoms'
 import styled from 'styled-components'
-import { Link } from '../../atoms/Link'
 import { LINKS } from '../../router/links'
 import { TbError404 } from 'react-icons/tb'
-import { LoadingImage } from '../../atoms/LoadingImage'
-import DashboardLogo from '../../assets/logos/logo-dark-colors.svg'
 
 const StyledWrapper = styled.div`
     height: 100%;

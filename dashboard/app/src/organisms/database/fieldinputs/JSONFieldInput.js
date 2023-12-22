@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;
@@ -31,7 +31,7 @@ export const JSONFieldInput = ({ field, onChange, value: val }) => {
                 {field.name.toUpperCase()}<br/>
                 <StyledType>{field.type}</StyledType>
             </Typography>
-            <Input textarea type="text" value={value} setValue={setValue} />
+            <Input size={1.1} textarea type="text" value={value} setValue={setValue} />
         </StyledField>
     )
 }

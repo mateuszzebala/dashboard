@@ -12,7 +12,7 @@ import {
     BsFolder,
 } from 'react-icons/bs'
 import styled from 'styled-components'
-import { Tooltip } from '../../atoms/Tooltip'
+import { Tooltip } from '../../atoms'
 import { toBoolStr } from '../../utils/utils'
 import { FaLock } from 'react-icons/fa'
 
@@ -20,7 +20,7 @@ import { useModalForm } from '../../utils/hooks'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
 import { BiEditAlt } from 'react-icons/bi'
-import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
+import { EditorChooser } from '../../atoms'
 
 const StyledWrapper = styled.div`
     aspect-ratio: 1/1;

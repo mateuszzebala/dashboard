@@ -1,16 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Input } from '../../atoms/Input'
-import { Button } from '../../atoms/Button'
-import { Typography } from '../../atoms/Typography'
+import { Button, Input, ResetPassword, Typography } from '../../atoms'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FaLock, FaQrcode } from 'react-icons/fa'
 import { toBoolStr } from '../../utils/utils'
 import { useModalForm, useUser } from '../../utils/hooks'
-import { ResetPassword } from '../../atoms/modalforms/ResetPassword'
 import { BiReset } from 'react-icons/bi'
-import Logo from '../../assets/logos/logo-light-colors.svg'
 import { DashboardIcon } from '../../organisms/DashboardIcon'
 
 const StyledWrapper = styled.div`

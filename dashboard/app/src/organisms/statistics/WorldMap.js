@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import useResizeObserver from 'use-resize-observer'
 import { useModalForm, useTheme } from '../../utils/hooks'
 import { CountryInfo } from './CountryInfo'
+import { FaGlobe, FaGlobeAfrica } from 'react-icons/fa'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -22,6 +23,8 @@ const StyledPath = styled.path`
     fill: ${({ theme, color }) => (color ? color : theme.secondary)};
     cursor: pointer;
     stroke-linejoin: round;
+    transition: fill 0.1s;
+
 `
 
 const PathCountry = ({ color, ...props }) => {
@@ -43,7 +46,7 @@ const PathCountry = ({ color, ...props }) => {
                     modalForm({
                         content: CountryInfo,
                         title: props.title,
-                        icon: <></>,
+                        icon: <FaGlobeAfrica/>,
                         country: props.countryCode,
                     })
             }}

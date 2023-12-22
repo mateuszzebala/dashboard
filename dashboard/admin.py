@@ -6,4 +6,4 @@ class AccountAdmin(admin.ModelAdmin):
     list_display = ['id', 'state', 'country', 'website']
 
 # admin.site.register(Email)
-# admin.site.register(RequestLog)
+admin.site.register(RequestLog)

@@ -12,6 +12,7 @@ export const LINKS = {
     },
     users: {
         index: () => '/dashboard/users/',
+        indexAdmins: (admin) => `/dashboard/users/?admins=${admin ? 'true' : 'false'}`,
         user: (id) => `/dashboard/users/${id}/`,
         new: () => '/dashboard/users/new/',
     },
@@ -44,12 +45,15 @@ export const LINKS = {
     },
     requests: {
         index: () => '/dashboard/requests/',
+        request: (id) => `/dashboard/requests/${id}/`,
     },
 
     statistics: {
         index: () => '/dashboard/statistics/',
         map: () => '/dashboard/statistics/map/',
         browsers: () => '/dashboard/statistics/browsers/',
+        systems: () => '/dashboard/statistics/systems/',
+        efficiency: () => '/dashboard/statistics/efficiency/',
     },
     settings: {
         index: () => '/dashboard/settings/',

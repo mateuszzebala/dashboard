@@ -9,10 +9,15 @@ from django.db.models import Count
 @dashboard_access
 def get_countries_statistics(request):
     logs = RequestLog.objects.filter(country__isnull=False).values('country').annotate(total=Count('country'))
-    countries = dict((log['country'], log['total']) for log in logs)
-    max_value = max(*countries.values())
+    countries = dict((log.get('country'), log.get('total')) for log in logs)
+    totals = list(countries.values())
+    if len(totals) >= 2:
+        max_value = max(*totals)
+    else:
+        max_value = totals[0]
     for country, value in countries.items():
         countries[country] = 100/max_value*value
+    print(countries)
     return JsonResponse({
         'countries': countries
     })

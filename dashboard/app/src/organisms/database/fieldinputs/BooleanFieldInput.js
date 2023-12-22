@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
 import { SwitchWithNull } from '../../../atoms/SwitchWithNull'
-import { Switch } from '../../../atoms/Switch'
+import { Switch } from '../../../atoms/inputs/Switch'
 
 const StyledRow = styled.div`
     display: flex;
@@ -31,7 +31,7 @@ export const BooleanFieldInput = ({ field, value, onChange }) => {
                     />
                 </>
             ) : (
-                <Switch size={1.4} value={val} setValue={setVal} />
+                <Switch size={1.5} value={val} setValue={setVal} />
             )}
         </StyledRow>
     )

@@ -84,4 +84,9 @@ export const ENDPOINTS = {
         set: () => API(['settings', 'set']),
         get: () => API(['settings', 'get']),
     },
+    requests: {
+        get: () => API(['requests', 'get']),
+        info: (id) => API(['requests', 'info', id]),
+        delete: (id) => API(['requests', 'delete', id]),
+    },
 }

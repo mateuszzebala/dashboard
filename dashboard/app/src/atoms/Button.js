@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { toBoolStr } from '../utils/utils'
 import { VscLoading } from 'react-icons/vsc'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Tooltip } from './Tooltip'
 import { useGlobalKey } from '../utils/hooks'
 

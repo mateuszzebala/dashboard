@@ -56,14 +56,14 @@
         "liked": [],
         "last": [
             {
-                "name": "Skan_20231218.png",
-                "path": "C:\\Users\\Mateusz\\code\\dashboard\\Media\\Media\\dashboard\\auth\\account\\Skan_20231218.png",
-                "type": "image"
-            },
-            {
                 "name": "5",
                 "path": "C:\\Users\\Mateusz\\Desktop\\test\\5",
                 "type": "file"
+            },
+            {
+                "name": "Skan_20231218.png",
+                "path": "C:\\Users\\Mateusz\\code\\dashboard\\Media\\Media\\dashboard\\auth\\account\\Skan_20231218.png",
+                "type": "image"
             }
         ]
     },

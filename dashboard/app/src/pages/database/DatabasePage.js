@@ -6,11 +6,7 @@ import { FETCH } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
 import { LINKS } from '../../router/links'
 import { APPS } from '../../apps/apps'
-import {
-    BsPersonFillGear,
-    BsQrCode,
-    BsTable,
-} from 'react-icons/bs'
+import { BsPersonFillGear, BsQrCode, BsTable } from 'react-icons/bs'
 import { BiWrench } from 'react-icons/bi'
 import { FiEye, FiKey, FiMail, FiUser, FiUsers } from 'react-icons/fi'
 

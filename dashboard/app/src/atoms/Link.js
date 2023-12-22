@@ -31,7 +31,7 @@ const StyledWrapper = styled.span`
 
 export const Link = ({ children, animation = true, accent, ...props }) => {
     return (
-        <StyledWrapper animation={toBoolStr(animation)} accent={accent}>
+        <StyledWrapper tabIndex={0} animation={toBoolStr(animation)} accent={accent}>
             <RouterLink {...props}>{children}</RouterLink>
         </StyledWrapper>
     )

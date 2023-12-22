@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { toBoolStr } from '../utils/utils'
-import { useGlobalKey } from '../utils/hooks'
+import { toBoolStr } from '../../utils/utils'
+import { useGlobalKey } from '../../utils/hooks'
 
 const StyledWrapper = styled.div`
     display: inline-flex;

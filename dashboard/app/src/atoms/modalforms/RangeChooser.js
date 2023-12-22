@@ -1,5 +1,5 @@
 import React from 'react'
-import { Range } from '../Range'
+import { Range } from '../inputs/Range'
 import { Button } from '../Button'
 import styled from 'styled-components'
 

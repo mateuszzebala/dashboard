@@ -2,15 +2,18 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import { FolderContent } from '../../organisms/files/FolderContent'
-import { Button } from '../../atoms/Button'
 import {
-    BsFilePlus,
-    BsFolderPlus,
-    BsFileZip,
-    BsFileArrowUp,
-    BsFolder,
-} from 'react-icons/bs'
-import { FloatingActionButton } from '../../atoms/FloatingActionButton'
+    Button,
+    ChooseDevice,
+    Confirm,
+    EditorChooser,
+    FilePrompt,
+    FloatingActionButton,
+    Prompt,
+    Properties,
+    SelectFolder,
+} from '../../atoms'
+import { BsFileArrowUp, BsFilePlus, BsFileZip, BsFolder, BsFolderPlus } from 'react-icons/bs'
 import { HiDownload, HiOutlineLockClosed } from 'react-icons/hi'
 import styled from 'styled-components'
 import { FiArrowUp, FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
@@ -19,16 +22,8 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useLoading, useModalForm, useSettings } from '../../utils/hooks'
-import { Prompt } from '../../atoms/modalforms/Prompt'
-import { Confirm } from '../../atoms/modalforms/Confirm'
-import { ChooseDevice } from '../../atoms/modalforms/ChooseDevice'
 import { LINKS } from '../../router/links'
 import { useMessage } from '../../utils/messages'
-import { EditorChooser } from '../../atoms/modalforms/EditorChooser'
-import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
-import { Properties } from '../../atoms/modalforms/Properties'
-import { useCookies } from 'react-cookie'
-import { SelectFolder } from '../../atoms/modalforms/SelectFolder'
 import { downloadURL } from '../../utils/utils'
 
 const StyledMenu = styled.div`

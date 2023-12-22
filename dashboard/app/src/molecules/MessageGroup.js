@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Message } from '../atoms/Message'
+import { Message } from '../atoms'
 import { useMessage } from '../utils/messages'
 
 const StyledWrapper = styled.div`

@@ -36,8 +36,8 @@ export const APPS = {
         link: LINKS.users.index(),
         sublinks: () => {
             return {
-                ADMINS: '/',
-                CREATE: '/',
+                ADMINS: LINKS.users.indexAdmins(true),
+                CREATE: LINKS.users.new(),
             }
         },
     },
@@ -78,7 +78,6 @@ export const APPS = {
             return {
                 'EMAILS': LINKS.email.index(),
                 'NEWSLETTER': LINKS.email.newsletter(),
-                'SMTP SERVER': LINKS.settings.byApp('email'),
             }
         },
     },
@@ -100,7 +99,9 @@ export const APPS = {
             return {
                 'PAGE ACTIVITY': '/',
                 'WORLD MAP': LINKS.statistics.map(),
-                'SERVER EFFICIENCY ': '/',
+                'SERVER EFFICIENCY ': LINKS.statistics.efficiency(),
+                'BROWSERS ': LINKS.statistics.browsers(),
+                'SYSTEMS ': LINKS.statistics.systems(),
             }
         },
     },

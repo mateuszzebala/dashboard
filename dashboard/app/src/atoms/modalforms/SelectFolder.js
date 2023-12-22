@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../../atoms/Button'
+import { Button } from '../../atoms'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { BsFolder } from 'react-icons/bs'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Curtain } from '../atoms/Curtain'
+import { Curtain } from '../atoms'
 import { useNavigate } from 'react-router'
 import { ENDPOINTS } from '../api/endpoints'
 import { FETCH, INIT } from '../api/api'

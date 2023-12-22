@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import React from 'react'
 import { HomePage } from '../pages/other/HomePage'
 import { Page404 } from '../pages/other/Page404'
@@ -32,6 +32,9 @@ import { NewUserPage } from '../pages/users/NewUserPage'
 import { AddEmailPage } from '../pages/email/AddEmailPage'
 import { ShowEmailPage } from '../pages/email/inboxPages/ShowEmailPage'
 import { ComposeEmailPage } from '../pages/email/ComposeEmailPage'
+import { RequestPage } from '../pages/requests/RequestPage'
+import { StatisticsSystemPage } from '../pages/statistics/subpages/StatisticsSystemsPage'
+import { StatisticsEfficiencyPage } from '../pages/statistics/subpages/StatisticsEfficiencyPage'
 
 const pages = {
     '/dashboard/': {page: HomePage, app: APPS.home},
@@ -65,8 +68,11 @@ const pages = {
     '/dashboard/statistics/': {page: StatisticsPage, app: APPS.statistics},
     '/dashboard/statistics/map/': {page: StatisticsWorldMapPage, app: APPS.statistics},
     '/dashboard/statistics/browsers/': {page: StatisticsBrowsersPage, app: APPS.statistics},
+    '/dashboard/statistics/systems/': {page: StatisticsSystemPage, app: APPS.statistics},
+    '/dashboard/statistics/efficiency/': {page: StatisticsEfficiencyPage, app: APPS.statistics},
 
     '/dashboard/requests/': {page: RequestsPage, app: APPS.requests},
+    '/dashboard/requests/:id/': {page: RequestPage, app: APPS.requests},
 
     '/dashboard/settings/': {page: SettingsPage, app: null},
 

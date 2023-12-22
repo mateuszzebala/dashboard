@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { toBoolStr } from '../utils/utils'
+import { toBoolStr } from '../../utils/utils'
 import { BsCheck2 } from 'react-icons/bs'
 
 const StyledWrapper = styled.button`

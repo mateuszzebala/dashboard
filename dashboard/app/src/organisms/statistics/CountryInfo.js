@@ -2,7 +2,7 @@ import React from 'react'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
-import { Loading } from '../../atoms/Loading'
+import { Loading } from '../../atoms/loading/Loading'
 import { Table, Field, Row, HeaderRow } from '../../atoms/Table'
 
 export const CountryInfo = ({ country }) => {

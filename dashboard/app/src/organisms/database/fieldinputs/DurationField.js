@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;
@@ -35,7 +35,7 @@ export const DurationFieldInput = ({ field, onChange }) => {
             <Typography variant={'h3'}>
                 {field.name}<br/><StyledType>{field.type}</StyledType>
             </Typography>
-            <Input type={'number'} value={value} setValue={setValue} />
+            <Input size={1.1} type={'number'} value={value} setValue={setValue} />
         </StyledField>
     )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Input } from '../Input'
+import { Input } from '../inputs/Input'
 import styled from 'styled-components'
 import { Button } from '../Button'
-import { CodeInput } from '../CodeInput'
+import { CodeInput } from '../inputs/CodeInput'
 
 const StyledWrapper = styled.div`
     display: flex;

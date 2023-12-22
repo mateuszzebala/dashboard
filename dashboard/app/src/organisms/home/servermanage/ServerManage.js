@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Switch } from '../../../atoms/Switch'
-import { Typography } from '../../../atoms/Typography'
-import { Theme } from '../../../atoms/Theme'
+import { Switch } from '../../../atoms'
+import { Typography } from '../../../atoms'
+import { Theme } from '../../../atoms'
 import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { FiPower } from 'react-icons/fi'
-import { Button } from '../../../atoms/Button'
+import { Button } from '../../../atoms'
 import { useSettings, useTheme } from '../../../utils/hooks'
 
 const StyledWrapper = styled.div`

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { IoClose } from 'react-icons/io5'
 import { MdOutlineMinimize } from 'react-icons/md'
-import { BsArrowUpShort } from 'react-icons/bs'
 import { toBoolStr } from '../utils/utils'
 import { useGlobalKey } from '../utils/hooks'
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FETCH } from '../api/api'
-import { ENDPOINTS } from '../api/endpoints'
-import { Loading } from './Loading'
-import { Button } from './Button'
-import { useModalForm } from '../utils/hooks'
-import { Prompt } from './modalforms/Prompt'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
+import { Loading } from '../loading/Loading'
+import { Button } from '../Button'
+import { useModalForm } from '../../utils/hooks'
+import { Prompt } from './Prompt'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 
 const StyledClockWrapper = styled.div`

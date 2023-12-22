@@ -16,7 +16,7 @@ const StyledWrapper = styled.div`
 const StyledList = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     padding: 10px;
     max-height: 100%;
     min-height: 100%;
@@ -32,7 +32,7 @@ export const LogsList = ({reloadEachSecond=false}) => {
     const [logs, setLogs] = React.useState([])
 
     const handleReload = () => {
-        FETCH(ENDPOINTS.home.logs()).then((data) => {
+        FETCH(ENDPOINTS.requests.get(), {sortBy: 'datetime', asc: false, length: 30, page: 0}).then((data) => {
             setLogs(data.data.logs)
         })
     }

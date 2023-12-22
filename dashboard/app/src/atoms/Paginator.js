@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { range, toBoolStr } from '../utils/utils'
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { BsThreeDots } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`

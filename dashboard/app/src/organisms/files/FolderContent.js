@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import useResizeObserver from 'use-resize-observer'
-import { Loading } from '../../atoms/Loading'
+import { Loading } from '../../atoms'
 import {centerEllipsis, toBoolStr} from '../../utils/utils'
 import { useLoading, useModalForm } from '../../utils/hooks'
-import {Confirm} from '../../atoms/modalforms/Confirm'
+import {Confirm} from '../../atoms'
 import {MdOutlineDriveFileMove} from 'react-icons/md'
 
 const StyledWrapper = styled.div`

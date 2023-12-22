@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
 
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;
@@ -29,6 +29,7 @@ export const FloatFieldInput = ({ field, onChange, value: val }) => {
                 <StyledType>{field.type}</StyledType>
             </Typography>
             <Input
+                size={1.1}
                 step={0.00001}
                 type={'number'}
                 value={value}

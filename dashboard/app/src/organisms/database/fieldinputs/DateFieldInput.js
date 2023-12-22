@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
 import date from 'date-and-time'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;

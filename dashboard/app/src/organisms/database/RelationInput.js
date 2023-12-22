@@ -1,7 +1,7 @@
 import React from 'react'
 import { SelectItem } from '../database/SelectItem'
 import styled from 'styled-components'
-import { Typography } from '../../atoms/Typography'
+import { Typography } from '../../atoms'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 

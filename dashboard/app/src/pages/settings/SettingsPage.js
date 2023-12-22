@@ -2,21 +2,15 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { FiSettings } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
-import { ColorInput } from '../../atoms/ColorInput'
+import { Button, ColorInput, Counter, Select, Switch, Theme, Typography } from '../../atoms'
 import { useSettings, useTheme } from '../../utils/hooks'
 import styled from 'styled-components'
-import { Typography } from '../../atoms/Typography'
-import { Switch } from '../../atoms/Switch'
-import { Counter } from '../../atoms/Counter'
-import { Button } from '../../atoms/Button'
 import { HiXMark } from 'react-icons/hi2'
-import { Theme } from '../../atoms/Theme'
-import { theme as orginalTheme } from '../../theme/theme'
+import {theme as originalTheme} from '../../theme/theme'
 import { LuComponent, LuSave } from 'react-icons/lu'
 import { MdOutlineStyle } from 'react-icons/md'
 import { useSearchParams } from 'react-router-dom'
 import { APPS } from '../../apps/apps'
-import { Select } from '../../atoms/Select'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 
@@ -66,14 +60,14 @@ const ColorProp = ({ setColors, colorName, colors }) => {
         <StyledRow>
             <Theme
                 value={{
-                    primary: orginalTheme[colorName],
+                    primary: originalTheme[colorName],
                 }}
             >
                 <Button
                     onClick={() => {
                         setColors((prev) => ({
                             ...prev,
-                            [colorName]: orginalTheme[colorName],
+                            [colorName]: originalTheme[colorName],
                         }))
                     }}
                     circle

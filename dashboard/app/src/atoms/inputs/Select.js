@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useModalForm } from '../utils/hooks'
-import { SelectModal } from './modalforms/SelectModal'
+import { useModalForm } from '../../utils/hooks'
+import { SelectModal } from '../modalforms/SelectModal'
 import { BiSelectMultiple } from 'react-icons/bi'
-import { Button } from './Button'
+import { Button } from '../Button'
 import { IoIosArrowDown } from 'react-icons/io'
-import { toBoolStr } from '../utils/utils'
+import { toBoolStr } from '../../utils/utils'
 
 const StyledValue = styled.div`
     display: flex;

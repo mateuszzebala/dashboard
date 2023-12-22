@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
-import { Select } from '../../../atoms/Select'
-import { Input } from '../../../atoms/Input'
+import { Select } from '../../../atoms/inputs/Select'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;
@@ -25,7 +25,7 @@ export const CharFieldInput = ({ field, onChange, value }) => {
         if(field.params.choices){
             const selectedOption = field.params.choices.find(element => element[0] === val)
             if (selectedOption){
-                val && onChange(selectedOption[1])
+                val && onChange(selectedOption[0])
             }
             else{
                 val && onChange(null)
@@ -44,6 +44,7 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                     <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Select
+                    size={1.1}
                     emptyName={`SELECT ${field.name.toUpperCase()}`}
                     data={field.params.choices.reduce((obj, choice) => {
                         const [key, value] = choice
@@ -65,6 +66,7 @@ export const CharFieldInput = ({ field, onChange, value }) => {
                     <StyledType>{field.type}</StyledType>
                 </Typography>
                 <Input
+                    size={1.1}
                     maxLength={field.params.max_length}
                     value={val || ''}
                     setValue={setVal}

@@ -4,7 +4,7 @@ import { Button } from '../Button'
 import { FaPython, FaNodeJs, FaJava, FaLinux } from 'react-icons/fa'
 import { TbBrandCpp } from 'react-icons/tb'
 import { SiDotnet, SiWindows11 } from 'react-icons/si'
-import { Input } from '../Input'
+import { Input } from '../inputs/Input'
 
 const StyledButtons = styled.div`
     display: flex;

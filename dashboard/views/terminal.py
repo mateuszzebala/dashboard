@@ -43,7 +43,7 @@ def command(request):
     request.session.save()
 
     if cmd.startswith('cd ') and len(errors) == 0:
-        folder = cmd[2:]
+        folder = cmd[3:]
         if folder == '..':
             slesh_position = path.rfind(os.sep)
             path = path[:slesh_position]

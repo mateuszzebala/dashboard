@@ -112,6 +112,7 @@ def delete_item_view(request, item):
 @dashboard_access
 def patch_item_view(request, item):
     field = request.POST.get('field')
+    print(request.POST.get('value'))
     value_post = unescape(request.POST.get('value') or '')
     value_files = request.FILES.get('value')
     if value_files is not None: value = value_files
@@ -159,6 +160,7 @@ def patch_item_view(request, model_name, pk):
     names_of_relations = list(map(lambda field: field.name, list(filter(lambda field: field.is_relation and not field.one_to_many, model._meta.get_fields()))))
     item = model.objects.filter(pk=pk).first()
     for field in names_of_fields:
+        print(field, request.POST.get(field))
         set_field_serializer(
             request.FILES.get(field) or request.POST.get(field), 
             get_type_of_field(model, field),

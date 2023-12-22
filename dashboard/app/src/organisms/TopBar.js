@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { TopBarIcons } from '../molecules/TopBarIcons'
 import { LINKS } from '../router/links'
-import { Link } from '../atoms/Link'
+import { Link } from '../atoms'
 
 import {HiOutlineMenu} from 'react-icons/hi'
 import { toBoolStr } from '../utils/utils'

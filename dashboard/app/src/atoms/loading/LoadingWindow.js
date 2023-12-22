@@ -1,10 +1,10 @@
 import React from 'react'
-import { LoadingContext, useTheme } from '../utils/hooks'
+import { LoadingContext, useTheme } from '../../utils/hooks'
 import { Loading } from './Loading'
 import styled from 'styled-components'
-import { Theme } from './Theme'
+import { Theme } from '../Theme'
 import { useCookies } from 'react-cookie'
-import { toBoolStr } from '../utils/utils'
+import { toBoolStr } from '../../utils/utils'
 
 const StyledLoading = styled.div`
   display: flex;

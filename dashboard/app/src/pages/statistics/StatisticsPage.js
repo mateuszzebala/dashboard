@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
 import { BsBrowserSafari } from 'react-icons/bs'
 import { MdDevicesOther } from 'react-icons/md'
-import { FaMoneyBillTransfer } from 'react-icons/fa6'
+import { FaChrome, FaChromecast, FaMoneyBillTransfer } from 'react-icons/fa6'
+import { FiPieChart, FiServer } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: grid;
@@ -53,7 +54,7 @@ export const StatisticsPage = () => {
         <MainTemplate app={APPS.statistics}>
             <StyledWrapper>
                 <StyledTile>
-                    <AiOutlineLineChart /> PAGE ACTIVITY
+                    <FiPieChart /> PAGE ACTIVITY
                 </StyledTile>
                 <StyledTile
                     onClick={() => {
@@ -62,13 +63,21 @@ export const StatisticsPage = () => {
                 >
                     <FaGlobeEurope /> MAP
                 </StyledTile>
-                <StyledTile>
-                    <BiServer /> SERVER EFFICIENCY
+                <StyledTile
+                    onClick={() => {
+                        navigate(LINKS.statistics.efficiency())
+                    }}
+                >
+                    <FiServer /> SERVER EFFICIENCY
                 </StyledTile>
-                <StyledTile><MdDevicesOther/> OPERATING SYSTEMS</StyledTile>
+                <StyledTile
+                    onClick={() => {
+                        navigate(LINKS.statistics.systems())
+                    }}
+                ><MdDevicesOther/> OPERATING SYSTEMS</StyledTile>
                 <StyledTile onClick={()=>{
                     navigate(LINKS.statistics.browsers())
-                }}><BsBrowserSafari/> BROWSERS</StyledTile>
+                }}><FaChrome/> BROWSERS</StyledTile>
             </StyledWrapper>
         </MainTemplate>
     )

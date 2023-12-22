@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
 import date from 'date-and-time'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;
@@ -55,6 +55,7 @@ export const DateTimeFieldInput = ({ field, onChange, value: val }) => {
                 <StyledType>{field.type}</StyledType>
             </Typography>
             <Input
+                size={1.1}
                 step={1}
                 type="datetime-local"
                 value={value}

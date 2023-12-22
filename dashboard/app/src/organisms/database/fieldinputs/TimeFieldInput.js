@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
 import date from 'date-and-time'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 
 const StyledField = styled.div`
     display: flex;
@@ -47,7 +47,7 @@ export const TimeFieldInput = ({ field, onChange, value: val }) => {
                 {field.name.toUpperCase()}<br/>
                 <StyledType>{field.type}</StyledType>
             </Typography>
-            <Input step={1} type="time" value={value} setValue={handleOnChange} />
+            <Input size={1.1} step={1} type="time" value={value} setValue={handleOnChange} />
         </StyledField>
     )
 }

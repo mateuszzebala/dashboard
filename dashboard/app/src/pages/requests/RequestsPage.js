@@ -2,183 +2,31 @@ import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import styled from 'styled-components'
-import { Button } from '../../atoms/Button'
-import { FiAlertTriangle, FiArrowUpRight, FiCheck, FiKey, FiList, FiSearch, FiTrash, FiUser, FiX } from 'react-icons/fi'
+import { Button, Counter, Paginator, Prompt, Select, Theme } from '../../atoms'
+import { FiAlertTriangle, FiCheck, FiKey, FiList, FiSearch, FiTrash, FiUser, FiX } from 'react-icons/fi'
 import { useModalForm, useTheme } from '../../utils/hooks'
-import { Theme } from '../../atoms/Theme'
-import { FaCircle, FaSort } from 'react-icons/fa'
+import { FaSort } from 'react-icons/fa'
 import { toBoolStr } from '../../utils/utils'
-import { Prompt } from '../../atoms/modalforms/Prompt'
-import { TbHttpConnect, TbHttpDelete, TbHttpGet, TbHttpHead, TbHttpOptions, TbHttpPatch, TbHttpPost, TbHttpPut, TbHttpQue, TbHttpTrace } from 'react-icons/tb'
+import {
+    TbHttpConnect,
+    TbHttpDelete,
+    TbHttpGet,
+    TbHttpHead,
+    TbHttpOptions,
+    TbHttpPatch,
+    TbHttpPost,
+    TbHttpPut,
+    TbHttpTrace,
+} from 'react-icons/tb'
 import { MdHttp } from 'react-icons/md'
 import { LuClock10, LuClock2 } from 'react-icons/lu'
-import { SelectItemModal } from '../../atoms/modalforms/SelectItemModal'
-import { Paginator } from '../../atoms/Paginator'
-import { Select } from '../../atoms/Select'
 import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
+import { FETCH } from '../../api/api'
+import { ENDPOINTS } from '../../api/endpoints'
+import { useNavigate } from 'react-router'
+import { LINKS } from '../../router/links'
+import moment from 'moment'
 
-const logs = [
-    {
-        id: 0,
-        ip_v4: '127.0.0.1',
-        when: '2 seconday ago',
-        path: '/dashboard/api/database/User/1/',
-        status_code: 200,
-        method: 'POST'
-    },
-    {
-        id: 1,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/models/',
-        status_code: 500,
-        method: 'POST'
-    },
-    {
-        id: 2,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/./',
-        status_code: 404,
-        method: 'PUT'
-    },
-    {
-        id: 3,
-        ip_v4: '127.0.0.1',
-        when: '6 seconday ago',
-        path: '/dashboard/api/auth/csrf/',
-        status_code: 401,
-        method: 'GET'
-    },
-    {
-        id: 0,
-        ip_v4: '127.0.0.1',
-        when: '2 seconday ago',
-        path: '/dashboard/api/database/User/1/',
-        status_code: 200,
-        method: 'POST'
-    },
-    {
-        id: 1,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/models/',
-        status_code: 500,
-        method: 'POST'
-    },
-    {
-        id: 2,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/./',
-        status_code: 404,
-        method: 'PUT'
-    },
-    {
-        id: 3,
-        ip_v4: '127.0.0.1',
-        when: '6 seconday ago',
-        path: '/dashboard/api/auth/csrf/',
-        status_code: 401,
-        method: 'GET'
-    },
-    {
-        id: 0,
-        ip_v4: '127.0.0.1',
-        when: '2 seconday ago',
-        path: '/dashboard/api/database/User/1/',
-        status_code: 200,
-        method: 'POST'
-    },
-    {
-        id: 1,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/models/',
-        status_code: 500,
-        method: 'POST'
-    },
-    {
-        id: 2,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/./',
-        status_code: 404,
-        method: 'PUT'
-    },
-    {
-        id: 3,
-        ip_v4: '127.0.0.1',
-        when: '6 seconday ago',
-        path: '/dashboard/api/auth/csrf/',
-        status_code: 401,
-        method: 'GET'
-    },
-    {
-        id: 0,
-        ip_v4: '127.0.0.1',
-        when: '2 seconday ago',
-        path: '/dashboard/api/database/User/1/',
-        status_code: 200,
-        method: 'POST'
-    },
-    {
-        id: 1,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/models/',
-        status_code: 500,
-        method: 'POST'
-    },
-    {
-        id: 2,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/./',
-        status_code: 404,
-        method: 'PUT'
-    },
-    {
-        id: 3,
-        ip_v4: '127.0.0.1',
-        when: '6 seconday ago',
-        path: '/dashboard/api/auth/csrf/',
-        status_code: 401,
-        method: 'GET'
-    },
-    {
-        id: 0,
-        ip_v4: '127.0.0.1',
-        when: '2 seconday ago',
-        path: '/dashboard/api/database/User/1/',
-        status_code: 200,
-        method: 'POST'
-    },
-    {
-        id: 1,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/models/',
-        status_code: 500,
-        method: 'POST'
-    },
-    {
-        id: 2,
-        ip_v4: '127.0.0.1',
-        when: '4 seconday ago',
-        path: '/dashboard/api/database/./',
-        status_code: 404,
-        method: 'PUT'
-    },
-    {
-        id: 3,
-        ip_v4: '127.0.0.1',
-        when: '6 seconday ago',
-        path: '/dashboard/api/auth/csrf/',
-        status_code: 401,
-        method: 'GET'
-    },
-]
 
 const StyledRequestLog = styled.div`
     background-color: ${({theme})=>theme.secondary};
@@ -221,12 +69,17 @@ const StyledDeleteButton = styled.button`
     background-color: transparent;
     border: 0;
     outline: none;
-    padding: 5px;
+    padding: 10px 20px;
+    color: ${({theme})=>theme.error};
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: transform 0.1s;
+    &:hover{
+        transform: scale(0.9);
+    }
 `
 
 const StyledFooter = styled.footer`
@@ -273,12 +126,38 @@ export const RequestsPage = () => {
     const [deleteMode, setDeleteMode] = React.useState(false)
     const [searchQuery, setSearchQuery] = React.useState('')
     const [page, setPage] = React.useState(0)
-    const [asc, setAsc] = React.useState(true)
+    const [pages, setPages] = React.useState(0)
+    const [asc, setAsc] = React.useState(false)
+    const [reload, setReload] = React.useState(0)
     const [sortBy, setSortBy] = React.useState('datetime')
     const [fromDatetime, setFromDatetime] = React.useState(null)
-    const [user, setUser] = React.useState({})
+    const [logs, setLogs] = React.useState([])
     const [toDatetime, setToDatetime] = React.useState(null)
+    const [length, setLength] = React.useState(30)
     const modalForm = useModalForm()
+    const navigate = useNavigate()
+
+
+    React.useEffect(()=>{
+        setPage(0)
+    }, [statuses, methods, searchQuery, asc, sortBy, fromDatetime, toDatetime])
+
+    React.useEffect(()=>{
+        FETCH(ENDPOINTS.requests.get(), {
+            statuses,
+            methods,
+            query: searchQuery,
+            page,
+            asc,
+            length,
+            sortBy,
+            fromDatetime: fromDatetime || '',
+            toDatetime: toDatetime || '',
+        }).then(data => {
+            setLogs(data.data.logs)
+            setPages(Math.ceil(data.data.counter / length))
+        })
+    }, [statuses, methods, searchQuery, page, asc, sortBy, fromDatetime, toDatetime, length, reload])
 
     const colorsByResponse = {
         all: theme.quaternary,
@@ -362,7 +241,7 @@ export const RequestsPage = () => {
                 <Select canBeNull={false} second size={1.4} value={sortBy} setValue={setSortBy} subContent={'SORT BY'} icon={<FaSort/>} asButton data={{
                     datetime: 'DATETIME',
                     path: 'PATH',
-                    statusCode: 'STATUS CODE',
+                    status_code: 'STATUS CODE',
                     method: 'METHOD',
                 }}/>
                 <Button
@@ -372,12 +251,22 @@ export const RequestsPage = () => {
                     onClick={()=>setAsc(prev => !prev)}
                     size={1.4}
                 />
+                <Counter value={length} setValue={setLength} min={0} max={200} unit='Logs' size={1.4}/>
             </>
         }>
             <StyledPage>
                 <StyledLogs>
                     {logs.map(log => (
-                        <StyledRequestLog key={log.id} deleteMode={toBoolStr(deleteMode)}>
+                        <StyledRequestLog onClick={() => {
+                            if(!deleteMode) {
+                                navigate(LINKS.requests.request(log.id))
+                            }
+                            else{
+                                FETCH(ENDPOINTS.requests.delete(log.id)).then(()=>{
+                                    setReload(prev => prev + 1)
+                                })
+                            }
+                        }} key={log.id} deleteMode={toBoolStr(deleteMode)}>
                             {deleteMode && (
                                 <StyledDeleteButton>
                                     <FiTrash/>
@@ -386,7 +275,7 @@ export const RequestsPage = () => {
                             <StyledColumn>
                                 <StyledRow>
                                     <span>{log.ip_v4}</span>
-                                    <span>{log.when}</span>
+                                    <span>{moment(log.datetime).fromNow(true)}</span>
                                 </StyledRow>
                                 <StyledRow>
                                     <b>{log.method}</b> 
@@ -398,7 +287,7 @@ export const RequestsPage = () => {
                     ))}
                 </StyledLogs>
                 <StyledFooter>
-                    <Paginator pages={10} value={page} setValue={setPage} second/>
+                    <Paginator pages={pages} value={page} setValue={setPage} second/>
                 </StyledFooter>
             </StyledPage>
         </MainTemplate>

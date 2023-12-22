@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Typography } from '../../../atoms/Typography'
-import { Input } from '../../../atoms/Input'
+import { Input } from '../../../atoms/inputs/Input'
 import { AiOutlineUpload } from 'react-icons/ai'
 import { FaUpload } from 'react-icons/fa'
-import { FileInput } from '../../../atoms/FileInput'
+import { FileInput } from '../../../atoms/inputs/FileInput'
 
 const StyledField = styled.div`
     display: flex;
