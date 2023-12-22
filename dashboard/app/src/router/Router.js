@@ -35,6 +35,7 @@ import { ComposeEmailPage } from '../pages/email/ComposeEmailPage'
 import { RequestPage } from '../pages/requests/RequestPage'
 import { StatisticsSystemPage } from '../pages/statistics/subpages/StatisticsSystemsPage'
 import { StatisticsEfficiencyPage } from '../pages/statistics/subpages/StatisticsEfficiencyPage'
+import { StatisticsActivityPage } from '../pages/statistics/subpages/StatisticsActivityPage'
 
 const pages = {
     '/dashboard/': {page: HomePage, app: APPS.home},
@@ -70,6 +71,7 @@ const pages = {
     '/dashboard/statistics/browsers/': {page: StatisticsBrowsersPage, app: APPS.statistics},
     '/dashboard/statistics/systems/': {page: StatisticsSystemPage, app: APPS.statistics},
     '/dashboard/statistics/efficiency/': {page: StatisticsEfficiencyPage, app: APPS.statistics},
+    '/dashboard/statistics/activity/': {page: StatisticsActivityPage, app: APPS.statistics},
 
     '/dashboard/requests/': {page: RequestsPage, app: APPS.requests},
     '/dashboard/requests/:id/': {page: RequestPage, app: APPS.requests},

@@ -54,6 +54,7 @@ export const LINKS = {
         browsers: () => '/dashboard/statistics/browsers/',
         systems: () => '/dashboard/statistics/systems/',
         efficiency: () => '/dashboard/statistics/efficiency/',
+        activity: () => '/dashboard/statistics/activity/',
     },
     settings: {
         index: () => '/dashboard/settings/',

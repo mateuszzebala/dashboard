@@ -128,7 +128,11 @@ const SettingsByPage = {
                 colors={colors}
                 colorName={'accent'}
             />
-
+            <ColorProp
+                setColors={setColors}
+                colors={colors}
+                colorName={'shoper'}
+            />
             <StyledSection>
                 <StyledRow>
                     <Select label={'FONT FAMILY'} emptyName='FONT FAMILY' canBeNull={false} second setValue={(val) => {
@@ -425,6 +429,7 @@ export const SettingsPage = () => {
         error: theme.error,
         warning: theme.warning,
         tertiary: theme.tertiary,
+        shoper: theme.shoper,
     })
 
     React.useEffect(() => {

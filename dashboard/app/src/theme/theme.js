@@ -6,6 +6,7 @@ const accent = '#4f8de3'
 const error = '#FF6B6B'
 const warning = '#f5d11d'
 const success = '#41d165'
+const shoper = '#6A5FFF'
 
 export const theme = {
     primary,
@@ -16,4 +17,5 @@ export const theme = {
     tertiary,
     warning,
     success,
+    shoper
 }

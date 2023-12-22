@@ -53,7 +53,11 @@ export const StatisticsPage = () => {
     return (
         <MainTemplate app={APPS.statistics}>
             <StyledWrapper>
-                <StyledTile>
+                <StyledTile
+                    onClick={() => {
+                        navigate(LINKS.statistics.activity())
+                    }}
+                >
                     <FiPieChart /> PAGE ACTIVITY
                 </StyledTile>
                 <StyledTile

@@ -23,8 +23,7 @@ export const ChartInfo = ({ data }) => {
                 <Table key={dataSet.title}>
                     <Theme value={{...theme, primary: dataSet.color}}>
                         <HeaderRow>
-                            <Field>LABEL</Field>
-                            <Field>VALUE</Field>
+                            <Field colSpan={2}>{dataSet.name}</Field>
                         </HeaderRow>
                     </Theme>
                     {dataSet.values.map(({ label, value }) => <>

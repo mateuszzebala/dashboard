@@ -97,7 +97,7 @@ export const APPS = {
         link: LINKS.statistics.index(),
         sublinks: () => {
             return {
-                'PAGE ACTIVITY': '/',
+                'PAGE ACTIVITY': LINKS.statistics.activity(),
                 'WORLD MAP': LINKS.statistics.map(),
                 'SERVER EFFICIENCY ': LINKS.statistics.efficiency(),
                 'BROWSERS ': LINKS.statistics.browsers(),
