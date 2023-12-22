@@ -45,7 +45,8 @@ import { SelectFile } from './modalforms/SelectFile'
 import { SelectItemModal } from './modalforms/SelectItemModal'
 import { SelectModal } from './modalforms/SelectModal'
 import { ServerInformations } from './modalforms/ServerInformations'
-import { LineChart } from './charts/LineChart'
+import { AreaChart } from './charts/AreaChart'
+import { BarChart } from './charts/BarChart'
 
 export {
     Button,
@@ -98,5 +99,6 @@ export {
     Row,
     Field,
     HeaderRow,
-    LineChart
+    AreaChart,
+    BarChart
 }

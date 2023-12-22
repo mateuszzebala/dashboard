@@ -4,8 +4,6 @@ from django.urls import path
 import smtplib
 from email.mime.text import MIMEText
 from dashboard.models import Email
-from imapclient import IMAPClient
-import mailparser
 import json
 import imaplib
 import email as emaillib
