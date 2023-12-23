@@ -46,7 +46,10 @@ import { SelectItemModal } from './modalforms/SelectItemModal'
 import { SelectModal } from './modalforms/SelectModal'
 import { ServerInformations } from './modalforms/ServerInformations'
 import { AreaChart } from './charts/AreaChart'
+import { ColumnChart } from './charts/ColumnChart'
+import { PieChart } from './charts/PieChart'
 import { BarChart } from './charts/BarChart'
+import { LineChart } from './charts/LineChart'
 
 export {
     Button,
@@ -100,5 +103,8 @@ export {
     Field,
     HeaderRow,
     AreaChart,
-    BarChart
+    ColumnChart,
+    PieChart,
+    BarChart,
+    LineChart
 }

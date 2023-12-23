@@ -23,14 +23,15 @@ const StyledChart = styled.svg`
     fill: ${({theme})=> theme.primary};
   }
 
-  line {
+`
+
+const GridLine = styled.line`
     stroke: ${({ theme }) => theme.quaternary}88;
     stroke-width: 2px;
-  }
 `
 
 const StyledPolygon = styled.polygon`
-  fill: ${({ color, theme }) => color || theme.primary};
+  fill: transparent;
   stroke: ${({ color, theme }) => color || theme.primary};
   stroke-opacity: 50%;
   fill-opacity: 30%;
@@ -64,8 +65,18 @@ const StyledChartTop = styled.div`
     }
 `
 
+const StyledLine = styled.line`
+    stroke: ${({ theme, color }) => color ? color : theme.primary};
+    stroke-width: 4px;
+`
 
-export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val}) => {
+const StyledPoint = styled.circle`
+    stroke: ${({ theme, color }) => color ? color : theme.primary};
+    fill: ${({ theme, color }) => color ? color : theme.primary};
+`
+
+
+export const LineChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val}) => {
     const svgRef = React.useRef()
     const [svgSize, setSvgSize] = React.useState({ width: 0, height: 0 })
     const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 })
@@ -119,7 +130,7 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
                     const y = value / max * 100
                     return (
                         <>
-                            <line x1={getChartPoint(0, y).x} y1={getChartPoint(0, y).y} x2={getChartPoint(100, y).x} y2={getChartPoint(0, y).y} />
+                            <GridLine x1={getChartPoint(0, y).x} y1={getChartPoint(0, y).y} x2={getChartPoint(100, y).x} y2={getChartPoint(0, y).y} />
                             <text fontSize={chartSize.width / 80} x={padding - 10} y={getChartPoint(0, y).y} textAnchor='end' alignmentBaseline='central'>{getValue(value)}</text>
                         </>
                     )
@@ -129,20 +140,28 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
                     counterLabels += 1
                     const x = 100 / (dataSets[0].values.length - 1) * counterLabels
                     return <>
-                        <line x1={getChartPoint(x, 0).x} y1={getChartPoint(x, 0).y} x2={getChartPoint(x, 0).x}  y2={getChartPoint(x, 100).y} />
+                        <GridLine x1={getChartPoint(x, 0).x} y1={getChartPoint(x, 0).y} x2={getChartPoint(x, 0).x}  y2={getChartPoint(x, 100).y} />
                         <text fontSize={chartSize.width / 80} x={getChartPoint(x, 0).x} y={svgSize.height - padding + 10} textAnchor='middle' alignmentBaseline='hanging'>{label}</text>
                     </>
                 })}
 
                 {dataSets.map(dataSet => {
                     let counterXs = -1
-                    return <StyledPolygon key={dataSet.name} color={dataSet.color}
-                        points={`${getChartPoint(0, 0).x},${getChartPoint(0, 0).y} ` + dataSet.values.map(({value}) => {
-                            counterXs += 1
-                            const y = value / max * 100
-                            const x = getChartPoint(100 / (dataSets[0].values.length - 1) * counterXs, 0).x
-                            return `${x},${getChartPoint(0, y).y}`
-                        }).join(' ') + ` ${getChartPoint(100, 0).x},${getChartPoint(100, 0).y}`} />
+                    let lastPoint = null
+                    return dataSet.values.map(({value}) => {
+                        counterXs += 1
+                        const {x, y} = getChartPoint(100 / (dataSets[0].values.length - 1) * counterXs, value / max * 100)
+                        if (lastPoint == null){
+                            lastPoint = {x, y}
+                            return <StyledPoint key={{x, y}} color={dataSet.color} cx={x} cy={y} r={6} />
+                        }
+                        const ret = <>
+                            <StyledPoint color={dataSet.color} cx={x} cy={y} r={6} />
+                            <StyledLine color={dataSet.color} x1={x} y1={y} x2={lastPoint.x} y2={lastPoint.y}/>
+                        </>
+                        lastPoint = {x, y}
+                        return ret
+                    })
                 })}
 
 

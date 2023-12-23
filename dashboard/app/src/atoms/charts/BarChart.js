@@ -9,12 +9,13 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    position: relative;
 `
 
 const StyledChart = styled.svg`
     width: 100%;
     height: 100%;
-    cursor: help;
+    cursor: pointer;
     text{
         font-family: var(--font-family);
         fill: ${({theme})=> theme.primary};
@@ -29,11 +30,31 @@ const StyledRect = styled.rect`
     fill: ${({ color, theme }) => color || theme.primary};
     stroke: ${({ color, theme }) => color || theme.primary};
     stroke-opacity: 50%;
-    fill-opacity: 50%;
+    fill-opacity: 30%;
     stroke-width: 5px;
     stroke-linejoin: round;
 `
 
+const StyledDataSetName = styled.span`
+    font-weight: 500;
+    text-transform: uppercase;
+`
+
+const StyledChartTop = styled.div`
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    left: ${({left})=>left}px;
+    padding: 0;
+    height: ${({height})=>height}px;
+    gap: 20px;
+    h1{
+        margin: 0;
+        text-transform: uppercase;
+    }
+`
 
 
 export const BarChart = ({ title, dataSets = [], max=100, padding = 60, gap = 10, values=null, getValue=(val)=>val }) => {
@@ -58,16 +79,16 @@ export const BarChart = ({ title, dataSets = [], max=100, padding = 60, gap = 10
     const distinctPointsY = []
 
     if(values){
-        values.forEach(value => distinctPointsY.push({value}))
+        values.forEach(value => distinctPointsX.push({value}))
     }
     else{
         dataSets.forEach(dataSet => {
-            dataSet.values.forEach(point => !distinctPointsY.some(p => point.y == p.y) && distinctPointsY.push(point))
+            dataSet.values.forEach(point => !distinctPointsX.some(p => point.value == p.value) && distinctPointsX.push(point))
         })
     }
 
     dataSets.forEach(dataSet => {
-        dataSet.values.forEach(point => !distinctPointsX.some(p => point.label == p.label) && distinctPointsX.push(point))
+        dataSet.values.forEach(point => !distinctPointsY.some(p => point.label == p.label) && distinctPointsY.push(point))
     })
 
     let counterLabels = -1
@@ -85,46 +106,48 @@ export const BarChart = ({ title, dataSets = [], max=100, padding = 60, gap = 10
                     todo: () => { },
                 })
             }} viewBox={`0 0 ${svgSize.width} ${svgSize.height}`} ref={svgRef}>
-                <text x={svgSize.width / 2} y={padding / 2} textAnchor={'middle'} alignmentBaseline={'central'} fontSize={20} fontWeight={'bold'}>{title}</text>
 
-                {distinctPointsY.map(({ value }) => {
-                    const y = getValue(value) / max * 100
+                {distinctPointsX.map(({ value }) => {
+                    const x = value / max * 100
                     return (
                         <>
-                            <line x1={getChartPoint(0, y).x} y1={getChartPoint(0, y).y} x2={getChartPoint(100, y).x} y2={getChartPoint(0, y).y} />
-                            <text fontSize={chartSize.width / 80} x={padding - 10} y={getChartPoint(0, y).y} textAnchor='end' alignmentBaseline='central'>{getValue(value)}</text>
+                            <line x1={getChartPoint(x, 0).x} y1={getChartPoint(0, 0).y} x2={getChartPoint(x, 0).x} y2={getChartPoint(0, 100).y} />
+                            <text fontSize={chartSize.width / 80} x={getChartPoint(x, 0).x} y={getChartPoint(0, 0).y + 5} textAnchor='middle' alignmentBaseline='hanging'>{getValue(value)}</text>
                         </>
                     )
                 })}
-                {distinctPointsX.map(({ label }) => {
+
+                {distinctPointsY.map(({ label }) => {
                     counterLabels += 1
-                    return <text fontSize={chartSize.width / 80} key={label} x={getChartPoint(100 / dataSets[0].values.length * counterLabels + 50 / dataSets[0].values.length, 0).x} y={svgSize.height - padding + 10} textAnchor='middle' alignmentBaseline='hanging'>{label}</text>
+                    return <text fontSize={chartSize.width / 80} key={label} x={padding - 5} y={(1 / dataSets[0].values.length * counterLabels + 0.5 / dataSets[0].values.length)*chartSize.height+padding} textAnchor='end' alignmentBaseline='central'>{label}</text>
                 })}
+
                 {dataSets.map(dataSet => {
                     let counterBars = -1
                     counterSet += 1
                     return (
                         <>
                             {dataSet.values.map(({ label, value, color }) => {
-                                const y = value / max * 100
+                                const x = value / max * 100
                                 counterBars += 1
-                                const width = (chartSize.width / dataSet.values.length - gap) / dataSets.length
-                                const height = chartSize.height / 100 * y
-                                const rectX = getChartPoint(100 / dataSets[0].values.length * counterBars, 0).x + (gap/2) + (counterSet * width)
-                                const rectY = getChartPoint(0, y).y
+                                const width = chartSize.width / 100 * x
+                                const height = (chartSize.height / dataSet.values.length - gap) / dataSets.length
+                                const rectX = getChartPoint(0, 0).x 
+                                const rectY = (1 / dataSets[0].values.length * counterBars) * chartSize.height + padding + (gap/2) + (counterSet * height)
                                 return <StyledRect color={color || dataSet.color} key={label} width={width} height={height} x={rectX} y={rectY} />
                             })}
                         </>
                     )
                 })}
 
+            </StyledChart>
+            <StyledChartTop height={padding} left={padding}>
+                <h1>{title}</h1>
                 {dataSets.map(dataSet => {
                     counterSetsName += 1
-                    return <text style={{ fill: dataSet.color }} key={dataSet.name}  x={getChartPoint(0, 0).x + 20}
-                        y={padding + 20 + (chartSize.width / 40) * counterSetsName} textAnchor={'start'} alignmentBaseline={'central'} fontSize={chartSize.width / 60} >{dataSet.name}</text>
+                    return <StyledDataSetName style={{ color: dataSet.color }} key={dataSet.name} fontSize={chartSize.width / 60} >{dataSet.name}</StyledDataSetName>
                 })}
-
-            </StyledChart>
+            </StyledChartTop>
         </StyledWrapper>
     )
 }

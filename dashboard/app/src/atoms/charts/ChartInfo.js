@@ -15,15 +15,15 @@ const StyledWrapper = styled.div`
     }
 `
 
-export const ChartInfo = ({ data }) => {
+export const ChartInfo = ({ data, title }) => {
     const [theme] =useTheme()
     return (
         <StyledWrapper>
             {data.map(dataSet => (
                 <Table key={dataSet.title}>
-                    <Theme value={{...theme, primary: dataSet.color}}>
+                    <Theme value={{...theme, primary: dataSet.color + 'AA'}}>
                         <HeaderRow>
-                            <Field colSpan={2}>{dataSet.name}</Field>
+                            <Field colSpan={2}>{dataSet.name ? dataSet.name.toUpperCase() : title.toUpperCase()}</Field>
                         </HeaderRow>
                     </Theme>
                     {dataSet.values.map(({ label, value }) => <>

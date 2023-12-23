@@ -1,47 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
 import useResizeObserver from 'use-resize-observer'
-import { useModalForm, useTheme } from '../../utils/hooks'
-import { FaChartArea } from 'react-icons/fa'
+import { useModalForm } from '../../utils/hooks'
 import { ChartInfo } from './ChartInfo'
-import { objectEquals } from '../../utils/utils'
+import { FaChartColumn } from 'react-icons/fa6'
 
 const StyledWrapper = styled.div`
-  width: 100%;
-  position: relative;
-  height: 100%;
-  border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
 `
 
 const StyledChart = styled.svg`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-
-  text {
-    font-family: var(--font-family);
-    fill: ${({theme})=> theme.primary};
-  }
-
-  line {
-    stroke: ${({ theme }) => theme.quaternary}88;
-    stroke-width: 2px;
-  }
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text{
+        font-family: var(--font-family);
+        fill: ${({theme})=> theme.primary};
+    }
+    line{
+        stroke: ${({ theme }) => theme.quaternary}88;
+        stroke-width: 2px;
+    }
 `
 
-const StyledPolygon = styled.polygon`
-  fill: ${({ color, theme }) => color || theme.primary};
-  stroke: ${({ color, theme }) => color || theme.primary};
-  stroke-opacity: 50%;
-  fill-opacity: 30%;
-  transition: fill-opacity 0.3s;
-  &:hover{
-    fill-opacity: 60%;
-  }
-  stroke-width: 5px;
-  stroke-linejoin: round;
+const StyledRect = styled.rect`
+    fill: ${({ color, theme }) => color || theme.primary};
+    stroke: ${({ color, theme }) => color || theme.primary};
+    stroke-opacity: 50%;
+    fill-opacity: 30%;
+    stroke-width: 5px;
+    stroke-linejoin: round;
 `
-
 
 const StyledDataSetName = styled.span`
     font-weight: 500;
@@ -65,7 +57,7 @@ const StyledChartTop = styled.div`
 `
 
 
-export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val}) => {
+export const ColumnChart = ({ title, dataSets = [], max=100, padding = 60, gap = 10, values=null, getValue=(val)=>val }) => {
     const svgRef = React.useRef()
     const [svgSize, setSvgSize] = React.useState({ width: 0, height: 0 })
     const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 })
@@ -75,20 +67,21 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
         onResize: ({ width, height }) => {
             setSvgSize({ width, height })
             setChartSize({ width: width - padding * 2, height: height - padding * 2 })
-        },
+        }
     })
 
     const getChartPoint = (xPer, yPer) => ({
         x: Math.round(xPer * 0.01 * chartSize.width + padding),
-        y: Math.round((yPer - 100) * (-1) * 0.01 * chartSize.height + padding),
+        y: Math.round((yPer - 100) * (-1) * 0.01 * chartSize.height + padding)
     })
 
     const distinctPointsX = []
     const distinctPointsY = []
 
-    if (values) {
-        values.forEach(value => distinctPointsY.push({ value: value, y: value }))
-    } else {
+    if(values){
+        values.forEach(value => distinctPointsY.push({value}))
+    }
+    else{
         dataSets.forEach(dataSet => {
             dataSet.values.forEach(point => !distinctPointsY.some(p => point.y == p.y) && distinctPointsY.push(point))
         })
@@ -99,6 +92,7 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
     })
 
     let counterLabels = -1
+    let counterSet = -1
     let counterSetsName = -1
 
     return (
@@ -106,14 +100,12 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
             <StyledChart onDoubleClick={() => {
                 modalForm({
                     content: ChartInfo,
-                    title: title || 'CHART INFO',
+                    title: 'CHART INFO',
                     data: dataSets,
-                    icon: <FaChartArea />,
-                    todo: () => {
-                    },
+                    icon: <FaChartColumn />,
+                    todo: () => { },
                 })
             }} viewBox={`0 0 ${svgSize.width} ${svgSize.height}`} ref={svgRef}>
-
 
                 {distinctPointsY.map(({ value }) => {
                     const y = value / max * 100
@@ -124,31 +116,31 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
                         </>
                     )
                 })}
-
                 {distinctPointsX.map(({ label }) => {
                     counterLabels += 1
-                    const x = 100 / (dataSets[0].values.length - 1) * counterLabels
-                    return <>
-                        <line x1={getChartPoint(x, 0).x} y1={getChartPoint(x, 0).y} x2={getChartPoint(x, 0).x}  y2={getChartPoint(x, 100).y} />
-                        <text fontSize={chartSize.width / 80} x={getChartPoint(x, 0).x} y={svgSize.height - padding + 10} textAnchor='middle' alignmentBaseline='hanging'>{label}</text>
-                    </>
+                    return <text fontSize={chartSize.width / 80} key={label} x={getChartPoint(100 / dataSets[0].values.length * counterLabels + 50 / dataSets[0].values.length, 0).x} y={svgSize.height - padding + 10} textAnchor='middle' alignmentBaseline='hanging'>{label}</text>
                 })}
-
                 {dataSets.map(dataSet => {
-                    let counterXs = -1
-                    return <StyledPolygon key={dataSet.name} color={dataSet.color}
-                        points={`${getChartPoint(0, 0).x},${getChartPoint(0, 0).y} ` + dataSet.values.map(({value}) => {
-                            counterXs += 1
-                            const y = value / max * 100
-                            const x = getChartPoint(100 / (dataSets[0].values.length - 1) * counterXs, 0).x
-                            return `${x},${getChartPoint(0, y).y}`
-                        }).join(' ') + ` ${getChartPoint(100, 0).x},${getChartPoint(100, 0).y}`} />
+                    let counterBars = -1
+                    counterSet += 1
+                    return (
+                        <>
+                            {dataSet.values.map(({ label, value, color }) => {
+                                const y = value / max * 100
+                                counterBars += 1
+                                const width = (chartSize.width / dataSet.values.length - gap) / dataSets.length
+                                const height = chartSize.height / 100 * y
+                                const rectX = getChartPoint(100 / dataSets[0].values.length * counterBars, 0).x + (gap/2) + (counterSet * width)
+                                const rectY = getChartPoint(0, y).y
+                                return <StyledRect color={color || dataSet.color} key={label} width={width} height={height} x={rectX} y={rectY} />
+                            })}
+                        </>
+                    )
                 })}
 
-
+                
 
             </StyledChart>
-            
             <StyledChartTop height={padding} left={padding}>
                 <h1>{title}</h1>
                 {dataSets.map(dataSet => {
