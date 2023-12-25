@@ -65,7 +65,7 @@ const StyledChartTop = styled.div`
 `
 
 
-export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val}) => {
+export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val, setValue=(val)=>val}) => {
     const svgRef = React.useRef()
     const [svgSize, setSvgSize] = React.useState({ width: 0, height: 0 })
     const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 })
@@ -139,7 +139,7 @@ export const AreaChart = ({ title, dataSets = [], max=100, padding = 60, values=
                     return <StyledPolygon key={dataSet.name} color={dataSet.color}
                         points={`${getChartPoint(0, 0).x},${getChartPoint(0, 0).y} ` + dataSet.values.map(({value}) => {
                             counterXs += 1
-                            const y = value / max * 100
+                            const y = setValue(value) / max * 100
                             const x = getChartPoint(100 / (dataSets[0].values.length - 1) * counterXs, 0).x
                             return `${x},${getChartPoint(0, y).y}`
                         }).join(' ') + ` ${getChartPoint(100, 0).x},${getChartPoint(100, 0).y}`} />

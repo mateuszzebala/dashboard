@@ -73,7 +73,7 @@
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": false,
+            "save_requests": true,
             "credientals": true
         },
         "allowed_hosts": [

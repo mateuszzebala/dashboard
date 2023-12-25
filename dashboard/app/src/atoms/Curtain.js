@@ -37,7 +37,7 @@ export const Curtain = ({ loading = false, time = 3 }) => {
     return (
         <StyledWrapper>
             <LoadingBar time={time} />
-            <Loading size={2} />
+            <Loading size={3} />
         </StyledWrapper>
     )
 }

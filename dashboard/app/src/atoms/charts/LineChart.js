@@ -76,7 +76,7 @@ const StyledPoint = styled.circle`
 `
 
 
-export const LineChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val}) => {
+export const LineChart = ({ title, dataSets = [], max=100, padding = 60, values=null, getValue=(val)=>val, setValue=(val)=>val}) => {
     const svgRef = React.useRef()
     const [svgSize, setSvgSize] = React.useState({ width: 0, height: 0 })
     const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 })
@@ -150,7 +150,7 @@ export const LineChart = ({ title, dataSets = [], max=100, padding = 60, values=
                     let lastPoint = null
                     return dataSet.values.map(({value}) => {
                         counterXs += 1
-                        const {x, y} = getChartPoint(100 / (dataSets[0].values.length - 1) * counterXs, value / max * 100)
+                        const {x, y} = getChartPoint(100 / (dataSets[0].values.length - 1) * counterXs, setValue(value) / max * 100)
                         if (lastPoint == null){
                             lastPoint = {x, y}
                             return <StyledPoint key={{x, y}} color={dataSet.color} cx={x} cy={y} r={6} />

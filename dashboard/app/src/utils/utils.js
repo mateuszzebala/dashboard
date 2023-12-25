@@ -4,9 +4,10 @@ import String from 'string'
 export const toBoolStr = (variable) => {
     return variable ? '1' : ''
 }
-export const range = (start, end) => {
-    return Array.from({ length: end - start + 1 }, (_, i) => i)
+export const range = (start, end, step = 1) => {
+    return Array.from({ length: Math.floor((end - start) / step) + 1 }, (_, i) => start + i * step)
 }
+
 export const datetimeToString = (datetime) => {
     let { year, month, day, hours, minutes, seconds } = datetime
     if (month < 10) month = '0' + month

@@ -57,7 +57,7 @@ const StyledChartTop = styled.div`
 `
 
 
-export const ColumnChart = ({ title, dataSets = [], max=100, padding = 60, gap = 10, values=null, getValue=(val)=>val }) => {
+export const ColumnChart = ({ title, dataSets = [], max=100, padding = 60, gap = 10, values=null, getValue=(val)=>val, setValue=(val)=>val}) => {
     const svgRef = React.useRef()
     const [svgSize, setSvgSize] = React.useState({ width: 0, height: 0 })
     const [chartSize, setChartSize] = React.useState({ width: 0, height: 0 })
@@ -126,12 +126,13 @@ export const ColumnChart = ({ title, dataSets = [], max=100, padding = 60, gap =
                     return (
                         <>
                             {dataSet.values.map(({ label, value, color }) => {
-                                const y = value / max * 100
+                                const y1 = Math.abs(value) / max * 100
+                                const y2 = setValue(value) / max * 100
                                 counterBars += 1
                                 const width = (chartSize.width / dataSet.values.length - gap) / dataSets.length
-                                const height = chartSize.height / 100 * y
+                                const height = chartSize.height / 100 * y1
                                 const rectX = getChartPoint(100 / dataSets[0].values.length * counterBars, 0).x + (gap/2) + (counterSet * width)
-                                const rectY = getChartPoint(0, y).y
+                                const rectY = value < 0 ? getChartPoint(0, y2).y - height : getChartPoint(0, y2).y
                                 return <StyledRect color={color || dataSet.color} key={label} width={width} height={height} x={rectX} y={rectY} />
                             })}
                         </>

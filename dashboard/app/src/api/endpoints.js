@@ -72,7 +72,10 @@ export const ENDPOINTS = {
     },
     statistics: {
         countries: () => API(['statistics', 'countries']),
+        efficiency: () => API(['statistics', 'efficiency']),
+        network: () => API(['statistics', 'network']),
         country: (country) => API(['statistics', 'country', country]),
+        activity: (period) => API(['statistics', 'activity'], {period}),
     },
     users: {
         logout: () => API(['users', 'logout']),

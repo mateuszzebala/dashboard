@@ -13,8 +13,8 @@ views = [
     'statistics',
     'users',
     'email',
+    'sessions',
     'requests'
 ]
-
 
 urlpatterns = [path(f'{view}/', include(f'dashboard.views.{view}')) for view in views]

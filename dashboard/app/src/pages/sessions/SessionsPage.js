@@ -8,49 +8,25 @@ import { useTheme } from '../../utils/hooks'
 export const SessionsPage = () => {
     const [theme] = useTheme()
     return <MainTemplate app={APPS.sessions}>
-        <ColumnChart gap={25} max={500} title={'TOP CATEGORIES'} getValue={(val) => val} values={[0, 100, 200, 300, 400, 500]} dataSets={[
+        <ColumnChart gap={25} max={600} title={'TOP CATEGORIES'} setValue={val => val + 300} getValue={(val) => val - 300} values={[0, 100, 200, 300, 400, 500, 600]} dataSets={[
             {
                 name: 'INCOME',
                 color: theme.success,
                 values: [
-                    { label: 'SOCKS', value: 250 },
-                    { label: 'TOPS', value: 312 },
-                    { label: 'OTHER', value: 120 },
-                    { label: 'PANTS', value: 333 },
-                    { label: 'SHOES', value: 240 }
+                    { label: '3DAYS AGO', value: 200 },
+                    { label: '2DAYS AGO', value: 100 },
+                    { label: 'YESTRDAY', value: -100 },
+                    { label: 'TODAY', value: -200 },
                 ]
             },
             {
-                name: 'LOSSES',
+                name: 'LOSSESS',
                 color: theme.error,
                 values: [
-                    { label: 'SOCKS', value: 410 },
-                    { label: 'TOPS', value: 412 },
-                    { label: 'OTHER', value: 300 },
-                    { label: 'PANTS', value: 150 },
-                    { label: 'SHOES', value: 420 }
-                ]
-            },
-            {
-                name: 'LOSSES - INCOME',
-                color: theme.warning,
-                values: [
-                    { label: 'SOCKS', value: 200 },
-                    { label: 'TOPS', value: 312 },
-                    { label: 'OTHER', value: 200 },
-                    { label: 'PANTS', value: 250 },
-                    { label: 'SHOES', value: 10 }
-                ]
-            },
-            {
-                name: 'POPULAR',
-                color: theme.shoper,
-                values: [
-                    { label: 'SOCKS', value: 129 },
-                    { label: 'TOPS', value: 315 },
-                    { label: 'OTHER', value: 500 },
-                    { label: 'PANTS', value: 120 },
-                    { label: 'SHOES', value: 40 }
+                    { label: '3DAYS AGO', value: 100 },
+                    { label: '2DAYS AGO', value: -50 },
+                    { label: 'YESTRDAY', value: 100 },
+                    { label: 'TODAY', value: -100 },
                 ]
             },
         ]}/>

@@ -8,7 +8,7 @@ import { BiServer } from 'react-icons/bi'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
 import { BsBrowserSafari } from 'react-icons/bs'
-import { MdDevicesOther } from 'react-icons/md'
+import { MdDevicesOther, MdNetworkCheck, MdOutlineNetworkCheck } from 'react-icons/md'
 import { FaChrome, FaChromecast, FaMoneyBillTransfer } from 'react-icons/fa6'
 import { FiPieChart, FiServer } from 'react-icons/fi'
 
@@ -82,6 +82,9 @@ export const StatisticsPage = () => {
                 <StyledTile onClick={()=>{
                     navigate(LINKS.statistics.browsers())
                 }}><FaChrome/> BROWSERS</StyledTile>
+                <StyledTile onClick={()=>{
+                    navigate(LINKS.statistics.network())
+                }}><MdOutlineNetworkCheck/> NETWORK</StyledTile>
             </StyledWrapper>
         </MainTemplate>
     )

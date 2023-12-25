@@ -28,8 +28,8 @@ export const ChartInfo = ({ data, title }) => {
                     </Theme>
                     {dataSet.values.map(({ label, value }) => <>
                         <Row>
-                            <Field>{label}</Field>
-                            <Field>{value}</Field>
+                            {label && <Field>{label}</Field>}
+                            <Field colSpan={label ? 1 : 2}>{value}</Field>
                         </Row>
                     </>)}
                 </Table>
