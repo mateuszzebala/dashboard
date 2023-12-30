@@ -8,13 +8,11 @@ import { ENDPOINTS } from '../api/endpoints'
 import { InfoByApp } from '../pages/info/InfoPage'
 import { useGlobalKey, useModalForm, useSettings, useTheme, useUser } from '../utils/hooks'
 import { DashboardsMenu } from '../atoms'
-import { FaQrcode } from 'react-icons/fa'
 import { LoadingImage } from '../atoms'
-import { BsArrowBarUp, BsQrCode, BsQrCodeScan } from 'react-icons/bs'
+import { BsArrowBarUp, BsQrCodeScan } from 'react-icons/bs'
 import { ServerClock } from '../atoms'
 import { Tooltip } from '../atoms'
 import { APPS } from '../apps/apps'
-import { HiQrcode } from 'react-icons/hi'
 
 const StyledIcon = styled.button`
     display: flex;
@@ -30,7 +28,8 @@ const StyledIcon = styled.button`
     padding: 10px;
     border-radius: 20px;
     transform: ${({ rotate }) => (rotate ? 'rotate(180deg)' : 'rotate(0deg)')};
-    &:hover, &:focus{
+    &:hover,
+    &:focus {
         outline: none;
         background-color: ${({ theme }) => theme.tertiary}44;
     }
@@ -70,17 +69,21 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
             </Tooltip>
             <Tooltip text="APP INFO">
                 {InfoByApp[app.name] && (
-                    <StyledIcon onClick={() => {
-                        navigate(LINKS.info.app(app.name))
-                    }}>
+                    <StyledIcon
+                        onClick={() => {
+                            navigate(LINKS.info.app(app.name))
+                        }}
+                    >
                         <FiInfo />
                     </StyledIcon>
                 )}
             </Tooltip>
             <Tooltip text="SETTINGS">
-                <StyledIcon onClick={() => {
-                    navigate(Object.keys(APPS).includes(app.name.toLowerCase()) ? LINKS.settings.byApp(app.name.toLowerCase()) : LINKS.settings.byApp(APPS.home.name.toLowerCase()))
-                }}>
+                <StyledIcon
+                    onClick={() => {
+                        navigate(Object.keys(APPS).includes(app.name.toLowerCase()) ? LINKS.settings.byApp(app.name.toLowerCase()) : LINKS.settings.byApp(APPS.home.name.toLowerCase()))
+                    }}
+                >
                     <FiSettings />
                 </StyledIcon>
             </Tooltip>
@@ -88,17 +91,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                 <StyledIcon
                     onClick={() => {
                         modalForm({
-                            content: () => (
-                                <LoadingImage
-                                    src={ENDPOINTS.auth.qrcode(
-                                        theme.primary,
-                                        theme.secondary
-                                    )}
-                                    alt="qrcode"
-                                    width={400}
-                                    height={400}
-                                />
-                            ),
+                            content: () => <LoadingImage src={ENDPOINTS.auth.qrcode(theme.primary, theme.secondary)} alt="qrcode" width={400} height={400} />,
                             title: 'QRCODE',
                             icon: <BsQrCodeScan />,
                         })
@@ -107,7 +100,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                     <BsQrCodeScan />
                 </StyledIcon>
             </Tooltip>
-            {settings['dashboard.topbar_submenu_toggler'] &&
+            {settings['dashboard.topbar_submenu_toggler'] && (
                 <Tooltip text={`${hideSubmenu ? 'SHOW' : 'HIDE'} SUBMENU`}>
                     <StyledIcon
                         rotate={hideSubmenu}
@@ -118,8 +111,8 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                         <BsArrowBarUp />
                     </StyledIcon>
                 </Tooltip>
-            }
-            {settings['dashboard.dashboards_menu'] &&
+            )}
+            {settings['dashboard.dashboards_menu'] && (
                 <Tooltip text="CHOOSE PAGE">
                     <StyledIcon
                         onClick={() => {
@@ -133,7 +126,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                         <FiGrid />
                     </StyledIcon>
                 </Tooltip>
-            }
+            )}
             <Tooltip text="SERVER TIME">
                 <StyledIcon
                     onClick={() => {

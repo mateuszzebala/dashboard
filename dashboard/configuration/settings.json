@@ -10,7 +10,7 @@
         "default_number_of_rows": 30
     },
     "terminal": {
-        "sh_type": "cmd",
+        "sh_type": "zsh",
         "bookmarks": true,
         "auto_clear": true
     },
@@ -47,7 +47,7 @@
             "statistics": true
         },
         "style": {
-            "fontFamily": "Rubik",
+            "fontFamily": "Montserrat",
             "fontFamilyMono": "Jetbrains Mono"
         },
         "topbar_submenu_toggler": true
@@ -55,6 +55,11 @@
     "editor": {
         "liked": [],
         "last": [
+            {
+                "name": "a.txt",
+                "path": "/Users/mateuszzebala/Desktop/a.txt",
+                "type": "file"
+            },
             {
                 "name": "5",
                 "path": "C:\\Users\\Mateusz\\Desktop\\test\\5",
@@ -79,8 +84,7 @@
         "allowed_hosts": [
             "localhost",
             "192.168.100.37",
-            "192.168.100.35",
-            "manjaro"
+            "192.168.100.35"
         ],
         "cors_allowed_origins": [
             "http://localhost:3000",

@@ -7,8 +7,7 @@ export const LINKS = {
         model: (modelName) => `/dashboard/database/${modelName}/`,
         item: (modelName, pk) => `/dashboard/database/${modelName}/${pk}/`,
         putItem: (modelName) => `/dashboard/database/${modelName}/add/`,
-        patchItem: (modelName, pk) =>
-            `/dashboard/database/${modelName}/edit/${pk}/`,
+        patchItem: (modelName, pk) => `/dashboard/database/${modelName}/edit/${pk}/`,
     },
     users: {
         index: () => '/dashboard/users/',
@@ -18,8 +17,7 @@ export const LINKS = {
     },
     editor: {
         index: () => '/dashboard/editor/',
-        edit: (path, type = 'text') =>
-            `/dashboard/editor/${type}/?path=${path}`,
+        edit: (path, type = 'text') => `/dashboard/editor/${type}/?path=${path}`,
     },
     files: {
         index: () => '/dashboard/files/',
@@ -74,12 +72,10 @@ export const LINKS = {
     info: {
         app: (appName) => `/dashboard/info/${appName}/`,
         index: () => '/dashboard/info/',
-    }, 
+    },
     other: {
         admin: () => `${MANIFEST.page_url}/admin/`,
         page: () => MANIFEST.page_url,
-        shoper: () => '/shoper/',
-        bloger: () => '/bloger/',
         components: () => '/dashboard/components/',
     },
 }

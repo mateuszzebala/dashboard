@@ -16,7 +16,7 @@ export const StatisticsNetworkPage = () => {
     const [theme] = useTheme()
 
     const reload = () => {
-        FETCH(ENDPOINTS.statistics.network()).then(data => {
+        FETCH(ENDPOINTS.statistics.network()).then((data) => {
             setStats(data.data.stats)
             setMax(data.data.max)
         })
@@ -24,35 +24,32 @@ export const StatisticsNetworkPage = () => {
 
     React.useEffect(reload, [])
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const interval = setInterval(reload, 500)
         return () => clearInterval(interval)
     }, [])
 
     return (
         <MainTemplate app={APPS.statistics} title={'NETWORK'}>
-            <AreaChart 
-                title={'NETWORK'} 
+            <AreaChart
+                title={'NETWORK'}
                 max={max}
                 padding={70}
-                getValue={(val)=>Math.round(val) + 'Mb/s'} 
-                values={range(0, max, max/10)}
+                getValue={(val) => Math.round(val) + 'Mb/s'}
+                values={range(0, max, max / 10)}
                 dataSets={[
                     {
                         name: 'DOWNLOAD',
-                        color: theme.shoper,
-                        values: stats.download.map(sec => ({label: '', value: sec}))
+                        color: theme.success,
+                        values: stats.download.map((sec) => ({ label: '', value: sec })),
                     },
                     {
                         name: 'UPLOAD',
                         color: theme.success,
-                        values: stats.upload.map(sec => ({label: '', value: sec}))
+                        values: stats.upload.map((sec) => ({ label: '', value: sec })),
                     },
                 ]}
-            /> 
-
-     
-
+            />
         </MainTemplate>
     )
 }

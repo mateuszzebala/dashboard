@@ -13,7 +13,8 @@ const StyledButtons = styled.div`
     gap: 8px;
     padding: 20px;
     width: 100%;
-    a, span {
+    a,
+    span {
         width: 100%;
         display: flex;
     }
@@ -36,7 +37,9 @@ export const DashboardsMenu = ({ setOpen }) => {
                     to={LINKS.other.page()}
                     size={1.4}
                     width={'100%'}
-                >PAGE</Button>
+                >
+                    PAGE
+                </Button>
             </Theme>
             <Button
                 onClick={() => {
@@ -45,42 +48,35 @@ export const DashboardsMenu = ({ setOpen }) => {
                 to={LINKS.home()}
                 size={1.4}
                 width={'100%'}
-            >DASHBOARD</Button>
+            >
+                DASHBOARD
+            </Button>
             <Theme
                 value={{
                     primary: theme.success,
                 }}
             >
-                <Button
-                    target={'_blank'}
-                    to={LINKS.other.admin()}
-                    size={1.4}
-                    width={'100%'}
-                >ADMIN</Button>
+                <Button target={'_blank'} to={LINKS.other.admin()} size={1.4} width={'100%'}>
+                    ADMIN
+                </Button>
             </Theme>
             <Theme
                 value={{
                     primary: theme.warning,
                 }}
             >
-                <Button
-                    target={'_blank'}
-                    to={LINKS.other.shoper()}
-                    size={1.4}
-                    width={'100%'}
-                >SHOPER</Button>
+                <Button target={'_blank'} to={'#'} size={1.4} width={'100%'}>
+                    ...
+                </Button>
             </Theme>
             <Theme
                 value={{
                     primary: theme.error,
                 }}
             >
-                <Button
-                    target={'_blank'}
-                    to={LINKS.other.bloger()}
-                    size={1.4}
-                    width={'100%'}
-                >BLOGER</Button>
+                <Button target={'_blank'} to={LINKS.other.bloger()} size={1.4} width={'100%'}>
+                    BLOGER
+                </Button>
             </Theme>
         </StyledButtons>
     )
