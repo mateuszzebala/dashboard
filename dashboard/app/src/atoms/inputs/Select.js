@@ -38,7 +38,7 @@ const StyledWrapper = styled.div`
     max-width: ${({size})=>size*300+'px'};
     width: ${({size})=>size*300+'px'};
     background-color: ${({ theme }) => theme.secondary};
-    border: 2.5px solid ${({ theme }) => theme.primary};
+    border: ${({size})=>size*2.5+'px'} solid ${({ theme }) => theme.primary};
     border-radius: ${({size})=>size*3+'px'};
     justify-content: space-between;
     height: ${({size})=>size*45+'px'};

@@ -3,17 +3,15 @@ import styled from 'styled-components'
 import { TopBarIcons } from '../molecules/TopBarIcons'
 import { LINKS } from '../router/links'
 import { Link } from '../atoms'
-
-import {HiOutlineMenu} from 'react-icons/hi'
+import { isMobile } from 'react-device-detect'
 import { toBoolStr } from '../utils/utils'
 import { useSettings } from '../utils/hooks'
-import { FiMenu } from 'react-icons/fi'
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai'
 
 const StyledWrapper = styled.nav`
     display: flex;
     transition: padding 0.3s;
-    padding: ${({submenuExists, hideSubmenu}) => submenuExists ? !hideSubmenu ? '20px 10px 10px' : '20px 10px' : '20px 10px'};
+    padding: ${({ submenuExists, hideSubmenu }) => (submenuExists ? (!hideSubmenu ? '20px 10px 10px' : '20px 10px') : '20px 10px')};
     width: 100%;
     z-index: 1;
     align-items: center;
@@ -43,7 +41,8 @@ const StyledMenuButton = styled.button`
         stroke-width: 1.4px;
     }
     transition: outline-width 0.1s;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         outline-width: 3px;
     }
 `
@@ -75,45 +74,28 @@ const StyledLeftSide = styled.div`
     gap: 10px;
     align-items: center;
     justify-content: center;
-    a{
+    a {
         outline: 0 solid ${({ theme }) => theme.tertiary}aa;
         transition: transform 0.1s;
         border-radius: 3px;
     }
-    a:focus{
+    a:focus {
         outline-width: 3px;
     }
 `
 
-export const TopBar = ({
-    app,
-    setClose,
-    title,
-    close,
-    topbarLink,
-    setHideSubmenu,
-    hideSubmenu,
-    submenuExists
-}) => {
+export const TopBar = ({ app, setClose, title, close, topbarLink, setHideSubmenu, hideSubmenu, submenuExists }) => {
     const [settings] = useSettings()
-    
+
     function handleBurgerClick() {
         setClose((prev) => !prev)
     }
 
     return (
-        <StyledWrapper
-            submenuExists={toBoolStr(submenuExists)}
-            hideSubmenu={toBoolStr(hideSubmenu)}
-        >
+        <StyledWrapper submenuExists={toBoolStr(submenuExists)} hideSubmenu={toBoolStr(hideSubmenu)}>
             <StyledLeftSide>
-                <StyledMenuButton onClick={handleBurgerClick}>
-                    {!close ?  <AiOutlineMenuFold /> : <AiOutlineMenuUnfold/>}
-                </StyledMenuButton>
-                <Link
-                    animation={false}
-                    to={topbarLink ? topbarLink : app.link || LINKS.home()}
-                >
+                {!isMobile && <StyledMenuButton onClick={handleBurgerClick}>{!close ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}</StyledMenuButton>}
+                <Link animation={false} to={topbarLink ? topbarLink : app.link || LINKS.home()}>
                     <StyledTitle>
                         {settings['dashboard.topbar_app_icon'] && <app.icon />}
                         {app.name.toUpperCase()}
@@ -121,11 +103,7 @@ export const TopBar = ({
                     </StyledTitle>
                 </Link>
             </StyledLeftSide>
-            <TopBarIcons
-                app={app}
-                hideSubmenu={hideSubmenu}
-                setHideSubmenu={setHideSubmenu}
-            />
+            <TopBarIcons app={app} hideSubmenu={hideSubmenu} setHideSubmenu={setHideSubmenu} />
         </StyledWrapper>
     )
 }

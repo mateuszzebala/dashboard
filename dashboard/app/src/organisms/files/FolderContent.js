@@ -5,21 +5,22 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import useResizeObserver from 'use-resize-observer'
 import { Loading } from '../../atoms'
-import {centerEllipsis, toBoolStr} from '../../utils/utils'
+import { centerEllipsis, toBoolStr } from '../../utils/utils'
 import { useLoading, useModalForm } from '../../utils/hooks'
-import {Confirm} from '../../atoms'
-import {MdOutlineDriveFileMove} from 'react-icons/md'
+import { Confirm } from '../../atoms'
+import { MdOutlineDriveFileMove } from 'react-icons/md'
 
 const StyledWrapper = styled.div`
-    display: ${({list})=>list ? 'flex' : 'grid'};
+    display: ${({ list }) => (list ? 'flex' : 'grid')};
     flex-direction: column;
     align-items: stretch;
     gap: 5px;
-    grid-template-columns: repeat(auto-fit, 100px);
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     grid-template-rows: repeat(auto-fit, 100px);
     overflow: scroll;
     min-height: ${({ content }) => (content ? '100%' : '0')};
     max-height: 100%;
+    width: 100%;
 `
 
 const StyledSelectRect = styled.div`
@@ -41,51 +42,39 @@ const StyledLoading = styled.div`
 `
 
 const StyledDragItems = styled.div`
-  width: 80px;
-  height: 80px;
-  background-color: ${({theme})=>theme.accent}CC;
-  border-radius: 4px;
-  position: absolute;
-  color: ${({theme})=>theme.secondary};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  justify-content: center;
-  gap: 5px;
-  left: ${({x})=>x-40}px;
-  top: ${({y})=>y-40}px;
-  h1{
-    font-size: 40px;
-    margin: 0;
-  }
-  span{
-    font-weight: bold;
-  }
+    width: 80px;
+    height: 80px;
+    background-color: ${({ theme }) => theme.accent}CC;
+    border-radius: 4px;
+    position: absolute;
+    color: ${({ theme }) => theme.secondary};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: move;
+    justify-content: center;
+    gap: 5px;
+    left: ${({ x }) => x - 40}px;
+    top: ${({ y }) => y - 40}px;
+    h1 {
+        font-size: 40px;
+        margin: 0;
+    }
+    span {
+        font-weight: bold;
+    }
 `
 
-export const FolderContent = ({
-    path,
-    setPath,
-    selectedItems,
-    setSelectedItems,
-    files,
-    setFiles,
-    folders,
-    setFolders,
-    setReload,
-    reload,
-    list=false,
-    setData,
-}) => {
+export const FolderContent = ({ path, setPath, selectedItems, setSelectedItems, files, setFiles, folders, setFolders, setReload, reload, list = false, setData }) => {
     const load = useLoading()
     const modalForm = useModalForm()
     const [loading, setLoading] = React.useState(true)
     const [pos, setPos] = React.useState({})
     const [reloadPos, setReloadPos] = React.useState(0)
-    const [dragItemsPos, setDragItemsPos] = React.useState({x: 0, y: 0})
+    const [dragItemsPos, setDragItemsPos] = React.useState({ x: 0, y: 0 })
     const [dragging, setDragging] = React.useState(false)
     const [toDropElement, setToDropElement] = React.useState()
+
     const [selectRect, setSelectRect] = React.useState({
         mouseDown: false,
         show: false,
@@ -95,15 +84,13 @@ export const FolderContent = ({
         y2: 0,
     })
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
+        setReloadPos((prev) => prev + 1)
+    }, [selectRect.show])
+
+    React.useEffect(() => {
         !dragging && setToDropElement(null)
     }, [dragging])
-
-    const { ref: contentRef } = useResizeObserver({
-        onResize: () => {
-            setReloadPos((prev) => prev + 1)
-        },
-    })
 
     const handleMouseDown = (e) => {
         e.button === 0 &&
@@ -119,19 +106,19 @@ export const FolderContent = ({
 
     const handleMouseUp = (e) => {
         e.preventDefault()
-        if(dragging && toDropElement && selectedItems){
+        if (dragging && toDropElement && selectedItems) {
             modalForm({
                 content: Confirm,
                 title: 'MOVE ITEMS',
                 text: `MOVE ${selectedItems.length} ITEM${selectedItems.length > 1 ? 'S' : ''} TO ${centerEllipsis(toDropElement.name, 20).toUpperCase()}?`,
-                icon: <MdOutlineDriveFileMove/>,
-                todo: ()=>{
-                    load({show: true, text: 'MOVING ITEMS'})
-                    FETCH(ENDPOINTS.files.move(), {moveTo: toDropElement.path, items: selectedItems.map(item => item.path).join(';;;')}).then(data => {
-                        setReload(prev => prev + 1)
-                        load({show: false})
+                icon: <MdOutlineDriveFileMove />,
+                todo: () => {
+                    load({ show: true, text: 'MOVING ITEMS' })
+                    FETCH(ENDPOINTS.files.move(), { moveTo: toDropElement.path, items: selectedItems.map((item) => item.path).join(';;;') }).then((data) => {
+                        setReload((prev) => prev + 1)
+                        load({ show: false })
                     })
-                }
+                },
             })
         }
         setDragging(false)
@@ -143,40 +130,35 @@ export const FolderContent = ({
             mouseDown: false,
             show: false,
         })
-
     }
 
-    React.useEffect(()=>{
-        if(dragging){
-            const toDropElements = [...folders, ...files].filter((item) => {
-                const bcr = pos[item.name]
-                return (
-                    bcr.x <= dragItemsPos.x && bcr.x + bcr.width > dragItemsPos.x && bcr.y <= dragItemsPos.y && bcr.y + bcr.height >= dragItemsPos.y
-                )
-            }).filter(item => !selectedItems.includes(item)).filter(item => !item.is_file)
+    React.useEffect(() => {
+        if (dragging) {
+            const toDropElements = [...folders, ...files]
+                .filter((item) => {
+                    const bcr = pos[item.name]
+                    return bcr.x <= dragItemsPos.x && bcr.x + bcr.width > dragItemsPos.x && bcr.y <= dragItemsPos.y && bcr.y + bcr.height >= dragItemsPos.y
+                })
+                .filter((item) => !selectedItems.includes(item))
+                .filter((item) => !item.is_file)
             setToDropElement(toDropElements.length > 0 ? toDropElements[0] : null)
         }
     }, [dragging, dragItemsPos])
 
     const handleMouseMove = (e) => {
-        setDragItemsPos({x: e.clientX, y: e.clientY})
+        setDragItemsPos({ x: e.clientX, y: e.clientY })
         e.preventDefault()
         if (selectRect.mouseDown) {
             const rectPosition = {
                 top: selectRect.y1 < selectRect.y2 ? selectRect.y1 : selectRect.y2,
                 left: selectRect.x1 < selectRect.x2 ? selectRect.x1 : selectRect.x2,
                 width: Math.abs(selectRect.x1 - selectRect.x2),
-                height: Math.abs(selectRect.y1 - selectRect.y2)
+                height: Math.abs(selectRect.y1 - selectRect.y2),
             }
 
             const newSelectedItems = [...folders, ...files].filter((item) => {
                 const bcr = pos[item.name]
-                return (
-                    bcr.x + bcr.width > rectPosition.left &&
-                    bcr.x < rectPosition.left + rectPosition.width &&
-                    bcr.y + bcr.height > rectPosition.top &&
-                    bcr.y < rectPosition.top + rectPosition.height
-                )
+                return bcr.x + bcr.width > rectPosition.left && bcr.x < rectPosition.left + rectPosition.width && bcr.y + bcr.height > rectPosition.top && bcr.y < rectPosition.top + rectPosition.height
             })
 
             setSelectRect((prev) => ({
@@ -186,9 +168,7 @@ export const FolderContent = ({
                 y2: e.clientY,
             }))
 
-            setSelectedItems((prev) =>
-                e.shiftKey ? [...new Set([...prev, ...newSelectedItems])] : newSelectedItems
-            )
+            setSelectedItems((prev) => (e.shiftKey ? [...new Set([...prev, ...newSelectedItems])] : newSelectedItems))
         }
     }
 
@@ -209,7 +189,7 @@ export const FolderContent = ({
     }, [path])
 
     React.useEffect(() => {
-        setReloadPos((prev) => prev + 1)
+        //setReloadPos((prev) => prev + 1)
     }, [folders, files, list])
 
     return (
@@ -220,17 +200,17 @@ export const FolderContent = ({
                 </StyledLoading>
             )}
             <StyledWrapper
-                onScroll={() => {
-                    setReloadPos((prev) => prev + 1)
-                }}
                 content={toBoolStr([...folders, ...files].length > 0)}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 list={toBoolStr(list)}
-                ref={contentRef}
-                onMouseMove={!dragging ? handleMouseMove : (e) => {
-                    setDragItemsPos({x: e.clientX, y: e.clientY})
-                }}
+                onMouseMove={
+                    !dragging
+                        ? handleMouseMove
+                        : (e) => {
+                              setDragItemsPos({ x: e.clientX, y: e.clientY })
+                          }
+                }
                 onMouseLeave={() => {
                     setSelectRect((prev) => ({
                         ...prev,
@@ -291,21 +271,17 @@ export const FolderContent = ({
                                 mouseDown: false,
                             }))
                         }}
-                        top={
-                            selectRect.y1 < selectRect.y2
-                                ? selectRect.y1
-                                : selectRect.y2
-                        }
-                        left={
-                            selectRect.x1 < selectRect.x2
-                                ? selectRect.x1
-                                : selectRect.x2
-                        }
+                        top={selectRect.y1 < selectRect.y2 ? selectRect.y1 : selectRect.y2}
+                        left={selectRect.x1 < selectRect.x2 ? selectRect.x1 : selectRect.x2}
                         width={Math.abs(selectRect.x1 - selectRect.x2)}
                         height={Math.abs(selectRect.y1 - selectRect.y2)}
                     />
                 )}
-                {dragging && <StyledDragItems x={dragItemsPos.x} y={dragItemsPos.y}><h1>{selectedItems.length}</h1> <span>items</span></StyledDragItems>}
+                {dragging && (
+                    <StyledDragItems x={dragItemsPos.x} y={dragItemsPos.y}>
+                        <h1>{selectedItems.length}</h1> <span>items</span>
+                    </StyledDragItems>
+                )}
             </StyledWrapper>
         </>
     )

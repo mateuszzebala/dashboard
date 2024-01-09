@@ -10,6 +10,9 @@ import qrcode
 import os
 import datetime
 
+def dashboard_user_access(user):
+    return user.is_superuser or user.groups.filter(name='dashboard_admin').exists()
+
 @csrf_exempt
 def signin(request):
     username = request.POST.get('username')
@@ -18,14 +21,15 @@ def signin(request):
     if user is not None:
         login(request, user)
     return JsonResponse({
-        'done': request.user.is_authenticated
+        'done': request.user.is_authenticated and request.user.username == username
     })
 
 @csrf_exempt
 def csrf(request):
     return JsonResponse({
         'token': get_token(request),
-        'username': request.user.username if request.user.is_authenticated else None
+        'username': request.user.username if request.user.is_authenticated else None,
+        'access': dashboard_user_access(request.user)
     })
 
 def logout_view(request):
@@ -47,6 +51,7 @@ def me(request):
             'is_superuser': request.user.is_superuser,
             'is_active': request.user.is_active,
             'is_staff': request.user.is_staff,
+            'dashboard_access': dashboard_user_access(request.user)
         })
     else:
         return JsonResponse({
@@ -57,7 +62,8 @@ def me(request):
 def dashboard_access(fnc):
     def inner(*args, **kwargs):
         request = args[0]
-        if request.user.is_superuser or request.user.groups.filter(name='dashboard_admin').exists():
+        have_access = dashboard_user_access(request.user)
+        if have_access:
             return fnc(*args, **kwargs)
         else:
             return JsonResponse({
@@ -93,10 +99,12 @@ def get_auth(request, token):
 def profile_picture(request, username):
     account = Account.objects.filter(user__username=username).first()
     if account is not None:
-        image = account.image
-        if image:
-            return FileResponse(open(image.path, 'rb'))
-    return FileResponse(open('Media/dashboard/auth/account/default.jpg', 'rb'))
+        if account.image and os.path.exists(account.image.path):
+            return FileResponse(open(account.image.path, 'rb'))
+        else:
+            if account.gender == 'woman':
+                return FileResponse(open('Media/dashboard/auth/account/defaults/woman1.png', 'rb'))
+    return FileResponse(open('Media/dashboard/auth/account/defaults/man1.png', 'rb'))
 
 
 urlpatterns = [

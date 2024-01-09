@@ -12,6 +12,7 @@ const StyledWrapper = styled.div`
     font-size: 20px;
     cursor: pointer;
     transition: background-color 0.2s;
+    overflow: hidden;
     &:hover {
         background-color: #00000011;
     }

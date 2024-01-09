@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { isMobile } from 'react-device-detect'
 const StyledWrapper = styled.span`
     display: inline-block;
-
 `
 
 const StyledTooltip = styled.div`
@@ -54,14 +53,9 @@ export const Tooltip = ({ children, text = '', wrapper: Wrapper = StyledWrapper,
     }
 
     return (
-        <Wrapper
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseMove={handleMouseMove}
-            {...props}
-        >
+        <Wrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} {...props}>
             {children}
-            {show && text && (
+            {show && !isMobile && text && (
                 <StyledTooltip x={position.x} y={position.y}>
                     {text}
                 </StyledTooltip>

@@ -33,8 +33,7 @@ const StyledWrapper = styled.div`
     z-index: ${({zIndex})=>zIndex};
     max-width: 97%;
     max-height: 97vh;
-
-    padding: 10px;
+    padding: 12px;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     
@@ -72,7 +71,7 @@ const StyledIcon = styled.span`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 28px;
 `
 
 const StyledCircleButton = styled.button`

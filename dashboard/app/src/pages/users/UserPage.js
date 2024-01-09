@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { BsCamera } from 'react-icons/bs'
 import { useModalForm, useTheme } from '../../utils/hooks'
 import { Button, Confirm, FilePrompt, FloatingActionButton, Input, Select, Theme } from '../../atoms'
-import { FiCamera, FiDatabase, FiLogOut, FiSave } from 'react-icons/fi'
+import { FiCamera, FiDatabase, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
 import { MdBlock, MdPassword } from 'react-icons/md'
 import { useMessage } from '../../utils/messages'
 import { objectEquals } from '../../utils/utils'
@@ -155,6 +155,11 @@ export const UserPage = () => {
             }} />
             <Button second icon={<MdPassword />} size={1.4} subContent='PASSWORD' />
             <Button second to={LINKS.database.item('Account', id)} icon={<FiDatabase />} size={1.4} subContent='SHOW IN' />
+            <Button size={1.4} icon={<FiLogIn/>} subContent='LOGIN' second onClick={() => {
+                FETCH(ENDPOINTS.users.signin(id)).then(data => {
+                    window.location.reload()
+                })
+            }}/>
         </>}>
             {accountInfo.username && (
                 <StyledWrapper>

@@ -13,11 +13,9 @@ const StyledWrapper = styled.div`
 `
 
 const StyledPageButton = styled.button`
-    background-color: ${({ theme, second }) =>
-        second ? theme.quaternary : theme.primary};
+    background-color: ${({ theme, second }) => (second ? theme.quaternary : theme.primary)};
     color: ${({ theme, second }) => (second ? theme.primary : theme.secondary)};
-    outline-color: ${({ theme, second }) =>
-        second ? theme.quaternary : theme.primary}88;
+    outline-color: ${({ theme, second }) => (second ? theme.quaternary : theme.primary)}88;
     outline-style: solid;
     outline-width: 0;
     border: 0;
@@ -38,8 +36,6 @@ const StyledPageButton = styled.button`
 `
 
 export const Paginator = ({ value, setValue, pages, second, minimum }) => {
-
-
     return (
         <StyledWrapper>
             <StyledPageButton
@@ -65,21 +61,22 @@ export const Paginator = ({ value, setValue, pages, second, minimum }) => {
                 </>
             )}
             {minimum && <StyledPageButton second={second}>{value + 1}</StyledPageButton>}
-            {!minimum && range(1, pages).map((page) => {
-                if (Math.abs(value - page) >= 3) return ''
-                return (
-                    <StyledPageButton
-                        second={second}
-                        selected={toBoolStr(value == page)}
-                        key={page}
-                        onClick={() => {
-                            setValue(page)
-                        }}
-                    >
-                        {page + 1}
-                    </StyledPageButton>
-                )
-            })}
+            {!minimum &&
+                range(0, pages - 1).map((page) => {
+                    if (Math.abs(value - page) >= 3) return ''
+                    return (
+                        <StyledPageButton
+                            second={second}
+                            selected={toBoolStr(value == page)}
+                            key={page}
+                            onClick={() => {
+                                setValue(page)
+                            }}
+                        >
+                            {page + 1}
+                        </StyledPageButton>
+                    )
+                })}
 
             {value < pages - 3 && !minimum && (
                 <>

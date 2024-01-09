@@ -7,10 +7,14 @@ import { ENDPOINTS } from '../../../api/endpoints'
 const StyledWrapper = styled.div`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     padding: 10px;
-    height: 100%;
     width: 100%;
-    min-width: 400px;
     border-radius: 10px;
+    overflow: scroll;
+    min-height: 100%;
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
 `
 
 const StyledList = styled.div`
@@ -18,28 +22,20 @@ const StyledList = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 10px;
-    max-height: 100%;
-    min-height: 100%;
-    overflow: scroll;
-    &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-    }
 `
 
-
-export const LogsList = ({reloadEachSecond=false}) => {
+export const LogsList = ({ reloadEachSecond = false }) => {
     const [logs, setLogs] = React.useState([])
 
     const handleReload = () => {
-        FETCH(ENDPOINTS.requests.get(), {sortBy: 'datetime', asc: false, length: 30, page: 0}).then((data) => {
+        FETCH(ENDPOINTS.requests.get(), { sortBy: 'datetime', asc: false, length: 10, page: 0 }).then((data) => {
             setLogs(data.data.logs)
         })
     }
 
     React.useEffect(() => {
         handleReload()
-        if(reloadEachSecond){
+        if (reloadEachSecond) {
             const interval = setInterval(() => {
                 handleReload()
             }, 1000)

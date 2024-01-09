@@ -48,8 +48,8 @@ export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
     })
 
     formData.append('csrfmiddlewaretoken', tokenData.token)
-
-    if (tokenData.username === null) {
+    console.log(tokenData)
+    if (!tokenData.access) {
         if (window.location.pathname !== LINKS.auth.signin())
             window.location.href = LINKS.auth.signinNext(
                 window.location.pathname

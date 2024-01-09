@@ -8,12 +8,15 @@ import { ENDPOINTS } from '../../../api/endpoints'
 import { FiPower } from 'react-icons/fi'
 import { Button } from '../../../atoms'
 import { useSettings, useTheme } from '../../../utils/hooks'
+import { toBoolStr } from '../../../utils/utils'
+import { isMobile } from 'react-device-detect'
 
 const StyledWrapper = styled.div`
     padding: 20px 50px;
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     border-radius: 10px;
-    width: 30%;
+    width: ${({ isMobile }) => (isMobile ? '100' : '30')}%;
+    min-height: 100%;
     min-width: 200px;
     gap: 20px;
     display: grid;
@@ -62,23 +65,21 @@ export const ServerManage = () => {
                 'server.config.new_users': config.new_users,
                 'server.config.ddos_block': config.ddos_block,
                 'server.config.save_requests': config.save_requests,
-            })
+            }),
         }).then(() => {
-            FETCH(ENDPOINTS.settings.get()).then(data => {
+            FETCH(ENDPOINTS.settings.get()).then((data) => {
                 setSettings(data.data)
             })
         })
     }, [config])
 
     return (
-        <StyledWrapper>
+        <StyledWrapper isMobile={toBoolStr(isMobile)}>
             <StyledToggle>
                 <Typography variant={'h4'}>PAGE</Typography>
                 <Theme
                     value={{
-                        primary: config.enable_server
-                            ? theme.success
-                            : theme.error,
+                        primary: config.enable_server ? theme.success : theme.error,
                     }}
                 >
                     <Button

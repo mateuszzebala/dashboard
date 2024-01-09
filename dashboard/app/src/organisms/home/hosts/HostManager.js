@@ -18,6 +18,7 @@ const StyledWrapper = styled.div`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     display: inline-flex;
     border-radius: 10px;
+    overflow: hidden;
     flex-direction: column;
     gap: 20px;
 `
@@ -41,26 +42,29 @@ export const HostManager = ({ name, hostKey }) => {
     const [hosts, setHosts] = React.useState([])
     const [settings] = useSettings()
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         setHosts(settings[hostKey])
     }, [])
 
-    React.useEffect(()=>{
-        hosts.length && FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify({
-            [hostKey]: hosts
-        })})
+    React.useEffect(() => {
+        hosts.length &&
+            FETCH(ENDPOINTS.settings.set(), {
+                settings: JSON.stringify({
+                    [hostKey]: hosts,
+                }),
+            })
     }, [hosts])
 
     const handleAddHost = () => {
         modalForm({
             content: Prompt,
             title: 'ADD HOST',
-            icon: <MdOutlineNetworkCheck/>,
+            icon: <MdOutlineNetworkCheck />,
             label: 'HOST',
             setButton: 'ADD',
             todo: (val) => {
                 setHosts((prev) => [...prev, val])
-            }
+            },
         })
     }
 
@@ -81,12 +85,7 @@ export const HostManager = ({ name, hostKey }) => {
                                     text: `DELETE ${host} HOST?`,
                                     icon: <FiTrash />,
                                     todo: () => {
-                                        host !== 'localhost' &&
-                                            setHosts((prev) =>
-                                                prev.filter(
-                                                    (val) => val !== host
-                                                )
-                                            )
+                                        host !== 'localhost' && setHosts((prev) => prev.filter((val) => val !== host))
                                     },
                                 })
                             }}
@@ -95,9 +94,7 @@ export const HostManager = ({ name, hostKey }) => {
                         />
                     ))
                 ) : (
-                    <Typography variant={'span'}>
-                        There are not allowed hosts
-                    </Typography>
+                    <Typography variant={'span'}>There are not allowed hosts</Typography>
                 )}
             </StyledHosts>
         </StyledWrapper>

@@ -47,27 +47,23 @@
             "statistics": true
         },
         "style": {
-            "fontFamily": "Montserrat",
+            "fontFamily": "Rubik",
             "fontFamilyMono": "Jetbrains Mono"
         },
         "topbar_submenu_toggler": true
     },
     "editor": {
-        "liked": [],
+        "liked": [
+            {
+                "name": "Screenshot 2024-01-08 at 09.47.33.png",
+                "path": "/Users/mateuszzebala/Desktop/Screenshot 2024-01-08 at 09.47.33.png",
+                "type": "image"
+            }
+        ],
         "last": [
             {
-                "name": "a.txt",
-                "path": "/Users/mateuszzebala/Desktop/a.txt",
-                "type": "file"
-            },
-            {
-                "name": "5",
-                "path": "C:\\Users\\Mateusz\\Desktop\\test\\5",
-                "type": "file"
-            },
-            {
-                "name": "Skan_20231218.png",
-                "path": "C:\\Users\\Mateusz\\code\\dashboard\\Media\\Media\\dashboard\\auth\\account\\Skan_20231218.png",
+                "name": "Screenshot 2024-01-08 at 09.47.33.png",
+                "path": "/Users/mateuszzebala/Desktop/Screenshot 2024-01-08 at 09.47.33.png",
                 "type": "image"
             }
         ]
@@ -78,7 +74,7 @@
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": true,
+            "save_requests": false,
             "credientals": true
         },
         "allowed_hosts": [

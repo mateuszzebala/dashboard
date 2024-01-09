@@ -1,16 +1,5 @@
 import React from 'react'
-import {
-    BsFileBinary,
-    BsFileCode,
-    BsFileEarmarkImage,
-    BsFileExcel,
-    BsFileMusic,
-    BsFilePlay,
-    BsFileText,
-    BsFileWord,
-    BsFileZip,
-    BsFolder,
-} from 'react-icons/bs'
+import { BsFileBinary, BsFileCode, BsFileEarmarkImage, BsFileExcel, BsFileMusic, BsFilePlay, BsFileText, BsFileWord, BsFileZip, BsFolder } from 'react-icons/bs'
 import styled from 'styled-components'
 import { Tooltip } from '../../atoms'
 import { toBoolStr } from '../../utils/utils'
@@ -23,36 +12,36 @@ import { BiEditAlt } from 'react-icons/bi'
 import { EditorChooser } from '../../atoms'
 
 const StyledWrapper = styled.div`
-    aspect-ratio: 1/1;
     display: ${({ hidden }) => (hidden ? 'none' : 'inline-flex')};
-    justify-content: ${({ list }) => list ? 'flex-start' : 'center'};
+    justify-content: ${({ list }) => (list ? 'flex-start' : 'center')};
     align-items: center;
-    flex-direction: ${({ list }) => list ? 'row' : 'column'};
+    flex-direction: ${({ list }) => (list ? 'row' : 'column')};
     gap: 10px;
     padding: 10px;
-    opacity: ${({ dragging, selected, isFile }) => (dragging && (selected || isFile)) ? '40%' : 1};
+    opacity: ${({ dragging, selected, isFile }) => (dragging && (selected || isFile) ? '40%' : 1)};
     background-color: ${({ theme }) => theme.quaternary};
     color: ${({ theme }) => theme.primary};
     border-radius: 3px;
-    height: ${({ list }) => list ? '50px' : '100px'};
-    border: ${({ selected, isFile, dragging }) => dragging ? (!isFile && !selected) ? '3px' : '3px' : '3px'} solid ${({ theme, selected, toDrop, dragging }) => toDrop ? theme.accent : ((selected && dragging) ? theme.primary : selected ? theme.primary : 'transparent')};
-    width: ${({ list }) => list ? '100%' : '100px'};
+    height: ${({ list }) => (list ? '50px' : '100px')};
+    border: ${({ selected, isFile, dragging }) => (dragging ? (!isFile && !selected ? '3px' : '3px') : '3px')} solid ${({ theme, selected, toDrop, dragging }) => (toDrop ? theme.accent : selected && dragging ? theme.primary : selected ? theme.primary : 'transparent')};
+    width: ${({ list }) => (list ? '100%' : '100%')};
     font-size: 15px;
     cursor: pointer;
     user-select: none;
     position: relative;
-    transition: transform 0.3s, background-color 0.3s, border-color 0.1s, border-width 0.2s;   
+    transition: transform 0.3s, background-color 0.3s, border-color 0.1s, border-width 0.2s;
 `
 
 const StyledHoverWrapper = styled.div`
     display: inline-block;
     width: 100%;
-    &:focus{
+    &:focus {
         outline: none;
     }
-    &:hover > *, &:focus > *{
-        transform: ${({ list }) => list ? 'none' : 'scale(0.9)'};
-        background-color: ${({ list, theme }) => list ? theme.primary + '22' : theme.quaternary};
+    &:hover > *,
+    &:focus > * {
+        transform: ${({ list }) => (list ? 'none' : 'scale(0.9)')};
+        background-color: ${({ list, theme }) => (list ? theme.primary + '22' : theme.quaternary)};
     }
 `
 
@@ -63,10 +52,10 @@ const StyledFilename = styled.div`
     font-size: 15px;
     padding: 5px 0;
     text-overflow: ellipsis;
-    text-align: ${({ list }) => list ? 'left' : 'center'};
+    text-align: ${({ list }) => (list ? 'left' : 'center')};
 `
 const StyledIcon = styled.div`
-    font-size: ${({ list }) => list ? '20px' : '35px'};
+    font-size: ${({ list }) => (list ? '20px' : '35px')};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,24 +81,7 @@ export const getIconByFileType = (type) => {
     return <BsFileText />
 }
 
-export const ItemTile = ({
-    filename,
-    isFile,
-    setLocation,
-    selected,
-    reload,
-    access,
-    item,
-    setSelectedItems,
-    setPos,
-    toDrop,
-    filetype,
-    hidden,
-    list,
-    dragging,
-    setDragging,
-    ...props
-}) => {
+export const ItemTile = ({ filename, isFile, setLocation, selected, reload, access, item, setSelectedItems, setPos, toDrop, filetype, hidden, list, dragging, setDragging, ...props }) => {
     const wrapperRef = React.useRef()
     const modalForm = useModalForm()
     const navigate = useNavigate()
@@ -130,22 +102,14 @@ export const ItemTile = ({
                     list={toBoolStr(list)}
                     toDrop={toBoolStr(toDrop)}
                     isFile={toBoolStr(isFile)}
-
                     onMouseDown={(e) => {
                         if (selected && !e.shiftKey) setDragging(true)
                         else if (!selected && !e.shiftKey) setSelectedItems([item])
                     }}
                     onClick={(e) => {
-                        !isFile &&
-                            !e.shiftKey &&
-                            e.detail === 1 &&
-                            setLocation(filename)
+                        !isFile && !e.shiftKey && e.detail === 1 && setLocation(filename)
                         if (e.detail === 1 && (isFile || e.shiftKey)) {
-                            setSelectedItems((prev) =>
-                                selected
-                                    ? [...prev.filter((i) => i !== item)]
-                                    : [...prev, item]
-                            )
+                            setSelectedItems((prev) => (selected ? [...prev.filter((i) => i !== item)] : [...prev, item]))
                         }
 
                         e.detail > 1 &&
@@ -154,17 +118,13 @@ export const ItemTile = ({
                                 icon: <BiEditAlt />,
                                 title: 'CHOOSE EDITOR TYPE',
                                 todo: (editorType) => {
-                                    navigate(
-                                        LINKS.editor.edit(item.path, editorType)
-                                    )
+                                    navigate(LINKS.editor.edit(item.path, editorType))
                                 },
                             })
                     }}
                     {...props}
                 >
-                    <StyledIcon list={toBoolStr(list)}>
-                        {isFile ? getIconByFileType(filetype) : <BsFolder />}
-                    </StyledIcon>
+                    <StyledIcon list={toBoolStr(list)}>{isFile ? getIconByFileType(filetype) : <BsFolder />}</StyledIcon>
                     <StyledFilename list={toBoolStr(list)}>{filename}</StyledFilename>
                     {!access && (
                         <StyledLockIcon>

@@ -37,6 +37,7 @@ import { StatisticsSystemPage } from '../pages/statistics/subpages/StatisticsSys
 import { StatisticsEfficiencyPage } from '../pages/statistics/subpages/StatisticsEfficiencyPage'
 import { StatisticsActivityPage } from '../pages/statistics/subpages/StatisticsActivityPage'
 import { StatisticsNetworkPage } from '../pages/statistics/subpages/StatisticsNetworkPage'
+import { SessionPage } from '../pages/sessions/SessionPage'
 
 const pages = {
     '/dashboard/': {page: HomePage, app: APPS.home},
@@ -81,6 +82,7 @@ const pages = {
     '/dashboard/settings/': {page: SettingsPage, app: null},
 
     '/dashboard/sessions/': {page: SessionsPage, app: APPS.sessions},
+    '/dashboard/sessions/:key/': {page: SessionPage, app: APPS.sessions},
 
     '/dashboard/search/': {page: SearchPage, app: null},
 

@@ -16,7 +16,7 @@ export const RootTemplate = ({ children }) => {
     React.useEffect(() => {
         setShow(true)
         if (user) {
-            if (user.signin) {
+            if (user.dashboard_access) {
                 if (window.location.pathname === LINKS.auth.signin())
                     INIT().then(() => {
                         setShow(false)

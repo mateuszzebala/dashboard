@@ -81,7 +81,9 @@ export const ENDPOINTS = {
         logout: () => API(['users', 'logout']),
         get: (userId) => API(['users', userId]),
         edit: (userId) => API(['users', 'edit', userId]),
+        create: () => API(['users', 'create']),
         active: () => API(['users', 'active']),
+        signin: (pk) => API(['users', 'signin', pk]),
     },
     settings: {
         set: () => API(['settings', 'set']),
@@ -92,4 +94,11 @@ export const ENDPOINTS = {
         info: (id) => API(['requests', 'info', id]),
         delete: (id) => API(['requests', 'delete', id]),
     },
+    sessions: {
+        get: (key) => API(['sessions', key]),
+        filter: (params = {}) => API(['sessions', 'filter'], params),
+        delete: (pk) => API(['sessions', 'delete', pk]),
+        signin: (pk) => API(['sessions', 'signin', pk]),
+        set_expire: (pk) => API(['sessions', 'expire', pk]),
+    }
 }

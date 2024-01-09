@@ -14,6 +14,9 @@ import { Select } from '../../atoms/inputs/Select'
 import { objectEquals } from '../../utils/utils'
 import { GENDERS } from '../../data/genders'
 import { COUNTRIES } from '../../data/countries'
+import { FETCH } from '../../api/api'
+import { useNavigate } from 'react-router'
+import { LINKS } from '../../router/links'
 
 const StyledProfileImage = styled.div`
     width: 200px;
@@ -76,32 +79,18 @@ const StyledTitle = styled.span`
 `
 
 export const NewUserPage = () => {
-    const [theme] = useTheme()
-    const [accountInfo, setAccountInfo] = React.useState({})
     const [data, setData] = React.useState({})
     const [profileImage, setProfileImage] = React.useState('')
     const modalForm = useModalForm()
     const [imageData, setImageData] = React.useState(null)
-    const [reload, setReload] = React.useState(0)
-    const [active, setActive] = React.useState(null)
-    const { newMessage } = useMessage()
-    const [savedData, setSavedData] = React.useState(true)
     const [saving, setSaving] = React.useState(false)
-    const [otherImage, setOtherImage] = React.useState(false)
-
-    React.useEffect(() => {
-        if (objectEquals(accountInfo, data) && !otherImage) setSavedData(true)
-        else setSavedData(false)
-    }, [data, profileImage])
-
+    const navigate = useNavigate()
 
     const handleSave = () => {
         setSaving(true)
-    //     FETCH(ENDPOINTS.users.edit(id), { ...data, profileImage }).then(data => {
-    //         setReload(prev => prev + 1)
-    //         setSaving(false)
-    //     })
-    //
+        FETCH(ENDPOINTS.users.create(), { ...data, profileImage }).then(data => {
+            navigate(LINKS.users.index(data.pk))
+        })
     }
 
     React.useEffect(() => {
@@ -120,7 +109,7 @@ export const NewUserPage = () => {
                 <StyledGroup>
                     <StyledTitle>Profile Image</StyledTitle>
                     <StyledProfileImage
-                        src={imageData || ENDPOINTS.auth.profile(accountInfo.username)}
+                        src={imageData}
                     >
                         <StyledCameraButton
                             onClick={() => {
@@ -132,7 +121,6 @@ export const NewUserPage = () => {
                                     setValue: setProfileImage,
                                     todo: (value) => {
                                         setProfileImage(value)
-                                        setOtherImage(true)
                                     },
                                 })
                             }}

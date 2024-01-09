@@ -138,6 +138,7 @@ export const SignInPage = () => {
             password,
         })
             .then((data) => {
+                console.log(data.data)
                 if (data.data.done) {
                     FETCH(ENDPOINTS.auth.me()).then((dataUser) => {
                         setUser(dataUser.data)

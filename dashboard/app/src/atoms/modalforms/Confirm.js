@@ -5,20 +5,22 @@ import styled from 'styled-components'
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
 `
 
 const StyledTitle = styled.span`
-  font-size: 17px;
+    font-size: 18px;
+    text-align: center;
 `
 
 const StyledButtons = styled.div`
-  display: flex;
-  gap: 10px;
-  
+    gap: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
 `
 
 export const Confirm = ({ setOpen, todo = () => {}, text='', yesText='YES', noText='NO' }) => {
@@ -30,8 +32,9 @@ export const Confirm = ({ setOpen, todo = () => {}, text='', yesText='YES', noTe
                     onClick={() => {
                         setOpen(false)
                     }}
-                    size={1.3}
+                    size={1.2}
                     second
+                    width={'100%'}
                 >
                     {noText}
                 </Button>
@@ -41,7 +44,8 @@ export const Confirm = ({ setOpen, todo = () => {}, text='', yesText='YES', noTe
                         setOpen(false)
                         todo()
                     }}
-                    size={1.3}
+                    size={1.2}
+                    width={'100%'}
                 >
                     {yesText}
                 </Button>

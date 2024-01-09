@@ -61,6 +61,7 @@ export const LINKS = {
     },
     sessions: {
         index: () => '/dashboard/sessions/',
+        session: (key) => `/dashboard/sessions/${key}/`,
     },
     search: {
         index: (query = '') => `/dashboard/search/${query}/`,

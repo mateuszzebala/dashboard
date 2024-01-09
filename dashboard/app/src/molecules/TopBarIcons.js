@@ -91,7 +91,7 @@ export const TopBarIcons = ({ app, setHideSubmenu, hideSubmenu }) => {
                 <StyledIcon
                     onClick={() => {
                         modalForm({
-                            content: () => <LoadingImage src={ENDPOINTS.auth.qrcode(theme.primary, theme.secondary)} alt="qrcode" width={400} height={400} />,
+                            content: () => <LoadingImage src={ENDPOINTS.auth.qrcode(theme.primary, theme.secondary)} alt="qrcode" width={350} height={350} />,
                             title: 'QRCODE',
                             icon: <BsQrCodeScan />,
                         })

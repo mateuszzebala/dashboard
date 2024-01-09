@@ -5,6 +5,7 @@ from dashboard.models import Account
 from .auth import dashboard_access
 from datetime import date
 from django.contrib.sessions.models import Session
+from django.contrib.auth import login
 
 
 @dashboard_access
@@ -37,23 +38,23 @@ def edit_user(request, userId):
     user = User.objects.filter(id=userId).first()
     account = Account.objects.filter(user__id=userId).first()
     user.username = request.POST.get('username')
-    user.first_name = request.POST.get('first_name')
-    user.last_name = request.POST.get('last_name')
-    user.email = request.POST.get('email')
-    account.phone = request.POST.get('phone')
-    account.bio = request.POST.get('bio')
+    user.first_name = request.POST.get('first_name') or ''
+    user.last_name = request.POST.get('last_name') or ''
+    user.email = request.POST.get('email') or ''
+    account.phone = request.POST.get('phone') or ''
+    account.bio = request.POST.get('bio') or ''
     account.birth_date = date(*list(map(lambda i: int(i), request.POST.get('birth_date').split('-'))))
-    account.address = request.POST.get('address')
-    account.street = request.POST.get('street')
-    account.city = request.POST.get('city')
-    account.country = request.POST.get('country')
-    account.phone = request.POST.get('phone')
-    account.state = request.POST.get('state')
-    account.zip_code = request.POST.get('zip_code')
-    account.website = request.POST.get('website')
-    account.pronouns = request.POST.get('pronouns')
+    account.address = request.POST.get('address') or ''
+    account.street = request.POST.get('street') or ''
+    account.city = request.POST.get('city') or ''
+    account.country = request.POST.get('country') or ''
+    account.phone = request.POST.get('phone') or ''
+    account.state = request.POST.get('state') or ''
+    account.zip_code = request.POST.get('zip_code') or ''
+    account.website = request.POST.get('website') or ''
+    account.pronouns = request.POST.get('pronouns') or ''
     account.image = request.FILES.get('profileImage') or account.image
-    account.gender = request.POST.get('gender')
+    account.gender = request.POST.get('gender') or ''
     user.save()
     account.save()
     return JsonResponse({})
@@ -70,6 +71,13 @@ def logout_user(request):
                 session.delete()
     return JsonResponse({})
 
+@dashboard_access
+def singin_by_id(request, pk):
+    user = User.objects.filter(pk=pk).first()
+    print(user)
+    if user is not None:
+        login(request, user)
+    return JsonResponse({})
 
 @dashboard_access
 def active_user(request):
@@ -83,10 +91,43 @@ def active_user(request):
         'active': user.is_active
     })
 
+@dashboard_access
+def create_account(request):
+    user = User()
+    user.username = request.POST.get('username')
+    user.first_name = request.POST.get('first_name') or ''
+    user.last_name = request.POST.get('last_name') or ''
+    user.email = request.POST.get('email') or ''
+    user.save()
+    user.set_password(request.POST.get('password'))
+    user.save()
+    account = Account()
+    account.user = user
+    account.phone = request.POST.get('phone') or ''
+    account.bio = request.POST.get('bio') or ''
+    account.birth_date = date(*list(map(lambda i: int(i), request.POST.get('birth_date').split('-')))) if request.POST.get('birth_date') is not None else None
+    account.address = request.POST.get('address') or ''
+    account.street = request.POST.get('street') or ''
+    account.city = request.POST.get('city') or ''
+    account.country = request.POST.get('country') or ''
+    account.phone = request.POST.get('phone') or ''
+    account.state = request.POST.get('state') or ''
+    account.zip_code = request.POST.get('zip_code') or ''
+    account.website = request.POST.get('website') or ''
+    account.pronouns = request.POST.get('pronouns') or ''
+    account.image = request.FILES.get('profileImage') or None
+    account.gender = request.POST.get('gender') or ''
+    account.save()
+    return JsonResponse({
+        'pk': account.id,
+    })
+
 
 urlpatterns = [
     path('logout/', logout_user),
-    path('<int:userId>/', get_account),
+    path('create/', create_account),
     path('edit/<userId>/', edit_user),
+    path('signin/<pk>/', singin_by_id),
     path('active/', active_user),
+    path('<int:userId>/', get_account),
 ]
