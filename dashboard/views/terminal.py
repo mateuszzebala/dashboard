@@ -1,5 +1,5 @@
 import platform
-from django.urls import path
+from django.urls import path, re_path
 from django.http import JsonResponse
 from .auth import dashboard_access
 import subprocess
@@ -9,8 +9,26 @@ import signal
 import os
 from django.conf import settings
 from dashboard.configuration.settings import SETTINGS
+from channels.generic.websocket import AsyncWebsocketConsumer
+import json
 
 processes = {}
+
+class TerminalConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        print("start of session")
+        await self.accept()
+
+    async def disconnect(self, code):
+        print("end of session")
+        pass
+
+    async def receive(self, command):
+        await self.send(text_data=json.dumps({
+            'message': 'HELLO'
+        }))
+
+
 
 @dashboard_access
 def kill_process(request):
@@ -75,4 +93,8 @@ urlpatterns = [
     path('init/', init_terminal), # GET USER PATH
     path('command/', command), # COMMAND FOR TERMINAL
     path('kill/', kill_process), # KILL ALL PROCESSES
+]
+
+websocket_urlpatterns = [
+    path('run/', TerminalConsumer.as_asgi()),
 ]

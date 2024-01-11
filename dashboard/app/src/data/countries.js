@@ -237,5 +237,4 @@ export const COUNTRIES = {
     ZM: 'Zambia',
     ZR: 'Zaire',
     ZW: 'Zimbabwe',
-    ZZ: 'Unknown or unspecified country',
 }

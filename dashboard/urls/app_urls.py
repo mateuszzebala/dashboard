@@ -7,3 +7,4 @@ urlpatterns = [
     path('api/', include('dashboard.urls.api_urls')),
     re_path(r'^(?P<path>.*)$', host_app, name='app'),
 ]
+

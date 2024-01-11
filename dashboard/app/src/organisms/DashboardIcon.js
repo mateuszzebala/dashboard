@@ -3,7 +3,7 @@ import React from 'react'
 import { toBoolStr } from '../utils/utils'
 
 const StyleDashboard = styled.span`
-    font-size: 35px;
+    font-size: 38px;
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.secondary};
@@ -24,7 +24,7 @@ const StyleDashboard = styled.span`
         font-family: 'Rubik Glitch';
         align-items: center;
         justify-content: center;
-        padding: 5px;
+        padding: 2px;
         border-radius: 5px;
     }
 
@@ -44,7 +44,7 @@ const StyleDashboard = styled.span`
 export const DashboardIcon = ({ second = false, ...props }) => {
     return (
         <StyleDashboard second={toBoolStr(second)} {...props}>
-            <span>DASH</span>
+            <span>DEV</span>
             <span>BOARD</span>
         </StyleDashboard>
     )

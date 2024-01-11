@@ -36,7 +36,7 @@ const StyledRequestLog = styled.div`
     cursor: pointer;
     align-items: center;
     border-radius: 5px;
-    gap: 5px;
+    gap: 10px;
     transition: transform 0.3s;
     &:hover{
         transform: ${({deleteMode})=>deleteMode ? 'none' : 'translateX(10px)'};
@@ -66,19 +66,25 @@ const StyledLogs= styled.div`
 `
 
 const StyledDeleteButton = styled.button`
-    background-color: transparent;
-    border: 0;
-    outline: none;
-    padding: 10px 20px;
-    color: ${({theme})=>theme.error};
-    font-size: 20px;
+    font-size: 27px;
+    color: ${({ theme }) => theme.error};
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
     cursor: pointer;
-    transition: transform 0.1s;
-    &:hover{
-        transform: scale(0.9);
+    transition: background-color 0.1s, color 0.1s, outline-width 0.1s;
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 4px;
+    outline: 0 solid ${({ theme }) => theme.error}88;
+    border: 0;
+    background-color: transparent;
+    &:hover,
+    &:focus {
+        outline-width: 4px;
+        background-color: ${({ theme }) => theme.error};
+        color: ${({ theme }) => theme.secondary};
     }
 `
 
@@ -258,18 +264,15 @@ export const RequestsPage = () => {
                 <StyledLogs>
                     {logs.map(log => (
                         <StyledRequestLog onClick={() => {
-                            if(!deleteMode) {
-                                navigate(LINKS.requests.request(log.id))
-                            }
-                            else{
-                                FETCH(ENDPOINTS.requests.delete(log.id)).then(()=>{
-                                    setReload(prev => prev + 1)
-                                })
-                            }
+                            !deleteMode && navigate(LINKS.requests.request(log.id))
                         }} key={log.id} deleteMode={toBoolStr(deleteMode)}>
                             {deleteMode && (
-                                <StyledDeleteButton>
-                                    <FiTrash/>
+                                <StyledDeleteButton onClick={()=>{
+                                    FETCH(ENDPOINTS.requests.delete(log.id)).then(()=>{
+                                        setReload(prev => prev + 1)
+                                    })
+                                }}>
+                                    <FiX/>
                                 </StyledDeleteButton>
                             )}
                             <StyledColumn>

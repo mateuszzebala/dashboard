@@ -7,10 +7,12 @@ import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import { LINKS } from '../../router/links'
 import { AreaChart, Button, ColumnChart, Field, HeaderRow, LineChart, Prompt, Row, Table } from '../../atoms'
-import { FiCalendar, FiClock, FiLogIn, FiTrash } from 'react-icons/fi'
+import { FiCalendar, FiClock, FiLogIn, FiPlus, FiTrash } from 'react-icons/fi'
 import moment from 'moment'
 import { useModalForm, useTheme } from '../../utils/hooks'
 import { dateForDateTimeInputValue } from '../../utils/utils'
+import { useMessage } from '../../utils/messages'
+import { ChooseVarType } from '../../atoms/modalforms/ChooseVarType'
 
 
 const StyledPart = styled.button`
@@ -76,6 +78,17 @@ const StyledChart = styled.div`
     border-radius: 10px;
 `
 
+const StyledRow = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    justify-content: space-between;
+`
+
 export const SessionPage = () => {
     const {key} = useParams()
     const [data, setData] = React.useState({})
@@ -83,6 +96,7 @@ export const SessionPage = () => {
     const [reload, setReload] = React.useState(0)
     const [theme] = useTheme()
     const modalForm = useModalForm()
+    const {newMessage} = useMessage()
 
     const handleChangeExpireDate = ()=>{
         modalForm({
@@ -105,6 +119,31 @@ export const SessionPage = () => {
             setData(data.data)
         })
     }, [key, reload])
+
+    const handleAddData = () => {
+        modalForm({
+            content: Prompt,
+            title: 'ADD DATA',
+            icon: <FiPlus/>,
+            setButton: 'ADD',
+            type: 'text',
+            initValue: '',
+            label: 'KEY',
+            todo: (value) => {
+               if (Object.keys(data.session_data).includes(value)) {
+                    newMessage({error: true, text: 'Key already exists'})
+               }
+               else{
+                    modalForm({
+                        content: ChooseVarType,
+                        title: 'TYPE',
+                        icon: <FiPlus/>,
+                        setButton: 'SET',
+                    })
+               }
+            },
+        })
+    }
 
     return (
         <MainTemplate 
@@ -139,6 +178,10 @@ export const SessionPage = () => {
                     </StyledExpireTime>
                 </StyledPart>
                 <div>
+                    <StyledRow>
+                        <h1>DATA</h1>
+                        <Button onClick={handleAddData} size={1.2} icon={<FiPlus/>}/>
+                    </StyledRow>
                     {data.session_data && <Table>
                         {Object.keys(data.session_data).map(key => <Row key={key}>
                             <Field>{key}</Field>

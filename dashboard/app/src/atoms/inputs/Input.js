@@ -9,9 +9,8 @@ const StyledWrapper = styled.div`
     padding: ${({size})=>size*8+'px'};
     min-width: ${({size})=>size*300+'px'};
     height: ${({textarea, size}) => textarea ? 'auto' : size * 45 + 'px'};
-    max-width: ${({size})=>size*300+'px'};
     border-radius: ${({size})=>size*3+'px'};
-    border: ${({size})=>size*2.5+'px'} solid ${({ theme }) => theme.primary};
+    border: ${({size})=>size*2+'px'} solid ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     outline: ${({focus, size})=>focus?3*size+'px' : 0} solid${({ theme }) =>theme.quaternary};
@@ -41,7 +40,7 @@ const StyledInput = styled.input`
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     caret-color:${({ theme }) => theme.primary};
-
+    font-weight: 300;
     &:focus {
         outline: none;
     }
@@ -62,6 +61,7 @@ const StyledTextarea = styled.textarea`
     height: ${({ size })=> size * 200 + 'px'};
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
+    font-weight: 300;
     &:focus {
         outline: none;
     }

@@ -3,27 +3,24 @@ import { MainTemplate } from '../../templates/MainTemplate'
 import { APPS } from '../../apps/apps'
 import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
-import { BsCamera } from 'react-icons/bs'
-import { useModalForm, useTheme } from '../../utils/hooks'
-import { FloatingActionButton } from '../../atoms/FloatingActionButton'
+import { useModalForm } from '../../utils/hooks'
 import { FilePrompt } from '../../atoms/modalforms/FilePrompt'
 import { Input } from '../../atoms/inputs/Input'
 import { FiCamera, FiSave } from 'react-icons/fi'
-import { useMessage } from '../../utils/messages'
 import { Select } from '../../atoms/inputs/Select'
-import { objectEquals } from '../../utils/utils'
 import { GENDERS } from '../../data/genders'
 import { COUNTRIES } from '../../data/countries'
 import { FETCH } from '../../api/api'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
+import { Button } from '../../atoms'
 
 const StyledProfileImage = styled.div`
     width: 200px;
     height: 200px;
     background-image: url(${({ src }) => src});
-    border-radius: 50%;
-    box-shadow: 0 0 8px -3px ${({ theme }) => theme.primary};
+    border-radius: 10px;
+    box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     background-position: center;
     background-size: cover;
 `
@@ -31,7 +28,7 @@ const StyledProfileImage = styled.div`
 const StyledCameraButton = styled.button`
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 10px;
     border: 0;
     display: flex;
     flex-direction: column;
@@ -61,16 +58,11 @@ const StyledGroup = styled.div`
 `
 
 const StyledWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: center;
+    align-items: stretch;
     gap: 20px;
-    width: 100%;
-`
-const StyledInputs = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
     width: 100%;
 `
 
@@ -104,10 +96,12 @@ export const NewUserPage = () => {
     }, [profileImage])
 
     return (
-        <MainTemplate app={APPS.users} title={'CREATE USER'}>
+        <MainTemplate app={APPS.users} title={'CREATE USER'} submenuChildren={<>
+            <Button subContent='ADD' loading={saving} size={1.4} second icon={<FiSave />} onClick={handleSave} />
+        </>}>
             <StyledWrapper>
                 <StyledGroup>
-                    <StyledTitle>Profile Image</StyledTitle>
+                    <StyledTitle>Profile image</StyledTitle>
                     <StyledProfileImage
                         src={imageData}
                     >
@@ -116,7 +110,7 @@ export const NewUserPage = () => {
                                 modalForm({
                                     content: FilePrompt,
                                     title: 'UPLOAD PROFILE',
-                                    icon: <BsCamera />,
+                                    icon: <FiCamera />,
                                     value: profileImage,
                                     setValue: setProfileImage,
                                     todo: (value) => {
@@ -129,7 +123,6 @@ export const NewUserPage = () => {
                         </StyledCameraButton>
                     </StyledProfileImage>
                 </StyledGroup>
-                <StyledInputs>
 
                     <StyledGroup>
                         <StyledTitle>Main</StyledTitle>
@@ -307,8 +300,7 @@ export const NewUserPage = () => {
                             label={'PRONOUNS'}
                         />
                     </StyledGroup>
-                </StyledInputs>
-                <FloatingActionButton loading={saving} size={1.5} icon={<FiSave />} onClick={handleSave} />
+                
             </StyledWrapper>
         </MainTemplate>
     )

@@ -7,7 +7,7 @@ import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
 import { BsCamera } from 'react-icons/bs'
 import { useModalForm, useTheme } from '../../utils/hooks'
-import { Button, Confirm, FilePrompt, FloatingActionButton, Input, Select, Theme } from '../../atoms'
+import { Button, Confirm, FilePrompt, Input, Select, Theme } from '../../atoms'
 import { FiCamera, FiDatabase, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
 import { MdBlock, MdPassword } from 'react-icons/md'
 import { useMessage } from '../../utils/messages'
@@ -20,8 +20,8 @@ const StyledProfileImage = styled.div`
     width: 200px;
     height: 200px;
     background-image: url(${({ src }) => src});
-    border-radius: 50%;
-    box-shadow: 0 0 8px -3px ${({ theme }) => theme.primary};
+    border-radius: 10px;
+    box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     background-position: center;
     background-size: cover;
 `
@@ -29,7 +29,7 @@ const StyledProfileImage = styled.div`
 const StyledCameraButton = styled.button`
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 10px;
     border: 0;
     display: flex;
     flex-direction: column;
@@ -59,18 +59,14 @@ const StyledGroup = styled.div`
 `
 
 const StyledWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: center;
+    align-items: stretch;
     gap: 20px;
     width: 100%;
 `
-const StyledInputs = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    width: 100%;
-`
+
 
 const StyledTitle = styled.span`
     font-size: 20px;
@@ -130,6 +126,9 @@ export const UserPage = () => {
 
     return (
         <MainTemplate app={APPS.users} title={accountInfo.username} submenuChildren={<>
+            <Theme value={{ ...theme, primary: savedData ? theme.success : theme.error }}>
+                <Button subContent='SAVE' loading={saving} size={1.4} icon={<FiSave />} onClick={handleSave} />
+            </Theme>
             <Button icon={<FiLogOut />} subContent={'LOGOUT'} second size={1.4} onClick={() => {
                 FETCH(ENDPOINTS.users.logout(), { id }).then(() => {
                     newMessage({
@@ -173,7 +172,7 @@ export const UserPage = () => {
                                     modalForm({
                                         content: FilePrompt,
                                         title: 'UPLOAD PROFILE',
-                                        icon: <BsCamera />,
+                                        icon: <FiCamera />,
                                         value: profileImage,
                                         setValue: setProfileImage,
                                         todo: (value) => {
@@ -187,7 +186,6 @@ export const UserPage = () => {
                             </StyledCameraButton>
                         </StyledProfileImage>
                     </StyledGroup>
-                    <StyledInputs>
 
                         <StyledGroup>
                             <StyledTitle>Main</StyledTitle>
@@ -353,10 +351,7 @@ export const UserPage = () => {
                                 label={'PRONOUNS'}
                             />
                         </StyledGroup>
-                    </StyledInputs>
-                    <Theme value={{ ...theme, primary: savedData ? theme.success : theme.error }}>
-                        <FloatingActionButton loading={saving} size={1.5} icon={<FiSave />} onClick={handleSave} />
-                    </Theme>
+                    
                 </StyledWrapper>
             )}
         </MainTemplate>

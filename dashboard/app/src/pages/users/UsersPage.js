@@ -7,7 +7,7 @@ import { Button, Paginator, Prompt } from '../../atoms'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { FaLock, FaLockOpen } from 'react-icons/fa'
-import { FiSearch, FiUserPlus } from 'react-icons/fi'
+import { FiLock, FiSearch, FiUnlock, FiUserPlus } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { LINKS } from '../../router/links'
 import { useSearchParams } from 'react-router-dom'
@@ -82,7 +82,7 @@ export const UsersPage = () => {
                         onClick={() => {
                             setAdmins((prev) => !prev)
                         }}
-                        icon={admins ? <FaLock /> : <FaLockOpen />}
+                        icon={admins ? <FiLock /> : <FiUnlock />}
                         subContent={admins ? 'ADMINS' : 'NORMAL'}
                         size={1.4}
                     />

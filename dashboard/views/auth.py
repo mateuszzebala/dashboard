@@ -116,3 +116,5 @@ urlpatterns = [
     path('qrcode/', generate_auth_qrcode), # GENERATE QR CODE
     path('qrcode/<token>/', get_auth), # AUTH BY QRCODE
 ]
+
+websocket_urlpatterns = []
