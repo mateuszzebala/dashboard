@@ -1,5 +1,5 @@
 from pathlib import Path
-from dashboard.configuration.settings import SETTINGS
+from devboard.configuration.settings import SETTINGS
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,7 +14,7 @@ CORS_ALLOW_CREDENTIALS = SETTINGS.get('server.config.credientals')
 
 INSTALLED_APPS = [
     'corsheaders',
-    'dashboard',
+    'devboard.apps.DevboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,7 +31,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'dashboard.middleware.DashboardMiddleware',
+    'devboard.middleware.devboardMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -82,7 +82,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = 'Media'
+MEDIA_ROOT = 'media'
 
 TEMP_ROOT = 'temp/'
 

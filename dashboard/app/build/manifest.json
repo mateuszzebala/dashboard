@@ -1,9 +1,0 @@
-{
-    "short_name": "Django Dashboard App",
-    "start_url": "/",
-    "api_url": "http://192.168.100.35:8000/dashboard/api/",
-    "page_url": "http://192.168.100.35:8000",
-    "icons": [
-        "/favicon.png"
-    ]
-}

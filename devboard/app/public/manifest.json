@@ -1,0 +1,9 @@
+{
+    "short_name": "Django Devboard App",
+    "start_url": "/",
+    "api_url": "http://192.168.100.37:8000/devboard/api/",
+    "page_url": "http://192.168.100.37:8000",
+    "icons": [
+        "/favicon.png"
+    ]
+}
