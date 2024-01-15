@@ -7,6 +7,7 @@ import { toBoolStr } from '../utils/utils'
 import { SubMenu } from '../organisms/SubMenu'
 import { isMobile } from 'react-device-detect'
 import { BottomBar } from '../organisms/BottomBar'
+import { Loading } from '../atoms'
 
 const StyledContainer = styled.main`
     display: flex;
@@ -38,6 +39,15 @@ const StyledContent = styled.article`
     user-select: auto;
 `
 
+const StyledLoading = styled.div`
+    padding: ${({ padding }) => padding + 'px'};
+    height: 100%;
+    transition: width 0.3s;
+    width: ${({ isMobile, leftbarclose }) => (isMobile ? '100vw' : leftbarclose ? '100vw' : 'calc(100vw - 200px)')};
+    display: grid;
+    place-items: center;
+`
+
 const StyledTopMenu = styled.div`
     box-shadow: 0 0 10px -6px ${({ theme }) => theme.primary};
     z-index: 2;
@@ -46,7 +56,7 @@ const StyledTopMenu = styled.div`
     user-select: none;
 `
 
-export const MainTemplate = ({ app, children, title = '', submenuChildren = '', topbarLink, padding = 10 }) => {
+export const MainTemplate = ({ app, children, title = '', submenuChildren = '', loading=false, topbarLink, padding = 10 }) => {
     const [cookies, setCookies, removeCookies] = useCookies()
     const [leftbarClose, setLeftbarClose] = React.useState(cookies.leftbarClose)
     const [hideSubmenu, setHideSubmenu] = React.useState(cookies.hideSubmenu)
@@ -85,9 +95,12 @@ export const MainTemplate = ({ app, children, title = '', submenuChildren = '', 
                     <TopBar title={title} app={app} close={leftbarClose} setClose={setLeftbarClose} topbarLink={topbarLink} hideSubmenu={hideSubmenu} setHideSubmenu={setHideSubmenu} submenuExists={toBoolStr(submenuChildren)} />
                     <SubMenu hideSubmenu={hideSubmenu}>{submenuChildren}</SubMenu>
                 </StyledTopMenu>
-                <StyledContent isMobile={toBoolStr(isMobile)} padding={padding} leftbarclose={toBoolStr(leftbarClose)}>
+                {!loading && <StyledContent isMobile={toBoolStr(isMobile)} padding={padding} leftbarclose={toBoolStr(leftbarClose)}>
                     {children}
-                </StyledContent>
+                </StyledContent>}
+                {loading && <StyledLoading>
+                    <Loading size={2.5}/>
+                </StyledLoading>}
                 {isMobile && <BottomBar />}
             </StyledRightSide>
         </StyledContainer>

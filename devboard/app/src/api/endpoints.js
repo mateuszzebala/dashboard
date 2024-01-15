@@ -84,6 +84,7 @@ export const ENDPOINTS = {
         create: () => API(['users', 'create']),
         active: () => API(['users', 'active']),
         signin: (pk) => API(['users', 'signin', pk]),
+        change_password: (userId) => API(['users', 'password', userId]),
     },
     settings: {
         set: () => API(['settings', 'set']),
@@ -93,6 +94,7 @@ export const ENDPOINTS = {
         get: () => API(['requests', 'get']),
         info: (id) => API(['requests', 'info', id]),
         delete: (id) => API(['requests', 'delete', id]),
+        getUsers: () => API(['requests', 'users']),
     },
     sessions: {
         get: (key) => API(['sessions', key]),
@@ -100,7 +102,7 @@ export const ENDPOINTS = {
         delete: (pk) => API(['sessions', 'delete', pk]),
         signin: (pk) => API(['sessions', 'signin', pk]),
         data: {
-            add: (pk) => API(['sessions', pk, 'add']),
+            edit: (pk) => API(['sessions', pk, 'edit']),
             delete: (pk) => API(['sessions', pk, 'delete']),
         },
         set_expire: (pk) => API(['sessions', 'expire', pk]),

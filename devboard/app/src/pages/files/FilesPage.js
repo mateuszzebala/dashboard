@@ -6,7 +6,7 @@ import { Button, ChooseDevice, Confirm, EditorChooser, FilePrompt, FloatingActio
 import { BsFileArrowUp, BsFilePlus, BsFileZip, BsFolder, BsFolderPlus } from 'react-icons/bs'
 import { HiDownload, HiOutlineLockClosed } from 'react-icons/hi'
 import styled from 'styled-components'
-import { FiArrowUp, FiCheck, FiCopy, FiGrid, FiList, FiRotateCw, FiSearch, FiTrash } from 'react-icons/fi'
+import { FiArrowUp, FiCheck, FiCopy, FiDownload, FiEdit, FiFile, FiFilePlus, FiFolder, FiFolderPlus, FiGrid, FiInfo, FiList, FiRotateCw, FiSearch, FiServer, FiTrash } from 'react-icons/fi'
 import { BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
@@ -15,6 +15,7 @@ import { useLoading, useModalForm, useSettings } from '../../utils/hooks'
 import { LINKS } from '../../router/links'
 import { useMessage } from '../../utils/messages'
 import { downloadURL } from '../../utils/utils'
+import { FaRegFileZipper, FaRegPaste } from 'react-icons/fa6'
 
 const StyledMenu = styled.div`
     display: flex;
@@ -110,12 +111,12 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                         subContent={'UPLOAD'}
                         right={160}
                         tooltip={'UPLOAD FILE'}
-                        icon={<BsFileArrowUp />}
+                        icon={<FiFilePlus />}
                         onClick={() => {
                             modalForm({
                                 content: FilePrompt,
                                 title: 'UPLOAD FILE',
-                                icon: <BsFileArrowUp />,
+                                icon: <FiFilePlus />,
                                 todo: (val) => {
                                     FETCH(ENDPOINTS.files.upload(path), {
                                         file: val,
@@ -126,8 +127,8 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                             })
                         }}
                     />
-                    <Button second icon={<BsFilePlus />} subContent={'+FILE'} tooltip={'NEW FILE'} size={1.4} right={90} onClick={handleNewFile} />
-                    <Button second size={1.4} tooltip={'NEW FOLDER'} subContent={'+FOLDER'} icon={<BsFolderPlus />} onClick={handleNewFolder} />
+                    <Button second icon={<FiFilePlus />} subContent={'+FILE'} tooltip={'NEW FILE'} size={1.4} right={90} onClick={handleNewFile} />
+                    <Button second size={1.4} tooltip={'NEW FOLDER'} subContent={'+FOLDER'} icon={<FiFolderPlus />} onClick={handleNewFolder} />
 
                     <Button
                         second
@@ -171,7 +172,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                             size={1.4}
                             tooltip={'PASTE'}
                             subContent="PASTE"
-                            icon={<BiPaste />}
+                            icon={<FaRegPaste />}
                             onKey={{
                                 key: 'v',
                                 ctrlKey: true,
@@ -182,7 +183,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                     content: Confirm,
                                     title: 'PASTE',
                                     text: 'PASTE ITEMS HERE?',
-                                    icon: <BiPaste />,
+                                    icon: <FaRegPaste />,
                                     todo: () => {
                                         load({ show: true, text: 'PASTING' })
                                         FETCH(ENDPOINTS.files.move(), { moveTo: path, items: copied.content.join(';;;'), copy: copied.type === 'COPY' }).then((data) => {
@@ -268,24 +269,24 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                 tooltip={'MAKE ZIP'}
                                 subContent="ZIP"
                                 size={1.4}
-                                icon={<BsFileZip />}
+                                icon={<FaRegFileZipper />}
                                 onClick={() => {
                                     modalForm({
                                         content: ChooseDevice,
                                         title: 'SAVE LOCATION',
-                                        icon: <BsFileZip />,
+                                        icon: <FaRegFileZipper />,
                                         todo: (device) => {
                                             if (device === 'server') {
                                                 modalForm({
                                                     content: SelectFolder,
-                                                    icon: <BsFolder />,
+                                                    icon: <FiFolder />,
                                                     title: 'SELECT FOLDER TO SAVE',
                                                     startPath: searchParams.get('path'),
                                                     todo: (path) => {
                                                         modalForm({
                                                             content: Prompt,
                                                             title: 'FILENAME',
-                                                            icon: <BsFileZip />,
+                                                            icon: <FiFile />,
                                                             setButton: device === 'server' ? 'SAVE' : 'DOWNLOAD',
                                                             todo: (filename) => {
                                                                 load({ show: true, text: 'ZIPPING' })
@@ -303,7 +304,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                                 modalForm({
                                                     content: Prompt,
                                                     title: 'FILENAME',
-                                                    icon: <BsFileZip />,
+                                                    icon: <FaRegFileZipper />,
                                                     setButton: device === 'server' ? 'SAVE' : 'DOWNLOAD',
                                                     todo: (filename) => {
                                                         FETCH(ENDPOINTS.files.zip(), { filename, toSave: null, items: selectedItems.map((item) => item.path).join(';;;') }).then((data) => {
@@ -323,7 +324,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                     })
                                 }}
                             />
-                            {selectedItems[0].name.endsWith('.zip') && <Button icon={<BsFileZip />} subContent="UNZIP" second size={1.4} tooltip={'UNZIP'} />}
+                            {selectedItems[0].name.endsWith('.zip') && <Button icon={<FaRegFileZipper />} subContent="UNZIP" second size={1.4} tooltip={'UNZIP'} />}
                         </>
                     )}
 
@@ -357,7 +358,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                 size={1.4}
                                 tooltip={'PROPERTIES'}
                                 subContent="PROPER..."
-                                icon={<BiInfoCircle />}
+                                icon={<FiInfo />}
                                 onKey={{
                                     key: 'i',
                                     ctrlKey: true,
@@ -366,7 +367,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                 onClick={() => {
                                     modalForm({
                                         content: Properties,
-                                        icon: <BiInfoCircle />,
+                                        icon: <FiInfo />,
                                         title: 'PROPERTIES',
                                         item: selectedItems[0],
                                         todo: () => {},
@@ -399,7 +400,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                 size={1.4}
                                 tooltip={'DOWNLOAD'}
                                 subContent="DOWNL..."
-                                icon={<HiDownload />}
+                                icon={<FiDownload />}
                                 onClick={() => {
                                     downloadURL(ENDPOINTS.files.file(selectedItems[0].path), selectedItems[0].name)
                                 }}
@@ -410,7 +411,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                 size={1.4}
                                 tooltip={'EDIT'}
                                 subContent="EDIT"
-                                icon={<BiEditAlt />}
+                                icon={<FiEdit />}
                                 onKey={{
                                     key: 'e',
                                     ctrlKey: true,
@@ -419,7 +420,7 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                 onClick={() => {
                                     modalForm({
                                         content: EditorChooser,
-                                        icon: <BiEditAlt />,
+                                        icon: <FiEdit />,
                                         title: 'CHOOSE EDITOR TYPE',
                                         todo: (editorType) => {
                                             navigate(LINKS.editor.edit(selectedItems[0].path, editorType))

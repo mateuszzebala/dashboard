@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { range, toBoolStr } from '../utils/utils'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import { BsThreeDots } from 'react-icons/bs'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 const StyledWrapper = styled.div`
     display: inline-flex;
@@ -44,7 +45,7 @@ export const Paginator = ({ value, setValue, pages, second, minimum }) => {
                     setValue((prev) => (prev > 0 ? prev - 1 : prev))
                 }}
             >
-                <IoIosArrowBack />
+                <FiChevronLeft />
             </StyledPageButton>
             {value > 2 && !minimum && (
                 <>
@@ -98,7 +99,7 @@ export const Paginator = ({ value, setValue, pages, second, minimum }) => {
                     setValue((prev) => (prev < pages - 1 ? prev + 1 : prev))
                 }}
             >
-                <IoIosArrowForward />
+                <FiChevronRight />
             </StyledPageButton>
         </StyledWrapper>
     )

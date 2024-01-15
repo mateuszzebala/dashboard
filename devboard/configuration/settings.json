@@ -31,7 +31,7 @@
         "topbar_username": true,
         "topbar_app_icon": true,
         "leftbar_app_icons": true,
-        "save_devboard_requests": true,
+        "save_devboard_requests": false,
         "leftbar_arrow_icons": true,
         "polish_flag": false,
         "app": {
@@ -55,6 +55,16 @@
     "editor": {
         "liked": [
             {
+                "name": "FOURSOFT.png",
+                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/FOURSOFT.png",
+                "type": "image"
+            },
+            {
+                "name": "wallpaper.png",
+                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/wallpaper.png",
+                "type": "image"
+            },
+            {
                 "name": "Screenshot 2024-01-08 at 09.47.33.png",
                 "path": "/Users/mateuszzebala/Desktop/Screenshot 2024-01-08 at 09.47.33.png",
                 "type": "image"
@@ -62,14 +72,29 @@
         ],
         "last": [
             {
-                "name": "recently-used.xbel",
-                "path": "/Users/mateuszzebala/.local/share/recently-used.xbel",
-                "type": "file"
+                "name": "FOURSOFT.png",
+                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/FOURSOFT.png",
+                "type": "image"
+            },
+            {
+                "name": "wallpaper.png",
+                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/wallpaper.png",
+                "type": "image"
             },
             {
                 "name": "Screenshot 2024-01-08 at 09.47.33.png",
                 "path": "/Users/mateuszzebala/Desktop/Screenshot 2024-01-08 at 09.47.33.png",
                 "type": "image"
+            },
+            {
+                "name": "Frame 1.png",
+                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/Frame 1.png",
+                "type": "image"
+            },
+            {
+                "name": "recently-used.xbel",
+                "path": "/Users/mateuszzebala/.local/share/recently-used.xbel",
+                "type": "file"
             }
         ]
     },

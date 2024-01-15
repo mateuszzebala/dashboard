@@ -80,7 +80,7 @@ def set_expire_date(request, key):
     return JsonResponse({})
 
 @devboard_access
-def add_session_data(request, pk):
+def edit_session_data(request, pk):
     session = Session.objects.filter(pk=pk).first()
     decoded = session.get_decoded()
 
@@ -92,7 +92,7 @@ def add_session_data(request, pk):
         'STRING': str,
         'INTEGER': int,
         'FLOAT': float,
-        'BOOL': bool,
+        'BOOL': lambda x: not x.lower() == 'false',
         'NONE': lambda x: None
     }
 
@@ -123,7 +123,7 @@ def delete_session_data(request, pk):
 urlpatterns = [
     path('filter/', filter_sessions),
     path('<pk>/', get_session_info),
-    path('<pk>/add/', add_session_data),
+    path('<pk>/edit/', edit_session_data),
     path('<pk>/delete/', delete_session_data),
     path('delete/<pk>/', delete_session),
     path('signin/<key>/', signin_to_session),

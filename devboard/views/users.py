@@ -122,10 +122,20 @@ def create_account(request):
         'pk': account.id,
     })
 
+@devboard_access
+def change_password(request, userId):
+    user = User.objects.filter(pk=userId).first()
+
+    if user is not None and request.POST.get('password') is not None:
+        user.set_password(request.POST.get('password'))
+        user.save()
+
+    return JsonResponse({})
 
 urlpatterns = [
     path('logout/', logout_user),
     path('create/', create_account),
+    path('password/<userId>/', change_password),
     path('edit/<userId>/', edit_user),
     path('signin/<pk>/', singin_by_id),
     path('active/', active_user),

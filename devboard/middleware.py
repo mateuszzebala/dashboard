@@ -7,6 +7,7 @@ from django.shortcuts import render
 from .models import RequestLog
 from .utils import get_client_ip
 import requests
+from django.contrib.sessions.models import Session
 
 colors_by_method = {
     'POST': 'white',
@@ -58,6 +59,8 @@ class devboardMiddleware:
                     res = requests.get(f'https://ipapi.co/{get_client_ip(request)}/json/').json()
                     country_code = res.get("country_code")
 
+                session = Session.objects.filter(session_key=request.session.session_key).first()
+
                 log = RequestLog(
                     ip_v4=get_client_ip(request),
                     method=method,
@@ -65,9 +68,10 @@ class devboardMiddleware:
                     status_code=response.status_code,
                     device=request.META.get('HTTP_USER_AGENT'),
                     user=request.user if request.user.is_authenticated else None,
-                    session=None,
+                    session=session,
                     args=args,
-                    country=country_code
+                    country=country_code,
+                    
                 )
                 log.save()
 

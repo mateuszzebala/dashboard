@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from devboard.models import RequestLog
 from .auth import devboard_access
 import datetime
+from django.db.models import Q
 
 
 def get_request_info(req):
@@ -30,6 +31,15 @@ def get_requests(request):
     length = int(request.POST.get('length')) if request.POST.get('length') else 30
 
     logs = RequestLog.objects.all()
+
+    if query:
+        logs = logs.filter(Q(method__contains=query) | Q(path__icontains=query) | Q(ip_v4__icontains=query) | Q(user__username__contains=query) | Q(user__email__contains=query) | Q(session__session_key__contains=query))
+
+    if userId is not None and userId != 'null':
+        logs = logs.filter(user__id=userId)
+    
+    if sessionKey is not None and sessionKey != 'null':
+        logs = logs.filter(session__session_key=sessionKey)
 
     if statuses and statuses != 'all':
         if statuses == 'successes':

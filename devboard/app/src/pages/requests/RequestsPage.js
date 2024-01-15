@@ -26,6 +26,8 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { useNavigate } from 'react-router'
 import { LINKS } from '../../router/links'
 import moment from 'moment'
+import { ChooseItemModal } from '../../atoms/modalforms/database/ChooseItemModal'
+import { useSearchParams } from 'react-router-dom'
 
 
 const StyledRequestLog = styled.div`
@@ -126,20 +128,24 @@ const nextMethod = {
 }
 
 export const RequestsPage = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
     const [theme] = useTheme()
-    const [statuses, setStatuses] = React.useState('all')
-    const [methods, setMethods] = React.useState('all')
+    const [loading, setLoading] = React.useState(true)
+    const [statuses, setStatuses] = React.useState(searchParams.get('statuses') || 'all')
+    const [methods, setMethods] = React.useState(searchParams.get('methods') || 'all')
     const [deleteMode, setDeleteMode] = React.useState(false)
-    const [searchQuery, setSearchQuery] = React.useState('')
-    const [page, setPage] = React.useState(0)
+    const [searchQuery, setSearchQuery] = React.useState(searchParams.get('searchQuery') || '')
+    const [page, setPage] = React.useState(searchParams.get('page') ? parseInt(searchParams.get('page')) : 0)
     const [pages, setPages] = React.useState(0)
-    const [asc, setAsc] = React.useState(false)
+    const [asc, setAsc] = React.useState(searchParams.get('asc') == 'true')
+    const [user, setUser] = React.useState(searchParams.get('user') ? parseInt(searchParams.get('user')) : null)
+    const [session, setSession] = React.useState(searchParams.get('session') || null)
     const [reload, setReload] = React.useState(0)
-    const [sortBy, setSortBy] = React.useState('datetime')
-    const [fromDatetime, setFromDatetime] = React.useState(null)
+    const [sortBy, setSortBy] = React.useState(searchParams.get('sortBy') || 'datetime')
+    const [fromDatetime, setFromDatetime] = React.useState(searchParams.get('fromDatetime') || null)
     const [logs, setLogs] = React.useState([])
-    const [toDatetime, setToDatetime] = React.useState(null)
-    const [length, setLength] = React.useState(30)
+    const [toDatetime, setToDatetime] = React.useState(searchParams.get('toDatetime') || null)
+    const [length, setLength] = React.useState(searchParams.get('length') ? parseInt(searchParams.get('length')) : 30)
     const modalForm = useModalForm()
     const navigate = useNavigate()
 
@@ -148,7 +154,26 @@ export const RequestsPage = () => {
         setPage(0)
     }, [statuses, methods, searchQuery, asc, sortBy, fromDatetime, toDatetime])
 
+
     React.useEffect(()=>{
+        setSearchParams(prev => ({
+            ...prev, 
+            statuses, 
+            methods, 
+            searchQuery, 
+            asc, 
+            sortBy, 
+            fromDatetime: fromDatetime || '', 
+            toDatetime: toDatetime || '', 
+            length, 
+            user: user || '', 
+            session: session || '', 
+            page
+        }))
+    }, [statuses, methods, searchQuery, asc, sortBy, fromDatetime, toDatetime, length, user, session, page])
+
+    React.useEffect(()=>{
+        setLoading(true)
         FETCH(ENDPOINTS.requests.get(), {
             statuses,
             methods,
@@ -159,11 +184,18 @@ export const RequestsPage = () => {
             sortBy,
             fromDatetime: fromDatetime || '',
             toDatetime: toDatetime || '',
+            userId: user,
+            sessionKey: session,
         }).then(data => {
             setLogs(data.data.logs)
+            setLoading(false)
             setPages(Math.ceil(data.data.counter / length))
         })
-    }, [statuses, methods, searchQuery, page, asc, sortBy, fromDatetime, toDatetime, length, reload])
+    }, [statuses, methods, searchQuery, page, asc, sortBy, fromDatetime, toDatetime, length, reload, user, session])
+
+    React.useEffect(() => {
+        page + 1 > pages && setPage(0)
+    }, [pages])
 
     const colorsByResponse = {
         all: theme.quaternary,
@@ -193,7 +225,7 @@ export const RequestsPage = () => {
     }
 
     return (
-        <MainTemplate app={APPS.requests} title='LAST REQUESTS' submenuChildren={
+        <MainTemplate loading={loading} app={APPS.requests} title='LAST REQUESTS' submenuChildren={
             <>
                 <Button subContent='DELETE' icon={<FiTrash/>} second={!deleteMode} onClick={()=>{
                     setDeleteMode(prev => !prev)
@@ -216,7 +248,7 @@ export const RequestsPage = () => {
                 <Button second size={1.4} subContent={methods == 'all' ? 'ALL METH..' : methods.toUpperCase()} icon={iconsByMethod[methods.toLowerCase()]} onClick={()=>{
                     setMethods(prev => nextMethod[prev])
                 }}/>
-                <Button second size={1.4} subContent={'FROM'} icon={<LuClock10/>} onClick={()=>{
+                <Button second={!fromDatetime} size={1.4} subContent={'FROM'} icon={<LuClock10/>} onClick={()=>{
                     modalForm({
                         content: Prompt,
                         type: 'datetime-local',
@@ -227,7 +259,7 @@ export const RequestsPage = () => {
                         setButton: 'SEARCH'
                     })
                 }}/>
-                <Button second size={1.4} subContent={'TO'} icon={<LuClock2/>} onClick={()=>{
+                <Button second={!toDatetime} size={1.4} subContent={'TO'} icon={<LuClock2/>} onClick={()=>{
                     modalForm({
                         content: Prompt,
                         type: 'datetime-local',
@@ -238,11 +270,29 @@ export const RequestsPage = () => {
                         setButton: 'SEARCH'
                     })
                 }}/>
-                <Button second size={1.4} subContent={'USER'} icon={<FiUser/>} onClick={()=>{
-                  
+                <Button second={user === null} size={1.4} subContent={'USER'} icon={<FiUser/>} onClick={()=>{
+                    modalForm({
+                        content: ChooseItemModal,
+                        title: 'CHOOSE USER',
+                        icon: <FiUser/>,
+                        model: 'User',
+                        value: user,
+                        todo: (usr) => {
+                            setUser(usr ? usr.pk : null)
+                        }
+                    })
                 }}/>
-                <Button second size={1.4} subContent={'SESSION'} icon={<FiKey/>} onClick={()=>{
-                  
+                <Button second={session === null} size={1.4} subContent={'SESSION'} icon={<FiKey/>} onClick={()=>{
+                    modalForm({
+                        content: ChooseItemModal,
+                        title: 'CHOOSE SESSION',
+                        icon: <FiUser/>,
+                        model: 'Session',
+                        value: session,
+                        todo: (ssn) => {
+                            setSession(ssn ? ssn.pk : null)
+                        }
+                    })
                 }}/>
                 <Select canBeNull={false} second size={1.4} value={sortBy} setValue={setSortBy} subContent={'SORT BY'} icon={<FaSort/>} asButton data={{
                     datetime: 'DATETIME',
@@ -289,9 +339,11 @@ export const RequestsPage = () => {
                         </StyledRequestLog>
                     ))}
                 </StyledLogs>
-                <StyledFooter>
-                    <Paginator pages={pages} value={page} setValue={setPage} second/>
-                </StyledFooter>
+                {pages > 1 && (
+                    <StyledFooter>
+                        <Paginator pages={pages} value={page} setValue={setPage} second/>
+                    </StyledFooter>
+                )}
             </StyledPage>
         </MainTemplate>
     )

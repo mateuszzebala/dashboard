@@ -4,10 +4,9 @@ import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import { BsFolder } from 'react-icons/bs'
 import { FaArrowRight } from 'react-icons/fa'
-import { LINKS } from '../../router/links'
 import {StyledContent, StyledItem, StyledMenu, StyledName, StyledWrapper, StyledPath, StyledMenuButtons} from './SelectFile'
 import { centerEllipsis } from '../../utils/utils'
-import { FiArrowLeft, FiFolder, FiRefreshCw, FiSearch } from 'react-icons/fi'
+import { FiArrowRight, FiArrowUp, FiFolder, FiRefreshCw, FiSearch } from 'react-icons/fi'
 import { Prompt } from './Prompt'
 import { useModalForm } from '../../utils/hooks'
 
@@ -43,22 +42,15 @@ export const SelectFolder = ({ todo, startPath, setOpen }) => {
                     <StyledMenuButtons>
                         <Button
                             second
-                            size={1.3}
+                            size={1.4}
                             onClick={() => {
                                 setPath(data.parent)
                             }}
-                            icon={<FiArrowLeft />}
+                            icon={<FiArrowUp />}
                         />
                         <Button
                             second
-                            size={1.3}
-                            target={'_blank'}
-                            to={LINKS.files.indexPath(path)}
-                            icon={<FiFolder />}
-                        />
-                        <Button
-                            second
-                            size={1.3}
+                            size={1.4}
                             icon={<FiRefreshCw />}
                             onClick={() => {
                                 setReload((prev) => prev + 1)
@@ -66,7 +58,7 @@ export const SelectFolder = ({ todo, startPath, setOpen }) => {
                         />
                         <Button
                             second
-                            size={1.3}
+                            size={1.4}
                             icon={<FiSearch />}
                             onKey={{
                                 key: 'f',
@@ -85,21 +77,23 @@ export const SelectFolder = ({ todo, startPath, setOpen }) => {
                                 })
                             }}
                         />
-                        <StyledPath>{centerEllipsis(path, 50)}</StyledPath>
+                        
                         {value !== null && <Button
                             value={search}
                             setValue={setSearch}
-                            size={1.3}
-                            icon={<FaArrowRight/>}
+                            size={1.4}
+                            icon={<FiArrowRight/>}
                             onClick={()=>{
                                 todo(value)
                                 setOpen(false)
                             }}
                         />}
                     </StyledMenuButtons>
-                    
                 </StyledMenu>
                 <StyledContent>
+                    <StyledItem selected={path == value} onClick={()=>{
+                        setValue(path)
+                    }}><StyledName>{centerEllipsis(path, 50)}</StyledName></StyledItem>
                     {folders
                         .filter((folder) =>
                             folder.name
@@ -118,13 +112,11 @@ export const SelectFolder = ({ todo, startPath, setOpen }) => {
                                 }}
                                 key={folder.name}
                             >
-                                <BsFolder />
+                                <FiFolder />
                                 <StyledName>{folder.name}</StyledName>
                             </StyledItem>
                         ))}
-                    <Button second={path != value} onClick={()=>{
-                        setValue(path)
-                    }}>THIS FOLDER</Button>
+                 
                 </StyledContent>
             </StyledWrapper>
         </>

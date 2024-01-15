@@ -1,60 +1,64 @@
 import React from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
-import { FiMinus, FiPlus } from 'react-icons/fi'
+import { FiChevronDown, FiChevronUp, FiMinus, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
+import { useModalForm } from '../../utils/hooks'
+import { Prompt } from '../modalforms/Prompt'
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.button`
     display: inline-flex;
-    gap: ${({ size }) => size * 5 + 'px'};
+    height: ${({ size }) => size * 43 + 'px'};
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
     font-size: ${({ size }) => size * 20 + 'px'};
     background-color: ${({ theme }) => theme.quaternary};
     color: ${({ theme }) => theme.primary};
     border-radius: ${({ size }) => size * 5 + 'px'};
-`
-const StyledInput = styled.input`
+    outline: 0 solid ${({ theme }) => theme.quaternary}88;
     border: 0;
-    background-color: transparent;
-    width: ${({ scaleSize }) => scaleSize * 50 + 'px'};
-    color: ${({ theme }) => theme.primary};
-    padding: 0;
-    font-weight: 400;
-    font-size: ${({ scaleSize }) => scaleSize * 15 + 'px'};
-    text-align: center;
-    &:focus {
-        outline: none;
+    transition: outline-width 0.1s;
+    cursor: pointer;
+    &:hover, &:focus{
+        outline-width: ${({ size }) => size * 3 + 'px'};
     }
 `
 
 const StyledButton = styled.button`
     display: flex;
     flex-direction: column;
-    font-size: ${({ size }) => size * 20 + 'px'};
+    font-size: ${({ size }) => size * 15 + 'px'};
     align-items: center;
     border-radius: ${({ size }) => size * 5 + 'px'};
     color: ${({ theme }) => theme.primary};
     cursor: pointer;
-    height: ${({ size }) => size * 43 + 'px'};
-    outline: 0 solid ${({theme})=>theme.quaternary};
+    height: ${({ size }) => size * 18 + 'px'};
+    outline: 0;
     transition: outline-width 0.1s;
-    &:hover, &:focus{
-        outline-width: ${({ size }) => size * 3 + 'px'};
-    }
     background-color: transparent;
     border: 0;
-    width: ${({ size }) => size * 43 + 'px'};
+    width: ${({ size }) => size * 23 + 'px'};
     justify-content: center;
 
 `
 
 const StyledRow = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-weight: 300;
-
     align-items: center;  
+    padding: 0 10px;
     font-size: ${({ scaleSize }) => scaleSize * 15 + 'px'};
+    span:first-child{
+
+    }
+    span:last-child{
+        font-size: ${({ scaleSize }) => scaleSize * 8 + 'px'};
+    }
+`
+
+const StyledButtons = styled.div`
+
 `
 
 export const Counter = ({
@@ -65,35 +69,43 @@ export const Counter = ({
     min = 0,
     max = 100,
 }) => {
+    const modalForm = useModalForm()
     return (
         <StyledWrapper size={size}>
-            <StyledButton
-                onClick={() => {
-                    setValue((prev) => (prev - 1 >= min ? prev - 1 : prev))
-                }}
-                size={size}
-            >
-                <FiMinus />
-            </StyledButton>
-            <StyledRow scaleSize={size}>
-                <StyledInput
-                    value={value}
-                    scaleSize={size}
-                    size={2}
-                    onChange={(e) => {
-                        setValue(prev => e.target.value ? parseInt(e.target.value) : 0)
+          
+            <StyledButtons>
+                <StyledButton
+                    size={size}
+                    onClick={() => {
+                        setValue((prev) => (prev + 1 <= max ? prev + 1 : prev))
                     }}
-                />
-                {unit}
+                >
+                    <FiChevronUp />
+                </StyledButton>
+                <StyledButton
+                    onClick={() => {
+                        setValue((prev) => (prev - 1 >= min ? prev - 1 : prev))
+                    }}
+                    size={size}
+                >
+                    <FiChevronDown />
+                </StyledButton>
+            </StyledButtons>
+
+             
+            <StyledRow onClick={()=>{
+                modalForm({
+                    content: Prompt,
+                    title: unit ? unit : 'VALUE',
+                    icon: <FiChevronUp/>,
+                    type: 'number',
+                    initValue: value,
+                    todo: (val) => setValue(val ? parseInt(val) : value)
+                })
+            }} scaleSize={size}>
+                <span>{value}</span>
+                <span>{unit}</span>
             </StyledRow>
-            <StyledButton
-                size={size}
-                onClick={() => {
-                    setValue((prev) => (prev + 1 <= max ? prev + 1 : prev))
-                }}
-            >
-                <FiPlus />
-            </StyledButton>
         </StyledWrapper>
     )
 }

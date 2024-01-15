@@ -14,11 +14,11 @@ CORS_ALLOW_CREDENTIALS = SETTINGS.get('server.config.credientals')
 
 INSTALLED_APPS = [
     'corsheaders',
-    'devboard.apps.DevboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'devboard.apps.DevboardConfig',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',

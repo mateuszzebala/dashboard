@@ -154,7 +154,7 @@ export const SessionPage = () => {
             initValue,
             initType: Object.keys(data.session_data).includes(key) ? data.session_data_types[key] : 'str',
             todo: (value, type) => {
-                FETCH(ENDPOINTS.sessions.data.add(data.session_key), { type, value: value, key }).then((data) => {
+                FETCH(ENDPOINTS.sessions.data.edit(data.session_key), { type, value: value, key }).then((data) => {
                     setReload((prev) => prev + 1)
                 })
             }

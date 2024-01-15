@@ -21,7 +21,8 @@ def signin(request):
     if user is not None:
         login(request, user)
     return JsonResponse({
-        'done': request.user.is_authenticated and request.user.username == username
+        'username': user.username if user is not None else None,
+        'done': True if user else False
     })
 
 @csrf_exempt

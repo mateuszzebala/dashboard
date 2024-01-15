@@ -127,6 +127,6 @@ export const variableToPythonString = (variable) => {
     if (variable === null) return 'None'
     if (variable === undefined) return 'None'
     if (variable === true) return 'True'
-    if (variable === false) return 'True'
+    if (variable === false) return 'False'
     return variable.toString()
 }

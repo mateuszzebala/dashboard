@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
     gap: 10px;
     padding: 10px;
     opacity: ${({ dragging, selected, isFile }) => (dragging && (selected || isFile) ? '40%' : 1)};
-    background-color: ${({ theme }) => theme.quaternary};
+    background-color: ${({ theme }) => theme.quaternary}88;
     color: ${({ theme }) => theme.primary};
     border-radius: 3px;
     height: ${({ list }) => (list ? '50px' : '100px')};
@@ -85,11 +85,25 @@ export const ItemTile = ({ filename, isFile, setLocation, selected, reload, acce
     const wrapperRef = React.useRef()
     const modalForm = useModalForm()
     const navigate = useNavigate()
+    let mouseDownPos = React.useRef([0, 0])
 
     React.useEffect(() => {
         const bcr = wrapperRef.current.getBoundingClientRect()
         setPos(bcr)
     }, [reload])
+
+
+    const handleAshEditor = () => {
+        modalForm({
+            content: EditorChooser,
+            icon: <BiEditAlt />,
+            title: 'CHOOSE EDITOR TYPE',
+            todo: (editorType) => {
+                navigate(LINKS.editor.edit(item.path, editorType))
+            },
+        })
+    }
+
 
     return (
         <Tooltip text={filename}>
@@ -103,24 +117,24 @@ export const ItemTile = ({ filename, isFile, setLocation, selected, reload, acce
                     toDrop={toBoolStr(toDrop)}
                     isFile={toBoolStr(isFile)}
                     onMouseDown={(e) => {
+                        mouseDownPos.current[0] = e.clientX
+                        mouseDownPos.current[1] = e.clientY
                         if (selected && !e.shiftKey) setDragging(true)
                         else if (!selected && !e.shiftKey) setSelectedItems([item])
                     }}
                     onClick={(e) => {
                         !isFile && !e.shiftKey && e.detail === 1 && setLocation(filename)
-                        if (e.detail === 1 && (isFile || e.shiftKey)) {
+                        if(e.detail === 1 && isFile){
+                            const [x, y] = [e.clientX, e.clientY]
+                            const [lx, ly] = mouseDownPos.current
+                            const distatnce = Math.sqrt((lx - x) ** 2 + (ly - y) ** 2)
+                            if(distatnce < 5) handleAshEditor()
+                        }
+                        else if (e.detail === 1 && (isFile || e.shiftKey)) {
                             setSelectedItems((prev) => (selected ? [...prev.filter((i) => i !== item)] : [...prev, item]))
                         }
+                        e.detail > 1 && handleAshEditor()
 
-                        e.detail > 1 &&
-                            modalForm({
-                                content: EditorChooser,
-                                icon: <BiEditAlt />,
-                                title: 'CHOOSE EDITOR TYPE',
-                                todo: (editorType) => {
-                                    navigate(LINKS.editor.edit(item.path, editorType))
-                                },
-                            })
                     }}
                     {...props}
                 >
