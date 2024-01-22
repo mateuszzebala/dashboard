@@ -8,7 +8,6 @@ from devboard.models import QrCodeAuth, Account
 from uuid import uuid4
 import qrcode
 import os
-import datetime
 
 def devboard_user_access(user):
     return user.is_superuser or user.groups.filter(name='devboard_admin').exists()
@@ -55,10 +54,11 @@ def me(request):
             'devboard_access': devboard_user_access(request.user)
         })
     else:
-        return JsonResponse({
+        resp = JsonResponse({
             'signin': False,
-        
         })
+        resp.status_code = 403
+        return resp
 
 def devboard_access(fnc):
     def inner(*args, **kwargs):

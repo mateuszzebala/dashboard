@@ -88,19 +88,3 @@ TEMP_ROOT = 'temp/'
 
 WSGI_APPLICATION = 'main.wsgi.application'
 ASGI_APPLICATION = 'main.asgi.application'
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': True,
-#     'handlers': {
-#         'file': {
-#             'level': 'INFO',
-#             'class': 'logging.FileHandler',
-#             'filename': BASE_DIR / 'django.log',
-#         },
-#     },
-#     'root': {
-#         'handlers': ['file'],
-#         'level': 'INFO',
-#     },
-# }

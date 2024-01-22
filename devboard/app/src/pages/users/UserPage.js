@@ -5,7 +5,6 @@ import { useParams } from 'react-router'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import styled from 'styled-components'
-import { BsCamera } from 'react-icons/bs'
 import { useModalForm, useTheme } from '../../utils/hooks'
 import { Button, Confirm, FilePrompt, Input, Prompt, Select, Theme } from '../../atoms'
 import { FiCamera, FiDatabase, FiLogIn, FiLogOut, FiSave } from 'react-icons/fi'
@@ -101,7 +100,7 @@ export const UserPage = () => {
 
     const handleSave = () => {
         setSaving(true)
-        FETCH(ENDPOINTS.users.edit(id), { ...data, profileImage }).then(data => {
+        FETCH(ENDPOINTS.users.edit(id), { ...data, profileImage }).then(() => {
             setReload(prev => prev + 1)
             setSaving(false)
         })
@@ -172,7 +171,7 @@ export const UserPage = () => {
             }}/>
             <Button second to={LINKS.database.item('Account', id)} icon={<FiDatabase />} size={1.4} subContent='SHOW IN' />
             <Button size={1.4} icon={<FiLogIn/>} subContent='LOGIN' second onClick={() => {
-                FETCH(ENDPOINTS.users.signin(id)).then(data => {
+                FETCH(ENDPOINTS.users.signin(id)).then(() => {
                     window.location.reload()
                 })
             }}/>
