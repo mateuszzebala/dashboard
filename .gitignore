@@ -8,6 +8,7 @@ venv
 temp
 temp/**
 **/temp
+**/.DS_Store
 .DS_Store
 node_modules
 scripts/flow/*/.flowconfig
