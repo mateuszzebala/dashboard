@@ -8,7 +8,7 @@ export const range = (start, end, step = 1) => {
     return Array.from({ length: Math.floor((end - start) / step) + 1 }, (_, i) => start + i * step)
 }
 
-export const dateForDateTimeInputValue = date => new Date(date.getTime() + new Date().getTimezoneOffset() * -60 * 1000).toISOString().slice(0, 19)
+export const dateForDateTimeInputValue = (date) => new Date(date.getTime() + new Date().getTimezoneOffset() * -60 * 1000).toISOString().slice(0, 19)
 
 export const datetimeToString = (datetime) => {
     let { year, month, day, hours, minutes, seconds } = datetime
@@ -117,11 +117,10 @@ export const downloadURL = (url, filename) => {
 }
 
 export const objectEquals = (obj1, obj2) => {
-    return Object.keys(obj1).every(key => obj1[key] === obj2[key])
+    return Object.keys(obj1).every((key) => obj1[key] === obj2[key])
 }
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
-
 
 export const variableToPythonString = (variable) => {
     if (variable === null) return 'None'
@@ -129,4 +128,20 @@ export const variableToPythonString = (variable) => {
     if (variable === true) return 'True'
     if (variable === false) return 'False'
     return variable.toString()
+}
+
+export const convertKeyToANSI = ({ key, code, crtl }) => {
+    if (key.length == 1) return key
+
+    const KEYS = {
+        Enter: '\n',
+        Backspace: '\b',
+        Tab: '\t',
+    }
+
+    console.log(KEYS[key])
+
+    if (KEYS[key]) return KEYS[key]
+
+    return ''
 }

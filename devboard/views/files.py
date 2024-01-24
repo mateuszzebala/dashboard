@@ -12,7 +12,6 @@ from devboard.views.auth import devboard_access
 # POST (path: path to folder)
 # RETURN {files: [], folders: [], permission_error: true|false, sep, parent}
 
-
 @devboard_access
 def get_content_of_folder(request):
     parent_path = request.POST.get('path')
@@ -111,13 +110,13 @@ def mkdir(request):
 @devboard_access
 def remove(request):
     paths = request.POST.get('paths')
-    for current_path in paths.split(';;;'):
-        if os.path.exists(current_path) and os.access(current_path, os.W_OK):
-            if os.path.isfile(current_path):
-                os.remove(current_path)
-            else:
-                shutil.rmtree(current_path)
-    return JsonResponse({})
+    try:
+        for current_path in paths.split(';;;'):
+            if os.path.exists(current_path) and os.access(current_path, os.W_OK):
+                if os.path.isfile(current_path): os.remove(current_path)
+                else: shutil.rmtree(current_path)
+        return JsonResponse({ 'done': True })
+    except: return JsonResponse({ 'done': False })
 
 
 # CREATE FILE VIEW
@@ -246,8 +245,12 @@ def move_files_view(request):
                     if not copy_mode:
                         shutil.rmtree(item_to_move)
         except PermissionError:
-            ...
-    return JsonResponse({})
+            return JsonResponse({
+                'done': False
+            })
+    return JsonResponse({
+        'done': True
+    })
 
 
 urlpatterns = [

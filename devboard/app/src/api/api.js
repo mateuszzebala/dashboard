@@ -10,6 +10,7 @@ export const MANIFEST = await fetch(manifest_location).then(async (data) => {
 })
 
 export const API_URL = MANIFEST.api_url
+export const WS_API_URL = MANIFEST.ws_api_url
 
 export const INIT = async () => {
     return Promise.all([initSubLinks()])
@@ -17,13 +18,19 @@ export const INIT = async () => {
 
 export const API = (path, args = null) => {
     let url = `${API_URL}${path.join('/')}/`
-
     if (args) {
         const params = new URLSearchParams(args)
         url += `?${params.toString()}`
- 
     }
+    return url
+}
 
+export const WS_API = (path, args = null) => {
+    let url = `${WS_API_URL}${path.join('/')}/`
+    if (args) {
+        const params = new URLSearchParams(args)
+        url += `?${params.toString()}`
+    }
     return url
 }
 
@@ -49,10 +56,7 @@ export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {
 
     formData.append('csrfmiddlewaretoken', tokenData.token)
     if (!tokenData.access) {
-        if (window.location.pathname !== LINKS.auth.signin())
-            window.location.href = LINKS.auth.signinNext(
-                window.location.pathname
-            )
+        if (window.location.pathname !== LINKS.auth.signin()) window.location.href = LINKS.auth.signinNext(window.location.pathname)
     }
 
     return axios({

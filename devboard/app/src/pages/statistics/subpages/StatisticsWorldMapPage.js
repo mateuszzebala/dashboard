@@ -15,7 +15,7 @@ const StyledLoading = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: ${({theme})=>theme.secondary};
+    background-color: ${({ theme }) => theme.secondary};
 `
 
 export const StatisticsWorldMapPage = () => {
@@ -30,31 +30,31 @@ export const StatisticsWorldMapPage = () => {
         })
     }, [])
 
-
-
     return (
         <MainTemplate padding={0} app={APPS.statistics} title="WORLD MAP">
-            {!loading && <>
-                <WorldMap scale={scale} setScale={setScale} countries={countries} />
-                <FloatingActionButton
-                    bottom={70}
-                    icon={<FaPlus />}
-                    onClick={() => {
-                        setScale((prev) => prev * 2)
-                    }}
-                />
-                <FloatingActionButton
-                    icon={<FaMinus />}
-                    onClick={() => {
-                        setScale((prev) => prev / 2)
-                    }}
-                />
-            </>}
-            {loading && 
+            {!loading && (
+                <>
+                    <WorldMap scale={scale} setScale={setScale} countries={countries} />
+                    <FloatingActionButton
+                        bottom={70}
+                        icon={<FaPlus />}
+                        onClick={() => {
+                            setScale((prev) => prev * 2)
+                        }}
+                    />
+                    <FloatingActionButton
+                        icon={<FaMinus />}
+                        onClick={() => {
+                            setScale((prev) => prev / 2)
+                        }}
+                    />
+                </>
+            )}
+            {loading && (
                 <StyledLoading>
-                    <Loading size={2}/>
+                    <Loading size={2} />
                 </StyledLoading>
-            }
+            )}
         </MainTemplate>
     )
 }

@@ -12,16 +12,17 @@ import { BsFolder2Open } from 'react-icons/bs'
 
 const StyledWrapper = styled.div`
     display: inline-flex;
-    width: 300px;
+    width: ${({ size }) => size * 300}px;
     flex-direction: column;
     align-items: stretch;
 `
 
-export const FileInput = ({ value, setValue }) => {
+export const FileInput = ({ value, setValue, size = 1 }) => {
     const modalForm = useModalForm()
     return (
-        <StyledWrapper>
+        <StyledWrapper size={size}>
             <Button
+                size={size}
                 onClick={() => {
                     modalForm({
                         content: ChooseDevice,
@@ -53,9 +54,7 @@ export const FileInput = ({ value, setValue }) => {
                 width={'100%'}
                 second
             >
-                {value
-                    ? centerEllipsis(value.name ? value.name : value, 15)
-                    : 'UPLOAD'}
+                {value ? centerEllipsis(value.name ? value.name : value, 15) : 'UPLOAD'}
             </Button>
         </StyledWrapper>
     )

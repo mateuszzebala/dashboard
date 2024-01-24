@@ -67,9 +67,11 @@ def devboard_access(fnc):
         if have_access:
             return fnc(*args, **kwargs)
         else:
-            return JsonResponse({
+            response = JsonResponse({
                 'error': 'You do not have access to this API. You should be a superuser.'
             })
+            response.status_code = 403
+            return response
 
     return inner
 
@@ -88,7 +90,7 @@ def generate_auth_qrcode(request):
     code.save()
     return FileResponse(open(f'media/devboard/auth/qrcode/{token}.png', 'rb'))
 
-def get_auth(request, token):
+def get_auth_by_code(request, token):
     code = QrCodeAuth.objects.filter(token=token).first()
     if code is not None:
         if code.datetime.today:
@@ -107,6 +109,13 @@ def profile_picture(request, username):
                 return FileResponse(open('media/devboard/auth/account/defaults/woman1.png', 'rb'))
     return FileResponse(open('media/devboard/auth/account/defaults/man1.png', 'rb'))
 
+@devboard_access
+def test_view(request):
+    response = JsonResponse({
+        'success': 'You have access to API.'
+    })
+    response.status_code = 200
+    return response
 
 urlpatterns = [
     path('signin/', signin), # SIGN IN USER
@@ -115,5 +124,6 @@ urlpatterns = [
     path('me/', me), # AM I SIGN IN?
     path('profile/<username>/', profile_picture), # GET PROFILE PICTURE
     path('qrcode/', generate_auth_qrcode), # GENERATE QR CODE
-    path('qrcode/<token>/', get_auth), # AUTH BY QRCODE
+    path('qrcode/<token>/', get_auth_by_code), # AUTH BY QRCODE
+    path('test/', test_view), # AUTH BY QRCODE
 ]

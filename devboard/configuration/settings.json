@@ -10,7 +10,7 @@
         "default_number_of_rows": 30
     },
     "terminal": {
-        "sh_type": "zsh",
+        "sh_type": "sh",
         "bookmarks": true,
         "auto_clear": true
     },
@@ -31,7 +31,7 @@
         "topbar_username": true,
         "topbar_app_icon": true,
         "leftbar_app_icons": true,
-        "save_devboard_requests": false,
+        "save_devboard_requests": true,
         "leftbar_arrow_icons": true,
         "polish_flag": false,
         "app": {
@@ -55,46 +55,36 @@
     "editor": {
         "liked": [
             {
-                "name": "FOURSOFT.png",
-                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/FOURSOFT.png",
-                "type": "image"
+                "name": "package.json",
+                "path": "/Users/mateuszzebala/Desktop/p1/package.json",
+                "type": "code"
             },
             {
-                "name": "wallpaper.png",
-                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/wallpaper.png",
-                "type": "image"
-            },
-            {
-                "name": "Screenshot 2024-01-08 at 09.47.33.png",
-                "path": "/Users/mateuszzebala/Desktop/Screenshot 2024-01-08 at 09.47.33.png",
-                "type": "image"
+                "name": "main.py",
+                "path": "/Users/mateuszzebala/Desktop/main.py",
+                "type": "code"
             }
         ],
         "last": [
             {
-                "name": "FOURSOFT.png",
-                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/FOURSOFT.png",
-                "type": "image"
+                "name": "package.json",
+                "path": "/Users/mateuszzebala/Desktop/p1/package.json",
+                "type": "code"
             },
             {
-                "name": "wallpaper.png",
-                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/wallpaper.png",
-                "type": "image"
+                "name": "main.py",
+                "path": "/Users/mateuszzebala/Desktop/main.py",
+                "type": "code"
             },
             {
-                "name": "Screenshot 2024-01-08 at 09.47.33.png",
-                "path": "/Users/mateuszzebala/Desktop/Screenshot 2024-01-08 at 09.47.33.png",
-                "type": "image"
+                "name": "index.js",
+                "path": "/Users/mateuszzebala/Desktop/p1/index.js",
+                "type": "code"
             },
             {
-                "name": "Frame 1.png",
-                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/Frame 1.png",
+                "name": "F.png",
+                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/F.png",
                 "type": "image"
-            },
-            {
-                "name": "recently-used.xbel",
-                "path": "/Users/mateuszzebala/.local/share/recently-used.xbel",
-                "type": "file"
             }
         ]
     },

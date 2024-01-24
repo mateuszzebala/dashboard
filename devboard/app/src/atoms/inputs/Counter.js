@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useModalForm } from '../../utils/hooks'
 import { Prompt } from '../modalforms/Prompt'
 
-const StyledWrapper = styled.button`
+const StyledWrapper = styled.div`
     display: inline-flex;
     height: ${({ size }) => size * 43 + 'px'};
     align-items: center;
@@ -19,7 +19,8 @@ const StyledWrapper = styled.button`
     border: 0;
     transition: outline-width 0.1s;
     cursor: pointer;
-    &:hover, &:focus{
+    &:hover,
+    &:focus {
         outline-width: ${({ size }) => size * 3 + 'px'};
     }
 `
@@ -39,40 +40,28 @@ const StyledButton = styled.button`
     border: 0;
     width: ${({ size }) => size * 23 + 'px'};
     justify-content: center;
-
 `
 
 const StyledRow = styled.div`
     display: flex;
     flex-direction: column;
     font-weight: 300;
-    align-items: center;  
+    align-items: center;
     padding: 0 10px;
     font-size: ${({ scaleSize }) => scaleSize * 15 + 'px'};
-    span:first-child{
-
+    span:first-child {
     }
-    span:last-child{
+    span:last-child {
         font-size: ${({ scaleSize }) => scaleSize * 8 + 'px'};
     }
 `
 
-const StyledButtons = styled.div`
+const StyledButtons = styled.div``
 
-`
-
-export const Counter = ({
-    value,
-    setValue,
-    unit = '',
-    size = 1,
-    min = 0,
-    max = 100,
-}) => {
+export const Counter = ({ value, setValue, unit = '', size = 1, min = 0, max = 100 }) => {
     const modalForm = useModalForm()
     return (
         <StyledWrapper size={size}>
-          
             <StyledButtons>
                 <StyledButton
                     size={size}
@@ -92,17 +81,19 @@ export const Counter = ({
                 </StyledButton>
             </StyledButtons>
 
-             
-            <StyledRow onClick={()=>{
-                modalForm({
-                    content: Prompt,
-                    title: unit ? unit : 'VALUE',
-                    icon: <FiChevronUp/>,
-                    type: 'number',
-                    initValue: value,
-                    todo: (val) => setValue(val ? parseInt(val) : value)
-                })
-            }} scaleSize={size}>
+            <StyledRow
+                onClick={() => {
+                    modalForm({
+                        content: Prompt,
+                        title: unit ? unit : 'VALUE',
+                        icon: <FiChevronUp />,
+                        type: 'number',
+                        initValue: value,
+                        todo: (val) => setValue(val ? parseInt(val) : value),
+                    })
+                }}
+                scaleSize={size}
+            >
                 <span>{value}</span>
                 <span>{unit}</span>
             </StyledRow>

@@ -8,3 +8,4 @@ def create_regular_user():
 @pytest.fixture(name="super_user")
 def create_super_user():
     return UserFactory.create(is_superuser=True, is_staff=True)
+    

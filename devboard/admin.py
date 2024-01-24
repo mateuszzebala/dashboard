@@ -17,4 +17,5 @@ class AccountAdmin(admin.ModelAdmin):
 
 
 # admin.site.register(Email)
+admin.site.register(RequestLog)
 admin.site.register(Session)

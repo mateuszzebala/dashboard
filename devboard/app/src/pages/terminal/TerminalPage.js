@@ -1,338 +1,104 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
-import { AiOutlineClear } from 'react-icons/ai'
-import { FloatingActionButton, Prompt } from '../../atoms'
-import { BiBookmark } from 'react-icons/bi'
-import { convertTerminalTextToHTML } from '../../utils/utils'
-import { useSearchParams } from 'react-router-dom'
-import { useModalForm } from '../../utils/hooks'
-import { LINKS } from '../../router/links'
 import { APPS } from '../../apps/apps'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { FiBookmark, FiStopCircle } from 'react-icons/fi'
+import { useGlobalKey } from '../../utils/hooks'
+import { convertKeyToANSI, toBoolStr } from '../../utils/utils'
 
-const StyledWrapper = styled.div`
+function removeAnsiCodes(text) {
+    return text.replace(/(\\x1b\[\d*m)/g, '')
+}
+
+const StyledWrapper = styled.pre`
     position: relative;
-    height: 100%;
+    height: 95%;
+    max-height: 95%;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     font-weight: bold;
-`
-
-const StyledTerminal = styled.div`
     font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
-  font-weight: bold;
-`
-
-const StyledPrompt = styled.div`
-    color: ${({ theme }) => theme.primary};
-    
-    font-size: 18px;
-    >div{
-        display: flex;
-        align-items: center;
+    overflow: scroll;
+    outline: none;
+    &::-webkit-scrollbar {
+        height: 0;
+    }
+    .coursor {
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            49% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        animation: ${({ focus }) => (focus ? 'blink 1s infinite' : 'none')};
     }
 `
-const StyledInput = styled.input`
-    color: ${({ theme }) => theme.primary};
-    border: 0;
-    font-size: 18px;
-    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
-    font-weight: bold;
-    padding: 0 5px;
-    width: 100%;
-
-    &:focus {
-        outline: none;
-    }
-    &:disabled {
-        color: ${({ theme }) => theme.primary};
-    }
-`
-
-const StyledPre = styled.pre`
-    display: inline;
-    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
-    font-weight: bold;
-`
-
-const StyledErrors = styled.pre`
-    display: inline;
-    color: ${({ theme }) => theme.error};
-    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
-    font-weight: bold;
-`
-
 
 export const TerminalPage = () => {
-    const [path, setPath] = React.useState('')
-    const [waiting, setWaiting] = React.useState(false)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const modalForm = useModalForm()
-    const [folderContent, setFolderContent] = React.useState('')
-    const lastInputRef = React.useRef()
-    const terminalRef = React.useRef()
-    const [commandHistory, setCommandHistory] = React.useState([])
-    const [historyCounter, setHistoryCounter] = React.useState(-1)
-    const [os, setOs] = React.useState('Linux')
-    const [prompts, setPrompts] = React.useState([])
+    const socket = React.useRef(null)
+    const [socketOpen, setSocketOpen] = React.useState(false)
+    const output = React.useRef('')
+    const [reloadOutput, setReloadOutput] = React.useState(0)
+    const wrapperRef = React.useRef()
+    const [focus, setFocus] = React.useState(true)
 
-    const focusLastInput = () => {
-        terminalRef.current.querySelectorAll('input').forEach((elem) => {
-            elem.focus()
-        })
+    const handleSendCommand = (value) => {
+        socket.current.send(value)
     }
 
-    const handleStopProcess = () => {
-        FETCH(ENDPOINTS.terminal.kill()).then((data) => {
-            data.data.done && setWaiting(false)
-        })
-    }
-
-    React.useEffect(focusLastInput, [prompts])
+    useGlobalKey(
+        (e) => {
+            e.preventDefault()
+            handleSendCommand(
+                convertKeyToANSI({
+                    key: e.key,
+                    code: e.keyCode,
+                    ctrl: e.ctrlKey,
+                })
+            )
+        },
+        'all',
+        socketOpen && focus
+    )
 
     React.useEffect(() => {
-        FETCH(ENDPOINTS.terminal.init(), {
-            path: searchParams.get('path') || null,
-        }).then((data) => {
-            setPath(data.data.path)
-            setFolderContent(data.data.folder_content)
-            setPrompts([
-                {
-                    path: data.data.path,
-                    output: '',
-                    value: '',
-                    sent: false,
-                },
-            ])
-            setOs(data.data.os)
+        if (wrapperRef.current)
+            wrapperRef.current.scrollTo({
+                top: wrapperRef.current.scrollHeight + 1000,
+            })
+    }, [reloadOutput])
+
+    const handleNewMessage = (event) => {
+        output.current += event.data
+        setReloadOutput((prev) => prev + 1)
+    }
+
+    React.useEffect(() => {
+        socket.current = new WebSocket(ENDPOINTS.terminal.sh())
+        socket.current.addEventListener('open', () => {
+            console.log('WEBSOCKET CONNECTED')
+            setSocketOpen(true)
         })
+        socket.current.addEventListener('message', handleNewMessage)
+
+        return () => {
+            socket.current.removeEventListener('message', handleNewMessage)
+        }
     }, [])
 
-
-    React.useEffect(() => {
-        setSearchParams({ path })
-        path && FETCH(ENDPOINTS.terminal.init(), {
-            path
-        }).then((data) => {
-            setFolderContent(data.data.folder_content)
-        })
-    }, [path])
-
-    const handleClear = () => {
-        setPrompts([
-            {
-                path: path,
-                output: '',
-                value: '',
-                sent: false,
-            },
-        ])
-    }
-
-    const handleEnterDown = (prompt, e) => {
-        if (e.target.value === 'clear' || e.target.value === 'cls') {
-            handleClear()
-            return
-        }
-
-        setPrompts((prev) => {
-            const newPrompts = [...prev]
-            const index = newPrompts.indexOf(prompt)
-            newPrompts[index].sent = true
-            return newPrompts
-        })
-        setCommandHistory((prev) => [prompt, ...prev])
-        setWaiting(true)
-        FETCH(ENDPOINTS.terminal.command(), {
-            command: e.target.value,
-            path: prompt.path,
-        })
-            .then((data) => {
-                setPrompts((prev) => {
-                    const newPrompts = [...prev]
-                    const index = newPrompts.indexOf(prompt)
-                    newPrompts[index].output = data.data.output
-                    newPrompts[index].errors = data.data.errors
-                    return newPrompts
-                })
-                setPath(data.data.path)
-                setPrompts((prev) => [
-                    ...prev,
-                    {
-                        path: data.data.path,
-                    },
-                ])
-                setWaiting(false)
-            })
-            .catch(() => {
-                setWaiting(false)
-            })
-    }
-
-    const handleTabDown = (index, e) => {
-        e.preventDefault()
-        setPrompts((prev) => {
-            const newPrompts = [...prev]
-
-            const contentParts = e.target.value.split(' ')
-            let best_value = contentParts.slice(-1)
-
-            folderContent.forEach((item) => {
-                if (item.startsWith(contentParts.slice(-1))) {
-                    best_value = item
-                }
-            })
-
-            newPrompts[index].value =
-                contentParts.slice(0, -1).join(' ').trim() + ' ' + best_value
-            return newPrompts
-        })
-    }
-
-    const handleInputChange = (index, e) => {
-        setPrompts((prev) => {
-            const newPrompts = [...prev]
-            newPrompts[index].value = e.target.value
-            return newPrompts
-        })
-    }
-
-    const handleArrowButtonDown = (c, index, e) => {
-        e.preventDefault()
-        setHistoryCounter((prev) => {
-            let newCounter = prev + c
-            if (newCounter < 0) newCounter = 0
-            if (newCounter > commandHistory.length - 1) newCounter = commandHistory.length - 1
-            return newCounter
-        })
-    }
-
-    React.useEffect(() => {
-        if (lastInputRef.current && commandHistory[historyCounter]) lastInputRef.current.value = commandHistory[historyCounter].value
-    }, [historyCounter])
-
-    React.useEffect(() => {
-        //console.log(commandHistory)
-    }, [commandHistory])
-
-    const PromptInput = ({ index }) => {
-        return (
-            <StyledInput
-                ref={lastInputRef}
-                autoFocus
-                value={prompts[index].value || ''}
-                disabled={prompts[index].sent}
-                onKeyDown={(e) => {
-                    e.key === 'Enter' &&
-                        handleEnterDown(prompts[index], e)
-                    e.key === 'Tab' && handleTabDown(index, e)
-                    e.key === 'ArrowDown' &&
-                        handleArrowButtonDown(-1, index, e)
-                    e.key === 'ArrowUp' &&
-                        handleArrowButtonDown(1, index, e)
-                }}
-                onChange={(e) => {
-                    handleInputChange(index, e)
-                }}
-                onInput={(e) => {
-                    handleInputChange(index, e)
-                }}
-            />
-        )
-    }
-
     return (
-        <MainTemplate app={APPS.terminal} title={path}>
-            <StyledWrapper onClick={focusLastInput}>
-                {waiting && (
-                    <FloatingActionButton
-                        second
-                        size={1.4}
-                        right={230}
-                        icon={<FiStopCircle />}
-                        onClick={handleStopProcess}
-                        subContent='STOP'
-                    />
-                )}
-                <FloatingActionButton
-                    size={1.4}
-                    right={160}
-                    second
-                    icon={<APPS.files.icon />}
-                    to={LINKS.files.indexPath(path)}
-                    subContent='LOCATION'
-
-                />
-                <FloatingActionButton
-                    size={1.4}
-                    second
-                    right={90}
-                    icon={<FiBookmark />}
-                    subContent='BOOKMARK'
-                    onClick={() => {
-                        modalForm({
-                            content: Prompt,
-                            label: 'BOOKMARK NAME',
-                            title: 'ADD BOOKMARK',
-                            icon: <BiBookmark />,
-                            setButton: 'ADD'
-                        })
-                    }}
-                />
-                <FloatingActionButton
-                    onClick={handleClear}
-                    subContent='CLEAR'
-                    size={1.4}
-                    icon={<AiOutlineClear />}
-                    second
-                />
-
-                <StyledTerminal ref={terminalRef}>
-                    {Object.keys(prompts).map((index) => (
-                        <StyledPrompt key={index}>
-
-                            {(os === 'Linux' || os === 'Darwin') && (
-                                <>
-                                    <div>{prompts[index].path}</div>
-                                    <div>
-                                        $
-                                        <PromptInput index={index} />
-                                    </div>
-                                </>
-                            )}
-                            {os === 'Windows' && (
-                                <div>{prompts[index].path}&gt;<PromptInput index={index} /></div>
-                            )}
-                            {prompts[index].output ? (
-                                <>
-                                    <br />
-                                    <StyledPre
-                                        dangerouslySetInnerHTML={{
-                                            __html: convertTerminalTextToHTML(
-                                                prompts[index].output
-                                            ),
-                                        }}
-                                    />
-                                    <br />
-                                </>
-                            ) : (
-                                <>
-                                    <StyledErrors
-                                        dangerouslySetInnerHTML={{
-                                            __html: convertTerminalTextToHTML(
-                                                prompts[index].errors
-                                            ),
-                                        }}
-                                    />
-                                </>
-                            )}
-                            <br />
-                        </StyledPrompt>
-                    ))}
-                </StyledTerminal>
+        <MainTemplate padding={5} loading={!socketOpen} app={APPS.terminal}>
+            <StyledWrapper autoFocus focus={toBoolStr(focus)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} tabIndex={0} ref={wrapperRef}>
+                <b>{removeAnsiCodes(output.current)}</b>
+                <span className="coursor">█</span>
             </StyledWrapper>
         </MainTemplate>
     )

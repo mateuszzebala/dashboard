@@ -1,5 +1,5 @@
 import { theme } from '../theme/theme'
-import { API } from './api'
+import { API, WS_API } from './api'
 
 export const ENDPOINTS = {
     home: {
@@ -23,10 +23,7 @@ export const ENDPOINTS = {
         logout: () => API(['auth', 'logout']),
         me: () => API(['auth', 'me']),
         profile: (username) => API(['auth', 'profile', username]),
-        qrcode: (
-            fillColor = theme.primary,
-            backgroundColor = theme.secondary
-        ) =>
+        qrcode: (fillColor = theme.primary, backgroundColor = theme.secondary) =>
             API(['auth', 'qrcode'], {
                 datetime: new Date().toISOString(),
                 fillColor,
@@ -37,11 +34,12 @@ export const ENDPOINTS = {
         command: () => API(['terminal', 'command']),
         init: () => API(['terminal', 'init']),
         kill: () => API(['terminal', 'kill']),
+        sh: () => WS_API(['terminal', 'sh']),
     },
     files: {
         content: () => API(['files', 'content']),
         init: () => API(['files', 'init']),
-        file: (path) => API(['files', 'file'], { path, datetime: new Date().toISOString(), }),
+        file: (path) => API(['files', 'file'], { path, datetime: new Date().toISOString() }),
         mkdir: () => API(['files', 'mkdir']),
         remove: () => API(['files', 'remove']),
         touch: () => API(['files', 'touch']),
@@ -55,7 +53,7 @@ export const ENDPOINTS = {
         star: () => API(['email', 'star']),
         connect: () => API(['email', 'connect']),
         info: (email) => API(['email', 'info', email]),
-        inbox: (email, args={}) => API(['email', 'inbox', email], args),
+        inbox: (email, args = {}) => API(['email', 'inbox', email], args),
     },
     editor: {
         json: (path) => API(['editor', 'json'], { path }),
@@ -75,7 +73,7 @@ export const ENDPOINTS = {
         efficiency: () => API(['statistics', 'efficiency']),
         network: () => API(['statistics', 'network']),
         country: (country) => API(['statistics', 'country', country]),
-        activity: (period) => API(['statistics', 'activity'], {period}),
+        activity: (period) => API(['statistics', 'activity'], { period }),
     },
     users: {
         logout: () => API(['users', 'logout']),
@@ -106,5 +104,5 @@ export const ENDPOINTS = {
             delete: (pk) => API(['sessions', pk, 'delete']),
         },
         set_expire: (pk) => API(['sessions', 'expire', pk]),
-    }
+    },
 }

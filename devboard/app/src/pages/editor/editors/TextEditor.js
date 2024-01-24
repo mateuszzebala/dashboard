@@ -32,7 +32,7 @@ const StyledTextArea = styled.textarea`
     white-space: pre;
     overflow-wrap: normal;
     padding: 0;
-    font-family: ${({theme})=>theme.monoFontFamily}, monospace;
+    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
     overflow: scroll;
     color: ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.secondary};
@@ -53,8 +53,8 @@ const StyledLines = styled.div`
     flex-direction: column;
     text-align: right;
     color: ${({ theme }) => theme.tertiary};
-    span{
-        font-family: ${({theme})=>theme.monoFontFamily}, monospace !important;
+    span {
+        font-family: ${({ theme }) => theme.monoFontFamily}, monospace !important;
         font-weight: bold;
     }
     &::-webkit-scrollbar {
@@ -78,7 +78,7 @@ const StyledIde = styled.div`
 `
 
 const StyledTerminal = styled.pre`
-    font-family: ${({theme})=>theme.monoFontFamily}, monospace;
+    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
     color: ${({ theme }) => theme.primary};
     font-size: 20px;
     overflow: scroll;
@@ -94,7 +94,7 @@ const Lines = ({ max }) => {
     return (
         <StyledLines ref={linesRef}>
             {range(1, max).map((line) => (
-                <span key={line}>{line + 1}</span>
+                <span key={line}>{line}</span>
             ))}
         </StyledLines>
     )
@@ -125,20 +125,19 @@ export const TextEditor = () => {
     const [saved, setSaved] = React.useState(true)
     const load = useLoading()
 
-    React.useEffect(()=>{
-        if(savedValue === value) setSaved(true)
+    React.useEffect(() => {
+        if (savedValue === value) setSaved(true)
         else setSaved(false)
     }, [value])
 
-    React.useEffect(()=>{
-        data.path && saveSettings(prev => ({...prev, 'editor.last': [{name: data.filename, path: data.path, type: data.type}, ...prev['editor.last'].filter(file => file.path !== data.path)]}))
+    React.useEffect(() => {
+        data.path && saveSettings((prev) => ({ ...prev, 'editor.last': [{ name: data.filename, path: data.path, type: data.type }, ...prev['editor.last'].filter((file) => file.path !== data.path)] }))
     }, [data])
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const path = searchParams.get('path')
-        setLiked(settings['editor.liked'].some(file => file.path === path))
+        setLiked(settings['editor.liked'].some((file) => file.path === path))
     }, [settings])
-
 
     const handleSave = () => {
         value !== false && setSaveLoading(true)
@@ -156,8 +155,8 @@ export const TextEditor = () => {
         setLoading(true)
         FETCH(ENDPOINTS.files.file(searchParams.get('path')))
             .then((data) => {
-                setValue(data.data)
-                setSavedValue(data.data)
+                setValue(data.data.toString() == '[object Object]' ? JSON.stringify(data.data, null, 4) : data.data)
+                setSavedValue(data.data.toString() == '[object Object]' ? JSON.stringify(data.data, null, 4) : data.data)
                 setLoading(false)
             })
             .catch(() => {
@@ -173,7 +172,7 @@ export const TextEditor = () => {
         })
     }, [searchParams])
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         saveSettings()
     }, [liked])
 
@@ -182,12 +181,12 @@ export const TextEditor = () => {
             app={{
                 name: 'TEXT EDITOR',
                 icon: FiCode,
-                link: LINKS.editor.index()
+                link: LINKS.editor.index(),
             }}
             title={centerEllipsis(searchParams.get('path'), 50)}
             submenuChildren={
                 <>
-                    <Theme value={{...theme, primary: saved ? theme.success : theme.error}}>
+                    <Theme value={{ ...theme, primary: saved ? theme.success : theme.error }}>
                         <Button
                             tooltip={'SAVE FILE'}
                             size={1.4}
@@ -202,24 +201,8 @@ export const TextEditor = () => {
                             onClick={handleSave}
                         />
                     </Theme>
-                    <Button
-                        second
-                        subContent={'FOLDER'}
-                        to={LINKS.files.indexPath(data.parent)}
-                        tooltip={'GO TO FOLDER'}
-                        size={1.4}
-                        icon={<APPS.files.icon />}
-                    />
-                    <Button
-                        second
-                        tooltip={'DOWNLOAD FILE'}
-                        subContent={'DOWNLOAD'}
-                        size={1.4}
-                        target={'_blank'}
-                        download="true"
-                        to={ENDPOINTS.files.file(searchParams.get('path'))}
-                        icon={<FiDownload />}
-                    />
+                    <Button second subContent={'FOLDER'} to={LINKS.files.indexPath(data.parent)} tooltip={'GO TO FOLDER'} size={1.4} icon={<APPS.files.icon />} />
+                    <Button second tooltip={'DOWNLOAD FILE'} subContent={'DOWNLOAD'} size={1.4} target={'_blank'} download="true" to={ENDPOINTS.files.file(searchParams.get('path'))} icon={<FiDownload />} />
                     <Button
                         second
                         icon={<FiEdit />}
@@ -237,35 +220,30 @@ export const TextEditor = () => {
                                 icon: <FiEdit />,
                                 title: 'CHOOSE EDITOR TYPE',
                                 todo: (editorType) => {
-                                    navigate(
-                                        LINKS.editor.edit(
-                                            searchParams.get('path'),
-                                            editorType
-                                        )
-                                    )
+                                    navigate(LINKS.editor.edit(searchParams.get('path'), editorType))
                                 },
                             })
                         }}
                     />
-                    <Button 
-                        second 
-                        icon={<TbReplaceFilled />} 
-                        size={1.4} 
+                    <Button
+                        second
+                        icon={<TbReplaceFilled />}
+                        size={1.4}
                         subContent={'REPLACE'}
-                        onClick={()=>{
+                        onClick={() => {
                             modalForm({
                                 content: FilePrompt,
                                 title: 'REPLACE FILE',
-                                icon: <TbReplaceFilled/>,
-                                todo: (val)=>{
+                                icon: <TbReplaceFilled />,
+                                todo: (val) => {
                                     load({
                                         text: 'REPLACEING',
-                                        show: true
+                                        show: true,
                                     })
                                     FETCH(ENDPOINTS.editor.replace(searchParams.get('path')), {
                                         file: val,
-                                    }).then(()=>{
-                                        load({show: false})
+                                    }).then(() => {
+                                        load({ show: false })
                                         handleReload()
                                     })
                                 },
@@ -276,11 +254,10 @@ export const TextEditor = () => {
                         second
                         onClick={() => {
                             const path = searchParams.get('path')
-                            if(liked){
-                                saveSettings(prev => ({...prev, 'editor.liked': prev['editor.liked'].filter(file => file.path !== path)}))
-                            }
-                            else{
-                                saveSettings(prev => ({...prev, 'editor.liked': [{name: data.filename, path: data.path, type: data.type}, ...prev['editor.liked']]}))
+                            if (liked) {
+                                saveSettings((prev) => ({ ...prev, 'editor.liked': prev['editor.liked'].filter((file) => file.path !== path) }))
+                            } else {
+                                saveSettings((prev) => ({ ...prev, 'editor.liked': [{ name: data.filename, path: data.path, type: data.type }, ...prev['editor.liked']] }))
                             }
                         }}
                         tooltip={'LIKE'}
@@ -306,12 +283,7 @@ export const TextEditor = () => {
                         onClick={() => {
                             if (value !== false && command) {
                                 setRunLoading(true)
-                                FETCH(
-                                    ENDPOINTS.editor.save.run(
-                                        searchParams.get('path')
-                                    ),
-                                    { command, content: value }
-                                ).then((data) => {
+                                FETCH(ENDPOINTS.editor.save.run(searchParams.get('path')), { command, content: value }).then((data) => {
                                     setRunLoading(false)
                                     setSaved(true)
                                     setSavedValue(value)
@@ -320,8 +292,7 @@ export const TextEditor = () => {
                                         title: 'TERMINAL',
                                         minimizeIcon: true,
                                         icon: <APPS.terminal.icon />,
-                                        terminalContent:
-                                            data.data.output + data.data.errors,
+                                        terminalContent: data.data.output + data.data.errors,
                                     })
                                 })
                             } else {
@@ -367,22 +338,15 @@ export const TextEditor = () => {
             {!loading && (
                 <StyledIde>
                     <StyledWrapper>
-                        <Lines
-                            max={value.split('\n').length}
-                            height={value.split('\n').length}
-                        />
+                        <Lines max={value.split('\n').length} height={value.split('\n').length} />
                         <StyledTextArea
                             onKeyDown={(e) => {
                                 if (e.key == 'Tab') {
                                     e.preventDefault()
                                     var start = e.target.selectionStart
                                     var end = e.target.selectionEnd
-                                    e.target.value =
-                                        e.target.value.substring(0, start) +
-                                        '\t' +
-                                        e.target.value.substring(end)
-                                    e.target.selectionStart =
-                                        e.target.selectionEnd = start + 1
+                                    e.target.value = e.target.value.substring(0, start) + '\t' + e.target.value.substring(end)
+                                    e.target.selectionStart = e.target.selectionEnd = start + 1
                                     setValue(e.target.value)
                                 }
                             }}

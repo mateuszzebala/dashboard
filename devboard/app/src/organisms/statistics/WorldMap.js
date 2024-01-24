@@ -19,12 +19,11 @@ const StyledSvgMap = styled.svg``
 
 const StyledPath = styled.path`
     stroke: ${({ theme }) => theme.primary};
-    stroke-width: 1px;
+    stroke-width: 0.5px;
     fill: ${({ theme, color }) => (color ? color : theme.secondary)};
     cursor: pointer;
     stroke-linejoin: round;
     transition: fill 0.1s;
-
 `
 
 const PathCountry = ({ color, ...props }) => {
@@ -46,7 +45,7 @@ const PathCountry = ({ color, ...props }) => {
                     modalForm({
                         content: CountryInfo,
                         title: props.title,
-                        icon: <FaGlobeAfrica/>,
+                        icon: <FaGlobeAfrica />,
                         country: props.countryCode,
                     })
             }}
@@ -80,10 +79,8 @@ export const WorldMap = ({ scale, setScale, countries = {} }) => {
     React.useEffect(() => {
         setPos((prev) => ({
             ...prev,
-            left:
-                prev.left + (prev.width - (1 / scale) * wrapperSize.width) / 2,
-            top:
-                prev.top + (prev.height - (1 / scale) * wrapperSize.height) / 2,
+            left: prev.left + (prev.width - (1 / scale) * wrapperSize.width) / 2,
+            top: prev.top + (prev.height - (1 / scale) * wrapperSize.height) / 2,
             width: (1 / scale) * wrapperSize.width,
             height: (1 / scale) * wrapperSize.height,
         }))
@@ -124,9 +121,7 @@ export const WorldMap = ({ scale, setScale, countries = {} }) => {
             scale={scale}
         >
             <StyledSvgMap
-                viewBox={`${pos.left} ${pos.top} ${
-                    pos.width < 0 ? 0 : pos.width
-                } ${pos.height < 0 ? 0 : pos.height}`}
+                viewBox={`${pos.left} ${pos.top} ${pos.width < 0 ? 0 : pos.width} ${pos.height < 0 ? 0 : pos.height}`}
                 ref={svgRef}
                 scale={scale}
                 onTouchStart={handleMouseDown}
@@ -139,15 +134,7 @@ export const WorldMap = ({ scale, setScale, countries = {} }) => {
             >
                 <g>
                     {COUNTRIES.map((country) => (
-                        <PathCountry
-                            key={country.country_code}
-                            id={country.country_code}
-                            countryCode={country.country_code}
-                            title={country.name}
-                            className="land"
-                            d={country.pos}
-                            color={countries[country.country_code]}
-                        />
+                        <PathCountry key={country.country_code} id={country.country_code} countryCode={country.country_code} title={country.name} className="land" d={country.pos} color={countries[country.country_code]} />
                     ))}
                 </g>
             </StyledSvgMap>

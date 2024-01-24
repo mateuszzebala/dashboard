@@ -66,7 +66,7 @@ export const useModalForm = () => {
     const setModalForm = React.useContext(ModalFormContext)[1]
 
     return (form) => {
-        setModalForm(prev => [...prev, form])
+        setModalForm((prev) => [...prev, form])
     }
 }
 
@@ -84,7 +84,7 @@ export const useGlobalState = () => {
     return { globalState, setGlobalState }
 }
 
-export const useGlobalKey = (callback, key, enable = true) => {
+export const useGlobalKey = (callback, key = '', enable = true) => {
     const todo = (e) => {
         if (key.prevent) {
             e.preventDefault()
@@ -95,7 +95,9 @@ export const useGlobalKey = (callback, key, enable = true) => {
 
     const handleKeyDown = (e) => {
         if (!key) return
-        if (typeof key === 'string') {
+        if (key == 'all') {
+            todo(e)
+        } else if (typeof key === 'string') {
             e.key === key && todo(e)
         } else {
             if (key.key !== e.key) return
@@ -122,7 +124,6 @@ export const useGlobalKey = (callback, key, enable = true) => {
     }, [key, todo])
 }
 
-
 export const LoadingContext = React.createContext([])
 
 export const useLoading = () => {
@@ -136,17 +137,16 @@ export const useLoading = () => {
     }
 }
 
-
 export const SettingsContext = React.createContext({})
 
 export const useSettings = () => {
     const [settings, setSettings] = React.useContext(SettingsContext)
 
-    const saveSettings = (newSettings=()=>settings) => {
-        FETCH(ENDPOINTS.settings.set(), {settings: JSON.stringify((newSettings(settings)))}).then(data => {
+    const saveSettings = (newSettings = () => settings) => {
+        FETCH(ENDPOINTS.settings.set(), { settings: JSON.stringify(newSettings(settings)) }).then((data) => {
             setSettings(data.data)
         })
     }
 
-    return [ settings, setSettings, saveSettings]
+    return [settings, setSettings, saveSettings]
 }

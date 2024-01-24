@@ -3,7 +3,7 @@ import React from 'react'
 import { toBoolStr } from '../utils/utils'
 
 const Styledevboard = styled.span`
-    font-size: 38px;
+    font-size: 32px;
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.secondary};
