@@ -12,6 +12,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from queue import Empty
 import threading
 import asyncio
+import time
 
 processes = {}
 
@@ -34,7 +35,7 @@ def command(request):
     interpreter = SETTINGS.get('terminal.sh_type')
 
     if interpreter == 'cmd':
-        interpreter = 'C:\Windows\System32\cmd.exe'
+        interpreter = 'C:\\Windows\\System32\\cmd.exe'
 
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=path, executable=interpreter)
     
@@ -97,21 +98,23 @@ class TerminalConsumer(AsyncWebsocketConsumer):
         if shell == 'zsh': 
             self.runner = Runner('zsh', ['--interactive'], 0.1)
             self.runner.run_command("source ~/.zshrc\n".encode())
+        if shell == 'bash':
+            self.runner = Runner('bash', ['-i'], 0.1)
+            self.runner.run_command("source ~/.bashrc\n".encode())
         else:
-            self.runner = Runner(shell, [], 0.1)
+            self.runner = Runner(shell, ['-i'], 0.1)
         self.runner.start()
-        #self.runner.run_command("print -P $PROMPT\n".encode())
         await self.accept()
         await self.send_output()
-       
-        set_interval(lambda: asyncio.run(self.send_output()), 0.01)
+        set_interval(lambda: asyncio.run(self.send_output()), 1)
 
     async def disconnect(self, close_code):
         ...
 
     async def receive(self, text_data):
-        self.runner.run_command(text_data.encode('utf-8').decode('unicode_escape').encode())
-        await self.send(text_data=(text_data))
+        if text_data:
+            self.runner.run_command(text_data.encode())
+            #await self.send(text_data=text_data)
         
     async def send_output(self):
         

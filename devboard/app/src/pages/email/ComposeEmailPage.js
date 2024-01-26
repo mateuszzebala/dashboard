@@ -24,14 +24,13 @@ const StyledInput = styled.input`
     font-size: 20px;
     border: none;
     font-weight: 200;
-    &:focus{
+    &:focus {
         outline: none;
     }
-    &::placeholder{
-        color: ${({theme})=>theme.primary};
+    &::placeholder {
+        color: ${({ theme }) => theme.primary};
     }
-    `
-
+`
 
 const StyledContent = styled.textarea`
     width: 100%;
@@ -40,11 +39,11 @@ const StyledContent = styled.textarea`
     border: none;
     height: 100%;
     font-weight: 200;
-    &:focus{
+    &:focus {
         outline: none;
     }
-    &::placeholder{
-        color: ${({theme})=>theme.primary};
+    &::placeholder {
+        color: ${({ theme }) => theme.primary};
     }
 `
 
@@ -62,25 +61,27 @@ export const ComposeEmailPage = () => {
             email: searchParams.get('mail'),
             content,
             subject,
-            recipients
-        }).then(()=>{
+            recipients,
+        }).then(() => {
             navigate(LINKS.email.inbox(searchParams.get('mail')))
             setSending(false)
         })
     }
 
     return (
-        <MainTemplate 
-            app={APPS.email} 
-            title='COMPOSE'
-            submenuChildren={<>
-                <Button loading={sending} size={1.4} icon={<FiSend/>} subContent='SEND' onClick={handleSend}/>    
-            </>}
+        <MainTemplate
+            app={APPS.email}
+            title="COMPOSE"
+            submenuChildren={
+                <>
+                    <Button loading={sending} size={1.4} icon={<FiSend />} subContent="SEND" onClick={handleSend} />
+                </>
+            }
         >
             <StyledForm>
-                <StyledInput value={recipients} onChange={(event)=>setRecipients(event.target.value)} placeholder='Recipients'/>
-                <StyledInput value={subject} onChange={(event)=>setSubject(event.target.value)} placeholder='Subject'/>
-                <StyledContent placeholder='Content' onChange={(event)=>setContent(event.target.value)}>{content}</StyledContent>
+                <StyledInput value={recipients} onChange={(event) => setRecipients(event.target.value)} placeholder="Recipients" />
+                <StyledInput value={subject} onChange={(event) => setSubject(event.target.value)} placeholder="Subject" />
+                <StyledContent placeholder="Content" onChange={(event) => setContent(event.target.value)} value={content} />
             </StyledForm>
         </MainTemplate>
     )

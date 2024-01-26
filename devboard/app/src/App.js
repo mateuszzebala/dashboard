@@ -6,14 +6,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import { MessageGroup } from './molecules/MessageGroup'
 import { MessageContext } from './utils/messages'
 import { RootTemplate } from './templates/RootTemplate'
-import {
-    GlobalStateContext,
-    LoadingContext,
-    ModalFormContext,
-    SettingsContext,
-    ThemeContext,
-    UserContext,
-} from './utils/hooks'
+import { GlobalStateContext, LoadingContext, ModalFormContext, SettingsContext, ThemeContext, UserContext } from './utils/hooks'
 import { theme } from './theme/theme'
 import { LoadingWindow, ModalForm } from './atoms'
 import { useCookies } from 'react-cookie'
@@ -38,35 +31,29 @@ export const App = () => {
         if (cookies.theme) {
             setCustomTheme(cookies.theme)
         }
-        FETCH(ENDPOINTS.settings.get()).then(data => {
-            setSettings(data.data)
-        })
+        user &&
+            user.devboard_access &&
+            FETCH(ENDPOINTS.settings.get()).then((data) => {
+                setSettings(data.data)
+            })
     }, [user])
 
     return (
         <ThemeContext.Provider value={[customTheme, setCustomTheme]}>
-            <ThemeProvider theme={{
-                ...customTheme, 
-                fontFamily: settings['devboard.style.fontFamily'],
-                monoFontFamily: settings['devboard.style.fontFamilyMono']
-            }}>
+            <ThemeProvider
+                theme={{
+                    ...customTheme,
+                    fontFamily: settings['devboard.style.fontFamily'],
+                    monoFontFamily: settings['devboard.style.fontFamilyMono'],
+                }}
+            >
                 <BrowserRouter>
                     <UserContext.Provider value={[user, setUser]}>
-                        <GlobalStateContext.Provider
-                            value={[globalState, setGlobalState]}
-                        >
-                            <SettingsContext.Provider
-                                value={[settings, setSettings]}
-                            >
-                                <LoadingContext.Provider
-                                    value={[loading, setLoading]}
-                                >
-                                    <ModalFormContext.Provider
-                                        value={[modalForm, setModalForm]}
-                                    >
-                                        <MessageContext.Provider
-                                            value={[messages, setMessages]}
-                                        >
+                        <GlobalStateContext.Provider value={[globalState, setGlobalState]}>
+                            <SettingsContext.Provider value={[settings, setSettings]}>
+                                <LoadingContext.Provider value={[loading, setLoading]}>
+                                    <ModalFormContext.Provider value={[modalForm, setModalForm]}>
+                                        <MessageContext.Provider value={[messages, setMessages]}>
                                             <StyledWrapper>
                                                 <GlobalStyle />
                                                 <MessageGroup />

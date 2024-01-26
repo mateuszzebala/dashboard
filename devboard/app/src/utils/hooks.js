@@ -2,6 +2,7 @@ import React from 'react'
 import { useCookies } from 'react-cookie'
 import { FETCH } from '../api/api'
 import { ENDPOINTS } from '../api/endpoints'
+import { useMessage } from './messages'
 
 export const useOnClickOutside = (ref, handler) => {
     React.useEffect(() => {
@@ -149,4 +150,14 @@ export const useSettings = () => {
     }
 
     return [settings, setSettings, saveSettings]
+}
+
+export const useCatchFetch = () => {
+    const { newMessage } = useMessage()
+    return (event) => {
+        newMessage({
+            text: event.code,
+            error: true,
+        })
+    }
 }

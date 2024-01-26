@@ -10,7 +10,7 @@ def test_get_me_info_when_user_is_not_authenticated(client):
     response = client.get(URLS.ME)
     json_data = response.json()
     assert json_data == { "signin": False }
-    assert response.status_code == 403
+
     
 @pytest.mark.django_db
 def test_get_me_info_when_user_is_not_superuser(client, regular_user):

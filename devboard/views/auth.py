@@ -54,11 +54,9 @@ def me(request):
             'devboard_access': devboard_user_access(request.user)
         })
     else:
-        resp = JsonResponse({
+        return JsonResponse({
             'signin': False,
         })
-        resp.status_code = 403
-        return resp
 
 def devboard_access(fnc):
     def inner(*args, **kwargs):

@@ -13,6 +13,7 @@ import { useSearchParams } from 'react-router-dom'
 import { APPS } from '../../apps/apps'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
+import String from 'string'
 
 const StyledRow = styled.div`
     display: flex;
@@ -80,7 +81,7 @@ const ColorProp = ({ setColors, colorName, colors }) => {
                     setColors((prev) => ({ ...prev, [colorName]: val }))
                 }}
             />
-            <Typography variant={'h3'}>{colorName.toUpperCase()}</Typography>
+            <Typography variant={'h3'}>{String(colorName).capitalize().toString()}</Typography>
         </StyledRow>
     )
 }
@@ -100,8 +101,8 @@ const SettingsByPage = {
             <StyledSection>
                 <StyledRow>
                     <Select
-                        label={'FONT FAMILY'}
-                        emptyName="FONT FAMILY"
+                        label={'Font family'}
+                        emptyName="Font family"
                         canBeNull={false}
                         second
                         setValue={(val) => {
@@ -120,12 +121,12 @@ const SettingsByPage = {
                             'Ubuntu Mono': 'Ubuntu Mono',
                         }}
                     />
-                    <Typography variant={'h3'}>FONT FAMILY</Typography>
+                    <Typography variant={'h3'}>Font family</Typography>
                 </StyledRow>
                 <StyledRow>
                     <Select
-                        label={'FONT FAMILY MONO'}
-                        emptyName="FONT FAMILY MONO"
+                        label={'Font family mono'}
+                        emptyName="Font family mono"
                         canBeNull={false}
                         second
                         setValue={(val) => {
@@ -141,21 +142,21 @@ const SettingsByPage = {
                             'Jetbrains Mono': 'Jetbrains Mono',
                         }}
                     />
-                    <Typography variant={'h3'}>MONO FONT FAMILY</Typography>
+                    <Typography variant={'h3'}>Font family mono</Typography>
                 </StyledRow>
             </StyledSection>
         </StyledSection>
     ),
     devboard: ({ value, setValue }) => (
         <StyledSection>
-            <SwitchSetting value={value} setValue={setValue} prop={'devboard.devboards_menu'} text={'Show devboards Menu'} />
+            <SwitchSetting value={value} setValue={setValue} prop={'devboard.devboards_menu'} text={'Show Devboards Menu'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.polish_flag'} text={'Show Polish Flag'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.topbar_username'} text={'Show Username In TopBar'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.topbar_submenu_toggler'} text={'Show Submenu Toggler'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.topbar_app_icon'} text={'Show TopBar app icon'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.leftbar_app_icons'} text={'Show Leftbar app icons'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.leftbar_arrow_icons'} text={'Show Leftbar arrow icons'} />
-            <SwitchSetting value={value} setValue={setValue} prop={'devboard.save_devboard_requests'} text={'Save devboard Requests'} />
+            <SwitchSetting value={value} setValue={setValue} prop={'devboard.save_devboard_requests'} text={'Save Devboard Requests'} />
             <span>APPS</span>
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.app.database'} text={'Database App'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.app.users'} text={'Users App'} />

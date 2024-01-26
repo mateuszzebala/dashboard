@@ -43,7 +43,12 @@ async function CSRF() {
 }
 
 export const SIGNIN = async () => {
-    return (await FETCH(ENDPOINTS.auth.me())).data.signin
+    const data = await FETCH(ENDPOINTS.auth.me())
+    if (data) {
+        return data.data.signin
+    } else {
+        return null
+    }
 }
 
 export const FETCH = async (url, data = {}, headers = {}, method = 'POST') => {

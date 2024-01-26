@@ -25,7 +25,7 @@ const StyledPageButton = styled.button`
     place-items: center;
     padding: 5px;
     font-size: 18px;
-    width: ${({ selected }) => (selected ? '45px' : '40px')};
+    min-width: ${({ selected }) => (selected ? '45px' : '40px')};
     height: ${({ selected }) => (selected ? '45px' : '40px')};
     cursor: pointer;
     font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};

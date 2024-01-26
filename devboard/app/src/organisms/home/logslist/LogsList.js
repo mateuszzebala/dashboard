@@ -5,14 +5,17 @@ import { FETCH } from '../../../api/api'
 import { ENDPOINTS } from '../../../api/endpoints'
 import { isMobile } from 'react-device-detect'
 import { toBoolStr } from '../../../utils/utils'
+import { Loading } from '../../../atoms'
 
 const StyledWrapper = styled.div`
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};
     padding: 10px;
     width: 100%;
     border-radius: 10px;
+    display: grid;
+    place-items: center;
     overflow: scroll;
-    min-height: ${({ isMobile }) => (isMobile? '50%' : '100%')};
+    min-height: ${({ isMobile }) => (isMobile ? '50%' : '100%')};
     &::-webkit-scrollbar {
         width: 0;
         height: 0;
@@ -24,6 +27,7 @@ const StyledList = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 10px;
+    width: 100%;
 `
 
 export const LogsList = ({ reloadEachSecond = false }) => {
@@ -47,11 +51,15 @@ export const LogsList = ({ reloadEachSecond = false }) => {
 
     return (
         <StyledWrapper isMobile={toBoolStr(isMobile)}>
-            <StyledList onClick={handleReload}>
-                {Object.keys(logs).map((index) => (
-                    <LogItem key={index} {...logs[index]} />
-                ))}
-            </StyledList>
+            {logs.length ? (
+                <StyledList onClick={handleReload}>
+                    {Object.keys(logs).map((index) => (
+                        <LogItem key={index} {...logs[index]} />
+                    ))}
+                </StyledList>
+            ) : (
+                <Loading size={2} />
+            )}
         </StyledWrapper>
     )
 }

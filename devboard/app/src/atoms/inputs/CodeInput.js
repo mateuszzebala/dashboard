@@ -11,6 +11,11 @@ const StyledInput = styled.input`
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.primary};
     text-align: center;
+    outline: 0px solid ${({ theme }) => theme.primary}88;
+
+    &:focus {
+        outline-width: 3px;
+    }
 `
 
 const StyledWrapper = styled.div`
@@ -65,9 +70,7 @@ export const CodeInput = ({ value, setValue, length = 4 }) => {
                             e.key !== 'Backspace' && setFocus(key + 1)
                             setValue((prev) => {
                                 const val = String(e.key.charAt(0))
-                                prev[key] = val.isAlphaNumeric
-                                    ? val.toString().toUpperCase()
-                                    : ''
+                                prev[key] = val.isAlphaNumeric ? val.toString().toUpperCase() : ''
                                 return prev
                             })
                         }

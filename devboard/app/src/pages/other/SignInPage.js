@@ -84,12 +84,8 @@ const StyledForm = styled.form`
     align-items: center;
     border-radius: 30px;
     color: ${({ theme }) => theme.primary};
-    box-shadow: 0px 0px 239.1px rgba(0, 0, 0, 0.028),
-        0px 0px 291.6px rgba(0, 0, 0, 0.036),
-        0px 0px 313.3px rgba(0, 0, 0, 0.041),
-        0px 0px 322.7px rgba(0, 0, 0, 0.045), 0px 0px 329px rgba(0, 0, 0, 0.05),
-        0px 0px 340.3px rgba(0, 0, 0, 0.059),
-        0px 0px 370.9px rgba(0, 0, 0, 0.076), 0px 0px 500px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 239.1px rgba(0, 0, 0, 0.028), 0px 0px 291.6px rgba(0, 0, 0, 0.036), 0px 0px 313.3px rgba(0, 0, 0, 0.041), 0px 0px 322.7px rgba(0, 0, 0, 0.045), 0px 0px 329px rgba(0, 0, 0, 0.05), 0px 0px 340.3px rgba(0, 0, 0, 0.059), 0px 0px 370.9px rgba(0, 0, 0, 0.076),
+        0px 0px 500px rgba(0, 0, 0, 0.15);
     @keyframes fade-in {
         from {
             opacity: 0;
@@ -138,12 +134,12 @@ export const SignInPage = () => {
             password,
         })
             .then((data) => {
-                
                 if (data.data.done) {
-                    FETCH(ENDPOINTS.auth.me()).then((dataUser) => {
-                        setUser(dataUser.data)
-                        console.log(dataUser.data)
-                    })
+                    FETCH(ENDPOINTS.auth.me())
+                        .then((dataUser) => {
+                            setUser(dataUser.data)
+                        })
+                        .catch(() => {})
                 } else {
                     setError(true)
                 }
@@ -161,25 +157,11 @@ export const SignInPage = () => {
             <StyledBackgroundDecoration2 />
 
             <StyledForm onSubmit={handleSubmitForm}>
-               
                 <Typography variant={'h1'}>SIGN IN</Typography>
 
-                <Input
-                    value={username}
-                    setValue={setUsername}
-                    label={'USERNAME'}
-                    size={1.1}
-                />
-                <Input
-                    value={password}
-                    setValue={setPassword}
-                    type="password"
-                    size={1.1}
-                    label={'PASSWORD'}
-                />
-                <StyledError error={toBoolStr(error)}>
-                    BAD USERNAME OR PASSWORD
-                </StyledError>
+                <Input value={username} setValue={setUsername} label={'USERNAME'} size={1.1} />
+                <Input value={password} setValue={setPassword} type="password" size={1.1} label={'PASSWORD'} />
+                <StyledError error={toBoolStr(error)}>BAD USERNAME OR PASSWORD</StyledError>
                 <StyledButtons>
                     <Button loading={sending}>SIGN IN</Button>
                     <Button
@@ -188,12 +170,7 @@ export const SignInPage = () => {
                         icon={<FaQrcode />}
                         onClick={() => {
                             modalForm({
-                                content: () => (
-                                    <img
-                                        width={300}
-                                        src="https://clockwork-poznan.pl/wp-content/uploads/2021/09/qr-code.png"
-                                    />
-                                ),
+                                content: () => <img width={300} src="https://clockwork-poznan.pl/wp-content/uploads/2021/09/qr-code.png" />,
                                 title: 'QRCODE',
                                 icon: <FaQrcode />,
                             })
@@ -215,11 +192,8 @@ export const SignInPage = () => {
             <StyledLock>
                 <FaLock />
             </StyledLock>
-            <StyledDeveloperName
-                target="_blank"
-                href="https://mateuszzebala.github.io"
-            >
-                <DevboardIcon/>
+            <StyledDeveloperName target="_blank" href="https://mateuszzebala.github.io">
+                <DevboardIcon />
             </StyledDeveloperName>
         </StyledWrapper>
     )

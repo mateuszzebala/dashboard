@@ -35,8 +35,9 @@ const StyledFiles = styled.div`
     }
 `
 
-const StyledFile = styled.div`
+const StyledFile = styled.button`
     color: ${({ theme }) => theme.primary};
+    border: 0;
     padding: 20px 15px;
     background-color: ${({ theme }) => theme.quaternary};
     box-shadow: 0 0 5px -3px ${({ theme }) => theme.primary};

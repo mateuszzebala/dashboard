@@ -1,5 +1,5 @@
 import { terminalCodesToHtml } from 'terminal-codes-to-html'
-import String from 'string'
+import StringLib from 'string'
 
 export const toBoolStr = (variable) => {
     return variable ? '1' : ''
@@ -82,8 +82,8 @@ export const convertTerminalTextToHTML = (text) => {
 export const centerEllipsis = (text, width) => {
     if (text.length < width) return text
     const toCut = Math.round(text.length - width / 2)
-    const leftSide = String(text).left(text.length - toCut)
-    const rightSide = String(text).right(text.length - toCut)
+    const leftSide = StringLib(text).left(text.length - toCut)
+    const rightSide = StringLib(text).right(text.length - toCut)
     return `${leftSide}...${rightSide}`
 }
 
@@ -130,18 +130,34 @@ export const variableToPythonString = (variable) => {
     return variable.toString()
 }
 
-export const convertKeyToANSI = ({ key, code, crtl }) => {
-    if (key.length == 1) return key
+export const TERMINAL_CODES = {
+    CLEAR: '\x1b[H\x1b[2J',
+}
 
-    const KEYS = {
+export const convertKeyToANSI = ({ code, key, keyCode, shiftKey }) => {
+    if (key.length === 1 && String(key).match(/^[a-zA-Z]$/)) {
+        if (shiftKey) return String.fromCharCode(keyCode)
+        else return String.fromCharCode(keyCode + 32)
+    }
+    if (key.length === 1 && String(key).match(/^[0-9]$/)) {
+        return String.fromCharCode(keyCode)
+    }
+    if ('.,/;\'][=-!@#$%^&*()]}{":?><+_'.includes(key)) {
+        return key
+    }
+
+    const SpecialKeys = {
         Enter: '\n',
+        ArrowLeft: '\x1b[D',
+        ArrowUp: '\x1b[A',
+        ArrowRight: '\x1b[C',
+        ArrowDown: '\x1b[B',
         Backspace: '\b',
+        Space: ' ',
         Tab: '\t',
     }
 
-    console.log(KEYS[key])
-
-    if (KEYS[key]) return KEYS[key]
+    if (SpecialKeys[code]) return SpecialKeys[code]
 
     return ''
 }

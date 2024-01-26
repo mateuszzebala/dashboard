@@ -10,9 +10,9 @@
         "default_number_of_rows": 30
     },
     "terminal": {
-        "sh_type": "sh",
-        "bookmarks": true,
-        "auto_clear": true
+        "sh_type": "bash",
+        "bookmarks": false,
+        "auto_clear": false
     },
     "requests": {
         "save_requests": true,
@@ -31,7 +31,7 @@
         "topbar_username": true,
         "topbar_app_icon": true,
         "leftbar_app_icons": true,
-        "save_devboard_requests": true,
+        "save_devboard_requests": false,
         "leftbar_arrow_icons": true,
         "polish_flag": false,
         "app": {
@@ -67,6 +67,11 @@
         ],
         "last": [
             {
+                "name": ".localized",
+                "path": "/Users/mateuszzebala/Public/Drop Box/.localized",
+                "type": "file"
+            },
+            {
                 "name": "package.json",
                 "path": "/Users/mateuszzebala/Desktop/p1/package.json",
                 "type": "code"
@@ -75,16 +80,6 @@
                 "name": "main.py",
                 "path": "/Users/mateuszzebala/Desktop/main.py",
                 "type": "code"
-            },
-            {
-                "name": "index.js",
-                "path": "/Users/mateuszzebala/Desktop/p1/index.js",
-                "type": "code"
-            },
-            {
-                "name": "F.png",
-                "path": "/Users/mateuszzebala/Desktop/foursoft.dev/assets/F.png",
-                "type": "image"
             }
         ]
     },
@@ -94,7 +89,7 @@
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": true,
+            "save_requests": false,
             "credientals": true
         },
         "allowed_hosts": [

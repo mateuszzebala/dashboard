@@ -4,11 +4,10 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { APPS } from '../../apps/apps'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { useGlobalKey } from '../../utils/hooks'
-import { convertKeyToANSI, toBoolStr } from '../../utils/utils'
+import { TERMINAL_CODES, convertKeyToANSI, toBoolStr } from '../../utils/utils'
+import Convert from 'ansi-to-html'
 
-function removeAnsiCodes(text) {
-    return text.replace(/(\\x1b\[\d*m)/g, '')
-}
+const convert = new Convert()
 
 const StyledWrapper = styled.pre`
     position: relative;
@@ -56,14 +55,8 @@ export const TerminalPage = () => {
 
     useGlobalKey(
         (e) => {
+            handleSendCommand(convertKeyToANSI(e))
             e.preventDefault()
-            handleSendCommand(
-                convertKeyToANSI({
-                    key: e.key,
-                    code: e.keyCode,
-                    ctrl: e.ctrlKey,
-                })
-            )
         },
         'all',
         socketOpen && focus
@@ -78,6 +71,9 @@ export const TerminalPage = () => {
 
     const handleNewMessage = (event) => {
         output.current += event.data
+        if (output.current.endsWith(TERMINAL_CODES.CLEAR)) {
+            output.current = ''
+        }
         setReloadOutput((prev) => prev + 1)
     }
 
@@ -96,10 +92,7 @@ export const TerminalPage = () => {
 
     return (
         <MainTemplate padding={5} loading={!socketOpen} app={APPS.terminal}>
-            <StyledWrapper autoFocus focus={toBoolStr(focus)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} tabIndex={0} ref={wrapperRef}>
-                <b>{removeAnsiCodes(output.current)}</b>
-                <span className="coursor">█</span>
-            </StyledWrapper>
+            <StyledWrapper dangerouslySetInnerHTML={{ __html: convert.toHtml(output.current) + '<span className="coursor">|</span>' }} autoFocus focus={toBoolStr(focus)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} tabIndex={0} ref={wrapperRef}></StyledWrapper>
         </MainTemplate>
     )
 }

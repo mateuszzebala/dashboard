@@ -35,7 +35,6 @@ const StyledBar = styled.nav`
     }
 `
 
-
 const StyledMenuItems = styled.div`
     overflow-y: auto;
     width: 100%;
@@ -63,12 +62,16 @@ const PolishFlag = styled.div`
     flex-direction: column;
     align-items: center;
     cursor: wait;
-    div{
+    div {
         width: 230px;
         height: 25px;
     }
-    div:nth-child(1){background-color: #FFFFFF;}
-    div:nth-child(2){background-color: #DC143C;}
+    div:nth-child(1) {
+        background-color: #ffffff;
+    }
+    div:nth-child(2) {
+        background-color: #dc143c;
+    }
 `
 
 const StyledFlag = styled.img`
@@ -83,37 +86,36 @@ export const LeftBar = ({ close }) => {
     const location = useLocation()
     const [currectApp, setCurrentApp] = React.useState('None')
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const appFromUrl = location.pathname.split('/').slice(1)[1]
         setCurrentApp(appFromUrl === '' ? '' : appFromUrl || 'None')
     }, [])
 
     return (
         <StyledBar close={toBoolStr(close)}>
-            {settings['devboard.polish_flag'] && <PolishFlag onClick={() => {
-                modalForm({
-                    content: () => <>
-                        <StyledFlag src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/400px-Flag_of_Poland.svg.png" />
-                    </>,
-                    title: 'POLES FOR EVERYONE',
-                    icon: <GiPoland />
-                })
-            }}>
-                <div></div>
-                <div></div>
-            </PolishFlag>}
-            <DevboardIcon tabIndex={0} onClick={() => navigate(LINKS.home())}/>
+            {settings['devboard.polish_flag'] && (
+                <PolishFlag
+                    onClick={() => {
+                        modalForm({
+                            content: () => (
+                                <>
+                                    <StyledFlag src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/400px-Flag_of_Poland.svg.png" />
+                                </>
+                            ),
+                            title: 'POLES FOR EVERYONE',
+                            icon: <GiPoland />,
+                        })
+                    }}
+                >
+                    <div></div>
+                    <div></div>
+                </PolishFlag>
+            )}
+            <DevboardIcon tabIndex={close ? -1 : 0} onClick={() => navigate(LINKS.home())} />
             <StyledMenuItems>
                 {Object.values(APPS).map((app) => {
                     if (!settings[`devboard.app.${app.name.toLowerCase()}`]) return ''
-                    return (
-                        <LeftBarItem
-                            active={app.name === APPS.home.name ? currectApp === '' : app.name.toLowerCase() === currectApp.toLowerCase()}
-                            key={app.name}
-                            app={app}
-                            sublinks={app.sublinks && app.sublinks()}
-                        />
-                    )
+                    return <LeftBarItem active={app.name === APPS.home.name ? currectApp === '' : app.name.toLowerCase() === currectApp.toLowerCase()} key={app.name} app={app} sublinks={app.sublinks && app.sublinks()} />
                 })}
             </StyledMenuItems>
         </StyledBar>

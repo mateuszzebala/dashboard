@@ -8,9 +8,7 @@ export const SUBLINKS = {}
 export const initSubLinks = async () => {
     SUBLINKS.TERMINAL = (await FETCH(ENDPOINTS.terminal.init())).data
     SUBLINKS.FILES = (await FETCH(ENDPOINTS.files.init())).data
-    SUBLINKS.DATABASE = Object.keys(
-        (await FETCH(ENDPOINTS.database.models())).data.models
-    )
+    SUBLINKS.DATABASE = Object.keys((await FETCH(ENDPOINTS.database.models())).data.models)
     return SUBLINKS
 }
 
@@ -76,8 +74,8 @@ export const APPS = {
         link: LINKS.email.index(),
         sublinks: () => {
             return {
-                'EMAILS': LINKS.email.index(),
-                'NEWSLETTER': LINKS.email.newsletter(),
+                EMAILS: LINKS.email.index(),
+                NEWSLETTER: LINKS.email.newsletter(),
             }
         },
     },
