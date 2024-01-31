@@ -148,14 +148,20 @@ export const EditorPage = () => {
                                               saveSettings((prev) => ({ ...prev, 'editor.liked': prev['editor.liked'].filter((f) => f.path != file.path) }))
                                           }
                                         : () => {
-                                              modalForm({
-                                                  content: EditorChooser,
-                                                  icon: <BiEditAlt />,
-                                                  title: 'CHOOSE EDITOR TYPE',
-                                                  todo: (editorType) => {
-                                                      navigate(LINKS.editor.edit(file.path, editorType))
-                                                  },
-                                              })
+                                              if (file.type == 'file') {
+                                                  navigate(LINKS.editor.edit(file.path, 'text'))
+                                              } else if (file.type == 'image') {
+                                                  navigate(LINKS.editor.edit(file.path, 'image'))
+                                              } else {
+                                                  modalForm({
+                                                      content: EditorChooser,
+                                                      icon: <BiEditAlt />,
+                                                      title: 'CHOOSE EDITOR TYPE',
+                                                      todo: (editorType) => {
+                                                          navigate(LINKS.editor.edit(file.path, editorType))
+                                                      },
+                                                  })
+                                              }
                                           }
                                 }
                                 key={file.path}
@@ -185,14 +191,20 @@ export const EditorPage = () => {
                                               saveSettings((prev) => ({ ...prev, 'editor.last': prev['editor.last'].filter((f) => f.path != file.path) }))
                                           }
                                         : () => {
-                                              modalForm({
-                                                  content: EditorChooser,
-                                                  icon: <BiEditAlt />,
-                                                  title: 'CHOOSE EDITOR TYPE',
-                                                  todo: (editorType) => {
-                                                      navigate(LINKS.editor.edit(file.path, editorType))
-                                                  },
-                                              })
+                                              if (file.type == 'file') {
+                                                  navigate(LINKS.editor.edit(file.path, 'text'))
+                                              } else if (file.type == 'image') {
+                                                  navigate(LINKS.editor.edit(file.path, 'image'))
+                                              } else {
+                                                  modalForm({
+                                                      content: EditorChooser,
+                                                      icon: <BiEditAlt />,
+                                                      title: 'CHOOSE EDITOR TYPE',
+                                                      todo: (editorType) => {
+                                                          navigate(LINKS.editor.edit(file.path, editorType))
+                                                      },
+                                                  })
+                                              }
                                           }
                                 }
                                 key={file.path}

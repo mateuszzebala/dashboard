@@ -26,26 +26,23 @@ class Runner:
         os.write(self.master, ansi_code)
 
     def enqueue_output(self, out, queue):
-        try:
-            while True:
-                o = out.read(1)
-                if not o: time.sleep(0.3) 
-                queue.put(str(o))
-        except:
-            ...
+        while True:
+            o = os.read(self.master, 1)
+            if not o: time.sleep(0.1) 
+            else: queue.put(o)
 
     def start(self):
         self.proc = subprocess.Popen(
             self.program,
             stdin=self.slave,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stdout=self.slave,
+            stderr=self.slave,
             text=True,
             bufsize=0,
         )
         self.thread = Thread(target=self.enqueue_output, args=(self.proc.stdout, self.lineQueue))
-        self.errorThread = Thread(target=self.enqueue_output, args=(self.proc.stderr, self.errorLineQueue))
+        #self.errorThread = Thread(target=self.enqueue_output, args=(self.proc.stderr, self.errorLineQueue))
         self.thread.daemon = True
-        self.errorThread.daemon = True
+        #self.errorThread.daemon = True
         self.thread.start()
-        self.errorThread.start()
+        #self.errorThread.start()

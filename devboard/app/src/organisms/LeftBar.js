@@ -93,24 +93,6 @@ export const LeftBar = ({ close }) => {
 
     return (
         <StyledBar close={toBoolStr(close)}>
-            {settings['devboard.polish_flag'] && (
-                <PolishFlag
-                    onClick={() => {
-                        modalForm({
-                            content: () => (
-                                <>
-                                    <StyledFlag src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/400px-Flag_of_Poland.svg.png" />
-                                </>
-                            ),
-                            title: 'POLES FOR EVERYONE',
-                            icon: <GiPoland />,
-                        })
-                    }}
-                >
-                    <div></div>
-                    <div></div>
-                </PolishFlag>
-            )}
             <DevboardIcon tabIndex={close ? -1 : 0} onClick={() => navigate(LINKS.home())} />
             <StyledMenuItems>
                 {Object.values(APPS).map((app) => {

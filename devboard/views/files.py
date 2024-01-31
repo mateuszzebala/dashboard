@@ -68,12 +68,17 @@ def init_files(request):
 
 # GET FILE VIEW
 # POST (path: path to file)
-# RETURN: file
+# RETURN: file or {"error": "File does not exists"} is file not exists
 
 @devboard_access
 def get_file_content(request):
     path_to_file = request.GET.get('path')
-    return FileResponse(open(path_to_file, 'rb'))
+    if os.path.exists(path_to_file):
+        return FileResponse(open(path_to_file, 'rb'))
+    else: 
+        res = JsonResponse({"error": "File does not exists!"})
+        res.status_code = 404
+        return res
 
 
 # CREATE DIRECTORY VIEW
@@ -251,6 +256,14 @@ def move_files_view(request):
     return JsonResponse({
         'done': True
     })
+    
+@devboard_access
+def rename(request):
+    path = request.POST.get('path')
+    name = request.POST.get('name')
+    parent = os.path.abspath(os.path.join(path, os.pardir))
+    os.rename(path, os.path.join(parent, name))
+    return JsonResponse({})
 
 
 urlpatterns = [
@@ -260,6 +273,7 @@ urlpatterns = [
     path('mkdir/', mkdir),
     path('remove/', remove),
     path('touch/', create_file),
+    path('rename/', rename),
     path('upload/', upload_file),
     path('zip/', zip_files),
     path('move/', move_files_view),

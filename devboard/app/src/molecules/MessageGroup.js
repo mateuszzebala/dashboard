@@ -18,10 +18,9 @@ const StyledWrapper = styled.div`
     }
 `
 
-
 export const MessageGroup = () => {
     const { messages, removeMessage } = useMessage()
-    
+
     const handleCloseMessage = (id) => {
         removeMessage(id)
     }
@@ -29,13 +28,7 @@ export const MessageGroup = () => {
     return (
         <StyledWrapper>
             {Object.values(messages).map((message) => {
-                return (
-                    <Message
-                        key={message.id}
-                        onClose={handleCloseMessage}
-                        {...message}
-                    />
-                )
+                return <Message key={message.id} onClose={handleCloseMessage} {...message} />
             })}
         </StyledWrapper>
     )

@@ -95,46 +95,42 @@ def set_interval(func, sec):
 class TerminalConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         shell = SETTINGS.get('terminal.sh_type')
-        if shell == 'zsh': 
-            self.runner = Runner('zsh', ['--interactive'], 0.1)
-            self.runner.run_command("source ~/.zshrc\n".encode())
+        rc_file_path = SETTINGS.get('terminal.rc_file')
+        
         if shell == 'bash':
-            self.runner = Runner('bash', ['-i'], 0.1)
-            self.runner.run_command("source ~/.bashrc\n".encode())
+            self.runner = Runner('bash', ['--init-file', rc_file_path], 0.1)
         else:
             self.runner = Runner(shell, ['-i'], 0.1)
         self.runner.start()
+
+        # if rc_file_path:
+        #     self.runner.run_command(f"source {rc_file_path}\n".encode())
+        # self.runner.run_command("clear\n".encode())
+            
         await self.accept()
         await self.send_output()
-        set_interval(lambda: asyncio.run(self.send_output()), 1)
+        set_interval(lambda: asyncio.run(self.send_output()), 0.01)
 
     async def disconnect(self, close_code):
         ...
 
     async def receive(self, text_data):
         if text_data:
-            self.runner.run_command(text_data.encode())
             #await self.send(text_data=text_data)
+            self.runner.run_command(text_data.encode())
         
     async def send_output(self):
-        
-        try: 
-            stdout = self.runner.lineQueue.get_nowait()
-        except Empty:
-            stdout = ''
-            
-        try: 
-            stderr = self.runner.errorLineQueue.get_nowait()
-        except Empty:
-            stderr = ''
-        
-        if stdout != '':
-            await self.send(text_data=stdout)
-            await self.send_output()
-            
-        if stderr != '':
-            await self.send(text_data=stderr)
-            await self.send_output()
+        while True:
+            stdout = b''
+            while True:
+                try: 
+                    stdout += self.runner.lineQueue.get_nowait()
+                except Empty:
+                    break
 
+            if stdout == b'': break
 
+            if stdout != b'':
+                await self.send(bytes_data=stdout)
+                await self.send_output()
 

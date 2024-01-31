@@ -132,6 +132,17 @@ export const variableToPythonString = (variable) => {
 
 export const TERMINAL_CODES = {
     CLEAR: '\x1b[H\x1b[2J',
+    BACKSPACE: '\x7f',
+    REMOVE_LAST_CHARACTER: '\x1b[K',
+    CURSOR_UP: '\x1b[1A',
+    CURSOR_DOWN: '\x1b[1B',
+    CURSOR_FORWARD: '\x1b[1C',
+    CURSOR_BACKWARD: '\x1b[1D',
+    HIDE_CURSOR: '\x1b[?25l',
+    SHOW_CURSOR: '\x1b[?25h',
+    RESET_FORMATTING: '\x1b[0m',
+    MOVE_TO_START: '\x1b[0G',
+    ERASE_LINE: '\x1b[2K',
 }
 
 export const convertKeyToANSI = ({ code, key, keyCode, shiftKey }) => {
@@ -159,5 +170,50 @@ export const convertKeyToANSI = ({ code, key, keyCode, shiftKey }) => {
 
     if (SpecialKeys[code]) return SpecialKeys[code]
 
-    return ''
+    return null
+}
+
+export const ansiToText = (ansi) => {
+    let text = ansi
+    const outputText = []
+    let i = 0
+    while (i < text.length) {
+        if (text[i] == '\x1b') {
+            let csi = ''
+            while (i < text.length) {
+                const ch = text[i]
+                csi += ch
+                i += 1
+                if (StringLib(ch).isAlpha()) {
+                    break
+                }
+            }
+            //console.log('csi ' + encodeURIComponent(csi))
+            switch (csi) {
+                case TERMINAL_CODES.REMOVE_LAST_CHARACTER:
+                    outputText.pop()
+            }
+            continue
+        } else if (text[i] == '\x08') {
+            console.log('BACKSPACE')
+        } else if (text[i] == '\x07') {
+            console.log('BELL')
+        } else {
+            outputText.push(text[i])
+        }
+        i += 1
+    }
+
+    // text = text.split(TERMINAL_CODES.CLEAR).pop()
+
+    // text = text
+    //     .split(TERMINAL_CODES.REMOVE_LAST_CHARACTER)
+    //     .map((sentence, index, array) => {
+    //         return index != array.length - 1 ? sentence.slice(0, -1) : sentence
+    //     })
+    //     .join('')
+
+    // text = text.replace(TERMINAL_CODES.BACKSPACE, '')
+    text = outputText.join('')
+    return text
 }

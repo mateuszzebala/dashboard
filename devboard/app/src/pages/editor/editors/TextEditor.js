@@ -13,6 +13,7 @@ import { useLoading, useModalForm, useSettings, useTheme } from '../../../utils/
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { TbReplaceFilled } from 'react-icons/tb'
 import { FiCode, FiDownload, FiEdit, FiPlay, FiSave } from 'react-icons/fi'
+import { useMessage } from '../../../utils/messages'
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -124,6 +125,7 @@ export const TextEditor = () => {
     const [settings, setSettings, saveSettings] = useSettings()
     const [saved, setSaved] = React.useState(true)
     const load = useLoading()
+    const { newMessage } = useMessage()
 
     React.useEffect(() => {
         if (savedValue === value) setSaved(true)
@@ -152,15 +154,25 @@ export const TextEditor = () => {
     }
 
     const handleReload = () => {
-        setLoading(true)
+        const fileNotExistsMessage = setLoading(true)
         FETCH(ENDPOINTS.files.file(searchParams.get('path')))
             .then((data) => {
-                setValue(data.data.toString() == '[object Object]' ? JSON.stringify(data.data, null, 4) : data.data)
-                setSavedValue(data.data.toString() == '[object Object]' ? JSON.stringify(data.data, null, 4) : data.data)
+                if (data.data.toString() == '[object Object]') {
+                    setValue(JSON.stringify(data.data, null, 4))
+                    setSavedValue(JSON.stringify(data.data, null, 4))
+                } else {
+                    setValue(data.data)
+                    setSavedValue(data.data)
+                }
                 setLoading(false)
             })
-            .catch(() => {
+            .catch((err) => {
                 setLoading(false)
+                newMessage({
+                    text: err.response.data.error,
+                    error: true,
+                })
+                navigate(LINKS.editor.index())
             })
     }
 
@@ -335,7 +347,7 @@ export const TextEditor = () => {
                 </StyledLoading>
             )}
 
-            {!loading && (
+            {((!loading && value) || value === '') && (
                 <StyledIde>
                     <StyledWrapper>
                         <Lines max={value.split('\n').length} height={value.split('\n').length} />

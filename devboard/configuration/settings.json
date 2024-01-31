@@ -11,8 +11,7 @@
     },
     "terminal": {
         "sh_type": "bash",
-        "bookmarks": false,
-        "auto_clear": false
+        "rc_file": "/Users/mateuszzebala/.bash_profile"
     },
     "requests": {
         "save_requests": true,
@@ -33,7 +32,6 @@
         "leftbar_app_icons": true,
         "save_devboard_requests": false,
         "leftbar_arrow_icons": true,
-        "polish_flag": false,
         "app": {
             "home": true,
             "database": true,
@@ -55,31 +53,36 @@
     "editor": {
         "liked": [
             {
-                "name": "package.json",
-                "path": "/Users/mateuszzebala/Desktop/p1/package.json",
-                "type": "code"
+                "name": "image2.jpg",
+                "path": "/Users/mateuszzebala/Pictures/testfolder/image2.jpg",
+                "type": "image"
             },
             {
-                "name": "main.py",
-                "path": "/Users/mateuszzebala/Desktop/main.py",
-                "type": "code"
+                "name": "pexels-sebastian-voortman-312105.jpg",
+                "path": "/Users/mateuszzebala/Pictures/pexels-sebastian-voortman-312105.jpg",
+                "type": "image"
             }
         ],
         "last": [
             {
-                "name": ".localized",
-                "path": "/Users/mateuszzebala/Public/Drop Box/.localized",
+                "name": "test.py",
+                "path": "/Users/mateuszzebala/Desktop/test.py",
+                "type": "code"
+            },
+            {
+                "name": ".bash_profile",
+                "path": "/Users/mateuszzebala/.bash_profile",
                 "type": "file"
             },
             {
-                "name": "package.json",
-                "path": "/Users/mateuszzebala/Desktop/p1/package.json",
-                "type": "code"
+                "name": "pexels-sebastian-voortman-312105.jpg",
+                "path": "/Users/mateuszzebala/Pictures/pexels-sebastian-voortman-312105.jpg",
+                "type": "image"
             },
             {
-                "name": "main.py",
-                "path": "/Users/mateuszzebala/Desktop/main.py",
-                "type": "code"
+                "name": ".yarnrc",
+                "path": "/Users/mateuszzebala/.yarnrc",
+                "type": "file"
             }
         ]
     },
@@ -94,24 +97,15 @@
         },
         "allowed_hosts": [
             "localhost",
-            "192.168.100.37",
-            "192.168.100.35"
+            "dev.mz"
         ],
         "cors_allowed_origins": [
-            "http://localhost:3000",
-            "http://localhost:8000",
-            "http://192.168.100.37:8000",
-            "http://192.168.100.35:8000",
-            "http://192.168.100.35:3000",
-            "http://192.168.100.37:3000"
+            "http://dev.mz:3000",
+            "http://dev.mz:8000"
         ],
         "csrf_trusted_origins": [
-            "http://localhost:3000",
-            "http://localhost:8000",
-            "http://192.168.100.37:8000",
-            "http://192.168.100.35:8000",
-            "http://192.168.100.35:3000",
-            "http://192.168.100.37:3000"
+            "http://dev.mz:3000",
+            "http://dev.mz:8000"
         ]
     },
     "files": {

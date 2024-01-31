@@ -3,7 +3,7 @@ import React from 'react'
 import { toBoolStr } from '../utils/utils'
 
 const Styledevboard = styled.span`
-    font-size: 32px;
+    font-size: 35px;
     padding: 10px;
     text-align: center;
     color: ${({ theme }) => theme.secondary};
@@ -21,7 +21,7 @@ const Styledevboard = styled.span`
     span {
         display: flex;
         flex-direction: column;
-        font-family: 'Rubik Glitch';
+        font-family: 'Rubik Wet Paint';
         align-items: center;
         justify-content: center;
         padding: 2px;

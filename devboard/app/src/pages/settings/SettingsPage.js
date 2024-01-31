@@ -1,9 +1,9 @@
 import React from 'react'
 import { MainTemplate } from '../../templates/MainTemplate'
-import { FiSettings } from 'react-icons/fi'
+import { FiFile, FiSettings, FiX } from 'react-icons/fi'
 import { LINKS } from '../../router/links'
-import { Button, ColorInput, Counter, Select, Switch, Theme, Typography } from '../../atoms'
-import { useSettings, useTheme } from '../../utils/hooks'
+import { Button, ColorInput, Counter, Select, SelectFile, Switch, Theme, Typography } from '../../atoms'
+import { useModalForm, useSettings, useTheme } from '../../utils/hooks'
 import styled from 'styled-components'
 import { HiXMark } from 'react-icons/hi2'
 import { theme as originalTheme } from '../../theme/theme'
@@ -14,6 +14,7 @@ import { APPS } from '../../apps/apps'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
 import String from 'string'
+import { centerEllipsis } from '../../utils/utils'
 
 const StyledRow = styled.div`
     display: flex;
@@ -150,7 +151,6 @@ const SettingsByPage = {
     devboard: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.devboards_menu'} text={'Show Devboards Menu'} />
-            <SwitchSetting value={value} setValue={setValue} prop={'devboard.polish_flag'} text={'Show Polish Flag'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.topbar_username'} text={'Show Username In TopBar'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.topbar_submenu_toggler'} text={'Show Submenu Toggler'} />
             <SwitchSetting value={value} setValue={setValue} prop={'devboard.topbar_app_icon'} text={'Show TopBar app icon'} />
@@ -206,37 +206,68 @@ const SettingsByPage = {
                     size={1.3}
                     unit="rows"
                 />
-                <Typography variant={'h3'}>DEFAULT NUMBER OF ROWS</Typography>
+                <Typography variant={'h3'}>Default number of rows</Typography>
             </StyledRow>
         </StyledSection>
     ),
-    terminal: ({ value, setValue }) => (
-        <StyledSection>
-            <SwitchSetting value={value} setValue={setValue} prop={'terminal.auto_clear'} text={'AUTO CLEAR'} />
-            <SwitchSetting value={value} setValue={setValue} prop={'terminal.bookmarks'} text={'BOOKMARKS'} />
-            <StyledRow>
-                <Select
-                    emptyName="INTERPRETER"
-                    canBeNull={false}
-                    second
-                    setValue={(val) => {
-                        setValue((prev) => ({
-                            ...prev,
-                            'terminal.sh_type': val,
-                        }))
-                    }}
-                    value={value['terminal.sh_type']}
-                    data={{
-                        zsh: 'ZSH',
-                        bash: 'BASH',
-                        sh: 'SH',
-                        cmd: 'CMD',
-                    }}
-                />
-                <Typography variant={'h3'}>INTERPRETER</Typography>
-            </StyledRow>
-        </StyledSection>
-    ),
+    terminal: ({ value, setValue }) => {
+        const modalForm = useModalForm()
+        return (
+            <StyledSection>
+                <StyledRow>
+                    <Select
+                        emptyName="INTERPRETER"
+                        canBeNull={false}
+                        second
+                        setValue={(val) => {
+                            setValue((prev) => ({
+                                ...prev,
+                                'terminal.sh_type': val,
+                            }))
+                        }}
+                        value={value['terminal.sh_type']}
+                        data={{
+                            zsh: 'ZSH',
+                            bash: 'BASH',
+                            sh: 'SH',
+                        }}
+                    />
+                    <Typography variant={'h3'}>INTERPRETER</Typography>
+                </StyledRow>
+                <StyledRow>
+                    <Button
+                        icon={<FiX />}
+                        second
+                        onClick={() => {
+                            setValue((prev) => ({
+                                ...prev,
+                                'terminal.rc_file': '',
+                            }))
+                        }}
+                    />
+                    <Button
+                        onClick={() => {
+                            modalForm({
+                                content: SelectFile,
+                                title: 'FILE',
+                                icon: <FiFile />,
+                                todo: (path) => {
+                                    setValue((prev) => ({
+                                        ...prev,
+                                        'terminal.rc_file': path,
+                                    }))
+                                },
+                            })
+                        }}
+                        second
+                    >
+                        {value['terminal.rc_file'] ? centerEllipsis(value['terminal.rc_file'], 30) : 'SELECT FILE'}
+                    </Button>
+                    <Typography variant={'h3'}>RC FILE</Typography>
+                </StyledRow>
+            </StyledSection>
+        )
+    },
     requests: ({ value, setValue }) => (
         <StyledSection>
             <SwitchSetting value={value} setValue={setValue} prop={'requests.save_requests'} text={'SAVE REQUESTS'} />

@@ -1,0 +1,8 @@
+osurce ~/.bash_profile
+clear
+H[[2Jls
+
+README.md		manage.p	y	temp
+db.sqlite3	m	edi	a		test_dir_t_remoove
+devboard		pytestini	.	venv
+man			riequirements.ttx

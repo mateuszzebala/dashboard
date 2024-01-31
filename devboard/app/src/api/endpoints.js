@@ -42,6 +42,7 @@ export const ENDPOINTS = {
         file: (path) => API(['files', 'file'], { path, datetime: new Date().toISOString() }),
         mkdir: () => API(['files', 'mkdir']),
         remove: () => API(['files', 'remove']),
+        rename: () => API(['files', 'rename']),
         touch: () => API(['files', 'touch']),
         upload: (path) => API(['files', 'upload'], { path }),
         zip: () => API(['files', 'zip']),

@@ -6,11 +6,10 @@ import styled from 'styled-components'
 import { Button, Paginator, Prompt } from '../../atoms'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
-import { FiLock, FiSearch, FiTrello, FiUnlock, FiUserPlus } from 'react-icons/fi'
+import { FiLock, FiSearch, FiUnlock, FiUserPlus } from 'react-icons/fi'
 import { useModalForm } from '../../utils/hooks'
 import { LINKS } from '../../router/links'
 import { useSearchParams } from 'react-router-dom'
-import { useCatchFetch } from '../../utils/hooks'
 
 const StyledUsersGrid = styled.div`
     display: flex;
@@ -47,7 +46,6 @@ export const UsersPage = () => {
     const [admins, setAdmins] = React.useState(searchParams.get('admins') === 'true' || false)
     const [pages, setPages] = React.useState(0)
     const modalForm = useModalForm()
-    const catchFetch = useCatchFetch()
 
     React.useEffect(() => {
         setSearchParams((prev) => ({ ...prev, admins }))
@@ -107,19 +105,6 @@ export const UsersPage = () => {
                         size={1.4}
                     />
                     <Button to={LINKS.users.new()} second size={1.4} icon={<FiUserPlus />} subContent="NEW" />
-                    <Button
-                        second
-                        size={1.4}
-                        icon={<FiTrello />}
-                        subContent="TRELLO"
-                        onClick={() => {
-                            FETCH(ENDPOINTS.database.items('User', {}))
-                                .then((data) => {
-                                    console.log(data)
-                                })
-                                .catch(catchFetch)
-                        }}
-                    />
                 </>
             }
         >

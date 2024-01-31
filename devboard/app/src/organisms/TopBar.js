@@ -95,7 +95,7 @@ export const TopBar = ({ app, setClose, title, close, topbarLink, setHideSubmenu
         <StyledWrapper submenuExists={toBoolStr(submenuExists)} hideSubmenu={toBoolStr(hideSubmenu)}>
             <StyledLeftSide>
                 {!isMobile && <StyledMenuButton onClick={handleBurgerClick}>{!close ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}</StyledMenuButton>}
-                <Link animation={false} to={topbarLink ? topbarLink : app.link || LINKS.home()}>
+                <Link to={topbarLink ? topbarLink : app.link || LINKS.home()}>
                     <StyledTitle>
                         {settings['devboard.topbar_app_icon'] && <app.icon />}
                         {app.name.toUpperCase()}

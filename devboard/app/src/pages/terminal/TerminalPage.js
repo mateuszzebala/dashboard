@@ -4,59 +4,42 @@ import { ENDPOINTS } from '../../api/endpoints'
 import { APPS } from '../../apps/apps'
 import { MainTemplate } from '../../templates/MainTemplate'
 import { useGlobalKey } from '../../utils/hooks'
-import { TERMINAL_CODES, convertKeyToANSI, toBoolStr } from '../../utils/utils'
-import Convert from 'ansi-to-html'
+import { convertKeyToANSI } from '../../utils/utils'
+import { Size as TerminalSize, TerminalGrid, TerminalGridComponent } from '../../utils/byApp/terminal'
+import { Loading } from '../../atoms'
+import clipboard from 'clipboardy'
 
-const convert = new Convert()
-
-const StyledWrapper = styled.pre`
-    position: relative;
-    height: 95%;
-    max-height: 95%;
-    background-color: ${({ theme }) => theme.secondary};
-    color: ${({ theme }) => theme.primary};
-    font-weight: bold;
-    font-family: ${({ theme }) => theme.monoFontFamily}, monospace;
-    overflow: scroll;
+const StyledWrapper = styled.div`
+    max-height: 100%;
+    max-width: 100%;
     outline: none;
-    &::-webkit-scrollbar {
-        height: 0;
-    }
-    .coursor {
-        @keyframes blink {
-            0% {
-                opacity: 1;
-            }
-            49% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-        animation: ${({ focus }) => (focus ? 'blink 1s infinite' : 'none')};
-    }
+    overflow: scroll;
 `
 
 export const TerminalPage = () => {
     const socket = React.useRef(null)
+    const terminalGrid = React.useRef(null)
     const [socketOpen, setSocketOpen] = React.useState(false)
-    const output = React.useRef('')
     const [reloadOutput, setReloadOutput] = React.useState(0)
     const wrapperRef = React.useRef()
     const [focus, setFocus] = React.useState(true)
 
     const handleSendCommand = (value) => {
-        socket.current.send(value)
+        socketOpen && socket.current.send(value)
     }
 
     useGlobalKey(
         (e) => {
-            handleSendCommand(convertKeyToANSI(e))
-            e.preventDefault()
+            if (e.metaKey && e.key == 'v') {
+                ///
+            } else {
+                const ansi = convertKeyToANSI(e)
+                if (ansi !== null) {
+                    handleSendCommand(ansi)
+                    //e.preventDefault()
+                    setReloadOutput((prev) => prev + 1)
+                }
+            }
         },
         'all',
         socketOpen && focus
@@ -69,21 +52,43 @@ export const TerminalPage = () => {
             })
     }, [reloadOutput])
 
-    const handleNewMessage = (event) => {
-        output.current += event.data
-        if (output.current.endsWith(TERMINAL_CODES.CLEAR)) {
-            output.current = ''
-        }
-        setReloadOutput((prev) => prev + 1)
+    const onPaste = (event) => {
+        const clipboardData = event.clipboardData || window.clipboardData
+        const pastedText = clipboardData.getData('text')
+        console.log({ pastedText })
+        socket.current.send(pastedText)
     }
+    const enableFocus = () => setFocus(true)
+    const disableFocus = () => setFocus(false)
 
     React.useEffect(() => {
+        if (wrapperRef.current) {
+            wrapperRef.current.addEventListener('focus', enableFocus)
+            wrapperRef.current.addEventListener('blur', disableFocus)
+        }
+        window.addEventListener('paste', onPaste)
+        return () => {
+            window.removeEventListener('paste', onPaste)
+            if (wrapperRef.current) {
+                wrapperRef.current.removeEventListener('focus', enableFocus)
+                wrapperRef.current.removeEventListener('blur', disableFocus)
+            }
+        }
+    }, [wrapperRef])
+
+    const handleNewMessage = React.useEffect(() => {
         socket.current = new WebSocket(ENDPOINTS.terminal.sh())
+        terminalGrid.current = new TerminalGrid(new TerminalSize(40, 40), () => {
+            setReloadOutput((prev) => prev + 1)
+        })
+
         socket.current.addEventListener('open', () => {
-            console.log('WEBSOCKET CONNECTED')
+            console.log('OPENED')
             setSocketOpen(true)
         })
-        socket.current.addEventListener('message', handleNewMessage)
+        socket.current.addEventListener('message', (event) => {
+            terminalGrid.current.input(event.data)
+        })
 
         return () => {
             socket.current.removeEventListener('message', handleNewMessage)
@@ -92,7 +97,22 @@ export const TerminalPage = () => {
 
     return (
         <MainTemplate padding={5} loading={!socketOpen} app={APPS.terminal}>
-            <StyledWrapper dangerouslySetInnerHTML={{ __html: convert.toHtml(output.current) + '<span className="coursor">|</span>' }} autoFocus focus={toBoolStr(focus)} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} tabIndex={0} ref={wrapperRef}></StyledWrapper>
+            <StyledWrapper tabIndex={0} ref={wrapperRef}>
+                {socketOpen ? (
+                    <TerminalGridComponent
+                        sendCommand={(command) => {
+                            handleSendCommand(command)
+                        }}
+                        socketOpen={socketOpen}
+                        reload={reloadOutput}
+                        setReload={setReloadOutput}
+                        charSize={{ width: 12, height: 22 }}
+                        terminalGrid={terminalGrid.current}
+                    />
+                ) : (
+                    <Loading size={2} />
+                )}
+            </StyledWrapper>
         </MainTemplate>
     )
 }

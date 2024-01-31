@@ -6,7 +6,7 @@ import { Button, ChooseDevice, Confirm, EditorChooser, FilePrompt, FloatingActio
 import { BsFileArrowUp, BsFilePlus, BsFileZip, BsFolder, BsFolderPlus } from 'react-icons/bs'
 import { HiDownload, HiOutlineLockClosed } from 'react-icons/hi'
 import styled from 'styled-components'
-import { FiArrowUp, FiCheck, FiCopy, FiDownload, FiEdit, FiFile, FiFilePlus, FiFolder, FiFolderPlus, FiGrid, FiInfo, FiList, FiRotateCw, FiSearch, FiServer, FiTrash } from 'react-icons/fi'
+import { FiArrowUp, FiCheck, FiCopy, FiDownload, FiEdit, FiFile, FiFilePlus, FiFolder, FiFolderPlus, FiGrid, FiInfo, FiList, FiRotateCw, FiSearch, FiServer, FiTrash, FiX } from 'react-icons/fi'
 import { BiCut, BiEditAlt, BiInfoCircle, BiPaste, BiRename } from 'react-icons/bi'
 import { FETCH } from '../../api/api'
 import { ENDPOINTS } from '../../api/endpoints'
@@ -81,6 +81,15 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                     setReload((prev) => prev + 1)
                 })
             },
+        })
+    }
+
+    const handleRename = (path, name) => {
+        FETCH(ENDPOINTS.files.rename(), {
+            path,
+            name,
+        }).then(() => {
+            setReload((prev) => prev + 1)
         })
     }
 
@@ -347,7 +356,17 @@ const FolderMenu = ({ selectedItems, data, path, setPath, setSelectedItems, fold
                                         title: 'RENAME',
                                         setButton: 'RENAME',
                                         todo: (name) => {
-                                            console.log(name)
+                                            const items = [...files, ...folders]
+
+                                            if (items.some((item) => item.name == name)) {
+                                                modalForm({
+                                                    content: Confirm,
+                                                    title: 'ITEM EXISTS',
+                                                    icon: <FiX />,
+                                                    text: 'Item with this name exists. Do you want to replace it?',
+                                                    todo: () => handleRename(selectedItems[0].path, name),
+                                                })
+                                            } else handleRename(selectedItems[0].path, name)
                                         },
                                         initValue: selectedItems[0].name,
                                     })

@@ -12,6 +12,9 @@ const StyledWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     font-size: 25px;
+    opacity: ${({ show }) => (show ? 1 : 0)};
+    transition: opacity 0.5s, transform 0.5s;
+    transform: ${({ show }) => (show ? 'translateX(0)' : 'translateX(100%)')};
     outline: 3px solid
         ${({ error, warning, success, theme }) => {
             if (error) return theme.error
@@ -42,24 +45,35 @@ const StyledExitButton = styled.button`
     cursor: pointer;
     transition: background 0.1s;
     border-radius: 50%;
+
     &:hover {
         background-color: ${({ theme }) => theme.secondary}44;
     }
 `
 
 export const Message = ({ id, text = '', onClose, error = false, success = false, warning = false }) => {
+    const [show, setShow] = React.useState(true)
+
     React.useEffect(() => {
         setTimeout(() => {
-            onClose(id)
+            setShow(false)
         }, 10000)
     })
 
+    React.useEffect(() => {
+        if (!show) {
+            setTimeout(() => {
+                onClose(id)
+            }, 500)
+        }
+    }, [show])
+
     return (
-        <StyledWrapper error={toBoolStr(error)} success={toBoolStr(success)} warning={toBoolStr(warning)}>
+        <StyledWrapper show={toBoolStr(show)} error={toBoolStr(error)} success={toBoolStr(success)} warning={toBoolStr(warning)}>
             <StyledText>{text}</StyledText>
             <StyledExitButton
                 onClick={() => {
-                    onClose(id)
+                    setShow(false)
                 }}
             >
                 <FiX />
