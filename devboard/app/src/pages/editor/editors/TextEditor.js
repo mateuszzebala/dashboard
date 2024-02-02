@@ -28,7 +28,7 @@ const StyledTextArea = styled.textarea`
     width: 100%;
     height: ${({ height }) => height * 30 + 'px'};
     line-height: 1.2;
-    font-size: 20px;
+    font-size: 18px;
     resize: none;
     white-space: pre;
     overflow-wrap: normal;
@@ -45,7 +45,7 @@ const StyledTextArea = styled.textarea`
     }
 `
 const StyledLines = styled.div`
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     padding: 0;
     width: 40px;

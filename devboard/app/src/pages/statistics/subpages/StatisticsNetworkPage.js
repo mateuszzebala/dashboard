@@ -43,11 +43,11 @@ export const StatisticsNetworkPage = () => {
                         color: theme.success,
                         values: stats.download.map((sec) => ({ label: '', value: sec })),
                     },
-                    {
-                        name: 'UPLOAD',
-                        color: theme.success,
-                        values: stats.upload.map((sec) => ({ label: '', value: sec })),
-                    },
+                    // {
+                    //     name: 'UPLOAD',
+                    //     color: theme.success,
+                    //     values: stats.upload.map((sec) => ({ label: '', value: sec })),
+                    // },
                 ]}
             />
         </MainTemplate>

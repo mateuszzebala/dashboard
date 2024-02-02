@@ -112,7 +112,10 @@ class TerminalConsumer(AsyncWebsocketConsumer):
         set_interval(lambda: asyncio.run(self.send_output()), 0.01)
 
     async def disconnect(self, close_code):
-        ...
+        try:
+            self.runner.proc.kill()
+        except:
+            ...
 
     async def receive(self, text_data):
         if text_data:

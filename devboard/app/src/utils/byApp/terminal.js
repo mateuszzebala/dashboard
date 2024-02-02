@@ -4,6 +4,7 @@ import useResizeObserver from 'use-resize-observer'
 import String from 'string'
 import { toBoolStr } from '../utils'
 import terminalBell from '../../assets/audios/terminal_bell.wav'
+import { terminalColors } from '../../data/terminalColors'
 
 export class Vector2 {
     x = 0
@@ -31,13 +32,12 @@ export class Size {
 
 const TERMINAL_CODES = {
     BELL: '\x07',
-    BACKSPACE: '\x1b[K',
+    BACKSPACE: '\x1B[k',
     NEW_LINE: '\n',
     RETURN: '\r',
     CLEAR: '\x1b[2j',
     START: '\x1b[?1034h',
     MOVE_CURSOR_TO_0_0: '\x1b[h',
-
     ARROW_LEFT: '\x1b[D',
     ARROW_UP: '\x1b[A',
     ARROW_RIGHT: '\x1b[C',
@@ -45,7 +45,7 @@ const TERMINAL_CODES = {
 }
 
 const stringToTerminalCodesList = (string) => {
-    console.log({ string })
+    //console.log({ string })
     const terminalCodes = []
 
     let charCounter = 0
@@ -60,24 +60,33 @@ const stringToTerminalCodesList = (string) => {
                     break
                 }
             }
-            console.log({ csi })
-            let exists = false
+
             for (let codeKey of Object.keys(TERMINAL_CODES)) {
                 const code = TERMINAL_CODES[codeKey]
                 if (code.toLowerCase() == csi.toLowerCase()) {
                     terminalCodes.push({ code })
-                    exists = true
+                    break
                 }
             }
-            if (exists) continue
+
+            const colorCode = csi.replace(';', ':').toLowerCase()
+            if (Object.keys(terminalColors).includes(colorCode)) {
+                Object.keys(terminalColors).forEach((code) => {
+                    if (code == colorCode) {
+                        const { type, color } = terminalColors[code]
+                        //console.log({ type, color })
+                    }
+                })
+            }
+
+            continue
         } else if (string[charCounter] == '\x08') {
-            //terminalCodes.push(TERMINAL_CODES.BACKSPACE)
+            // terminalCodes.push(TERMINAL_CODES.BACKSPACE)
         } else if (string[charCounter] == '\n') {
             terminalCodes.push(TERMINAL_CODES.NEW_LINE)
         } else if (string[charCounter] == '\x07') {
             terminalCodes.push(TERMINAL_CODES.BELL)
         } else {
-            console.log({ s: string[charCounter] })
             terminalCodes.push(string[charCounter])
         }
         charCounter += 1
@@ -209,6 +218,9 @@ export class TerminalGrid {
 const StyledWrapper = styled.div`
     overflow: scroll;
     user-select: text;
+    &::-webkit-scrollbar {
+        height: 0;
+    }
 `
 
 const StyledTerminalGrid = styled.div`
@@ -242,21 +254,20 @@ export const TerminalGridComponent = ({ terminalGrid, charSize, reload, setReloa
     const handleResize = ({ width, height }) => {
         const columns = Math.ceil(width / charSize.width) - 1
         const rows = Math.ceil(height / charSize.height) - 1
-        console.log(columns, rows)
+        //console.log(columns, rows)
         terminalGrid.resize(columns, rows)
         //socketOpen && sendCommand(`\x1b[8;${height};${width}t`)
         setReload((prev) => prev + 1)
     }
 
-    // const { ref: terminalGridRef } = useResizeObserver({
-    //     onResize: handleResize,
-    // })
-
     React.useEffect(() => {
-        terminalGridRef.current &&
-            new ResizeObserver(() => {
+        new ResizeObserver(() => {
+            try {
                 handleResize(terminalGridRef.current.getBoundingClientRect())
-            }).observe(terminalGridRef.current)
+            } catch {
+                //
+            }
+        }).observe(terminalGridRef.current)
     }, [terminalGridRef])
 
     return (

@@ -16,6 +16,6 @@ class AccountAdmin(admin.ModelAdmin):
         return obj.user.email
 
 
-# admin.site.register(Email)
+#admin.site.register(Email)
 admin.site.register(RequestLog)
-admin.site.register(Session)
+#admin.site.register(Session)

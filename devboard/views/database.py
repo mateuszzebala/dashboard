@@ -200,7 +200,7 @@ def item_to_json(item):
         'str': str(item),
         'fields': dict((field.name, get_field_serializer(getattr(item, field.name), field.get_internal_type())) for field in filter(lambda field: not field.is_relation, item.__class__._meta.get_fields())),
         'relations': dict((field.name, get_relation_items(item, field)) for field in filter(lambda field: field.is_relation and not field.one_to_many and field.editable, item.__class__._meta.get_fields())),
-        'registered_fields': dict((field, get_value_or_admin_value(adminModel, field, item)) for field in adminModel.list_display)
+        'registered_fields': dict((field, get_value_or_admin_value(adminModel, field, item)) for field in adminModel.list_display) if adminModel else ['__str__']
     }
 
 @devboard_access

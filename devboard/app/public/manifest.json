@@ -1,9 +1,9 @@
 {
     "short_name": "Django Devboard App",
     "start_url": "/",
-    "api_url": "http://dev.mz:8000/devboard/api/",
-    "ws_api_url": "ws://dev.mz:8000/devboard/api/ws/",
-    "page_url": "http://dev.mz:8000",
+    "api_url": "http://localhost:8000/devboard/api/",
+    "ws_api_url": "ws://localhost:8000/devboard/api/ws/",
+    "page_url": "http://localhost:8000",
     "icons": [
         "/favicon.png"
     ]

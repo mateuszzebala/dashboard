@@ -19,7 +19,7 @@ import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai'
 const StyledError = styled.span`
     font-weight: 500;
     font-size: 20px;
-    color: ${({theme})=>theme.error};
+    color: ${({ theme }) => theme.error};
 `
 
 const StyledWrapper = styled.div`
@@ -81,27 +81,25 @@ export const DatabaseModelPage = () => {
     const [error, setError] = React.useState(null)
     const [queryError, setQueryError] = React.useState(false)
 
-    React.useEffect(()=>{
-        setSearchParams(prev => ({
-            ...prev, 
+    React.useEffect(() => {
+        setSearchParams((prev) => ({
+            ...prev,
             page,
-            query: searchQuery, 
-            length, 
-            orderBy, 
-            asc: asc ? 'true' : 'false', 
+            query: searchQuery,
+            length,
+            orderBy,
+            asc: asc ? 'true' : 'false',
         }))
     }, [page, searchQuery, length, orderBy, asc])
-
 
     React.useEffect(() => {
         FETCH(ENDPOINTS.database.model(modelName)).then((res) => {
             const resModelData = res.data
             setModelData(resModelData)
-            if(res.data.error){
+            if (res.data.error) {
                 setError(res.data.error)
                 return
             }
-           
         })
     }, [modelName])
 
@@ -115,7 +113,7 @@ export const DatabaseModelPage = () => {
                 query: searchQuery,
             })
         ).then((res) => {
-            if(res.data.queryError) setQueryError(true)
+            if (res.data.queryError) setQueryError(true)
             else setQueryError(false)
             setData(res.data)
             setPages(res.data.pages)
@@ -123,14 +121,7 @@ export const DatabaseModelPage = () => {
         setSelectedItems([])
     }
 
-    React.useEffect(fetchItems, [
-        page,
-        length,
-        orderBy,
-        asc,
-        searchQuery,
-        modelName,
-    ])
+    React.useEffect(fetchItems, [page, length, orderBy, asc, searchQuery, modelName])
     React.useEffect(() => {
         setPage(0)
     }, [length, orderBy, asc, searchQuery])
@@ -153,40 +144,24 @@ export const DatabaseModelPage = () => {
                             }}
                             subContent={'SELECT'}
                             onClick={() => {
-                                if (selectedItems && selectedItems.length === 0)
-                                    setSelectedItems(
-                                        data.items.map((item) => item.pk)
-                                    )
+                                if (selectedItems && selectedItems.length === 0) setSelectedItems(data.items.map((item) => item.pk))
                                 else setSelectedItems([])
                             }}
                         />
-                        <Button
-                            second
-                            subContent={'NEW'}
-                            to={LINKS.database.putItem(modelName)}
-                            icon={<FiPlus />}
-                            size={1.4}
-                        />
+                        <Button second subContent={'NEW'} to={LINKS.database.putItem(modelName)} icon={<FiPlus />} size={1.4} />
                         <Select
                             asButton
                             subContent={'ORDER BY'}
                             data={modelData ? Object.keys(modelData.fields) : []}
                             value={modelData ? Object.keys(modelData.fields).indexOf(orderBy) : 0}
-                            setValue={(val)=>{
+                            setValue={(val) => {
                                 setOrderBy(Object.keys(modelData.fields)[val])
                             }}
                             second
                             icon={<FaSort />}
                             size={1.4}
-
                         />
-                        <Button
-                            subContent={asc ? 'ASC' : 'DESC'}
-                            second
-                            icon={asc ? <AiOutlineSortAscending/> : <AiOutlineSortDescending/>}
-                            onClick={()=>setAsc(prev => !prev)}
-                            size={1.4}
-                        />
+                        <Button subContent={asc ? 'ASC' : 'DESC'} second icon={asc ? <AiOutlineSortAscending /> : <AiOutlineSortDescending />} onClick={() => setAsc((prev) => !prev)} size={1.4} />
 
                         {selectedItems.length >= 1 && (
                             <>
@@ -200,61 +175,54 @@ export const DatabaseModelPage = () => {
                                     onClick={() => {
                                         modalForm({
                                             content: Confirm,
-                                            title: `Delete ${
-                                                selectedItems.length
-                                            } item${
-                                                selectedItems.length ? 's' : ''
-                                            }?`,
+                                            title: 'DELETE',
+                                            text: `Delete ${selectedItems.length} item${selectedItems.length ? 's' : ''}?`,
                                             icon: <FiTrash />,
                                             todo: () => {
-                                                selectedItems.forEach(
-                                                    (item) => {
-                                                        FETCH(
-                                                            ENDPOINTS.database.item(
-                                                                modelName,
-                                                                item
-                                                            ),
-                                                            { method: 'DELETE' }
-                                                        ).then(() => {
-                                                            fetchItems()
-                                                        })
-                                                    }
-                                                )
+                                                selectedItems.forEach((item) => {
+                                                    FETCH(ENDPOINTS.database.item(modelName, item), { method: 'DELETE' }).then(() => {
+                                                        fetchItems()
+                                                    })
+                                                })
                                             },
                                         })
                                     }}
                                 />
-                                <Button 
-                                    second 
-                                    size={1.4} 
+                                <Button
+                                    second
+                                    size={1.4}
                                     tooltip={'EXPORT'}
                                     subContent={'EXPORT'}
-                                    icon={<PiExportBold/>}
-                                    onClick={()=>{
+                                    icon={<PiExportBold />}
+                                    onClick={() => {
                                         modalForm({
                                             content: Export,
                                             title: 'EXPORT',
-                                            icon: <PiExportBold/>,
-                                            todo: ()=>{}
+                                            icon: <PiExportBold />,
+                                            todo: () => {},
                                         })
                                     }}
                                 />
-                                {modelData.actions != undefined && modelData.actions.length != 0 && <Button 
-                                    size={1.4} 
-                                    second
-                                    subContent={'ACTION'}
-                                    onClick={()=>{
-                                        modalForm({
-                                            content: Actions,
-                                            title: 'MAKE ACTION',
-                                            actions: modelData.actions,
-                                            action,
-                                            setAction,
-                                            icon: <PiFunctionBold/>,
-                                            todo: ()=>{}
-                                        })
-                                    }}
-                                >ACTIONS</Button>}
+                                {modelData.actions != undefined && modelData.actions.length != 0 && (
+                                    <Button
+                                        size={1.4}
+                                        second
+                                        subContent={'ACTION'}
+                                        onClick={() => {
+                                            modalForm({
+                                                content: Actions,
+                                                title: 'MAKE ACTION',
+                                                actions: modelData.actions,
+                                                action,
+                                                setAction,
+                                                icon: <PiFunctionBold />,
+                                                todo: () => {},
+                                            })
+                                        }}
+                                    >
+                                        ACTIONS
+                                    </Button>
+                                )}
                             </>
                         )}
 
@@ -266,10 +234,7 @@ export const DatabaseModelPage = () => {
                                     tooltip={'EDIT ITEM'}
                                     subContent={'EDIT'}
                                     icon={<FiEdit />}
-                                    to={LINKS.database.patchItem(
-                                        modelName,
-                                        selectedItems[0]
-                                    )}
+                                    to={LINKS.database.patchItem(modelName, selectedItems[0])}
                                     onKey={{
                                         key: 'e',
                                         ctrlKey: true,
@@ -282,52 +247,38 @@ export const DatabaseModelPage = () => {
                                     tooltip={'SHOW ITEM'}
                                     subContent={'SHOW'}
                                     icon={<IoMdOpen />}
-                                    to={LINKS.database.item(
-                                        modelName,
-                                        selectedItems[0]
-                                    )}
+                                    to={LINKS.database.item(modelName, selectedItems[0])}
                                     onKey={{
                                         key: 'o',
                                         ctrlKey: true,
                                         prevent: true,
                                     }}
                                 />
-                  
-                                
                             </>
                         )}
-                       
                     </StyledMenuSide>
                     <StyledMenuSide>
-                       
-                        <Counter
-                            value={length}
-                            setValue={setLength}
-                            min={0}
-                            max={1000}
-                            unit="Rows"
-                            size={1.4}
-                        />
+                        <Counter value={length} setValue={setLength} min={0} max={1000} unit="Rows" size={1.4} />
                         <Button
-                            icon={<FiSearch/>}
+                            icon={<FiSearch />}
                             second
                             size={1.4}
                             onKey={{
                                 ctrlKey: true,
                                 key: 'f',
-                                prevent: true
+                                prevent: true,
                             }}
                             subContent={'QUERY'}
-                            onClick={()=>{
+                            onClick={() => {
                                 modalForm({
                                     content: Prompt,
-                                    icon: <FiSearch/>,
+                                    icon: <FiSearch />,
                                     title: 'QUERY',
                                     initValue: searchQuery,
                                     setButton: 'SEARCH',
-                                    todo: (val)=>{
+                                    todo: (val) => {
                                         setSearchQuery(val)
-                                    }
+                                    },
                                 })
                             }}
                         />
@@ -339,29 +290,11 @@ export const DatabaseModelPage = () => {
                 <StyledError>{error}</StyledError>
             ) : (
                 <StyledWrapper>
-                    <ModelTable
-                        selectedItems={selectedItems}
-                        setSelectedItems={setSelectedItems}
-                        data={data}
-                        orderBy={orderBy}
-                        setOrderBy={setOrderBy}
-                        setAsc={setAsc}
-                        modelData={modelData}
-                    />
+                    <ModelTable selectedItems={selectedItems} setSelectedItems={setSelectedItems} data={data} orderBy={orderBy} setOrderBy={setOrderBy} setAsc={setAsc} modelData={modelData} />
 
-                    <FloatingActionButton
-                        to={LINKS.database.putItem(modelName)}
-                        icon={<FiPlus />}
-                        second
-                        size={1.4}
-                    />
+                    <FloatingActionButton to={LINKS.database.putItem(modelName)} icon={<FiPlus />} second size={1.4} />
                     <StyledFooter>
-                        <Paginator
-                            second
-                            value={page}
-                            pages={pages}
-                            setValue={setPage}
-                        />
+                        <Paginator second value={page} pages={pages} setValue={setPage} />
                     </StyledFooter>
                 </StyledWrapper>
             )}

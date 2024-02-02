@@ -30,7 +30,7 @@
         "topbar_username": true,
         "topbar_app_icon": true,
         "leftbar_app_icons": true,
-        "save_devboard_requests": false,
+        "save_devboard_requests": true,
         "leftbar_arrow_icons": true,
         "app": {
             "home": true,
@@ -51,40 +51,8 @@
         "topbar_submenu_toggler": true
     },
     "editor": {
-        "liked": [
-            {
-                "name": "image2.jpg",
-                "path": "/Users/mateuszzebala/Pictures/testfolder/image2.jpg",
-                "type": "image"
-            },
-            {
-                "name": "pexels-sebastian-voortman-312105.jpg",
-                "path": "/Users/mateuszzebala/Pictures/pexels-sebastian-voortman-312105.jpg",
-                "type": "image"
-            }
-        ],
-        "last": [
-            {
-                "name": "test.py",
-                "path": "/Users/mateuszzebala/Desktop/test.py",
-                "type": "code"
-            },
-            {
-                "name": ".bash_profile",
-                "path": "/Users/mateuszzebala/.bash_profile",
-                "type": "file"
-            },
-            {
-                "name": "pexels-sebastian-voortman-312105.jpg",
-                "path": "/Users/mateuszzebala/Pictures/pexels-sebastian-voortman-312105.jpg",
-                "type": "image"
-            },
-            {
-                "name": ".yarnrc",
-                "path": "/Users/mateuszzebala/.yarnrc",
-                "type": "file"
-            }
-        ]
+        "liked": [],
+        "last": []
     },
     "server": {
         "config": {
@@ -96,16 +64,15 @@
             "credientals": true
         },
         "allowed_hosts": [
-            "localhost",
-            "dev.mz"
+            "localhost"
         ],
         "cors_allowed_origins": [
-            "http://dev.mz:3000",
-            "http://dev.mz:8000"
+            "http://localhost:3000",
+            "http://localhost:8000"
         ],
         "csrf_trusted_origins": [
-            "http://dev.mz:3000",
-            "http://dev.mz:8000"
+            "http://localhost:3000",
+            "http://localhost:8000"
         ]
     },
     "files": {

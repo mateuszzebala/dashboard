@@ -7,13 +7,15 @@ import { useGlobalKey } from '../../utils/hooks'
 import { convertKeyToANSI } from '../../utils/utils'
 import { Size as TerminalSize, TerminalGrid, TerminalGridComponent } from '../../utils/byApp/terminal'
 import { Loading } from '../../atoms'
-import clipboard from 'clipboardy'
 
 const StyledWrapper = styled.div`
     max-height: 100%;
     max-width: 100%;
     outline: none;
     overflow: scroll;
+    &::-webkit-scrollbar {
+        height: 0;
+    }
 `
 
 export const TerminalPage = () => {
@@ -34,6 +36,7 @@ export const TerminalPage = () => {
                 ///
             } else {
                 const ansi = convertKeyToANSI(e)
+                e.preventDefault()
                 if (ansi !== null) {
                     handleSendCommand(ansi)
                     //e.preventDefault()
@@ -41,8 +44,8 @@ export const TerminalPage = () => {
                 }
             }
         },
-        'all',
-        socketOpen && focus
+        'all'
+        // socketOpen && focus
     )
 
     React.useEffect(() => {
@@ -55,7 +58,6 @@ export const TerminalPage = () => {
     const onPaste = (event) => {
         const clipboardData = event.clipboardData || window.clipboardData
         const pastedText = clipboardData.getData('text')
-        console.log({ pastedText })
         socket.current.send(pastedText)
     }
     const enableFocus = () => setFocus(true)

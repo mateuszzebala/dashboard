@@ -216,7 +216,7 @@ const SettingsByPage = {
             <StyledSection>
                 <StyledRow>
                     <Select
-                        emptyName="INTERPRETER"
+                        emptyName="SHELL TYPE"
                         canBeNull={false}
                         second
                         setValue={(val) => {
@@ -232,7 +232,7 @@ const SettingsByPage = {
                             sh: 'SH',
                         }}
                     />
-                    <Typography variant={'h3'}>INTERPRETER</Typography>
+                    <Typography variant={'h3'}>SHELL TYPE</Typography>
                 </StyledRow>
                 <StyledRow>
                     <Button
