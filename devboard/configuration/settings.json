@@ -30,7 +30,7 @@
         "topbar_username": true,
         "topbar_app_icon": true,
         "leftbar_app_icons": true,
-        "save_devboard_requests": true,
+        "save_devboard_requests": false,
         "leftbar_arrow_icons": true,
         "app": {
             "home": true,
@@ -52,7 +52,23 @@
     },
     "editor": {
         "liked": [],
-        "last": []
+        "last": [
+            {
+                "name": ".bash_profile",
+                "path": "/Users/mateuszzebala/.bash_profile",
+                "type": "file"
+            },
+            {
+                "name": "",
+                "path": "/Users/mateuszzebala/Code/",
+                "type": "file"
+            },
+            {
+                "name": "",
+                "path": "/Users/mateuszzebala/Code//",
+                "type": "file"
+            }
+        ]
     },
     "server": {
         "config": {
@@ -60,7 +76,7 @@
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": false,
+            "save_requests": true,
             "credientals": true
         },
         "allowed_hosts": [

@@ -21,7 +21,7 @@ const Styledevboard = styled.span`
     span {
         display: flex;
         flex-direction: column;
-        font-family: 'Rubik Wet Paint';
+        font-family: 'Rubik Glitch';
         align-items: center;
         justify-content: center;
         padding: 2px;
