@@ -13,7 +13,7 @@
 7. Session managment
 8. Statistics
 
-### Here is some screenshots:
+### Here are some screenshots:
 
 ![Home](./screenshots/home.png)
 
