@@ -6,9 +6,14 @@ import re
 from termcolor import colored
 from queue import Queue, Empty
 import subprocess
-import pty
 import time
 import os
+
+try:
+    import pty
+except:
+    pty = None
+
 
 def remove_terminal_codes(s):
     return re.sub(r'\x1b\[\d*m', '', s)

@@ -60,15 +60,6 @@ export const DashboardsMenu = ({ setOpen }) => {
                     ADMIN
                 </Button>
             </Theme>
-            <Theme
-                value={{
-                    primary: theme.warning,
-                }}
-            >
-                <Button target={'_blank'} to={'#'} size={1.4} width={'100%'}>
-                    ...
-                </Button>
-            </Theme>
         </StyledButtons>
     )
 }

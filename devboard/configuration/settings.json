@@ -45,30 +45,14 @@
             "statistics": true
         },
         "style": {
-            "fontFamily": "Rubik",
+            "fontFamily": "Montserrat",
             "fontFamilyMono": "Jetbrains Mono"
         },
         "topbar_submenu_toggler": true
     },
     "editor": {
         "liked": [],
-        "last": [
-            {
-                "name": ".bash_profile",
-                "path": "/Users/mateuszzebala/.bash_profile",
-                "type": "file"
-            },
-            {
-                "name": "",
-                "path": "/Users/mateuszzebala/Code/",
-                "type": "file"
-            },
-            {
-                "name": "",
-                "path": "/Users/mateuszzebala/Code//",
-                "type": "file"
-            }
-        ]
+        "last": []
     },
     "server": {
         "config": {
@@ -76,7 +60,7 @@
             "debug": true,
             "new_users": true,
             "ddos_block": true,
-            "save_requests": true,
+            "save_requests": false,
             "credientals": true
         },
         "allowed_hosts": [

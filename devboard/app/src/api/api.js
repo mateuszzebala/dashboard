@@ -3,7 +3,7 @@ import { ENDPOINTS } from './endpoints'
 import { LINKS } from '../router/links'
 import { initSubLinks } from '../apps/apps'
 
-const manifest_location = '/devboard/manifest.json'
+const manifest_location = '/manifest.json'
 
 export const MANIFEST = await fetch(manifest_location).then(async (data) => {
     return await data.json()
